@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESLplans - Unique Resources for English Teachers</title>
+    <style>
+        /* Base styles for the layout from fgh.jpg */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f7f9fa;
+            color: #333;
+        }
+
+        /* Deep orange brand header banner */
+        header {
+            background-color: #c95210; /* The rich orange background */
+            color: white;
+            padding: 20px 10px 40px 10px;
+            text-align: center;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto 30px auto;
+            background-color: white;
+            border-radius: 30px;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+        }
+        .logo span {
+            font-weight: normal;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+
+        /* Distinct highlight box for active categories tab */
+        .nav-menu a.active {
+            background-color: #c95210;
+            color: white;
+        }
+
+        .hero-text {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+        }
+
+        /* Simple Keyword Search Box Container */
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .search-box button {
+            background-color: #ff7300;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .search-box button:hover {
+            background-color: #e06500;
+        }
+
+        /* Main Content Feed layout */
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .feed-heading {
+            font-size: 28px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- White floating navigation bar -->
+        <div class="nav-container">
+            <div class="logo">ESL<span>plans</span></div>
+            <ul class="nav-menu">
+                <li><a href="#">Levels</a></li>
+                <li><a href="#" class="active">Categories</a></li>
+                <li><a href="#">Topic Suggestions</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </div>
+
+        <p class="hero-text">Unique and original resources for English teachers who look for a hot'n'ready class!</p>
+
+        <!-- Simple keyword search bar -->
+        <div class="search-box">
+            <input type="text" placeholder="Search: food, description, lesson plan content...">
+            <button type="button">Find materials</button>
+        </div>
+    </header>
+
+    <main>
+        <h2 class="feed-heading">Latest Lessons</h2>
+        
+        <!-- The lesson grid container will sit right here in our next step -->
+        
+    </main>
+
+</body>
+</html>
