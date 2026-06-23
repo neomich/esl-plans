@@ -119,13 +119,12 @@
             background-color: #e66e00;
         }
 
-        /* Sub-Navigation Dynamic Filter Pill Trays */
         .filter-panel-tray {
             background-color: #fcece1;
             border-bottom: 1px solid #ebd0be;
             padding: 15px 20px;
             text-align: center;
-            display: none; /* Managed dynamically via toggle Sub-menus */
+            display: none;
         }
 
         .filter-panel-container {
@@ -367,6 +366,7 @@
             align-items: flex-start;
             border-top: 1px dashed #ddd;
             padding-top: 30px;
+            margin-bottom: 35px;
         }
 
         @media (max-width: 550px) {
@@ -382,6 +382,7 @@
             align-items: center;
             gap: 8px;
             text-align: center;
+            flex-shrink: 0;
         }
 
         .download-label {
@@ -419,6 +420,8 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            overflow: hidden; /* Clean protection wall boundary */
+            flex: 1;
         }
 
         .links-label {
@@ -431,6 +434,8 @@
             display: flex;
             align-items: center; 
             gap: 15px;
+            overflow: hidden;
+            width: 100%;
         }
 
         .youtube-logo-placeholder {
@@ -458,38 +463,79 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
+            overflow: hidden;
+            flex: 1;
+            /* Sets the invisible constraint boundary wall based on dfh.jpg */
+            max-width: 290px; 
+        }
+
+        .links-list p {
+            display: flex;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        .links-list span {
+            color: #555;
+            font-weight: 600;
+            margin-right: 5px;
+            flex-shrink: 0;
         }
 
         .links-list a {
             color: #1a73e8;
             text-decoration: none;
-            font-size: 15px;
             font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
         }
         .links-list a:hover {
             text-decoration: underline;
         }
-        .links-list span {
-            color: #555;
-            font-weight: 600;
+
+        /* Oblong Redesigned Orange Go Back Button from dfh.jpg */
+        .back-btn-container {
+            margin-top: 25px;
         }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 35px;
-            color: #c95210;
-            text-decoration: none;
+        .back-btn-oblong {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #c95210; /* Matching heading brand color */
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 25px; /* Fully rounded oblong profile */
+            font-size: 15px;
             font-weight: 600;
-            font-size: 16px;
+            text-decoration: none;
             cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 2px 6px rgba(201, 82, 16, 0.2);
         }
-        .back-link:hover {
-            text-decoration: underline;
+
+        .back-btn-oblong:hover {
+            background-color: #b0460b;
+            transform: translateY(-1px);
+        }
+
+        .back-btn-oblong:active {
+            transform: translateY(0);
+        }
+
+        .back-arrow-icon {
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Nav Bar Header Panel -->
     <header>
         <div class="nav-container">
             <a onclick="showDashboardView()" class="logo-link">
@@ -505,6 +551,7 @@
         </div>
     </header>
 
+    <!-- Master Hero/Search Banner Container -->
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
         <div class="search-box">
@@ -513,6 +560,7 @@
         </div>
     </div>
 
+    <!-- DYNAMIC FILTER TRAYS -->
     <div id="level-filter-tray" class="filter-panel-tray">
         <div class="filter-panel-container">
             <span class="filter-label">Filter by CEFR Level:</span>
@@ -532,12 +580,15 @@
         </div>
     </div>
 
+    <!-- Main Dynamic Application Window wrapper -->
     <main class="content-container">
 
+        <!-- 1. DASHBOARD VIEW -->
         <div id="dashboard-catalog-view">
             <h3 class="section-title" id="catalog-section-title">Latest Lessons</h3>
             <div class="catalog-grid">
                 
+                <!-- Card 1: Do We Buy Too Much? -->
                 <div class="lesson-card general" data-level="b1" data-category="general" data-keywords="food consumerism shopping buying items spending money b1 general english video description">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
@@ -556,6 +607,7 @@
                     </div>
                 </div>
 
+                <!-- Card 2: How To Stop Pollution -->
                 <div class="lesson-card general" data-level="a2" data-category="general" data-keywords="pollution environment nature climate clean green plastic earth global warming a2 general english video">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #74ebe1, #89f7fe);"></div>
@@ -574,6 +626,7 @@
                     </div>
                 </div>
 
+                <!-- Card 3: Corporate AI Strategy -->
                 <div class="lesson-card business" data-level="b2" data-category="business" data-keywords="corporate ai strategy business tech artificial intelligence workplace corporate b2 audio description">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);"></div>
@@ -596,6 +649,7 @@
         </div>
 
 
+        <!-- 2. DETAILED LESSON INTERFACE WORKSPACE VIEW -->
         <div id="lesson-detail-view" style="display: none;" class="workspace-view">
             
             <div id="dynamic-sidebar-card" class="lesson-card">
@@ -643,15 +697,20 @@
                     </div>
                 </div>
 
-                <a onclick="showDashboardView()" class="back-link">← Go Back</a>
+                <!-- Upgraded Oblong Orange Go Back Action Controller Container matching dfh.jpg -->
+                <div class="back-btn-container">
+                    <a onclick="showDashboardView()" class="back-btn-oblong">
+                        <span class="back-arrow-icon">↩</span> Go Back
+                    </a>
+                </div>
             </div>
 
         </div>
 
     </main>
 
+    <!-- Navigation, Search, and Filtering Logic Architecture -->
     <script>
-        // Global object state trackers for active constraints
         let activeFilters = {
             level: 'all',
             category: 'all'
@@ -708,7 +767,6 @@
             }
         };
 
-        // UI Controls: Toggle target sliding navigation panel trays cleanly
         function toggleFilterTray(trayType) {
             const levelTray = document.getElementById('level-filter-tray');
             const categoryTray = document.getElementById('category-filter-tray');
@@ -722,23 +780,17 @@
             }
         }
 
-        // Apply selected pill criteria state safely 
         function applyPillFilter(filterType, selectionValue, pillElement) {
-            // Update active state visualization on pills within that container context
             const siblings = pillElement.parentNode.getElementsByClassName('filter-pill');
             for (let i = 0; i < siblings.length; i++) {
                 siblings[i].classList.remove('active');
             }
             pillElement.classList.add('active');
 
-            // Save choice configuration state parameters
             activeFilters[filterType] = selectionValue;
-
-            // Execute rendering evaluations
             evaluateCatalogVisibility();
         }
 
-        // Unified Engine: Combines Text Search + Pill Navigation Filter States simultaneously
         function executeCatalogSearch() {
             evaluateCatalogVisibility();
         }
@@ -751,24 +803,19 @@
             let visibleCount = 0;
 
             for (let i = 0; i < cards.length; i++) {
-                // Safeguard layout structure elements
                 if (cards[i].id === 'dynamic-sidebar-card') continue;
 
-                // Grab component metadata targets
                 const cardLevel = cards[i].getAttribute('data-level') || '';
                 const cardCategory = cards[i].getAttribute('data-category') || '';
                 const titleElement = cards[i].getElementsByClassName('card-title-strip')[0];
                 const keywordData = cards[i].getAttribute('data-keywords') || '';
                 const titleText = titleElement ? (titleElement.innerText || titleElement.textContent).toLowerCase() : '';
 
-                // Condition Evaluations
                 const matchesLevel = (activeFilters.level === 'all' || cardLevel === activeFilters.level);
                 const matchesCategory = (activeFilters.category === 'all' || cardCategory === activeFilters.category);
                 const matchesSearch = (searchFilter === '' || titleText.indexOf(searchFilter) > -1 || keywordData.toLowerCase().indexOf(searchFilter) > -1);
 
-                // Combined Evaluation Matrix Logical Gate
                 if (matchesLevel && matchesCategory && matchesSearch) {
-                    cards[i].style.style.setProperty('display', '', 'important');
                     cards[i].style.display = "";
                     visibleCount++;
                 } else {
@@ -776,7 +823,6 @@
                 }
             }
 
-            // Clean title update context response indicators
             const sectionTitle = document.getElementById('catalog-section-title');
             if (visibleCount === 0) {
                 sectionTitle.innerText = "No matching lessons found";
@@ -815,14 +861,14 @@
                 linksContainer.innerHTML = "";
                 contentData.links.forEach(function(linkItem) {
                     const p = document.createElement('p');
-                    p.innerHTML = `<span>${linkItem.label}:</span> <a href="${linkItem.url}" target="_blank">${linkItem.url.replace('https://', '')}</a>`;
+                    // Links are rendered with clean text-truncation limits natively integrated
+                    p.innerHTML = `<span>${linkItem.label}:</span> <a href="${linkItem.url}" target="_blank" title="${linkItem.url}">${linkItem.url.replace('https://', '')}</a>`;
                     linksContainer.appendChild(p);
                 });
             }
 
             document.getElementById('dashboard-catalog-view').style.display = 'none';
             document.getElementById('hero-banner-view').style.display = 'none';
-            // Also hide any active filter sub-menus when jumping into deep detail workspaces
             document.getElementById('level-filter-tray').style.display = 'none';
             document.getElementById('category-filter-tray').style.display = 'none';
             document.getElementById('lesson-detail-view').style.display = 'grid';
