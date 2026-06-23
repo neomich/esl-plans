@@ -112,7 +112,6 @@
             background-color: #e06500;
         }
 
-        /* Responsive Main Content Grid Parameters */
         main {
             max-width: 1100px;
             margin: 40px auto;
@@ -125,14 +124,12 @@
             font-weight: 600;
         }
 
-        /* 3-Column Grid that stacks into a 1-column layout on small phones */
         .lessons-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        /* Lesson Card Base Style */
         .lesson-card {
             background: white;
             border-radius: 24px;
@@ -149,12 +146,11 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        /* Color Coding Themes based on fgh.jpg */
         .lesson-card.general {
-            background-color: #f1fbf4; /* Soft green backdrop */
+            background-color: #f1fbf4; 
         }
         .lesson-card.business {
-            background-color: #f5efff; /* Soft purple backdrop */
+            background-color: #f5efff; 
         }
 
         .card-image-box {
@@ -165,16 +161,13 @@
             padding: 20px;
         }
 
-        /* Temporary mock 3D illustration placeholder using css art */
         .mock-3d-illustration {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, #ddd, #bbb);
             border-radius: 20px;
             box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1), 5px 10px 15px rgba(0,0,0,0.1);
         }
 
-        /* Content Strip styling for headers inside the cards */
         .card-title-strip {
             padding: 12px 15px;
             text-align: center;
@@ -198,7 +191,6 @@
             flex-grow: 1;
         }
 
-        /* Metadata Tags parameters */
         .tag-row {
             display: flex;
             justify-content: space-between;
@@ -213,7 +205,6 @@
             gap: 6px;
         }
 
-        /* Custom Buttons per stream */
         .view-btn {
             display: block;
             text-align: center;
@@ -237,6 +228,17 @@
         .view-btn:hover {
             background-color: #f7f9fa;
         }
+
+        /* Message displayed when no keywords match */
+        .no-results-msg {
+            display: none;
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #666;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -256,18 +258,19 @@
         <p class="hero-text">Zero-prep, conversation-driven lesson plans for online ESL tutors!</p>
 
         <div class="search-box">
-            <input type="text" placeholder="Search: food, description, lesson plan content...">
-            <button type="button">Find materials</button>
+            <!-- Added id="searchInput" to target with JavaScript -->
+            <input type="text" id="searchInput" placeholder="Search: food, description, lesson plan content...">
+            <button type="button" id="searchButton">Find materials</button>
         </div>
     </header>
 
     <main>
         <h2 class="feed-heading">Latest Lessons</h2>
         
-        <div class="lessons-grid">
+        <div class="lessons-grid" id="lessonsGrid">
             
-            <!-- Card 1: General English Example -->
-            <div class="lesson-card general">
+            <!-- Card 1: Added data-keywords attribute -->
+            <div class="lesson-card general" data-keywords="do we buy too much shopping consumerism money spending food grocery products economics">
                 <div class="card-image-box">
                     <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
                 </div>
@@ -285,8 +288,8 @@
                 </div>
             </div>
 
-            <!-- Card 2: Another General English Example -->
-            <div class="lesson-card general">
+            <!-- Card 2: Added data-keywords attribute -->
+            <div class="lesson-card general" data-keywords="how to stop pollution environment nature green ecology climate change garbage recycling plastic food waste">
                 <div class="card-image-box">
                     <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #64b3f4, #c2e59c);"></div>
                 </div>
@@ -304,8 +307,8 @@
                 </div>
             </div>
 
-            <!-- Card 3: Business English Stream Example -->
-            <div class="lesson-card business">
+            <!-- Card 3: Added data-keywords attribute -->
+            <div class="lesson-card business" data-keywords="corporate ai strategy artificial intelligence business technology work automation future management corporate structures">
                 <div class="card-image-box">
                     <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #ff9966, #ff5e62);"></div>
                 </div>
@@ -323,8 +326,47 @@
                 </div>
             </div>
 
+            <!-- Placeholder for when nothing matches -->
+            <div class="no-results-msg" id="noResultsMessage">No matching lesson plans found. Try another keyword!</div>
+
         </div>
     </main>
+
+    <!-- Instant Client-Side Search Engine Script -->
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const lessonCards = document.querySelectorAll('.lesson-card');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+
+        function performSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            lessonCards.forEach(card => {
+                // Reads the text contents inside the hidden data attribute
+                const keywords = card.getAttribute('data-keywords') || '';
+                
+                if (query === '' || keywords.includes(query)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // If no items match, display the fallback alert message
+            if (visibleCount === 0) {
+                noResultsMessage.style.display = 'block';
+            } else {
+                noResultsMessage.style.display = 'none';
+            }
+        }
+
+        // Search runs instantly when typing or when clicking the button
+        searchInput.addEventListener('input', performSearch);
+        searchButton.addEventListener('click', performSearch);
+    </script>
 
 </body>
 </html>
