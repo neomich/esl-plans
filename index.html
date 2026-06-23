@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #fff5ee; /* Adjusted with a richer, deeper pale orange tint */
+            background-color: #fff5ee; /* Richer, warmer pale orange backdrop */
             color: #333;
         }
 
@@ -260,10 +260,10 @@
             color: #e03131;
         }
 
-        /* PDF Icon dimensions balanced precisely */
+        /* PDF Icon dimensions balanced precisely to 52px */
         .pdf-icon-btn {
             width: 55px;
-            height: 52px; /* Set directly to match the YouTube logo height box */
+            height: 52px; 
             background-color: #e03131;
             border-radius: 12px;
             display: flex;
@@ -300,14 +300,14 @@
 
         .video-links-wrapper {
             display: flex;
-            align-items: center; /* Centered visually with the list contents */
+            align-items: center; 
             gap: 15px;
         }
 
-        /* YouTube logo placeholder frame balanced perfectly with PDF asset */
+        /* YouTube logo placeholder frame balanced perfectly to 52px height */
         .youtube-logo-placeholder {
             width: 75px;
-            height: 52px; /* Matches PDF absolute container line bounds */
+            height: 52px; 
             background-color: #ff0000;
             border-radius: 12px;
             display: flex;
@@ -353,6 +353,7 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 16px;
+            cursor: pointer;
         }
         .back-link:hover {
             text-decoration: underline;
@@ -431,7 +432,7 @@
                 </div>
             </div>
 
-            <a href="index.html" class="back-link">← Go Back</a>
+            <a onclick="window.location.href='index.html'" class="back-link">← Go Back</a>
         </div>
 
     </main>
