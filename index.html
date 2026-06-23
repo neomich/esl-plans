@@ -5,59 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESLplans - Conversation-Driven Lesson Plans</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #fff5ee; color: #333; }
         header { background-color: #c95210; padding: 20px 10px; text-align: center; }
         .nav-container { max-width: 1100px; margin: 0 auto; background-color: white; border-radius: 35px; padding: 12px 35px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .logo { font-size: 32px; font-weight: 400; }
+        .logo { font-size: 32px; font-weight: 400; color: #000; letter-spacing: -0.5px; }
         .logo strong { font-weight: 800; }
-        .hero-banner-container { background-color: #c95210; text-align: center; padding: 20px 20px 40px 20px; color: white; }
-        .search-box { display: flex; max-width: 700px; margin: 20px auto 0; background: white; border-radius: 8px; overflow: hidden; }
-        .search-box input { flex: 1; padding: 18px 25px; border: none; outline: none; }
-        .search-box button { background-color: #ff7a00; color: white; border: none; padding: 0 35px; cursor: pointer; font-weight: 600; }
-        .content-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .hero-banner-container { background-color: #c95210; text-align: center; padding: 20px 20px 40px 20px; }
+        .hero-banner-container h2 { font-size: 24px; font-weight: 400; margin-bottom: 30px; color: white; }
+        .search-box { display: flex; max-width: 700px; margin: 0 auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .search-box input { flex: 1; padding: 18px 25px; border: none; font-size: 16px; outline: none; color: #555; }
+        .search-box button { background-color: #ff7a00; color: white; border: none; padding: 0 35px; font-size: 16px; font-weight: 600; cursor: pointer; }
+        .content-container { max-width: 1100px; margin: 40px auto 60px auto; padding: 0 20px; }
+        .section-title { font-size: 28px; font-weight: 700; color: #2c3e50; margin-bottom: 30px; }
         .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
         .lesson-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
         .card-image-box { height: 180px; width: 100%; overflow: hidden; }
         .mock-3d-illustration { width: 100%; height: 100%; background-size: cover; background-position: center; }
-        .card-title-strip { padding: 15px; text-align: center; font-weight: 700; background: #e0e0e0; }
-        .card-details { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
-        .view-btn { background-color: white; border: 2px solid #ff7a00; color: #ff7a00; padding: 12px; border-radius: 20px; text-align: center; cursor: pointer; font-weight: 700; transition: 0.2s; }
-        .view-btn:hover { background-color: #ff7a00; color: white; }
-        .workspace-view { display: grid; grid-template-columns: 320px 1fr; gap: 50px; }
+        .card-title-strip { padding: 12px 15px; text-align: center; font-weight: 700; font-size: 16px; background-color: #eee; }
+        .card-details { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+        .view-btn { background-color: white; border: 1px solid #ff7a00; color: #ff7a00; padding: 14px; border-radius: 20px; font-size: 16px; font-weight: 700; cursor: pointer; text-align: center; }
+        .workspace-view { display: grid; grid-template-columns: 320px 1fr; gap: 50px; align-items: start; }
         .info-panel { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .media-section { display: flex; gap: 40px; border-top: 1px dashed #ddd; padding-top: 30px; margin-top: 20px; }
+        .media-section { display: flex; gap: 40px; border-top: 1px dashed #ddd; padding-top: 30px; margin-top: 35px; }
         .download-box { display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .pdf-icon-btn, .mp3-icon-btn { width: 55px; height: 52px; display: flex; align-items: center; justify-content: center; color: white; border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 11px; }
         .pdf-icon-btn { background-color: #e03131; }
         .mp3-icon-btn { background-color: #ff7a00; }
+        .back-btn { margin-top: 25px; padding: 12px 28px; background-color: #c95210; color: white; border-radius: 25px; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
-    <header><div class="nav-container"><div class="logo"><strong>ESL</strong>plans</div></div></header>
+    <header>
+        <div class="nav-container">
+            <a onclick="showDashboardView()" style="cursor: pointer;"><div class="logo"><strong>ESL</strong>plans</div></a>
+        </div>
+    </header>
+
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
         <div class="search-box">
-            <input type="text" placeholder="Search: food, description...">
-            <button>Find materials</button>
+            <input type="text" id="catalog-search-input" placeholder="Search lessons...">
+            <button onclick="executeCatalogSearch()">Find materials</button>
         </div>
     </div>
+
     <main class="content-container">
         <div id="dashboard-catalog-view">
+            <h3 class="section-title">Latest Lessons</h3>
             <div class="catalog-grid" id="catalog-grid-root"></div>
         </div>
+
         <div id="lesson-detail-view" style="display: none;" class="workspace-view">
             <div id="dynamic-sidebar-card" class="lesson-card">
                 <div class="card-image-box"><div id="dynamic-card-artwork" class="mock-3d-illustration"></div></div>
                 <div id="dynamic-card-title" class="card-title-strip"></div>
                 <div class="card-details">
                     <div id="dynamic-card-media-type"></div>
+                    <div id="dynamic-card-level"></div>
                 </div>
             </div>
             <div class="info-panel">
                 <h1 id="dynamic-panel-heading"></h1>
                 <ul id="dynamic-objectives-list" style="margin: 20px 0; padding-left: 20px;"></ul>
-                <div id="dynamic-description-frame" style="line-height: 1.6;"></div>
+                <div id="dynamic-description-frame" style="line-height: 1.6; color: #444;"></div>
                 <div class="media-section">
                     <div class="download-box" id="pdf-box" style="display: none;">
                         <div class="download-label">PDF</div>
@@ -68,13 +79,13 @@
                         <a href="#" id="dynamic-mp3-btn" class="mp3-icon-btn" download>MP3</a>
                     </div>
                 </div>
-                <button onclick="showDashboardView()" style="margin-top:30px; padding: 10px 20px; cursor: pointer;">Go Back</button>
+                <button onclick="showDashboardView()" class="back-btn">Go Back</button>
             </div>
         </div>
     </main>
 
     <script>
-        // Automatic unshift ensures new content is always at index 0
+        // Data Store
         const lessonsCatalog = [
             {
                 title: "Modern Remakes Of Famous Paintings",
@@ -87,7 +98,19 @@
                 pdfUrl: "materials/b1_modern_remakes_of_famous_paintings.pdf",
                 audioUrl: "audio/b1_modern_remakes_of_famous_paintings_4_speakers.mp3",
                 objectives: ["Identify and categorize art types", "Practice prepositions", "Discuss modern remakes"],
-                description: "In this lesson, students explore various art forms and discuss reinterpretations of famous masterpieces..."
+                description: "In this lesson, students explore various art forms by defining categories such as applied, conceptual, and digital arts. They engage with modern reinterpretations of famous masterpieces by completing gap-fill exercises with prepositions of place. Students listen to speakers describing specific artistic adaptations, match descriptions to images, and critically evaluate whether these modern versions respect or mock the originals."
+            },
+            {
+                title: "What's The Most Popular Age To Be?",
+                category: "general",
+                mediaType: "Video",
+                mediaIcon: "▶️",
+                levelLabel: "B1",
+                duration: "90 min",
+                visualSource: "images/b1_what_is_the_best_age_to_be_in_life.jpg",
+                pdfUrl: "materials/b1_what_is_the_best_age_to_be_in_life.pdf",
+                objectives: ["Discuss generational stereotypes", "Debate attitudes toward ageing", "Watch video on life satisfaction"],
+                description: "In this lesson, students explore common stereotypes about older and younger generations and watch a video examining attitudes toward ageing and life satisfaction."
             }
         ];
 
@@ -115,6 +138,7 @@
             document.getElementById('dynamic-card-title').innerText = lesson.title;
             document.getElementById('dynamic-card-artwork').style.backgroundImage = `url('${lesson.visualSource}')`;
             document.getElementById('dynamic-card-media-type').innerText = `${lesson.mediaIcon} ${lesson.mediaType}`;
+            document.getElementById('dynamic-card-level').innerText = `🥇 ${lesson.levelLabel}`;
             document.getElementById('dynamic-panel-heading').innerText = lesson.title;
             document.getElementById('dynamic-description-frame').innerText = lesson.description;
             
@@ -130,12 +154,15 @@
             if(lesson.audioUrl) document.getElementById('dynamic-mp3-btn').href = lesson.audioUrl;
 
             document.getElementById('dashboard-catalog-view').style.display = 'none';
+            document.getElementById('hero-banner-view').style.display = 'none';
             document.getElementById('lesson-detail-view').style.display = 'grid';
+            window.scrollTo(0,0);
         }
 
         function showDashboardView() {
             document.getElementById('lesson-detail-view').style.display = 'none';
             document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('hero-banner-view').style.display = 'block';
         }
 
         renderCatalogGrid();
