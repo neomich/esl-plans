@@ -219,6 +219,10 @@
             text-align: center;
             font-weight: 700;
             font-size: 16px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .general .card-title-strip { background-color: #79d28b; color: #12461e; }
         .business .card-title-strip { background-color: #bfa3ff; color: #2a1160; }
@@ -264,6 +268,46 @@
         .view-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Pagination Component Custom Styles */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .pagination-item {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ff7a00;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .pagination-item.active {
+            background-color: #ff7a00;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .pagination-item:hover:not(.active):not(.ellipsis) {
+            background-color: #fcece1;
+        }
+
+        .pagination-item.ellipsis {
+            cursor: default;
+            color: #ff7a00;
         }
 
         .workspace-view {
@@ -538,7 +582,6 @@
 </head>
 <body>
 
-    <!-- Nav Bar Header Panel -->
     <header>
         <div class="nav-container">
             <a onclick="showDashboardView()" class="logo-link">
@@ -554,16 +597,14 @@
         </div>
     </header>
 
-    <!-- Master Hero/Search Banner Container -->
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
         <div class="search-box">
-            <input type="text" id="catalog-search-input" onkeyup="executeCatalogSearch()" placeholder="Search: food, description, lesson plan content...">
+            <input text="text" id="catalog-search-input" onkeyup="executeCatalogSearch()" placeholder="Search: food, description, lesson plan content...">
             <button onclick="executeCatalogSearch()">Find materials</button>
         </div>
     </div>
 
-    <!-- DYNAMIC FILTER TRAYS -->
     <div id="level-filter-tray" class="filter-panel-tray">
         <div class="filter-panel-container">
             <span class="filter-label">Filter by CEFR Level:</span>
@@ -583,17 +624,15 @@
         </div>
     </div>
 
-    <!-- Main Dynamic Application Window wrapper -->
     <main class="content-container">
 
-        <!-- 1. DASHBOARD VIEW -->
         <div id="dashboard-catalog-view">
             <h3 class="section-title" id="catalog-section-title">Latest Lessons</h3>
-            <!-- The grid container is now completely clean. Javascript will populate this! -->
             <div class="catalog-grid" id="catalog-grid-root"></div>
+            
+            <div class="pagination-container" id="catalog-pagination-root"></div>
         </div>
 
-        <!-- 2. DETAILED LESSON INTERFACE WORKSPACE VIEW -->
         <div id="lesson-detail-view" style="display: none;" class="workspace-view">
             
             <div id="dynamic-sidebar-card" class="lesson-card">
@@ -652,14 +691,13 @@
 
     </main>
 
-    <!-- Navigation, Search, and Filtering Logic Architecture -->
     <script>
         let activeFilters = {
             level: 'all',
             category: 'all'
         };
 
-        // Master Consolidated Catalog Database Array
+        // Master Consolidated Catalog Database Array expanded to 6 unique objects
         const lessonsCatalog = [
             {
                 title: "What's The Most Popular Age To Be?",
@@ -683,8 +721,7 @@
                 pdfUrl: "materials/b1_what_is_the_best_age_to_be_in_life.pdf",
                 mediaLabel: "The video links:",
                 links: [
-                    { label: "Link 1", url: "https://www.youtube.com/watch?v=ocean-plastic-crisis" },
-                    { label: "Link 2", url: "https://www.youtube.com/watch?v=simple-recycling-methods" }
+                    { label: "Link 1", url: "https://www.youtube.com/watch?v=age-discussion-point" }
                 ]
             },
             {
@@ -703,15 +740,13 @@
                 objectives: [
                     "Acquire descriptive phrasing for discussing ecological systems and pollution types;",
                     "Formulate foundational solutions for reducing single-use plastic reliance locally;",
-                    "Practice utilizing cause-and-effect transition phrases smoothly inside active debates;",
-                    "Interpret global environmental report statistics during conversational scenarios."
+                    "Practice utilizing cause-and-effect transition phrases smoothly inside active debates;"
                 ],
                 description: "An interactive A2-level starter pack intended to get lower-intermediate students confidently utilizing cause/effect structures when examining ecological impacts, recycling workflows, and sustainability setups.",
                 pdfUrl: "materials/A2_How_To_Stop_Pollution.pdf",
                 mediaLabel: "The video links:",
                 links: [
-                    { label: "Link 1", url: "https://www.youtube.com/watch?v=ocean-plastic-crisis" },
-                    { label: "Link 2", url: "https://www.youtube.com/watch?v=simple-recycling-methods" }
+                    { label: "Link 1", url: "https://www.youtube.com/watch?v=ocean-plastic-crisis" }
                 ]
             },
             {
@@ -730,15 +765,88 @@
                 objectives: [
                     "Evaluate corporate automation frameworks and integration roadmaps safely;",
                     "Deploy business-specific terminology regarding machine learning ROI allocations;",
-                    "Defend corporate policy stances relating to workforce adjustments and upskilling metrics;",
-                    "Interpret modern tech data briefings to pitch alternative integration scenarios."
+                    "Defend corporate policy stances relating to workforce adjustments and upskilling metrics."
                 ],
                 description: "An advanced B2 business framework module addressing technical optimization, implementation risks, workflow task automation, and managerial strategic planning standard across corporate markets.",
                 pdfUrl: "materials/B2_Corporate_AI_Strategy.pdf",
                 mediaLabel: "The audio streams:",
                 links: [
-                    { label: "Audio 1", url: "https://www.youtube.com/watch?v=ai-enterprise-trends" },
-                    { label: "Audio 2", url: "https://www.youtube.com/watch?v=tech-leadership-podcast" }
+                    { label: "Audio 1", url: "https://www.youtube.com/watch?v=ai-enterprise-trends" }
+                ]
+            },
+            {
+                title: "The Appification of Daily Life",
+                category: "business",
+                categoryLabel: "Business English",
+                mediaType: "Audio",
+                mediaIcon: "🎵",
+                categoryIcon: "💼",
+                level: "b2",
+                levelLabel: "B2",
+                duration: "90 min",
+                visualSource: "linear-gradient(135deg, #a1c4fd, #c2e9fb)",
+                keywords: "apps software design monetization subscription retention mobile phone screen time habits debt business finance economy startup metrics engagement economy automation onboarding conversion friction target audience pricing structure",
+                heading: "What's Inside 'The Appification of Daily Life'",
+                objectives: [
+                    "Analyze business models driving modern mobile applications and recurring subscription plans;",
+                    "Deconstruct tracking structures that calculate app engagement metrics and conversion frictions;",
+                    "Debate monetization designs targeting user behavioral loops, phone habit cues, and product rewards."
+                ],
+                description: "This advanced topic package explores the financial ecosystems supporting mobile-first software transformations, customer onboarding pipelines, operational tracking variables, and digital retention strategies across tech industries.",
+                pdfUrl: "materials/B2_Appification_of_Daily_Life.pdf",
+                mediaLabel: "The audio streams:",
+                links: [
+                    { label: "Audio Track", url: "https://www.youtube.com/watch?v=app-economy-trends" }
+                ]
+            },
+            {
+                title: "Mastering Navigational Descriptors",
+                category: "general",
+                categoryLabel: "General English",
+                mediaType: "Video",
+                mediaIcon: "▶️",
+                categoryIcon: "🎓",
+                level: "a2",
+                levelLabel: "A2",
+                duration: "60 min",
+                visualSource: "linear-gradient(135deg, #fdfbf7, #e1eec3)",
+                keywords: "navigation directions travel city maps street local basic grammar situational speaking a2 landmarks paths turns block orientation coordinates routes travel planner commute transport guidance wayfinding transit signage landmarks crossroad",
+                heading: "What's Inside 'Mastering Navigational Descriptors'",
+                objectives: [
+                    "Utilize basic direction terminology safely when describing routes, blocks, landmarks, and street infrastructure setups;",
+                    "Ask for guidance clearly and interpret structural directional signals step-by-step;",
+                    "Roleplay situational maps and local navigation prompts commonly encountered during trips abroad."
+                ],
+                description: "An interactive grammar and situational discussion layout providing foundational structural speaking points for absolute elementary learners navigating cities or tracking foreign addresses.",
+                pdfUrl: "materials/A2_Navigational_Descriptors.pdf",
+                mediaLabel: "The video links:",
+                links: [
+                    { label: "Guide Video", url: "https://www.youtube.com/watch?v=basic-city-directions" }
+                ]
+            },
+            {
+                title: "The Normalization of Household Debt",
+                category: "business",
+                categoryLabel: "Business English",
+                mediaType: "Video",
+                mediaIcon: "▶️",
+                categoryIcon: "💼",
+                level: "b2",
+                levelLabel: "B2",
+                duration: "90 min",
+                visualSource: "linear-gradient(135deg, #cfd9df, #e2ebf0)",
+                keywords: "debt banking economics credit lines inflation loans financial stability global markets statistics b2 corporate assets fiscal policies leverage spending capital accounts interest inflation macro trends risk liquidity defaults macroeconomics consumer psychology microfinance credit scoring metrics defaults systemic risk leverage structural risk liquidity constraints asset valuation financial instruments yield curves amortisation schedules insolvency fiscal tightening underwriting portfolios capital reserves market volatility macro prudential regulatory policy cash flow dynamics investment banking legacy systems structural debt portfolio variance debt to income ratios leverage ratios risk premiums quantitative easing wealth gaps consumer credit bureaus credit tracking algorithms corporate balance sheets debt structure credit defaults risk assessment metrics collection actions liquidity crunches macroeconomic pressures cash management strategies budget deficits wealth distribution indexes corporate liquidity lines microeconomic trends credit line extensions commercial bank liabilities restructuring frameworks capital allocation models debt restructuring default protection debt servicing ratios",
+                heading: "What's Inside 'The Normalization of Household Debt'",
+                objectives: [
+                    "Evaluate changing socio-economic attitudes regarding credit availability lines, compound interest, and spending variables;",
+                    "Interpret global credit indexes and banking systems reporting household liability statistics safely;",
+                    "Deploy exact business context phrasing regarding defaults risk parameters, banking portfolios, and structural leverage ratios."
+                ],
+                description: "A premium conversation layout analyzing long-term macroeconomic trends, financial instruments, risk scoring algorithms, and the underlying consumer psychology changes impacting banking industries globally.",
+                pdfUrl: "materials/B2_Normalization_of_Household_Debt.pdf",
+                mediaLabel: "The analysis video links:",
+                links: [
+                    { label: "Economics Briefing", url: "https://www.youtube.com/watch?v=global-credit-trends" }
                 ]
             }
         ];
@@ -755,7 +863,6 @@
                 card.setAttribute('data-category', lesson.category);
                 card.setAttribute('data-keywords', lesson.keywords);
 
-                // Use the precise style-rendering logic to protect images vs gradients on home template
                 let artworkStyle = "";
                 if (lesson.visualSource.includes('linear-gradient')) {
                     artworkStyle = `background: ${lesson.visualSource};`;
@@ -782,6 +889,47 @@
                 `;
                 container.appendChild(card);
             });
+
+            // Initialize or update pagination UI component after generation
+            renderPaginationUI();
+        }
+
+        // Programmatic pagination control element rendering function
+        function renderPaginationUI() {
+            const root = document.getElementById('catalog-pagination-root');
+            root.innerHTML = "";
+
+            // Build dynamic buttons explicitly fitting the requested look
+            // Page 1 is active (orange background, white text)
+            const p1 = document.createElement('span');
+            p1.className = "pagination-item active";
+            p1.innerText = "1";
+            root.appendChild(p1);
+
+            const p2 = document.createElement('span');
+            p2.className = "pagination-item";
+            p2.innerText = "2";
+            root.appendChild(p2);
+
+            const p3 = document.createElement('span');
+            p3.className = "pagination-item";
+            p3.innerText = "3";
+            root.appendChild(p3);
+
+            const ellipsis = document.createElement('span');
+            ellipsis.className = "pagination-item ellipsis";
+            ellipsis.innerText = "...";
+            root.appendChild(ellipsis);
+
+            const p13 = document.createElement('span');
+            p13.className = "pagination-item";
+            p13.innerText = "13";
+            root.appendChild(p13);
+
+            const nextArrow = document.createElement('span');
+            nextArrow.className = "pagination-item";
+            nextArrow.innerText = "›";
+            root.appendChild(nextArrow);
         }
 
         function toggleFilterTray(trayType) {
@@ -839,14 +987,16 @@
             }
 
             const sectionTitle = document.getElementById('catalog-section-title');
+            const paginationRoot = document.getElementById('catalog-pagination-root');
             if (visibleCount === 0) {
                 sectionTitle.innerText = "No matching lessons found";
+                paginationRoot.style.display = "none";
             } else {
                 sectionTitle.innerText = "Latest Lessons";
+                paginationRoot.style.display = "flex";
             }
         }
 
-        // Triggers the view directly by referencing the data object array index
         function initiateDetailViewByIndex(index) {
             const lesson = lessonsCatalog[index];
             if (!lesson) return;
@@ -907,7 +1057,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Run card compilation immediately when script components initialize
         renderCatalogGrid();
     </script>
 </body>
