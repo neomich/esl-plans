@@ -420,7 +420,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            overflow: hidden; /* Clean protection wall boundary */
+            overflow: hidden; 
             flex: 1;
         }
 
@@ -465,7 +465,6 @@
             gap: 6px;
             overflow: hidden;
             flex: 1;
-            /* Sets the invisible constraint boundary wall based on dfh.jpg */
             max-width: 290px; 
         }
 
@@ -498,7 +497,6 @@
             text-decoration: underline;
         }
 
-        /* Oblong Redesigned Orange Go Back Button from dfh.jpg */
         .back-btn-container {
             margin-top: 25px;
         }
@@ -507,10 +505,10 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background-color: #c95210; /* Matching heading brand color */
+            background-color: #c95210; 
             color: white !important;
             padding: 10px 24px;
-            border-radius: 25px; /* Fully rounded oblong profile */
+            border-radius: 25px; 
             font-size: 15px;
             font-weight: 600;
             text-decoration: none;
@@ -535,7 +533,6 @@
 </head>
 <body>
 
-    <!-- Nav Bar Header Panel -->
     <header>
         <div class="nav-container">
             <a onclick="showDashboardView()" class="logo-link">
@@ -551,7 +548,6 @@
         </div>
     </header>
 
-    <!-- Master Hero/Search Banner Container -->
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
         <div class="search-box">
@@ -560,7 +556,6 @@
         </div>
     </div>
 
-    <!-- DYNAMIC FILTER TRAYS -->
     <div id="level-filter-tray" class="filter-panel-tray">
         <div class="filter-panel-container">
             <span class="filter-label">Filter by CEFR Level:</span>
@@ -580,20 +575,17 @@
         </div>
     </div>
 
-    <!-- Main Dynamic Application Window wrapper -->
     <main class="content-container">
 
-        <!-- 1. DASHBOARD VIEW -->
         <div id="dashboard-catalog-view">
             <h3 class="section-title" id="catalog-section-title">Latest Lessons</h3>
             <div class="catalog-grid">
                 
-                <!-- Card 1: Do We Buy Too Much? -->
-                <div class="lesson-card general" data-level="b1" data-category="general" data-keywords="food consumerism shopping buying items spending money b1 general english video description">
+                <div class="lesson-card general" data-level="b1" data-category="general" data-keywords="age ageing generations stereotypes b1 general english video life survey perspective profile old young values">
                     <div class="card-image-box">
-                        <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
+                        <div class="mock-3d-illustration" style="background: url('images/b1_what_is_the_best_age_to_be_in_life.jpg') center/cover no-repeat;"></div>
                     </div>
-                    <div class="card-title-strip">Do We Buy Too Much?</div>
+                    <div class="card-title-strip">What's The Most Popular Age To Be?</div>
                     <div class="card-details">
                         <div class="tag-row">
                             <div class="tag-item">🎓 General English</div>
@@ -603,11 +595,10 @@
                             <div class="tag-item">🥇 B1</div>
                             <div class="tag-item">🕒 90 min</div>
                         </div>
-                        <div onclick="showLessonDetailView('Do We Buy Too Much?', 'General English', 'Video', 'B1', '90 min', 'linear-gradient(135deg, #a8ff78, #78ffd6)', 'general')" class="view-btn">View Lesson</div>
+                        <div onclick="showLessonDetailView('What's The Most Popular Age To Be?', 'General English', 'Video', 'B1', '90 min', 'url(\'images/b1_what_is_the_best_age_to_be_in_life.jpg\') center/cover no-repeat', 'general')" class="view-btn">View Lesson</div>
                     </div>
                 </div>
 
-                <!-- Card 2: How To Stop Pollution -->
                 <div class="lesson-card general" data-level="a2" data-category="general" data-keywords="pollution environment nature climate clean green plastic earth global warming a2 general english video">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #74ebe1, #89f7fe);"></div>
@@ -626,7 +617,6 @@
                     </div>
                 </div>
 
-                <!-- Card 3: Corporate AI Strategy -->
                 <div class="lesson-card business" data-level="b2" data-category="business" data-keywords="corporate ai strategy business tech artificial intelligence workplace corporate b2 audio description">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);"></div>
@@ -649,7 +639,6 @@
         </div>
 
 
-        <!-- 2. DETAILED LESSON INTERFACE WORKSPACE VIEW -->
         <div id="lesson-detail-view" style="display: none;" class="workspace-view">
             
             <div id="dynamic-sidebar-card" class="lesson-card">
@@ -697,7 +686,6 @@
                     </div>
                 </div>
 
-                <!-- Upgraded Oblong Orange Go Back Action Controller Container matching dfh.jpg -->
                 <div class="back-btn-container">
                     <a onclick="showDashboardView()" class="back-btn-oblong">
                         <span class="back-arrow-icon">↩</span> Go Back
@@ -709,28 +697,27 @@
 
     </main>
 
-    <!-- Navigation, Search, and Filtering Logic Architecture -->
     <script>
         let activeFilters = {
             level: 'all',
             category: 'all'
         };
 
+        // Complete lesson mapping database updated with your real variables
         const lessonDatabase = {
-            "Do We Buy Too Much?": {
-                heading: "What's Inside 'Do We Buy Too Much?'",
+            "What's The Most Popular Age To Be?": {
+                heading: "What's Inside 'What's The Most Popular Age To Be?'",
                 objectives: [
-                    "Analyze modern consumer habits and retail psychology markers;",
-                    "Expand vocabulary related to spending impulses and budgeting;",
-                    "Evaluate personal financial philosophies through discussion;",
-                    "Deconstruct marketing techniques shown in target authentic media streams."
+                    "Discuss stereotypes and misunderstandings between generations;",
+                    "Debate attitudes toward ageing and different stages of life;",
+                    "Watch a video exploring which age people consider the best time of their lives."
                 ],
-                description: "This B1-level plan dives into modern consumer culture, impulse buying habits, and personal financial management. Perfect for structured intermediate conversations regarding materialism and commercial influence.",
-                pdfUrl: "materials/B1_Do_We_Buy_Too_Much.pdf",
+                description: "In this lesson, students explore common stereotypes about older and younger generations, match critical comments to everyday situations, and discuss whether age-based assumptions are fair. They debate social expectations, changing values, and generational differences, then watch a video examining people's attitudes toward ageing and life satisfaction.\n\nStudents analyze survey results about perceptions of older adults, reflect on their own age and responsibilities, and share their opinions on what makes a particular period of life enjoyable. They can also do an extra vocabulary task (e.g. bristle at, wound up, assumptions, obligations, depend on).",
+                pdfUrl: "materials/b1_what_is_the_best_age_to_be_in_life.pdf",
                 mediaLabel: "The video links:",
                 links: [
-                    { label: "Link 1", url: "https://youtube.com/watch?v=retail-psychology-101" },
-                    { label: "Link 2", url: "https://youtube.com/watch?v=minimalism-vs-consumerism" }
+                    { label: "Link 1", url: "https://www.youtube.com/watch?v=jQYlCKUkWcc" },
+                    { label: "Link 2", url: "https://www.youtube.com/watch?v=uAX_mnOl8oU" }
                 ]
             },
             "How To Stop Pollution": {
@@ -861,7 +848,6 @@
                 linksContainer.innerHTML = "";
                 contentData.links.forEach(function(linkItem) {
                     const p = document.createElement('p');
-                    // Links are rendered with clean text-truncation limits natively integrated
                     p.innerHTML = `<span>${linkItem.label}:</span> <a href="${linkItem.url}" target="_blank" title="${linkItem.url}">${linkItem.url.replace('https://', '')}</a>`;
                     linksContainer.appendChild(p);
                 });
