@@ -588,7 +588,7 @@
                 
                 <div class="lesson-card general" data-level="b1" data-category="general" data-keywords="age ageing generations stereotypes b1 general english video life survey perspective profile old young values">
                     <div class="card-image-box">
-                        <div class="mock-3d-illustration" style="background: url('images/b1_what_is_the_best_age_to_be_in_life.jpg') center/center no-repeat; background-size: cover;"></div>
+                        <div class="mock-3d-illustration" style="background-image: url('images/b1_what_is_the_best_age_to_be_in_life.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
                     </div>
                     <div class="card-title-strip">What's The Most Popular Age To Be?</div>
                     <div class="card-details">
@@ -826,7 +826,6 @@
             document.getElementById('dynamic-card-title').className = "card-title-strip"; 
             document.getElementById('dynamic-sidebar-card').className = "lesson-card " + cardClass;
             
-            // Fixed JS style assignment bug here:
             const artworkElement = document.getElementById('dynamic-card-artwork');
             if (visualSource.includes('linear-gradient')) {
                 artworkElement.style.background = visualSource;
@@ -878,6 +877,7 @@
         function showDashboardView() {
             document.getElementById('lesson-detail-view').style.display = 'none';
             document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('hero-banner-view').style.block = 'block'; // Wait, let's keep style.display simple
             document.getElementById('hero-banner-view').style.display = 'block';
             window.scrollTo(0, 0);
         }
