@@ -5,66 +5,629 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESLplans - Conversation-Driven Lesson Plans</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #fff5ee; color: #333; }
-        header { background-color: #c95210; padding: 20px 10px; text-align: center; }
-        .nav-container { max-width: 1100px; margin: 0 auto; background-color: white; border-radius: 35px; padding: 12px 35px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .logo-link { text-decoration: none; cursor: pointer; }
-        .logo { font-size: 32px; font-weight: 400; color: #000; letter-spacing: -0.5px; }
-        .logo strong { font-weight: 800; }
-        .nav-menu { display: flex; list-style: none; gap: 10px; align-items: center; }
-        .nav-menu a { text-decoration: none; color: #444; font-weight: 600; font-size: 16px; padding: 10px 20px; border-radius: 25px; transition: all 0.2s ease; cursor: pointer; }
-        .nav-menu a:hover { background-color: #c95210; color: white; }
-        .hero-banner-container { background-color: #c95210; text-align: center; padding: 20px 20px 40px 20px; }
-        .hero-banner-container h2 { font-size: 24px; font-weight: 400; margin-bottom: 30px; color: white; }
-        .search-box { display: flex; max-width: 700px; margin: 0 auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .search-box input { flex: 1; padding: 18px 25px; border: none; font-size: 16px; outline: none; color: #555; }
-        .search-box button { background-color: #ff7a00; color: white; border: none; padding: 0 35px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-        .filter-panel-tray { background-color: #fcece1; border-bottom: 1px solid #ebd0be; padding: 15px 20px; text-align: center; display: none; }
-        .filter-panel-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .filter-label { font-size: 14px; font-weight: 700; color: #8a3607; text-transform: uppercase; margin-right: 8px; }
-        .filter-pill { background-color: white; border: 1px solid #ebd0be; color: #444; padding: 8px 18px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
-        .filter-pill:hover, .filter-pill.active { background-color: #ff7a00; border-color: #ff7a00; color: white; }
-        .content-container { max-width: 1100px; margin: 40px auto 60px auto; padding: 0 20px; }
-        .section-title { font-size: 28px; font-weight: 700; color: #2c3e50; margin-bottom: 30px; }
-        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
-        .lesson-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; border: 2px solid transparent; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fff5ee; 
+            color: #333;
+        }
+
+        header {
+            background-color: #c95210; 
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 35px;
+            padding: 12px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .logo-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .logo {
+            font-size: 32px; 
+            font-weight: 400;
+            color: #000;
+            letter-spacing: -0.5px;
+        }
+        .logo strong {
+            font-weight: 800;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover {
+            background-color: #c95210;
+            color: white;
+        }
+
+        .hero-banner-container {
+            background-color: #c95210;
+            text-align: center;
+            padding: 20px 20px 40px 20px;
+        }
+
+        .hero-banner-container h2 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .search-box {
+            display: flex;
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 18px 25px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+            color: #555;
+        }
+
+        .search-box button {
+            background-color: #ff7a00;
+            color: white;
+            border: none;
+            padding: 0 35px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-box button:hover {
+            background-color: #e66e00;
+        }
+
+        .filter-panel-tray {
+            background-color: #fcece1;
+            border-bottom: 1px solid #ebd0be;
+            padding: 15px 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .filter-panel-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #8a3607;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-right: 8px;
+        }
+
+        .filter-pill {
+            background-color: white;
+            border: 1px solid #ebd0be;
+            color: #444;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-pill:hover, .filter-pill.active {
+            background-color: #ff7a00;
+            border-color: #ff7a00;
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 122, 0, 0.2);
+        }
+
+        .content-container {
+            max-width: 1100px;
+            margin: 40px auto 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            border: 2px solid transparent;
+        }
         .lesson-card.general { background-color: #f1fbf4; }
         .lesson-card.business { background-color: #f6f0ff; }
-        .card-image-box { height: 180px; width: 100%; display: flex; padding: 0; overflow: hidden; }
-        .mock-3d-illustration { width: 100%; height: 100%; border-radius: 22px 22px 0 0; background-color: #d1f2e5; }
-        .card-title-strip { padding: 12px 15px; text-align: center; font-weight: 700; font-size: 16px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+
+        .card-image-box {
+            height: 180px;
+            width: 100%;
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
+            padding: 0; 
+            overflow: hidden;
+        }
+
+        .mock-3d-illustration {
+            width: 100%; 
+            height: 100%;
+            border-radius: 22px 22px 0 0; 
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.05);
+            background-color: #d1f2e5; 
+        }
+
+        .card-title-strip {
+            padding: 12px 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .general .card-title-strip { background-color: #79d28b; color: #12461e; }
         .business .card-title-strip { background-color: #bfa3ff; color: #2a1160; }
-        .card-details { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
-        .tag-row { display: flex; justify-content: space-between; font-size: 14px; color: #555; font-weight: 500; }
-        .tag-item { display: flex; align-items: center; gap: 6px; }
-        .view-btn { background-color: white; border: 1px solid #79d28b; color: #12461e; padding: 14px; border-radius: 20px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 10px; text-align: center; }
-        .workspace-view { display: grid; grid-template-columns: 320px 1fr; gap: 50px; align-items: start; margin-top: 40px; }
-        .info-panel { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .panel-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
-        .objectives-list { list-style: none; margin-bottom: 30px; }
-        .objectives-list li { font-size: 16px; margin-bottom: 10px; padding-left: 20px; position: relative; color: #555; }
-        .objectives-list li::before { content: "•"; color: #c95210; font-weight: bold; position: absolute; left: 0; }
-        .description-frame { border: 1px solid #333; border-radius: 20px; padding: 25px; line-height: 1.6; margin-bottom: 35px; }
-        .media-section { display: flex; gap: 40px; border-top: 1px dashed #ddd; padding-top: 30px; margin-bottom: 35px; }
-        .download-box { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
-        .download-label { font-weight: 600; font-size: 14px; color: #e03131; }
-        .download-label.audio-label { color: #ff7a00; }
-        .pdf-icon-btn, .mp3-icon-btn { width: 55px; height: 52px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 11px; text-decoration: none; }
-        .pdf-icon-btn { background-color: #e03131; }
-        .mp3-icon-btn { background-color: #ff7a00; }
-        .links-box { display: flex; flex-direction: column; gap: 8px; flex: 1; }
-        .back-btn-oblong { background-color: #c95210; color: #ffffff; padding: 12px 28px; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; }
+
+        .card-details {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tag-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .tag-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .view-btn {
+            background-color: white;
+            border: 1px solid #79d28b;
+            color: #12461e;
+            padding: 14px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .business .view-btn {
+            border-color: #bfa3ff;
+            color: #2a1160;
+        }
+        .view-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Pagination Component Styles */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .pagination-item {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ff7a00;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .pagination-item.active {
+            background-color: #ff7a00;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .pagination-item:hover:not(.active):not(.ellipsis) {
+            background-color: #fcece1;
+        }
+
+        .pagination-item.ellipsis {
+            cursor: default;
+            color: #ff7a00;
+        }
+
+        .workspace-view {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 50px;
+            align-items: start;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .workspace-view {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        .info-panel {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .panel-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .info-panel h1 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .favorite-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .favorite-badge:hover {
+            color: #e03131;
+        }
+        .favorite-icon {
+            background-color: #e03131;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px 4px 12px 4px;
+            font-size: 16px;
+        }
+
+        .objectives-label {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #444;
+        }
+        .objectives-label strong {
+            color: #000;
+        }
+
+        .objectives-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .objectives-list li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+        }
+        .objectives-list li::before {
+            content: "•";
+            color: #c95210;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .description-frame {
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 25px;
+            background-color: #fff;
+            line-height: 1.6;
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 35px;
+        }
+
+        .media-section {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            border-top: 1px dashed #ddd;
+            padding-top: 30px;
+            margin-bottom: 35px;
+        }
+
+        @media (max-width: 550px) {
+            .media-section {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        .downloads-wrapper {
+            display: flex;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+
+        .download-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .download-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #e03131;
+        }
+        
+        .download-label.audio-label {
+            color: #ff7a00;
+        }
+
+        .pdf-icon-btn {
+            width: 55px;
+            height: 52px; 
+            background-color: #e03131;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 11px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(224, 49, 49, 0.3);
+            transition: transform 0.2s;
+        }
+        .pdf-icon-btn:hover {
+            transform: scale(1.05);
+        }
+        .pdf-icon-btn::before {
+            content: "📄";
+            font-size: 16px;
+            margin-bottom: -3px;
+        }
+
+        .mp3-icon-btn {
+            width: 55px;
+            height: 52px; 
+            background-color: #ff7a00;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 11px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(255, 122, 0, 0.3);
+            transition: transform 0.2s;
+        }
+        .mp3-icon-btn:hover {
+            transform: scale(1.05);
+        }
+        .mp3-icon-btn::before {
+            content: "🎵";
+            font-size: 16px;
+            margin-bottom: -3px;
+        }
+
+        .links-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow: hidden; 
+            flex: 1;
+        }
+
+        .links-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #e03131;
+        }
+
+        .video-links-wrapper {
+            display: flex;
+            align-items: center; 
+            gap: 15px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .youtube-logo-placeholder {
+            width: 75px;
+            height: 52px; 
+            background-color: #ff0000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+        .youtube-logo-placeholder::after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 14px solid white;
+            margin-left: 4px;
+        }
+
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            overflow: hidden;
+            flex: 1;
+            max-width: 380px; 
+        }
+
+        .links-list p {
+            display: flex;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        .links-list span {
+            color: #555;
+            font-weight: 600;
+            margin-right: 5px;
+            flex-shrink: 0;
+        }
+
+        .links-list a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            white-space: nowrap;
+            flex: 1;
+        }
+        .links-list a:hover {
+            text-decoration: underline;
+        }
+
+        .back-btn-container {
+            margin-top: 25px;
+        }
+
+        .back-btn-oblong {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #c95210; 
+            color: #ffffff !important; 
+            padding: 12px 28px;
+            border-radius: 25px; 
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 10px rgba(201, 82, 16, 0.25);
+            border: none;
+        }
+
+        .back-btn-oblong:hover {
+            background-color: #b0460b;
+            transform: translateY(-1px);
+        }
+
+        .back-btn-oblong:active {
+            transform: translateY(0);
+        }
+
+        .back-arrow-icon {
+            font-size: 16px;
+            color: #ffffff; 
+        }
     </style>
 </head>
 <body>
+
     <header>
         <div class="nav-container">
-            <a onclick="showDashboardView()" class="logo-link"><div class="logo"><strong>ESL</strong>plans</div></a>
+            <a onclick="showDashboardView()" class="logo-link">
+                <div class="logo"><strong>ESL</strong>plans</div>
+            </a>
             <ul class="nav-menu">
                 <li><a onclick="toggleFilterTray('level')">Levels</a></li>
                 <li><a onclick="toggleFilterTray('category')">Categories</a></li>
+                <li><a href="#">Topic Suggestions</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Login</a></li>
             </ul>
         </div>
     </header>
@@ -72,135 +635,479 @@
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
         <div class="search-box">
-            <input type="text" id="catalog-search-input" placeholder="Search lessons...">
+            <input type="text" id="catalog-search-input" onkeyup="executeCatalogSearch()" placeholder="Search: food, description, lesson plan content...">
             <button onclick="executeCatalogSearch()">Find materials</button>
         </div>
     </div>
 
+    <div id="level-filter-tray" class="filter-panel-tray">
+        <div class="filter-panel-container">
+            <span class="filter-label">Filter by CEFR Level:</span>
+            <button class="filter-pill active" onclick="applyPillFilter('level', 'all', this)">All Levels</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'a2', this)">A2 (Elementary)</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'b1', this)">B1 (Intermediate)</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'b2', this)">B2 (Upper-Intermediate)</button>
+        </div>
+    </div>
+
+    <div id="category-filter-tray" class="filter-panel-tray">
+        <div class="filter-panel-container">
+            <span class="filter-label">Filter by Category:</span>
+            <button class="filter-pill active" onclick="applyPillFilter('category', 'all', this)">All Categories</button>
+            <button class="filter-pill" onclick="applyPillFilter('category', 'general', this)">General English</button>
+            <button class="filter-pill" onclick="applyPillFilter('category', 'business', this)">Business English</button>
+        </div>
+    </div>
+
     <main class="content-container">
+
         <div id="dashboard-catalog-view">
-            <h3 class="section-title">Latest Lessons</h3>
+            <h3 class="section-title" id="catalog-section-title">Latest Lessons</h3>
             <div class="catalog-grid" id="catalog-grid-root"></div>
+            
+            <div class="pagination-container" id="catalog-pagination-root"></div>
         </div>
 
         <div id="lesson-detail-view" style="display: none;" class="workspace-view">
+            
             <div id="dynamic-sidebar-card" class="lesson-card">
-                <div class="card-image-box"><div id="dynamic-card-artwork" class="mock-3d-illustration"></div></div>
+                <div class="card-image-box">
+                    <div id="dynamic-card-artwork" class="mock-3d-illustration"></div>
+                </div>
                 <div id="dynamic-card-title" class="card-title-strip"></div>
                 <div class="card-details">
                     <div class="tag-row">
                         <div id="dynamic-card-type" class="tag-item"></div>
                         <div id="dynamic-card-media" class="tag-item"></div>
                     </div>
+                    <div class="tag-row">
+                        <div id="dynamic-card-level" class="tag-item"></div>
+                        <div id="dynamic-card-duration" class="tag-item"></div>
+                    </div>
                 </div>
             </div>
+
             <div class="info-panel">
-                <h1 id="dynamic-panel-heading"></h1>
-                <ul class="objectives-list" id="dynamic-objectives-list"></ul>
-                <div class="description-frame" id="dynamic-description-frame"></div>
-                <div class="media-section">
-                    <div class="downloads-wrapper" style="display:flex; gap:20px;">
-                        <div class="download-box"><div class="download-label">Download pdf</div><a href="#" id="dynamic-pdf-btn" class="pdf-icon-btn">PDF</a></div>
-                        <div class="download-box" id="dynamic-mp3-box" style="display: none;"><div class="download-label audio-label">Download mp3</div><a href="#" id="dynamic-mp3-btn" class="mp3-icon-btn">MP3</a></div>
-                    </div>
-                    <div class="links-box" id="dynamic-media-container" style="display: none;">
-                        <div class="links-label" id="dynamic-media-label">The links:</div>
-                        <div class="video-links-wrapper" id="dynamic-links-list"></div>
+                <div class="panel-header-row">
+                    <h1 id="dynamic-panel-heading">What's Inside?</h1>
+                    <div class="favorite-badge">
+                        add to your favorite <span class="favorite-icon">❤️</span>
                     </div>
                 </div>
-                <button onclick="showDashboardView()" class="back-btn-oblong">⬅ Go Back</button>
+
+                <p class="objectives-label">The <strong>main objectives</strong> of this ESL lesson are to:</p>
+                <ul class="objectives-list" id="dynamic-objectives-list"></ul>
+
+                <div class="description-frame" id="dynamic-description-frame"></div>
+
+                <div class="media-section">
+                    <div class="downloads-wrapper">
+                        <div class="download-box">
+                            <div class="download-label">Download pdf</div>
+                            <a href="#" id="dynamic-pdf-btn" class="pdf-icon-btn" download>PDF</a>
+                        </div>
+                        
+                        <div class="download-box" id="dynamic-mp3-box" style="display: none;">
+                            <div class="download-label audio-label">Download mp3</div>
+                            <a href="#" id="dynamic-mp3-btn" class="mp3-icon-btn" download>MP3</a>
+                        </div>
+                    </div>
+
+                    <div class="links-box">
+                        <div class="links-label" id="dynamic-media-label">The video links:</div>
+                        <div class="video-links-wrapper">
+                            <div class="youtube-logo-placeholder"></div>
+                            <div class="links-list" id="dynamic-links-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="back-btn-container">
+                    <button onclick="showDashboardView()" class="back-btn-oblong">
+                        <span class="back-arrow-icon">⬅</span> Go Back
+                    </button>
+                </div>
             </div>
+
         </div>
+
     </main>
 
     <script>
+        let activeFilters = {
+            level: 'all',
+            category: 'all'
+        };
+
+        // Master Consolidated Catalog Database Array - Restored Links & Added Optional audioUrl
         const lessonsCatalog = [
             {
-                title: "Modern Remakes Of Famous Paintings",
-                category: "general", categoryLabel: "General English",
-                mediaType: "Audio", mediaIcon: "🎵", categoryIcon: "🎓",
-                level: "b1", levelLabel: "B1", duration: "60 min",
-                visualSource: "b1_modern_remakes_of_famous_paintings.JPG",
-                heading: "What's Inside 'Modern Remakes Of Famous Paintings'",
+                title: "What's The Most Popular Age To Be?",
+                category: "general",
+                categoryLabel: "General English",
+                mediaType: "Video",
+                mediaIcon: "▶️",
+                categoryIcon: "🎓",
+                level: "b1",
+                levelLabel: "B1",
+                duration: "90 min",
+                visualSource: "images/b1_what_is_the_best_age_to_be_in_life.jpg",
+                keywords: "age ageing generations stereotypes b1 general english video life survey perspective profile old young values",
+                heading: "What's Inside 'What's The Most Popular Age To Be?'",
                 objectives: [
-                    "Identify and categorize different types of art;",
-                    "Practice prepositions of place through visual description;",
-                    "Discuss the relevance and humor of modern remakes of classical paintings."
+                    "Discuss stereotypes and misunderstandings between generations;",
+                    "Debate attitudes toward ageing and different stages of life;",
+                    "Watch a video exploring which age people consider the best time of their lives."
                 ],
-                description: "In this lesson, students explore various art forms, engage with modern reinterpretations of masterpieces, and practice prepositions of place.",
-                pdfUrl: "b1_modern_remakes_of_famous_paintings.pdf",
-                audioUrl: "b1_modern_remakes_of_famous_paintings_4_speakers.mp3",
-                links: []
+                description: "In this lesson, students explore common stereotypes about older and younger generations, match critical comments to everyday situations, and discuss whether age-based assumptions are fair. They debate social expectations, changing values, and generational differences, then watch a video examining people's attitudes toward ageing and life satisfaction.\n\nStudents analyze survey results about perceptions of older adults, reflect on their own age and responsibilities, and share their opinions on what makes a particular period of life enjoyable. They can also do an extra vocabulary task (e.g. bristle at, wound up, assumptions, obligations, depend on).",
+                pdfUrl: "materials/b1_what_is_the_best_age_to_be_in_life.pdf",
+                mediaLabel: "The video links:",
+                links: [
+                    { label: "Link 1", url: "https://www.youtube.com/watch?v=jQYlCKUkWcc" },
+                    { label: "Link 2", url: "https://www.youtube.com/watch?v=uAX_mnOl8oU" }
+                ]
             },
             {
-                title: "What's The Most Popular Age To Be?",
-                category: "general", categoryLabel: "General English",
-                mediaType: "Video", mediaIcon: "▶️", categoryIcon: "🎓",
-                level: "b1", levelLabel: "B1", duration: "90 min",
-                visualSource: "images/b1_what_is_the_best_age_to_be_in_life.jpg",
-                heading: "What's Inside 'What's The Most Popular Age To Be?'",
-                objectives: ["Discuss stereotypes", "Debate attitudes"],
-                description: "Discussion on ageing and generations.",
-                pdfUrl: "#", audioUrl: null,
-                links: [{ label: "Link 1", url: "https://www.youtube.com/watch?v=jQYlCKUkWcc" }]
+                title: "How To Stop Pollution",
+                category: "general",
+                categoryLabel: "General English",
+                mediaType: "Video",
+                mediaIcon: "▶️",
+                categoryIcon: "🎓",
+                level: "a2",
+                levelLabel: "A2",
+                duration: "90 min",
+                visualSource: "linear-gradient(135deg, #74ebe1, #89f7fe)",
+                keywords: "pollution environment nature climate clean green plastic earth global warming a2 general english video",
+                heading: "What's Inside 'How To Stop Pollution'",
+                objectives: [
+                    "Acquire descriptive phrasing for discussing ecological systems and pollution types;",
+                    "Formulate foundational solutions for reducing single-use plastic reliance locally;",
+                    "Practice utilizing cause-and-effect transition phrases smoothly inside active debates;"
+                ],
+                description: "An interactive A2-level starter pack intended to get lower-intermediate students confidently utilizing cause/effect structures when examining ecological impacts, recycling workflows, and sustainability setups.",
+                pdfUrl: "materials/A2_How_To_Stop_Pollution.pdf",
+                mediaLabel: "The video links:",
+                links: [
+                    { label: "Link 1", url: "https://www.youtube.com/watch?v=ocean-plastic-crisis" }
+                ]
+            },
+            {
+                title: "Corporate AI Strategy",
+                category: "business",
+                categoryLabel: "Business English",
+                mediaType: "Audio",
+                mediaIcon: "🎵",
+                categoryIcon: "💼",
+                level: "b2",
+                levelLabel: "B2",
+                duration: "60 min",
+                visualSource: "linear-gradient(135deg, #ff9a9e, #fecfef)",
+                keywords: "corporate ai strategy business tech artificial intelligence workplace corporate b2 audio description",
+                heading: "What's Inside 'Corporate AI Strategy'",
+                objectives: [
+                    "Evaluate corporate automation frameworks and integration roadmaps safely;",
+                    "Deploy business-specific terminology regarding machine learning ROI allocations;",
+                    "Defend corporate policy stances relating to workforce adjustments and upskilling metrics."
+                ],
+                description: "An advanced B2 business framework module addressing technical optimization, implementation risks, workflow task automation, and managerial strategic planning standard across corporate markets.",
+                pdfUrl: "materials/B2_Corporate_AI_Strategy.pdf",
+                audioUrl: "audio/B2_Corporate_AI_Strategy.mp3",
+                mediaLabel: "The audio streams:",
+                links: [
+                    { label: "Audio 1", url: "https://www.youtube.com/watch?v=ai-enterprise-trends" }
+                ]
+            },
+            {
+                title: "The Appification of Daily Life",
+                category: "business",
+                categoryLabel: "Business English",
+                mediaType: "Audio",
+                mediaIcon: "🎵",
+                categoryIcon: "💼",
+                level: "b2",
+                levelLabel: "B2",
+                duration: "90 min",
+                visualSource: "linear-gradient(135deg, #a1c4fd, #c2e9fb)",
+                keywords: "apps software design monetization subscription retention mobile phone screen time habits debt business finance economy startup metrics engagement economy automation onboarding conversion friction target audience pricing structure",
+                heading: "What's Inside 'The Appification of Daily Life'",
+                objectives: [
+                    "Analyze business models driving modern mobile applications and recurring subscription plans;",
+                    "Deconstruct tracking structures that calculate app engagement metrics and conversion frictions;",
+                    "Debate monetization designs targeting user behavioral loops, phone habit cues, and product rewards."
+                ],
+                description: "This advanced topic package explores the financial ecosystems supporting mobile-first software transformations, customer onboarding pipelines, operational tracking variables, and digital retention strategies across tech industries.",
+                pdfUrl: "materials/B2_Appification_of_Daily_Life.pdf",
+                audioUrl: "audio/B2_Appification_of_Daily_Life.mp3",
+                mediaLabel: "The audio streams:",
+                links: [
+                    { label: "Audio Track", url: "https://www.youtube.com/watch?v=app-economy-trends" }
+                ]
+            },
+            {
+                title: "Mastering Navigational Descriptors",
+                category: "general",
+                categoryLabel: "General English",
+                mediaType: "Video",
+                mediaIcon: "▶️",
+                categoryIcon: "🎓",
+                level: "a2",
+                levelLabel: "A2",
+                duration: "60 min",
+                visualSource: "linear-gradient(135deg, #fdfbf7, #e1eec3)",
+                keywords: "navigation directions travel city maps street local basic grammar situational speaking a2 landmarks paths turns block orientation coordinates routes travel planner commute transport guidance wayfinding transit signage landmarks crossroad",
+                heading: "What's Inside 'Mastering Navigational Descriptors'",
+                objectives: [
+                    "Utilize basic direction terminology safely when describing routes, blocks, landmarks, and street infrastructure setups;",
+                    "Ask for guidance clearly and interpret structural directional signals step-by-step;",
+                    "Roleplay situational maps and local navigation prompts commonly encountered during trips abroad."
+                ],
+                description: "An interactive grammar and situational discussion layout providing foundational structural speaking points for absolute elementary learners navigating cities or tracking foreign addresses.",
+                pdfUrl: "materials/A2_Navigational_Descriptors.pdf",
+                mediaLabel: "The video links:",
+                links: [
+                    { label: "Guide Video", url: "https://www.youtube.com/watch?v=basic-city-directions" }
+                ]
+            },
+            {
+                title: "The Normalization of Household Debt",
+                category: "business",
+                categoryLabel: "Business English",
+                mediaType: "Video",
+                mediaIcon: "▶️",
+                categoryIcon: "💼",
+                level: "b2",
+                levelLabel: "B2",
+                duration: "90 min",
+                visualSource: "linear-gradient(135deg, #cfd9df, #e2ebf0)",
+                keywords: "debt banking economics credit lines inflation loans financial stability global markets statistics b2 corporate assets fiscal policies leverage spending capital accounts interest inflation macro trends risk liquidity defaults macroeconomics consumer psychology microfinance credit scoring metrics defaults systemic risk leverage structural risk liquidity constraints asset valuation financial instruments yield curves amortisation schedules insolvency fiscal tightening underwriting portfolios capital reserves market volatility macro prudential regulatory policy cash flow dynamics investment banking legacy systems structural debt portfolio variance debt to income ratios leverage ratios risk premiums quantitative easing wealth gaps consumer credit bureaus credit tracking algorithms corporate balance sheets debt structure credit defaults risk assessment metrics collection actions liquidity crunches macroeconomic pressures cash management strategies budget deficits wealth distribution indexes corporate liquidity lines microeconomic trends credit line extensions commercial bank liabilities restructuring frameworks capital allocation models debt restructuring default protection debt servicing ratios",
+                heading: "What's Inside 'The Normalization of Household Debt'",
+                objectives: [
+                    "Evaluate changing socio-economic attitudes regarding credit availability lines, compound interest, and spending variables;",
+                    "Interpret global credit indexes and banking systems reporting household liability statistics safely;",
+                    "Deploy exact business context phrasing regarding defaults risk parameters, banking portfolios, and structural leverage ratios."
+                ],
+                description: "A premium conversation layout analyzing long-term macroeconomic trends, financial instruments, risk scoring algorithms, and the underlying consumer psychology changes impacting banking industries globally.",
+                pdfUrl: "materials/B2_Normalization_of_Household_Debt.pdf",
+                mediaLabel: "The analysis video links:",
+                links: [
+                    { label: "Economics Briefing", url: "https://www.youtube.com/watch?v=global-credit-trends" }
+                ]
             }
         ];
 
+        // Function to build catalog cards programmatically on load
         function renderCatalogGrid() {
             const container = document.getElementById('catalog-grid-root');
             container.innerHTML = "";
+
             lessonsCatalog.forEach((lesson, index) => {
                 const card = document.createElement('div');
                 card.className = `lesson-card ${lesson.category}`;
+                card.setAttribute('data-level', lesson.level);
+                card.setAttribute('data-category', lesson.category);
+                card.setAttribute('data-keywords', lesson.keywords);
+
+                let artworkStyle = "";
+                if (lesson.visualSource.includes('linear-gradient')) {
+                    artworkStyle = `background: ${lesson.visualSource};`;
+                } else {
+                    artworkStyle = `background-image: url('${lesson.visualSource}'); background-size: cover; background-position: center; background-repeat: no-repeat;`;
+                }
+
                 card.innerHTML = `
-                    <div class="card-image-box"><div class="mock-3d-illustration" style="background-size:cover; background-image: url('${lesson.visualSource}')"></div></div>
+                    <div class="card-image-box">
+                        <div class="mock-3d-illustration" style="${artworkStyle}"></div>
+                    </div>
                     <div class="card-title-strip">${lesson.title}</div>
                     <div class="card-details">
-                        <div class="tag-row"><div>${lesson.categoryIcon} ${lesson.categoryLabel}</div><div>${lesson.mediaIcon} ${lesson.mediaType}</div></div>
-                        <div class="view-btn" onclick="initiateDetailViewByIndex(${index})">View Lesson</div>
+                        <div class="tag-row">
+                            <div class="tag-item">${lesson.categoryIcon} ${lesson.categoryLabel}</div>
+                            <div class="tag-item">${lesson.mediaIcon} ${lesson.mediaType}</div>
+                        </div>
+                        <div class="tag-row">
+                            <div class="tag-item">🥇 ${lesson.levelLabel}</div>
+                            <div class="tag-item">🕒 ${lesson.duration}</div>
+                        </div>
+                        <div onclick="initiateDetailViewByIndex(${index})" class="view-btn">View Lesson</div>
                     </div>
                 `;
                 container.appendChild(card);
             });
+
+            renderPaginationUI();
+        }
+
+        // Programmatic pagination control element rendering function
+        function renderPaginationUI() {
+            const root = document.getElementById('catalog-pagination-root');
+            root.innerHTML = "";
+
+            const p1 = document.createElement('span');
+            p1.className = "pagination-item active";
+            p1.innerText = "1";
+            root.appendChild(p1);
+
+            const p2 = document.createElement('span');
+            p2.className = "pagination-item";
+            p2.innerText = "2";
+            root.appendChild(p2);
+
+            const p3 = document.createElement('span');
+            p3.className = "pagination-item";
+            p3.innerText = "3";
+            root.appendChild(p3);
+
+            const ellipsis = document.createElement('span');
+            ellipsis.className = "pagination-item ellipsis";
+            ellipsis.innerText = "...";
+            root.appendChild(ellipsis);
+
+            const p13 = document.createElement('span');
+            p13.className = "pagination-item";
+            p13.innerText = "13";
+            root.appendChild(p13);
+
+            const nextArrow = document.createElement('span');
+            nextArrow.className = "pagination-item";
+            nextArrow.innerText = "›";
+            root.appendChild(nextArrow);
+        }
+
+        function toggleFilterTray(trayType) {
+            const levelTray = document.getElementById('level-filter-tray');
+            const categoryTray = document.getElementById('category-filter-tray');
+
+            if (trayType === 'level') {
+                categoryTray.style.display = 'none';
+                levelTray.style.display = (levelTray.style.display === 'block') ? 'none' : 'block';
+            } else if (trayType === 'category') {
+                levelTray.style.display = 'none';
+                categoryTray.style.display = (categoryTray.style.display === 'block') ? 'none' : 'block';
+            }
+        }
+
+        function applyPillFilter(filterType, selectionValue, pillElement) {
+            const siblings = pillElement.parentNode.getElementsByClassName('filter-pill');
+            for (let i = 0; i < siblings.length; i++) {
+                siblings[i].classList.remove('active');
+            }
+            pillElement.classList.add('active');
+
+            activeFilters[filterType] = selectionValue;
+            evaluateCatalogVisibility();
+        }
+
+        function executeCatalogSearch() {
+            evaluateCatalogVisibility();
+        }
+
+        function evaluateCatalogVisibility() {
+            const searchInput = document.getElementById('catalog-search-input');
+            const searchFilter = searchInput.value.toLowerCase().trim();
+            const cards = document.getElementById('catalog-grid-root').getElementsByClassName('lesson-card');
+            
+            let visibleCount = 0;
+
+            for (let i = 0; i < cards.length; i++) {
+                const cardLevel = cards[i].getAttribute('data-level') || '';
+                const cardCategory = cards[i].getAttribute('data-category') || '';
+                const titleElement = cards[i].getElementsByClassName('card-title-strip')[0];
+                const keywordData = cards[i].getAttribute('data-keywords') || '';
+                const titleText = titleElement ? (titleElement.innerText || titleElement.textContent).toLowerCase() : '';
+
+                const matchesLevel = (activeFilters.level === 'all' || cardLevel === activeFilters.level);
+                const matchesCategory = (activeFilters.category === 'all' || cardCategory === activeFilters.category);
+                const matchesSearch = (searchFilter === '' || titleText.indexOf(searchFilter) > -1 || keywordData.toLowerCase().indexOf(searchFilter) > -1);
+
+                if (matchesLevel && matchesCategory && matchesSearch) {
+                    cards[i].style.display = "";
+                    visibleCount++;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+
+            const sectionTitle = document.getElementById('catalog-section-title');
+            const paginationRoot = document.getElementById('catalog-pagination-root');
+            if (visibleCount === 0) {
+                sectionTitle.innerText = "No matching lessons found";
+                paginationRoot.style.display = "none";
+            } else {
+                sectionTitle.innerText = "Latest Lessons";
+                paginationRoot.style.display = "flex";
+            }
         }
 
         function initiateDetailViewByIndex(index) {
             const lesson = lessonsCatalog[index];
+            if (!lesson) return;
+
             document.getElementById('dynamic-card-title').innerText = lesson.title;
-            document.getElementById('dynamic-panel-heading').innerText = lesson.heading;
-            document.getElementById('dynamic-description-frame').innerText = lesson.description;
+            document.getElementById('dynamic-card-title').className = "card-title-strip"; 
+            document.getElementById('dynamic-sidebar-card').className = "lesson-card " + lesson.category;
+            
+            const artworkElement = document.getElementById('dynamic-card-artwork');
+            if (lesson.visualSource.includes('linear-gradient')) {
+                artworkElement.style.background = lesson.visualSource;
+            } else {
+                artworkElement.style.backgroundImage = "url('" + lesson.visualSource + "')";
+                artworkElement.style.backgroundSize = "cover";
+                artworkElement.style.backgroundPosition = "center";
+                artworkElement.style.backgroundRepeat = "no-repeat";
+            }
+
             document.getElementById('dynamic-card-type').innerText = `${lesson.categoryIcon} ${lesson.categoryLabel}`;
             document.getElementById('dynamic-card-media').innerText = `${lesson.mediaIcon} ${lesson.mediaType}`;
-            document.getElementById('dynamic-pdf-btn').href = lesson.pdfUrl;
+            document.getElementById('dynamic-card-level').innerText = '🥇 ' + lesson.levelLabel;
+            document.getElementById('dynamic-card-duration').innerText = '🕒 ' + lesson.duration;
 
-            // MP3 Visibility Logic
+            document.getElementById('dynamic-panel-heading').innerText = lesson.heading;
+            document.getElementById('dynamic-description-frame').innerText = lesson.description;
+            document.getElementById('dynamic-media-label').innerText = lesson.mediaLabel;
+            document.getElementById('dynamic-pdf-btn').setAttribute('href', lesson.pdfUrl);
+
+            // Audio Element Visibility Logic
             const mp3Box = document.getElementById('dynamic-mp3-box');
+            const mp3Btn = document.getElementById('dynamic-mp3-btn');
             if (lesson.audioUrl) {
-                document.getElementById('dynamic-mp3-btn').href = lesson.audioUrl;
+                mp3Btn.setAttribute('href', lesson.audioUrl);
                 mp3Box.style.display = "flex";
             } else {
+                mp3Btn.setAttribute('href', '#');
                 mp3Box.style.display = "none";
             }
 
-            // Links / Media Visibility Logic
-            const mediaContainer = document.getElementById('dynamic-media-container');
-            if (lesson.links && lesson.links.length > 0) {
-                mediaContainer.style.display = "block";
-                document.getElementById('dynamic-links-list').innerHTML = lesson.links.map(l => `<p><a href="${l.url}">${l.label}</a></p>`).join('');
-            } else {
-                mediaContainer.style.display = "none";
-            }
+            const objectivesContainer = document.getElementById('dynamic-objectives-list');
+            objectivesContainer.innerHTML = ""; 
+            lesson.objectives.forEach(function(objectiveText) {
+                const li = document.createElement('li');
+                li.innerText = objectiveText;
+                objectivesContainer.appendChild(li);
+            });
 
-            document.getElementById('dynamic-objectives-list').innerHTML = lesson.objectives.map(o => `<li>${o}</li>`).join('');
+            const linksContainer = document.getElementById('dynamic-links-list');
+            linksContainer.innerHTML = "";
+            lesson.links.forEach(function(linkItem) {
+                const p = document.createElement('p');
+                const printableUrl = linkItem.url.replace('https://www.', '').replace('https://', '');
+                p.innerHTML = `<span>${linkItem.label}:</span> <a href="${linkItem.url}" target="_blank" title="${linkItem.url}">${printableUrl}</a>`;
+                linksContainer.appendChild(p);
+            });
+
             document.getElementById('dashboard-catalog-view').style.display = 'none';
             document.getElementById('hero-banner-view').style.display = 'none';
+            document.getElementById('level-filter-tray').style.display = 'none';
+            document.getElementById('category-filter-tray').style.display = 'none';
             document.getElementById('lesson-detail-view').style.display = 'grid';
+            window.scrollTo(0, 0);
         }
 
         function showDashboardView() {
             document.getElementById('lesson-detail-view').style.display = 'none';
             document.getElementById('dashboard-catalog-view').style.display = 'block';
             document.getElementById('hero-banner-view').style.display = 'block';
+            window.scrollTo(0, 0);
         }
 
         renderCatalogGrid();
