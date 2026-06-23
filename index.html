@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do We Buy Too Much? - Lesson Plan - ESLplans</title>
+    <title>ESLplans - Conversation-Driven Lesson Plans</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #fff5ee; /* Deeper pale orange backdrop */
+            background-color: #fff5ee; /* Richer, warmer pale orange backdrop */
             color: #333;
         }
 
@@ -72,22 +72,74 @@
             color: white;
         }
 
-        /* 2-Column Split Workspace */
-        .workspace {
+        /* Hero / Search Section */
+        .hero {
             max-width: 1100px;
-            margin: 50px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 50px;
-            align-items: start;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px 20px 60px 20px;
+            color: white;
         }
 
-        @media (max-width: 768px) {
-            .workspace {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
+        .hero h2 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            display: flex;
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 18px 25px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+            color: #555;
+        }
+
+        .search-box button {
+            background-color: #ff7a00;
+            color: white;
+            border: none;
+            padding: 0 35px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-box button:hover {
+            background-color: #e66e00;
+        }
+
+        /* Content View Wrapper */
+        .content-container {
+            max-width: 1100px;
+            margin: -20px auto 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        /* Dashboard Catalog View */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
         }
 
         /* Lesson Card Base Style */
@@ -101,6 +153,7 @@
             border: 2px solid transparent;
         }
         .lesson-card.general { background-color: #f1fbf4; }
+        .lesson-card.business { background-color: #f6f0ff; }
 
         .card-image-box {
             height: 180px;
@@ -122,12 +175,13 @@
             text-align: center;
             font-weight: 700;
             font-size: 16px;
-            background-color: #79d28b;
             color: #12461e;
         }
+        .general .card-title-strip { background-color: #79d28b; color: #12461e; }
+        .business .card-title-strip { background-color: #bfa3ff; color: #2a1160; }
 
         .card-details {
-            padding: 20px 20px 25px 20px;
+            padding: 20px 20px 20px 20px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -145,6 +199,43 @@
             display: flex;
             align-items: center;
             gap: 6px;
+        }
+
+        .view-btn {
+            background-color: white;
+            border: 1px solid #79d28b;
+            color: #12461e;
+            padding: 14px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .business .view-btn {
+            border-color: #bfa3ff;
+            color: #2a1160;
+        }
+        .view-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* 2-Column Split Details Workspace */
+        .workspace-view {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .workspace-view {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
 
         /* Lesson Info Panel Styles */
@@ -231,7 +322,7 @@
             margin-bottom: 35px;
         }
 
-        /* Media Section Layout */
+        /* Balanced Media Section Layout */
         .media-section {
             display: flex;
             gap: 40px;
@@ -364,7 +455,7 @@
 
     <header>
         <div class="nav-container">
-            <a onclick="window.location.assign('index.html?refresh=' + Date.now())" class="logo-link">
+            <a onclick="showDashboardView()" class="logo-link">
                 <div class="logo"><strong>ESL</strong>plans</div>
             </a>
             <ul class="nav-menu">
@@ -375,69 +466,165 @@
                 <li><a href="#">Login</a></li>
             </ul>
         </div>
+
+        <div id="hero-banner-view" class="hero">
+            <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
+            <div class="search-box">
+                <input type="text" placeholder="Search: food, description, lesson plan content...">
+                <button>Find materials</button>
+            </div>
+        </div>
     </header>
 
-    <main class="workspace">
-        
-        <div class="lesson-card general">
-            <div class="card-image-box">
-                <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
-            </div>
-            <div class="card-title-strip">Do We Buy Too Much?</div>
-            <div class="card-details">
-                <div class="tag-row">
-                    <div class="tag-item">🎓 General English</div>
-                    <div class="tag-item">▶️ Video</div>
+    <main class="content-container">
+
+        <div id="dashboard-catalog-view">
+            <h3 class="section-title">Latest Lessons</h3>
+            <div class="catalog-grid">
+                
+                <div class="lesson-card general">
+                    <div class="card-image-box">
+                        <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
+                    </div>
+                    <div class="card-title-strip">Do We Buy Too Much?</div>
+                    <div class="card-details">
+                        <div class="tag-row">
+                            <div class="tag-item">🎓 General English</div>
+                            <div class="tag-item">▶️ Video</div>
+                        </div>
+                        <div class="tag-row">
+                            <div class="tag-item">🥇 B1</div>
+                            <div class="tag-item">🕒 90 min</div>
+                        </div>
+                        <div onclick="showLessonDetailView()" class="view-btn">View Lesson</div>
+                    </div>
                 </div>
-                <div class="tag-row">
-                    <div class="tag-item">🥇 B1</div>
-                    <div class="tag-item">🕒 90 min</div>
+
+                <div class="lesson-card general">
+                    <div class="card-image-box">
+                        <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #74ebe1, #89f7fe);"></div>
+                    </div>
+                    <div class="card-title-strip">How To Stop Pollution</div>
+                    <div class="card-details">
+                        <div class="tag-row">
+                            <div class="tag-item">🎓 General English</div>
+                            <div class="tag-item">▶️ Video</div>
+                        </div>
+                        <div class="tag-row">
+                            <div class="tag-item">🥇 A2</div>
+                            <div class="tag-item">🕒 90 min</div>
+                        </div>
+                        <div class="view-btn">View Lesson</div>
+                    </div>
                 </div>
+
+                <div class="lesson-card business">
+                    <div class="card-image-box">
+                        <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);"></div>
+                    </div>
+                    <div class="card-title-strip">Corporate AI Strategy</div>
+                    <div class="card-details">
+                        <div class="tag-row">
+                            <div class="tag-item">💼 Business English</div>
+                            <div class="tag-item">🎵 Audio</div>
+                        </div>
+                        <div class="tag-row">
+                            <div class="tag-item">🥇 B2</div>
+                            <div class="tag-item">🕒 60 min</div>
+                        </div>
+                        <div class="view-btn">View Lesson</div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="info-panel">
-            <div class="panel-header-row">
-                <h1>What's Inside?</h1>
-                <div class="favorite-badge">
-                    add to your favorite <span class="favorite-icon">❤️</span>
+
+        <div id="lesson-detail-view" style="display: none;" class="workspace-view">
+            
+            <div class="lesson-card general">
+                <div class="card-image-box">
+                    <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
                 </div>
-            </div>
-
-            <p class="objectives-label">The <strong>main objectives</strong> of this ESL lesson are to:</p>
-            <ul class="objectives-list">
-                <li>Analyze modern consumer habits and retail psychology markers;</li>
-                <li>Expand vocabulary related to spending impulses and budgeting;</li>
-                <li>Evaluate personal financial philosophies through discussion;</li>
-                <li>Deconstruct marketing techniques shown in target authentic media streams.</li>
-            </ul>
-
-            <div class="description-frame">
-                Here will be a short description of the lesson plan, the topics it covers, the materials used, grammar + vocab, references etc.
-            </div>
-
-            <div class="media-section">
-                <div class="download-box">
-                    <div class="download-label">Download pdf</div>
-                    <a href="#" class="pdf-icon-btn">PDF</a>
-                </div>
-
-                <div class="links-box">
-                    <div class="links-label">The video links:</div>
-                    <div class="video-links-wrapper">
-                        <div class="youtube-logo-placeholder"></div>
-                        <div class="links-list">
-                            <p><span>Link 1:</span> <a href="https://youtube.com" target="_blank">youtube.com/watch?v=sample1</a></p>
-                            <p><span>Link 2:</span> <a href="https://youtube.com" target="_blank">youtube.com/watch?v=sample2</a></p>
-                        </div>
+                <div class="card-title-strip">Do We Buy Too Much?</div>
+                <div class="card-details">
+                    <div class="tag-row">
+                        <div class="tag-item">🎓 General English</div>
+                        <div class="tag-item">▶️ Video</div>
+                    </div>
+                    <div class="tag-row">
+                        <div class="tag-item">🥇 B1</div>
+                        <div class="tag-item">🕒 90 min</div>
                     </div>
                 </div>
             </div>
 
-            <a onclick="window.location.assign('index.html?refresh=' + Date.now())" class="back-link">← Go Back</a>
+            <div class="info-panel">
+                <div class="panel-header-row">
+                    <h1>What's Inside?</h1>
+                    <div class="favorite-badge">
+                        add to your favorite <span class="favorite-icon">❤️</span>
+                    </div>
+                </div>
+
+                <p class="objectives-label">The <strong>main objectives</strong> of this ESL lesson are to:</p>
+                <ul class="objectives-list">
+                    <li>Analyze modern consumer habits and retail psychology markers;</li>
+                    <li>Expand vocabulary related to spending impulses and budgeting;</li>
+                    <li>Evaluate personal financial philosophies through discussion;</li>
+                    <li>Deconstruct marketing techniques shown in target authentic media streams.</li>
+                </ul>
+
+                <div class="description-frame">
+                    Here will be a short description of the lesson plan, the topics it covers, the materials used, grammar + vocab, references etc.
+                </div>
+
+                <div class="media-section">
+                    <div class="download-box">
+                        <div class="download-label">Download pdf</div>
+                        <a href="#" class="pdf-icon-btn">PDF</a>
+                    </div>
+
+                    <div class="links-box">
+                        <div class="links-label">The video links:</div>
+                        <div class="video-links-wrapper">
+                            <div class="youtube-logo-placeholder"></div>
+                            <div class="links-list">
+                                <p><span>Link 1:</span> <a href="https://youtube.com" target="_blank">youtube.com/watch?v=sample1</a></p>
+                                <p><span>Link 2:</span> <a href="https://youtube.com" target="_blank">youtube.com/watch?v=sample2</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a onclick="showDashboardView()" class="back-link">← Go Back</a>
+            </div>
+
         </div>
 
     </main>
+
+    <script>
+        function showLessonDetailView() {
+            // Hide dashboard grid, hide the top text search banner block
+            document.getElementById('dashboard-catalog-view').style.display = 'none';
+            document.getElementById('hero-banner-view').style.display = 'none';
+            
+            // Show workspace details block seamlessly
+            document.getElementById('lesson-detail-view').style.display = 'grid';
+            window.scrollTo(0, 0);
+        }
+
+        function showDashboardView() {
+            // Hide workspace panel details
+            document.getElementById('lesson-detail-view').style.display = 'none';
+            
+            // Unveil the hero banner and primary plan grid layout instantly
+            document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('hero-banner-view').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+    </script>
 
 </body>
 </html>
