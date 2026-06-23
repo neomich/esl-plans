@@ -71,7 +71,7 @@
             color: white;
         }
 
-        /* Hero banner section broken out from top navigation container to prevent content overlaps */
+        /* Hero banner section isolated from top navigation container */
         .hero-banner-container {
             background-color: #c95210;
             text-align: center;
@@ -221,7 +221,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        /* 2-Column Split Details Workspace with top margin to avoid overlaps */
+        /* 2-Column Split Details Workspace */
         .workspace-view {
             display: grid;
             grid-template-columns: 320px 1fr;
@@ -470,8 +470,8 @@
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
         <div class="search-box">
-            <input type="text" placeholder="Search: food, description, lesson plan content...">
-            <button>Find materials</button>
+            <input type="text" id="catalog-search-input" onkeyup="executeCatalogSearch()" placeholder="Search: food, description, lesson plan content...">
+            <button onclick="executeCatalogSearch()">Find materials</button>
         </div>
     </div>
 
@@ -604,6 +604,33 @@
     </main>
 
     <script>
+        function executeCatalogSearch() {
+            // Get text string from the search field
+            var input = document.getElementById('catalog-search-input');
+            var filter = input.value.toLowerCase().trim();
+            
+            // Gather all card blocks currently in the grid
+            var cards = document.getElementsByClassName('lesson-card');
+
+            // Systematically loop through elements to verify search targets matches title structures
+            for (var i = 0; i < cards.length; i++) {
+                // Skip the hidden sidebar card container used on the layout detail sheets
+                if (cards[i].id === 'dynamic-sidebar-card') continue;
+
+                var titleElement = cards[i].getElementsByClassName('card-title-strip')[0];
+                if (titleElement) {
+                    var titleText = titleElement.innerText || titleElement.textContent;
+                    
+                    // If target query matches title elements, show the card layout block; otherwise drop it completely
+                    if (titleText.toLowerCase().indexOf(filter) > -1) {
+                        cards[i].style.display = "";
+                    } else {
+                        cards[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
         function showLessonDetailView(title, type, media, level, duration, gradient, cardClass) {
             // Populate dynamic left sidebar fields contextually based on clicked card content parameters
             document.getElementById('dynamic-card-title').innerText = title;
@@ -616,7 +643,7 @@
             document.getElementById('dynamic-card-level').innerText = '🥇 ' + level;
             document.getElementById('dynamic-card-duration').innerText = '🕒 ' + duration;
 
-            // Cleanly toggle window display fields to hide home elements and surface the detail container views without overlaps
+            // Toggle window display fields to hide home elements and surface the detail container views without overlaps
             document.getElementById('dashboard-catalog-view').style.display = 'none';
             document.getElementById('hero-banner-view').style.display = 'none';
             document.getElementById('lesson-detail-view').style.display = 'grid';
@@ -624,7 +651,7 @@
         }
 
         function showDashboardView() {
-            // Hide details grid view panels instantly
+            // Hide workspace panel details instantly
             document.getElementById('lesson-detail-view').style.display = 'none';
             
             // Surface catalog grid dashboard and the upper search block cleanly
