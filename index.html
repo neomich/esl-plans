@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #fff5ee; /* Richer, warmer pale orange backdrop */
+            background-color: #fff5ee; 
             color: #333;
         }
 
@@ -71,7 +71,6 @@
             color: white;
         }
 
-        /* Hero banner section isolated from top navigation container */
         .hero-banner-container {
             background-color: #c95210;
             text-align: center;
@@ -120,7 +119,6 @@
             background-color: #e66e00;
         }
 
-        /* Content View Wrapper */
         .content-container {
             max-width: 1100px;
             margin: 0 auto 60px auto;
@@ -134,14 +132,12 @@
             margin-bottom: 30px;
         }
 
-        /* Dashboard Catalog View */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
         }
 
-        /* Lesson Card Base Style */
         .lesson-card {
             background: white;
             border-radius: 24px;
@@ -221,7 +217,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        /* 2-Column Split Details Workspace */
         .workspace-view {
             display: grid;
             grid-template-columns: 320px 1fr;
@@ -237,7 +232,6 @@
             }
         }
 
-        /* Lesson Info Panel Styles */
         .info-panel {
             background: white;
             padding: 40px;
@@ -309,7 +303,6 @@
             top: -2px;
         }
 
-        /* Description Frame Container */
         .description-frame {
             border: 1px solid #333;
             border-radius: 20px;
@@ -321,7 +314,6 @@
             margin-bottom: 35px;
         }
 
-        /* Balanced Media Section Layout */
         .media-section {
             display: flex;
             gap: 40px;
@@ -351,7 +343,6 @@
             color: #e03131;
         }
 
-        /* Perfectly Balanced 52px Heights */
         .pdf-icon-btn {
             width: 55px;
             height: 52px; 
@@ -452,6 +443,7 @@
 </head>
 <body>
 
+    <!-- Nav Bar Header Panel -->
     <header>
         <div class="nav-container">
             <a onclick="showDashboardView()" class="logo-link">
@@ -467,6 +459,7 @@
         </div>
     </header>
 
+    <!-- Master Hero/Search Banner Container -->
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
         <div class="search-box">
@@ -475,13 +468,16 @@
         </div>
     </div>
 
+    <!-- Main Dynamic Application Window wrapper -->
     <main class="content-container">
 
+        <!-- 1. DASHBOARD VIEW -->
         <div id="dashboard-catalog-view">
             <h3 class="section-title">Latest Lessons</h3>
             <div class="catalog-grid">
                 
-                <div class="lesson-card general">
+                <!-- Card 1: Do We Buy Too Much? (Mapped with explicit topic keywords) -->
+                <div class="lesson-card general" data-keywords="food consumerism shopping buying items spending money b1 general english video description">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
                     </div>
@@ -499,7 +495,8 @@
                     </div>
                 </div>
 
-                <div class="lesson-card general">
+                <!-- Card 2: How To Stop Pollution -->
+                <div class="lesson-card general" data-keywords="pollution environment nature climate clean green plastic earth global warming a2 general english video">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #74ebe1, #89f7fe);"></div>
                     </div>
@@ -517,7 +514,8 @@
                     </div>
                 </div>
 
-                <div class="lesson-card business">
+                <!-- Card 3: Corporate AI Strategy -->
+                <div class="lesson-card business" data-keywords="corporate ai strategy business tech artificial intelligence workplace corporate b2 audio description">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);"></div>
                     </div>
@@ -539,6 +537,7 @@
         </div>
 
 
+        <!-- 2. DETAILED LESSON INTERFACE WORKSPACE VIEW -->
         <div id="lesson-detail-view" style="display: none;" class="workspace-view">
             
             <div id="dynamic-sidebar-card" class="lesson-card">
@@ -603,26 +602,25 @@
 
     </main>
 
+    <!-- Navigation and Deep Search Handling Script -->
     <script>
         function executeCatalogSearch() {
-            // Get text string from the search field
             var input = document.getElementById('catalog-search-input');
             var filter = input.value.toLowerCase().trim();
-            
-            // Gather all card blocks currently in the grid
             var cards = document.getElementsByClassName('lesson-card');
 
-            // Systematically loop through elements to verify search targets matches title structures
             for (var i = 0; i < cards.length; i++) {
-                // Skip the hidden sidebar card container used on the layout detail sheets
                 if (cards[i].id === 'dynamic-sidebar-card') continue;
 
+                // Systematic Deep Scan: Check both title text and hidden data-keywords attribute
                 var titleElement = cards[i].getElementsByClassName('card-title-strip')[0];
+                var keywordData = cards[i].getAttribute('data-keywords') || '';
+                
                 if (titleElement) {
-                    var titleText = titleElement.innerText || titleElement.textContent;
+                    var titleText = (titleElement.innerText || titleElement.textContent).toLowerCase();
                     
-                    // If target query matches title elements, show the card layout block; otherwise drop it completely
-                    if (titleText.toLowerCase().indexOf(filter) > -1) {
+                    // If target query matches title OR metadata keywords, item stays visible
+                    if (titleText.indexOf(filter) > -1 || keywordData.toLowerCase().indexOf(filter) > -1) {
                         cards[i].style.display = "";
                     } else {
                         cards[i].style.display = "none";
@@ -632,7 +630,6 @@
         }
 
         function showLessonDetailView(title, type, media, level, duration, gradient, cardClass) {
-            // Populate dynamic left sidebar fields contextually based on clicked card content parameters
             document.getElementById('dynamic-card-title').innerText = title;
             document.getElementById('dynamic-card-title').className = "card-title-strip"; 
             document.getElementById('dynamic-sidebar-card').className = "lesson-card " + cardClass;
@@ -643,7 +640,6 @@
             document.getElementById('dynamic-card-level').innerText = '🥇 ' + level;
             document.getElementById('dynamic-card-duration').innerText = '🕒 ' + duration;
 
-            // Toggle window display fields to hide home elements and surface the detail container views without overlaps
             document.getElementById('dashboard-catalog-view').style.display = 'none';
             document.getElementById('hero-banner-view').style.display = 'none';
             document.getElementById('lesson-detail-view').style.display = 'grid';
@@ -651,10 +647,7 @@
         }
 
         function showDashboardView() {
-            // Hide workspace panel details instantly
             document.getElementById('lesson-detail-view').style.display = 'none';
-            
-            // Surface catalog grid dashboard and the upper search block cleanly
             document.getElementById('dashboard-catalog-view').style.display = 'block';
             document.getElementById('hero-banner-view').style.display = 'block';
             window.scrollTo(0, 0);
