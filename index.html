@@ -11,21 +11,22 @@
         .nav-container { max-width: 1100px; margin: 0 auto; background-color: white; border-radius: 35px; padding: 12px 35px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .logo { font-size: 32px; font-weight: 400; }
         .logo strong { font-weight: 800; }
-        .hero-banner-container { background-color: #c95210; text-align: center; padding: 20px 20px 40px 20px; }
-        .search-box { display: flex; max-width: 700px; margin: 0 auto; background: white; border-radius: 8px; overflow: hidden; }
+        .hero-banner-container { background-color: #c95210; text-align: center; padding: 20px 20px 40px 20px; color: white; }
+        .search-box { display: flex; max-width: 700px; margin: 20px auto 0; background: white; border-radius: 8px; overflow: hidden; }
         .search-box input { flex: 1; padding: 18px 25px; border: none; outline: none; }
-        .search-box button { background-color: #ff7a00; color: white; border: none; padding: 0 35px; cursor: pointer; }
+        .search-box button { background-color: #ff7a00; color: white; border: none; padding: 0 35px; cursor: pointer; font-weight: 600; }
         .content-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
-        .lesson-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .lesson-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
         .card-image-box { height: 180px; width: 100%; overflow: hidden; }
         .mock-3d-illustration { width: 100%; height: 100%; background-size: cover; background-position: center; }
-        .card-title-strip { padding: 15px; text-align: center; font-weight: 700; background: #eee; }
-        .card-details { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .view-btn { background-color: #ff7a00; color: white; padding: 12px; border-radius: 20px; text-align: center; cursor: pointer; }
+        .card-title-strip { padding: 15px; text-align: center; font-weight: 700; background: #e0e0e0; }
+        .card-details { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+        .view-btn { background-color: white; border: 2px solid #ff7a00; color: #ff7a00; padding: 12px; border-radius: 20px; text-align: center; cursor: pointer; font-weight: 700; transition: 0.2s; }
+        .view-btn:hover { background-color: #ff7a00; color: white; }
         .workspace-view { display: grid; grid-template-columns: 320px 1fr; gap: 50px; }
-        .info-panel { background: white; padding: 40px; border-radius: 24px; }
-        .media-section { display: flex; gap: 40px; border-top: 1px dashed #ddd; padding-top: 30px; }
+        .info-panel { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .media-section { display: flex; gap: 40px; border-top: 1px dashed #ddd; padding-top: 30px; margin-top: 20px; }
         .download-box { display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .pdf-icon-btn, .mp3-icon-btn { width: 55px; height: 52px; display: flex; align-items: center; justify-content: center; color: white; border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 11px; }
         .pdf-icon-btn { background-color: #e03131; }
@@ -35,9 +36,10 @@
 <body>
     <header><div class="nav-container"><div class="logo"><strong>ESL</strong>plans</div></div></header>
     <div id="hero-banner-view" class="hero-banner-container">
+        <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
         <div class="search-box">
-            <input type="text" id="catalog-search-input" placeholder="Search lessons...">
-            <button>Find</button>
+            <input type="text" placeholder="Search: food, description...">
+            <button>Find materials</button>
         </div>
     </div>
     <main class="content-container">
@@ -54,8 +56,8 @@
             </div>
             <div class="info-panel">
                 <h1 id="dynamic-panel-heading"></h1>
-                <ul id="dynamic-objectives-list" style="margin: 20px 0;"></ul>
-                <div id="dynamic-description-frame" style="margin-bottom: 20px;"></div>
+                <ul id="dynamic-objectives-list" style="margin: 20px 0; padding-left: 20px;"></ul>
+                <div id="dynamic-description-frame" style="line-height: 1.6;"></div>
                 <div class="media-section">
                     <div class="download-box" id="pdf-box" style="display: none;">
                         <div class="download-label">PDF</div>
@@ -65,39 +67,29 @@
                         <div class="download-label">MP3</div>
                         <a href="#" id="dynamic-mp3-btn" class="mp3-icon-btn" download>MP3</a>
                     </div>
-                    <div id="video-links-container" style="display:none;"></div>
                 </div>
-                <button onclick="showDashboardView()" style="margin-top:20px;">Go Back</button>
+                <button onclick="showDashboardView()" style="margin-top:30px; padding: 10px 20px; cursor: pointer;">Go Back</button>
             </div>
         </div>
     </main>
 
     <script>
-        // Use unshift to add new lessons to the front automatically
-        const lessonsCatalog = [];
-        
-        // New Lesson Added
-        lessonsCatalog.unshift({
-            title: "Modern Remakes Of Famous Paintings",
-            category: "general",
-            categoryLabel: "General English",
-            mediaType: "Audio",
-            mediaIcon: "🎵",
-            categoryIcon: "🎓",
-            level: "b1",
-            levelLabel: "B1",
-            duration: "90 min",
-            visualSource: "b1_modern_remakes_of_famous_paintings.JPG",
-            pdfUrl: "b1_modern_remakes_of_famous_paintings.pdf",
-            audioUrl: "b1_modern_remakes_of_famous_paintings_4_speakers.mp3",
-            objectives: [
-                "Identify and categorize different types of art;",
-                "Practice prepositions of place through visual description;",
-                "Discuss the relevance and humor of modern remakes of classical paintings."
-            ],
-            description: "In this lesson, students explore various art forms... (rest of description text)",
-            links: [] // Empty = no video
-        });
+        // Automatic unshift ensures new content is always at index 0
+        const lessonsCatalog = [
+            {
+                title: "Modern Remakes Of Famous Paintings",
+                category: "general",
+                mediaType: "Audio",
+                mediaIcon: "🎵",
+                levelLabel: "B1",
+                duration: "90 min",
+                visualSource: "images/b1_modern_remakes_of_famous_paintings.JPG",
+                pdfUrl: "materials/b1_modern_remakes_of_famous_paintings.pdf",
+                audioUrl: "audio/b1_modern_remakes_of_famous_paintings_4_speakers.mp3",
+                objectives: ["Identify and categorize art types", "Practice prepositions", "Discuss modern remakes"],
+                description: "In this lesson, students explore various art forms and discuss reinterpretations of famous masterpieces..."
+            }
+        ];
 
         function renderCatalogGrid() {
             const container = document.getElementById('catalog-grid-root');
@@ -110,6 +102,7 @@
                     <div class="card-title-strip">${lesson.title}</div>
                     <div class="card-details">
                         <div>${lesson.mediaIcon} ${lesson.mediaType}</div>
+                        <div>🥇 ${lesson.levelLabel} | 🕒 ${lesson.duration}</div>
                         <div onclick="initiateDetailViewByIndex(${index})" class="view-btn">View Lesson</div>
                     </div>
                 `;
@@ -122,14 +115,19 @@
             document.getElementById('dynamic-card-title').innerText = lesson.title;
             document.getElementById('dynamic-card-artwork').style.backgroundImage = `url('${lesson.visualSource}')`;
             document.getElementById('dynamic-card-media-type').innerText = `${lesson.mediaIcon} ${lesson.mediaType}`;
+            document.getElementById('dynamic-panel-heading').innerText = lesson.title;
+            document.getElementById('dynamic-description-frame').innerText = lesson.description;
             
-            // Logic for PDF and MP3 buttons
+            const objList = document.getElementById('dynamic-objectives-list');
+            objList.innerHTML = lesson.objectives.map(o => `<li>${o}</li>`).join('');
+            
             const pdfBox = document.getElementById('pdf-box');
-            if(lesson.pdfUrl) { pdfBox.style.display = 'flex'; document.getElementById('dynamic-pdf-btn').href = lesson.pdfUrl; }
+            pdfBox.style.display = lesson.pdfUrl ? 'flex' : 'none';
+            if(lesson.pdfUrl) document.getElementById('dynamic-pdf-btn').href = lesson.pdfUrl;
             
             const mp3Box = document.getElementById('mp3-box');
-            if(lesson.audioUrl) { mp3Box.style.display = 'flex'; document.getElementById('dynamic-mp3-btn').href = lesson.audioUrl; }
-            else { mp3Box.style.display = 'none'; }
+            mp3Box.style.display = lesson.audioUrl ? 'flex' : 'none';
+            if(lesson.audioUrl) document.getElementById('dynamic-mp3-btn').href = lesson.audioUrl;
 
             document.getElementById('dashboard-catalog-view').style.display = 'none';
             document.getElementById('lesson-detail-view').style.display = 'grid';
