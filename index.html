@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESLplans - Unique Resources for English Teachers</title>
+    <title>ESLplans - Zero-prep Lesson Plans for Online ESL Tutors</title>
     <style>
-        /* Base styles for the layout from fgh.jpg */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -18,9 +17,8 @@
             color: #333;
         }
 
-        /* Deep orange brand header banner */
         header {
-            background-color: #c95210; /* The rich orange background */
+            background-color: #c95210; 
             color: white;
             padding: 20px 10px 40px 10px;
             text-align: center;
@@ -30,8 +28,8 @@
             max-width: 1100px;
             margin: 0 auto 30px auto;
             background-color: white;
-            border-radius: 30px;
-            padding: 10px 30px;
+            border-radius: 35px;
+            padding: 12px 35px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -40,33 +38,35 @@
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 32px; 
+            font-weight: 400;
             color: #000;
+            letter-spacing: -0.5px;
         }
-        .logo span {
-            font-weight: normal;
+        .logo strong {
+            font-weight: 800;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 10px;
             align-items: center;
         }
 
         .nav-menu a {
             text-decoration: none;
-            color: #333;
-            font-weight: 500;
+            color: #444;
+            font-weight: 600;
             font-size: 16px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.2s;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.2s ease;
+            background-color: transparent;
         }
 
-        /* Distinct highlight box for active categories tab */
-        .nav-menu a.active {
+        .nav-menu a:hover, 
+        .nav-menu a:active {
             background-color: #c95210;
             color: white;
         }
@@ -74,14 +74,11 @@
         .hero-text {
             font-size: 22px;
             font-weight: 400;
-            margin-bottom: 25px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 25px auto;
+            max-width: 950px; 
             line-height: 1.4;
         }
 
-        /* Simple Keyword Search Box Container */
         .search-box {
             max-width: 600px;
             margin: 0 auto;
@@ -115,7 +112,6 @@
             background-color: #e06500;
         }
 
-        /* Main Content Feed layout */
         main {
             max-width: 1100px;
             margin: 40px auto;
@@ -132,21 +128,20 @@
 <body>
 
     <header>
-        <!-- White floating navigation bar -->
         <div class="nav-container">
-            <div class="logo">ESL<span>plans</span></div>
+            <div class="logo"><strong>ESL</strong>plans</div>
             <ul class="nav-menu">
                 <li><a href="#">Levels</a></li>
-                <li><a href="#" class="active">Categories</a></li>
+                <li><a href="#">Categories</a></li>
                 <li><a href="#">Topic Suggestions</a></li>
                 <li><a href="#">Pricing</a></li>
                 <li><a href="#">Login</a></li>
             </ul>
         </div>
 
-        <p class="hero-text">Unique and original resources for English teachers who look for a hot'n'ready class!</p>
+        <!-- New snappy headline applied here -->
+        <p class="hero-text">Zero-prep, conversation-driven lesson plans for online ESL tutors!</p>
 
-        <!-- Simple keyword search bar -->
         <div class="search-box">
             <input type="text" placeholder="Search: food, description, lesson plan content...">
             <button type="button">Find materials</button>
@@ -155,9 +150,7 @@
 
     <main>
         <h2 class="feed-heading">Latest Lessons</h2>
-        
-        <!-- The lesson grid container will sit right here in our next step -->
-        
+        <!-- Lesson grid container goes here -->
     </main>
 
 </body>
