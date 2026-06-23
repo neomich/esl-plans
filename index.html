@@ -741,6 +741,33 @@
 
         // Master Consolidated Catalog Database Array - Restored Links & Added Optional audioUrl
         const lessonsCatalog = [
+
+            {
+                dateAdded: "2026-06-24",
+                title: "Modern Remakes Of Famous Paintings",
+                category: "general",
+                categoryLabel: "General English",
+                mediaType: "Audio",
+                mediaIcon: "🎵",
+                categoryIcon: "🎓",
+                level: "b1",
+                levelLabel: "B1",
+                duration: "90 min",
+                visualSource: "images/b1_modern_remakes_of_famous_paintings.JPG",
+                keywords: "art paintings remake famous paintings museum humour prepositions description audio b1",
+                heading: "What's Inside 'Modern Remakes Of Famous Paintings'",
+                objectives: [
+                    "Identify and categorize different types of art;",
+                    "Practice prepositions of place through visual description;",
+                    "Discuss the relevance and humor of modern remakes of classical paintings."
+                ],
+                description: "In this lesson, students explore various art forms by defining categories such as applied, conceptual, and digital arts. They engage with modern reinterpretations of famous masterpieces (e.g., Son of Man, American Gothic, The Persistence of Memory) by completing gap-fill exercises with prepositions of place to accurately describe the composition of both original and remade works.\n\nStudents listen to speakers describing specific artistic adaptations, match descriptions to images, and critically evaluate whether these modern versions respect or mock the originals. The lesson encourages debate on how shifting historical contexts alter a painting’s mood and story, while reinforcing spatial vocabulary through authentic visual analysis.\n\nStudents can also do an extra creative task (e.g., generating their own prompt for a modern remake using contemporary cultural references).",
+                pdfUrl: "materials/b1_modern_remakes_of_famous_paintings.pdf",
+                audioUrl: "audio/b1_modern_remakes_of_famous_paintings_4_speakers.mp3",
+                mediaLabel: "The audio streams:",
+                links: []
+            },
+
             {
                 title: "What's The Most Popular Age To Be?",
                 category: "general",
@@ -1110,7 +1137,16 @@
             window.scrollTo(0, 0);
         }
 
+
+        // Automatically keep newest lessons first
+        lessonsCatalog.sort((a, b) => {
+            const da = new Date(a.dateAdded || "2000-01-01");
+            const db = new Date(b.dateAdded || "2000-01-01");
+            return db - da;
+        });
+
         renderCatalogGrid();
+
     </script>
 </body>
 </html>
