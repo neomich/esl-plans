@@ -5,84 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESLplans - Conversation-Driven Lesson Plans</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: #fffaf5; color: #333; }
-        header { background-color: #c95210; padding: 20px; text-align: center; }
-        .nav-container { max-width: 1100px; margin: 0 auto; background-color: white; border-radius: 35px; padding: 10px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .logo { font-size: 28px; }
-        .hero { background-color: #c95210; padding: 40px 20px; text-align: center; color: white; }
-        .search-box { display: flex; max-width: 600px; margin: 20px auto 0; background: white; border-radius: 8px; overflow: hidden; }
-        .search-box input { flex: 1; padding: 15px; border: none; outline: none; }
-        .search-box button { background: #ff7a00; color: white; border: none; padding: 0 30px; cursor: pointer; }
-        .content { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
-        .card img { width: 100%; height: 180px; object-fit: cover; }
-        .card-body { padding: 20px; flex-grow: 1; }
-        .card-title { font-weight: bold; margin-bottom: 10px; }
-        .btn { display: block; text-align: center; background: #ff7a00; color: white; padding: 10px; border-radius: 20px; text-decoration: none; margin-top: 15px; }
-        .workspace { display: grid; grid-template-columns: 300px 1fr; gap: 40px; }
-        .media-icons { display: flex; gap: 15px; margin-top: 20px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #fff5ee; color: #333; }
+        header { background-color: #c95210; padding: 20px 10px; text-align: center; }
+        .nav-container { max-width: 1100px; margin: 0 auto; background-color: white; border-radius: 35px; padding: 12px 35px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .logo-link { text-decoration: none; cursor: pointer; }
+        .logo { font-size: 32px; font-weight: 400; color: #000; letter-spacing: -0.5px; }
+        .logo strong { font-weight: 800; }
+        .nav-menu { display: flex; list-style: none; gap: 10px; align-items: center; }
+        .nav-menu a { text-decoration: none; color: #444; font-weight: 600; font-size: 16px; padding: 10px 20px; border-radius: 25px; transition: all 0.2s ease; cursor: pointer; }
+        .nav-menu a:hover { background-color: #c95210; color: white; }
+        .hero-banner-container { background-color: #c95210; text-align: center; padding: 20px 20px 40px 20px; }
+        .hero-banner-container h2 { font-size: 24px; font-weight: 400; margin-bottom: 30px; color: white; }
+        .search-box { display: flex; max-width: 700px; margin: 0 auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .search-box input { flex: 1; padding: 18px 25px; border: none; font-size: 16px; outline: none; color: #555; }
+        .search-box button { background-color: #ff7a00; color: white; border: none; padding: 0 35px; font-size: 16px; font-weight: 600; cursor: pointer; }
+        .filter-panel-tray { background-color: #fcece1; border-bottom: 1px solid #ebd0be; padding: 15px 20px; text-align: center; display: none; }
+        .filter-panel-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .filter-pill { background-color: white; border: 1px solid #ebd0be; color: #444; padding: 8px 18px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .filter-pill.active { background-color: #ff7a00; color: white; }
+        .content-container { max-width: 1100px; margin: 40px auto 60px auto; padding: 0 20px; }
+        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+        .lesson-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+        .card-image-box { height: 180px; width: 100%; overflow: hidden; }
+        .mock-3d-illustration { width: 100%; height: 100%; background-color: #d1f2e5; }
+        .card-title-strip { padding: 12px 15px; text-align: center; font-weight: 700; background-color: #79d28b; color: #12461e; }
+        .card-details { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+        .view-btn { background-color: white; border: 1px solid #79d28b; color: #12461e; padding: 14px; border-radius: 20px; font-weight: 700; cursor: pointer; text-align: center; }
+        .workspace-view { display: grid; grid-template-columns: 320px 1fr; gap: 50px; align-items: start; }
+        .info-panel { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .objectives-list { list-style: none; margin-bottom: 30px; }
+        .objectives-list li { margin-bottom: 10px; padding-left: 20px; position: relative; }
+        .objectives-list li::before { content: "•"; color: #c95210; position: absolute; left: 0; }
+        .description-frame { border: 1px solid #333; border-radius: 20px; padding: 25px; margin-bottom: 35px; }
+        .media-section { display: flex; gap: 40px; border-top: 1px dashed #ddd; padding-top: 30px; }
+        .pdf-icon-btn, .mp3-icon-btn { width: 55px; height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 11px; }
+        .pdf-icon-btn { background-color: #e03131; }
+        .mp3-icon-btn { background-color: #ff7a00; }
+        .back-btn-oblong { background-color: #c95210; color: white; padding: 12px 28px; border-radius: 25px; border: none; cursor: pointer; font-weight: 700; }
     </style>
 </head>
 <body>
-    <header><div class="nav-container"><div class="logo"><strong>ESL</strong>plans</div></div></header>
-    <div class="hero">
+    <header>
+        <div class="nav-container">
+            <a onclick="showDashboardView()" class="logo-link"><div class="logo"><strong>ESL</strong>plans</div></a>
+            <ul class="nav-menu">
+                <li><a onclick="toggleFilterTray('level')">Levels</a></li>
+                <li><a onclick="toggleFilterTray('category')">Categories</a></li>
+                <li><a href="#">Topic Suggestions</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
-        <div class="search-box"><input type="text" placeholder="Search lessons..."><button>Find materials</button></div>
-    </div>
-
-    <div class="content" id="catalog-view">
-        <h2 style="margin-bottom:20px;">Latest Lessons</h2>
-        <div class="grid" id="lesson-grid"></div>
-    </div>
-
-    <div class="content" id="detail-view" style="display:none;">
-        <div class="workspace">
-            <div class="card" id="side-card"></div>
-            <div id="lesson-content"></div>
+        <div class="search-box">
+            <input type="text" id="catalog-search-input" onkeyup="executeCatalogSearch()" placeholder="Search: food, description, lesson plan content...">
+            <button onclick="executeCatalogSearch()">Find materials</button>
         </div>
     </div>
 
+    <div id="level-filter-tray" class="filter-panel-tray"><div class="filter-panel-container"><button class="filter-pill active" onclick="applyPillFilter('level', 'all', this)">All Levels</button><button class="filter-pill" onclick="applyPillFilter('level', 'a2', this)">A2</button><button class="filter-pill" onclick="applyPillFilter('level', 'b1', this)">B1</button></div></div>
+    <div id="category-filter-tray" class="filter-panel-tray"><div class="filter-panel-container"><button class="filter-pill active" onclick="applyPillFilter('category', 'all', this)">All Categories</button><button class="filter-pill" onclick="applyPillFilter('category', 'general', this)">General</button><button class="filter-pill" onclick="applyPillFilter('category', 'business', this)">Business</button></div></div>
+
+    <main class="content-container">
+        <div id="dashboard-catalog-view">
+            <h3 class="section-title">Latest Lessons</h3>
+            <div class="catalog-grid" id="catalog-grid-root"></div>
+        </div>
+        <div id="lesson-detail-view" style="display: none;" class="workspace-view">
+            <div class="lesson-card">
+                <div class="card-image-box"><div id="dynamic-card-artwork" class="mock-3d-illustration"></div></div>
+                <div id="dynamic-card-title" class="card-title-strip"></div>
+                <div class="card-details">
+                    <div id="dynamic-card-type"></div>
+                    <div id="dynamic-card-level"></div>
+                </div>
+            </div>
+            <div class="info-panel">
+                <h1 id="dynamic-panel-heading"></h1>
+                <ul class="objectives-list" id="dynamic-objectives-list"></ul>
+                <div class="description-frame" id="dynamic-description-frame"></div>
+                <div class="media-section">
+                    <div class="downloads-wrapper">
+                        <a href="#" id="dynamic-pdf-btn" class="pdf-icon-btn">PDF</a>
+                        <a href="#" id="dynamic-mp3-btn" class="mp3-icon-btn" style="display:none;">MP3</a>
+                    </div>
+                    <div class="links-list" id="dynamic-links-list"></div>
+                </div>
+                <button onclick="showDashboardView()" class="back-btn-oblong">⬅ Go Back</button>
+            </div>
+        </div>
+    </main>
+
     <script>
-        const lessons = [
-            { id: 1, title: "Modern Remakes Of Famous Paintings", level: "B1", type: "Audio", icon: "🎵", img: "1as.JPG", desc: "In this lesson, students explore various art forms...", objectives: ["Identify and categorize art types", "Practice prepositions", "Discuss modern remakes"], pdf: "#", mp3: "#" },
-            { id: 2, title: "What's The Most Popular Age To Be?", level: "B1", type: "Video", icon: "▶️", img: "2as.JPG", desc: "In this lesson, students explore common stereotypes...", objectives: ["Discuss stereotypes", "Debate ageing", "Watch video"], pdf: "#", video: "#" }
+        const lessonsCatalog = [
+            { id: 0, title: "What's The Most Popular Age To Be?", category: "general", level: "b1", desc: "Discussion on ageing and generations.", objectives: ["Discuss stereotypes", "Debate attitudes"], pdfUrl: "#" },
+            { id: 1, title: "Corporate AI Strategy", category: "business", level: "b2", desc: "Business AI implementation.", objectives: ["Analyze frameworks", "Defend policy"], pdfUrl: "#" }
         ];
 
-        function renderGrid() {
-            const grid = document.getElementById('lesson-grid');
-            grid.innerHTML = lessons.map((l, i) => `
-                <div class="card">
-                    <img src="${l.img}">
-                    <div class="card-body">
-                        <div class="card-title">${l.title}</div>
-                        <div>${l.icon} ${l.type}</div>
-                        <div>🥇 ${l.level} | 🕒 90 min</div>
-                        <a href="#" class="btn" onclick="showDetail(${i})">View Lesson</a>
+        function renderCatalog(data = lessonsCatalog) {
+            const grid = document.getElementById('catalog-grid-root');
+            grid.innerHTML = data.map(l => `
+                <div class="lesson-card">
+                    <div class="card-image-box"><div class="mock-3d-illustration"></div></div>
+                    <div class="card-title-strip">${l.title}</div>
+                    <div class="card-details">
+                        <button class="view-btn" onclick="showDetail(${l.id})">View Lesson</button>
                     </div>
                 </div>
             `).join('');
         }
 
-        function showDetail(i) {
-            const l = lessons[i];
-            document.getElementById('catalog-view').style.display = 'none';
-            document.getElementById('detail-view').style.display = 'block';
-            document.getElementById('side-card').innerHTML = `<img src="${l.img}"><div class="card-body"><div class="card-title">${l.title}</div><div>${l.icon} ${l.type}</div><div>🥇 ${l.level}</div></div>`;
-            document.getElementById('lesson-content').innerHTML = `
-                <h1>${l.title}</h1>
-                <ul>${l.objectives.map(o => `<li>${o}</li>`).join('')}</ul>
-                <p>${l.desc}</p>
-                <div class="media-icons">
-                    ${l.pdf ? `<a href="${l.pdf}" class="btn" style="background:#d9534f">PDF</a>` : ''}
-                    ${l.mp3 ? `<a href="${l.mp3}" class="btn">MP3</a>` : ''}
-                    ${l.video ? `<a href="${l.video}" class="btn">Video</a>` : ''}
-                </div>
-                <button class="btn" onclick="location.reload()">Go Back</button>
-            `;
+        function showDetail(id) {
+            const l = lessonsCatalog[id];
+            document.getElementById('dashboard-catalog-view').style.display = 'none';
+            document.getElementById('lesson-detail-view').style.display = 'grid';
+            document.getElementById('dynamic-panel-heading').innerText = l.title;
+            document.getElementById('dynamic-description-frame').innerText = l.desc;
+            document.getElementById('dynamic-objectives-list').innerHTML = l.objectives.map(o => `<li>${o}</li>`).join('');
+            document.getElementById('dynamic-pdf-btn').href = l.pdfUrl;
         }
-        renderGrid();
+
+        function showDashboardView() {
+            document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('lesson-detail-view').style.display = 'none';
+        }
+
+        function toggleFilterTray(type) {
+            const tray = document.getElementById(type + '-filter-tray');
+            tray.style.display = tray.style.display === 'block' ? 'none' : 'block';
+        }
+
+        renderCatalog();
     </script>
 </body>
 </html>
