@@ -538,6 +538,7 @@
 </head>
 <body>
 
+    <!-- Nav Bar Header Panel -->
     <header>
         <div class="nav-container">
             <a onclick="showDashboardView()" class="logo-link">
@@ -553,6 +554,7 @@
         </div>
     </header>
 
+    <!-- Master Hero/Search Banner Container -->
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
         <div class="search-box">
@@ -561,6 +563,7 @@
         </div>
     </div>
 
+    <!-- DYNAMIC FILTER TRAYS -->
     <div id="level-filter-tray" class="filter-panel-tray">
         <div class="filter-panel-container">
             <span class="filter-label">Filter by CEFR Level:</span>
@@ -580,69 +583,17 @@
         </div>
     </div>
 
+    <!-- Main Dynamic Application Window wrapper -->
     <main class="content-container">
 
+        <!-- 1. DASHBOARD VIEW -->
         <div id="dashboard-catalog-view">
             <h3 class="section-title" id="catalog-section-title">Latest Lessons</h3>
-            <div class="catalog-grid">
-                
-                <div class="lesson-card general" data-level="b1" data-category="general" data-keywords="age ageing generations stereotypes b1 general english video life survey perspective profile old young values">
-                    <div class="card-image-box">
-                        <div class="mock-3d-illustration" style="background-image: url('images/b1_what_is_the_best_age_to_be_in_life.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
-                    </div>
-                    <div class="card-title-strip">What's The Most Popular Age To Be?</div>
-                    <div class="card-details">
-                        <div class="tag-row">
-                            <div class="tag-item">🎓 General English</div>
-                            <div class="tag-item">▶️ Video</div>
-                        </div>
-                        <div class="tag-row">
-                            <div class="tag-item">🥇 B1</div>
-                            <div class="tag-item">🕒 90 min</div>
-                        </div>
-                        <div onclick="showLessonDetailView('What\'s The Most Popular Age To Be?', 'General English', 'Video', 'B1', '90 min', 'images/b1_what_is_the_best_age_to_be_in_life.jpg', 'general')" class="view-btn">View Lesson</div>
-                    </div>
-                </div>
-
-                <div class="lesson-card general" data-level="a2" data-category="general" data-keywords="pollution environment nature climate clean green plastic earth global warming a2 general english video">
-                    <div class="card-image-box">
-                        <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #74ebe1, #89f7fe);"></div>
-                    </div>
-                    <div class="card-title-strip">How To Stop Pollution</div>
-                    <div class="card-details">
-                        <div class="tag-row">
-                            <div class="tag-item">🎓 General English</div>
-                            <div class="tag-item">▶️ Video</div>
-                        </div>
-                        <div class="tag-row">
-                            <div class="tag-item">🥇 A2</div>
-                            <div class="tag-item">🕒 90 min</div>
-                        </div>
-                        <div onclick="showLessonDetailView('How To Stop Pollution', 'General English', 'Video', 'A2', '90 min', 'linear-gradient(135deg, #74ebe1, #89f7fe)', 'general')" class="view-btn">View Lesson</div>
-                    </div>
-                </div>
-
-                <div class="lesson-card business" data-level="b2" data-category="business" data-keywords="corporate ai strategy business tech artificial intelligence workplace corporate b2 audio description">
-                    <div class="card-image-box">
-                        <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);"></div>
-                    </div>
-                    <div class="card-title-strip">Corporate AI Strategy</div>
-                    <div class="card-details">
-                        <div class="tag-row">
-                            <div class="tag-item">💼 Business English</div>
-                            <div class="tag-item">🎵 Audio</div>
-                        </div>
-                        <div class="tag-row">
-                            <div class="tag-item">🥇 B2</div>
-                            <div class="tag-item">🕒 60 min</div>
-                        </div>
-                        <div onclick="showLessonDetailView('Corporate AI Strategy', 'Business English', 'Audio', 'B2', '60 min', 'linear-gradient(135deg, #ff9a9e, #fecfef)', 'business')" class="view-btn">View Lesson</div>
-                    </div>
-                </div>
-
-            </div>
+            <!-- The grid container is now completely clean. Javascript will populate this! -->
+            <div class="catalog-grid" id="catalog-grid-root"></div>
         </div>
 
+        <!-- 2. DETAILED LESSON INTERFACE WORKSPACE VIEW -->
         <div id="lesson-detail-view" style="display: none;" class="workspace-view">
             
             <div id="dynamic-sidebar-card" class="lesson-card">
@@ -701,14 +652,27 @@
 
     </main>
 
+    <!-- Navigation, Search, and Filtering Logic Architecture -->
     <script>
         let activeFilters = {
             level: 'all',
             category: 'all'
         };
 
-        const lessonDatabase = {
-            "What's The Most Popular Age To Be?": {
+        // Master Consolidated Catalog Database Array
+        const lessonsCatalog = [
+            {
+                title: "What's The Most Popular Age To Be?",
+                category: "general",
+                categoryLabel: "General English",
+                mediaType: "Video",
+                mediaIcon: "▶️",
+                categoryIcon: "🎓",
+                level: "b1",
+                levelLabel: "B1",
+                duration: "90 min",
+                visualSource: "images/b1_what_is_the_best_age_to_be_in_life.jpg",
+                keywords: "age ageing generations stereotypes b1 general english video life survey perspective profile old young values",
                 heading: "What's Inside 'What's The Most Popular Age To Be?'",
                 objectives: [
                     "Discuss stereotypes and misunderstandings between generations;",
@@ -723,7 +687,18 @@
                     { label: "Link 2", url: "https://www.youtube.com/watch?v=simple-recycling-methods" }
                 ]
             },
-            "How To Stop Pollution": {
+            {
+                title: "How To Stop Pollution",
+                category: "general",
+                categoryLabel: "General English",
+                mediaType: "Video",
+                mediaIcon: "▶️",
+                categoryIcon: "🎓",
+                level: "a2",
+                levelLabel: "A2",
+                duration: "90 min",
+                visualSource: "linear-gradient(135deg, #74ebe1, #89f7fe)",
+                keywords: "pollution environment nature climate clean green plastic earth global warming a2 general english video",
                 heading: "What's Inside 'How To Stop Pollution'",
                 objectives: [
                     "Acquire descriptive phrasing for discussing ecological systems and pollution types;",
@@ -739,7 +714,18 @@
                     { label: "Link 2", url: "https://www.youtube.com/watch?v=simple-recycling-methods" }
                 ]
             },
-            "Corporate AI Strategy": {
+            {
+                title: "Corporate AI Strategy",
+                category: "business",
+                categoryLabel: "Business English",
+                mediaType: "Audio",
+                mediaIcon: "🎵",
+                categoryIcon: "💼",
+                level: "b2",
+                levelLabel: "B2",
+                duration: "60 min",
+                visualSource: "linear-gradient(135deg, #ff9a9e, #fecfef)",
+                keywords: "corporate ai strategy business tech artificial intelligence workplace corporate b2 audio description",
                 heading: "What's Inside 'Corporate AI Strategy'",
                 objectives: [
                     "Evaluate corporate automation frameworks and integration roadmaps safely;",
@@ -755,7 +741,48 @@
                     { label: "Audio 2", url: "https://www.youtube.com/watch?v=tech-leadership-podcast" }
                 ]
             }
-        };
+        ];
+
+        // Function to build catalog cards programmatically on load
+        function renderCatalogGrid() {
+            const container = document.getElementById('catalog-grid-root');
+            container.innerHTML = "";
+
+            lessonsCatalog.forEach((lesson, index) => {
+                const card = document.createElement('div');
+                card.className = `lesson-card ${lesson.category}`;
+                card.setAttribute('data-level', lesson.level);
+                card.setAttribute('data-category', lesson.category);
+                card.setAttribute('data-keywords', lesson.keywords);
+
+                // Use the precise style-rendering logic to protect images vs gradients on home template
+                let artworkStyle = "";
+                if (lesson.visualSource.includes('linear-gradient')) {
+                    artworkStyle = `background: ${lesson.visualSource};`;
+                } else {
+                    artworkStyle = `background-image: url('${lesson.visualSource}'); background-size: cover; background-position: center; background-repeat: no-repeat;`;
+                }
+
+                card.innerHTML = `
+                    <div class="card-image-box">
+                        <div class="mock-3d-illustration" style="${artworkStyle}"></div>
+                    </div>
+                    <div class="card-title-strip">${lesson.title}</div>
+                    <div class="card-details">
+                        <div class="tag-row">
+                            <div class="tag-item">${lesson.categoryIcon} ${lesson.categoryLabel}</div>
+                            <div class="tag-item">${lesson.mediaIcon} ${lesson.mediaType}</div>
+                        </div>
+                        <div class="tag-row">
+                            <div class="tag-item">🥇 ${lesson.levelLabel}</div>
+                            <div class="tag-item">🕒 ${lesson.duration}</div>
+                        </div>
+                        <div onclick="initiateDetailViewByIndex(${index})" class="view-btn">View Lesson</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
 
         function toggleFilterTray(trayType) {
             const levelTray = document.getElementById('level-filter-tray');
@@ -788,13 +815,11 @@
         function evaluateCatalogVisibility() {
             const searchInput = document.getElementById('catalog-search-input');
             const searchFilter = searchInput.value.toLowerCase().trim();
-            const cards = document.getElementsByClassName('lesson-card');
+            const cards = document.getElementById('catalog-grid-root').getElementsByClassName('lesson-card');
             
             let visibleCount = 0;
 
             for (let i = 0; i < cards.length; i++) {
-                if (cards[i].id === 'dynamic-sidebar-card') continue;
-
                 const cardLevel = cards[i].getAttribute('data-level') || '';
                 const cardCategory = cards[i].getAttribute('data-category') || '';
                 const titleElement = cards[i].getElementsByClassName('card-title-strip')[0];
@@ -821,50 +846,51 @@
             }
         }
 
-        function showLessonDetailView(title, type, media, level, duration, visualSource, cardClass) {
-            document.getElementById('dynamic-card-title').innerText = title;
+        // Triggers the view directly by referencing the data object array index
+        function initiateDetailViewByIndex(index) {
+            const lesson = lessonsCatalog[index];
+            if (!lesson) return;
+
+            document.getElementById('dynamic-card-title').innerText = lesson.title;
             document.getElementById('dynamic-card-title').className = "card-title-strip"; 
-            document.getElementById('dynamic-sidebar-card').className = "lesson-card " + cardClass;
+            document.getElementById('dynamic-sidebar-card').className = "lesson-card " + lesson.category;
             
             const artworkElement = document.getElementById('dynamic-card-artwork');
-            if (visualSource.includes('linear-gradient')) {
-                artworkElement.style.background = visualSource;
+            if (lesson.visualSource.includes('linear-gradient')) {
+                artworkElement.style.background = lesson.visualSource;
             } else {
-                artworkElement.style.backgroundImage = "url('" + visualSource + "')";
+                artworkElement.style.backgroundImage = "url('" + lesson.visualSource + "')";
                 artworkElement.style.backgroundSize = "cover";
                 artworkElement.style.backgroundPosition = "center";
                 artworkElement.style.backgroundRepeat = "no-repeat";
             }
 
-            document.getElementById('dynamic-card-type').innerText = (cardClass === 'business' ? '💼 ' : '🎓 ') + type;
-            document.getElementById('dynamic-card-media').innerText = (media === 'Audio' ? '🎵 ' : '▶️ ') + media;
-            document.getElementById('dynamic-card-level').innerText = '🥇 ' + level;
-            document.getElementById('dynamic-card-duration').innerText = '🕒 ' + duration;
+            document.getElementById('dynamic-card-type').innerText = `${lesson.categoryIcon} ${lesson.categoryLabel}`;
+            document.getElementById('dynamic-card-media').innerText = `${lesson.mediaIcon} ${lesson.mediaType}`;
+            document.getElementById('dynamic-card-level').innerText = '🥇 ' + lesson.levelLabel;
+            document.getElementById('dynamic-card-duration').innerText = '🕒 ' + lesson.duration;
 
-            const contentData = lessonDatabase[title];
-            if (contentData) {
-                document.getElementById('dynamic-panel-heading').innerText = contentData.heading;
-                document.getElementById('dynamic-description-frame').innerText = contentData.description;
-                document.getElementById('dynamic-media-label').innerText = contentData.mediaLabel;
-                document.getElementById('dynamic-pdf-btn').setAttribute('href', contentData.pdfUrl);
+            document.getElementById('dynamic-panel-heading').innerText = lesson.heading;
+            document.getElementById('dynamic-description-frame').innerText = lesson.description;
+            document.getElementById('dynamic-media-label').innerText = lesson.mediaLabel;
+            document.getElementById('dynamic-pdf-btn').setAttribute('href', lesson.pdfUrl);
 
-                const objectivesContainer = document.getElementById('dynamic-objectives-list');
-                objectivesContainer.innerHTML = ""; 
-                contentData.objectives.forEach(function(objectiveText) {
-                    const li = document.createElement('li');
-                    li.innerText = objectiveText;
-                    objectivesContainer.appendChild(li);
-                });
+            const objectivesContainer = document.getElementById('dynamic-objectives-list');
+            objectivesContainer.innerHTML = ""; 
+            lesson.objectives.forEach(function(objectiveText) {
+                const li = document.createElement('li');
+                li.innerText = objectiveText;
+                objectivesContainer.appendChild(li);
+            });
 
-                const linksContainer = document.getElementById('dynamic-links-list');
-                linksContainer.innerHTML = "";
-                contentData.links.forEach(function(linkItem) {
-                    const p = document.createElement('p');
-                    const printableUrl = linkItem.url.replace('https://www.', '').replace('https://', '');
-                    p.innerHTML = `<span>${linkItem.label}:</span> <a href="${linkItem.url}" target="_blank" title="${linkItem.url}">${printableUrl}</a>`;
-                    linksContainer.appendChild(p);
-                });
-            }
+            const linksContainer = document.getElementById('dynamic-links-list');
+            linksContainer.innerHTML = "";
+            lesson.links.forEach(function(linkItem) {
+                const p = document.createElement('p');
+                const printableUrl = linkItem.url.replace('https://www.', '').replace('https://', '');
+                p.innerHTML = `<span>${linkItem.label}:</span> <a href="${linkItem.url}" target="_blank" title="${linkItem.url}">${printableUrl}</a>`;
+                linksContainer.appendChild(p);
+            });
 
             document.getElementById('dashboard-catalog-view').style.display = 'none';
             document.getElementById('hero-banner-view').style.display = 'none';
@@ -877,10 +903,12 @@
         function showDashboardView() {
             document.getElementById('lesson-detail-view').style.display = 'none';
             document.getElementById('dashboard-catalog-view').style.display = 'block';
-            document.getElementById('hero-banner-view').style.block = 'block'; // Wait, let's keep style.display simple
             document.getElementById('hero-banner-view').style.display = 'block';
             window.scrollTo(0, 0);
         }
+
+        // Run card compilation immediately when script components initialize
+        renderCatalogGrid();
     </script>
 </body>
 </html>
