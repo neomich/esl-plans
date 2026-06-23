@@ -64,6 +64,7 @@
             padding: 10px 20px;
             border-radius: 25px;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .nav-menu a:hover {
@@ -74,8 +75,7 @@
         .hero-banner-container {
             background-color: #c95210;
             text-align: center;
-            padding: 20px 20px 50px 20px;
-            margin-bottom: 40px;
+            padding: 20px 20px 40px 20px;
         }
 
         .hero-banner-container h2 {
@@ -119,9 +119,56 @@
             background-color: #e66e00;
         }
 
+        /* Sub-Navigation Dynamic Filter Pill Trays */
+        .filter-panel-tray {
+            background-color: #fcece1;
+            border-bottom: 1px solid #ebd0be;
+            padding: 15px 20px;
+            text-align: center;
+            display: none; /* Managed dynamically via toggle Sub-menus */
+        }
+
+        .filter-panel-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #8a3607;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-right: 8px;
+        }
+
+        .filter-pill {
+            background-color: white;
+            border: 1px solid #ebd0be;
+            color: #444;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-pill:hover, .filter-pill.active {
+            background-color: #ff7a00;
+            border-color: #ff7a00;
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 122, 0, 0.2);
+        }
+
         .content-container {
             max-width: 1100px;
-            margin: 0 auto 60px auto;
+            margin: 40px auto 60px auto;
             padding: 0 20px;
         }
 
@@ -449,8 +496,8 @@
                 <div class="logo"><strong>ESL</strong>plans</div>
             </a>
             <ul class="nav-menu">
-                <li><a href="#">Levels</a></li>
-                <li><a href="#">Categories</a></li>
+                <li><a onclick="toggleFilterTray('level')">Levels</a></li>
+                <li><a onclick="toggleFilterTray('category')">Categories</a></li>
                 <li><a href="#">Topic Suggestions</a></li>
                 <li><a href="#">Pricing</a></li>
                 <li><a href="#">Login</a></li>
@@ -466,13 +513,32 @@
         </div>
     </div>
 
+    <div id="level-filter-tray" class="filter-panel-tray">
+        <div class="filter-panel-container">
+            <span class="filter-label">Filter by CEFR Level:</span>
+            <button class="filter-pill active" onclick="applyPillFilter('level', 'all', this)">All Levels</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'a2', this)">A2 (Elementary)</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'b1', this)">B1 (Intermediate)</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'b2', this)">B2 (Upper-Intermediate)</button>
+        </div>
+    </div>
+
+    <div id="category-filter-tray" class="filter-panel-tray">
+        <div class="filter-panel-container">
+            <span class="filter-label">Filter by Category:</span>
+            <button class="filter-pill active" onclick="applyPillFilter('category', 'all', this)">All Categories</button>
+            <button class="filter-pill" onclick="applyPillFilter('category', 'general', this)">General English</button>
+            <button class="filter-pill" onclick="applyPillFilter('category', 'business', this)">Business English</button>
+        </div>
+    </div>
+
     <main class="content-container">
 
         <div id="dashboard-catalog-view">
-            <h3 class="section-title">Latest Lessons</h3>
+            <h3 class="section-title" id="catalog-section-title">Latest Lessons</h3>
             <div class="catalog-grid">
                 
-                <div class="lesson-card general" data-keywords="food consumerism shopping buying items spending money b1 general english video description">
+                <div class="lesson-card general" data-level="b1" data-category="general" data-keywords="food consumerism shopping buying items spending money b1 general english video description">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
                     </div>
@@ -490,7 +556,7 @@
                     </div>
                 </div>
 
-                <div class="lesson-card general" data-keywords="pollution environment nature climate clean green plastic earth global warming a2 general english video">
+                <div class="lesson-card general" data-level="a2" data-category="general" data-keywords="pollution environment nature climate clean green plastic earth global warming a2 general english video">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #74ebe1, #89f7fe);"></div>
                     </div>
@@ -508,7 +574,7 @@
                     </div>
                 </div>
 
-                <div class="lesson-card business" data-keywords="corporate ai strategy business tech artificial intelligence workplace corporate b2 audio description">
+                <div class="lesson-card business" data-level="b2" data-category="business" data-keywords="corporate ai strategy business tech artificial intelligence workplace corporate b2 audio description">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);"></div>
                     </div>
@@ -585,7 +651,12 @@
     </main>
 
     <script>
-        // Production Asset Repository Database Mapper for Point 1
+        // Global object state trackers for active constraints
+        let activeFilters = {
+            level: 'all',
+            category: 'all'
+        };
+
         const lessonDatabase = {
             "Do We Buy Too Much?": {
                 heading: "What's Inside 'Do We Buy Too Much?'",
@@ -637,31 +708,84 @@
             }
         };
 
-        function executeCatalogSearch() {
-            var input = document.getElementById('catalog-search-input');
-            var filter = input.value.toLowerCase().trim();
-            var cards = document.getElementsByClassName('lesson-card');
+        // UI Controls: Toggle target sliding navigation panel trays cleanly
+        function toggleFilterTray(trayType) {
+            const levelTray = document.getElementById('level-filter-tray');
+            const categoryTray = document.getElementById('category-filter-tray');
 
-            for (var i = 0; i < cards.length; i++) {
+            if (trayType === 'level') {
+                categoryTray.style.display = 'none';
+                levelTray.style.display = (levelTray.style.display === 'block') ? 'none' : 'block';
+            } else if (trayType === 'category') {
+                levelTray.style.display = 'none';
+                categoryTray.style.display = (categoryTray.style.display === 'block') ? 'none' : 'block';
+            }
+        }
+
+        // Apply selected pill criteria state safely 
+        function applyPillFilter(filterType, selectionValue, pillElement) {
+            // Update active state visualization on pills within that container context
+            const siblings = pillElement.parentNode.getElementsByClassName('filter-pill');
+            for (let i = 0; i < siblings.length; i++) {
+                siblings[i].classList.remove('active');
+            }
+            pillElement.classList.add('active');
+
+            // Save choice configuration state parameters
+            activeFilters[filterType] = selectionValue;
+
+            // Execute rendering evaluations
+            evaluateCatalogVisibility();
+        }
+
+        // Unified Engine: Combines Text Search + Pill Navigation Filter States simultaneously
+        function executeCatalogSearch() {
+            evaluateCatalogVisibility();
+        }
+
+        function evaluateCatalogVisibility() {
+            const searchInput = document.getElementById('catalog-search-input');
+            const searchFilter = searchInput.value.toLowerCase().trim();
+            const cards = document.getElementsByClassName('lesson-card');
+            
+            let visibleCount = 0;
+
+            for (let i = 0; i < cards.length; i++) {
+                // Safeguard layout structure elements
                 if (cards[i].id === 'dynamic-sidebar-card') continue;
 
-                var titleElement = cards[i].getElementsByClassName('card-title-strip')[0];
-                var keywordData = cards[i].getAttribute('data-keywords') || '';
-                
-                if (titleElement) {
-                    var titleText = (titleElement.innerText || titleElement.textContent).toLowerCase();
-                    
-                    if (titleText.indexOf(filter) > -1 || keywordData.toLowerCase().indexOf(filter) > -1) {
-                        cards[i].style.display = "";
-                    } else {
-                        cards[i].style.display = "none";
-                    }
+                // Grab component metadata targets
+                const cardLevel = cards[i].getAttribute('data-level') || '';
+                const cardCategory = cards[i].getAttribute('data-category') || '';
+                const titleElement = cards[i].getElementsByClassName('card-title-strip')[0];
+                const keywordData = cards[i].getAttribute('data-keywords') || '';
+                const titleText = titleElement ? (titleElement.innerText || titleElement.textContent).toLowerCase() : '';
+
+                // Condition Evaluations
+                const matchesLevel = (activeFilters.level === 'all' || cardLevel === activeFilters.level);
+                const matchesCategory = (activeFilters.category === 'all' || cardCategory === activeFilters.category);
+                const matchesSearch = (searchFilter === '' || titleText.indexOf(searchFilter) > -1 || keywordData.toLowerCase().indexOf(searchFilter) > -1);
+
+                // Combined Evaluation Matrix Logical Gate
+                if (matchesLevel && matchesCategory && matchesSearch) {
+                    cards[i].style.style.setProperty('display', '', 'important');
+                    cards[i].style.display = "";
+                    visibleCount++;
+                } else {
+                    cards[i].style.display = "none";
                 }
+            }
+
+            // Clean title update context response indicators
+            const sectionTitle = document.getElementById('catalog-section-title');
+            if (visibleCount === 0) {
+                sectionTitle.innerText = "No matching lessons found";
+            } else {
+                sectionTitle.innerText = "Latest Lessons";
             }
         }
 
         function showLessonDetailView(title, type, media, level, duration, gradient, cardClass) {
-            // 1. Populate standard left sidebar elements
             document.getElementById('dynamic-card-title').innerText = title;
             document.getElementById('dynamic-card-title').className = "card-title-strip"; 
             document.getElementById('dynamic-sidebar-card').className = "lesson-card " + cardClass;
@@ -672,18 +796,13 @@
             document.getElementById('dynamic-card-level').innerText = '🥇 ' + level;
             document.getElementById('dynamic-card-duration').innerText = '🕒 ' + duration;
 
-            // 2. Systematic Content Ingestion matching current lesson key
             const contentData = lessonDatabase[title];
             if (contentData) {
-                // Populate custom layout header title and short introduction summary description
                 document.getElementById('dynamic-panel-heading').innerText = contentData.heading;
                 document.getElementById('dynamic-description-frame').innerText = contentData.description;
                 document.getElementById('dynamic-media-label').innerText = contentData.mediaLabel;
-                
-                // Track down standard PDF target routes directly
                 document.getElementById('dynamic-pdf-btn').setAttribute('href', contentData.pdfUrl);
 
-                // Reconstruct Objectives list arrays cleanly
                 const objectivesContainer = document.getElementById('dynamic-objectives-list');
                 objectivesContainer.innerHTML = ""; 
                 contentData.objectives.forEach(function(objectiveText) {
@@ -692,7 +811,6 @@
                     objectivesContainer.appendChild(li);
                 });
 
-                // Generate active custom reference tracking link outputs
                 const linksContainer = document.getElementById('dynamic-links-list');
                 linksContainer.innerHTML = "";
                 contentData.links.forEach(function(linkItem) {
@@ -702,9 +820,11 @@
                 });
             }
 
-            // 3. Clear interfaces toggling
             document.getElementById('dashboard-catalog-view').style.display = 'none';
             document.getElementById('hero-banner-view').style.display = 'none';
+            // Also hide any active filter sub-menus when jumping into deep detail workspaces
+            document.getElementById('level-filter-tray').style.display = 'none';
+            document.getElementById('category-filter-tray').style.display = 'none';
             document.getElementById('lesson-detail-view').style.display = 'grid';
             window.scrollTo(0, 0);
         }
