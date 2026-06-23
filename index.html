@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #fff5ee; /* Richer, warmer pale orange backdrop */
+            background-color: #fff5ee; /* Deeper pale orange backdrop */
             color: #333;
         }
 
@@ -38,6 +38,7 @@
 
         .logo-link {
             text-decoration: none;
+            cursor: pointer;
         }
         .logo {
             font-size: 32px; 
@@ -260,7 +261,7 @@
             color: #e03131;
         }
 
-        /* PDF Icon dimensions balanced precisely to 52px */
+        /* Perfectly Balanced 52px Heights */
         .pdf-icon-btn {
             width: 55px;
             height: 52px; 
@@ -304,7 +305,6 @@
             gap: 15px;
         }
 
-        /* YouTube logo placeholder frame balanced perfectly to 52px height */
         .youtube-logo-placeholder {
             width: 75px;
             height: 52px; 
@@ -364,7 +364,9 @@
 
     <header>
         <div class="nav-container">
-            <a href="index.html" class="logo-link"><div class="logo"><strong>ESL</strong>plans</div></a>
+            <a onclick="window.location.assign('index.html?refresh=' + Date.now())" class="logo-link">
+                <div class="logo"><strong>ESL</strong>plans</div>
+            </a>
             <ul class="nav-menu">
                 <li><a href="#">Levels</a></li>
                 <li><a href="#">Categories</a></li>
@@ -432,7 +434,7 @@
                 </div>
             </div>
 
-            <a onclick="window.location.href='index.html'" class="back-link">← Go Back</a>
+            <a onclick="window.location.assign('index.html?refresh=' + Date.now())" class="back-link">← Go Back</a>
         </div>
 
     </main>
