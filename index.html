@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #fffaf7; /* Warm, pale brand-orange backdrop to eliminate empty space */
+            background-color: #fff5ee; /* Adjusted with a richer, deeper pale orange tint */
             color: #333;
         }
 
@@ -230,7 +230,7 @@
             margin-bottom: 35px;
         }
 
-        /* Balanced Media Section Layout */
+        /* Media Section Layout */
         .media-section {
             display: flex;
             gap: 40px;
@@ -260,9 +260,10 @@
             color: #e03131;
         }
 
+        /* PDF Icon dimensions balanced precisely */
         .pdf-icon-btn {
             width: 55px;
-            height: 55px;
+            height: 52px; /* Set directly to match the YouTube logo height box */
             background-color: #e03131;
             border-radius: 12px;
             display: flex;
@@ -271,7 +272,7 @@
             justify-content: center;
             color: white;
             font-weight: 800;
-            font-size: 12px;
+            font-size: 11px;
             text-decoration: none;
             box-shadow: 0 4px 10px rgba(224, 49, 49, 0.3);
             transition: transform 0.2s;
@@ -281,8 +282,8 @@
         }
         .pdf-icon-btn::before {
             content: "📄";
-            font-size: 18px;
-            margin-bottom: -2px;
+            font-size: 16px;
+            margin-bottom: -3px;
         }
 
         .links-box {
@@ -299,19 +300,21 @@
 
         .video-links-wrapper {
             display: flex;
-            align-items: flex-start;
+            align-items: center; /* Centered visually with the list contents */
             gap: 15px;
         }
 
+        /* YouTube logo placeholder frame balanced perfectly with PDF asset */
         .youtube-logo-placeholder {
-            width: 65px;
-            height: 45px;
+            width: 75px;
+            height: 52px; /* Matches PDF absolute container line bounds */
             background-color: #ff0000;
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
+            flex-shrink: 0;
         }
         .youtube-logo-placeholder::after {
             content: "";
@@ -360,9 +363,7 @@
 
     <header>
         <div class="nav-container">
-            <!-- Logo correctly maps to home grid -->
-            <a href="./" class="logo-link"><div class="logo"><strong>ESL</strong>plans</div></a>
-            <!-- "Home" menu link removed entirely to clean up menu header links -->
+            <a href="index.html" class="logo-link"><div class="logo"><strong>ESL</strong>plans</div></a>
             <ul class="nav-menu">
                 <li><a href="#">Levels</a></li>
                 <li><a href="#">Categories</a></li>
@@ -430,8 +431,7 @@
                 </div>
             </div>
 
-            <!-- Restored with precise localized redirect tracking back to dashboard grid root -->
-            <a href="./" class="back-link">← Go Back</a>
+            <a href="index.html" class="back-link">← Go Back</a>
         </div>
 
     </main>
