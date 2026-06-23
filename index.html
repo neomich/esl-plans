@@ -443,7 +443,6 @@
 </head>
 <body>
 
-    <!-- Nav Bar Header Panel -->
     <header>
         <div class="nav-container">
             <a onclick="showDashboardView()" class="logo-link">
@@ -459,7 +458,6 @@
         </div>
     </header>
 
-    <!-- Master Hero/Search Banner Container -->
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
         <div class="search-box">
@@ -468,15 +466,12 @@
         </div>
     </div>
 
-    <!-- Main Dynamic Application Window wrapper -->
     <main class="content-container">
 
-        <!-- 1. DASHBOARD VIEW -->
         <div id="dashboard-catalog-view">
             <h3 class="section-title">Latest Lessons</h3>
             <div class="catalog-grid">
                 
-                <!-- Card 1: Do We Buy Too Much? (Mapped with explicit topic keywords) -->
                 <div class="lesson-card general" data-keywords="food consumerism shopping buying items spending money b1 general english video description">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
@@ -495,7 +490,6 @@
                     </div>
                 </div>
 
-                <!-- Card 2: How To Stop Pollution -->
                 <div class="lesson-card general" data-keywords="pollution environment nature climate clean green plastic earth global warming a2 general english video">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #74ebe1, #89f7fe);"></div>
@@ -514,7 +508,6 @@
                     </div>
                 </div>
 
-                <!-- Card 3: Corporate AI Strategy -->
                 <div class="lesson-card business" data-keywords="corporate ai strategy business tech artificial intelligence workplace corporate b2 audio description">
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);"></div>
@@ -537,7 +530,6 @@
         </div>
 
 
-        <!-- 2. DETAILED LESSON INTERFACE WORKSPACE VIEW -->
         <div id="lesson-detail-view" style="display: none;" class="workspace-view">
             
             <div id="dynamic-sidebar-card" class="lesson-card">
@@ -559,38 +551,28 @@
 
             <div class="info-panel">
                 <div class="panel-header-row">
-                    <h1>What's Inside?</h1>
+                    <h1 id="dynamic-panel-heading">What's Inside?</h1>
                     <div class="favorite-badge">
                         add to your favorite <span class="favorite-icon">❤️</span>
                     </div>
                 </div>
 
                 <p class="objectives-label">The <strong>main objectives</strong> of this ESL lesson are to:</p>
-                <ul class="objectives-list">
-                    <li>Analyze modern consumer habits and retail psychology markers;</li>
-                    <li>Expand vocabulary related to spending impulses and budgeting;</li>
-                    <li>Evaluate personal financial philosophies through discussion;</li>
-                    <li>Deconstruct marketing techniques shown in target authentic media streams.</li>
-                </ul>
+                <ul class="objectives-list" id="dynamic-objectives-list"></ul>
 
-                <div class="description-frame">
-                    Here will be a short description of the lesson plan, the topics it covers, the materials used, grammar + vocab, references etc.
-                </div>
+                <div class="description-frame" id="dynamic-description-frame"></div>
 
                 <div class="media-section">
                     <div class="download-box">
                         <div class="download-label">Download pdf</div>
-                        <a href="#" class="pdf-icon-btn">PDF</a>
+                        <a href="#" id="dynamic-pdf-btn" class="pdf-icon-btn" download>PDF</a>
                     </div>
 
                     <div class="links-box">
-                        <div class="links-label">The video links:</div>
+                        <div class="links-label" id="dynamic-media-label">The video links:</div>
                         <div class="video-links-wrapper">
                             <div class="youtube-logo-placeholder"></div>
-                            <div class="links-list">
-                                <p><span>Link 1:</span> <a href="https://youtube.com" target="_blank">youtube.com/watch?v=sample1</a></p>
-                                <p><span>Link 2:</span> <a href="https://youtube.com" target="_blank">youtube.com/watch?v=sample2</a></p>
-                            </div>
+                            <div class="links-list" id="dynamic-links-list"></div>
                         </div>
                     </div>
                 </div>
@@ -602,8 +584,59 @@
 
     </main>
 
-    <!-- Navigation and Deep Search Handling Script -->
     <script>
+        // Production Asset Repository Database Mapper for Point 1
+        const lessonDatabase = {
+            "Do We Buy Too Much?": {
+                heading: "What's Inside 'Do We Buy Too Much?'",
+                objectives: [
+                    "Analyze modern consumer habits and retail psychology markers;",
+                    "Expand vocabulary related to spending impulses and budgeting;",
+                    "Evaluate personal financial philosophies through discussion;",
+                    "Deconstruct marketing techniques shown in target authentic media streams."
+                ],
+                description: "This B1-level plan dives into modern consumer culture, impulse buying habits, and personal financial management. Perfect for structured intermediate conversations regarding materialism and commercial influence.",
+                pdfUrl: "materials/B1_Do_We_Buy_Too_Much.pdf",
+                mediaLabel: "The video links:",
+                links: [
+                    { label: "Link 1", url: "https://youtube.com/watch?v=retail-psychology-101" },
+                    { label: "Link 2", url: "https://youtube.com/watch?v=minimalism-vs-consumerism" }
+                ]
+            },
+            "How To Stop Pollution": {
+                heading: "What's Inside 'How To Stop Pollution'",
+                objectives: [
+                    "Acquire descriptive phrasing for discussing ecological systems and pollution types;",
+                    "Formulate foundational solutions for reducing single-use plastic reliance locally;",
+                    "Practice utilizing cause-and-effect transition phrases smoothly inside active debates;",
+                    "Interpret global environmental report statistics during conversational scenarios."
+                ],
+                description: "An interactive A2-level starter pack intended to get lower-intermediate students confidently utilizing cause/effect structures when examining ecological impacts, recycling workflows, and sustainability setups.",
+                pdfUrl: "materials/A2_How_To_Stop_Pollution.pdf",
+                mediaLabel: "The video links:",
+                links: [
+                    { label: "Link 1", url: "https://youtube.com/watch?v=ocean-plastic-crisis" },
+                    { label: "Link 2", url: "https://youtube.com/watch?v=simple-recycling-methods" }
+                ]
+            },
+            "Corporate AI Strategy": {
+                heading: "What's Inside 'Corporate AI Strategy'",
+                objectives: [
+                    "Evaluate corporate automation frameworks and integration roadmaps safely;",
+                    "Deploy business-specific terminology regarding machine learning ROI allocations;",
+                    "Defend corporate policy stances relating to workforce adjustments and upskilling metrics;",
+                    "Interpret modern tech data briefings to pitch alternative integration scenarios."
+                ],
+                description: "An advanced B2 business framework module addressing technical optimization, implementation risks, workflow task automation, and managerial strategic planning standard across corporate markets.",
+                pdfUrl: "materials/B2_Corporate_AI_Strategy.pdf",
+                mediaLabel: "The audio streams:",
+                links: [
+                    { label: "Audio 1", url: "https://youtube.com/watch?v=ai-enterprise-trends" },
+                    { label: "Audio 2", url: "https://youtube.com/watch?v=tech-leadership-podcast" }
+                ]
+            }
+        };
+
         function executeCatalogSearch() {
             var input = document.getElementById('catalog-search-input');
             var filter = input.value.toLowerCase().trim();
@@ -612,14 +645,12 @@
             for (var i = 0; i < cards.length; i++) {
                 if (cards[i].id === 'dynamic-sidebar-card') continue;
 
-                // Systematic Deep Scan: Check both title text and hidden data-keywords attribute
                 var titleElement = cards[i].getElementsByClassName('card-title-strip')[0];
                 var keywordData = cards[i].getAttribute('data-keywords') || '';
                 
                 if (titleElement) {
                     var titleText = (titleElement.innerText || titleElement.textContent).toLowerCase();
                     
-                    // If target query matches title OR metadata keywords, item stays visible
                     if (titleText.indexOf(filter) > -1 || keywordData.toLowerCase().indexOf(filter) > -1) {
                         cards[i].style.display = "";
                     } else {
@@ -630,6 +661,7 @@
         }
 
         function showLessonDetailView(title, type, media, level, duration, gradient, cardClass) {
+            // 1. Populate standard left sidebar elements
             document.getElementById('dynamic-card-title').innerText = title;
             document.getElementById('dynamic-card-title').className = "card-title-strip"; 
             document.getElementById('dynamic-sidebar-card').className = "lesson-card " + cardClass;
@@ -640,6 +672,37 @@
             document.getElementById('dynamic-card-level').innerText = '🥇 ' + level;
             document.getElementById('dynamic-card-duration').innerText = '🕒 ' + duration;
 
+            // 2. Systematic Content Ingestion matching current lesson key
+            const contentData = lessonDatabase[title];
+            if (contentData) {
+                // Populate custom layout header title and short introduction summary description
+                document.getElementById('dynamic-panel-heading').innerText = contentData.heading;
+                document.getElementById('dynamic-description-frame').innerText = contentData.description;
+                document.getElementById('dynamic-media-label').innerText = contentData.mediaLabel;
+                
+                // Track down standard PDF target routes directly
+                document.getElementById('dynamic-pdf-btn').setAttribute('href', contentData.pdfUrl);
+
+                // Reconstruct Objectives list arrays cleanly
+                const objectivesContainer = document.getElementById('dynamic-objectives-list');
+                objectivesContainer.innerHTML = ""; 
+                contentData.objectives.forEach(function(objectiveText) {
+                    const li = document.createElement('li');
+                    li.innerText = objectiveText;
+                    objectivesContainer.appendChild(li);
+                });
+
+                // Generate active custom reference tracking link outputs
+                const linksContainer = document.getElementById('dynamic-links-list');
+                linksContainer.innerHTML = "";
+                contentData.links.forEach(function(linkItem) {
+                    const p = document.createElement('p');
+                    p.innerHTML = `<span>${linkItem.label}:</span> <a href="${linkItem.url}" target="_blank">${linkItem.url.replace('https://', '')}</a>`;
+                    linksContainer.appendChild(p);
+                });
+            }
+
+            // 3. Clear interfaces toggling
             document.getElementById('dashboard-catalog-view').style.display = 'none';
             document.getElementById('hero-banner-view').style.display = 'none';
             document.getElementById('lesson-detail-view').style.display = 'grid';
