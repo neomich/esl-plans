@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESLplans - Zero-prep Lesson Plans for Online ESL Tutors</title>
+    <title>Do We Buy Too Much? - Lesson Plan - ESLplans</title>
     <style>
         * {
             box-sizing: border-box;
@@ -20,13 +20,13 @@
         header {
             background-color: #c95210; 
             color: white;
-            padding: 20px 10px 40px 10px;
+            padding: 20px 10px 20px 10px;
             text-align: center;
         }
 
         .nav-container {
             max-width: 1100px;
-            margin: 0 auto 30px auto;
+            margin: 0 auto;
             background-color: white;
             border-radius: 35px;
             padding: 12px 35px;
@@ -34,9 +34,11 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            flex-wrap: wrap;
         }
 
+        .logo-link {
+            text-decoration: none;
+        }
         .logo {
             font-size: 32px; 
             font-weight: 400;
@@ -62,74 +64,32 @@
             padding: 10px 20px;
             border-radius: 25px;
             transition: all 0.2s ease;
-            background-color: transparent;
         }
 
-        .nav-menu a:hover, 
-        .nav-menu a:active {
+        .nav-menu a:hover {
             background-color: #c95210;
             color: white;
         }
 
-        .hero-text {
-            font-size: 22px;
-            font-weight: 400;
-            margin: 0 auto 25px auto;
-            max-width: 950px; 
-            line-height: 1.4;
-        }
-
-        .search-box {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            background-color: white;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        .search-box input {
-            flex: 1;
-            padding: 14px 20px;
-            border: none;
-            outline: none;
-            font-size: 15px;
-        }
-
-        .search-box button {
-            background-color: #ff7300;
-            color: white;
-            border: none;
-            padding: 0 25px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.2s;
-        }
-
-        .search-box button:hover {
-            background-color: #e06500;
-        }
-
-        main {
+        /* 2-Column Split Workspace */
+        .workspace {
             max-width: 1100px;
-            margin: 40px auto;
+            margin: 50px auto;
             padding: 0 20px;
-        }
-
-        .feed-heading {
-            font-size: 28px;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-
-        .lessons-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: 320px 1fr;
+            gap: 50px;
+            align-items: start;
         }
 
+        @media (max-width: 768px) {
+            .workspace {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* Lesson Card Base Style - Removed button styling */
         .lesson-card {
             background: white;
             border-radius: 24px;
@@ -137,21 +97,9 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
             border: 2px solid transparent;
         }
-
-        .lesson-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .lesson-card.general {
-            background-color: #f1fbf4; 
-        }
-        .lesson-card.business {
-            background-color: #f5efff; 
-        }
+        .lesson-card.general { background-color: #f1fbf4; }
 
         .card-image-box {
             height: 180px;
@@ -173,22 +121,16 @@
             text-align: center;
             font-weight: 700;
             font-size: 16px;
-        }
-        .general .card-title-strip {
             background-color: #79d28b;
             color: #12461e;
         }
-        .business .card-title-strip {
-            background-color: #b091e9;
-            color: #2e145e;
-        }
 
+        /* Cleaned bottom padding since button is gone */
         .card-details {
-            padding: 20px;
+            padding: 20px 20px 25px 20px;
             display: flex;
             flex-direction: column;
             gap: 12px;
-            flex-grow: 1;
         }
 
         .tag-row {
@@ -205,39 +147,214 @@
             gap: 6px;
         }
 
-        .view-btn {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 14px;
-            font-weight: 700;
-            margin-top: 10px;
-            background-color: white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-            transition: background 0.2s;
-        }
-        .general .view-btn {
-            color: #12461e;
-            border: 1px solid #79d28b;
-        }
-        .business .view-btn {
-            color: #2e145e;
-            border: 1px solid #b091e9;
-        }
-        .view-btn:hover {
-            background-color: #f7f9fa;
+        /* Lesson Info Panel Styles */
+        .info-panel {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        /* Message displayed when no keywords match */
-        .no-results-msg {
-            display: none;
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px;
-            font-size: 18px;
+        .panel-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .info-panel h1 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .favorite-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .favorite-badge:hover {
+            color: #e03131;
+        }
+        .favorite-icon {
+            background-color: #e03131;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px 4px 12px 4px;
+            font-size: 16px;
+        }
+
+        .objectives-label {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #444;
+        }
+        .objectives-label strong {
+            color: #000;
+        }
+
+        .objectives-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .objectives-list li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+        }
+        .objectives-list li::before {
+            content: "•";
+            color: #c95210;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* Description Frame Container */
+        .description-frame {
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 25px;
+            background-color: #fff;
+            line-height: 1.6;
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 35px;
+        }
+
+        /* Balanced Media Section Layout from cvnh.jpg */
+        .media-section {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            border-top: 1px dashed #ddd;
+            padding-top: 30px;
+        }
+
+        @media (max-width: 550px) {
+            .media-section {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        .download-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .download-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #e03131;
+        }
+
+        /* Balanced CSS Art PDF Icon */
+        .pdf-icon-btn {
+            width: 55px;
+            height: 55px;
+            background-color: #e03131;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 12px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(224, 49, 49, 0.3);
+            transition: transform 0.2s;
+        }
+        .pdf-icon-btn:hover {
+            transform: scale(1.05);
+        }
+        .pdf-icon-btn::before {
+            content: "📄";
+            font-size: 18px;
+            margin-bottom: -2px;
+        }
+
+        .links-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .links-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #e03131;
+        }
+
+        .video-links-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        /* Balanced CSS Art YouTube Branding */
+        .youtube-logo-placeholder {
+            width: 65px;
+            height: 45px;
+            background-color: #ff0000;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
+        }
+        .youtube-logo-placeholder::after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 14px solid white;
+            margin-left: 4px;
+        }
+
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .links-list a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 15px;
             font-weight: 500;
+        }
+        .links-list a:hover {
+            text-decoration: underline;
+        }
+        .links-list span {
+            color: #555;
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 35px;
+            color: #c95210;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -245,128 +362,79 @@
 
     <header>
         <div class="nav-container">
-            <div class="logo"><strong>ESL</strong>plans</div>
+            <a href="index.html" class="logo-link"><div class="logo"><strong>ESL</strong>plans</div></a>
             <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
                 <li><a href="#">Levels</a></li>
                 <li><a href="#">Categories</a></li>
-                <li><a href="#">Topic Suggestions</a></li>
                 <li><a href="#">Pricing</a></li>
-                <li><a href="#">Login</a></li>
             </ul>
-        </div>
-
-        <p class="hero-text">Zero-prep, conversation-driven lesson plans for online ESL tutors!</p>
-
-        <div class="search-box">
-            <!-- Added id="searchInput" to target with JavaScript -->
-            <input type="text" id="searchInput" placeholder="Search: food, description, lesson plan content...">
-            <button type="button" id="searchButton">Find materials</button>
         </div>
     </header>
 
-    <main>
-        <h2 class="feed-heading">Latest Lessons</h2>
+    <main class="workspace">
         
-        <div class="lessons-grid" id="lessonsGrid">
-            
-            <!-- Card 1: Added data-keywords attribute -->
-            <div class="lesson-card general" data-keywords="do we buy too much shopping consumerism money spending food grocery products economics">
-                <div class="card-image-box">
-                    <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
+        <div class="lesson-card general">
+            <div class="card-image-box">
+                <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
+            </div>
+            <div class="card-title-strip">Do We Buy Too Much?</div>
+            <div class="card-details">
+                <div class="tag-row">
+                    <div class="tag-item">🎓 General English</div>
+                    <div class="tag-item">▶️ Video</div>
                 </div>
-                <div class="card-title-strip">Do We Buy Too Much?</div>
-                <div class="card-details">
-                    <div class="tag-row">
-                        <div class="tag-item">🎓 General English</div>
-                        <div class="tag-item">▶️ Video</div>
-                    </div>
-                    <div class="tag-row">
-                        <div class="tag-item">🥇 B1</div>
-                        <div class="tag-item">🕒 90 min</div>
-                    </div>
-                    <a href="#" class="view-btn">View Lesson</a>
+                <div class="tag-row">
+                    <div class="tag-item">🥇 B1</div>
+                    <div class="tag-item">🕒 90 min</div>
                 </div>
             </div>
-
-            <!-- Card 2: Added data-keywords attribute -->
-            <div class="lesson-card general" data-keywords="how to stop pollution environment nature green ecology climate change garbage recycling plastic food waste">
-                <div class="card-image-box">
-                    <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #64b3f4, #c2e59c);"></div>
-                </div>
-                <div class="card-title-strip">How To Stop Pollution</div>
-                <div class="card-details">
-                    <div class="tag-row">
-                        <div class="tag-item">🎓 General English</div>
-                        <div class="tag-item">▶️ Video</div>
-                    </div>
-                    <div class="tag-row">
-                        <div class="tag-item">🥇 A2</div>
-                        <div class="tag-item">🕒 90 min</div>
-                    </div>
-                    <a href="#" class="view-btn">View Lesson</a>
-                </div>
-            </div>
-
-            <!-- Card 3: Added data-keywords attribute -->
-            <div class="lesson-card business" data-keywords="corporate ai strategy artificial intelligence business technology work automation future management corporate structures">
-                <div class="card-image-box">
-                    <div class="mock-3d-illustration" style="background: linear-gradient(135deg, #ff9966, #ff5e62);"></div>
-                </div>
-                <div class="card-title-strip">Corporate AI Strategy</div>
-                <div class="card-details">
-                    <div class="tag-row">
-                        <div class="tag-item">💼 Business English</div>
-                        <div class="tag-item">🎵 Audio</div>
-                    </div>
-                    <div class="tag-row">
-                        <div class="tag-item">🥇 B2</div>
-                        <div class="tag-item">🕒 60 min</div>
-                    </div>
-                    <a href="#" class="view-btn">View Lesson</a>
-                </div>
-            </div>
-
-            <!-- Placeholder for when nothing matches -->
-            <div class="no-results-msg" id="noResultsMessage">No matching lesson plans found. Try another keyword!</div>
-
         </div>
-    </main>
 
-    <!-- Instant Client-Side Search Engine Script -->
-    <script>
-        const searchInput = document.getElementById('searchInput');
-        const searchButton = document.getElementById('searchButton');
-        const lessonCards = document.querySelectorAll('.lesson-card');
-        const noResultsMessage = document.getElementById('noResultsMessage');
+        <div class="info-panel">
+            <div class="panel-header-row">
+                <h1>What's Inside?</h1>
+                <div class="favorite-badge">
+                    add to your favorite <span class="favorite-icon">❤️</span>
+                </div>
+            </div>
 
-        function performSearch() {
-            const query = searchInput.value.toLowerCase().trim();
-            let visibleCount = 0;
+            <p class="objectives-label">The <strong>main objectives</strong> of this ESL lesson are to:</p>
+            <ul class="objectives-list">
+                <li>Analyze modern consumer habits and retail psychology markers;</li>
+                <li>Expand vocabulary related to spending impulses and budgeting;</li>
+                <li>Evaluate personal financial philosophies through discussion;</li>
+                <li>Deconstruct marketing techniques shown in target authentic media streams.</li>
+            </ul>
 
-            lessonCards.forEach(card => {
-                // Reads the text contents inside the hidden data attribute
-                const keywords = card.getAttribute('data-keywords') || '';
+            <div class="description-frame">
+                Here will be a short description of the lesson plan, the topics it covers, the materials used, grammar + vocab, references etc.
+            </div>
+
+            <div class="media-section">
                 
-                if (query === '' || keywords.includes(query)) {
-                    card.style.display = 'flex';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+                <div class="download-box">
+                    <div class="download-label">Download pdf</div>
+                    <a href="#" class="pdf-icon-btn">PDF</a>
+                </div>
 
-            // If no items match, display the fallback alert message
-            if (visibleCount === 0) {
-                noResultsMessage.style.display = 'block';
-            } else {
-                noResultsMessage.style.display = 'none';
-            }
-        }
+                <div class="links-box">
+                    <div class="links-label">The video links:</div>
+                    <div class="video-links-wrapper">
+                        <div class="youtube-logo-placeholder"></div>
+                        <div class="links-list">
+                            <p><span>Link 1:</span> <a href="https://youtube.com" target="_blank">youtube.com/watch?v=sample1</a></p>
+                            <p><span>Link 2:</span> <a href="https://youtube.com" target="_blank">youtube.com/watch?v=sample2</a></p>
+                        </div>
+                    </div>
+                </div>
 
-        // Search runs instantly when typing or when clicking the button
-        searchInput.addEventListener('input', performSearch);
-        searchButton.addEventListener('click', performSearch);
-    </script>
+            </div>
+
+            <a href="index.html" class="back-link">← Back to Dashboard</a>
+        </div>
+
+    </main>
 
 </body>
 </html>
