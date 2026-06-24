@@ -321,7 +321,7 @@
             display: grid;
             grid-template-columns: 320px 1fr;
             grid-template-rows: auto auto;
-            gap: 20px 50px;
+            gap: 10px 50px;
             align-items: start;
             margin-top: 40px;
         }
@@ -359,27 +359,31 @@
         .info-panel h1 {
             font-size: 32px;
             font-weight: 700;
+            color: #ff7a00;
+            font-style: italic;
         }
 
         .favorite-badge {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 8px;
-            color: #666;
-            font-size: 14px;
-            font-weight: 600;
+            gap: 4px;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: transform 0.2s;
+            flex-shrink: 0;
         }
         .favorite-badge:hover {
-            color: #e03131;
+            transform: scale(1.1);
         }
-        .favorite-icon {
-            background-color: #e03131;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px 4px 12px 4px;
-            font-size: 16px;
+        .favorite-badge .pin-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ff7a00;
+            letter-spacing: 0.5px;
+        }
+        .favorite-badge .pin-icon {
+            font-size: 32px;
+            line-height: 1;
         }
 
         .objectives-label {
@@ -765,9 +769,10 @@
 
             <div class="info-panel">
                 <div class="panel-header-row">
-                    <h1 id="dynamic-panel-heading">What's Inside?</h1>
+                    <h1 id="dynamic-panel-heading">What's this all about?</h1>
                     <div class="favorite-badge">
-                        add to your favorite <span class="favorite-icon">❤️</span>
+                        <span class="pin-label">Pin it!</span>
+                        <span class="pin-icon">📌</span>
                     </div>
                 </div>
 
@@ -1008,7 +1013,6 @@
             document.getElementById('dynamic-card-level').innerText = '🥇 ' + lesson.levelLabel;
             document.getElementById('dynamic-card-duration').innerText = '🕒 ' + lesson.duration;
 
-            document.getElementById('dynamic-panel-heading').innerText = lesson.heading;
             document.getElementById('dynamic-description-frame').innerText = lesson.description;
             document.getElementById('dynamic-media-label').innerText = lesson.mediaLabel;
             document.getElementById('dynamic-pdf-btn').setAttribute('href', lesson.pdfUrl);
