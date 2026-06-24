@@ -6,6 +6,61 @@
 const lessonsCatalog = [
 
     {
+        dateAdded: "2026-06-28",
+        title: "Life 3.0",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "🎓",
+        level: "c1",
+        levelLabel: "C1",
+        duration: "90 min",
+        visualSource: "images/c1_life_3_point_0.JPG",
+        keywords: "AI artificial intelligence future humanity Nick Bostrom Deep Utopia Max Tegmark Life 3.0 post-scarcity hedonic mastery primitive transhumanist dystopia utopia enslaved god zookeeper surveillance abundance status quo existential philosophy c1",
+        heading: "What's Inside 'Life 3.0'",
+        objectives: [
+            "Explore philosophical and practical perspectives on the future relationship between humanity and artificial intelligence;",
+            "Analyze speculative scenarios for a \"solved world\" where AI manages all human needs;",
+            "Evaluate potential existential outcomes for civilization through reading, listening, and critical discussion."
+        ],
+        description: "In this lesson, students begin by answering a humorous yet thought-provoking quiz that challenges common assumptions about technology, ownership, and human identity (e.g., who really owns the Earth, what a smartphone actually is). They then read an excerpt from Nick Bostrom's Deep Utopia, which introduces four distinct societal models for a post-scarcity future: the Hedonic Island (pleasure), the Mastery Island (challenge), the Primitive Island (simplicity), and the Transhumanist Island (evolution). Students discuss which lifestyle they would choose and why, reflecting on personal values regarding work, comfort, and meaning.\n\nThe lesson continues with Max Tegmark's ten possible endings for humanity in Life 3.0, where learners match dystopian and utopian scenarios — such as \"Enslaved God,\" \"Zookeeper,\" and \"Egalitarian Utopia\" — to their definitions before verifying answers via podcast. Finally, students consolidate new vocabulary (e.g., surveillance, abundance, status quo) and engage in a forward-looking debate on whether current tech trends align with any of these predicted futures or if alternative paths remain possible.\n\nStudents can also do an extra creative task (e.g., designing their own fifth island for Deep Utopia based on a value not covered in the text).",
+        pdfUrl: "materials/c1_life_3_point_0.pdf",
+        audioUrl: "audio/c1_life_3_point_0_podcast.mp3",
+        mediaLabel: "The audio streams:",
+        links: []
+    },
+
+    {
+        dateAdded: "2026-06-28",
+        title: "Pawn Shop",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "c1",
+        levelLabel: "C1",
+        duration: "90 min",
+        visualSource: "images/c1_pawn_shop.JPG",
+        keywords: "pawn shop endowment effect loss aversion hoarding behavioral psychology Stephen King unbanked financial vulnerability interest resale Sal guitar Rolex Chanel descriptive vocabulary pristine leathery glossy goat paths c1",
+        heading: "What's Inside 'Pawn Shop'",
+        objectives: [
+            "Explore the economic and social role of pawn shops in modern society, particularly for unbanked or financially vulnerable populations;",
+            "Analyze the psychological phenomenon known as the \"Endowment Effect\" and its impact on decision-making and valuation;",
+            "Practice descriptive vocabulary through detailed object analysis and personal storytelling."
+        ],
+        description: "In this lesson, students begin by examining statistics about pawn shop usage in the US, defining key financial terms (e.g., interest, resale value, withdrawal), and discussing their own experiences or perceptions of these establishments. They then listen to an interview with a pawn shop owner named Sal, identifying specific objects discussed (e.g., guitar, Chanel bag, Rolex) and matching them to emotional narratives involving hope, regret, or survival. Students expand their descriptive lexicon by associating adjectives like pristine, leathery, glossy, and clumpy with visual details before applying this vocabulary to describe a personally significant item and considering whether they would ever part with it.\n\nThe lesson transitions into behavioral psychology with Stephen King's quote \"We don't own things; things own us,\" introducing the Endowment Effect through video comprehension where learners match statements about loss aversion, identity attachment, and irrational pricing.\n\nFinally, students watch a second video on hoarding disorder, defining related concepts (goat paths, excessive acquisition, suffering in silence) and reflecting on why people struggle to discard items even when they lack utility or value.",
+        pdfUrl: "materials/c1_pawn_shop.pdf",
+        audioUrl: "audio/c1_pawn_shop_at_the_pawn_shop.mp3",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=D9U5EdFP9EI" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=5DNrZyht520" }
+        ]
+    },
+
+    {
         dateAdded: "2026-06-27",
         title: "The Culture of Overwork",
         category: "business",
