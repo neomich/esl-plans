@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESLplans - Conversation-Driven Lesson Plans</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -619,6 +620,58 @@
             font-size: 16px;
             color: #ffffff; 
         }
+        .pdf-preview-section {
+            margin-bottom: 35px;
+        }
+
+        .pdf-preview-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #e03131;
+            margin-bottom: 10px;
+        }
+
+        .pdf-preview-scroll-box {
+            height: 380px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            background: #f5f5f5;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #c95210 #f5f5f5;
+        }
+
+        .pdf-preview-scroll-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .pdf-preview-scroll-box::-webkit-scrollbar-track {
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+        .pdf-preview-scroll-box::-webkit-scrollbar-thumb {
+            background-color: #c95210;
+            border-radius: 10px;
+        }
+
+        .pdf-preview-scroll-box canvas {
+            width: 100% !important;
+            height: auto !important;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: block;
+        }
+
+        .pdf-preview-loading {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            padding: 40px 0;
+        }
     </style>
 </head>
 <body>
@@ -705,6 +758,13 @@
                 <ul class="objectives-list" id="dynamic-objectives-list"></ul>
 
                 <div class="description-frame" id="dynamic-description-frame"></div>
+
+                <div class="pdf-preview-section">
+                    <div class="pdf-preview-label">ESLplan overview</div>
+                    <div class="pdf-preview-scroll-box" id="pdf-preview-box">
+                        <div class="pdf-preview-loading">Loading preview...</div>
+                    </div>
+                </div>
 
                 <div class="media-section">
                     <div class="downloads-wrapper">
@@ -943,6 +1003,8 @@
             document.getElementById('dynamic-media-label').innerText = lesson.mediaLabel;
             document.getElementById('dynamic-pdf-btn').setAttribute('href', lesson.pdfUrl);
 
+            renderPdfPreview(lesson.pdfUrl);
+
             // Audio Element Visibility Logic
             const mp3Box = document.getElementById('dynamic-mp3-box');
             const mp3Btn = document.getElementById('dynamic-mp3-btn');
@@ -986,6 +1048,36 @@
             window.scrollTo(0, 0);
         }
 
+
+        // ── PDF PREVIEW: render all pages at 30% scale into the scroll box ──
+        function renderPdfPreview(pdfUrl) {
+            const box = document.getElementById('pdf-preview-box');
+            box.innerHTML = '<div class="pdf-preview-loading">Loading preview...</div>';
+
+            pdfjsLib.GlobalWorkerOptions.workerSrc =
+                'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+            pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+                box.innerHTML = '';
+                const scale = 0.3;
+                const renderPage = function(pageNum) {
+                    pdf.getPage(pageNum).then(function(page) {
+                        const viewport = page.getViewport({ scale: scale });
+                        const canvas = document.createElement('canvas');
+                        canvas.width = viewport.width;
+                        canvas.height = viewport.height;
+                        const ctx = canvas.getContext('2d');
+                        page.render({ canvasContext: ctx, viewport: viewport }).promise.then(function() {
+                            box.appendChild(canvas);
+                            if (pageNum < pdf.numPages) renderPage(pageNum + 1);
+                        });
+                    });
+                };
+                renderPage(1);
+            }).catch(function() {
+                box.innerHTML = '<div class="pdf-preview-loading">Preview unavailable.</div>';
+            });
+        }
 
         // ── BOOT: sort newest-first, then run initial filter+render ──
         lessonsCatalog.sort((a, b) => {
