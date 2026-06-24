@@ -6,6 +6,62 @@
 const lessonsCatalog = [
 
     {
+        dateAdded: "2026-06-27",
+        title: "The Culture of Overwork",
+        category: "business",
+        categoryLabel: "Business English",
+        mediaType: "Audio & Video",
+        mediaIcon: "🎵▶️",
+        categoryIcon: "💼",
+        level: "b2",
+        levelLabel: "B2-C1",
+        duration: "90 min",
+        visualSource: "images/b2_overwork_culture.JPG",
+        keywords: "overwork burnout presenteeism scope creep always-on digital tether meeting bloat manufactured urgency gamified productivity lean teams family narrative adjectives -ed -ing consulting inequality work-life balance business b2 c1",
+        heading: "What's Inside 'The Culture of Overwork'",
+        objectives: [
+            "Identify and analyze specific manifestations of modern overwork culture, such as competitive presenteeism, scope creep, and the \"always-on\" digital tether;",
+            "Distinguish between -ed and -ing adjectives to accurately describe personal feelings versus external work conditions;",
+            "Critically evaluate systemic workplace issues, including the \"family\" narrative and gamified productivity, through listening comprehension and debate."
+        ],
+        description: "In this lesson, students begin by matching visual scenarios of an overwhelmed employee named John to key overwork concepts like meeting bloat and manufactured urgency. They then explore three additional corporate tactics — gamified productivity, lean teams, and the family narrative — and listen to speakers share their personal experiences with these pressures.\n\nThe grammar focus centers on adjective endings, where students practice using -ed forms for internal emotions (e.g., exhausted, frustrated) and -ing forms for external causes (e.g., annoying, humiliating). Students consolidate this vocabulary through gap-fill exercises before engaging in a discussion about whether high-pressure environments are inspiring or depressing.\n\nFinally, they watch a video on structural inequality in consulting firms, verify true/false statements about career derailment and client demands, and read real YouTube comments reflecting global perspectives on work-life balance.",
+        pdfUrl: "materials/b2_overwork_culture.pdf",
+        audioUrl: "audio/b2_overwork_culture_3_speakers.mp3",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=jjRWaMCWs44" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-06-27",
+        title: "Confusing English Language",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "🎓",
+        level: "a2",
+        levelLabel: "A2",
+        duration: "60-90 min",
+        visualSource: "images/a2_confusing_english_language.JPG",
+        keywords: "confusing english spelling phrasal verbs pronunciation present perfect past simple few little modal verbs requests grammar reading comprehension coffee break a2 beginner language learning",
+        heading: "What's Inside 'Confusing English Language'",
+        objectives: [
+            "Identify and categorize the specific aspects of English that learners find most challenging;",
+            "Practice reading comprehension by analyzing a text about language learning difficulties and matching headings to paragraphs;",
+            "Distinguish between similar grammatical structures, including present perfect vs. past simple, few vs. little, and modal verbs for requests and obligations."
+        ],
+        description: "In this lesson, students begin by reflecting on their own struggles with English (e.g., spelling, phrasal verbs, pronunciation) and discussing why certain areas feel more difficult than others. They then listen to Arjun describe his personal language-learning journey, identifying which four specific challenges he faced, before engaging in a discussion about strategies for overcoming confusion and maintaining motivation.\n\nThe grammar focus addresses common pain points through targeted exercises: students choose between present perfect and past simple based on time markers, select few/little/a few/a little according to countable/uncountable nouns, and use appropriate modals (can/could/may/will) for polite requests and permissions.\n\nFinally, students read a story titled \"The Coffee Break Secret\", a completion task that integrates and reviews the target grammar structures. This task can be given as homework.",
+        pdfUrl: "materials/a2_confusing_english_language.pdf",
+        audioUrl: "audio/a2_confusing_english_language_arjun.mp3",
+        mediaLabel: "The audio streams:",
+        links: [
+            { label: "The Coffee Break Secret", url: "audio/a2_confusing_english_language_the_coffee_break_secret.mp3" }
+        ]
+    },
+
+    {
         dateAdded: "2026-06-26",
         title: "The Movie Industry of the Future",
         category: "general",
