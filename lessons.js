@@ -6,6 +6,35 @@
 const lessonsCatalog = [
 
     {
+        dateAdded: "2026-06-26",
+        title: "The Movie Industry of the Future",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video",
+        mediaIcon: "▶️",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_the_movie_industry_of_the_future.JPG",
+        keywords: "movies film cinema AI artificial intelligence budget blockbuster critics audience ratings adjective order Star Wars Fast X Matrix Parasite zombie spaghetti viral future filmmaking b1 b2",
+        heading: "What's Inside 'The Movie Industry of the Future'",
+        objectives: [
+            "Analyze the relationship between movie budgets, critical reception, and audience ratings;",
+            "Evaluate the current state and emotional potential of AI-generated video content;",
+            "Identify and correctly order adjectives when describing cinematic experiences."
+        ],
+        description: "In this lesson, students begin by examining data on high-budget blockbusters (e.g., Star Wars, Fast X) to debate whether massive spending guarantees quality or if critics and audiences often disagree.\n\nThey then explore the future of filmmaking through AI, watching a viral \"uncanny\" spaghetti video and an AI-generated short film (Zombie Scavenger) to sequence plot events and discuss whether artificial storytelling can truly evoke emotion.\n\nThe lesson transitions into linguistic precision with adjective order rules, where students practice arranging multiple descriptors (opinion, size, age, etc.) for famous films like The Matrix and Parasite. Finally, students read about the essential ingredients of great cinema — such as memorable characters and thought-provoking themes — and reflect on what makes a movie exceptional beyond its budget or technology.",
+        pdfUrl: "materials/b1_the_movie_industry_of_the_future.pdf",
+        audioUrl: null,
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=_TRkSzRKtsk" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=8uWmKjq98E0" }
+        ]
+    },
+
+    {
         dateAdded: "2026-06-25",
         title: "Affectations",
         category: "general",
