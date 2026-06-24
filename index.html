@@ -310,6 +310,12 @@
             color: #ff7a00;
         }
 
+        .pagination-item.disabled {
+            opacity: 0.3;
+            cursor: default;
+            pointer-events: none;
+        }
+
         .workspace-view {
             display: grid;
             grid-template-columns: 320px 1fr;
@@ -733,207 +739,32 @@
 
     </main>
 
+    <script src="lessons.js"></script>
     <script>
         let activeFilters = {
             level: 'all',
             category: 'all'
         };
 
-        // Master Consolidated Catalog Database Array - Restored Links & Added Optional audioUrl
-        const lessonsCatalog = [
+        const LESSONS_PER_PAGE = 6;
+        let currentPage = 1;
+        let filteredLessons = []; // holds indexes into lessonsCatalog after filtering
 
-            {
-                dateAdded: "2026-06-24",
-                title: "Modern Remakes Of Famous Paintings",
-                category: "general",
-                categoryLabel: "General English",
-                mediaType: "Audio",
-                mediaIcon: "🎵",
-                categoryIcon: "🎓",
-                level: "b1",
-                levelLabel: "B1",
-                duration: "90 min",
-                visualSource: "images/b1_modern_remakes_of_famous_paintings.JPG",
-                keywords: "art paintings remake famous paintings museum humour prepositions description audio b1",
-                heading: "What's Inside 'Modern Remakes Of Famous Paintings'",
-                objectives: [
-                    "Identify and categorize different types of art;",
-                    "Practice prepositions of place through visual description;",
-                    "Discuss the relevance and humor of modern remakes of classical paintings."
-                ],
-                description: "In this lesson, students explore various art forms by defining categories such as applied, conceptual, and digital arts. They engage with modern reinterpretations of famous masterpieces (e.g., Son of Man, American Gothic, The Persistence of Memory) by completing gap-fill exercises with prepositions of place to accurately describe the composition of both original and remade works.\n\nStudents listen to speakers describing specific artistic adaptations, match descriptions to images, and critically evaluate whether these modern versions respect or mock the originals. The lesson encourages debate on how shifting historical contexts alter a painting’s mood and story, while reinforcing spatial vocabulary through authentic visual analysis.\n\nStudents can also do an extra creative task (e.g., generating their own prompt for a modern remake using contemporary cultural references).",
-                pdfUrl: "materials/b1_modern_remakes_of_famous_paintings.pdf",
-                audioUrl: "audio/b1_modern_remakes_of_famous_paintings_4_speakers.mp3",
-                mediaLabel: "The audio streams:",
-                links: []
-            },
+        // lessons live in lessons.js
 
-            {
-                title: "What's The Most Popular Age To Be?",
-                category: "general",
-                categoryLabel: "General English",
-                mediaType: "Video",
-                mediaIcon: "▶️",
-                categoryIcon: "🎓",
-                level: "b1",
-                levelLabel: "B1",
-                duration: "90 min",
-                visualSource: "images/b1_what_is_the_best_age_to_be_in_life.jpg",
-                keywords: "age ageing generations stereotypes b1 general english video life survey perspective profile old young values",
-                heading: "What's Inside 'What's The Most Popular Age To Be?'",
-                objectives: [
-                    "Discuss stereotypes and misunderstandings between generations;",
-                    "Debate attitudes toward ageing and different stages of life;",
-                    "Watch a video exploring which age people consider the best time of their lives."
-                ],
-                description: "In this lesson, students explore common stereotypes about older and younger generations, match critical comments to everyday situations, and discuss whether age-based assumptions are fair. They debate social expectations, changing values, and generational differences, then watch a video examining people's attitudes toward ageing and life satisfaction.\n\nStudents analyze survey results about perceptions of older adults, reflect on their own age and responsibilities, and share their opinions on what makes a particular period of life enjoyable. They can also do an extra vocabulary task (e.g. bristle at, wound up, assumptions, obligations, depend on).",
-                pdfUrl: "materials/b1_what_is_the_best_age_to_be_in_life.pdf",
-                mediaLabel: "The video links:",
-                links: [
-                    { label: "Link 1", url: "https://www.youtube.com/watch?v=jQYlCKUkWcc" },
-                    { label: "Link 2", url: "https://www.youtube.com/watch?v=uAX_mnOl8oU" }
-                ]
-            },
-            {
-                title: "How To Stop Pollution",
-                category: "general",
-                categoryLabel: "General English",
-                mediaType: "Video",
-                mediaIcon: "▶️",
-                categoryIcon: "🎓",
-                level: "a2",
-                levelLabel: "A2",
-                duration: "90 min",
-                visualSource: "linear-gradient(135deg, #74ebe1, #89f7fe)",
-                keywords: "pollution environment nature climate clean green plastic earth global warming a2 general english video",
-                heading: "What's Inside 'How To Stop Pollution'",
-                objectives: [
-                    "Acquire descriptive phrasing for discussing ecological systems and pollution types;",
-                    "Formulate foundational solutions for reducing single-use plastic reliance locally;",
-                    "Practice utilizing cause-and-effect transition phrases smoothly inside active debates;"
-                ],
-                description: "An interactive A2-level starter pack intended to get lower-intermediate students confidently utilizing cause/effect structures when examining ecological impacts, recycling workflows, and sustainability setups.",
-                pdfUrl: "materials/A2_How_To_Stop_Pollution.pdf",
-                mediaLabel: "The video links:",
-                links: [
-                    { label: "Link 1", url: "https://www.youtube.com/watch?v=ocean-plastic-crisis" }
-                ]
-            },
-            {
-                title: "Corporate AI Strategy",
-                category: "business",
-                categoryLabel: "Business English",
-                mediaType: "Audio",
-                mediaIcon: "🎵",
-                categoryIcon: "💼",
-                level: "b2",
-                levelLabel: "B2",
-                duration: "60 min",
-                visualSource: "linear-gradient(135deg, #ff9a9e, #fecfef)",
-                keywords: "corporate ai strategy business tech artificial intelligence workplace corporate b2 audio description",
-                heading: "What's Inside 'Corporate AI Strategy'",
-                objectives: [
-                    "Evaluate corporate automation frameworks and integration roadmaps safely;",
-                    "Deploy business-specific terminology regarding machine learning ROI allocations;",
-                    "Defend corporate policy stances relating to workforce adjustments and upskilling metrics."
-                ],
-                description: "An advanced B2 business framework module addressing technical optimization, implementation risks, workflow task automation, and managerial strategic planning standard across corporate markets.",
-                pdfUrl: "materials/B2_Corporate_AI_Strategy.pdf",
-                audioUrl: "audio/B2_Corporate_AI_Strategy.mp3",
-                mediaLabel: "The audio streams:",
-                links: [
-                    { label: "Audio 1", url: "https://www.youtube.com/watch?v=ai-enterprise-trends" }
-                ]
-            },
-            {
-                title: "The Appification of Daily Life",
-                category: "business",
-                categoryLabel: "Business English",
-                mediaType: "Audio",
-                mediaIcon: "🎵",
-                categoryIcon: "💼",
-                level: "b2",
-                levelLabel: "B2",
-                duration: "90 min",
-                visualSource: "linear-gradient(135deg, #a1c4fd, #c2e9fb)",
-                keywords: "apps software design monetization subscription retention mobile phone screen time habits debt business finance economy startup metrics engagement economy automation onboarding conversion friction target audience pricing structure",
-                heading: "What's Inside 'The Appification of Daily Life'",
-                objectives: [
-                    "Analyze business models driving modern mobile applications and recurring subscription plans;",
-                    "Deconstruct tracking structures that calculate app engagement metrics and conversion frictions;",
-                    "Debate monetization designs targeting user behavioral loops, phone habit cues, and product rewards."
-                ],
-                description: "This advanced topic package explores the financial ecosystems supporting mobile-first software transformations, customer onboarding pipelines, operational tracking variables, and digital retention strategies across tech industries.",
-                pdfUrl: "materials/B2_Appification_of_Daily_Life.pdf",
-                audioUrl: "audio/B2_Appification_of_Daily_Life.mp3",
-                mediaLabel: "The audio streams:",
-                links: [
-                    { label: "Audio Track", url: "https://www.youtube.com/watch?v=app-economy-trends" }
-                ]
-            },
-            {
-                title: "Mastering Navigational Descriptors",
-                category: "general",
-                categoryLabel: "General English",
-                mediaType: "Video",
-                mediaIcon: "▶️",
-                categoryIcon: "🎓",
-                level: "a2",
-                levelLabel: "A2",
-                duration: "60 min",
-                visualSource: "linear-gradient(135deg, #fdfbf7, #e1eec3)",
-                keywords: "navigation directions travel city maps street local basic grammar situational speaking a2 landmarks paths turns block orientation coordinates routes travel planner commute transport guidance wayfinding transit signage landmarks crossroad",
-                heading: "What's Inside 'Mastering Navigational Descriptors'",
-                objectives: [
-                    "Utilize basic direction terminology safely when describing routes, blocks, landmarks, and street infrastructure setups;",
-                    "Ask for guidance clearly and interpret structural directional signals step-by-step;",
-                    "Roleplay situational maps and local navigation prompts commonly encountered during trips abroad."
-                ],
-                description: "An interactive grammar and situational discussion layout providing foundational structural speaking points for absolute elementary learners navigating cities or tracking foreign addresses.",
-                pdfUrl: "materials/A2_Navigational_Descriptors.pdf",
-                mediaLabel: "The video links:",
-                links: [
-                    { label: "Guide Video", url: "https://www.youtube.com/watch?v=basic-city-directions" }
-                ]
-            },
-            {
-                title: "The Normalization of Household Debt",
-                category: "business",
-                categoryLabel: "Business English",
-                mediaType: "Video",
-                mediaIcon: "▶️",
-                categoryIcon: "💼",
-                level: "b2",
-                levelLabel: "B2",
-                duration: "90 min",
-                visualSource: "linear-gradient(135deg, #cfd9df, #e2ebf0)",
-                keywords: "debt banking economics credit lines inflation loans financial stability global markets statistics b2 corporate assets fiscal policies leverage spending capital accounts interest inflation macro trends risk liquidity defaults macroeconomics consumer psychology microfinance credit scoring metrics defaults systemic risk leverage structural risk liquidity constraints asset valuation financial instruments yield curves amortisation schedules insolvency fiscal tightening underwriting portfolios capital reserves market volatility macro prudential regulatory policy cash flow dynamics investment banking legacy systems structural debt portfolio variance debt to income ratios leverage ratios risk premiums quantitative easing wealth gaps consumer credit bureaus credit tracking algorithms corporate balance sheets debt structure credit defaults risk assessment metrics collection actions liquidity crunches macroeconomic pressures cash management strategies budget deficits wealth distribution indexes corporate liquidity lines microeconomic trends credit line extensions commercial bank liabilities restructuring frameworks capital allocation models debt restructuring default protection debt servicing ratios",
-                heading: "What's Inside 'The Normalization of Household Debt'",
-                objectives: [
-                    "Evaluate changing socio-economic attitudes regarding credit availability lines, compound interest, and spending variables;",
-                    "Interpret global credit indexes and banking systems reporting household liability statistics safely;",
-                    "Deploy exact business context phrasing regarding defaults risk parameters, banking portfolios, and structural leverage ratios."
-                ],
-                description: "A premium conversation layout analyzing long-term macroeconomic trends, financial instruments, risk scoring algorithms, and the underlying consumer psychology changes impacting banking industries globally.",
-                pdfUrl: "materials/B2_Normalization_of_Household_Debt.pdf",
-                mediaLabel: "The analysis video links:",
-                links: [
-                    { label: "Economics Briefing", url: "https://www.youtube.com/watch?v=global-credit-trends" }
-                ]
-            }
-        ];
-
-        // Function to build catalog cards programmatically on load
+        // ── RENDER: build the grid for the current page of filteredLessons ──
         function renderCatalogGrid() {
             const container = document.getElementById('catalog-grid-root');
             container.innerHTML = "";
 
-            lessonsCatalog.forEach((lesson, index) => {
+            const start = (currentPage - 1) * LESSONS_PER_PAGE;
+            const end   = start + LESSONS_PER_PAGE;
+            const pageSlice = filteredLessons.slice(start, end);
+
+            pageSlice.forEach((catalogIndex) => {
+                const lesson = lessonsCatalog[catalogIndex];
                 const card = document.createElement('div');
                 card.className = `lesson-card ${lesson.category}`;
-                card.setAttribute('data-level', lesson.level);
-                card.setAttribute('data-category', lesson.category);
-                card.setAttribute('data-keywords', lesson.keywords);
 
                 let artworkStyle = "";
                 if (lesson.visualSource.includes('linear-gradient')) {
@@ -956,7 +787,7 @@
                             <div class="tag-item">🥇 ${lesson.levelLabel}</div>
                             <div class="tag-item">🕒 ${lesson.duration}</div>
                         </div>
-                        <div onclick="initiateDetailViewByIndex(${index})" class="view-btn">View Lesson</div>
+                        <div onclick="initiateDetailViewByIndex(${catalogIndex})" class="view-btn">View Lesson</div>
                     </div>
                 `;
                 container.appendChild(card);
@@ -965,40 +796,69 @@
             renderPaginationUI();
         }
 
-        // Programmatic pagination control element rendering function
+        // ── PAGINATION: real working page numbers ──
         function renderPaginationUI() {
             const root = document.getElementById('catalog-pagination-root');
             root.innerHTML = "";
 
-            const p1 = document.createElement('span');
-            p1.className = "pagination-item active";
-            p1.innerText = "1";
-            root.appendChild(p1);
+            const totalPages = Math.ceil(filteredLessons.length / LESSONS_PER_PAGE);
 
-            const p2 = document.createElement('span');
-            p2.className = "pagination-item";
-            p2.innerText = "2";
-            root.appendChild(p2);
+            if (totalPages <= 1) {
+                root.style.display = "none";
+                return;
+            }
+            root.style.display = "flex";
 
-            const p3 = document.createElement('span');
-            p3.className = "pagination-item";
-            p3.innerText = "3";
-            root.appendChild(p3);
+            // Prev arrow
+            const prev = document.createElement('span');
+            prev.className = "pagination-item" + (currentPage === 1 ? " disabled" : "");
+            prev.innerText = "‹";
+            if (currentPage > 1) prev.onclick = () => goToPage(currentPage - 1);
+            root.appendChild(prev);
 
-            const ellipsis = document.createElement('span');
-            ellipsis.className = "pagination-item ellipsis";
-            ellipsis.innerText = "...";
-            root.appendChild(ellipsis);
+            // Page number buttons with ellipsis for large catalogs
+            const pagesToShow = buildPageRange(currentPage, totalPages);
+            pagesToShow.forEach(p => {
+                const item = document.createElement('span');
+                if (p === '...') {
+                    item.className = "pagination-item ellipsis";
+                    item.innerText = "...";
+                } else {
+                    item.className = "pagination-item" + (p === currentPage ? " active" : "");
+                    item.innerText = p;
+                    item.onclick = () => goToPage(p);
+                }
+                root.appendChild(item);
+            });
 
-            const p13 = document.createElement('span');
-            p13.className = "pagination-item";
-            p13.innerText = "13";
-            root.appendChild(p13);
+            // Next arrow
+            const next = document.createElement('span');
+            next.className = "pagination-item" + (currentPage === totalPages ? " disabled" : "");
+            next.innerText = "›";
+            if (currentPage < totalPages) next.onclick = () => goToPage(currentPage + 1);
+            root.appendChild(next);
+        }
 
-            const nextArrow = document.createElement('span');
-            nextArrow.className = "pagination-item";
-            nextArrow.innerText = "›";
-            root.appendChild(nextArrow);
+        // Returns array like [1, 2, 3, '...', 13] depending on current page & total
+        function buildPageRange(current, total) {
+            if (total <= 7) {
+                return Array.from({ length: total }, (_, i) => i + 1);
+            }
+            const pages = [];
+            pages.push(1);
+            if (current > 3) pages.push('...');
+            for (let p = Math.max(2, current - 1); p <= Math.min(total - 1, current + 1); p++) {
+                pages.push(p);
+            }
+            if (current < total - 2) pages.push('...');
+            pages.push(total);
+            return pages;
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderCatalogGrid();
+            window.scrollTo(0, 0);
         }
 
         function toggleFilterTray(trayType) {
@@ -1022,48 +882,36 @@
             pillElement.classList.add('active');
 
             activeFilters[filterType] = selectionValue;
-            evaluateCatalogVisibility();
+            applyFiltersAndRender();
         }
 
         function executeCatalogSearch() {
-            evaluateCatalogVisibility();
+            applyFiltersAndRender();
         }
 
-        function evaluateCatalogVisibility() {
-            const searchInput = document.getElementById('catalog-search-input');
-            const searchFilter = searchInput.value.toLowerCase().trim();
-            const cards = document.getElementById('catalog-grid-root').getElementsByClassName('lesson-card');
-            
-            let visibleCount = 0;
+        // ── FILTER: rebuilds filteredLessons[], resets to page 1, re-renders ──
+        function applyFiltersAndRender() {
+            const searchFilter = document.getElementById('catalog-search-input').value.toLowerCase().trim();
 
-            for (let i = 0; i < cards.length; i++) {
-                const cardLevel = cards[i].getAttribute('data-level') || '';
-                const cardCategory = cards[i].getAttribute('data-category') || '';
-                const titleElement = cards[i].getElementsByClassName('card-title-strip')[0];
-                const keywordData = cards[i].getAttribute('data-keywords') || '';
-                const titleText = titleElement ? (titleElement.innerText || titleElement.textContent).toLowerCase() : '';
-
-                const matchesLevel = (activeFilters.level === 'all' || cardLevel === activeFilters.level);
-                const matchesCategory = (activeFilters.category === 'all' || cardCategory === activeFilters.category);
-                const matchesSearch = (searchFilter === '' || titleText.indexOf(searchFilter) > -1 || keywordData.toLowerCase().indexOf(searchFilter) > -1);
+            filteredLessons = [];
+            lessonsCatalog.forEach((lesson, index) => {
+                const matchesLevel    = (activeFilters.level === 'all'    || lesson.level    === activeFilters.level);
+                const matchesCategory = (activeFilters.category === 'all' || lesson.category === activeFilters.category);
+                const matchesSearch   = (searchFilter === ''
+                    || lesson.title.toLowerCase().includes(searchFilter)
+                    || (lesson.keywords || '').toLowerCase().includes(searchFilter));
 
                 if (matchesLevel && matchesCategory && matchesSearch) {
-                    cards[i].style.display = "";
-                    visibleCount++;
-                } else {
-                    cards[i].style.display = "none";
+                    filteredLessons.push(index);
                 }
-            }
+            });
+
+            currentPage = 1;
 
             const sectionTitle = document.getElementById('catalog-section-title');
-            const paginationRoot = document.getElementById('catalog-pagination-root');
-            if (visibleCount === 0) {
-                sectionTitle.innerText = "No matching lessons found";
-                paginationRoot.style.display = "none";
-            } else {
-                sectionTitle.innerText = "Latest Lessons";
-                paginationRoot.style.display = "flex";
-            }
+            sectionTitle.innerText = filteredLessons.length === 0 ? "No matching lessons found" : "Latest Lessons";
+
+            renderCatalogGrid();
         }
 
         function initiateDetailViewByIndex(index) {
@@ -1138,14 +986,14 @@
         }
 
 
-        // Automatically keep newest lessons first
+        // ── BOOT: sort newest-first, then run initial filter+render ──
         lessonsCatalog.sort((a, b) => {
             const da = new Date(a.dateAdded || "2000-01-01");
             const db = new Date(b.dateAdded || "2000-01-01");
             return db - da;
         });
 
-        renderCatalogGrid();
+        applyFiltersAndRender();
 
     </script>
 </body>
