@@ -363,6 +363,16 @@
             font-style: italic;
         }
 
+        @keyframes pinBounce {
+            0%   { transform: scale(1); }
+            30%  { transform: scale(1.4) rotate(-15deg); }
+            60%  { transform: scale(0.9) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        .pin-animate {
+            animation: pinBounce 0.4s ease;
+        }
+
         .favorite-badge {
             display: flex;
             flex-direction: column;
@@ -380,10 +390,18 @@
             font-weight: 700;
             color: #ff7a00;
             letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+        .favorite-badge .pin-label.pinned {
+            color: #2e7d32;
         }
         .favorite-badge .pin-icon {
             font-size: 32px;
             line-height: 1;
+            transition: filter 0.3s;
+        }
+        .favorite-badge .pin-icon.pinned {
+            filter: hue-rotate(90deg) saturate(3) brightness(0.8);
         }
 
         .objectives-label {
@@ -848,7 +866,10 @@
         <h2>Contacts</h2>
         <p>Join the Telegram group so you won't miss any new ESLplans!</p>
         <a href="https://t.me/eslplans" target="_blank" class="tg-link">
-            <span class="tg-icon">✈️</span> t.me/eslplans
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21.98 3.07a1 1 0 0 0-1.02-.17L2.45 10.16a1 1 0 0 0 .07 1.88l4.48 1.4 2.04 6.15a1 1 0 0 0 1.7.37l2.42-2.6 4.35 3.2a1 1 0 0 0 1.56-.63l2.99-16a1 1 0 0 0-.08-.46zM17.1 7.28l-7.2 6.58-1.53-4.6L17.1 7.28zm-5.72 8.85-.96-2.9 1.33-1.22 1.4 1.03-1.77 3.09zm5.4.98-4.04-2.97 7.08-6.48-3.04 9.45z"/>
+            </svg>
+            t.me/eslplans
         </a>
     </div>
 
@@ -1091,15 +1112,20 @@
         }
 
         function toggleFilterTray(trayType) {
+            // Always make sure catalog is visible when using filters
+            hideAllViews();
+            document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('hero-banner-view').style.display = 'block';
+
             const levelTray = document.getElementById('level-filter-tray');
             const categoryTray = document.getElementById('category-filter-tray');
 
             if (trayType === 'level') {
                 categoryTray.style.display = 'none';
-                levelTray.style.display = (levelTray.style.display === 'block') ? 'none' : 'block';
+                levelTray.style.display = 'block';
             } else if (trayType === 'category') {
                 levelTray.style.display = 'none';
-                categoryTray.style.display = (categoryTray.style.display === 'block') ? 'none' : 'block';
+                categoryTray.style.display = 'block';
             }
         }
 
@@ -1145,6 +1171,7 @@
         }
 
         function initiateDetailViewByIndex(index) {
+            currentLessonIndex = index;
             const lesson = lessonsCatalog[index];
             if (!lesson) return;
 
@@ -1203,6 +1230,7 @@
 
             hideAllViews();
             document.getElementById('lesson-detail-view').style.display = 'grid';
+            updatePinButton();
             window.scrollTo(0, 0);
         }
 
@@ -1220,6 +1248,12 @@
             hideAllViews();
             document.getElementById('dashboard-catalog-view').style.display = 'block';
             document.getElementById('hero-banner-view').style.display = 'block';
+            // Reset all filters so all lessons show
+            activeFilters = { level: 'all', category: 'all' };
+            document.getElementById('catalog-search-input').value = '';
+            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.filter-pill:first-of-type').forEach(p => p.classList.add('active'));
+            applyFiltersAndRender();
             window.scrollTo(0, 0);
         }
 
@@ -1276,7 +1310,14 @@
         function savePins() {
             localStorage.setItem('eslplans-pinned', JSON.stringify(pinnedIds));
             updatePinBadge();
-            renderPinnedPanel();
+            updateNavPin();
+        }
+
+        function updateNavPin() {
+            const navPin = document.querySelector('.pin-nav-btn');
+            if (navPin) {
+                navPin.style.color = pinnedIds.length > 0 ? '#2e7d32' : '#e03131';
+            }
         }
 
         function updatePinBadge() {
@@ -1306,12 +1347,18 @@
             const isPinned = pinnedIds.includes(currentLessonIndex);
             const label = document.getElementById('pin-btn-label');
             const icon = document.getElementById('pin-btn-icon');
-            if (label) label.innerText = isPinned ? 'Pinned!' : 'Pin it!';
-            if (icon) {
-                icon.innerText = '📌';
-                icon.style.color = isPinned ? '#2e7d32' : '';
-                icon.style.filter = isPinned ? 'hue-rotate(90deg) saturate(2)' : '';
+            if (label) {
+                label.innerText = isPinned ? 'Pinned!' : 'Pin it!';
+                label.classList.toggle('pinned', isPinned);
             }
+            if (icon) {
+                icon.classList.toggle('pinned', isPinned);
+                // Trigger bounce animation
+                icon.classList.remove('pin-animate');
+                void icon.offsetWidth; // force reflow
+                icon.classList.add('pin-animate');
+            }
+            updateNavPin();
         }
 
         function renderPinnedPage() {
@@ -1322,7 +1369,7 @@
             }
             body.innerHTML = pinnedIds.map(idx => {
                 const l = lessonsCatalog[idx];
-                return `<div class="pinned-item" onclick="openLesson(${idx})" style="cursor:pointer; padding:14px; border:1px solid #ddd; border-radius:12px; margin-bottom:12px; background:#fff;">
+                return `<div class="pinned-item" onclick="initiateDetailViewByIndex(${idx})" style="cursor:pointer; padding:14px; border:1px solid #ddd; border-radius:12px; margin-bottom:12px; background:#fff;">
                     <div style="font-weight:700; font-size:16px; margin-bottom:4px;">${l.title}</div>
                     <div style="color:#888; font-size:14px;">${l.levelLabel} · ${l.categoryLabel}</div>
                 </div>`;
@@ -1345,6 +1392,8 @@
         });
 
         applyFiltersAndRender();
+        updateNavPin();
+        updatePinBadge();
 
     </script>
 </body>
