@@ -320,25 +320,21 @@
         .workspace-view {
             display: grid;
             grid-template-columns: 320px 1fr;
-            grid-template-rows: auto auto;
-            gap: 4px 50px;
+            gap: 0 50px;
             align-items: start;
             margin-top: 40px;
         }
 
-        .workspace-view .info-panel {
-            grid-column: 2;
-            grid-row: 1 / 3;
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
         }
 
         @media (max-width: 768px) {
             .workspace-view {
                 grid-template-columns: 1fr;
                 gap: 30px;
-            }
-            .workspace-view .info-panel {
-                grid-column: 1;
-                grid-row: auto;
             }
         }
 
@@ -654,7 +650,7 @@
         }
         .pdf-preview-section {
             margin-bottom: 0;
-            margin-top: 0;
+            margin-top: 8px;
         }
 
         .pdf-preview-label {
@@ -706,10 +702,8 @@
             padding: 40px 0;
         }
 
-        /* Sidebar card: no view-btn, tighter bottom */
+        /* Sidebar card: no view-btn */
         #dynamic-sidebar-card .view-btn { display: none; }
-        #dynamic-sidebar-card .card-details { padding-bottom: 8px; }
-        #dynamic-sidebar-card { margin-bottom: 0; }
         /* ── CONTACTS PAGE ── */
         .contacts-view {
             max-width: 600px;
@@ -940,28 +934,30 @@
         </div>
 
         <div id="lesson-detail-view" style="display: none;" class="workspace-view">
-            
-            <div id="dynamic-sidebar-card" class="lesson-card">
-                <div class="card-image-box">
-                    <div id="dynamic-card-artwork" class="mock-3d-illustration"></div>
-                </div>
-                <div id="dynamic-card-title" class="card-title-strip"></div>
-                <div class="card-details">
-                    <div class="tag-row">
-                        <div id="dynamic-card-type" class="tag-item"></div>
-                        <div id="dynamic-card-media" class="tag-item"></div>
-                    </div>
-                    <div class="tag-row">
-                        <div id="dynamic-card-level" class="tag-item"></div>
-                        <div id="dynamic-card-duration" class="tag-item"></div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="pdf-preview-section">
-                <div class="pdf-preview-label">ESLplan overview</div>
-                <div class="pdf-preview-scroll-box" id="pdf-preview-box">
-                    <div class="pdf-preview-loading">Loading preview...</div>
+            <div class="left-column">
+                <div id="dynamic-sidebar-card" class="lesson-card">
+                    <div class="card-image-box">
+                        <div id="dynamic-card-artwork" class="mock-3d-illustration"></div>
+                    </div>
+                    <div id="dynamic-card-title" class="card-title-strip"></div>
+                    <div class="card-details">
+                        <div class="tag-row">
+                            <div id="dynamic-card-type" class="tag-item"></div>
+                            <div id="dynamic-card-media" class="tag-item"></div>
+                        </div>
+                        <div class="tag-row">
+                            <div id="dynamic-card-level" class="tag-item"></div>
+                            <div id="dynamic-card-duration" class="tag-item"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-section">
+                    <div class="pdf-preview-label">ESLplan overview</div>
+                    <div class="pdf-preview-scroll-box" id="pdf-preview-box">
+                        <div class="pdf-preview-loading">Loading preview...</div>
+                    </div>
                 </div>
             </div>
 
