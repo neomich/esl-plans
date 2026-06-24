@@ -110,10 +110,12 @@ const lessonsCatalog = [
         description: "In this lesson, students begin by reflecting on their own struggles with English (e.g., spelling, phrasal verbs, pronunciation) and discussing why certain areas feel more difficult than others. They then listen to Arjun describe his personal language-learning journey, identifying which four specific challenges he faced, before engaging in a discussion about strategies for overcoming confusion and maintaining motivation.\n\nThe grammar focus addresses common pain points through targeted exercises: students choose between present perfect and past simple based on time markers, select few/little/a few/a little according to countable/uncountable nouns, and use appropriate modals (can/could/may/will) for polite requests and permissions.\n\nFinally, students read a story titled \"The Coffee Break Secret\", a completion task that integrates and reviews the target grammar structures. This task can be given as homework.",
         pdfUrl: "materials/a2_confusing_english_language.pdf",
         audioUrl: "audio/a2_confusing_english_language_arjun.mp3",
-        mediaLabel: "The audio streams:",
-        links: [
+        audioUrls: [
+            { label: "Arjun", url: "audio/a2_confusing_english_language_arjun.mp3" },
             { label: "The Coffee Break Secret", url: "audio/a2_confusing_english_language_the_coffee_break_secret.mp3" }
-        ]
+        ],
+        mediaLabel: "The audio streams:",
+        links: []
     },
 
     {
