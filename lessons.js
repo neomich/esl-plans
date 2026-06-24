@@ -7,6 +7,34 @@ const lessonsCatalog = [
 
     {
         dateAdded: "2026-06-24",
+        title: "Algorithms",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_algorithms.JPG",
+        keywords: "algorithms data social media e-commerce decision making AI artificial intelligence ethics autonomy technology digital life podcast video b1 b2",
+        heading: "What's Inside 'Algorithms'",
+        objectives: [
+            "Define algorithms and understand their step-by-step nature;",
+            "Explore how algorithms function in daily life, from e-commerce to social media;",
+            "Critically evaluate the positive and negative impacts of algorithmic decision-making."
+        ],
+        description: "In this lesson, students begin by clarifying the concept of an algorithm through a humorous cooking analogy, rewriting unclear instructions into precise steps. They then watch a video explaining computer basics before diving into the mechanics of modern algorithms, analyzing processes like data collection, profile matching, and dynamic triggers.\n\nStudents review arguments regarding algorithm use, distinguishing between benefits (e.g., streamlining tasks) and drawbacks (e.g., manipulation, loss of free will), and verify their opinions via a podcast.\n\nThe lesson culminates in a debate on ethical dilemmas, such as whether to trust AI with personal relationships or if predictive technology threatens human autonomy.\n\n(Watch the video: 00:25-05:06).",
+        pdfUrl: "materials/b1_algorithms.pdf",
+        audioUrl: "audio/b1_algorithms_podcast.mp3",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Video", url: "https://www.youtube.com/watch?v=fkIvmfqX-t0" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-06-24",
         title: "Modern Remakes Of Famous Paintings",
         category: "general",
         categoryLabel: "General English",
