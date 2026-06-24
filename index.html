@@ -829,7 +829,7 @@
 
     <header>
         <div class="nav-container">
-            <a onclick="showDashboardView()" class="logo-link">
+            <a onclick="showDashboardView()" class="logo-link" style="cursor:pointer; text-decoration:none;">
                 <div class="logo"><strong>ESL</strong>plans</div>
             </a>
             <ul class="nav-menu">
@@ -837,7 +837,7 @@
                 <li><a onclick="toggleFilterTray('category')">Categories</a></li>
                 <li><a onclick="showContactsView()">Contacts</a></li>
                 <li><a href="#">Pricing</a></li>
-                <li><a onclick="togglePinnedPanel()" class="pin-nav-btn" title="Pinned lessons">📌 <span id="pin-count-badge" style="display:none"></span></a></li>
+                <li><a onclick="showPinnedView()" class="pin-nav-btn" title="Pinned lessons">📌 <span id="pin-count-badge" style="display:none"></span></a></li>
                 <li><a href="#">Login</a></li>
             </ul>
         </div>
@@ -852,15 +852,10 @@
         </a>
     </div>
 
-    <!-- ── PINNED LESSONS PANEL ── -->
-    <div id="pinned-panel" class="pinned-panel" style="display:none;">
-        <div class="pinned-panel-header">
-            <span>📌 Pinned Lessons</span>
-            <button onclick="togglePinnedPanel()" class="pinned-close-btn">✕</button>
-        </div>
-        <div id="pinned-panel-body" class="pinned-panel-body">
-            <p class="pinned-empty">No pinned lessons yet.</p>
-        </div>
+    <!-- ── PINNED LESSONS PAGE ── -->
+    <div id="pinned-view" style="display:none;" class="contacts-view">
+        <h2>📌 Pinned Lessons</h2>
+        <div id="pinned-page-body"></div>
     </div>
 
     <div id="hero-banner-view" class="hero-banner-container">
@@ -1206,16 +1201,23 @@
                 linksContainer.appendChild(p);
             });
 
-            document.getElementById('dashboard-catalog-view').style.display = 'none';
-            document.getElementById('hero-banner-view').style.display = 'none';
-            document.getElementById('level-filter-tray').style.display = 'none';
-            document.getElementById('category-filter-tray').style.display = 'none';
+            hideAllViews();
             document.getElementById('lesson-detail-view').style.display = 'grid';
             window.scrollTo(0, 0);
         }
 
-        function showDashboardView() {
+        function hideAllViews() {
             document.getElementById('lesson-detail-view').style.display = 'none';
+            document.getElementById('dashboard-catalog-view').style.display = 'none';
+            document.getElementById('hero-banner-view').style.display = 'none';
+            document.getElementById('contacts-view').style.display = 'none';
+            document.getElementById('pinned-view').style.display = 'none';
+            document.getElementById('level-filter-tray').style.display = 'none';
+            document.getElementById('category-filter-tray').style.display = 'none';
+        }
+
+        function showDashboardView() {
+            hideAllViews();
             document.getElementById('dashboard-catalog-view').style.display = 'block';
             document.getElementById('hero-banner-view').style.display = 'block';
             window.scrollTo(0, 0);
@@ -1254,11 +1256,16 @@
 
         // ── CONTACTS VIEW ──
         function showContactsView() {
-            document.getElementById('lesson-detail-view').style.display = 'none';
-            document.getElementById('dashboard-catalog-view').style.display = 'none';
-            document.getElementById('hero-banner-view').style.display = 'none';
+            hideAllViews();
             document.getElementById('contacts-view').style.display = 'block';
-            document.getElementById('pinned-panel').style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        // ── PINNED VIEW ──
+        function showPinnedView() {
+            hideAllViews();
+            renderPinnedPage();
+            document.getElementById('pinned-view').style.display = 'block';
             window.scrollTo(0, 0);
         }
 
@@ -1297,24 +1304,27 @@
         function updatePinButton() {
             if (currentLessonIndex === null) return;
             const isPinned = pinnedIds.includes(currentLessonIndex);
-            document.getElementById('pin-btn-label').innerText = isPinned ? 'Pinned!' : 'Pin it!';
-            document.getElementById('pin-btn-icon').innerText = isPinned ? '✅' : '📌';
+            const label = document.getElementById('pin-btn-label');
+            const icon = document.getElementById('pin-btn-icon');
+            if (label) label.innerText = isPinned ? 'Pinned!' : 'Pin it!';
+            if (icon) {
+                icon.innerText = '📌';
+                icon.style.color = isPinned ? '#2e7d32' : '';
+                icon.style.filter = isPinned ? 'hue-rotate(90deg) saturate(2)' : '';
+            }
         }
 
-        function renderPinnedPanel() {
-            const body = document.getElementById('pinned-panel-body');
+        function renderPinnedPage() {
+            const body = document.getElementById('pinned-page-body');
             if (pinnedIds.length === 0) {
-                body.innerHTML = '<p class="pinned-empty">No pinned lessons yet.</p>';
+                body.innerHTML = '<p style="color:#888; font-size:16px;">No pinned lessons yet. Open a lesson and click 📌 Pin it! to save it here.</p>';
                 return;
             }
             body.innerHTML = pinnedIds.map(idx => {
                 const l = lessonsCatalog[idx];
-                return `<div class="pinned-item">
-                    <div onclick="openLesson(${idx}); togglePinnedPanel();" style="flex:1">
-                        <div class="pinned-item-title">${l.title}</div>
-                        <div class="pinned-item-level">${l.levelLabel} · ${l.categoryLabel}</div>
-                    </div>
-                    <button class="unpin-btn" onclick="unpinLesson(${idx})" title="Remove">✕</button>
+                return `<div class="pinned-item" onclick="openLesson(${idx})" style="cursor:pointer; padding:14px; border:1px solid #ddd; border-radius:12px; margin-bottom:12px; background:#fff;">
+                    <div style="font-weight:700; font-size:16px; margin-bottom:4px;">${l.title}</div>
+                    <div style="color:#888; font-size:14px;">${l.levelLabel} · ${l.categoryLabel}</div>
                 </div>`;
             }).join('');
         }
@@ -1325,11 +1335,7 @@
             updatePinButton();
         }
 
-        function togglePinnedPanel() {
-            const panel = document.getElementById('pinned-panel');
-            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-            if (panel.style.display === 'block') renderPinnedPanel();
-        }
+        function togglePinnedPanel() { showPinnedView(); }
 
         // ── BOOT: sort newest-first, then run initial filter+render ──
         lessonsCatalog.sort((a, b) => {
