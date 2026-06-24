@@ -6,6 +6,35 @@
 const lessonsCatalog = [
 
     {
+        dateAdded: "2026-06-25",
+        title: "Affectations",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1",
+        duration: "90 min",
+        visualSource: "images/b1_affectation.JPG",
+        keywords: "affectation vocal fry creaky voice name-dropping intellectual posturing mirroring social behavior sincerity speech habits Larry David comedy gender youth professional b1",
+        heading: "What's Inside 'Affectations'",
+        objectives: [
+            "Define affectation and identify various forms of insincere social behavior;",
+            "Analyze the phenomenon of vocal fry through video comprehension and linguistic context;",
+            "Evaluate personal attitudes toward speech habits and performative behaviors in social interactions."
+        ],
+        description: "In this lesson, students begin by watching a comedy clip featuring Larry David to introduce the concept of affectation, specifically focusing on vocal fry and the annoyance it can cause. They then watch an educational video to understand the scientific definition of vocal fry (creaky voice), its association with youth and gender, and how it is perceived in professional settings.\n\nStudents expand their vocabulary by matching specific types of affectation — such as name-dropping, intellectual posturing, and mirroring — to their definitions, before listening to four speakers describe their own experiences with these behaviors.\n\nThe lesson culminates in a discussion where students reflect on which affectations they find most irritating, whether they are guilty of any themselves, and what matters more in communication: the content of words or the manner of delivery.",
+        pdfUrl: "materials/b1_affectation.pdf",
+        audioUrl: "audio/b1_affectation_4_callers.mp3",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=WDfJn1kcQuU" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=vMtbWt0wRyM" }
+        ]
+    },
+
+    {
         dateAdded: "2026-06-24",
         title: "Algorithms",
         category: "general",
