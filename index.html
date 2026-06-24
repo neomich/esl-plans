@@ -686,6 +686,143 @@
             font-size: 14px;
             padding: 40px 0;
         }
+        /* ── CONTACTS PAGE ── */
+        .contacts-view {
+            max-width: 600px;
+            margin: 80px auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .contacts-view h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        .contacts-view p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .tg-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #229ED9;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .tg-link:hover {
+            background: #1a86b8;
+            transform: scale(1.04);
+        }
+        .tg-icon { font-size: 22px; }
+
+        /* ── PIN NAV BUTTON ── */
+        .pin-nav-btn {
+            position: relative;
+            font-size: 20px !important;
+            cursor: pointer;
+        }
+        #pin-count-badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: #e03131;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── PINNED PANEL ── */
+        .pinned-panel {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            z-index: 1000;
+            overflow: hidden;
+        }
+        .pinned-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #eee;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .pinned-close-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #888;
+        }
+        .pinned-close-btn:hover { color: #333; }
+        .pinned-panel-body {
+            padding: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .pinned-empty {
+            text-align: center;
+            color: #aaa;
+            font-size: 14px;
+            padding: 20px 0;
+        }
+        .pinned-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: #fafafa;
+            border: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .pinned-item:hover { background: #f0f0f0; }
+        .pinned-item-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+            margin-right: 8px;
+        }
+        .pinned-item-level {
+            font-size: 11px;
+            color: #888;
+        }
+        .unpin-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #ccc;
+            padding: 0 4px;
+            transition: color 0.15s;
+        }
+        .unpin-btn:hover { color: #e03131; }
     </style>
 </head>
 <body>
@@ -698,12 +835,33 @@
             <ul class="nav-menu">
                 <li><a onclick="toggleFilterTray('level')">Levels</a></li>
                 <li><a onclick="toggleFilterTray('category')">Categories</a></li>
-                <li><a href="#">Topic Suggestions</a></li>
+                <li><a onclick="showContactsView()">Contacts</a></li>
                 <li><a href="#">Pricing</a></li>
+                <li><a onclick="togglePinnedPanel()" class="pin-nav-btn" title="Pinned lessons">📌 <span id="pin-count-badge" style="display:none"></span></a></li>
                 <li><a href="#">Login</a></li>
             </ul>
         </div>
     </header>
+
+    <!-- ── CONTACTS PAGE ── -->
+    <div id="contacts-view" style="display:none;" class="contacts-view">
+        <h2>Contacts</h2>
+        <p>Join the Telegram group so you won't miss any new ESLplans!</p>
+        <a href="https://t.me/eslplans" target="_blank" class="tg-link">
+            <span class="tg-icon">✈️</span> t.me/eslplans
+        </a>
+    </div>
+
+    <!-- ── PINNED LESSONS PANEL ── -->
+    <div id="pinned-panel" class="pinned-panel" style="display:none;">
+        <div class="pinned-panel-header">
+            <span>📌 Pinned Lessons</span>
+            <button onclick="togglePinnedPanel()" class="pinned-close-btn">✕</button>
+        </div>
+        <div id="pinned-panel-body" class="pinned-panel-body">
+            <p class="pinned-empty">No pinned lessons yet.</p>
+        </div>
+    </div>
 
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
@@ -771,9 +929,9 @@
             <div class="info-panel">
                 <div class="panel-header-row">
                     <h1 id="dynamic-panel-heading">What's this all about?</h1>
-                    <div class="favorite-badge">
-                        <span class="pin-label">Pin it!</span>
-                        <span class="pin-icon">📌</span>
+                    <div class="favorite-badge" id="pin-lesson-btn" onclick="togglePin()">
+                        <span class="pin-label" id="pin-btn-label">Pin it!</span>
+                        <span class="pin-icon" id="pin-btn-icon">📌</span>
                     </div>
                 </div>
 
@@ -1092,6 +1250,85 @@
             }).catch(function() {
                 box.innerHTML = '<div class="pdf-preview-loading">Preview unavailable.</div>';
             });
+        }
+
+        // ── CONTACTS VIEW ──
+        function showContactsView() {
+            document.getElementById('lesson-detail-view').style.display = 'none';
+            document.getElementById('dashboard-catalog-view').style.display = 'none';
+            document.getElementById('hero-banner-view').style.display = 'none';
+            document.getElementById('contacts-view').style.display = 'block';
+            document.getElementById('pinned-panel').style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        // ── PINNED LESSONS (localStorage) ──
+        let pinnedIds = JSON.parse(localStorage.getItem('eslplans-pinned') || '[]');
+        let currentLessonIndex = null;
+
+        function savePins() {
+            localStorage.setItem('eslplans-pinned', JSON.stringify(pinnedIds));
+            updatePinBadge();
+            renderPinnedPanel();
+        }
+
+        function updatePinBadge() {
+            const badge = document.getElementById('pin-count-badge');
+            if (pinnedIds.length > 0) {
+                badge.style.display = 'flex';
+                badge.innerText = pinnedIds.length;
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function togglePin() {
+            if (currentLessonIndex === null) return;
+            const idx = pinnedIds.indexOf(currentLessonIndex);
+            if (idx === -1) {
+                pinnedIds.push(currentLessonIndex);
+            } else {
+                pinnedIds.splice(idx, 1);
+            }
+            savePins();
+            updatePinButton();
+        }
+
+        function updatePinButton() {
+            if (currentLessonIndex === null) return;
+            const isPinned = pinnedIds.includes(currentLessonIndex);
+            document.getElementById('pin-btn-label').innerText = isPinned ? 'Pinned!' : 'Pin it!';
+            document.getElementById('pin-btn-icon').innerText = isPinned ? '✅' : '📌';
+        }
+
+        function renderPinnedPanel() {
+            const body = document.getElementById('pinned-panel-body');
+            if (pinnedIds.length === 0) {
+                body.innerHTML = '<p class="pinned-empty">No pinned lessons yet.</p>';
+                return;
+            }
+            body.innerHTML = pinnedIds.map(idx => {
+                const l = lessonsCatalog[idx];
+                return `<div class="pinned-item">
+                    <div onclick="openLesson(${idx}); togglePinnedPanel();" style="flex:1">
+                        <div class="pinned-item-title">${l.title}</div>
+                        <div class="pinned-item-level">${l.levelLabel} · ${l.categoryLabel}</div>
+                    </div>
+                    <button class="unpin-btn" onclick="unpinLesson(${idx})" title="Remove">✕</button>
+                </div>`;
+            }).join('');
+        }
+
+        function unpinLesson(idx) {
+            pinnedIds = pinnedIds.filter(id => id !== idx);
+            savePins();
+            updatePinButton();
+        }
+
+        function togglePinnedPanel() {
+            const panel = document.getElementById('pinned-panel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            if (panel.style.display === 'block') renderPinnedPanel();
         }
 
         // ── BOOT: sort newest-first, then run initial filter+render ──
