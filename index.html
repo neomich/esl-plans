@@ -705,12 +705,31 @@
             font-size: 14px;
             padding: 40px 0;
         }
+
+        /* Sidebar card: no view-btn, tighter bottom */
+        #dynamic-sidebar-card .view-btn { display: none; }
+        #dynamic-sidebar-card .card-details { padding-bottom: 8px; }
+        #dynamic-sidebar-card { margin-bottom: 0; }
         /* ── CONTACTS PAGE ── */
         .contacts-view {
             max-width: 600px;
             margin: 80px auto;
             text-align: center;
             padding: 0 20px;
+        }
+
+        /* ── PINNED PAGE ── */
+        .pinned-view {
+            max-width: 1100px;
+            margin: 40px auto 60px auto;
+            padding: 0 20px;
+            text-align: left;
+        }
+        .pinned-view h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
         }
         .contacts-view h2 {
             font-size: 36px;
@@ -749,6 +768,8 @@
             font-size: 20px !important;
             cursor: pointer;
         }
+        .pin-nav-btn.has-pins { color: #2e7d32 !important; }
+        .pin-nav-btn.no-pins  { color: #e03131 !important; }
         #pin-count-badge {
             position: absolute;
             top: -6px;
@@ -875,7 +896,7 @@
     </div>
 
     <!-- ── PINNED LESSONS PAGE ── -->
-    <div id="pinned-view" style="display:none;" class="contacts-view">
+    <div id="pinned-view" style="display:none;" class="pinned-view">
         <h2>📌 Pinned Lessons</h2>
         <div id="pinned-grid-root" class="catalog-grid" style="margin-top:20px;"></div>
         <div class="pagination-container" id="pinned-pagination-root"></div>
@@ -1196,26 +1217,28 @@
                 l.url.includes('youtube') || l.url.includes('youtu.be') || l.url.includes('vimeo')
             );
 
-            let html = '<div class="downloads-wrapper">';
+            // Flex row: downloads on left, video links on right
+            let html = '<div style="display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap;">';
+            html += '<div class="downloads-wrapper">';
 
-            // PDF always shown
+            // PDF — open directly, no download attr (GitHub Pages MIME fix)
             html += `<div class="download-box">
                 <div class="download-label">Download pdf</div>
-                <a href="${lesson.pdfUrl}" id="dynamic-pdf-btn" class="pdf-icon-btn" download>PDF</a>
+                <a href="${lesson.pdfUrl}" id="dynamic-pdf-btn" class="pdf-icon-btn" target="_blank">PDF</a>
             </div>`;
 
-            // One MP3 box per audio file
+            // One MP3 box per audio file — open directly, no download attr
             audioFiles.forEach((audio, i) => {
                 const label = audioFiles.length > 1
                     ? `Download mp3 ${i + 1}`
                     : 'Download mp3';
                 html += `<div class="download-box">
                     <div class="download-label audio-label">${label}</div>
-                    <a href="${audio.url}" class="mp3-icon-btn" download>MP3</a>
+                    <a href="${audio.url}" class="mp3-icon-btn" target="_blank">MP3</a>
                 </div>`;
             });
 
-            html += '</div>';
+            html += '</div>'; // end downloads-wrapper
 
             // Video links section — only if there are actual video links
             if (videoLinks.length > 0) {
@@ -1230,6 +1253,8 @@
                 });
                 html += `</div></div></div>`;
             }
+
+            html += '</div>'; // end outer flex row
 
             mediaSection.innerHTML = html;
 
@@ -1330,7 +1355,8 @@
         function updateNavPin() {
             const navPin = document.querySelector('.pin-nav-btn');
             if (navPin) {
-                navPin.style.color = pinnedIds.length > 0 ? '#2e7d32' : '#e03131';
+                navPin.classList.toggle('has-pins', pinnedIds.length > 0);
+                navPin.classList.toggle('no-pins',  pinnedIds.length === 0);
             }
         }
 
