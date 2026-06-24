@@ -877,7 +877,8 @@
     <!-- ── PINNED LESSONS PAGE ── -->
     <div id="pinned-view" style="display:none;" class="contacts-view">
         <h2>📌 Pinned Lessons</h2>
-        <div id="pinned-page-body"></div>
+        <div id="pinned-grid-root" class="catalog-grid" style="margin-top:20px;"></div>
+        <div class="pagination-container" id="pinned-pagination-root"></div>
     </div>
 
     <div id="hero-banner-view" class="hero-banner-container">
@@ -958,25 +959,7 @@
                 <div class="description-frame" id="dynamic-description-frame"></div>
 
                 <div class="media-section">
-                    <div class="downloads-wrapper">
-                        <div class="download-box">
-                            <div class="download-label">Download pdf</div>
-                            <a href="#" id="dynamic-pdf-btn" class="pdf-icon-btn" download>PDF</a>
-                        </div>
-                        
-                        <div class="download-box" id="dynamic-mp3-box" style="display: none;">
-                            <div class="download-label audio-label">Download mp3</div>
-                            <a href="#" id="dynamic-mp3-btn" class="mp3-icon-btn" download>MP3</a>
-                        </div>
-                    </div>
-
-                    <div class="links-box">
-                        <div class="links-label" id="dynamic-media-label">The video links:</div>
-                        <div class="video-links-wrapper">
-                            <div class="youtube-logo-placeholder"></div>
-                            <div class="links-list" id="dynamic-links-list"></div>
-                        </div>
-                    </div>
+                    <div id="dynamic-media-section"></div>
                 </div>
 
                 <div class="back-btn-container">
@@ -1196,37 +1179,67 @@
             document.getElementById('dynamic-card-duration').innerText = '🕒 ' + lesson.duration;
 
             document.getElementById('dynamic-description-frame').innerText = lesson.description;
-            document.getElementById('dynamic-media-label').innerText = lesson.mediaLabel;
-            document.getElementById('dynamic-pdf-btn').setAttribute('href', lesson.pdfUrl);
+            document.getElementById('dynamic-pdf-btn') && document.getElementById('dynamic-pdf-btn').setAttribute('href', lesson.pdfUrl);
 
             renderPdfPreview(lesson.pdfUrl);
 
-            // Audio Element Visibility Logic
-            const mp3Box = document.getElementById('dynamic-mp3-box');
-            const mp3Btn = document.getElementById('dynamic-mp3-btn');
-            if (lesson.audioUrl) {
-                mp3Btn.setAttribute('href', lesson.audioUrl);
-                mp3Box.style.display = "flex";
-            } else {
-                mp3Btn.setAttribute('href', '#');
-                mp3Box.style.display = "none";
+            // ── SMART MEDIA SECTION ──
+            const mediaSection = document.getElementById('dynamic-media-section');
+
+            // Build audio files list: prefer audioUrls array, fall back to single audioUrl
+            const audioFiles = lesson.audioUrls
+                ? lesson.audioUrls
+                : (lesson.audioUrl ? [{ label: null, url: lesson.audioUrl }] : []);
+
+            // Video links: only YouTube-style links (not audio files)
+            const videoLinks = (lesson.links || []).filter(l =>
+                l.url.includes('youtube') || l.url.includes('youtu.be') || l.url.includes('vimeo')
+            );
+
+            let html = '<div class="downloads-wrapper">';
+
+            // PDF always shown
+            html += `<div class="download-box">
+                <div class="download-label">Download pdf</div>
+                <a href="${lesson.pdfUrl}" id="dynamic-pdf-btn" class="pdf-icon-btn" download>PDF</a>
+            </div>`;
+
+            // One MP3 box per audio file
+            audioFiles.forEach((audio, i) => {
+                const label = audioFiles.length > 1
+                    ? `Download mp3 ${i + 1}`
+                    : 'Download mp3';
+                html += `<div class="download-box">
+                    <div class="download-label audio-label">${label}</div>
+                    <a href="${audio.url}" class="mp3-icon-btn" download>MP3</a>
+                </div>`;
+            });
+
+            html += '</div>';
+
+            // Video links section — only if there are actual video links
+            if (videoLinks.length > 0) {
+                html += `<div class="links-box">
+                    <div class="links-label">${lesson.mediaLabel || 'The video links:'}</div>
+                    <div class="video-links-wrapper">
+                        <div class="youtube-logo-placeholder"></div>
+                        <div class="links-list">`;
+                videoLinks.forEach(link => {
+                    const printableUrl = link.url.replace('https://www.', '').replace('https://', '');
+                    html += `<p><span>${link.label}:</span> <a href="${link.url}" target="_blank">${printableUrl}</a></p>`;
+                });
+                html += `</div></div></div>`;
             }
 
+            mediaSection.innerHTML = html;
+
+            // Objectives
             const objectivesContainer = document.getElementById('dynamic-objectives-list');
-            objectivesContainer.innerHTML = ""; 
+            objectivesContainer.innerHTML = "";
             lesson.objectives.forEach(function(objectiveText) {
                 const li = document.createElement('li');
                 li.innerText = objectiveText;
                 objectivesContainer.appendChild(li);
-            });
-
-            const linksContainer = document.getElementById('dynamic-links-list');
-            linksContainer.innerHTML = "";
-            lesson.links.forEach(function(linkItem) {
-                const p = document.createElement('p');
-                const printableUrl = linkItem.url.replace('https://www.', '').replace('https://', '');
-                p.innerHTML = `<span>${linkItem.label}:</span> <a href="${linkItem.url}" target="_blank" title="${linkItem.url}">${printableUrl}</a>`;
-                linksContainer.appendChild(p);
             });
 
             hideAllViews();
@@ -1362,37 +1375,68 @@
             updateNavPin();
         }
 
+        let pinnedPage = 1;
+        const PINNED_PER_PAGE = 6;
+
         function renderPinnedPage() {
-            const body = document.getElementById('pinned-page-body');
+            const grid = document.getElementById('pinned-grid-root');
+            const paginationRoot = document.getElementById('pinned-pagination-root');
+
             if (pinnedIds.length === 0) {
-                body.innerHTML = '<p style="color:#888; font-size:16px; margin-top:20px;">No pinned lessons yet. Open a lesson and click 📌 Pin it! to save it here.</p>';
+                grid.innerHTML = '<p style="color:#888; font-size:16px; grid-column:1/-1;">No pinned lessons yet. Open a lesson and click 📌 Pin it! to save it here.</p>';
+                paginationRoot.innerHTML = '';
                 return;
             }
-            body.innerHTML = `<div class="catalog-grid" style="margin-top:20px;">` +
-                pinnedIds.map(idx => {
-                    const l = lessonsCatalog[idx];
-                    const visual = l.visualSource.includes('linear-gradient')
-                        ? `style="background:${l.visualSource}"`
-                        : `style="background-image:url('${l.visualSource}');background-size:cover;background-position:center;"`;
-                    return `<div class="lesson-card ${l.category}">
-                        <div class="card-image-box">
-                            <div class="mock-3d-illustration" ${visual}></div>
+
+            const totalPages = Math.ceil(pinnedIds.length / PINNED_PER_PAGE);
+            pinnedPage = Math.min(pinnedPage, totalPages);
+            const start = (pinnedPage - 1) * PINNED_PER_PAGE;
+            const pageSlice = pinnedIds.slice(start, start + PINNED_PER_PAGE);
+
+            grid.innerHTML = pageSlice.map(idx => {
+                const l = lessonsCatalog[idx];
+                const visual = l.visualSource.includes('linear-gradient')
+                    ? `style="background:${l.visualSource}"`
+                    : `style="background-image:url('${l.visualSource}');background-size:cover;background-position:center;"`;
+                return `<div class="lesson-card ${l.category}">
+                    <div class="card-image-box">
+                        <div class="mock-3d-illustration" ${visual}></div>
+                    </div>
+                    <div class="card-title-strip">${l.title}</div>
+                    <div class="card-details">
+                        <div class="tag-row">
+                            <div class="tag-item">${l.categoryIcon} ${l.categoryLabel}</div>
+                            <div class="tag-item">${l.mediaIcon} ${l.mediaType}</div>
                         </div>
-                        <div class="card-title-strip">${l.title}</div>
-                        <div class="card-details">
-                            <div class="tag-row">
-                                <div class="tag-item">${l.categoryIcon} ${l.categoryLabel}</div>
-                                <div class="tag-item">${l.mediaIcon} ${l.mediaType}</div>
-                            </div>
-                            <div class="tag-row">
-                                <div class="tag-item">🥇 ${l.levelLabel}</div>
-                                <div class="tag-item">🕒 ${l.duration}</div>
-                            </div>
+                        <div class="tag-row">
+                            <div class="tag-item">🥇 ${l.levelLabel}</div>
+                            <div class="tag-item">🕒 ${l.duration}</div>
                         </div>
-                        <div onclick="initiateDetailViewByIndex(${idx})" class="view-btn">View Lesson</div>
-                    </div>`;
-                }).join('') +
-            `</div>`;
+                    </div>
+                    <div onclick="initiateDetailViewByIndex(${idx})" class="view-btn">View Lesson</div>
+                </div>`;
+            }).join('');
+
+            // Pagination
+            if (totalPages <= 1) { paginationRoot.innerHTML = ''; return; }
+            paginationRoot.innerHTML = '';
+            const prev = document.createElement('span');
+            prev.className = 'pagination-item' + (pinnedPage === 1 ? ' disabled' : '');
+            prev.innerText = '‹';
+            if (pinnedPage > 1) prev.onclick = () => { pinnedPage--; renderPinnedPage(); window.scrollTo(0,0); };
+            paginationRoot.appendChild(prev);
+            for (let p = 1; p <= totalPages; p++) {
+                const item = document.createElement('span');
+                item.className = 'pagination-item' + (p === pinnedPage ? ' active' : '');
+                item.innerText = p;
+                item.onclick = ((pg) => () => { pinnedPage = pg; renderPinnedPage(); window.scrollTo(0,0); })(p);
+                paginationRoot.appendChild(item);
+            }
+            const next = document.createElement('span');
+            next.className = 'pagination-item' + (pinnedPage === totalPages ? ' disabled' : '');
+            next.innerText = '›';
+            if (pinnedPage < totalPages) next.onclick = () => { pinnedPage++; renderPinnedPage(); window.scrollTo(0,0); };
+            paginationRoot.appendChild(next);
         }
 
         function unpinLesson(idx) {
