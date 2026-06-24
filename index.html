@@ -899,7 +899,8 @@
                 const matchesCategory = (activeFilters.category === 'all' || lesson.category === activeFilters.category);
                 const matchesSearch   = (searchFilter === ''
                     || lesson.title.toLowerCase().includes(searchFilter)
-                    || (lesson.keywords || '').toLowerCase().includes(searchFilter));
+                    || (lesson.keywords || '').toLowerCase().includes(searchFilter)
+                    || (lesson.description || '').toLowerCase().includes(searchFilter));
 
                 if (matchesLevel && matchesCategory && matchesSearch) {
                     filteredLessons.push(index);
