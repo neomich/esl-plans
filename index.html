@@ -720,6 +720,7 @@
             <button class="filter-pill" onclick="applyPillFilter('level', 'a2', this)">A2 (Elementary)</button>
             <button class="filter-pill" onclick="applyPillFilter('level', 'b1', this)">B1 (Intermediate)</button>
             <button class="filter-pill" onclick="applyPillFilter('level', 'b2', this)">B2 (Upper-Intermediate)</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'c1', this)">C1 (Advanced)</button>
         </div>
     </div>
 
@@ -970,7 +971,7 @@
 
             filteredLessons = [];
             lessonsCatalog.forEach((lesson, index) => {
-                const matchesLevel    = (activeFilters.level === 'all'    || lesson.level    === activeFilters.level);
+                const matchesLevel    = (activeFilters.level === 'all' || lesson.level.toLowerCase().split(/[-\/]/).map(s => s.trim()).includes(activeFilters.level));
                 const matchesCategory = (activeFilters.category === 'all' || lesson.category === activeFilters.category);
                 const matchesSearch   = (searchFilter === ''
                     || lesson.title.toLowerCase().includes(searchFilter)
