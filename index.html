@@ -73,6 +73,59 @@
             color: white;
         }
 
+        /* ── HAMBURGER ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #333;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+                padding: 16px 0;
+                z-index: 1000;
+                gap: 0;
+            }
+            .nav-menu.open { display: flex; }
+            .nav-menu li { width: 100%; }
+            .nav-menu a {
+                display: block;
+                padding: 14px 28px;
+                border-radius: 0;
+                font-size: 17px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            .nav-menu a:hover {
+                background-color: #fff5f0;
+                color: #c95210;
+            }
+        }
+
         .hero-banner-container {
             background-color: #c95210;
             text-align: center;
@@ -866,7 +919,10 @@
             <a onclick="showDashboardView()" class="logo-link" style="cursor:pointer; text-decoration:none;">
                 <div class="logo"><strong>ESL</strong>plans</div>
             </a>
-            <ul class="nav-menu">
+            <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
                 <li><a onclick="toggleFilterTray('level')">Levels</a></li>
                 <li><a onclick="toggleFilterTray('category')">Categories</a></li>
                 <li><a onclick="showContactsView()">Contacts</a></li>
@@ -1303,7 +1359,7 @@
 
             pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
                 box.innerHTML = '';
-                const scale = 0.3;
+                const scale = 0.4;
                 const renderPage = function(pageNum) {
                     pdf.getPage(pageNum).then(function(page) {
                         const viewport = page.getViewport({ scale: scale });
@@ -1469,7 +1525,23 @@
 
         function togglePinnedPanel() { showPinnedView(); }
 
-        // ── BOOT: sort newest-first, then run initial filter+render ──
+        // ── HAMBURGER MENU ──
+        function toggleMobileMenu() {
+            const btn = document.getElementById('hamburger-btn');
+            const menu = document.getElementById('nav-menu');
+            btn.classList.toggle('open');
+            menu.classList.toggle('open');
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('hamburger-btn').classList.remove('open');
+            document.getElementById('nav-menu').classList.remove('open');
+        }
+
+        // Close menu when any nav link is clicked
+        document.getElementById('nav-menu').querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
         lessonsCatalog.sort((a, b) => {
             const da = new Date(a.dateAdded || "2000-01-01");
             const db = new Date(b.dateAdded || "2000-01-01");
