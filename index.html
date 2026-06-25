@@ -1312,15 +1312,13 @@
 
             // PDF — open directly, no download attr (GitHub Pages MIME fix)
             html += `<div class="download-box">
-                <div class="download-label">Download pdf</div>
+                <div class="download-label">ESLplan</div>
                 <a href="${lesson.pdfUrl}" id="dynamic-pdf-btn" class="pdf-icon-btn" target="_blank">PDF</a>
             </div>`;
 
             // One MP3 box per audio file — open directly, no download attr
             audioFiles.forEach((audio, i) => {
-                const label = audioFiles.length > 1
-                    ? `Download mp3 ${i + 1}`
-                    : 'Download mp3';
+                const label = audioFiles.length > 1 ? `Audio ${i + 1}` : 'Audio';
                 html += `<div class="download-box">
                     <div class="download-label audio-label">${label}</div>
                     <a href="${audio.url}" class="mp3-icon-btn" target="_blank">MP3</a>
@@ -1332,7 +1330,7 @@
             // Video links section — only if there are actual video links
             if (videoLinks.length > 0) {
                 html += `<div class="links-box">
-                    <div class="links-label">${lesson.mediaLabel || 'The video links:'}</div>
+                    <div class="links-label">Video</div>
                     <div class="video-links-wrapper">
                         <div class="youtube-logo-placeholder"></div>
                         <div class="links-list">`;
