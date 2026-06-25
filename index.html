@@ -387,9 +387,46 @@
         @media (max-width: 768px) {
             .workspace-view {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 20px;
+            }
+
+            .info-panel {
+                padding: 20px;
+                border-radius: 16px;
+            }
+
+            .info-panel h1 {
+                font-size: 22px;
+            }
+
+            .panel-header-row {
+                gap: 10px;
+            }
+
+            .description-frame {
+                font-size: 15px;
+                padding: 16px;
+            }
+
+            .links-list {
+                max-width: 100%;
+            }
+
+            .downloads-wrapper {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .video-links-wrapper {
+                flex-wrap: wrap;
+            }
+
+            .pdf-preview-scroll-box {
+                height: 280px;
             }
         }
+
+        body { overflow-x: hidden; }
 
         .info-panel {
             background: white;
