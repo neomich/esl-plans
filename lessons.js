@@ -27,6 +27,7 @@ const lessonsCatalog = [
         description: "In this lesson, students begin by answering a humorous yet thought-provoking quiz that challenges common assumptions about technology, ownership, and human identity (e.g., who really owns the Earth, what a smartphone actually is). They then read an excerpt from Nick Bostrom's Deep Utopia, which introduces four distinct societal models for a post-scarcity future: the Hedonic Island (pleasure), the Mastery Island (challenge), the Primitive Island (simplicity), and the Transhumanist Island (evolution). Students discuss which lifestyle they would choose and why, reflecting on personal values regarding work, comfort, and meaning.\n\nThe lesson continues with Max Tegmark's ten possible endings for humanity in Life 3.0, where learners match dystopian and utopian scenarios — such as \"Enslaved God,\" \"Zookeeper,\" and \"Egalitarian Utopia\" — to their definitions before verifying answers via podcast. Finally, students consolidate new vocabulary (e.g., surveillance, abundance, status quo) and engage in a forward-looking debate on whether current tech trends align with any of these predicted futures or if alternative paths remain possible.\n\nStudents can also do an extra creative task (e.g., designing their own fifth island for Deep Utopia based on a value not covered in the text).",
         pdfUrl: "materials/c1_life_3_point_0.pdf",
         audioUrl: "audio/c1_life_3_point_0_podcast.mp3",
+        rarUrl: "zips/c1_life_3_point_0.rar",
         mediaLabel: "The audio streams:",
         links: []
     },
@@ -53,6 +54,7 @@ const lessonsCatalog = [
         description: "In this lesson, students begin by examining statistics about pawn shop usage in the US, defining key financial terms (e.g., interest, resale value, withdrawal), and discussing their own experiences or perceptions of these establishments. They then listen to an interview with a pawn shop owner named Sal, identifying specific objects discussed (e.g., guitar, Chanel bag, Rolex) and matching them to emotional narratives involving hope, regret, or survival. Students expand their descriptive lexicon by associating adjectives like pristine, leathery, glossy, and clumpy with visual details before applying this vocabulary to describe a personally significant item and considering whether they would ever part with it.\n\nThe lesson transitions into behavioral psychology with Stephen King's quote \"We don't own things; things own us,\" introducing the Endowment Effect through video comprehension where learners match statements about loss aversion, identity attachment, and irrational pricing.\n\nFinally, students watch a second video on hoarding disorder, defining related concepts (goat paths, excessive acquisition, suffering in silence) and reflecting on why people struggle to discard items even when they lack utility or value.",
         pdfUrl: "materials/c1_pawn_shop.pdf",
         audioUrl: "audio/c1_pawn_shop_at_the_pawn_shop.mp3",
+        rarUrl: "zips/c1_pawn_shop.rar",
         mediaLabel: "The video links:",
         links: [
             { label: "Link 1", url: "https://www.youtube.com/watch?v=D9U5EdFP9EI" },
@@ -82,6 +84,7 @@ const lessonsCatalog = [
         description: "In this lesson, students begin by matching visual scenarios of an overwhelmed employee named John to key overwork concepts like meeting bloat and manufactured urgency. They then explore three additional corporate tactics — gamified productivity, lean teams, and the family narrative — and listen to speakers share their personal experiences with these pressures.\n\nThe grammar focus centers on adjective endings, where students practice using -ed forms for internal emotions (e.g., exhausted, frustrated) and -ing forms for external causes (e.g., annoying, humiliating). Students consolidate this vocabulary through gap-fill exercises before engaging in a discussion about whether high-pressure environments are inspiring or depressing.\n\nFinally, they watch a video on structural inequality in consulting firms, verify true/false statements about career derailment and client demands, and read real YouTube comments reflecting global perspectives on work-life balance.",
         pdfUrl: "materials/b2_overwork_culture.pdf",
         audioUrl: "audio/b2_overwork_culture_3_speakers.mp3",
+        rarUrl: "zips/b2_overwork_culture.rar",
         mediaLabel: "The video links:",
         links: [
             { label: "Link 1", url: "https://www.youtube.com/watch?v=jjRWaMCWs44" }
@@ -114,6 +117,7 @@ const lessonsCatalog = [
             { label: "Arjun", url: "audio/a2_confusing_english_language_arjun.mp3" },
             { label: "The Coffee Break Secret", url: "audio/a2_confusing_english_language_the_coffee_break_secret.mp3" }
         ],
+        rarUrl: "zips/a2_confusing_english_language.rar",
         mediaLabel: "The audio streams:",
         links: []
     },
@@ -140,6 +144,7 @@ const lessonsCatalog = [
         description: "In this lesson, students begin by examining data on high-budget blockbusters (e.g., Star Wars, Fast X) to debate whether massive spending guarantees quality or if critics and audiences often disagree.\n\nThey then explore the future of filmmaking through AI, watching a viral \"uncanny\" spaghetti video and an AI-generated short film (Zombie Scavenger) to sequence plot events and discuss whether artificial storytelling can truly evoke emotion.\n\nThe lesson transitions into linguistic precision with adjective order rules, where students practice arranging multiple descriptors (opinion, size, age, etc.) for famous films like The Matrix and Parasite. Finally, students read about the essential ingredients of great cinema — such as memorable characters and thought-provoking themes — and reflect on what makes a movie exceptional beyond its budget or technology.",
         pdfUrl: "materials/b1_the_movie_industry_of_the_future.pdf",
         audioUrl: null,
+        rarUrl: "zips/b1_the_movie_industry_of_the_future.rar",
         mediaLabel: "The video links:",
         links: [
             { label: "Link 1", url: "https://www.youtube.com/watch?v=_TRkSzRKtsk" },
@@ -169,6 +174,7 @@ const lessonsCatalog = [
         description: "In this lesson, students begin by watching a comedy clip featuring Larry David to introduce the concept of affectation, specifically focusing on vocal fry and the annoyance it can cause. They then watch an educational video to understand the scientific definition of vocal fry (creaky voice), its association with youth and gender, and how it is perceived in professional settings.\n\nStudents expand their vocabulary by matching specific types of affectation — such as name-dropping, intellectual posturing, and mirroring — to their definitions, before listening to four speakers describe their own experiences with these behaviors.\n\nThe lesson culminates in a discussion where students reflect on which affectations they find most irritating, whether they are guilty of any themselves, and what matters more in communication: the content of words or the manner of delivery.",
         pdfUrl: "materials/b1_affectation.pdf",
         audioUrl: "audio/b1_affectation_4_callers.mp3",
+        rarUrl: "zips/b1_affectation.rar",
         mediaLabel: "The video links:",
         links: [
             { label: "Link 1", url: "https://www.youtube.com/watch?v=WDfJn1kcQuU" },
@@ -198,6 +204,7 @@ const lessonsCatalog = [
         description: "In this lesson, students begin by clarifying the concept of an algorithm through a humorous cooking analogy, rewriting unclear instructions into precise steps. They then watch a video explaining computer basics before diving into the mechanics of modern algorithms, analyzing processes like data collection, profile matching, and dynamic triggers.\n\nStudents review arguments regarding algorithm use, distinguishing between benefits (e.g., streamlining tasks) and drawbacks (e.g., manipulation, loss of free will), and verify their opinions via a podcast.\n\nThe lesson culminates in a debate on ethical dilemmas, such as whether to trust AI with personal relationships or if predictive technology threatens human autonomy.\n\n(Watch the video: 00:25-05:06).",
         pdfUrl: "materials/b1_algorithms.pdf",
         audioUrl: "audio/b1_algorithms_podcast.mp3",
+        rarUrl: "zips/b1_algorithms.rar",
         mediaLabel: "The video links:",
         links: [
             { label: "Video", url: "https://www.youtube.com/watch?v=fkIvmfqX-t0" }
@@ -226,6 +233,7 @@ const lessonsCatalog = [
         description: "In this lesson, students explore various art forms by defining categories such as applied, conceptual, and digital arts. They engage with modern reinterpretations of famous masterpieces (e.g., Son of Man, American Gothic, The Persistence of Memory) by completing gap-fill exercises with prepositions of place to accurately describe the composition of both original and remade works.\n\nStudents listen to speakers describing specific artistic adaptations, match descriptions to images, and critically evaluate whether these modern versions respect or mock the originals. The lesson encourages debate on how shifting historical contexts alter a painting's mood and story, while reinforcing spatial vocabulary through authentic visual analysis.\n\nStudents can also do an extra creative task (e.g., generating their own prompt for a modern remake using contemporary cultural references).",
         pdfUrl: "materials/b1_modern_remakes_of_famous_paintings.pdf",
         audioUrl: "audio/b1_modern_remakes_of_famous_paintings_4_speakers.mp3",
+        rarUrl: "zips/b1_modern_remakes_of_famous_paintings.rar",
         mediaLabel: "The audio streams:",
         links: []
     },
@@ -252,6 +260,7 @@ const lessonsCatalog = [
         description: "In this lesson, students explore common stereotypes about older and younger generations, match critical comments to everyday situations, and discuss whether age-based assumptions are fair. They debate social expectations, changing values, and generational differences, then watch a video examining people's attitudes toward ageing and life satisfaction.\n\nStudents analyze survey results about perceptions of older adults, reflect on their own age and responsibilities, and share their opinions on what makes a particular period of life enjoyable. They can also do an extra vocabulary task (e.g. bristle at, wound up, assumptions, obligations, depend on).",
         pdfUrl: "materials/b1_what_is_the_best_age_to_be_in_life.pdf",
         audioUrl: null,
+        rarUrl: "zips/b1_what_is_the_best_age_to_be_in_life.rar",
         mediaLabel: "The video links:",
         links: [
             { label: "Link 1", url: "https://www.youtube.com/watch?v=jQYlCKUkWcc" },
