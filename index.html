@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>ESLplans - Conversation-Driven Lesson Plans</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <style>
@@ -13,15 +13,22 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
         body {
-            background-color: #fff5ee; 
+            background-color: #fff5ee;
             color: #333;
         }
 
         header {
-            background-color: #c95210; 
+            background-color: #c95210;
             padding: 20px 10px;
             text-align: center;
+            position: relative;
         }
 
         .nav-container {
@@ -36,19 +43,9 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .logo-link {
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .logo {
-            font-size: 32px; 
-            font-weight: 400;
-            color: #000;
-            letter-spacing: -0.5px;
-        }
-        .logo strong {
-            font-weight: 800;
-        }
+        .logo-link { text-decoration: none; cursor: pointer; }
+        .logo { font-size: 32px; font-weight: 400; color: #000; letter-spacing: -0.5px; }
+        .logo strong { font-weight: 800; }
 
         .nav-menu {
             display: flex;
@@ -68,10 +65,7 @@
             cursor: pointer;
         }
 
-        .nav-menu a:hover {
-            background-color: #c95210;
-            color: white;
-        }
+        .nav-menu a:hover { background-color: #c95210; color: white; }
 
         /* ── HAMBURGER ── */
         .hamburger {
@@ -97,7 +91,6 @@
 
         @media (max-width: 768px) {
             .hamburger { display: flex; }
-
             .nav-menu {
                 display: none;
                 flex-direction: column;
@@ -120,10 +113,7 @@
                 font-size: 17px;
                 border-bottom: 1px solid #f0f0f0;
             }
-            .nav-menu a:hover {
-                background-color: #fff5f0;
-                color: #c95210;
-            }
+            .nav-menu a:hover { background-color: #fff5f0; color: #c95210; }
         }
 
         .hero-banner-container {
@@ -131,7 +121,6 @@
             text-align: center;
             padding: 20px 20px 40px 20px;
         }
-
         .hero-banner-container h2 {
             font-size: 24px;
             font-weight: 400;
@@ -148,7 +137,6 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-
         .search-box input {
             flex: 1;
             padding: 18px 25px;
@@ -156,8 +144,8 @@
             font-size: 16px;
             outline: none;
             color: #555;
+            min-width: 0;
         }
-
         .search-box button {
             background-color: #ff7a00;
             color: white;
@@ -167,11 +155,9 @@
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
+            white-space: nowrap;
         }
-
-        .search-box button:hover {
-            background-color: #e66e00;
-        }
+        .search-box button:hover { background-color: #e66e00; }
 
         .filter-panel-tray {
             background-color: #fcece1;
@@ -180,7 +166,6 @@
             text-align: center;
             display: none;
         }
-
         .filter-panel-container {
             max-width: 1100px;
             margin: 0 auto;
@@ -190,7 +175,6 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-
         .filter-label {
             font-size: 14px;
             font-weight: 700;
@@ -199,7 +183,6 @@
             letter-spacing: 0.5px;
             margin-right: 8px;
         }
-
         .filter-pill {
             background-color: white;
             border: 1px solid #ebd0be;
@@ -211,12 +194,11 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-
         .filter-pill:hover, .filter-pill.active {
             background-color: #ff7a00;
             border-color: #ff7a00;
             color: white;
-            box-shadow: 0 2px 8px rgba(255, 122, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(255,122,0,0.2);
         }
 
         .content-container {
@@ -234,7 +216,7 @@
 
         .catalog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
 
@@ -253,19 +235,12 @@
         .card-image-box {
             height: 180px;
             width: 100%;
-            display: flex;
-            align-items: stretch;
-            justify-content: stretch;
-            padding: 0; 
             overflow: hidden;
         }
-
         .mock-3d-illustration {
-            width: 100%; 
+            width: 100%;
             height: 100%;
-            border-radius: 22px 22px 0 0; 
-            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.05);
-            background-color: #d1f2e5; 
+            border-radius: 22px 22px 0 0;
         }
 
         .card-title-strip {
@@ -287,7 +262,6 @@
             flex-direction: column;
             gap: 12px;
         }
-
         .tag-row {
             display: flex;
             justify-content: space-between;
@@ -295,12 +269,7 @@
             color: #555;
             font-weight: 500;
         }
-
-        .tag-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .tag-item { display: flex; align-items: center; gap: 6px; }
 
         .view-btn {
             background-color: white;
@@ -315,16 +284,10 @@
             transition: all 0.2s ease;
             text-align: center;
         }
-        .business .view-btn {
-            border-color: #bfa3ff;
-            color: #2a1160;
-        }
-        .view-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
+        .business .view-btn { border-color: #bfa3ff; color: #2a1160; }
+        .view-btn:hover { transform: scale(1.02); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
-        /* Pagination Component Styles */
+        /* Pagination */
         .pagination-container {
             display: flex;
             justify-content: center;
@@ -332,13 +295,11 @@
             gap: 15px;
             margin-top: 50px;
         }
-
         .pagination-item {
             font-size: 18px;
             font-weight: 600;
             color: #ff7a00;
             cursor: pointer;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -348,28 +309,12 @@
             transition: all 0.2s ease;
             user-select: none;
         }
+        .pagination-item.active { background-color: #ff7a00; color: white; font-weight: 700; }
+        .pagination-item:hover:not(.active):not(.ellipsis) { background-color: #fcece1; }
+        .pagination-item.ellipsis { cursor: default; color: #ff7a00; }
+        .pagination-item.disabled { opacity: 0.3; cursor: default; pointer-events: none; }
 
-        .pagination-item.active {
-            background-color: #ff7a00;
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        .pagination-item:hover:not(.active):not(.ellipsis) {
-            background-color: #fcece1;
-        }
-
-        .pagination-item.ellipsis {
-            cursor: default;
-            color: #ff7a00;
-        }
-
-        .pagination-item.disabled {
-            opacity: 0.3;
-            cursor: default;
-            pointer-events: none;
-        }
-
+        /* ── WORKSPACE (lesson detail) ── */
         .workspace-view {
             display: grid;
             grid-template-columns: 320px 1fr;
@@ -377,11 +322,11 @@
             align-items: start;
             margin-top: 40px;
         }
-
         .left-column {
             display: flex;
             flex-direction: column;
             gap: 0;
+            min-width: 0;
         }
 
         @media (max-width: 768px) {
@@ -389,59 +334,31 @@
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-
-            .info-panel {
-                padding: 20px;
-                border-radius: 16px;
-            }
-
-            .info-panel h1 {
-                font-size: 22px;
-            }
-
-            .panel-header-row {
-                gap: 10px;
-            }
-
-            .description-frame {
-                font-size: 15px;
-                padding: 16px;
-            }
-
-            .links-list {
-                max-width: 100%;
-            }
-
-            .downloads-wrapper {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .video-links-wrapper {
-                flex-wrap: wrap;
-            }
-
-            .pdf-preview-scroll-box {
-                height: 280px;
-            }
+            .left-column { width: 100%; }
+            .info-panel { padding: 20px; border-radius: 16px; }
+            .info-panel h1 { font-size: 22px; }
+            .panel-header-row { gap: 10px; }
+            .description-frame { font-size: 15px; padding: 16px; }
+            .links-list { max-width: 100%; }
+            .downloads-wrapper { flex-wrap: wrap; gap: 12px; }
+            .video-links-wrapper { flex-wrap: wrap; }
+            .pdf-preview-scroll-box { height: 280px; }
+            .media-section > div { flex-wrap: wrap; }
         }
-
-        body { overflow-x: hidden; }
 
         .info-panel {
             background: white;
             padding: 40px;
             border-radius: 24px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            min-width: 0;
         }
-
         .panel-header-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 20px;
         }
-
         .info-panel h1 {
             font-size: 32px;
             font-weight: 700;
@@ -455,9 +372,7 @@
             60%  { transform: scale(0.9) rotate(5deg); }
             100% { transform: scale(1) rotate(0deg); }
         }
-        .pin-animate {
-            animation: pinBounce 0.4s ease;
-        }
+        .pin-animate { animation: pinBounce 0.4s ease; }
 
         .favorite-badge {
             display: flex;
@@ -468,9 +383,7 @@
             transition: transform 0.2s;
             flex-shrink: 0;
         }
-        .favorite-badge:hover {
-            transform: scale(1.1);
-        }
+        .favorite-badge:hover { transform: scale(1.1); }
         .favorite-badge .pin-label {
             font-size: 12px;
             font-weight: 700;
@@ -478,32 +391,13 @@
             letter-spacing: 0.5px;
             transition: color 0.3s;
         }
-        .favorite-badge .pin-label.pinned {
-            color: #2e7d32;
-        }
-        .favorite-badge .pin-icon {
-            font-size: 32px;
-            line-height: 1;
-            transition: filter 0.3s;
-        }
-        .favorite-badge .pin-icon.pinned {
-            filter: hue-rotate(90deg) saturate(3) brightness(0.8);
-        }
+        .favorite-badge .pin-label.pinned { color: #2e7d32; }
+        .favorite-badge .pin-icon { font-size: 32px; line-height: 1; transition: filter 0.3s; }
+        .favorite-badge .pin-icon.pinned { filter: hue-rotate(90deg) saturate(3) brightness(0.8); }
 
-        .objectives-label {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #444;
-        }
-        .objectives-label strong {
-            color: #000;
-        }
-
-        .objectives-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
+        .objectives-label { font-size: 18px; margin-bottom: 15px; color: #444; }
+        .objectives-label strong { color: #000; }
+        .objectives-list { list-style: none; margin-bottom: 30px; }
         .objectives-list li {
             font-size: 16px;
             margin-bottom: 10px;
@@ -533,25 +427,16 @@
         }
 
         .media-section {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
             border-top: 1px dashed #ddd;
             padding-top: 30px;
             margin-bottom: 35px;
-        }
-
-        @media (max-width: 550px) {
-            .media-section {
-                flex-direction: column;
-                gap: 30px;
-            }
         }
 
         .downloads-wrapper {
             display: flex;
             gap: 20px;
             flex-shrink: 0;
+            flex-wrap: wrap;
         }
 
         .download-box {
@@ -563,118 +448,93 @@
             flex-shrink: 0;
         }
 
-        .download-label {
-            font-weight: 600;
-            font-size: 14px;
-            color: #e03131;
-        }
-        
-        .download-label.audio-label {
-            color: #ff7a00;
-        }
+        .download-label { font-weight: 600; font-size: 14px; color: #e03131; }
+        .download-label.audio-label { color: #ff7a00; }
+        .download-label.rar-label { color: #6a0dad; }
 
         .pdf-icon-btn {
-            width: 55px;
-            height: 52px; 
+            width: 55px; height: 52px;
             background-color: #e03131;
             border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 800;
-            font-size: 11px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: white; font-weight: 800; font-size: 11px;
             text-decoration: none;
-            box-shadow: 0 4px 10px rgba(224, 49, 49, 0.3);
+            box-shadow: 0 4px 10px rgba(224,49,49,0.3);
             transition: transform 0.2s;
         }
-        .pdf-icon-btn:hover {
-            transform: scale(1.05);
-        }
-        .pdf-icon-btn::before {
-            content: "📄";
-            font-size: 16px;
-            margin-bottom: -3px;
-        }
+        .pdf-icon-btn:hover { transform: scale(1.05); }
+        .pdf-icon-btn::before { content: "📄"; font-size: 16px; margin-bottom: -3px; }
 
         .mp3-icon-btn {
-            width: 55px;
-            height: 52px; 
+            width: 55px; height: 52px;
             background-color: #ff7a00;
             border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 800;
-            font-size: 11px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: white; font-weight: 800; font-size: 11px;
             text-decoration: none;
-            box-shadow: 0 4px 10px rgba(255, 122, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(255,122,0,0.3);
             transition: transform 0.2s;
         }
-        .mp3-icon-btn:hover {
-            transform: scale(1.05);
+        .mp3-icon-btn:hover { transform: scale(1.05); }
+        .mp3-icon-btn::before { content: "🎵"; font-size: 16px; margin-bottom: -3px; }
+
+        /* ── RAR ICON ── */
+        .rar-icon-btn {
+            width: 55px; height: 52px;
+            background-color: #6a0dad;
+            border-radius: 12px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: white; font-weight: 800; font-size: 11px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(106,13,173,0.3);
+            transition: transform 0.2s;
         }
-        .mp3-icon-btn::before {
-            content: "🎵";
-            font-size: 16px;
-            margin-bottom: -3px;
-        }
+        .rar-icon-btn:hover { transform: scale(1.05); }
+        .rar-icon-btn::before { content: "🗜️"; font-size: 16px; margin-bottom: -3px; }
 
         .links-box {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            overflow: hidden; 
+            overflow: hidden;
             flex: 1;
         }
-
-        .links-label {
-            font-weight: 600;
-            font-size: 14px;
-            color: #e03131;
-        }
+        .links-label { font-weight: 600; font-size: 14px; color: #e03131; }
 
         .video-links-wrapper {
             display: flex;
-            align-items: center; 
+            align-items: center;
             gap: 15px;
             overflow: hidden;
             width: 100%;
         }
-
         .youtube-logo-placeholder {
-            width: 75px;
-            height: 52px; 
+            width: 75px; height: 52px;
             background-color: #ff0000;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(255,0,0,0.2);
             flex-shrink: 0;
         }
         .youtube-logo-placeholder::after {
             content: "";
-            width: 0;
-            height: 0;
+            width: 0; height: 0;
             border-top: 8px solid transparent;
             border-bottom: 8px solid transparent;
             border-left: 14px solid white;
             margin-left: 4px;
         }
-
         .links-list {
             display: flex;
             flex-direction: column;
             gap: 6px;
             overflow: hidden;
             flex: 1;
-            max-width: 380px; 
+            max-width: 380px;
         }
-
         .links-list p {
             display: flex;
             white-space: nowrap;
@@ -683,73 +543,40 @@
             width: 100%;
             font-size: 15px;
         }
-
-        .links-list span {
-            color: #555;
-            font-weight: 600;
-            margin-right: 5px;
-            flex-shrink: 0;
-        }
-
+        .links-list span { color: #555; font-weight: 600; margin-right: 5px; flex-shrink: 0; }
         .links-list a {
             color: #1a73e8;
             text-decoration: none;
             font-weight: 500;
             overflow: hidden;
-            text-overflow: ellipsis; 
+            text-overflow: ellipsis;
             white-space: nowrap;
             flex: 1;
         }
-        .links-list a:hover {
-            text-decoration: underline;
-        }
+        .links-list a:hover { text-decoration: underline; }
 
-        .back-btn-container {
-            margin-top: 25px;
-        }
-
+        .back-btn-container { margin-top: 25px; }
         .back-btn-oblong {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background-color: #c95210; 
-            color: #ffffff !important; 
+            background-color: #c95210;
+            color: #ffffff !important;
             padding: 12px 28px;
-            border-radius: 25px; 
+            border-radius: 25px;
             font-size: 15px;
             font-weight: 700;
-            text-decoration: none;
             cursor: pointer;
             transition: background-color 0.2s, transform 0.1s;
-            box-shadow: 0 4px 10px rgba(201, 82, 16, 0.25);
+            box-shadow: 0 4px 10px rgba(201,82,16,0.25);
             border: none;
         }
+        .back-btn-oblong:hover { background-color: #b0460b; transform: translateY(-1px); }
+        .back-arrow-icon { font-size: 16px; color: #ffffff; }
 
-        .back-btn-oblong:hover {
-            background-color: #b0460b;
-            transform: translateY(-1px);
-        }
-
-        .back-btn-oblong:active {
-            transform: translateY(0);
-        }
-
-        .back-arrow-icon {
-            font-size: 16px;
-            color: #ffffff; 
-        }
-        .pdf-preview-section {
-            margin-bottom: 0;
-            margin-top: 8px;
-        }
-
-        .pdf-preview-label {
-            font-weight: 600;
-            font-size: 14px;
-            color: #e03131;
-            margin-bottom: 10px;
-        }
-
+        /* PDF preview */
+        .pdf-preview-section { margin-bottom: 0; margin-top: 8px; }
+        .pdf-preview-label { font-weight: 600; font-size: 14px; color: #e03131; margin-bottom: 10px; }
         .pdf-preview-scroll-box {
             height: 380px;
             overflow-y: scroll;
@@ -764,189 +591,47 @@
             scrollbar-width: thin;
             scrollbar-color: #c95210 #f5f5f5;
         }
-
-        .pdf-preview-scroll-box::-webkit-scrollbar {
-            width: 6px;
-        }
-        .pdf-preview-scroll-box::-webkit-scrollbar-track {
-            background: #f5f5f5;
-            border-radius: 10px;
-        }
-        .pdf-preview-scroll-box::-webkit-scrollbar-thumb {
-            background-color: #c95210;
-            border-radius: 10px;
-        }
-
+        .pdf-preview-scroll-box::-webkit-scrollbar { width: 6px; }
+        .pdf-preview-scroll-box::-webkit-scrollbar-track { background: #f5f5f5; border-radius: 10px; }
+        .pdf-preview-scroll-box::-webkit-scrollbar-thumb { background-color: #c95210; border-radius: 10px; }
         .pdf-preview-scroll-box canvas {
-            width: 100% !important;
-            height: auto !important;
+            width: 100% !important; height: auto !important;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             display: block;
         }
+        .pdf-preview-loading { text-align: center; color: #888; font-size: 14px; padding: 40px 0; }
 
-        .pdf-preview-loading {
-            text-align: center;
-            color: #888;
-            font-size: 14px;
-            padding: 40px 0;
-        }
-
-        /* Sidebar card: no view-btn */
         #dynamic-sidebar-card .view-btn { display: none; }
-        /* ── CONTACTS PAGE ── */
-        .contacts-view {
-            max-width: 600px;
-            margin: 80px auto;
-            text-align: center;
-            padding: 0 20px;
-        }
 
-        /* ── PINNED PAGE ── */
-        .pinned-view {
-            max-width: 1100px;
-            margin: 40px auto 60px auto;
-            padding: 0 20px;
-            text-align: left;
-        }
-        .pinned-view h2 {
-            font-size: 28px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        .contacts-view h2 {
-            font-size: 36px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 16px;
-        }
-        .contacts-view p {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
+        /* Contacts page */
+        .contacts-view { max-width: 600px; margin: 80px auto; text-align: center; padding: 0 20px; }
+        .contacts-view h2 { font-size: 36px; font-weight: 700; color: #333; margin-bottom: 16px; }
+        .contacts-view p { font-size: 18px; color: #555; margin-bottom: 30px; line-height: 1.6; }
         .tg-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #229ED9;
-            color: white;
-            text-decoration: none;
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 600;
+            display: inline-flex; align-items: center; gap: 10px;
+            background: #229ED9; color: white; text-decoration: none;
+            padding: 14px 28px; border-radius: 50px;
+            font-size: 18px; font-weight: 600;
             transition: background 0.2s, transform 0.2s;
         }
-        .tg-link:hover {
-            background: #1a86b8;
-            transform: scale(1.04);
-        }
-        .tg-icon { font-size: 22px; }
+        .tg-link:hover { background: #1a86b8; transform: scale(1.04); }
 
-        /* ── PIN NAV BUTTON ── */
-        .pin-nav-btn {
-            position: relative;
-            font-size: 20px !important;
-            cursor: pointer;
-        }
+        /* Pinned page */
+        .pinned-view { max-width: 1100px; margin: 40px auto 60px auto; padding: 0 20px; text-align: left; }
+        .pinned-view h2 { font-size: 28px; font-weight: 700; color: #333; margin-bottom: 8px; }
+
+        /* Pin nav button */
+        .pin-nav-btn { position: relative; font-size: 20px !important; cursor: pointer; }
         .pin-nav-btn.has-pins { color: #2e7d32 !important; }
         .pin-nav-btn.no-pins  { color: #e03131 !important; }
         #pin-count-badge {
-            position: absolute;
-            top: -6px;
-            right: -8px;
-            background: #e03131;
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: absolute; top: -6px; right: -8px;
+            background: #e03131; color: white;
+            font-size: 10px; font-weight: 700;
+            border-radius: 50%; width: 16px; height: 16px;
+            display: flex; align-items: center; justify-content: center;
         }
-
-        /* ── PINNED PANEL ── */
-        .pinned-panel {
-            position: fixed;
-            top: 90px;
-            right: 20px;
-            width: 300px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-            z-index: 1000;
-            overflow: hidden;
-        }
-        .pinned-panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 16px;
-            background: #f8f8f8;
-            border-bottom: 1px solid #eee;
-            font-weight: 700;
-            font-size: 15px;
-        }
-        .pinned-close-btn {
-            background: none;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            color: #888;
-        }
-        .pinned-close-btn:hover { color: #333; }
-        .pinned-panel-body {
-            padding: 12px;
-            max-height: 400px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .pinned-empty {
-            text-align: center;
-            color: #aaa;
-            font-size: 14px;
-            padding: 20px 0;
-        }
-        .pinned-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 12px;
-            border-radius: 10px;
-            background: #fafafa;
-            border: 1px solid #eee;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-        .pinned-item:hover { background: #f0f0f0; }
-        .pinned-item-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #333;
-            flex: 1;
-            margin-right: 8px;
-        }
-        .pinned-item-level {
-            font-size: 11px;
-            color: #888;
-        }
-        .unpin-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            color: #ccc;
-            padding: 0 4px;
-            transition: color 0.15s;
-        }
-        .unpin-btn:hover { color: #e03131; }
     </style>
 </head>
 <body>
@@ -970,7 +655,7 @@
         </div>
     </header>
 
-    <!-- ── CONTACTS PAGE ── -->
+    <!-- CONTACTS PAGE -->
     <div id="contacts-view" style="display:none;" class="contacts-view">
         <h2>Contacts</h2>
         <p>Join the Telegram group so you won't miss any new ESLplans!</p>
@@ -982,7 +667,7 @@
         </a>
     </div>
 
-    <!-- ── PINNED LESSONS PAGE ── -->
+    <!-- PINNED PAGE -->
     <div id="pinned-view" style="display:none;" class="pinned-view">
         <h2>📌 Pinned Lessons</h2>
         <div id="pinned-grid-root" class="catalog-grid" style="margin-top:20px;"></div>
@@ -1022,11 +707,10 @@
         <div id="dashboard-catalog-view">
             <h3 class="section-title" id="catalog-section-title">Latest Lessons</h3>
             <div class="catalog-grid" id="catalog-grid-root"></div>
-            
             <div class="pagination-container" id="catalog-pagination-root"></div>
         </div>
 
-        <div id="lesson-detail-view" style="display: none;" class="workspace-view">
+        <div id="lesson-detail-view" style="display:none;" class="workspace-view">
 
             <div class="left-column">
                 <div id="dynamic-sidebar-card" class="lesson-card">
@@ -1085,38 +769,24 @@
 
     <script src="lessons.js"></script>
     <script>
-        let activeFilters = {
-            level: 'all',
-            category: 'all'
-        };
-
+        let activeFilters = { level: 'all', category: 'all' };
         const LESSONS_PER_PAGE = 6;
         let currentPage = 1;
-        let filteredLessons = []; // holds indexes into lessonsCatalog after filtering
+        let filteredLessons = [];
 
-        // lessons live in lessons.js
-
-        // ── RENDER: build the grid for the current page of filteredLessons ──
         function renderCatalogGrid() {
             const container = document.getElementById('catalog-grid-root');
             container.innerHTML = "";
-
             const start = (currentPage - 1) * LESSONS_PER_PAGE;
-            const end   = start + LESSONS_PER_PAGE;
-            const pageSlice = filteredLessons.slice(start, end);
+            const pageSlice = filteredLessons.slice(start, start + LESSONS_PER_PAGE);
 
             pageSlice.forEach((catalogIndex) => {
                 const lesson = lessonsCatalog[catalogIndex];
                 const card = document.createElement('div');
                 card.className = `lesson-card ${lesson.category}`;
-
-                let artworkStyle = "";
-                if (lesson.visualSource.includes('linear-gradient')) {
-                    artworkStyle = `background: ${lesson.visualSource};`;
-                } else {
-                    artworkStyle = `background-image: url('${lesson.visualSource}'); background-size: cover; background-position: center; background-repeat: no-repeat;`;
-                }
-
+                let artworkStyle = lesson.visualSource.includes('linear-gradient')
+                    ? `background: ${lesson.visualSource};`
+                    : `background-image: url('${lesson.visualSource}'); background-size: cover; background-position: center; background-repeat: no-repeat;`;
                 card.innerHTML = `
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" style="${artworkStyle}"></div>
@@ -1132,50 +802,29 @@
                             <div class="tag-item">🕒 ${lesson.duration}</div>
                         </div>
                         <div onclick="initiateDetailViewByIndex(${catalogIndex})" class="view-btn">View Lesson</div>
-                    </div>
-                `;
+                    </div>`;
                 container.appendChild(card);
             });
-
             renderPaginationUI();
         }
 
-        // ── PAGINATION: real working page numbers ──
         function renderPaginationUI() {
             const root = document.getElementById('catalog-pagination-root');
             root.innerHTML = "";
-
             const totalPages = Math.ceil(filteredLessons.length / LESSONS_PER_PAGE);
-
-            if (totalPages <= 1) {
-                root.style.display = "none";
-                return;
-            }
+            if (totalPages <= 1) { root.style.display = "none"; return; }
             root.style.display = "flex";
-
-            // Prev arrow
             const prev = document.createElement('span');
             prev.className = "pagination-item" + (currentPage === 1 ? " disabled" : "");
             prev.innerText = "‹";
             if (currentPage > 1) prev.onclick = () => goToPage(currentPage - 1);
             root.appendChild(prev);
-
-            // Page number buttons with ellipsis for large catalogs
-            const pagesToShow = buildPageRange(currentPage, totalPages);
-            pagesToShow.forEach(p => {
+            buildPageRange(currentPage, totalPages).forEach(p => {
                 const item = document.createElement('span');
-                if (p === '...') {
-                    item.className = "pagination-item ellipsis";
-                    item.innerText = "...";
-                } else {
-                    item.className = "pagination-item" + (p === currentPage ? " active" : "");
-                    item.innerText = p;
-                    item.onclick = () => goToPage(p);
-                }
+                if (p === '...') { item.className = "pagination-item ellipsis"; item.innerText = "..."; }
+                else { item.className = "pagination-item" + (p === currentPage ? " active" : ""); item.innerText = p; item.onclick = () => goToPage(p); }
                 root.appendChild(item);
             });
-
-            // Next arrow
             const next = document.createElement('span');
             next.className = "pagination-item" + (currentPage === totalPages ? " disabled" : "");
             next.innerText = "›";
@@ -1183,84 +832,51 @@
             root.appendChild(next);
         }
 
-        // Returns array like [1, 2, 3, '...', 13] depending on current page & total
         function buildPageRange(current, total) {
-            if (total <= 7) {
-                return Array.from({ length: total }, (_, i) => i + 1);
-            }
-            const pages = [];
-            pages.push(1);
+            if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+            const pages = [1];
             if (current > 3) pages.push('...');
-            for (let p = Math.max(2, current - 1); p <= Math.min(total - 1, current + 1); p++) {
-                pages.push(p);
-            }
+            for (let p = Math.max(2, current - 1); p <= Math.min(total - 1, current + 1); p++) pages.push(p);
             if (current < total - 2) pages.push('...');
             pages.push(total);
             return pages;
         }
 
-        function goToPage(page) {
-            currentPage = page;
-            renderCatalogGrid();
-            window.scrollTo(0, 0);
-        }
+        function goToPage(page) { currentPage = page; renderCatalogGrid(); window.scrollTo(0, 0); }
 
         function toggleFilterTray(trayType) {
-            // Always make sure catalog is visible when using filters
             hideAllViews();
             document.getElementById('dashboard-catalog-view').style.display = 'block';
             document.getElementById('hero-banner-view').style.display = 'block';
-
             const levelTray = document.getElementById('level-filter-tray');
             const categoryTray = document.getElementById('category-filter-tray');
-
-            if (trayType === 'level') {
-                categoryTray.style.display = 'none';
-                levelTray.style.display = 'block';
-            } else if (trayType === 'category') {
-                levelTray.style.display = 'none';
-                categoryTray.style.display = 'block';
-            }
+            if (trayType === 'level') { categoryTray.style.display = 'none'; levelTray.style.display = 'block'; }
+            else { levelTray.style.display = 'none'; categoryTray.style.display = 'block'; }
         }
 
         function applyPillFilter(filterType, selectionValue, pillElement) {
-            const siblings = pillElement.parentNode.getElementsByClassName('filter-pill');
-            for (let i = 0; i < siblings.length; i++) {
-                siblings[i].classList.remove('active');
-            }
+            Array.from(pillElement.parentNode.getElementsByClassName('filter-pill')).forEach(p => p.classList.remove('active'));
             pillElement.classList.add('active');
-
             activeFilters[filterType] = selectionValue;
             applyFiltersAndRender();
         }
 
-        function executeCatalogSearch() {
-            applyFiltersAndRender();
-        }
+        function executeCatalogSearch() { applyFiltersAndRender(); }
 
-        // ── FILTER: rebuilds filteredLessons[], resets to page 1, re-renders ──
         function applyFiltersAndRender() {
             const searchFilter = document.getElementById('catalog-search-input').value.toLowerCase().trim();
-
             filteredLessons = [];
             lessonsCatalog.forEach((lesson, index) => {
-                const matchesLevel    = (activeFilters.level === 'all' || lesson.level.toLowerCase().split(/[-\/]/).map(s => s.trim()).includes(activeFilters.level));
-                const matchesCategory = (activeFilters.category === 'all' || lesson.category === activeFilters.category);
-                const matchesSearch   = (searchFilter === ''
+                const matchesLevel = activeFilters.level === 'all' || lesson.level.toLowerCase().split(/[-\/]/).map(s => s.trim()).includes(activeFilters.level);
+                const matchesCategory = activeFilters.category === 'all' || lesson.category === activeFilters.category;
+                const matchesSearch = searchFilter === ''
                     || lesson.title.toLowerCase().includes(searchFilter)
                     || (lesson.keywords || '').toLowerCase().includes(searchFilter)
-                    || (lesson.description || '').toLowerCase().includes(searchFilter));
-
-                if (matchesLevel && matchesCategory && matchesSearch) {
-                    filteredLessons.push(index);
-                }
+                    || (lesson.description || '').toLowerCase().includes(searchFilter);
+                if (matchesLevel && matchesCategory && matchesSearch) filteredLessons.push(index);
             });
-
             currentPage = 1;
-
-            const sectionTitle = document.getElementById('catalog-section-title');
-            sectionTitle.innerText = filteredLessons.length === 0 ? "No matching lessons found" : "Latest Lessons";
-
+            document.getElementById('catalog-section-title').innerText = filteredLessons.length === 0 ? "No matching lessons found" : "Latest Lessons";
             renderCatalogGrid();
         }
 
@@ -1270,53 +886,50 @@
             if (!lesson) return;
 
             document.getElementById('dynamic-card-title').innerText = lesson.title;
-            document.getElementById('dynamic-card-title').className = "card-title-strip"; 
             document.getElementById('dynamic-sidebar-card').className = "lesson-card " + lesson.category;
-            
-            const artworkElement = document.getElementById('dynamic-card-artwork');
+            const artworkEl = document.getElementById('dynamic-card-artwork');
             if (lesson.visualSource.includes('linear-gradient')) {
-                artworkElement.style.background = lesson.visualSource;
+                artworkEl.style.background = lesson.visualSource;
             } else {
-                artworkElement.style.backgroundImage = "url('" + lesson.visualSource + "')";
-                artworkElement.style.backgroundSize = "cover";
-                artworkElement.style.backgroundPosition = "center";
-                artworkElement.style.backgroundRepeat = "no-repeat";
+                artworkEl.style.backgroundImage = `url('${lesson.visualSource}')`;
+                artworkEl.style.backgroundSize = "cover";
+                artworkEl.style.backgroundPosition = "center";
+                artworkEl.style.backgroundRepeat = "no-repeat";
             }
-
             document.getElementById('dynamic-card-type').innerText = `${lesson.categoryIcon} ${lesson.categoryLabel}`;
             document.getElementById('dynamic-card-media').innerText = `${lesson.mediaIcon} ${lesson.mediaType}`;
             document.getElementById('dynamic-card-level').innerText = '🥇 ' + lesson.levelLabel;
             document.getElementById('dynamic-card-duration').innerText = '🕒 ' + lesson.duration;
-
             document.getElementById('dynamic-description-frame').innerText = lesson.description;
-            document.getElementById('dynamic-pdf-btn') && document.getElementById('dynamic-pdf-btn').setAttribute('href', lesson.pdfUrl);
 
             renderPdfPreview(lesson.pdfUrl);
 
             // ── SMART MEDIA SECTION ──
-            const mediaSection = document.getElementById('dynamic-media-section');
-
-            // Build audio files list: prefer audioUrls array, fall back to single audioUrl
             const audioFiles = lesson.audioUrls
                 ? lesson.audioUrls
                 : (lesson.audioUrl ? [{ label: null, url: lesson.audioUrl }] : []);
-
-            // Video links: only YouTube-style links (not audio files)
             const videoLinks = (lesson.links || []).filter(l =>
                 l.url.includes('youtube') || l.url.includes('youtu.be') || l.url.includes('vimeo')
             );
 
-            // Flex row: downloads on left, video links on right
             let html = '<div style="display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap;">';
             html += '<div class="downloads-wrapper">';
 
-            // PDF — open directly, no download attr (GitHub Pages MIME fix)
+            // RAR first (full package)
+            if (lesson.rarUrl) {
+                html += `<div class="download-box">
+                    <div class="download-label rar-label">Full Pack</div>
+                    <a href="${lesson.rarUrl}" class="rar-icon-btn" target="_blank">RAR</a>
+                </div>`;
+            }
+
+            // PDF
             html += `<div class="download-box">
                 <div class="download-label">ESLplan</div>
-                <a href="${lesson.pdfUrl}" id="dynamic-pdf-btn" class="pdf-icon-btn" target="_blank">PDF</a>
+                <a href="${lesson.pdfUrl}" class="pdf-icon-btn" target="_blank">PDF</a>
             </div>`;
 
-            // One MP3 box per audio file — open directly, no download attr
+            // Audio files
             audioFiles.forEach((audio, i) => {
                 const label = audioFiles.length > 1 ? `Audio ${i + 1}` : 'Audio';
                 html += `<div class="download-box">
@@ -1327,7 +940,7 @@
 
             html += '</div>'; // end downloads-wrapper
 
-            // Video links section — only if there are actual video links
+            // Video links
             if (videoLinks.length > 0) {
                 html += `<div class="links-box">
                     <div class="links-label">Video</div>
@@ -1342,16 +955,15 @@
             }
 
             html += '</div>'; // end outer flex row
-
-            mediaSection.innerHTML = html;
+            document.getElementById('dynamic-media-section').innerHTML = html;
 
             // Objectives
-            const objectivesContainer = document.getElementById('dynamic-objectives-list');
-            objectivesContainer.innerHTML = "";
-            lesson.objectives.forEach(function(objectiveText) {
+            const objContainer = document.getElementById('dynamic-objectives-list');
+            objContainer.innerHTML = "";
+            lesson.objectives.forEach(text => {
                 const li = document.createElement('li');
-                li.innerText = objectiveText;
-                objectivesContainer.appendChild(li);
+                li.innerText = text;
+                objContainer.appendChild(li);
             });
 
             hideAllViews();
@@ -1374,7 +986,6 @@
             hideAllViews();
             document.getElementById('dashboard-catalog-view').style.display = 'block';
             document.getElementById('hero-banner-view').style.display = 'block';
-            // Reset all filters so all lessons show
             activeFilters = { level: 'all', category: 'all' };
             document.getElementById('catalog-search-input').value = '';
             document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
@@ -1383,26 +994,20 @@
             window.scrollTo(0, 0);
         }
 
-
-        // ── PDF PREVIEW: render all pages at 30% scale into the scroll box ──
         function renderPdfPreview(pdfUrl) {
             const box = document.getElementById('pdf-preview-box');
             box.innerHTML = '<div class="pdf-preview-loading">Loading preview...</div>';
-
-            pdfjsLib.GlobalWorkerOptions.workerSrc =
-                'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
             pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
                 box.innerHTML = '';
                 const scale = 0.4;
                 const renderPage = function(pageNum) {
                     pdf.getPage(pageNum).then(function(page) {
-                        const viewport = page.getViewport({ scale: scale });
+                        const viewport = page.getViewport({ scale });
                         const canvas = document.createElement('canvas');
                         canvas.width = viewport.width;
                         canvas.height = viewport.height;
-                        const ctx = canvas.getContext('2d');
-                        page.render({ canvasContext: ctx, viewport: viewport }).promise.then(function() {
+                        page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise.then(function() {
                             box.appendChild(canvas);
                             if (pageNum < pdf.numPages) renderPage(pageNum + 1);
                         });
@@ -1414,57 +1019,33 @@
             });
         }
 
-        // ── CONTACTS VIEW ──
-        function showContactsView() {
-            hideAllViews();
-            document.getElementById('contacts-view').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
+        function showContactsView() { hideAllViews(); document.getElementById('contacts-view').style.display = 'block'; window.scrollTo(0, 0); }
+        function showPinnedView() { hideAllViews(); renderPinnedPage(); document.getElementById('pinned-view').style.display = 'block'; window.scrollTo(0, 0); }
 
-        // ── PINNED VIEW ──
-        function showPinnedView() {
-            hideAllViews();
-            renderPinnedPage();
-            document.getElementById('pinned-view').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        // ── PINNED LESSONS (localStorage) ──
         let pinnedIds = JSON.parse(localStorage.getItem('eslplans-pinned') || '[]');
         let currentLessonIndex = null;
 
-        function savePins() {
-            localStorage.setItem('eslplans-pinned', JSON.stringify(pinnedIds));
-            updatePinBadge();
-            updateNavPin();
-        }
+        function savePins() { localStorage.setItem('eslplans-pinned', JSON.stringify(pinnedIds)); updatePinBadge(); updateNavPin(); }
 
         function updateNavPin() {
             const navPin = document.querySelector('.pin-nav-btn');
             if (navPin) {
                 navPin.classList.toggle('has-pins', pinnedIds.length > 0);
-                navPin.classList.toggle('no-pins',  pinnedIds.length === 0);
+                navPin.classList.toggle('no-pins', pinnedIds.length === 0);
             }
         }
 
         function updatePinBadge() {
             const badge = document.getElementById('pin-count-badge');
-            if (pinnedIds.length > 0) {
-                badge.style.display = 'flex';
-                badge.innerText = pinnedIds.length;
-            } else {
-                badge.style.display = 'none';
-            }
+            badge.style.display = pinnedIds.length > 0 ? 'flex' : 'none';
+            badge.innerText = pinnedIds.length;
         }
 
         function togglePin() {
             if (currentLessonIndex === null) return;
             const idx = pinnedIds.indexOf(currentLessonIndex);
-            if (idx === -1) {
-                pinnedIds.push(currentLessonIndex);
-            } else {
-                pinnedIds.splice(idx, 1);
-            }
+            if (idx === -1) pinnedIds.push(currentLessonIndex);
+            else pinnedIds.splice(idx, 1);
             savePins();
             updatePinButton();
         }
@@ -1474,15 +1055,11 @@
             const isPinned = pinnedIds.includes(currentLessonIndex);
             const label = document.getElementById('pin-btn-label');
             const icon = document.getElementById('pin-btn-icon');
-            if (label) {
-                label.innerText = isPinned ? 'Pinned!' : 'Pin it!';
-                label.classList.toggle('pinned', isPinned);
-            }
+            if (label) { label.innerText = isPinned ? 'Pinned!' : 'Pin it!'; label.classList.toggle('pinned', isPinned); }
             if (icon) {
                 icon.classList.toggle('pinned', isPinned);
-                // Trigger bounce animation
                 icon.classList.remove('pin-animate');
-                void icon.offsetWidth; // force reflow
+                void icon.offsetWidth;
                 icon.classList.add('pin-animate');
             }
             updateNavPin();
@@ -1494,27 +1071,20 @@
         function renderPinnedPage() {
             const grid = document.getElementById('pinned-grid-root');
             const paginationRoot = document.getElementById('pinned-pagination-root');
-
             if (pinnedIds.length === 0) {
                 grid.innerHTML = '<p style="color:#888; font-size:16px; grid-column:1/-1;">No pinned lessons yet. Open a lesson and click 📌 Pin it! to save it here.</p>';
-                paginationRoot.innerHTML = '';
-                return;
+                paginationRoot.innerHTML = ''; return;
             }
-
             const totalPages = Math.ceil(pinnedIds.length / PINNED_PER_PAGE);
             pinnedPage = Math.min(pinnedPage, totalPages);
-            const start = (pinnedPage - 1) * PINNED_PER_PAGE;
-            const pageSlice = pinnedIds.slice(start, start + PINNED_PER_PAGE);
-
+            const pageSlice = pinnedIds.slice((pinnedPage - 1) * PINNED_PER_PAGE, pinnedPage * PINNED_PER_PAGE);
             grid.innerHTML = pageSlice.map(idx => {
                 const l = lessonsCatalog[idx];
                 const visual = l.visualSource.includes('linear-gradient')
                     ? `style="background:${l.visualSource}"`
                     : `style="background-image:url('${l.visualSource}');background-size:cover;background-position:center;"`;
                 return `<div class="lesson-card ${l.category}">
-                    <div class="card-image-box">
-                        <div class="mock-3d-illustration" ${visual}></div>
-                    </div>
+                    <div class="card-image-box"><div class="mock-3d-illustration" ${visual}></div></div>
                     <div class="card-title-strip">${l.title}</div>
                     <div class="card-details">
                         <div class="tag-row">
@@ -1529,8 +1099,6 @@
                     <div onclick="initiateDetailViewByIndex(${idx})" class="view-btn">View Lesson</div>
                 </div>`;
             }).join('');
-
-            // Pagination
             if (totalPages <= 1) { paginationRoot.innerHTML = ''; return; }
             paginationRoot.innerHTML = '';
             const prev = document.createElement('span');
@@ -1552,42 +1120,25 @@
             paginationRoot.appendChild(next);
         }
 
-        function unpinLesson(idx) {
-            pinnedIds = pinnedIds.filter(id => id !== idx);
-            savePins();
-            updatePinButton();
-        }
-
+        function unpinLesson(idx) { pinnedIds = pinnedIds.filter(id => id !== idx); savePins(); updatePinButton(); }
         function togglePinnedPanel() { showPinnedView(); }
 
-        // ── HAMBURGER MENU ──
         function toggleMobileMenu() {
-            const btn = document.getElementById('hamburger-btn');
-            const menu = document.getElementById('nav-menu');
-            btn.classList.toggle('open');
-            menu.classList.toggle('open');
+            document.getElementById('hamburger-btn').classList.toggle('open');
+            document.getElementById('nav-menu').classList.toggle('open');
         }
-
         function closeMobileMenu() {
             document.getElementById('hamburger-btn').classList.remove('open');
             document.getElementById('nav-menu').classList.remove('open');
         }
-
-        // Close menu when any nav link is clicked
         document.getElementById('nav-menu').querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeMobileMenu);
         });
-        lessonsCatalog.sort((a, b) => {
-            const da = new Date(a.dateAdded || "2000-01-01");
-            const db = new Date(b.dateAdded || "2000-01-01");
-            return db - da;
-        });
 
+        lessonsCatalog.sort((a, b) => new Date(b.dateAdded || "2000-01-01") - new Date(a.dateAdded || "2000-01-01"));
         applyFiltersAndRender();
         updatePinBadge();
-        // Small delay ensures DOM nav element is queryable before coloring
         setTimeout(() => updateNavPin(), 0);
-
     </script>
 </body>
 </html>
