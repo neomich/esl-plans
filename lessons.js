@@ -6,6 +6,160 @@
 const lessonsCatalog = [
 
     {
+        dateAdded: "2026-07-09",
+        title: "The Everywhere Girl!",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1-B2",
+        duration: "60-90 min",
+        visualSource: "images/b1_the_everywhere_girl.jpeg",
+        keywords: "everywhere girl stock photo viral fame media representation ambiguous overexposed eurasian celebrity internet fame brands models photography b1 b2",
+        heading: "What's Inside 'The Everywhere Girl!'",
+        objectives: [
+            "Define key vocabulary related to media representation, including ambiguous, overexposed, and stock photograph;",
+            "Analyze the phenomenon of viral anonymity through listening comprehension and true/false verification;",
+            "Evaluate the psychological and ethical implications of global fame without personal recognition."
+        ],
+        description: "In this lesson, students begin by matching terms like Eurasian, cross section, and to be overexposed to their definitions and contextual sentences, establishing a framework for discussing digital visibility. They then watch a video about \"the everywhere girl,\" verifying statements regarding her career trajectory, the ubiquity of her stock photos, and the security challenges that arose from her unintended internet fame.\n\nStudents explore why international brands favor culturally ambiguous faces and discuss whether companies should use ready-made imagery or hire real models.\n\nThe lesson culminates in reading philosophical quotes from Terry Pratchett, Matt Damon, Will Smith, and Jim Carrey about the paradoxes of celebrity, prompting reflection on whether public adulation is truly desirable or if it ultimately reveals the emptiness of external validation.",
+        pdfUrl: "materials/b1_the_everywhere_girl.pdf",
+        audioUrl: "audio/b1_the_everywhere_girl_interview.mp3",
+        rarUrl: "zips/b1_the_everywhere_girl.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Video", url: "https://www.youtube.com/shorts/LfgCdlLf__c" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-09",
+        title: "Tiny Joys & Rituals",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "a2",
+        levelLabel: "A2",
+        duration: "60 min",
+        visualSource: "images/a2_tiny_joys_and_rituals.jpeg",
+        keywords: "tiny joys rituals habits anxiety comfort uncertainty predictable laughter podcast mindfulness routine desk setup english mode Paul Daley a2",
+        heading: "What's Inside 'Tiny Joys & Rituals'",
+        objectives: [
+            "Define and identify \"tiny joys\" and personal rituals that bring comfort in uncertain times;",
+            "Distinguish between the concepts of ritual and habit, and understand key vocabulary related to anxiety and predictability;",
+            "Reflect on how small, repeatable actions can create focus and emotional stability."
+        ],
+        description: "In this lesson, students begin by matching images of simple pleasures — such as sipping tea by a window or handwriting thank-you cards — to their corresponding descriptions, sharing which ones they have experienced recently.\n\nThey then expand their vocabulary by defining terms like uncertainty, anxiety, predictable, and comfort, before listening to a podcast featuring Paul Daley who explains why intentional rituals (unlike automatic habits) help ground us when the world feels overwhelming. Students discuss practical applications, such as using desk setup routines to transition into work mode or starting lessons with a specific action to enter \"English mode.\"\n\nFinally, they watch a video about the power of laughter as a free, low-effort joy and brainstorm other accessible tiny rituals that require minimal cost but offer significant emotional impact.",
+        pdfUrl: "materials/a2_tiny_joys_and_rituals.pdf",
+        audioUrl: "audio/a2_tiny_joys_and_rituals.mp3",
+        rarUrl: "zips/a2_tiny_joys_and_rituals.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Video", url: "https://www.youtube.com/watch?v=Wk9-gkT2bI8" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-09",
+        title: "Why Do We Gossip?",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_why_do_we_gossip.jpeg",
+        keywords: "gossip rumor trash talk hearsay chatter social news status bonding stress venting University California study neutral malicious demographics personality b1 b2",
+        heading: "What's Inside 'Why Do We Gossip?'",
+        objectives: [
+            "Analyze the social dynamics and consequences of gossip through narrative comprehension;",
+            "Distinguish between negative \"trash talk\" and neutral information sharing based on scientific research;",
+            "Evaluate personal motivations for gossiping and practice vocabulary related to informal communication."
+        ],
+        description: "In this lesson, students begin by reading a dialogue that demonstrates how a simple observation escalates into a damaging rumor, identifying the roles of the instigator and victim while discussing the ethical implications of talking about colleagues behind their backs.\n\nThey then watch a short video and examine quotes and proverbs about gossip before reviewing findings from a landmark University of California study which reveals that 75% of gossip is actually neutral rather than malicious. Students test their assumptions against this data by verifying true/false statements regarding demographics, personality types, and the universality of gossip.\n\nThe lesson transitions into exploring psychological motivations — such as seeking status, venting stress, or bonding with others — and watching a video to see which reasons resonate most with real people. Finally, students consolidate new terminology (e.g., hearsay, social news, chatter, rumors) and reflect on whether they enjoy hearing gossip or prefer to avoid it.",
+        pdfUrl: "materials/b1_why_do_we_gossip.pdf",
+        audioUrl: "audio/b1_why_do_we_gossip_podcast.mp3",
+        rarUrl: "zips/b1_why_do_we_gossip.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=6WQx3ePgHuQ" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=NF1qgkTcEiA" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-09",
+        title: "Cultural Appropriation",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1",
+        duration: "60-90 min",
+        visualSource: "images/b1_cultural_appropriation.jpeg",
+        keywords: "cultural appropriation appreciation war bonnet henna mehendi feng shui cyrillic gopnik modals obligation prohibition permission sacred symbols fashion heritage podcast b1",
+        heading: "What's Inside 'Cultural Appropriation'",
+        objectives: [
+            "Distinguish between cultural appropriation and cultural appreciation through definition and visual analysis;",
+            "Identify specific examples of appropriated symbols (e.g., war bonnets, henna, Cyrillic script) and understand their original cultural significance;",
+            "Practice using modals of obligation, prohibition, and permission to discuss ethical responsibilities regarding cultural heritage."
+        ],
+        description: "In this lesson, students begin by defining the difference between taking from a culture for profit or fashion (appropriation) versus learning with respect and giving credit (appreciation). They examine images of commonly appropriated items — such as Native American war bonnets, Indian mehendi, and Chinese feng shui — and listen to a podcast to uncover the deep historical meanings often ignored by modern users.\n\nStudents then analyze sentences from the listening text to categorize grammar structures expressing moral duty (ought to, obligated to), strict rules (forbidden from, not allowed to), and past necessities (had to).\n\nThe lesson culminates in a critical discussion on whether movies should hire cultural experts, if sacred symbols belong in high fashion, and how stereotypes like the \"Gopnik\" image affect real communities.",
+        pdfUrl: "materials/b1_cultural_appropriation.pdf",
+        audioUrl: "audio/b1_appreciating_VS_appropriating.mp3",
+        audioUrls: [
+            { label: "Appreciating VS Appropriating", url: "audio/b1_appreciating_VS_appropriating.mp3" },
+            { label: "8 Examples Podcast", url: "audio/b1_cultural_appropriation_8_examples_podcast.mp3" },
+            { label: "Russian VS Jewish", url: "audio/b1_cultural_appropriation_Russian_VS_Jewish.mp3" }
+        ],
+        rarUrl: "zips/b1_cultural_appropriation.rar",
+        mediaLabel: "The audio streams:",
+        links: []
+    },
+
+    {
+        dateAdded: "2026-07-09",
+        title: "Europe",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_europe.jpeg",
+        keywords: "europe countries geography trivia Finland Norway Denmark national pride identity Enzo Zeynep Jean-Luc travelers flight culture statistics b1 b2",
+        heading: "What's Inside 'Europe'",
+        objectives: [
+            "Identify European countries and recall surprising geographical and cultural facts about the continent;",
+            "Practice listening comprehension by extracting specific information from a conversation between travelers;",
+            "Analyze national pride through statistical data and personal reflection."
+        ],
+        description: "In this lesson, students begin by identifying countries in photographs and testing their knowledge with trivia questions ranging from mosquito-free nations to medieval beverage alternatives. They verify these answers by listening to an American couple discuss long-haul flight habits while traveling to Europe.\n\nThe lesson then transitions to reading comprehension, where learners match descriptive statements about social systems, economies, and lifestyles to specific countries like Finland, Norway, and Denmark. Students critically examine survey results regarding what citizens value most about their home nations — such as politics, history, or people — and discuss why certain demographics express negative feelings toward their own country.\n\nFinally, they listen to three speakers (Enzo, Zeynep, Jean-Luc) share personal perspectives on national identity before reflecting on sources of pride and shame in their own cultures.\n\n(Watch the 2nd video from 19:20)",
+        pdfUrl: "materials/b1_europe.pdf",
+        audioUrl: "audio/b1_europe_plane_chat.mp3",
+        audioUrls: [
+            { label: "Plane Chat", url: "audio/b1_europe_plane_chat.mp3" },
+            { label: "3 Speakers", url: "audio/b1_europe_3_speakers.mp3" }
+        ],
+        rarUrl: "zips/b1_europe.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://youtu.be/Uvd-dGZ6PYM?t=1160" },
+            { label: "Link 2", url: "https://www.youtube.com/shorts/p2W8fxqGt3U" }
+        ]
+    },
+
+    {
         dateAdded: "2026-06-28",
         title: "Life 3.0",
         category: "general",
