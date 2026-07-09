@@ -44,8 +44,31 @@
         }
 
         .logo-link { text-decoration: none; cursor: pointer; }
-        .logo { font-size: 32px; font-weight: 400; color: #000; letter-spacing: -0.5px; }
-        .logo strong { font-weight: 800; }
+        .logo {
+            font-size: 28px;
+            font-weight: 400;
+            color: #000;
+            letter-spacing: -0.5px;
+            font-family: 'Georgia', serif;
+        }
+        .logo .esl-part {
+            font-weight: 900;
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: -1px;
+            font-style: italic;
+            color: #c95210;
+        }
+        .logo .dash-part {
+            color: #c95210;
+            font-weight: 300;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .logo .plans-part {
+            font-weight: 300;
+            font-family: 'Georgia', serif;
+            color: #222;
+            letter-spacing: 1px;
+        }
 
         .nav-menu {
             display: flex;
@@ -199,6 +222,17 @@
             border-color: #ff7a00;
             color: white;
             box-shadow: 0 2px 8px rgba(255,122,0,0.2);
+        }
+        .free-pill {
+            background: #e8f5e9;
+            border-color: #2e7d32;
+            color: #2e7d32;
+            font-weight: 700;
+        }
+        .free-pill:hover, .free-pill.active {
+            background: #2e7d32;
+            border-color: #2e7d32;
+            color: white;
         }
 
         .content-container {
@@ -835,7 +869,9 @@
     <header>
         <div class="nav-container">
             <a onclick="showDashboardView()" class="logo-link" style="cursor:pointer; text-decoration:none;">
-                <div class="logo"><strong>ESL</strong>plans</div>
+                <div class="logo">
+                    <span class="esl-part">ESL</span><span class="dash-part">-</span><span class="plans-part">plans</span>
+                </div>
             </a>
             <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
                 <span></span><span></span><span></span>
@@ -988,6 +1024,7 @@
         <div class="filter-panel-container">
             <span class="filter-label">Filter by Category:</span>
             <button class="filter-pill active" onclick="applyPillFilter('category', 'all', this)">All Categories</button>
+            <button class="filter-pill free-pill" onclick="applyPillFilter('category', 'free', this)">⭐ FREE</button>
             <button class="filter-pill" onclick="applyPillFilter('category', 'general', this)">General English</button>
             <button class="filter-pill" onclick="applyPillFilter('category', 'business', this)">Business English</button>
         </div>
@@ -1032,9 +1069,15 @@
             <div class="info-panel">
                 <div class="panel-header-row">
                     <h1 id="dynamic-panel-heading">What's this all about?</h1>
-                    <div class="favorite-badge" id="pin-lesson-btn" onclick="togglePin()">
-                        <span class="pin-label" id="pin-btn-label">Pin it!</span>
-                        <span class="pin-icon" id="pin-btn-icon">📌</span>
+                    <div style="display:flex; gap:16px; align-items:flex-start; flex-shrink:0;">
+                        <div class="favorite-badge" id="pin-lesson-btn" onclick="togglePin()">
+                            <span class="pin-label" id="pin-btn-label">Pin it!</span>
+                            <span class="pin-icon" id="pin-btn-icon">📌</span>
+                        </div>
+                        <div class="favorite-badge" onclick="openShareModal()">
+                            <span class="pin-label" style="color:#1a73e8;">Share</span>
+                            <span class="pin-icon">🔗</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1057,6 +1100,30 @@
         </div>
 
     </main>
+
+    <!-- SHARE MODAL -->
+    <div id="share-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
+        <div style="background:white; border-radius:20px; padding:32px; max-width:400px; width:90%; text-align:center; position:relative;">
+            <button onclick="closeShareModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#888;">✕</button>
+            <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">Share this lesson</h3>
+            <p style="color:#888;font-size:14px;margin-bottom:20px;">Copy the link or share directly</p>
+            <div style="display:flex;align-items:center;gap:8px;background:#f5f5f5;border-radius:10px;padding:10px 14px;margin-bottom:24px;">
+                <span id="share-url" style="font-size:13px;color:#444;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;"></span>
+                <button onclick="copyShareLink()" style="background:#ff7a00;color:white;border:none;border-radius:8px;padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;" id="copy-btn">Copy</button>
+            </div>
+            <div style="display:flex;justify-content:center;gap:16px;">
+                <a id="share-telegram" href="#" target="_blank" style="display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:#444;font-size:12px;font-weight:600;">
+                    <span style="width:48px;height:48px;background:#229ED9;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">✈️</span>Telegram
+                </a>
+                <a id="share-whatsapp" href="#" target="_blank" style="display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:#444;font-size:12px;font-weight:600;">
+                    <span style="width:48px;height:48px;background:#25D366;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">💬</span>WhatsApp
+                </a>
+                <a id="share-email" href="#" style="display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:#444;font-size:12px;font-weight:600;">
+                    <span style="width:48px;height:48px;background:#e03131;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">✉️</span>Email
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script src="lessons.js"></script>
     <script>
@@ -1285,6 +1352,7 @@
             document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.filter-pill:first-of-type').forEach(p => p.classList.add('active'));
             applyFiltersAndRender();
+            clearHash();
             window.scrollTo(0, 0);
         }
 
@@ -1429,8 +1497,79 @@
             link.addEventListener('click', closeMobileMenu);
         });
 
+        // ── URL HASH: shareable lesson links ──
+        function setLessonHash(index) {
+            const lesson = lessonsCatalog[index];
+            if (lesson) {
+                const slug = lesson.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                history.replaceState(null, '', '#lesson-' + slug);
+            }
+        }
+
+        function clearHash() {
+            history.replaceState(null, '', window.location.pathname);
+        }
+
+        function loadFromHash() {
+            const hash = window.location.hash;
+            if (!hash.startsWith('#lesson-')) return false;
+            const slug = hash.replace('#lesson-', '');
+            const idx = lessonsCatalog.findIndex(l => {
+                const s = l.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                return s === slug;
+            });
+            if (idx !== -1) { initiateDetailViewByIndex(idx); return true; }
+            return false;
+        }
+
+        // ── SHARE MODAL ──
+        function openShareModal() {
+            if (currentLessonIndex === null) return;
+            setLessonHash(currentLessonIndex);
+            const url = window.location.href;
+            const lesson = lessonsCatalog[currentLessonIndex];
+            const text = `Check out this ESL lesson plan: ${lesson.title}`;
+            document.getElementById('share-url').innerText = url;
+            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+            document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+            document.getElementById('share-email').href = `mailto:?subject=${encodeURIComponent(lesson.title)}&body=${encodeURIComponent(text + '\n\n' + url)}`;
+            document.getElementById('share-modal').style.display = 'flex';
+        }
+
+        function closeShareModal() {
+            document.getElementById('share-modal').style.display = 'none';
+        }
+
+        function copyShareLink() {
+            const url = document.getElementById('share-url').innerText;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('copy-btn');
+                btn.innerText = 'Copied!';
+                btn.style.background = '#2e7d32';
+                setTimeout(() => { btn.innerText = 'Copy'; btn.style.background = '#ff7a00'; }, 2000);
+            });
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('share-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeShareModal();
+        });
+
+        // Also update hash when opening lesson
+        const _origInitiate = initiateDetailViewByIndex;
+        initiateDetailViewByIndex = function(index) {
+            _origInitiate(index);
+            setLessonHash(index);
+        };
+
         lessonsCatalog.sort((a, b) => new Date(b.dateAdded || "2000-01-01") - new Date(a.dateAdded || "2000-01-01"));
-        applyFiltersAndRender();
+
+        // Boot: load from hash if present, otherwise show dashboard
+        if (!loadFromHash()) {
+            applyFiltersAndRender();
+        } else {
+            applyFiltersAndRender(); // still build the catalog in background
+        }
         updatePinBadge();
         setTimeout(() => updateNavPin(), 0);
     </script>
