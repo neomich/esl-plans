@@ -142,45 +142,67 @@
         .hero-banner-container {
             background-color: #c95210;
             text-align: center;
-            padding: 20px 20px 40px 20px;
+            padding: 28px 20px 32px 20px;
         }
         .hero-banner-container h2 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 400;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             color: white;
         }
 
-        .search-box {
-            display: flex;
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .search-box input {
-            flex: 1;
-            padding: 18px 25px;
-            border: none;
-            font-size: 16px;
-            outline: none;
-            color: #555;
-            min-width: 0;
-        }
-        .search-box button {
-            background-color: #ff7a00;
+        .free-hero-btn {
+            display: inline-block;
+            background: #2e7d32;
             color: white;
             border: none;
-            padding: 0 35px;
-            font-size: 16px;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+            letter-spacing: 0.3px;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .free-hero-btn:hover { background: #1b5e20; transform: scale(1.03); }
+
+        .topic-scroll-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .topic-scroll-wrapper::-webkit-scrollbar { display: none; }
+
+        .topic-scroll-track {
+            display: flex;
+            gap: 10px;
+            padding: 4px 4px 8px;
+            width: max-content;
+            margin: 0 auto;
+        }
+
+        .topic-pill {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
             white-space: nowrap;
+            transition: all 0.2s;
         }
-        .search-box button:hover { background-color: #e66e00; }
+        .topic-pill:hover { background: rgba(255,255,255,0.3); }
+        .topic-pill.active {
+            background: white;
+            color: #c95210;
+            border-color: white;
+        }
 
         .filter-panel-tray {
             background-color: #fcece1;
@@ -1003,12 +1025,29 @@
 
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
-        <div class="search-box">
-            <input type="text" id="catalog-search-input" onkeyup="executeCatalogSearch()" placeholder="Search: food, description, lesson plan content...">
-            <button onclick="executeCatalogSearch()">Find materials</button>
+
+        <button class="free-hero-btn" onclick="applyTopicFilter('free')">
+            ⭐ FREE ESL-plans
+        </button>
+
+        <div class="topic-scroll-wrapper">
+            <div class="topic-scroll-track" id="topic-scroll-track">
+                <button class="topic-pill active" onclick="applyTopicFilter('all', this)">All Topics</button>
+                <button class="topic-pill" onclick="applyTopicFilter('grammar', this)">Grammar</button>
+                <button class="topic-pill" onclick="applyTopicFilter('business', this)">Business</button>
+                <button class="topic-pill" onclick="applyTopicFilter('travel', this)">Travel & Tourism</button>
+                <button class="topic-pill" onclick="applyTopicFilter('psychology', this)">Psychology</button>
+                <button class="topic-pill" onclick="applyTopicFilter('technology', this)">Technology</button>
+                <button class="topic-pill" onclick="applyTopicFilter('culture', this)">Culture</button>
+                <button class="topic-pill" onclick="applyTopicFilter('media', this)">Media & Fame</button>
+                <button class="topic-pill" onclick="applyTopicFilter('art', this)">Art</button>
+                <button class="topic-pill" onclick="applyTopicFilter('society', this)">Society</button>
+                <button class="topic-pill" onclick="applyTopicFilter('work', this)">Work & Career</button>
+            </div>
         </div>
     </div>
 
+    <input type="hidden" id="catalog-search-input" value="">
     <div id="level-filter-tray" class="filter-panel-tray">
         <div class="filter-panel-container">
             <span class="filter-label">Filter by CEFR Level:</span>
@@ -1024,7 +1063,6 @@
         <div class="filter-panel-container">
             <span class="filter-label">Filter by Category:</span>
             <button class="filter-pill active" onclick="applyPillFilter('category', 'all', this)">All Categories</button>
-            <button class="filter-pill free-pill" onclick="applyPillFilter('category', 'free', this)">⭐ FREE</button>
             <button class="filter-pill" onclick="applyPillFilter('category', 'general', this)">General English</button>
             <button class="filter-pill" onclick="applyPillFilter('category', 'business', this)">Business English</button>
         </div>
@@ -1127,7 +1165,7 @@
 
     <script src="lessons.js"></script>
     <script>
-        let activeFilters = { level: 'all', category: 'all' };
+        let activeFilters = { level: 'all', category: 'all', topic: 'all' };
         const LESSONS_PER_PAGE = 6;
         let currentPage = 1;
         let filteredLessons = [];
@@ -1219,10 +1257,42 @@
             applyFiltersAndRender();
         }
 
+        function applyTopicFilter(topic, pillEl) {
+            // Update active pill in topic track
+            document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+            if (pillEl) pillEl.classList.add('active');
+
+            activeFilters.topic = topic;
+
+            // Show catalog
+            hideAllViews();
+            document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('hero-banner-view').style.display = 'block';
+            applyFiltersAndRender();
+            window.scrollTo(0, 0);
+        }
+
         function executeCatalogSearch() { applyFiltersAndRender(); }
 
+        // Topic keyword map
+        const topicKeywords = {
+            grammar: ['grammar', 'adjective', 'modal', 'verb', 'tense', 'present perfect', 'past simple', 'few', 'little', 'obligation', 'prohibition'],
+            business: ['business', 'overwork', 'corporate', 'consulting', 'career', 'workplace', 'burnout', 'scope creep'],
+            travel: ['travel', 'europe', 'flight', 'tourism', 'countries', 'geography', 'national'],
+            psychology: ['psychology', 'endowment', 'loss aversion', 'hoarding', 'ritual', 'habit', 'anxiety', 'comfort', 'gossip', 'behaviour'],
+            technology: ['algorithm', 'AI', 'artificial intelligence', 'technology', 'digital', 'social media', 'data', 'computer'],
+            culture: ['culture', 'appropriation', 'appreciation', 'heritage', 'identity', 'national', 'stereotype', 'generation'],
+            media: ['media', 'fame', 'celebrity', 'stock photo', 'viral', 'internet', 'film', 'movie', 'cinema'],
+            art: ['art', 'painting', 'museum', 'remake', 'masterpiece', 'preposition'],
+            society: ['society', 'age', 'ageing', 'generations', 'gossip', 'overwork', 'affectation', 'vocal fry'],
+            work: ['work', 'overwork', 'burnout', 'career', 'corporate', 'business', 'consulting'],
+            free: ['free']
+        };
+
         function applyFiltersAndRender() {
-            const searchFilter = document.getElementById('catalog-search-input').value.toLowerCase().trim();
+            const searchFilter = (document.getElementById('catalog-search-input').value || '').toLowerCase().trim();
+            const keywords = activeFilters.topic !== 'all' ? (topicKeywords[activeFilters.topic] || []) : [];
+
             filteredLessons = [];
             lessonsCatalog.forEach((lesson, index) => {
                 const matchesLevel = activeFilters.level === 'all' || lesson.level.toLowerCase().split(/[-\/]/).map(s => s.trim()).includes(activeFilters.level);
@@ -1231,8 +1301,13 @@
                     || lesson.title.toLowerCase().includes(searchFilter)
                     || (lesson.keywords || '').toLowerCase().includes(searchFilter)
                     || (lesson.description || '').toLowerCase().includes(searchFilter);
-                if (matchesLevel && matchesCategory && matchesSearch) filteredLessons.push(index);
+                const matchesTopic = activeFilters.topic === 'all' || activeFilters.topic === 'free'
+                    ? (activeFilters.topic === 'free' ? (lesson.category === 'free') : true)
+                    : keywords.some(kw => (lesson.keywords || '').toLowerCase().includes(kw.toLowerCase()) || lesson.title.toLowerCase().includes(kw.toLowerCase()));
+
+                if (matchesLevel && matchesCategory && matchesSearch && matchesTopic) filteredLessons.push(index);
             });
+
             currentPage = 1;
             document.getElementById('catalog-section-title').innerText = filteredLessons.length === 0 ? "No matching lessons found" : "Latest Lessons";
             renderCatalogGrid();
@@ -1347,10 +1422,12 @@
             hideAllViews();
             document.getElementById('dashboard-catalog-view').style.display = 'block';
             document.getElementById('hero-banner-view').style.display = 'block';
-            activeFilters = { level: 'all', category: 'all' };
-            document.getElementById('catalog-search-input').value = '';
+            activeFilters = { level: 'all', category: 'all', topic: 'all' };
             document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.filter-pill:first-of-type').forEach(p => p.classList.add('active'));
+            document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+            const firstPill = document.querySelector('.topic-pill');
+            if (firstPill) firstPill.classList.add('active');
             applyFiltersAndRender();
             clearHash();
             window.scrollTo(0, 0);
