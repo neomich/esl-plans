@@ -16,7 +16,7 @@ const lessonsCatalog = [
         level: "b1",
         levelLabel: "B1-B2",
         duration: "60-90 min",
-        visualSource: "images/b1_the_everywhere_girl.jpeg",
+        visualSource: "images/b1_the_everywhere_girl.JPG",
         keywords: "everywhere girl stock photo viral fame media representation ambiguous overexposed eurasian celebrity internet fame brands models photography b1 b2",
         heading: "What's Inside 'The Everywhere Girl!'",
         objectives: [
@@ -45,7 +45,7 @@ const lessonsCatalog = [
         level: "a2",
         levelLabel: "A2",
         duration: "60 min",
-        visualSource: "images/a2_tiny_joys_and_rituals.jpeg",
+        visualSource: "images/a2_tiny_joys_and_rituals.JPG",
         keywords: "tiny joys rituals habits anxiety comfort uncertainty predictable laughter podcast mindfulness routine desk setup english mode Paul Daley a2",
         heading: "What's Inside 'Tiny Joys & Rituals'",
         objectives: [
@@ -74,7 +74,7 @@ const lessonsCatalog = [
         level: "b1",
         levelLabel: "B1-B2",
         duration: "90 min",
-        visualSource: "images/b1_why_do_we_gossip.jpeg",
+        visualSource: "images/b1_why_do_we_gossip.JPG",
         keywords: "gossip rumor trash talk hearsay chatter social news status bonding stress venting University California study neutral malicious demographics personality b1 b2",
         heading: "What's Inside 'Why Do We Gossip?'",
         objectives: [
@@ -104,7 +104,7 @@ const lessonsCatalog = [
         level: "b1",
         levelLabel: "B1",
         duration: "60-90 min",
-        visualSource: "images/b1_cultural_appropriation.jpeg",
+        visualSource: "images/b1_cultural_appropriation.JPG",
         keywords: "cultural appropriation appreciation war bonnet henna mehendi feng shui cyrillic gopnik modals obligation prohibition permission sacred symbols fashion heritage podcast b1",
         heading: "What's Inside 'Cultural Appropriation'",
         objectives: [
@@ -136,7 +136,7 @@ const lessonsCatalog = [
         level: "b1",
         levelLabel: "B1-B2",
         duration: "90 min",
-        visualSource: "images/b1_europe.jpeg",
+        visualSource: "images/b1_europe.JPG",
         keywords: "europe countries geography trivia Finland Norway Denmark national pride identity Enzo Zeynep Jean-Luc travelers flight culture statistics b1 b2",
         heading: "What's Inside 'Europe'",
         objectives: [
