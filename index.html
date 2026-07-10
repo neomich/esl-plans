@@ -73,22 +73,33 @@
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 10px;
+            gap: 6px;
             align-items: center;
         }
 
         .nav-menu a {
             text-decoration: none;
             color: #444;
-            font-weight: 600;
-            font-size: 16px;
-            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 17px;
+            padding: 10px 18px;
             border-radius: 25px;
             transition: all 0.2s ease;
             cursor: pointer;
         }
 
         .nav-menu a:hover { background-color: #c95210; color: white; }
+
+        .nav-free-btn {
+            background: #2e7d32;
+            color: white !important;
+            border-radius: 25px;
+            padding: 10px 20px !important;
+            font-weight: 800 !important;
+            font-size: 16px !important;
+            letter-spacing: 0.2px;
+        }
+        .nav-free-btn:hover { background: #1b5e20 !important; color: white !important; }
 
         /* ── HAMBURGER ── */
         .hamburger {
@@ -142,31 +153,14 @@
         .hero-banner-container {
             background-color: #c95210;
             text-align: center;
-            padding: 28px 20px 32px 20px;
+            padding: 16px 20px 20px 20px;
         }
         .hero-banner-container h2 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 400;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
             color: white;
         }
-
-        .free-hero-btn {
-            display: inline-block;
-            background: #2e7d32;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 20px;
-            letter-spacing: 0.3px;
-            transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        .free-hero-btn:hover { background: #1b5e20; transform: scale(1.03); }
 
         .topic-scroll-wrapper {
             max-width: 900px;
@@ -198,10 +192,41 @@
             transition: all 0.2s;
         }
         .topic-pill:hover { background: rgba(255,255,255,0.3); }
-        .topic-pill.active {
+        .topic-pill.active { background: white; color: #c95210; border-color: white; }
+
+        .topic-slider-wrapper {
+            max-width: 860px;
+            margin: 6px auto 0;
+            padding: 0 4px;
+        }
+        .topic-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.3);
+            outline: none;
+            cursor: pointer;
+        }
+        .topic-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
             background: white;
-            color: #c95210;
-            border-color: white;
+            cursor: grab;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        .topic-slider::-webkit-slider-thumb:active { cursor: grabbing; }
+        .topic-slider::-moz-range-thumb {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: white;
+            cursor: grab;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
 
         .filter-panel-tray {
@@ -486,6 +511,24 @@
             border-top: 1px dashed #ddd;
             padding-top: 30px;
             margin-bottom: 35px;
+        }
+
+        .media-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .video-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .video-row .links-list {
+            max-width: 100%;
+            flex: 1;
+            padding-top: 22px;
         }
 
         .downloads-wrapper {
@@ -898,9 +941,8 @@
             <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
                 <span></span><span></span><span></span>
             </button>
+            <a onclick="applyTopicFilter('free', null); showDashboardView();" class="nav-free-btn" style="cursor:pointer; text-decoration:none; background:#2e7d32; color:white; padding:10px 20px; border-radius:25px; font-weight:800; font-size:16px; white-space:nowrap;">⭐ FREE ESL-plans</a>
             <ul class="nav-menu" id="nav-menu">
-                <li><a onclick="toggleFilterTray('level')">Levels</a></li>
-                <li><a onclick="toggleFilterTray('category')">Categories</a></li>
                 <li><a onclick="showContactsView()">Contacts</a></li>
                 <li><a onclick="showPricingView()">Pricing</a></li>
                 <li><a onclick="showPinnedView()" class="pin-nav-btn" title="Pinned lessons">📌 <span id="pin-count-badge" style="display:none"></span></a></li>
@@ -1025,14 +1067,9 @@
 
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
-
-        <button class="free-hero-btn" onclick="applyTopicFilter('free')">
-            ⭐ FREE ESL-plans
-        </button>
-
         <div class="topic-scroll-wrapper">
             <div class="topic-scroll-track" id="topic-scroll-track">
-                <button class="topic-pill active" onclick="applyTopicFilter('all', this)">All Topics</button>
+                <button class="topic-pill active" onclick="applyTopicFilter('all', this)">All Lessons</button>
                 <button class="topic-pill" onclick="applyTopicFilter('grammar', this)">Grammar</button>
                 <button class="topic-pill" onclick="applyTopicFilter('business', this)">Business</button>
                 <button class="topic-pill" onclick="applyTopicFilter('travel', this)">Travel & Tourism</button>
@@ -1043,12 +1080,16 @@
                 <button class="topic-pill" onclick="applyTopicFilter('art', this)">Art</button>
                 <button class="topic-pill" onclick="applyTopicFilter('society', this)">Society</button>
                 <button class="topic-pill" onclick="applyTopicFilter('work', this)">Work & Career</button>
+                <button class="topic-pill" onclick="applyTopicFilter('food', this)">Food & Drink</button>
             </div>
+        </div>
+        <div class="topic-slider-wrapper">
+            <input type="range" id="topic-slider" min="0" max="100" value="0" class="topic-slider" oninput="syncSliderToScroll()">
         </div>
     </div>
 
     <input type="hidden" id="catalog-search-input" value="">
-    <div id="level-filter-tray" class="filter-panel-tray">
+    <div id="level-filter-tray" class="filter-panel-tray" style="display:block;">
         <div class="filter-panel-container">
             <span class="filter-label">Filter by CEFR Level:</span>
             <button class="filter-pill active" onclick="applyPillFilter('level', 'all', this)">All Levels</button>
@@ -1056,15 +1097,6 @@
             <button class="filter-pill" onclick="applyPillFilter('level', 'b1', this)">B1 (Intermediate)</button>
             <button class="filter-pill" onclick="applyPillFilter('level', 'b2', this)">B2 (Upper-Intermediate)</button>
             <button class="filter-pill" onclick="applyPillFilter('level', 'c1', this)">C1 (Advanced)</button>
-        </div>
-    </div>
-
-    <div id="category-filter-tray" class="filter-panel-tray">
-        <div class="filter-panel-container">
-            <span class="filter-label">Filter by Category:</span>
-            <button class="filter-pill active" onclick="applyPillFilter('category', 'all', this)">All Categories</button>
-            <button class="filter-pill" onclick="applyPillFilter('category', 'general', this)">General English</button>
-            <button class="filter-pill" onclick="applyPillFilter('category', 'business', this)">Business English</button>
         </div>
     </div>
 
@@ -1257,17 +1289,16 @@
             applyFiltersAndRender();
         }
 
+        function showPricingView() { hideAllViews(); document.getElementById('pricing-view').style.display = 'block'; window.scrollTo(0, 0); }
+
         function applyTopicFilter(topic, pillEl) {
-            // Update active pill in topic track
             document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
             if (pillEl) pillEl.classList.add('active');
-
             activeFilters.topic = topic;
-
-            // Show catalog
             hideAllViews();
             document.getElementById('dashboard-catalog-view').style.display = 'block';
             document.getElementById('hero-banner-view').style.display = 'block';
+            document.getElementById('level-filter-tray').style.display = 'block';
             applyFiltersAndRender();
             window.scrollTo(0, 0);
         }
@@ -1285,7 +1316,8 @@
             media: ['media', 'fame', 'celebrity', 'stock photo', 'viral', 'internet', 'film', 'movie', 'cinema'],
             art: ['art', 'painting', 'museum', 'remake', 'masterpiece', 'preposition'],
             society: ['society', 'age', 'ageing', 'generations', 'gossip', 'overwork', 'affectation', 'vocal fry'],
-            work: ['work', 'overwork', 'burnout', 'career', 'corporate', 'business', 'consulting'],
+            work: ['work', 'overwork', 'burnout', 'career', 'corporate', 'business', 'consulting', 'job', 'passion', 'loyalty'],
+            food: ['coffee', 'beverage', 'drink', 'food', 'matcha', 'yerba', 'tea', 'tasting'],
             free: ['free']
         };
 
@@ -1345,10 +1377,10 @@
                 l.url.includes('youtube') || l.url.includes('youtu.be') || l.url.includes('vimeo')
             );
 
-            let html = '<div style="display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap;">';
+            let html = '<div class="media-layout">';
             html += '<div class="downloads-wrapper">';
 
-            // RAR first (full package)
+            // RAR first
             if (lesson.rarUrl) {
                 html += `<div class="download-box">
                     <div class="download-label rar-label">Full Pack</div>
@@ -1373,21 +1405,22 @@
 
             html += '</div>'; // end downloads-wrapper
 
-            // Video links
+            // Video links: YouTube icon + links as a second row
             if (videoLinks.length > 0) {
-                html += `<div class="links-box">
-                    <div class="links-label">Video</div>
-                    <div class="video-links-wrapper">
+                html += `<div class="video-row">
+                    <div class="download-box">
+                        <div class="download-label" style="color:#e03131;">Video</div>
                         <div class="youtube-logo-placeholder"></div>
-                        <div class="links-list">`;
+                    </div>
+                    <div class="links-list">`;
                 videoLinks.forEach(link => {
                     const printableUrl = link.url.replace('https://www.', '').replace('https://', '');
                     html += `<p><span>${link.label}:</span> <a href="${link.url}" target="_blank">${printableUrl}</a></p>`;
                 });
-                html += `</div></div></div>`;
+                html += `</div></div>`;
             }
 
-            html += '</div>'; // end outer flex row
+            html += '</div>'; // end media-layout
             document.getElementById('dynamic-media-section').innerHTML = html;
 
             // Objectives
@@ -1413,15 +1446,13 @@
             document.getElementById('pinned-view').style.display = 'none';
             document.getElementById('pricing-view').style.display = 'none';
             document.getElementById('level-filter-tray').style.display = 'none';
-            document.getElementById('category-filter-tray').style.display = 'none';
         }
-
-        function showPricingView() { hideAllViews(); document.getElementById('pricing-view').style.display = 'block'; window.scrollTo(0, 0); }
 
         function showDashboardView() {
             hideAllViews();
             document.getElementById('dashboard-catalog-view').style.display = 'block';
             document.getElementById('hero-banner-view').style.display = 'block';
+            document.getElementById('level-filter-tray').style.display = 'block';
             activeFilters = { level: 'all', category: 'all', topic: 'all' };
             document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.filter-pill:first-of-type').forEach(p => p.classList.add('active'));
@@ -1561,6 +1592,26 @@
 
         function unpinLesson(idx) { pinnedIds = pinnedIds.filter(id => id !== idx); savePins(); updatePinButton(); }
         function togglePinnedPanel() { showPinnedView(); }
+
+        // ── TOPIC SLIDER sync ──
+        function syncSliderToScroll() {
+            const slider = document.getElementById('topic-slider');
+            const wrapper = document.querySelector('.topic-scroll-wrapper');
+            if (!slider || !wrapper) return;
+            const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+            wrapper.scrollLeft = (slider.value / 100) * maxScroll;
+        }
+        // Update slider when user finger-scrolls the pills
+        setTimeout(function() {
+            const wrapper = document.querySelector('.topic-scroll-wrapper');
+            const slider = document.getElementById('topic-slider');
+            if (wrapper && slider) {
+                wrapper.addEventListener('scroll', function() {
+                    const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+                    if (maxScroll > 0) slider.value = (wrapper.scrollLeft / maxScroll) * 100;
+                });
+            }
+        }, 500);
 
         function toggleMobileMenu() {
             document.getElementById('hamburger-btn').classList.toggle('open');
