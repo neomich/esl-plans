@@ -130,24 +130,44 @@
                 flex-direction: column;
                 position: absolute;
                 top: 70px;
-                left: 0;
                 right: 0;
+                width: 220px;
                 background: white;
-                box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-                padding: 16px 0;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+                padding: 8px 0 16px;
                 z-index: 1000;
                 gap: 0;
+                border-radius: 0 0 0 16px;
             }
             .nav-menu.open { display: flex; }
             .nav-menu li { width: 100%; }
             .nav-menu a {
                 display: block;
-                padding: 14px 28px;
+                padding: 13px 22px;
                 border-radius: 0;
-                font-size: 17px;
+                font-size: 16px;
                 border-bottom: 1px solid #f0f0f0;
             }
             .nav-menu a:hover { background-color: #fff5f0; color: #c95210; }
+            .nav-close-row {
+                display: flex;
+                justify-content: flex-end;
+                padding: 8px 14px 0;
+            }
+            .nav-close-btn {
+                background: none;
+                border: 2px solid #ddd;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+                cursor: pointer;
+                color: #888;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+            }
         }
 
         .hero-banner-container {
@@ -675,7 +695,13 @@
 
         /* PDF preview */
         .pdf-preview-section { margin-bottom: 0; margin-top: 8px; }
-        .pdf-preview-label { font-weight: 600; font-size: 14px; color: #e03131; margin-bottom: 10px; }
+        .pdf-preview-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #e03131;
+            margin-bottom: 10px;
+            text-align: center;
+        }
         .pdf-preview-scroll-box {
             height: 380px;
             overflow-y: scroll;
@@ -884,6 +910,7 @@
             gap: 0;
             border-top: 1px solid #eee;
             padding-top: 40px;
+            flex-wrap: wrap;
         }
         .pricing-stat {
             display: flex;
@@ -910,9 +937,17 @@
 
         @media (max-width: 768px) {
             .pricing-grid { grid-template-columns: 1fr; }
-            .pricing-stats { flex-direction: column; gap: 20px; padding: 30px 0 0; }
-            .pricing-stat { border-right: none; border-bottom: 1px solid #eee; padding: 0 0 20px; }
-            .pricing-stat:last-child { border-bottom: none; }
+            .pricing-stats {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+                padding: 30px 0 0;
+            }
+            .pricing-stat {
+                border-right: none;
+                border-bottom: none;
+                padding: 0;
+            }
             .pricing-hero h1 { font-size: 26px; }
         }
 
@@ -945,8 +980,9 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a onclick="showContactsView()">Contacts</a></li>
                 <li><a onclick="showPricingView()">Pricing</a></li>
-                <li><a onclick="showPinnedView()" class="pin-nav-btn" title="Pinned lessons">📌 <span id="pin-count-badge" style="display:none"></span></a></li>
+                <li><a onclick="showPinnedView()" class="pin-nav-btn" title="Pinned lessons">📌 Pinned Lessons <span id="pin-count-badge" style="display:none"></span></a></li>
                 <li><a href="#">Login</a></li>
+                <li class="nav-close-row"><button class="nav-close-btn" onclick="closeMobileMenu()">✕</button></li>
             </ul>
         </div>
     </header>
@@ -1017,9 +1053,9 @@
                 <div class="pricing-divider"></div>
                 <ul class="pricing-features">
                     <li><span class="feat-icon friend-icon">👑</span><span>Everything in the Contributor tier, plus bi-weekly updates with fresh, exclusive content.</span></li>
-                    <li><span class="feat-icon friend-icon">📅</span><span>Manage your teaching schedule seamlessly with my personal <strong>planner app.</strong></span></li>
+                    <li><span class="feat-icon friend-icon">📅</span><span>Manage your teaching schedule seamlessly with my personal <strong>planner app.</strong> <span style="color:#888;">(see the info below)</span></span></li>
                     <li><span class="feat-icon friend-icon">🎥</span><span>One-on-one mentorship: A 30-minute Zoom session to discuss your teaching challenges or explore the tools I use.</span></li>
-                    <li><span class="feat-icon friend-icon">💬</span><span>Join our community chat on Telegram.</span></li>
+                    <li><span class="feat-icon friend-icon">💬</span><span>Join our private TG Friends chat — I'll prioritize your questions and issues there.</span></li>
                 </ul>
             </div>
 
@@ -1029,7 +1065,7 @@
         <div class="pricing-stats">
             <div class="pricing-stat">
                 <span class="stat-icon">📖</span>
-                <div><strong>New lessons</strong><br>every 2 weeks</div>
+                <div><strong>New lessons</strong><br>2 per week</div>
             </div>
             <div class="pricing-stat">
                 <span class="stat-icon">🎓</span>
@@ -1129,7 +1165,7 @@
                 </div>
 
                 <div class="pdf-preview-section">
-                    <div class="pdf-preview-label">ESLplan overview</div>
+                    <div class="pdf-preview-label">— ESLplan overview —</div>
                     <div class="pdf-preview-scroll-box" id="pdf-preview-box">
                         <div class="pdf-preview-loading">Loading preview...</div>
                     </div>
@@ -1202,6 +1238,29 @@
         let currentPage = 1;
         let filteredLessons = [];
 
+        // ── IMAGE: try both .JPG and .jpg/.jpeg if one fails ──
+        function getImageStyle(src) {
+            if (src.includes('linear-gradient')) return `background: ${src};`;
+            return `background-image: url('${src}'); background-size: cover; background-position: center; background-repeat: no-repeat;`;
+        }
+
+        function setImageWithFallback(el, src) {
+            if (src.includes('linear-gradient')) { el.style.background = src; return; }
+            const img = new Image();
+            img.onload = () => { el.style.backgroundImage = `url('${src}')`; el.style.backgroundSize = 'cover'; el.style.backgroundPosition = 'center'; };
+            img.onerror = () => {
+                // Try flipping extension case
+                let alt = src;
+                if (src.endsWith('.JPG')) alt = src.slice(0, -4) + '.jpg';
+                else if (src.endsWith('.jpg')) alt = src.slice(0, -4) + '.JPG';
+                else if (src.endsWith('.jpeg')) alt = src.slice(0, -5) + '.JPG';
+                else if (src.endsWith('.PNG')) alt = src.slice(0, -4) + '.png';
+                else if (src.endsWith('.png')) alt = src.slice(0, -4) + '.PNG';
+                if (alt !== src) { el.style.backgroundImage = `url('${alt}')`; el.style.backgroundSize = 'cover'; el.style.backgroundPosition = 'center'; }
+            };
+            img.src = src;
+        }
+
         function renderCatalogGrid() {
             const container = document.getElementById('catalog-grid-root');
             container.innerHTML = "";
@@ -1212,12 +1271,9 @@
                 const lesson = lessonsCatalog[catalogIndex];
                 const card = document.createElement('div');
                 card.className = `lesson-card ${lesson.category}`;
-                let artworkStyle = lesson.visualSource.includes('linear-gradient')
-                    ? `background: ${lesson.visualSource};`
-                    : `background-image: url('${lesson.visualSource}'); background-size: cover; background-position: center; background-repeat: no-repeat;`;
                 card.innerHTML = `
                     <div class="card-image-box">
-                        <div class="mock-3d-illustration" style="${artworkStyle}"></div>
+                        <div class="mock-3d-illustration" id="img-${catalogIndex}"></div>
                     </div>
                     <div class="card-title-strip">${lesson.title}</div>
                     <div class="card-details">
@@ -1232,6 +1288,7 @@
                         <div onclick="initiateDetailViewByIndex(${catalogIndex})" class="view-btn">View Lesson</div>
                     </div>`;
                 container.appendChild(card);
+                setImageWithFallback(document.getElementById(`img-${catalogIndex}`), lesson.visualSource);
             });
             renderPaginationUI();
         }
@@ -1353,14 +1410,7 @@
             document.getElementById('dynamic-card-title').innerText = lesson.title;
             document.getElementById('dynamic-sidebar-card').className = "lesson-card " + lesson.category;
             const artworkEl = document.getElementById('dynamic-card-artwork');
-            if (lesson.visualSource.includes('linear-gradient')) {
-                artworkEl.style.background = lesson.visualSource;
-            } else {
-                artworkEl.style.backgroundImage = `url('${lesson.visualSource}')`;
-                artworkEl.style.backgroundSize = "cover";
-                artworkEl.style.backgroundPosition = "center";
-                artworkEl.style.backgroundRepeat = "no-repeat";
-            }
+            setImageWithFallback(artworkEl, lesson.visualSource);
             document.getElementById('dynamic-card-type').innerText = `${lesson.categoryIcon} ${lesson.categoryLabel}`;
             document.getElementById('dynamic-card-media').innerText = `${lesson.mediaIcon} ${lesson.mediaType}`;
             document.getElementById('dynamic-card-level').innerText = '🥇 ' + lesson.levelLabel;
@@ -1548,13 +1598,10 @@
             const totalPages = Math.ceil(pinnedIds.length / PINNED_PER_PAGE);
             pinnedPage = Math.min(pinnedPage, totalPages);
             const pageSlice = pinnedIds.slice((pinnedPage - 1) * PINNED_PER_PAGE, pinnedPage * PINNED_PER_PAGE);
-            grid.innerHTML = pageSlice.map(idx => {
+            grid.innerHTML = pageSlice.map((idx, i) => {
                 const l = lessonsCatalog[idx];
-                const visual = l.visualSource.includes('linear-gradient')
-                    ? `style="background:${l.visualSource}"`
-                    : `style="background-image:url('${l.visualSource}');background-size:cover;background-position:center;"`;
                 return `<div class="lesson-card ${l.category}">
-                    <div class="card-image-box"><div class="mock-3d-illustration" ${visual}></div></div>
+                    <div class="card-image-box"><div class="mock-3d-illustration" id="pinimg-${i}"></div></div>
                     <div class="card-title-strip">${l.title}</div>
                     <div class="card-details">
                         <div class="tag-row">
@@ -1569,6 +1616,9 @@
                     <div onclick="initiateDetailViewByIndex(${idx})" class="view-btn">View Lesson</div>
                 </div>`;
             }).join('');
+            pageSlice.forEach((idx, i) => {
+                setImageWithFallback(document.getElementById(`pinimg-${i}`), lessonsCatalog[idx].visualSource);
+            });
             if (totalPages <= 1) { paginationRoot.innerHTML = ''; return; }
             paginationRoot.innerHTML = '';
             const prev = document.createElement('span');
