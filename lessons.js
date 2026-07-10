@@ -6,6 +6,219 @@
 const lessonsCatalog = [
 
     {
+        dateAdded: "2026-07-10",
+        title: "Your Job Won't Love You Back",
+        category: "business",
+        categoryLabel: "Business English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "💼",
+        level: "b2",
+        levelLabel: "B2-C1",
+        duration: "90 min",
+        visualSource: "images/b2_your_job_wont_love_you_back.JPG",
+        keywords: "job passion loyalty corporate family redundancy betrayal Gen Z side hustle career work ethic self-worth professional identity business b2 c1",
+        heading: "What's Inside 'Your Job Won't Love You Back'",
+        objectives: [
+            "Identify and practice functional language for describing job responsibilities, skills, and professional experience;",
+            "Analyze the shifting dynamics of employer-employee loyalty through listening comprehension and statistical data;",
+            "Critically evaluate cultural myths about \"finding your passion\" and the \"corporate family\" narrative through video analysis and debate."
+        ],
+        description: "In this lesson, students begin by examining famous quotes about \"doing what you love\" and defining key idioms like to settle and matter of the heart to discuss whether their own jobs are their passion.\n\nThey then expand their professional vocabulary by categorizing phrases used to describe duties, positions, and skills, before listening to three professionals describe the roles they initially loved. The lesson takes a realistic turn as students listen to the same speakers two years later — now facing redundancy and betrayal — prompting a discussion on the limits of corporate loyalty.\n\nLearners analyze statistical data regarding Gen Z's transactional approach to work, side hustles, and dissatisfaction with traditional career paths.\n\nFinally, students contrast cultural myths with \"brutal truths\" by watching videos that challenge the idea of a company as a \"second family,\" exploring the reality that the corporate machine keeps going without the individual. They conclude by examining generational shifts in work ethic and discussing the importance of separating self-worth from professional identity.",
+        pdfUrl: "materials/b2_your_job_wont_love_you_back.pdf",
+        audioUrl: "audio/b2_your_job_wont_love_you_back_3_speakers_on_jobs_Part1.mp3",
+        audioUrls: [
+            { label: "3 Speakers Part 1", url: "audio/b2_your_job_wont_love_you_back_3_speakers_on_jobs_Part1.mp3" },
+            { label: "3 Speakers Part 2", url: "audio/b2_your_job_wont_love_you_back_3_speakers_on_jobs_Part2.mp3" }
+        ],
+        rarUrl: "zips/b2_your_job_wont_love_you_back.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=RfCi2P55l08&lc=UgyEZjjGS3s4KuyaGJJ4AaABAg" },
+            { label: "Link 2", url: "https://www.youtube.com/shorts/0Zn5nbVWL8M" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-10",
+        title: "Great Stories",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "🎓",
+        level: "b2",
+        levelLabel: "B2-C1",
+        duration: "90-120 min",
+        visualSource: "images/b2_great_stories.JPG",
+        keywords: "storytelling true crime Michael Malloy speakeasy Depression-era New York insurance scam narrative drift compelling characters cheap melodrama cautionary tale b2 c1",
+        heading: "What's Inside 'Great Stories'",
+        objectives: [
+            "Distinguish between the elements of compelling and poor storytelling through literary analysis and vocabulary matching;",
+            "Practice reading and listening comprehension by following the multi-part true crime narrative of \"The Man Who Wouldn't Die\";",
+            "Critically evaluate narrative structure and character motivations by applying storytelling concepts to a historical tale of greed and survival."
+        ],
+        description: "In this lesson, students begin by categorizing positive and negative storytelling elements (e.g., compelling characters, narrative drift, cheap melodrama) and discussing what makes classic literature and films enduring.\n\nThey then dive into a true crime story set in Depression-era New York about Michael Malloy, a homeless alcoholic targeted by a gang of criminals for a life insurance scam. Through sequential reading and listening tasks, learners track the conspirators' increasingly absurd and lethal attempts to kill Malloy — ranging from poisoned alcohol and spoiled food to freezing exposure and carbon monoxide — while he miraculously survives each ordeal. Students expand their vocabulary by matching terms like speakeasy, intoxicated, beneficiaries, and cautionary tale to their definitions.\n\nFinally, they consolidate their understanding by retelling the story's climax, where the criminals are ultimately caught and executed, and reflect on how the real-life events align with the narrative techniques discussed at the start of the lesson.",
+        pdfUrl: "materials/b2_great_stories.pdf",
+        audioUrl: "audio/b2_great_stories_part_2.mp3",
+        rarUrl: "zips/b2_great_stories.rar",
+        mediaLabel: "The audio streams:",
+        links: []
+    },
+
+    {
+        dateAdded: "2026-07-10",
+        title: "Coffee Of All Beverages",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_coffee_of_all_beverages.JPG",
+        keywords: "coffee beverages matcha yerba mate salep personality neurotic laid-back high-maintenance mental health J-shaped olfactory mouthfeel water temperature tasting b1 b2 food drink",
+        heading: "What's Inside 'Coffee Of All Beverages'",
+        objectives: [
+            "Identify traditional beverages from around the world and analyze their taste profiles;",
+            "Explore the psychological stereotypes linked to coffee preferences and practice related personality vocabulary;",
+            "Evaluate scientific research on the impact of coffee consumption on mental health and the sensory elements of coffee tasting."
+        ],
+        description: "In this lesson, students begin by matching traditional global drinks (e.g., Matcha, Yerba Mate, Salep) to their countries of origin and discussing their own daily beverage routines. They then examine a chart that links coffee preferences — such as black, latte, or instant coffee — to specific personality traits, matching descriptive vocabulary like neurotic, high-maintenance, and laid-back to their definitions.\n\nAfter listening to four speakers discuss their drinking habits and the accuracy of these stereotypes, students read an article about a 2026 study revealing a \"J-shaped\" relationship between coffee intake and mental health, identifying the optimal \"sweet spot\" of two to three cups for reducing stress.\n\nFinally, learners evaluate the sensory components of a perfect cup of coffee and watch a video detailing how factors like the olfactory bulb, mouthfeel, and water temperature contribute to the overall tasting experience.",
+        pdfUrl: "materials/b1_coffee_of_all_beverages.pdf",
+        audioUrl: "audio/b1_coffee_of_all_beverages_4_people.mp3",
+        rarUrl: "zips/b1_coffee_of_all_beverages.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Video", url: "https://www.youtube.com/watch?v=IkssYHTSpH4" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-10",
+        title: "The Seven Digital Deadly Sins",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "🎓",
+        level: "a2",
+        levelLabel: "A2-B1",
+        duration: "60-90 min",
+        visualSource: "images/b1_the_seven_digital_deadly_sins.JPG",
+        keywords: "seven deadly sins pride greed lust envy gluttony wrath sloth digital trolling hoarding followers cyber-stalking scrolling social media online ethics boast hate campaign chronicle a2 b1",
+        heading: "What's Inside 'The Seven Digital Deadly Sins'",
+        objectives: [
+            "Explore the traditional concept of the Seven Deadly Sins and analyze how they manifest in modern digital behavior;",
+            "Practice reading comprehension and vocabulary acquisition through an article on internet habits and social media ethics;",
+            "Critically evaluate personal online habits and the psychological impacts of digital connectivity."
+        ],
+        description: "In this lesson, students begin by reviewing the definitions of the traditional Seven Deadly Sins (pride, greed, lust, envy, gluttony, wrath, and sloth) and answering relatable questions to identify these traits in their own daily lives.\n\nThe lesson then transitions to the digital age, where students read an article mapping these sins to modern online behaviors, such as trolling (wrath), hoarding followers (greed), avoiding real-world interactions (sloth), curating perfect online personas (pride), cyber-stalking (lust), comparing profiles (envy), and compulsive scrolling or shopping (gluttony). Students expand their vocabulary by matching bolded terms from the text (e.g., boast, hate campaign, chronicle, troll) to their definitions.\n\nThe lesson culminates in a personal reflection and discussion where learners evaluate their own digital habits, debate the ethical implications of online behavior, and analyze provocative quotes about the illusion of internet friendship and the performative nature of digital charity.",
+        pdfUrl: "materials/b1_the_seven_digital_deadly_sins.pdf",
+        audioUrl: null,
+        rarUrl: "zips/b1_the_seven_digital_deadly_sins.rar",
+        mediaLabel: "The audio streams:",
+        links: []
+    },
+
+    {
+        dateAdded: "2026-07-10",
+        title: "Appification",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "a2",
+        levelLabel: "A2-B1",
+        duration: "60-90 min",
+        visualSource: "images/a2_appification.JPG",
+        keywords: "appification apps smartphone digital habits Apple Pay ChatGPT Google Maps Barcelona screen time data privacy dependency battery loyalty rewards offline technology a2 b1",
+        heading: "What's Inside 'Appification'",
+        objectives: [
+            "Define the concept of \"appification\" and understand how mobile applications have transitioned everyday activities to digital platforms;",
+            "Practice listening and reading comprehension by matching speakers to their digital habits and following a travel narrative reliant on various smartphone tools;",
+            "Critically evaluate the benefits and drawbacks of a highly \"appified\" lifestyle, including data privacy concerns and digital dependency."
+        ],
+        description: "In this lesson, students begin by examining various smartphone home screens to identify common applications and discussing their personal usage habits. They then listen to four speakers describe their daily routines, matching each person to the specific apps they use for tasks like studying, running, gaming, and video calling. The lesson transitions to a reading activity featuring two travelers in Barcelona who rely entirely on apps like Apple Pay, ChatGPT, and Google Maps to navigate their trip.\n\nStudents review statistical facts about global app adoption and screen time before listening to a podcast that highlights the practical conveniences of apps, such as wireless payments, loyalty rewards, and offline utility.\n\nFinally, they watch short videos expressing public frustrations with mobile applications — such as data tracking, complex password resets, and over-reliance on battery life — leading to a critical discussion on whether the convenience of apps outweighs the loss of privacy and digital independence.",
+        pdfUrl: "materials/a2_appification.pdf",
+        audioUrl: "audio/a2_appification_4_phone_users.mp3",
+        audioUrls: [
+            { label: "4 Phone Users", url: "audio/a2_appification_4_phone_users.mp3" },
+            { label: "We Got An App Podcast", url: "audio/a2_appification_we_got_an_app_podcast.mp3" }
+        ],
+        rarUrl: "zips/a2_appification.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/shorts/ThNhwo6iyjA" },
+            { label: "Link 2", url: "https://www.youtube.com/shorts/bo7hw_jNkNo" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-10",
+        title: "USSR",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_ussr.JPG",
+        keywords: "USSR Soviet Union nostalgia Ostalgie appliances bread box soda siphon stereoscope Western jeans empty shelves communist youth myths Ida Igor Marina history b1 b2",
+        heading: "What's Inside 'USSR'",
+        objectives: [
+            "Identify and describe historical Soviet household appliances and their modern equivalents;",
+            "Analyze statistical data and societal attitudes regarding nostalgia for the USSR;",
+            "Evaluate common myths about everyday life in the Soviet Union through listening comprehension and discussion."
+        ],
+        description: "In this lesson, students begin by matching images of obsolete Soviet appliances (e.g., bread box, soda siphon, stereoscope) to their names and discussing what modern items have replaced them. They then examine poll data and graphs revealing a 14-year high in nostalgia for the Soviet era, sparking a discussion on the concept of \"Ostalgie\" and whether longing for the past hinders real progress.\n\nThe lesson transitions into a myth-busting activity where students evaluate nine common assumptions about Soviet daily life, such as the rarity of Western jeans, the reality of empty store shelves, and the expectation to join communist youth groups. Finally, students listen to a podcast featuring three individuals (Ida, Igor, and Marina) who share their personal childhood memories, matching specific quotes to the speakers and reflecting on how their perspectives on that era have evolved.",
+        pdfUrl: "materials/b1_ussr.pdf",
+        audioUrl: "audio/b1_ussr_quiz.mp3",
+        audioUrls: [
+            { label: "Quiz", url: "audio/b1_ussr_quiz.mp3" },
+            { label: "Podcast", url: "audio/b1_ussr_podcast.mp3" }
+        ],
+        rarUrl: "zips/b1_ussr.rar",
+        mediaLabel: "The audio streams:",
+        links: []
+    },
+
+    {
+        dateAdded: "2026-07-10",
+        title: "The Insomniacs",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_insomniacs.JPG",
+        keywords: "insomnia anxiety depression burnout mental health word formation insomniac anxious depressive found family Manhattan diner greasy-spoon sanctuary shattered strangers stress b1 b2",
+        heading: "What's Inside 'The Insomniacs'",
+        objectives: [
+            "Identify and discuss various quality-of-life-altering conditions (e.g., insomnia, burnout, anxiety) and their societal impacts;",
+            "Practice word formation by converting nouns related to health and mental states into their corresponding adjective forms;",
+            "Analyze a narrative about a support group of insomniacs through reading comprehension, vocabulary matching, and critical discussion."
+        ],
+        description: "In this lesson, students begin by reviewing and rating severe physical and mental health conditions, discussing their primary triggers, causes, and effective treatments in modern society. They then focus on word formation, practicing how to convert nouns like insomnia, anxiety, and depression into their adjective forms (insomniac, anxious, depressive) through targeted gap-fill exercises.\n\nThe core of the lesson explores a story based on Allison Winn Scotch's novel, where students follow four strangers — Sybil, Zeke, Julian, and Betty — who form a \"found family\" in a Manhattan diner. Students complete various comprehension tasks, including True/False statements, error correction, and matching narrative vocabulary (e.g., greasy-spoon, sanctuary, shattered) to their definitions.\n\nFinally, they reflect on the psychological themes of the story, debating whether it is easier to open up to strangers and how individuals react to extreme stress.",
+        pdfUrl: "materials/b1_insomniacs.pdf",
+        audioUrl: "audio/b1_insomniacs_introductions.mp3",
+        audioUrls: [
+            { label: "Introductions", url: "audio/b1_insomniacs_introductions.mp3" },
+            { label: "The Outro", url: "audio/b1_insomniacs_the_outro.mp3" }
+        ],
+        rarUrl: "zips/b1_insomniacs.rar",
+        mediaLabel: "The audio streams:",
+        links: []
+    },
+
+    {
         dateAdded: "2026-07-09",
         title: "The Everywhere Girl!",
         category: "general",
