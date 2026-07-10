@@ -6,6 +6,266 @@
 const lessonsCatalog = [
 
     {
+        dateAdded: "2026-07-11",
+        title: "Snoring",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_snoring.jpg",
+        keywords: "snoring bodily sounds sleep apnea bruxism hiccuping burping demographics statistics doctor health remedies stigma b1 b2",
+        objectives: [
+            "Identify and define common involuntary bodily sounds and explore social attitudes toward them;",
+            "Analyze statistical data regarding the prevalence and health implications of snoring across different demographics;",
+            "Practice listening comprehension by distinguishing between normal snoring and sleep apnea through video analysis."
+        ],
+        description: "In this lesson, students begin by matching definitions to a list of common bodily sounds (e.g., hiccuping, snoring, burping) and discussing which ones they find most annoying, embarrassing, or even contagious. They then examine a list of \"cringe-inducing\" noises, ranking them based on personal reactions before looking at statistical data about snoring, noting its high prevalence among men, women, and children, and how it increases with age.\n\nThe lesson transitions to medical contexts as students watch a video featuring a doctor and a patient to learn about sleep apnea. They identify key symptoms like teeth grinding (bruxism) and the characteristic choking or gasping sounds that follow periods of breathlessness.\n\nFinally, learners engage in a critical discussion about the social and health impacts of snoring, debating personal responsibility, the stigma surrounding sleep studies, and the effectiveness of common home remedies.",
+        pdfUrl: "materials/b1_snoring.pdf",
+        audioUrl: "audio/b1_snoring_9_sounds.mp3",
+        audioUrls: [
+            { label: "9 Sounds", url: "audio/b1_snoring_9_sounds.mp3" },
+            { label: "Snoring", url: "audio/b1_snoring_snoring.mp3" }
+        ],
+        rarUrl: "zips/b1_snoring.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=S9gGRbX5TKM" }]
+    },
+
+    {
+        dateAdded: "2026-07-11",
+        title: "Sauna",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video",
+        mediaIcon: "▶️",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "60-90 min",
+        visualSource: "images/b1_sauna.jpg",
+        keywords: "sauna banya hammam sento onsen Finnish Russian Turkish Japanese bathing wellness relaxation cold plunge health melting stress relief b1 b2",
+        objectives: [
+            "Explore the cultural, historical, and physiological aspects of sauna and bathing traditions around the world;",
+            "Practice wellness and relaxation vocabulary through matching tasks and visual descriptions;",
+            "Evaluate personal attitudes toward extreme heat, stress relief, and the symbolic act of \"melting\" away tension."
+        ],
+        description: "In this lesson, students begin by discussing their ideal weekend routines and watching a short film titled \"Sauna,\" where they analyze the protagonist's emotional journey and the symbolic meaning of \"melting\" in the heat.\n\nThey then expand their lexical range by matching key nouns, verbs, and adjectives (e.g., cold plunge, to lash, sacred) to their definitions and using them to describe visual prompts.\n\nThe lesson transitions into a cross-cultural exploration of bathing rituals, where learners read about the distinct practices of the Finnish Sauna, Russian Banya, Turkish Hammam, and Japanese Sento/Onsen, discussing the social and historical significance of each.\n\nFinally, students test their knowledge with a true/false quiz about the health benefits and physiological effects of sauna use, verify their answers via a video, and reflect on a literary quote about the transformative power of heat on the mind and body.",
+        pdfUrl: "materials/b1_sauna.pdf",
+        audioUrl: null,
+        rarUrl: "zips/b1_sauna.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=jDRxUfb1X0s" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=7c-OXc6H7us" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-11",
+        title: "Abu Dhabi",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_abu_dhabi.jpg",
+        keywords: "Abu Dhabi UAE expat travel tourism shoulder season stopover tax-free happiness cafe Margot Nikhil Katya relocation summer heat social laws b1 b2 travel",
+        objectives: [
+            "Explore travel preferences and essential vocabulary related to tourism, accommodations, and seasonal travel trends;",
+            "Evaluate the advantages and disadvantages of relocating to Abu Dhabi as an expatriate through statistical analysis and personal anecdotes;",
+            "Practice listening comprehension by extracting specific details from expat interviews and a news segment about workplace happiness initiatives."
+        ],
+        description: "In this lesson, students begin by defining key tourism terms (e.g., shoulder season, stopover, hop-on hop-off) and discussing their personal travel preferences regarding planning, budgets, and destination types. They then watch a video about Abu Dhabi tourism to answer a \"Know Before You Go\" quiz, covering practical tips on weather, transport, and free attractions.\n\nThe lesson transitions to the realities of expat life, where learners categorize the pros and cons of living in the UAE — such as tax-free income versus extreme summer heat and strict social laws. Students expand their vocabulary by matching synonyms (e.g., ambience, enthused, asset) before analyzing a government initiative to open a \"Happiness Cafe\" for employees.\n\nFinally, students listen to three expats (Margot, Nikhil, and Katya) share their daily routines, financial habits, and emotional experiences, matching specific anecdotes to the speakers and discussing the challenges of building a support network and maintaining work-life balance abroad.",
+        pdfUrl: "materials/b1_abu_dhabi.pdf",
+        audioUrl: "audio/b1_abu_dhabi_cafe.mp3",
+        audioUrls: [
+            { label: "Happiness Cafe", url: "audio/b1_abu_dhabi_cafe.mp3" },
+            { label: "3 Expats", url: "audio/b1_abu_dhabi_3_expats.mp3" }
+        ],
+        rarUrl: "zips/b1_abu_dhabi.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=vOQSXY4Ytc0" }]
+    },
+
+    {
+        dateAdded: "2026-07-11",
+        title: "Learned Helplessness",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video",
+        mediaIcon: "▶️",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1-C1",
+        duration: "90 min",
+        visualSource: "images/b1_learned_helplessness.jpg",
+        keywords: "learned helplessness Seligman Maier psychology word formation -ness -less anagram Nabokov Lolita Charisse Nixon classroom experiment dating peer pressure victimization b1 c1 psychology",
+        objectives: [
+            "Understand the psychological concept of learned helplessness through historical experiments and real-life examples;",
+            "Practice word formation by applying the suffixes -ness, -less, and -lessness to create nouns and adjectives;",
+            "Explore the linguistic phenomenon of anagrams and their creative use in literature."
+        ],
+        description: "In this lesson, students begin by exploring word formation, categorizing words that take the suffixes -ness, -less, and the combined -lessness, before using them to complete personal reflection questions (e.g., priceless, fearless, speechless).\n\nThe lesson then introduces the core psychological concept of learned helplessness. Students sequence and analyze the stages of Martin Seligman and Steven F. Maier's classic experiment, distinguishing between the control group, the escapable shock group, and the inescapable shock group to understand how a cognitive expectation of unavoidable failure develops.\n\nNext, students engage with a linguistic puzzle by identifying anagrams (e.g., listen to silent) and exploring Vladimir Nabokov's creative use of anagrams as character names in his novel Lolita.\n\nFinally, learners watch a video of Charisse Nixon's classroom anagram experiment, observing how students react when given unsolvable puzzles, and discuss how this induced helplessness manifests in real-world social environments like dating, peer pressure, and childhood victimization.",
+        pdfUrl: "materials/b1_learned_helplessness.pdf",
+        audioUrl: null,
+        rarUrl: "zips/b1_learned_helplessness.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=q35FtODk64g&t" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=gFmFOmprTt0" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-11",
+        title: "Girls Labels",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "a2",
+        levelLabel: "A2-B1",
+        duration: "60-90 min",
+        visualSource: "images/a2_girls_labels.jpg",
+        keywords: "girls labels delulu girlboss beige mum corporate girlie tradwife pick me girl internet stereotypes empowering limiting Milena Zoya Elara Amaris society a2 b1",
+        objectives: [
+            "Explore and define modern internet labels and stereotypes applied to women, such as \"delulu,\" \"girlboss,\" and \"beige mum\";",
+            "Practice listening comprehension by matching speakers to their personal experiences and the specific labels they are given;",
+            "Critically evaluate the societal impact of these labels by categorizing them on a spectrum and discussing their empowering or limiting nature."
+        ],
+        description: "In this lesson, students begin by examining a word cloud of popular internet labels (e.g., corporate girlie, tradwife, pick me girl) and discussing where they have encountered them and whether they are used positively, negatively, or jokingly. They then expand their vocabulary by matching these terms to their specific definitions, exploring the distinct aesthetics and behaviors associated with each archetype.\n\nThe core of the lesson features a listening activity where students hear four women — Milena, Zoya, Elara, and Amaris — describe their lives, hobbies, and the labels they receive, requiring learners to identify specific details about each speaker's profession and feelings toward their label.\n\nFinally, students critically analyze these stereotypes by placing them on a spectrum from empowering to limiting, before engaging in a discussion about which labels are most misunderstood, which create the strongest reactions, and which ones they would personally remove from society. Students can also do an extra speaking task where they discuss what male labels are.",
+        pdfUrl: "materials/a2_girls_labels.pdf",
+        audioUrl: "audio/a2_girls_labels_4_ladies.mp3",
+        rarUrl: "zips/a2_girls_labels.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=hNS_D-pw8y4" }]
+    },
+
+    {
+        dateAdded: "2026-07-11",
+        title: "Chinese English",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "60-90 min",
+        visualSource: "images/b1_chinese_english.jpg",
+        keywords: "Chinese English accent phonetics staccato tonal language vowel insertion Russell Peters comedy saving face negotiation pronunciation Annie story b1 b2",
+        objectives: [
+            "Explore common cultural stereotypes and practices associated with Chinese people through humor and discussion;",
+            "Analyze the linguistic and phonetic features of a generalized Chinese accent in English, including vowel insertion, consonant substitution, and tonal influence;",
+            "Practice pronunciation theory and apply specific accent characteristics to a listening and speaking task."
+        ],
+        description: "In this lesson, students begin by matching business-related vocabulary and evaluating a list of common stereotypes about Chinese business culture, such as the importance of \"saving face,\" indirect communication, and aggressive negotiation tactics. They then watch a comedy sketch by Russell Peters, which humorously highlights these cultural tropes and parodies the Chinese accent in English.\n\nThe lesson transitions into a detailed phonetic breakdown, where learners review key linguistic terms like staccato, tonal language, and conjugation, and practice breaking down complex English words. Students watch an instructional video outlining the five main steps of a generalized Chinese accent — such as adding extra vowel sounds to ending consonants, replacing \"th\" sounds, and applying tonal pitch patterns.\n\nFinally, they listen to a short narrative about a character named Annie read by a Chinese female speaker, identifying the discussed phonetic features before attempting to retell the story themselves using the newly acquired pronunciation rules.",
+        pdfUrl: "materials/b1_chinese_english.pdf",
+        audioUrl: "audio/b1_chinese_english_annie_story.mp3",
+        rarUrl: "zips/b1_chinese_english.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=ITwPzduUmCw" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=VoQUVpOK61M" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-11",
+        title: "Underbelly of the Internet",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "🎓",
+        level: "b2",
+        levelLabel: "B2-C1",
+        duration: "90 min",
+        visualSource: "images/b2_underbelly_of_the_internet.jpg",
+        keywords: "internet underbelly darknet gambling troll anonymous reporting verbs concede proclaim maintain digital shadow digital hygiene digital exile privacy surveillance ethics b2 c1",
+        objectives: [
+            "Analyze surprising statistics about hidden internet activities and the concept of the web's \"underbelly\";",
+            "Practice categorizing and using advanced reporting verbs to express nuances of truth, denial, and public assertion;",
+            "Evaluate complex ethical dilemmas regarding digital footprints, online privacy, and modern digital collocations."
+        ],
+        description: "In this lesson, students begin by examining striking statistics about global internet usage — ranging from online gambling losses to darknet transactions — to define the hidden and unregulated areas of the digital world. They then read profiles of five seemingly ordinary individuals and attempt to match them to their secret online personas, such as an anonymous troll or a secret online gambler.\n\nThis leads into a focused grammar task where learners categorize advanced reporting verbs (e.g., to concede, to proclaim, to maintain) into functional groups before listening to the individuals' actual confessions to verify their guesses.\n\nThe lesson transitions to a critical discussion on the moral implications of these hidden digital lives, debating issues like workplace dismissal for private online activities and the ethics of consuming extreme content.\n\nFinally, students expand their lexical range by matching key digital collocations (e.g., digital shadow, digital hygiene, digital exile) to their definitions, and conclude by evaluating controversial statements about privacy, surveillance, and the inescapable nature of the modern digital era.",
+        pdfUrl: "materials/b2_underbelly_of_the_internet.pdf",
+        audioUrl: "audio/b2_underbelly_of_the_internet_5_speakers.mp3",
+        audioUrls: [
+            { label: "5 Speakers", url: "audio/b2_underbelly_of_the_internet_5_speakers.mp3" },
+            { label: "Politician", url: "audio/b2_underbelly_of_the_internet_politician.mp3" }
+        ],
+        rarUrl: "zips/b2_underbelly_of_the_internet.rar",
+        mediaLabel: "The audio streams:",
+        links: []
+    },
+
+    {
+        dateAdded: "2026-07-11",
+        title: "A One-Hit Wonder",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "a2",
+        levelLabel: "A2-B1",
+        duration: "60-90 min",
+        visualSource: "images/a2_one_hit_wonder.jpg",
+        keywords: "one hit wonder Angry Birds gaming viral Slinky Nutella Gotye Rick Astley relentless pacifist paranoid toys food music cinema technology a2 b1",
+        objectives: [
+            "Identify a mystery viral product and analyze the lifecycle of mobile gaming franchises;",
+            "Explore personality traits through character analysis and discuss the concept of a \"one-hit wonder\" across various industries;",
+            "Practice listening comprehension and categorize cultural phenomena into specific media and product sectors."
+        ],
+        description: "In this lesson, students begin by analyzing statistical clues to guess a mystery product (Angry Birds) and ordering gameplay instructions, followed by a discussion on the game's massive initial success and subsequent decline in popularity. They then expand their vocabulary by matching underlined personality traits (e.g., relentless, pacifist, paranoid) to their definitions and discussing which character best represents their own personality.\n\nThe lesson transitions to the concept of a \"one-hit wonder,\" defining the term and examining examples from toys, food, literature, and music (e.g., Slinky, Nutella, Gotye, Rick Astley). Finally, students listen to a conversation between two speakers discussing one-hit wonders, followed by a fun facts quiz where they match trivia clues to famous examples and categorize them into sectors like Cinema, Technology, and Food and Drink.",
+        pdfUrl: "materials/a2_one_hit_wonder.pdf",
+        audioUrl: "audio/a2_one_hit_wonder_chat.mp3",
+        rarUrl: "zips/a2_one_hit_wonder.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/shorts/LulGgQw9gog" }]
+    },
+
+    {
+        dateAdded: "2026-07-11",
+        title: "The Apple Doesn't Fall Far From a Tree",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "60-90 min",
+        visualSource: "images/b1_apple_doesnt_fall_far_from_a_tree.jpg",
+        keywords: "inherited traits family resemblance chip off the old block cut from the same cloth like father like son emotional inheritance Nina Simone loneliness mannerisms habits b1 b2",
+        objectives: [
+            "Explore the concept of inherited traits, mannerisms, and behavioral patterns through targeted idioms and reflective statements;",
+            "Practice listening comprehension by identifying specific inherited characteristics from personal anecdotes;",
+            "Analyze complex family dynamics and the concept of \"emotional inheritance\" through lyrical comprehension."
+        ],
+        description: "In this lesson, students begin by evaluating true/false statements about how adults unconsciously mimic their parents' habits, facial expressions, and routines as they age. They then explore common English idioms related to family resemblance and inherited behavior, such as \"chip off the old block,\" \"cut from the same cloth,\" and \"like father, like son.\"\n\nThe lesson continues with a listening activity featuring four speakers who share personal anecdotes, requiring students to identify the specific inherited traits they mention, ranging from tone of voice and conflict styles to brand loyalty and cleaning standards.\n\nFinally, students delve into a deep emotional analysis using Nina Simone's song \"Alone Again Naturally.\" They examine the lyrics to understand her complex, contradictory feelings toward her father on his deathbed and after his passing, concluding with a discussion on whether emotional states, such as loneliness or a broken heart, can be inherited just like physical mannerisms.",
+        pdfUrl: "materials/b1_apple_doesnt_fall_far_from_a_tree.pdf",
+        audioUrl: "audio/b1_apple_doesnt_fall_far_from_a_tree_podcast.mp3",
+        audioUrls: [
+            { label: "Podcast", url: "audio/b1_apple_doesnt_fall_far_from_a_tree_podcast.mp3" },
+            { label: "4 Speakers", url: "audio/b1_apple_doesnt_fall_far_from_a_tree_4_speakers.mp3" },
+            { label: "Nina Simone Song", url: "audio/b1_apple_doesnt_fall_far_from_a_tree_nina_simone_song.mp3" }
+        ],
+        rarUrl: "zips/b1_apple_doesnt_fall_far_from_a_tree.rar",
+        mediaLabel: "The audio streams:",
+        links: []
+    },
+
+    {
         dateAdded: "2026-07-10",
         title: "Your Job Won't Love You Back",
         category: "business",
