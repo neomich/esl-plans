@@ -6,6 +6,7 @@
     <title>ESL-plans — Conversation-Driven Lesson Plans</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c95210'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>ESL</text></svg>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -1014,6 +1015,128 @@
             border-radius: 50%; width: 16px; height: 16px;
             display: flex; align-items: center; justify-content: center;
         }
+        /* ── AUTH MODAL ── */
+        .auth-box {
+            background: white;
+            border-radius: 24px;
+            padding: 36px 32px;
+            max-width: 380px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .auth-close {
+            position: absolute; top: 14px; right: 18px;
+            background: none; border: none;
+            font-size: 20px; cursor: pointer; color: #aaa;
+        }
+        .auth-close:hover { color: #333; }
+        .auth-logo {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+        .auth-tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 24px;
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #888;
+            transition: all 0.2s;
+        }
+        .auth-tab.active {
+            background: white;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .auth-field {
+            margin-bottom: 16px;
+        }
+        .auth-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #555;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .auth-field input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .auth-field input:focus { border-color: #c95210; }
+        .auth-submit {
+            width: 100%;
+            background: #c95210;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .auth-submit:hover { background: #b0460b; transform: translateY(-1px); }
+        .auth-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+        .auth-switch {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 16px;
+        }
+        .auth-error {
+            background: #fff5f5;
+            border: 1px solid #fca5a5;
+            color: #e03131;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .auth-success {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        /* logged-in nav state */
+        .nav-user-btn {
+            background: #f0fdf4 !important;
+            color: #166534 !important;
+            border: 1.5px solid #86efac !important;
+            border-radius: 20px !important;
+            padding: 6px 14px !important;
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -1033,7 +1156,7 @@
                 <li><a onclick="showContactsView()">Contacts</a></li>
                 <li><a onclick="showPricingView()">Pricing</a></li>
                 <li><a onclick="showPinnedView()" class="pin-nav-btn" title="Pinned lessons">📌 Pinned Lessons <span id="pin-count-badge" style="display:none"></span></a></li>
-                <li><a href="#">Login</a></li>
+                <li><a onclick="openAuthModal()" id="nav-login-btn">Login</a></li>
                 <li class="nav-close-row"><button class="nav-close-btn" onclick="closeMobileMenu()">✕</button></li>
             </ul>
         </div>
@@ -1280,6 +1403,48 @@
         </div>
 
     </main>
+
+    <!-- AUTH MODAL -->
+    <div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:3000; align-items:center; justify-content:center;">
+        <div class="auth-box">
+            <button onclick="closeAuthModal()" class="auth-close">✕</button>
+
+            <div class="auth-logo"><span style="font-weight:900;font-style:italic;color:#c95210;font-family:'Segoe UI',sans-serif;">ESL</span><span style="font-weight:300;font-family:'Georgia',serif;">-plans</span></div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-signin" onclick="switchTab('signin')">Sign In</button>
+                <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <div id="auth-error" class="auth-error" style="display:none;"></div>
+            <div id="auth-success" class="auth-success" style="display:none;"></div>
+
+            <div id="auth-form">
+                <div class="auth-field">
+                    <label>Email</label>
+                    <input type="email" id="auth-email" placeholder="your@email.com" autocomplete="email">
+                </div>
+                <div class="auth-field">
+                    <label>Password</label>
+                    <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
+                </div>
+                <div class="auth-field" id="confirm-field" style="display:none;">
+                    <label>Confirm Password</label>
+                    <input type="password" id="auth-confirm" placeholder="••••••••" autocomplete="new-password">
+                </div>
+                <button class="auth-submit" id="auth-submit-btn" onclick="handleAuth()">Sign In</button>
+                <p class="auth-switch" id="auth-switch-text">
+                    Don't have an account? <a onclick="switchTab('signup')" style="color:#c95210;cursor:pointer;">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- USER MENU DROPDOWN -->
+    <div id="user-menu" style="display:none; position:fixed; top:75px; right:20px; background:white; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.15); padding:16px; z-index:2000; min-width:220px;">
+        <p id="user-email-display" style="font-size:14px;color:#888;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee;word-break:break-all;"></p>
+        <button onclick="handleSignOut()" style="width:100%;background:#e03131;color:white;border:none;border-radius:10px;padding:10px;font-size:15px;font-weight:700;cursor:pointer;">Sign Out</button>
+    </div>
 
     <!-- SHARE MODAL -->
     <div id="share-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
@@ -1836,6 +2001,145 @@
             _origInitiate(index);
             setLessonHash(index);
         };
+
+        // ── SUPABASE AUTH ──
+        const SUPABASE_URL = 'https://uhyapbinngjpotcifdbc.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_JNvGyFm_d1QGKCGj7SmXQQ_TNJ-vB-D';
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let currentUser = null;
+        let authMode = 'signin'; // 'signin' or 'signup'
+
+        // Check session on load
+        _supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) setLoggedIn(session.user);
+        });
+
+        // Listen for auth changes
+        _supabase.auth.onAuthStateChange((event, session) => {
+            if (session) setLoggedIn(session.user);
+            else setLoggedOut();
+        });
+
+        function setLoggedIn(user) {
+            currentUser = user;
+            const btn = document.getElementById('nav-login-btn');
+            const shortEmail = user.email.length > 18 ? user.email.substring(0, 18) + '…' : user.email;
+            btn.innerText = '✅ ' + shortEmail;
+            btn.className = 'nav-user-btn';
+            btn.onclick = toggleUserMenu;
+            document.getElementById('user-email-display').innerText = user.email;
+        }
+
+        function setLoggedOut() {
+            currentUser = null;
+            const btn = document.getElementById('nav-login-btn');
+            btn.innerText = 'Login';
+            btn.className = '';
+            btn.onclick = openAuthModal;
+            document.getElementById('user-menu').style.display = 'none';
+        }
+
+        function toggleUserMenu() {
+            const menu = document.getElementById('user-menu');
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Close user menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('user-menu');
+            const btn = document.getElementById('nav-login-btn');
+            if (menu.style.display === 'block' && !menu.contains(e.target) && e.target !== btn) {
+                menu.style.display = 'none';
+            }
+        });
+
+        function openAuthModal() {
+            closeMobileMenu();
+            document.getElementById('auth-modal').style.display = 'flex';
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+            document.getElementById('auth-email').value = '';
+            document.getElementById('auth-password').value = '';
+            document.getElementById('auth-confirm').value = '';
+            switchTab('signin');
+            setTimeout(() => document.getElementById('auth-email').focus(), 100);
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').style.display = 'none';
+        }
+
+        // Close on backdrop click
+        document.getElementById('auth-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeAuthModal();
+        });
+
+        function switchTab(mode) {
+            authMode = mode;
+            document.getElementById('tab-signin').classList.toggle('active', mode === 'signin');
+            document.getElementById('tab-signup').classList.toggle('active', mode === 'signup');
+            document.getElementById('confirm-field').style.display = mode === 'signup' ? 'block' : 'none';
+            document.getElementById('auth-submit-btn').innerText = mode === 'signin' ? 'Sign In' : 'Create Account';
+            document.getElementById('auth-switch-text').innerHTML = mode === 'signin'
+                ? 'Don\'t have an account? <a onclick="switchTab(\'signup\')" style="color:#c95210;cursor:pointer;">Sign Up</a>'
+                : 'Already have an account? <a onclick="switchTab(\'signin\')" style="color:#c95210;cursor:pointer;">Sign In</a>';
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+        }
+
+        function showAuthError(msg) {
+            const el = document.getElementById('auth-error');
+            el.innerText = msg;
+            el.style.display = 'block';
+            document.getElementById('auth-success').style.display = 'none';
+        }
+
+        function showAuthSuccess(msg) {
+            const el = document.getElementById('auth-success');
+            el.innerText = msg;
+            el.style.display = 'block';
+            document.getElementById('auth-error').style.display = 'none';
+        }
+
+        async function handleAuth() {
+            const email = document.getElementById('auth-email').value.trim();
+            const password = document.getElementById('auth-password').value;
+            const confirm = document.getElementById('auth-confirm').value;
+            const btn = document.getElementById('auth-submit-btn');
+
+            if (!email || !password) { showAuthError('Please fill in all fields.'); return; }
+            if (authMode === 'signup' && password !== confirm) { showAuthError('Passwords don\'t match.'); return; }
+            if (password.length < 6) { showAuthError('Password must be at least 6 characters.'); return; }
+
+            btn.disabled = true;
+            btn.innerText = authMode === 'signin' ? 'Signing in...' : 'Creating account...';
+
+            if (authMode === 'signin') {
+                const { error } = await _supabase.auth.signInWithPassword({ email, password });
+                if (error) { showAuthError(error.message); btn.disabled = false; btn.innerText = 'Sign In'; }
+                else { closeAuthModal(); }
+            } else {
+                const { error } = await _supabase.auth.signUp({ email, password });
+                if (error) { showAuthError(error.message); btn.disabled = false; btn.innerText = 'Create Account'; }
+                else {
+                    showAuthSuccess('Account created! You are now logged in.');
+                    btn.disabled = false;
+                    btn.innerText = 'Create Account';
+                    setTimeout(closeAuthModal, 1500);
+                }
+            }
+        }
+
+        async function handleSignOut() {
+            await _supabase.auth.signOut();
+            document.getElementById('user-menu').style.display = 'none';
+        }
+
+        // Allow Enter key in auth form
+        document.getElementById('auth-modal').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') handleAuth();
+        });
 
         lessonsCatalog.sort((a, b) => new Date(b.dateAdded || "2000-01-01") - new Date(a.dateAdded || "2000-01-01"));
 
