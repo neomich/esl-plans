@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>ESLplans - Conversation-Driven Lesson Plans</title>
+    <title>ESL-plans — Conversation-Driven Lesson Plans</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c95210'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>ESL</text></svg>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <style>
         * {
@@ -123,6 +124,7 @@
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+        .nav-close-row { display: none; }
         @media (max-width: 768px) {
             .hamburger { display: flex; }
             .nav-menu {
@@ -150,12 +152,11 @@
                 border-bottom: 1px solid #f0f0f0;
                 text-align: center;
             }
-            .nav-menu a:hover { background-color: #fff5f0; color: #c95210; }
-            .nav-close-row {
-                display: flex;
-                justify-content: center;
-                padding: 10px 14px 0;
-            }
+            .nav-menu li:nth-child(1) a { color: #1a4fa0; font-weight: 800; }
+            .nav-menu li:nth-child(2) a { color: #ff7a00; font-weight: 800; }
+            .nav-menu li:nth-child(3) a { color: #e03131; font-weight: 800; }
+            .nav-menu li:nth-child(4) a { color: #2e7d32; font-weight: 800; }
+            .nav-close-row { display: flex; justify-content: center; padding: 10px 14px 0; }
             .nav-close-btn {
                 background: none;
                 border: 2px solid #ddd;
@@ -733,13 +734,27 @@
 
         /* Contacts page */
         .contacts-view { max-width: 860px; margin: 50px auto; padding: 0 20px 60px; text-align: left; }
-        .contacts-view h2 { font-size: 32px; font-weight: 700; color: #333; margin-bottom: 30px; text-align: center; }
+        .contacts-view h2 {
+            font-size: 32px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-family: 'Georgia', serif;
+        }
+        .contacts-view h2 strong {
+            font-weight: 900;
+            font-family: 'Segoe UI', sans-serif;
+            font-style: italic;
+            color: #c95210;
+        }
 
         .bio-card { display: flex; gap: 36px; align-items: flex-start; margin-bottom: 40px; }
         .bio-photo-col { flex-shrink: 0; }
         .bio-photo {
             width: 210px;
-            height: 270px;
+            height: auto;
+            max-height: 420px;
             border-radius: 16px;
             object-fit: cover;
             object-position: center top;
@@ -1121,7 +1136,7 @@
 
     <!-- CONTACTS PAGE -->
     <div id="contacts-view" style="display:none;" class="contacts-view">
-        <h2>Contacts</h2>
+        <h2><strong>ESL</strong>-plans — Welcome!</h2>
 
         <div class="bio-card">
             <div class="bio-photo-col">
