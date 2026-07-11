@@ -738,14 +738,21 @@
         .bio-card { display: flex; gap: 36px; align-items: flex-start; margin-bottom: 40px; }
         .bio-photo-col { flex-shrink: 0; }
         .bio-photo {
-            width: 160px; height: 160px;
-            border-radius: 50%;
-            object-fit: cover; object-position: center top;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-            border: 4px solid #ff7a00;
+            width: 210px;
+            height: 270px;
+            border-radius: 16px;
+            object-fit: cover;
+            object-position: center top;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
         }
         .bio-text-col { display: flex; flex-direction: column; gap: 16px; }
-        .bio-text-col p { font-size: 16px; color: #444; line-height: 1.7; }
+        .bio-text-col p {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.75;
+            text-align: justify;
+            text-indent: 1.4em;
+        }
 
         .contacts-social { text-align: center; }
         .contacts-social-label { font-size: 17px; color: #555; margin-bottom: 20px; }
