@@ -157,6 +157,11 @@
             .nav-menu li:nth-child(2) a { color: #ff7a00; font-weight: 800; }
             .nav-menu li:nth-child(3) a { color: #e03131; font-weight: 800; }
             .nav-menu li:nth-child(4) a { color: #2e7d32; font-weight: 800; }
+            .nav-menu .nav-user-btn {
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+            }
             .nav-close-row { display: flex; justify-content: center; padding: 10px 14px 0; }
             .nav-close-btn {
                 background: none;
@@ -1137,6 +1142,43 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
+        /* User dropdown menu */
+        #user-menu {
+            position: fixed;
+            top: 80px;
+            right: 30px;
+            background: #f8f8f8;
+            border: 1px solid #e0e0e0;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            padding: 16px;
+            z-index: 2000;
+            min-width: 220px;
+        }
+
+        /* Password show/hide */
+        .auth-input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .auth-input-wrap input {
+            flex: 1;
+            padding-right: 44px;
+        }
+        .auth-eye {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #888;
+            padding: 0;
+            line-height: 1;
+        }
+        .auth-eye:hover { color: #333; }
     </style>
 </head>
 <body>
@@ -1426,11 +1468,17 @@
                 </div>
                 <div class="auth-field">
                     <label>Password</label>
-                    <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
+                    <div class="auth-input-wrap">
+                        <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
+                        <button type="button" class="auth-eye" onclick="togglePass('auth-password',this)">👁</button>
+                    </div>
                 </div>
                 <div class="auth-field" id="confirm-field" style="display:none;">
                     <label>Confirm Password</label>
-                    <input type="password" id="auth-confirm" placeholder="••••••••" autocomplete="new-password">
+                    <div class="auth-input-wrap">
+                        <input type="password" id="auth-confirm" placeholder="••••••••" autocomplete="new-password">
+                        <button type="button" class="auth-eye" onclick="togglePass('auth-confirm',this)">👁</button>
+                    </div>
                 </div>
                 <button class="auth-submit" id="auth-submit-btn" onclick="handleAuth()">Sign In</button>
                 <p class="auth-switch" id="auth-switch-text">
@@ -1441,7 +1489,7 @@
     </div>
 
     <!-- USER MENU DROPDOWN -->
-    <div id="user-menu" style="display:none; position:fixed; top:75px; right:20px; background:white; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.15); padding:16px; z-index:2000; min-width:220px;">
+    <div id="user-menu" style="display:none;">
         <p id="user-email-display" style="font-size:14px;color:#888;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee;word-break:break-all;"></p>
         <button onclick="handleSignOut()" style="width:100%;background:#e03131;color:white;border:none;border-radius:10px;padding:10px;font-size:15px;font-weight:700;cursor:pointer;">Sign Out</button>
     </div>
@@ -2001,6 +2049,17 @@
             _origInitiate(index);
             setLessonHash(index);
         };
+
+        function togglePass(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.innerText = '🙈';
+            } else {
+                input.type = 'password';
+                btn.innerText = '👁';
+            }
+        }
 
         // ── SUPABASE AUTH ──
         const SUPABASE_URL = 'https://uhyapbinngjpotcifdbc.supabase.co';
