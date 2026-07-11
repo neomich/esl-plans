@@ -6,6 +6,234 @@
 const lessonsCatalog = [
 
     {
+        dateAdded: "2026-07-12",
+        title: "AI Scam",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_ai_scam.jpg",
+        keywords: "scam fraud deepfake AI phishing identity theft dating scam get-rich-quick fake money robotic mislead wallet polished sources Philippines Vietnam Japan mobile b1 b2 technology",
+        objectives: [
+            "Identify and categorize different types of scams and fraud schemes through definition matching and real-world examples;",
+            "Analyze the rapid growth of AI-powered fraud and deepfake technology through statistical data and case studies;",
+            "Evaluate personal vulnerability to phishing attacks and practice critical thinking strategies for detecting digital deception."
+        ],
+        description: "In this lesson, students begin by defining what constitutes a scam and matching various fraud types (e.g., fake money, unexpected winnings, identity theft, get-rich-quick schemes, dating scams, buyer-seller fraud) to their specific descriptions. They then examine real testimonies from scam victims, matching each person's story to the type of fraud they experienced.\n\nThe lesson transitions to the technological aspect of modern fraud, where learners analyze a world map showing dramatic increases in deepfake-specific fraud cases across different countries (e.g., Philippines 4,500%, Vietnam 3,050%, Japan 2,800%). Students watch a video about AI-generated fake reporters and evaluate the believability of these deepfakes before reviewing alarming statistics about mobile phishing attacks.\n\nFinally, students complete a gap-fill exercise using vocabulary from a \"How to Spot an AI Scam\" video (e.g., robotic, mislead, wallet, polished, sources) and discuss practical detection strategies, such as checking facial movements, verifying sources, and recognizing unnatural phrasing in messages.",
+        pdfUrl: "materials/b1_ai_scam.pdf",
+        audioUrl: "audio/b1_ai_scam_4_speakers.mp3",
+        rarUrl: "zips/b1_ai_scam.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=zb7grp0N7Ek" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=uqnIjfe1Ems" },
+            { label: "Link 3", url: "https://www.youtube.com/watch?v=NKGoDUbyTEk" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "Quote of the Day",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_quote_of_the_day.jpg",
+        keywords: "quotes Steve Jobs Banksy Einstein intelligence clever smart wise night owl left-handedness dark humor smart move financial decisions phishing workplace b1 b2",
+        objectives: [
+            "Interpret famous quotes about focus, power, and success through listening comprehension;",
+            "Distinguish between synonyms for intelligence (e.g., clever, smart, wise) and apply them in context;",
+            "Evaluate common myths and truths about intelligence based on scientific studies and personal habits."
+        ],
+        description: "In this lesson, students begin by matching famous quotes from figures like Steve Jobs, Banksy, and Albert Einstein to their underlying meanings, verifying their interpretations via a podcast. The lesson then shifts to vocabulary building, where learners differentiate between nuanced terms for intelligence — such as clever, intelligent, smart, and wise — by completing contextual gap-fill exercises.\n\nNext, students engage in a critical thinking activity by reading ten surprising statements about the correlation between intelligence and various traits (e.g., being a night owl, left-handedness, or having a dark sense of humor). They predict whether these statements are myths or truths before watching a video to check their answers.\n\nFinally, the class explores the concept of a \"smart move\" by analyzing real-life scenarios — ranging from financial decisions and phishing emails to handling workplace conflicts and managing homework deadlines — and debate which actions demonstrate good judgment.",
+        pdfUrl: "materials/b1_quote_of_the_day.pdf",
+        audioUrl: "audio/b1_quote_of_the_day_6_quotes_podcast.mp3",
+        rarUrl: "zips/b1_quote_of_the_day.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=_X8XtZZYkNA" }]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "A Cult",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-c1",
+        levelLabel: "B1-C1",
+        duration: "90 min",
+        visualSource: "images/b1_a_cult.jpg",
+        keywords: "cult indoctrination love-bombing gaslighting isolation thought-terminating clichés high-control groups coercive control Mark Anna celebrities TikTok wellness conspiracy online b1 c1 psychology",
+        objectives: [
+            "Identify the psychological manipulation tactics used by high-control groups and understand the psychological process of indoctrination;",
+            "Analyze real-life case studies to recognize the warning signs of coercive control and emotional exploitation;",
+            "Evaluate modern digital and online movements to distinguish between healthy communities and harmful, cult-like organizations."
+        ],
+        description: "In this lesson, students begin by examining high-profile cases of celebrities who were involved in various controversial groups, matching them to specific organizations and discussing the initial appeal of such communities as well as the difficulties of leaving them.\n\nThe lesson then transitions to the core mechanics of indoctrination, where learners match specific psychological manipulation techniques — such as love-bombing, gaslighting, isolation, and thought-terminating clichés — to their definitions. Students debunk common myths about cults through a true/false exercise, clarifying that these groups often target vulnerable individuals during major life transitions.\n\nThe core of the lesson features personal accounts from two individuals, Mark and Anna, requiring students to identify the specific coercive tactics used against them and reflect on the emotional impact of losing one's autonomy.\n\nFinally, students analyze modern, digital-era examples of high-control groups — ranging from extreme TikTok mentoring schemes to online wellness and conspiracy networks — before engaging in a critical discussion on how to recognize red flags and safely support friends who might be falling under harmful influences.",
+        pdfUrl: "materials/b1_a_cult.pdf",
+        audioUrl: "audio/b1_a_cult_celebs_quiz.mp3",
+        audioUrls: [
+            { label: "Celebs Quiz", url: "audio/b1_a_cult_celebs_quiz.mp3" },
+            { label: "Mark and Anna", url: "audio/b1_a_cult_mark_and_anna.mp3" }
+        ],
+        rarUrl: "zips/b1_a_cult.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=TU-9-5k-rDM" }]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "12 Rules for Life",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "🎓",
+        level: "b2-c1",
+        levelLabel: "B2-C1",
+        duration: "90 min",
+        visualSource: "images/b2_12_rules_for_life.jpg",
+        keywords: "Jordan Peterson 12 rules for life personal responsibility chaos meaning morning routines toxic friendships social media YouTube philosophy young people wise father figures b2 c1",
+        objectives: [
+            "Explore the core principles of Jordan B. Peterson's 12 Rules for Life and the concept of radical personal responsibility;",
+            "Practice listening comprehension by identifying specific life changes and anecdotes related to the book's rules;",
+            "Critically evaluate the book's global success, target audience, and the modern search for meaning through podcast analysis and thematic discussion."
+        ],
+        description: "In this lesson, students begin by examining statistics on morning routines and preparation habits, discussing how small daily actions can set the tone for a more productive day. The lesson then introduces Jordan B. Peterson and his bestseller 12 Rules for Life: An Antidote to Chaos, outlining the twelve principles which range from practical advice like \"stand up straight\" to philosophical concepts like \"pursue what is meaningful.\"\n\nStudents listen to three individuals share how specific rules transformed their personal and professional lives — such as completing a 10K race, owning up to a work mistake, or prioritizing sleep — and match their anecdotes to the corresponding rules. This leads to a personal reflection phase where learners answer targeted questions linked to the rules, such as dealing with toxic friendships and pursuing meaningful goals over instant gratification.\n\nThe lesson transitions to an analysis of the book's cultural impact through a podcast unpacking its global success. Students verify True/False statements regarding the book's core appeal, the role of social media, and Peterson's controversial public persona.\n\nFinally, students engage in a deep discussion about broader themes, such as why young people are seeking \"wise father figures\" or \"maps\" for life, the validity of getting philosophy from \"bite-sized\" YouTube clips, and whether focusing entirely on fixing oneself is the best way to combat the uncertainty of the modern world.",
+        pdfUrl: "materials/b2_12_rules_for_life.pdf",
+        audioUrl: "audio/b2_12_rules_for_life_3_reviews.mp3",
+        audioUrls: [
+            { label: "3 Reviews", url: "audio/b2_12_rules_for_life_3_reviews.mp3" },
+            { label: "Podcast", url: "audio/b2_12_rules_for_life_podcast.mp3" }
+        ],
+        rarUrl: "zips/b2_12_rules_for_life.rar",
+        mediaLabel: "The audio streams:",
+        links: []
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "Absurdism",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_absurdism.jpg",
+        keywords: "absurdism Camus Kierkegaard Theatre of the Absurd meaninglessness social conventions clapping tipping small talk Romany blog failure Dali Magritte surreal philosophy b1 b2 psychology",
+        objectives: [
+            "Define the philosophical concept of absurdism and evaluate personal attitudes toward meaning and meaninglessness;",
+            "Critically analyze everyday social conventions and mundane habits through an absurdist lens;",
+            "Practice listening comprehension and vocabulary by exploring a personal narrative about overcoming fear and failure."
+        ],
+        description: "In this lesson, students begin by rating the importance of various life aspects — ranging from love and money to fast-food burgers and politics — to introduce the contrast between significance and absurdity. They then examine mundane social rituals, such as clapping, tipping, and small talk, questioning the real purpose behind these everyday habits.\n\nThe core philosophy is introduced through a humorous multiple-choice quiz covering key concepts like Albert Camus's \"indifferent universe,\" Søren Kierkegaard's link to faith, and the Theatre of the Absurd.\n\nThe lesson transitions to a listening task featuring Romany, a woman who applied the absurdist \"so what?\" mindset to stop worrying about failure, launch a successful blog, and cope with an unexpected job loss.\n\nFinally, students reflect on how to create their own meaning in life, analyze surreal and absurd artworks by painters like Salvador Dalí and René Magritte, and discuss Albert Camus's famous quote about personal freedom as an act of rebellion.",
+        pdfUrl: "materials/b1_absurdism.pdf",
+        audioUrl: "audio/b1_absurdism_romany.mp3",
+        rarUrl: "zips/b1_absurdism.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=QoePDl14Eyc" }]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "AI Anxiety",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b2-c1",
+        levelLabel: "B2-C1",
+        duration: "90 min",
+        visualSource: "images/b2_ai_anxiety.jpg",
+        keywords: "AI anxiety artificial intelligence innovations job displacement data privacy algorithmic manipulation Geoffrey Hinton nuclear war 2050 automation arms race teacher marketing truck driver b2 c1 technology",
+        objectives: [
+            "Evaluate the historical impact of major human innovations and rank their importance;",
+            "Analyze statistical data and expert opinions regarding public fears surrounding Artificial Intelligence;",
+            "Practice listening comprehension by extracting specific advice and personal perspectives on AI's impact on the modern workplace."
+        ],
+        description: "In this lesson, students begin by ranking the top 12 most important innovations in human history — from the discovery of fire to Artificial Intelligence — and discussing how specific technological breakthroughs have shaped the modern world. The lesson then shifts to the present day, where learners examine striking statistics about public apprehension toward AI, such as job displacement, data privacy, and algorithmic manipulation.\n\nStudents watch a video to verify facts about \"AI anxiety,\" noting key details like Geoffrey Hinton's warnings and the comparison of AI risks to nuclear war, before analyzing a provocative quote about AI as ultimate manipulators. The core of the lesson explores an AI-generated prediction for the year 2050, prompting a critical discussion on automation, the global \"AI arms race,\" and the balance between technological advancement and human values.\n\nFinally, students listen to an audio segment on overcoming workplace AI anxiety, completing gap-fill exercises to identify the psychological impacts of this fear. They review expert advice on managing stress and match specific viewpoints to three professionals from different industries (a teacher, a marketing specialist, and a truck driver) to understand how AI anxiety affects diverse career paths.",
+        pdfUrl: "materials/b2_ai_anxiety.pdf",
+        audioUrl: "audio/b2_ai_anxiety.mp3",
+        rarUrl: "zips/b2_ai_anxiety.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=0p_eBr9bIY4" }]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "I've Been to 25 Countries...",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_25_countries.jpg",
+        keywords: "travel countries Hannah Kennedy Ireland Egypt Germany breathtaking efficient enchanting present perfect tourism authentic performative koshari Neuschwanstein Castle b1 b2 travel",
+        objectives: [
+            "Explore personal travel experiences and evaluate the motivations behind modern tourism through critical discussion;",
+            "Practice reading and listening comprehension by following Hannah Kennedy's travel narrative across 25 countries;",
+            "Reinforce Present Perfect tense usage through targeted grammar exercises and personal travel questions."
+        ],
+        description: "In this lesson, students begin by examining a provocative rant about travel culture that challenges common assumptions about why people travel, sparking debate about authenticity versus performative tourism. They then read about Hannah Kennedy, who has visited 25 countries by age 23, and identify her top three destinations (Ireland, Egypt, and Germany) while completing True/False comprehension tasks.\n\nThe lesson transitions to vocabulary building with words like breathtaking landscapes, efficient, enchanting, and scratched the surface, which students use to complete gap-fill exercises describing Hannah's trips. Students then practice the Present Perfect tense by forming questions about travel experiences before listening to Hannah discuss specific cultural activities in Ireland, trying koshari in Egypt, and visiting Neuschwanstein Castle in Germany.\n\nFinally, learners reflect on their own travel preferences by identifying favorite and least favorite countries, discussing what makes destinations memorable, and evaluating whether they agree with Hannah's perspective that \"living abroad opened my eyes to the world.\"",
+        pdfUrl: "materials/b1_25_countries.pdf",
+        audioUrl: "audio/b1_25_countries_hannah.mp3",
+        audioUrls: [
+            { label: "Hannah", url: "audio/b1_25_countries_hannah.mp3" },
+            { label: "Hannah Interview", url: "audio/b1_25_countries_hannah_interview.mp3" }
+        ],
+        rarUrl: "zips/b1_25_countries.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=pa8siA2_EKc" }]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "Astrology",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_astrology.jpg",
+        keywords: "astrology zodiac signs horoscope synastry compatibility Barnum Effect Forer experiment Fire Earth signs psychics personality tests cognitive bias b1 b2",
+        objectives: [
+            "Explore personal beliefs about astrology and evaluate the accuracy of zodiac personality traits;",
+            "Analyze relationship compatibility and the concept of synastry through listening comprehension and chart analysis;",
+            "Understand the psychological phenomenon of the Barnum Effect and why people find vague personality descriptions so convincing."
+        ],
+        description: "In this lesson, students begin by matching zodiac signs to their symbols and discussing their personal experiences with horoscopes, including whether their own sign matches their personality and which signs they find most misunderstood. They then examine specific personality traits associated with each sign and debate whether these characteristics are shaped by the stars or by environment and experience.\n\nThe lesson transitions to relationship dynamics, where learners listen to an audio segment about astrological compatibility, verify true/false statements about elemental matches (e.g., Fire and Earth signs), and analyze a synastry chart to determine which zodiac pairings are considered favorable or unfavorable.\n\nFinally, students explore the psychological reasons behind belief in astrology by learning about the Barnum Effect. They review statistics from the Forer experiment, read ten universally applicable personality statements, and discuss how this cognitive bias influences people's trust in psychics, online personality tests, and everyday decision-making.",
+        pdfUrl: "materials/b1_astrology.pdf",
+        audioUrl: "audio/b1_astrology_4_people.mp3",
+        audioUrls: [
+            { label: "4 People", url: "audio/b1_astrology_4_people.mp3" },
+            { label: "Romance and Signs", url: "audio/b1_astrology_romance_and_signs.mp3" }
+        ],
+        rarUrl: "zips/b1_astrology.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=NBXRzdzFnHk" }]
+    },
+
+    {
         dateAdded: "2026-07-11",
         title: "Snoring",
         category: "general",
@@ -102,7 +330,7 @@ const lessonsCatalog = [
         mediaType: "Video",
         mediaIcon: "▶️",
         categoryIcon: "🎓",
-        level: "b1",
+        level: "b1-c1",
         levelLabel: "B1-C1",
         duration: "90 min",
         visualSource: "images/b1_learned_helplessness.jpg",
