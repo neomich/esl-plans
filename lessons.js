@@ -7,6 +7,233 @@ const lessonsCatalog = [
 
     {
         dateAdded: "2026-07-12",
+        title: "Altruism vs Egoism",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b2-c1",
+        levelLabel: "B2-C1",
+        duration: "90 min",
+        visualSource: "images/b1_altruism_vs_egoism.jpg",
+        keywords: "altruism egoism selfless selfish empathetic zero-sum positive-sum Malik Sofia Javier Elena mutual support social harmony personal goals wealth innovation psychology b2 c1",
+        objectives: [
+            "Define and distinguish between the concepts of altruism and egoism through targeted vocabulary and personal reflection;",
+            "Analyze the psychological and social advantages of both mindsets by listening to real-life case studies and evaluating personal traits;",
+            "Explore the historical and economic shift from \"zero-sum\" to \"positive-sum\" societies and debate the existence of true selflessness."
+        ],
+        description: "In this lesson, students begin by defining altruism and egoism, matching descriptive adjectives (e.g., selfless, selfish, empathetic) to their meanings and using them to describe visual prompts. They then examine a list of potential advantages for both mindsets and listen to four individuals (Malik, Sofia, Javier, and Elena) share their personal stories.\n\nThe lesson transitions to a broader societal perspective through a video exploring the concept of \"egoistic altruism\" and the historical shift from a \"zero-sum\" economic world to a modern \"positive-sum\" world driven by innovation, supply, and demand.\n\nStudents conclude with a critical debate on controversial statements, such as whether true altruism actually exists, if altruists often get used by others, or if self-interest is the only realistic path to success in a competitive world.",
+        pdfUrl: "materials/b1_altruism_vs_egoism.pdf",
+        audioUrl: "audio/b1_altruism_vs_egoism_4_people.mp3",
+        rarUrl: "zips/b1_altruism_vs_egoism.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=rvskMHn0sqQ" }]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "Belief",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video",
+        mediaIcon: "▶️",
+        categoryIcon: "🎓",
+        level: "b2-c1",
+        levelLabel: "B2-C1",
+        duration: "90 min",
+        visualSource: "images/b2_belief.jpg",
+        keywords: "belief faith God simulation theory AI takeover fate conspiracy Terry Pratchett Death Susan Neil deGrasse Tyson epistemic existential social motives narcissism Moon Landing Dead Internet b2 c1",
+        objectives: [
+            "Analyze statistical data on belief systems and explore the philosophical relationship between fantasy and human values through literary analysis;",
+            "Practice listening comprehension and vocabulary acquisition through a video interview on faith and a targeted gap-fill exercise;",
+            "Evaluate the psychological motivations behind conspiracy theories and distinguish between epistemic, existential, and social motives for belief."
+        ],
+        description: "In this lesson, students begin by analyzing a comprehensive chart showing belief percentages across 18 concepts (from Fate and God to Simulation Theory and AI takeover), comparing male and female responses and discussing why certain beliefs are more prevalent than others.\n\nThe lesson transitions to a close reading of an excerpt from Terry Pratchett's Hogfather, featuring a dialogue between Death and Susan about the necessity of believing in \"little lies\" to believe in \"big ones\" like justice and mercy. Students match vocabulary to definitions before engaging in philosophical discussion.\n\nNext, students watch a video interview with Neil deGrasse Tyson discussing his views on God, completing a vocabulary gap-fill using synonym pairs and discussing the nature of faith and proof.\n\nFinally, the lesson shifts to conspiracy theories, where students examine three core motivational categories: epistemic motives (desire for understanding), existential motives (need for control), and social motives (need for interaction), before analyzing specific theories ranging from Moon Landing denial to the Dead Internet Theory.",
+        pdfUrl: "materials/b2_belief.pdf",
+        audioUrl: null,
+        rarUrl: "zips/b2_belief.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=vPS5Yw_YsHA" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=I0nXG02tpDw" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "Annoyances",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_annoyances.jpg",
+        keywords: "annoyances misophonia anger iceberg robocalls pop-up ads chewing noises irritants frustration coping strategies drives me crazy gets on my nerves psychology b1 b2",
+        objectives: [
+            "Identify and categorize common daily irritants through survey data and personal reflection;",
+            "Explore the psychological concepts of misophonia and the \"Anger Iceberg\" theory through targeted video comprehension;",
+            "Practice functional language for expressing frustration and evaluate practical coping strategies for irritability."
+        ],
+        description: "In this lesson, students begin by expanding their vocabulary with synonyms for \"annoying\" and examining a National Geographic survey that ranks the most frustrating everyday irritants, ranging from robocalls and pop-up ads to chewing noises and overused expressions.\n\nThey then listen to an audio segment to identify specific daily annoyances and practice functional language for expressing frustration (e.g., It drives me crazy when..., It gets on my nerves when...).\n\nThe core of the lesson features two educational videos. The first introduces misophonia, an intense sensitivity to specific trigger sounds. The second explores the \"Anger Iceberg Theory,\" helping learners understand that anger often masks deeper vulnerabilities such as embarrassment, fear, or unmet needs like respect and connection.\n\nFinally, students read an article outlining eight practical strategies for managing irritability before discussing which coping mechanisms they find most effective.",
+        pdfUrl: "materials/b1_annoyances.pdf",
+        audioUrl: "audio/b1_annoyances_annoyances.mp3",
+        rarUrl: "zips/b1_annoyances.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=l8U6XK4f3AY" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=hHV_E76BzAM" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "Change Your Mind",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_change_your_mind.jpg",
+        keywords: "change your mind decision making euthanasia resentment guilt present perfect Clara Kevin Anna Mike tattoo travel friendship indecisiveness self-care boundaries b1 b2 psychology",
+        objectives: [
+            "Explore the psychological and emotional aspects of changing one's mind, decision-making, and setting personal boundaries;",
+            "Practice the Present Perfect tense to discuss life experiences, recent changes, and unfinished situations;",
+            "Analyze complex family dynamics and ethical dilemmas through a short film about assisted dying."
+        ],
+        description: "In this lesson, students begin by defining \"to change your mind\" through visual prompts of major life decisions — such as getting a tattoo, changing travel plans, or ending a friendship — and discussing their own experiences with indecisiveness.\n\nThe lesson then shifts to grammar, introducing the Present Perfect tense and key time markers like already, yet, and recently. Students listen to four individuals (Clara, Kevin, Anna, and Mike) share personal life experiences, matching spoken sentences to grammatical usages.\n\nThe core tackles a thought-provoking short film titled \"The Mother Situation,\" centered on a family's intense conflict over a mother's decision to pursue euthanasia. After learning key vocabulary (e.g., euthanasia, resentment, pure intentions), students complete a detailed listening task identifying which family member said or did specific things, sparking deep ethical discussion.\n\nFinally, students watch a video explaining why it is okay to change your mind, answering comprehension questions about the guilt of saying \"yes\" to things and the resentment that builds when we force ourselves to follow through.",
+        pdfUrl: "materials/b1_change_your_mind.pdf",
+        audioUrl: "audio/b1_change_your_mind_4_people.mp3",
+        rarUrl: "zips/b1_change_your_mind.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=Uw3qGznmKH4" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=4bmgz5D3qTo" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "Best of CES 2026",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1",
+        duration: "90 min",
+        visualSource: "images/b1_best_of_ces_2026.jpg",
+        keywords: "CES 2026 gadgets technology Samsung Galaxy TriFold Roborock Saros LG CLOiD Lenovo rollable Boston Dynamics Atlas OLED automate deploy generate trigger predict consumer electronics b1 technology",
+        objectives: [
+            "Discuss personal preferences and opinions regarding modern gadgets and consumer electronics;",
+            "Learn and practice advanced technology-related verbs (e.g., automate, deploy, generate, trigger) through definition matching and contextual gap-fills;",
+            "Evaluate the features and potential impact of innovative CES 2026 products through reading comprehension and true/false verification."
+        ],
+        description: "In this lesson, students begin by discussing their excitement about upcoming tech, identifying which gadgets could change their daily routines or make good gifts, and debating which inventions are truly useful versus completely unnecessary.\n\nThey then expand their lexical range by matching 12 powerful action verbs (such as automate, predict, deploy, and generate) to their definitions, establishing a framework for describing what modern technology can do.\n\nNext, learners explore a showcase of the \"Best of CES 2026,\" reading detailed descriptions of cutting-edge products like the Samsung Galaxy Z TriFold, the Roborock Saros Rover, and the LG CLOiD robot. They apply new vocabulary through gap-fill exercises.\n\nFinally, students verify true/false statements about specific innovations — such as Lenovo's rollable laptops, Boston Dynamics' Atlas robot, and Samsung's new OLED TVs — before using the target verbs to describe the gadgets they use most frequently.",
+        pdfUrl: "materials/b1_best_of_ces_2026.pdf",
+        audioUrl: "audio/b1_best_of_ces_2026_4_speakers.mp3",
+        rarUrl: "zips/b1_best_of_ces_2026.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=pyhdBrj-9g8" }]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "Dating a 10",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_dating_a_10.jpg",
+        keywords: "dating attractive pretty privilege halo effect beauty premium cognitive bias Reddit entitlement poo-poo get towed ugly guys hiring practices social leniency psychology b1 b2",
+        objectives: [
+            "Explore the social dynamics and psychological phenomena surrounding dating highly attractive people and the concept of \"pretty privilege\";",
+            "Practice functional language and idioms related to dating, scheduling, and social interactions;",
+            "Analyze cognitive biases like the \"Halo Effect\" and the \"Beauty Premium\" through listening comprehension and critical discussion."
+        ],
+        description: "In this lesson, students begin by matching dating and social slang phrases (e.g., a \"10\", to poo-poo on someone, to get towed) to their explanations and using them in conversational gap-fill exercises. They then watch a video clip of people reacting to a highly attractive person and read a Reddit thread where men share their real-life experiences dating a \"10,\" discussing unexpected downsides like entitlement and constant public attention.\n\nThe lesson transitions to the sociological and psychological aspects of attractiveness, where learners evaluate true/false statements from a video titled \"Why Pretty Girls Choose Ugly Guys.\" Students are then introduced to key academic concepts like the Halo Effect, Beauty Premium, and Cognitive Bias.\n\nFinally, they listen to a podcast explaining these phenomena and engage in a debate on whether attractive people receive an \"invisible VIP pass\" in life, reacting to statements about hiring practices, social leniency, and the hidden costs of conventional beauty.",
+        pdfUrl: "materials/b1_dating_a_10.pdf",
+        audioUrl: "audio/b1_dating_a_10_podcast.mp3",
+        rarUrl: "zips/b1_dating_a_10.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=ea9vQyGt7XQ" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=XbeXfqlgUgE" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "Asynchronous Work",
+        category: "business",
+        categoryLabel: "Business English",
+        mediaType: "Audio",
+        mediaIcon: "🎵",
+        categoryIcon: "💼",
+        level: "b2",
+        levelLabel: "B2",
+        duration: "90 min",
+        visualSource: "images/b2_asynchronous_work.jpg",
+        keywords: "asynchronous work remote office commute meeting fatigue isolation used to tend to get used to break the habit async flexibility coordination productivity business b2",
+        objectives: [
+            "Compare the daily time commitments, productivity levels, and work-life balance of remote versus in-office work environments;",
+            "Explore the benefits and challenges of asynchronous work models through statistical data and personal testimonials;",
+            "Practice grammar structures for describing past habits, current routines, and the process of adaptation (e.g., used to, tend to, get used to, break the habit)."
+        ],
+        description: "In this lesson, students begin by analyzing data visualizations that contrast the daily schedules of remote and in-office workers, discussing how factors like commute times, meeting loads, and interruptions impact focused work and overall well-being. They then explore the core concepts of synchronous versus asynchronous work, weighing the trade-offs between flexibility and coordination complexity.\n\nThe core of the lesson features a listening activity where learners hear from professionals who have transitioned to an async model, identifying specific benefits they experienced. This transitions into a grammar focus where students review and practice structures used to describe past habits, current tendencies, and adaptation processes — such as used to, no longer, tend to, and get/be used to.\n\nFinally, students apply these grammar structures in personalized speaking tasks, reflecting on how their own work routines and digital behaviors have evolved. An extra task debates whether fully asynchronous culture can replace the social bonding of a physical office.",
+        pdfUrl: "materials/b2_asynchronous_work.pdf",
+        audioUrl: "audio/b2_asynchronous_work_3_people.mp3",
+        audioUrls: [
+            { label: "3 People", url: "audio/b2_asynchronous_work_3_people.mp3" },
+            { label: "Podcast", url: "audio/b2_asynchronous_work_podcast.mp3" }
+        ],
+        rarUrl: "zips/b2_asynchronous_work.rar",
+        mediaLabel: "The audio streams:",
+        links: []
+    },
+
+    {
+        dateAdded: "2026-07-12",
+        title: "All About Feet",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_all_about_feet.jpg",
+        keywords: "feet idioms cold feet foot the bill two left feet Tarantino podophilia foot fetish psychology body language sweat glands walking distance global search trends pop culture b1 b2",
+        objectives: [
+            "Identify anatomical terms for the feet and legs and explore cultural \"secrets\" hidden in footwear and body language;",
+            "Practice and apply common English idioms related to feet through matching tasks and personal storytelling;",
+            "Analyze the psychology and cultural impact of foot fetishes, including their representation in Hollywood cinema and global internet search trends."
+        ],
+        description: "In this lesson, students begin by labeling parts of the feet and legs before testing their knowledge with surprising True/False facts about human feet, such as lifetime walking distances, sweat glands, and the psychological meanings behind foot movements.\n\nThey then expand their functional vocabulary by matching foot-related idioms — like to get cold feet, to foot the bill, and to have two left feet — to their definitions, using them to share personal anecdotes about awkward, assertive, or clumsy moments.\n\nThe lesson takes a playful turn into pop culture as learners examine Quentin Tarantino's famous cinematic fixation on feet. Finally, students listen to an educational podcast breaking down the definition and psychology of podophilia (foot fetishes), before analyzing a statistical chart of global search volumes for various unconventional fetishes, sparking a mature but lighthearted discussion on human psychology and internet habits.",
+        pdfUrl: "materials/b1_all_about_feet.pdf",
+        audioUrl: "audio/b1_all_about_feet_fetish.mp3",
+        rarUrl: "zips/b1_all_about_feet.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=9hh8IbIvDBc" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=zgml9wfxBqU" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-12",
         title: "AI Scam",
         category: "general",
         categoryLabel: "General English",
