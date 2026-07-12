@@ -1409,6 +1409,12 @@
                         <div class="pdf-preview-loading">Loading preview...</div>
                     </div>
                 </div>
+
+                <div class="back-btn-container" style="margin-top:12px;">
+                    <button onclick="goBackToCatalog()" class="back-btn-oblong" style="background:#1b5e20; width:100%; justify-content:center; padding:16px; font-size:17px;">
+                        <span class="back-arrow-icon">⬅</span> Go Back
+                    </button>
+                </div>
             </div>
 
             <div class="info-panel">
@@ -1433,12 +1439,6 @@
 
                 <div class="media-section">
                     <div id="dynamic-media-section"></div>
-                </div>
-
-                <div class="back-btn-container">
-                    <button onclick="showDashboardView()" class="back-btn-oblong">
-                        <span class="back-arrow-icon">⬅</span> Go Back
-                    </button>
                 </div>
             </div>
 
@@ -2060,6 +2060,60 @@
                 btn.innerText = '👁';
             }
         }
+
+        // ── NAVIGATION: remember page position, fix browser back/forward ──
+        let savedCatalogPage = 1;
+        let savedScrollY = 0;
+
+        function goBackToCatalog() {
+            currentPage = savedCatalogPage;
+            hideAllViews();
+            document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('hero-banner-view').style.display = 'block';
+            document.getElementById('level-filter-tray').style.display = 'block';
+            applyFiltersAndRender();
+            clearHash();
+            history.pushState({ view: 'catalog', page: savedCatalogPage }, '', window.location.pathname);
+            // Restore scroll position after render
+            setTimeout(() => window.scrollTo(0, savedScrollY), 50);
+        }
+
+        // Override goToPage to save position
+        const _origGoToPage = goToPage;
+        function goToPage(page) {
+            savedCatalogPage = page;
+            currentPage = page;
+            renderCatalogGrid();
+            history.pushState({ view: 'catalog', page: page }, '', window.location.pathname);
+            window.scrollTo(0, 0);
+        }
+
+        // Browser back/forward
+        window.addEventListener('popstate', function(e) {
+            const hash = window.location.hash;
+            if (hash.startsWith('#lesson-')) {
+                loadFromHash();
+            } else {
+                const page = (e.state && e.state.page) ? e.state.page : 1;
+                currentPage = page;
+                savedCatalogPage = page;
+                hideAllViews();
+                document.getElementById('dashboard-catalog-view').style.display = 'block';
+                document.getElementById('hero-banner-view').style.display = 'block';
+                document.getElementById('level-filter-tray').style.display = 'block';
+                applyFiltersAndRender();
+                window.scrollTo(0, 0);
+            }
+        });
+
+        // Save scroll position when opening a lesson
+        const _origInitiateDetail = initiateDetailViewByIndex;
+        initiateDetailViewByIndex = function(index) {
+            savedCatalogPage = currentPage;
+            savedScrollY = window.scrollY;
+            _origInitiateDetail(index);
+            history.pushState({ view: 'lesson', index: index }, '', window.location.hash);
+        };
 
         // ── SUPABASE AUTH ──
         const SUPABASE_URL = 'https://uhyapbinngjpotcifdbc.supabase.co';
