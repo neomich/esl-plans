@@ -362,9 +362,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            position: relative;
         }
         .general .card-title-strip { background-color: #79d28b; color: #12461e; }
         .business .card-title-strip { background-color: #bfa3ff; color: #2a1160; }
+
+        .free-badge {
+            font-family: 'Georgia', serif;
+            font-size: 11px;
+            font-weight: 700;
+            font-style: italic;
+            background: #ffd600;
+            color: #333;
+            padding: 2px 7px;
+            border-radius: 8px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
 
         .card-details {
             padding: 20px;
@@ -1024,13 +1040,15 @@
         .paywall-section {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
             gap: 10px;
-            padding: 16px;
+            padding: 20px;
             background: #fff8f0;
             border: 2px dashed #ff7a00;
             border-radius: 16px;
             margin-bottom: 8px;
+            text-align: center;
+            width: 100%;
         }
         .upgrade-btn {
             display: inline-block;
@@ -1050,6 +1068,7 @@
             font-size: 13px;
             color: #888;
             margin: 0;
+            text-align: center;
         }
 
         /* ── SUBSCRIPTION STATUS in user menu ── */
@@ -1236,7 +1255,7 @@
             <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
                 <span></span><span></span><span></span>
             </button>
-            <a onclick="applyTopicFilter('free', null); showDashboardView();" class="nav-free-btn" style="cursor:pointer; text-decoration:none; background:#2e7d32; color:white; padding:10px 20px; border-radius:25px; font-weight:800; font-size:16px; white-space:nowrap;">⭐ FREE ESL-plans</a>
+            <a onclick="applyTopicFilter('free', null)" class="nav-free-btn" style="cursor:pointer; text-decoration:none; background:#2e7d32; color:white; padding:10px 20px; border-radius:25px; font-weight:800; font-size:16px; white-space:nowrap;">⭐ FREE ESL-plans</a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a onclick="showContactsView()">Contacts</a></li>
                 <li><a onclick="showPricingView()">Pricing</a></li>
@@ -1617,7 +1636,10 @@
                     <div class="card-image-box">
                         <div class="mock-3d-illustration" id="img-${catalogIndex}"></div>
                     </div>
-                    <div class="card-title-strip">${lesson.title}</div>
+                    <div class="card-title-strip">
+                        <span>${lesson.title}</span>
+                        ${lesson.isFree ? '<span class="free-badge">FREE</span>' : ''}
+                    </div>
                     <div class="card-details">
                         <div class="tag-row">
                             <div class="tag-item">${lesson.categoryIcon} ${lesson.categoryLabel}</div>
@@ -1830,22 +1852,37 @@
             document.getElementById('dynamic-media-section').innerHTML = html;
 
             // ── PAYWALL: replace downloads with Upgrade Now for premium lessons ──
-            const isSubscribed = currentUser && currentUser.user_metadata && currentUser.user_metadata.subscribed;
+            const isSubscribed = currentUser && currentUser.user_metadata && currentUser.user_metadata.tier && currentUser.user_metadata.tier !== 'free';
             const isFreeLesson = lesson.isFree === true;
 
             if (!isFreeLesson && !isSubscribed) {
-                // Show Upgrade Now button instead of download icons
-                const upgradeHtml = `
-                    <div class="paywall-section">
-                        <a href="https://esl-plans.com/#pricing" onclick="showPricingView(); return false;" class="upgrade-btn">
-                            🔒 Upgrade Now to Download
-                        </a>
-                        <p class="paywall-note">Get access to all PDFs, audio files and full lesson packages</p>
-                    </div>`;
-                // Replace downloads-wrapper content but keep video links
                 const mediaSectionEl = document.getElementById('dynamic-media-section');
                 const videoRow = mediaSectionEl.querySelector('.video-row');
-                mediaSectionEl.innerHTML = `<div class="media-layout">${upgradeHtml}${videoRow ? videoRow.outerHTML : ''}</div>`;
+                const videoHtml = videoRow ? videoRow.outerHTML : '';
+                mediaSectionEl.innerHTML = `<div class="media-layout">
+                    <div class="paywall-section">
+                        <a href="#" onclick="showPricingView(); return false;" class="upgrade-btn">🔒 Upgrade Now to Download</a>
+                        <p class="paywall-note">Get access to full lesson package</p>
+                    </div>
+                    ${videoHtml}
+                    <div style="margin-top:12px;">
+                        <button onclick="goBackToCatalog()" class="back-btn-oblong" style="background:#1b5e20; width:100%; justify-content:center; padding:16px; font-size:17px; display:flex;">
+                            <span class="back-arrow-icon">⬅</span> Go Back
+                        </button>
+                    </div>
+                </div>`;
+            } else {
+                // Free/subscribed: add second Go Back below video links
+                const mediaSectionEl = document.getElementById('dynamic-media-section');
+                const existingLayout = mediaSectionEl.querySelector('.media-layout');
+                if (existingLayout) {
+                    const extraBtn = document.createElement('div');
+                    extraBtn.style.marginTop = '12px';
+                    extraBtn.innerHTML = `<button onclick="goBackToCatalog()" class="back-btn-oblong" style="background:#1b5e20; width:100%; justify-content:center; padding:16px; font-size:17px; display:flex;">
+                        <span class="back-arrow-icon">⬅</span> Go Back
+                    </button>`;
+                    existingLayout.appendChild(extraBtn);
+                }
             }
 
             // Objectives
