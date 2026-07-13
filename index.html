@@ -1020,7 +1020,50 @@
             border-radius: 50%; width: 16px; height: 16px;
             display: flex; align-items: center; justify-content: center;
         }
-        /* ── AUTH MODAL ── */
+        /* ── PAYWALL ── */
+        .paywall-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 16px;
+            background: #fff8f0;
+            border: 2px dashed #ff7a00;
+            border-radius: 16px;
+            margin-bottom: 8px;
+        }
+        .upgrade-btn {
+            display: inline-block;
+            background: #c95210;
+            color: white !important;
+            font-weight: 800;
+            font-size: 16px;
+            padding: 14px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+        .upgrade-btn:hover { background: #b0460b; transform: translateY(-1px); }
+        .paywall-note {
+            font-size: 13px;
+            color: #888;
+            margin: 0;
+        }
+
+        /* ── SUBSCRIPTION STATUS in user menu ── */
+        .sub-status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .sub-free { background: #f0f0f0; color: #666; }
+        .sub-contributor { background: #fff0d6; color: #e67e00; }
+        .sub-friend { background: #e8f5e9; color: #2e7d32; }
         .auth-box {
             background: white;
             border-radius: 24px;
@@ -1490,8 +1533,9 @@
 
     <!-- USER MENU DROPDOWN -->
     <div id="user-menu" style="display:none;">
-        <p id="user-email-display" style="font-size:14px;color:#888;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee;word-break:break-all;"></p>
-        <button onclick="handleSignOut()" style="width:100%;background:#e03131;color:white;border:none;border-radius:10px;padding:10px;font-size:15px;font-weight:700;cursor:pointer;">Sign Out</button>
+        <p id="user-email-display" style="font-size:14px;color:#888;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #eee;word-break:break-all;"></p>
+        <div id="user-sub-status" class="sub-status-badge sub-free">Guest</div>
+        <button onclick="handleSignOut()" style="width:100%;background:#e03131;color:white;border:none;border-radius:10px;padding:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;">Sign Out</button>
     </div>
 
     <!-- SHARE MODAL -->
@@ -1699,9 +1743,11 @@
                     || lesson.title.toLowerCase().includes(searchFilter)
                     || (lesson.keywords || '').toLowerCase().includes(searchFilter)
                     || (lesson.description || '').toLowerCase().includes(searchFilter);
-                const matchesTopic = activeFilters.topic === 'all' || activeFilters.topic === 'free'
-                    ? (activeFilters.topic === 'free' ? (lesson.category === 'free') : true)
-                    : keywords.some(kw => (lesson.keywords || '').toLowerCase().includes(kw.toLowerCase()) || lesson.title.toLowerCase().includes(kw.toLowerCase()));
+                const matchesTopic = activeFilters.topic === 'all'
+                    ? true
+                    : activeFilters.topic === 'free'
+                        ? lesson.isFree === true
+                        : keywords.some(kw => (lesson.keywords || '').toLowerCase().includes(kw.toLowerCase()) || lesson.title.toLowerCase().includes(kw.toLowerCase()));
 
                 if (matchesLevel && matchesCategory && matchesSearch && matchesTopic) filteredLessons.push(index);
             });
@@ -1782,6 +1828,25 @@
 
             html += '</div>'; // end media-layout
             document.getElementById('dynamic-media-section').innerHTML = html;
+
+            // ── PAYWALL: replace downloads with Upgrade Now for premium lessons ──
+            const isSubscribed = currentUser && currentUser.user_metadata && currentUser.user_metadata.subscribed;
+            const isFreeLesson = lesson.isFree === true;
+
+            if (!isFreeLesson && !isSubscribed) {
+                // Show Upgrade Now button instead of download icons
+                const upgradeHtml = `
+                    <div class="paywall-section">
+                        <a href="https://esl-plans.com/#pricing" onclick="showPricingView(); return false;" class="upgrade-btn">
+                            🔒 Upgrade Now to Download
+                        </a>
+                        <p class="paywall-note">Get access to all PDFs, audio files and full lesson packages</p>
+                    </div>`;
+                // Replace downloads-wrapper content but keep video links
+                const mediaSectionEl = document.getElementById('dynamic-media-section');
+                const videoRow = mediaSectionEl.querySelector('.video-row');
+                mediaSectionEl.innerHTML = `<div class="media-layout">${upgradeHtml}${videoRow ? videoRow.outerHTML : ''}</div>`;
+            }
 
             // Objectives
             const objContainer = document.getElementById('dynamic-objectives-list');
@@ -2145,6 +2210,21 @@
             btn.className = 'nav-user-btn';
             btn.onclick = toggleUserMenu;
             document.getElementById('user-email-display').innerText = user.email;
+
+            // Show subscription status
+            const meta = user.user_metadata || {};
+            const tier = meta.tier || 'free';
+            const badge = document.getElementById('user-sub-status');
+            if (tier === 'contributor') {
+                badge.className = 'sub-status-badge sub-contributor';
+                badge.innerText = '⭐ Contributor';
+            } else if (tier === 'friend') {
+                badge.className = 'sub-status-badge sub-friend';
+                badge.innerText = '👑 Friend';
+            } else {
+                badge.className = 'sub-status-badge sub-free';
+                badge.innerText = 'Guest — Upgrade to unlock all lessons';
+            }
         }
 
         function setLoggedOut() {
