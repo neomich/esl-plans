@@ -8,6 +8,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Freaks",
+        isFree: true,
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -68,6 +69,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Eggs",
+        isFree: true,
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -124,6 +126,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Dopamine Decor",
+        isFree: true,
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -399,6 +402,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Asynchronous Work",
+        isFree: true,
         category: "business",
         categoryLabel: "Business English",
         mediaType: "Audio",
@@ -458,6 +462,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "AI Scam",
+        isFree: true,
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -600,6 +605,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "AI Anxiety",
+        isFree: true,
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -656,6 +662,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Astrology",
+        isFree: true,
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -804,6 +811,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-11",
         title: "Girls Labels",
+        isFree: true,
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -1036,6 +1044,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-10",
         title: "The Seven Digital Deadly Sins",
+        isFree: true,
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -1279,6 +1288,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-09",
         title: "Europe",
+        isFree: true,
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
