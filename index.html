@@ -1676,7 +1676,7 @@
             free: ['free']
         };
 
-        function applyFiltersAndRender() {
+        function applyFiltersAndRender(resetPage) {
             const searchFilter = (document.getElementById('catalog-search-input').value || '').toLowerCase().trim();
             const keywords = activeFilters.topic !== 'all' ? (topicKeywords[activeFilters.topic] || []) : [];
 
@@ -1706,7 +1706,8 @@
                 if (matchesLevel && matchesCategory && matchesSearch && matchesTopic) filteredLessons.push(index);
             });
 
-            currentPage = 1;
+            // Only reset to page 1 when filtering/searching, not when returning from a lesson
+            if (resetPage !== false) currentPage = 1;
             document.getElementById('catalog-section-title').innerText = filteredLessons.length === 0 ? "No matching lessons found" : "Latest Lessons";
             renderCatalogGrid();
         }
@@ -2066,32 +2067,34 @@
         let savedScrollY = 0;
 
         function goBackToCatalog() {
-            currentPage = savedCatalogPage;
             hideAllViews();
             document.getElementById('dashboard-catalog-view').style.display = 'block';
             document.getElementById('hero-banner-view').style.display = 'block';
             document.getElementById('level-filter-tray').style.display = 'block';
-            applyFiltersAndRender();
+            // Set page BEFORE rendering so applyFiltersAndRender uses it
+            currentPage = savedCatalogPage;
+            applyFiltersAndRender(false);
             clearHash();
             history.pushState({ view: 'catalog', page: savedCatalogPage }, '', window.location.pathname);
             // Restore scroll position after render
-            setTimeout(() => window.scrollTo(0, savedScrollY), 50);
+            const scrollTarget = savedScrollY;
+            setTimeout(() => window.scrollTo(0, scrollTarget), 80);
         }
 
-        // Override goToPage to save position
-        const _origGoToPage = goToPage;
-        function goToPage(page) {
+        // Patch goToPage to save current page
+        const _realGoToPage = goToPage;
+        goToPage = function(page) {
             savedCatalogPage = page;
             currentPage = page;
             renderCatalogGrid();
             history.pushState({ view: 'catalog', page: page }, '', window.location.pathname);
             window.scrollTo(0, 0);
-        }
+        };
 
         // Browser back/forward
         window.addEventListener('popstate', function(e) {
             const hash = window.location.hash;
-            if (hash.startsWith('#lesson-')) {
+            if (hash && hash.startsWith('#lesson-')) {
                 loadFromHash();
             } else {
                 const page = (e.state && e.state.page) ? e.state.page : 1;
@@ -2106,12 +2109,12 @@
             }
         });
 
-        // Save scroll position when opening a lesson
-        const _origInitiateDetail = initiateDetailViewByIndex;
+        // Patch initiateDetailViewByIndex to save page + scroll before opening lesson
+        const _realInitiateDetail = initiateDetailViewByIndex;
         initiateDetailViewByIndex = function(index) {
             savedCatalogPage = currentPage;
             savedScrollY = window.scrollY;
-            _origInitiateDetail(index);
+            _realInitiateDetail(index);
             history.pushState({ view: 'lesson', index: index }, '', window.location.hash);
         };
 
