@@ -6,6 +6,229 @@
 const lessonsCatalog = [
 
     {
+        dateAdded: "2026-07-13",
+        title: "Freaks",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-c1",
+        levelLabel: "B1-C1",
+        duration: "60-120 min",
+        visualSource: "images/b1_freaks.jpg",
+        keywords: "freaks atypical bodybuilders furries OnlyFans freak show Thomas Anna Bertha Stefan Great Dane hair family Ken Barbie cosmetic surgery history psychology fascination social media b1 c1",
+        objectives: [
+            "Define and challenge the concept of a \"freak\" by examining socially atypical behaviors, appearances, and subcultures;",
+            "Analyze personal narratives and media representations of extreme lifestyles through targeted listening and video comprehension;",
+            "Explore the historical context and psychological reasons behind society's deep fascination with the unusual."
+        ],
+        description: "In this lesson, students begin by examining the definition of a \"freak\" and looking at a wide variety of images depicting atypical behaviors (e.g., extreme bodybuilders, furries, eco-activists, Apple fanatics, and people with extensive body modifications). They discuss what makes these behaviors \"freakish\" and why people choose to express themselves outside societal norms.\n\nA listening task features four individuals — Thomas, Anna, Bertha, and Stefan — who share their unconventional lives, ranging from winning vaping competitions and making a living on OnlyFans to raising eleven children and being extreme workaholics.\n\nStudents then watch three video clips: Claire and her giant Great Dane Freddy, Tere Lynn's family with over 50 feet of hair combined, and Justin Jedlica and Pixee Fox (the \"real-life Ken and Barbie\"). The class debates whether social media serves as a modern freak show.\n\nFinally, students read about the history of late 19th century freak shows and analyze four psychological reasons why humans are fascinated by the unusual: curiosity, desire for entertainment, inspiration from bravery, and social comparison.",
+        pdfUrl: "materials/b1_freaks.pdf",
+        audioUrl: "audio/b1_freaks_4_freaks.mp3",
+        rarUrl: "zips/b1_freaks.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=VZGTeW6DnKk" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=gFJtvGhuL7Y" },
+            { label: "Link 3", url: "https://www.youtube.com/watch?v=kjhVvzQcRc0" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-13",
+        title: "Dyson",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video",
+        mediaIcon: "▶️",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1",
+        duration: "90 min",
+        visualSource: "images/b1_dyson.jpg",
+        keywords: "Dyson James Dyson vacuum cleaner bladeless fan hairdryer inventor design thinking frustration perseverance underdog Edison Solveiga Paceviciute food spoilage b1 technology",
+        objectives: [
+            "Explore the design process and the concept of problem-solving through the biography and philosophy of James Dyson;",
+            "Practice descriptive vocabulary for household appliances and their physical features through reading and matching tasks;",
+            "Analyze key traits of successful inventors (frustration, wrong thinking, perseverance, underdog mentality) and apply design thinking to everyday problems."
+        ],
+        description: "In this lesson, students begin by examining high-end Dyson products — such as a bladeless fan, a cordless vacuum, a high-tech hair straightener, and a Supersonic hairdryer — matching detailed descriptive paragraphs to the correct devices.\n\nThe lesson transitions to the engineering journey of James Dyson, where learners complete a gap-fill about his early inventions, including a fast boat, a ball-wheelbarrow, and the first bagless vacuum cleaner inspired by an industrial cyclone system.\n\nStudents then explore four core mindsets of innovative designers: Frustration (as a starting point), Wrong thinking (challenging the status quo), Perseverance (learning from failure), and the Underdog spirit. They engage in a creative problem-solving activity analyzing everyday annoyances and brainstorming innovative fixes.\n\nFinally, students watch a video about Solveiga Paceviciute, a young inventor who created a tactile food spoilage indicator for the visually impaired, answering comprehension questions about her Dyson Award-winning project.",
+        pdfUrl: "materials/b1_dyson.pdf",
+        audioUrl: null,
+        rarUrl: "zips/b1_dyson.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=tRT6m3T-QbQ" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=CkK1W364OzM" },
+            { label: "Link 3", url: "https://www.youtube.com/watch?v=CRHcSWfory8" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-13",
+        title: "Eggs",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "a2-b1",
+        levelLabel: "A2-B1",
+        duration: "60-120 min",
+        visualSource: "images/a2_eggs.jpg",
+        keywords: "eggs poultry cooking Over Easy Poached Scrambled Ostrich Quail albumen chalazae choline selenium vitamin USDA idioms walk on eggshells nest egg golden goose a2 b1 food",
+        objectives: [
+            "Explore culinary preferences and cultural attitudes toward eggs and poultry through visual matching and discussion;",
+            "Learn the anatomical structure and nutritional benefits of eggs through targeted vocabulary and matching tasks;",
+            "Expand functional vocabulary by learning and applying 12 common English idioms related to eggs."
+        ],
+        description: "In this lesson, students begin by examining pictures of various egg dishes (e.g., Over Easy, Poached, Scrambled) and different types of birds (e.g., Ostrich, Quail, Dove), discussing breakfast preferences and matching eggs to their corresponding birds.\n\nThe lesson transitions to the biological and nutritional aspects, where learners label a diagram of an egg's anatomy (e.g., albumen, chalazae, air cell) and match nutrients like choline, selenium, and vitamin B-12 to their specific health benefits.\n\nStudents complete a True/False quiz titled \"The Incredible Invaluable Egg,\" reading 12 surprising statements — ranging from USDA grading to the impact of a hen's emotional state on shell hardness — and watching a video to separate truths from \"scrambled lies.\"\n\nFinally, the class explores 12 egg-related idioms (e.g., to walk on eggshells, a nest egg, to kill the goose that lays the golden egg), matching them to definitions and using them in personal discussion questions.",
+        pdfUrl: "materials/a2_eggs.pdf",
+        audioUrl: "audio/a2_eggs_united.mp3",
+        rarUrl: "zips/a2_eggs.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=ob2XRPezeyI" }]
+    },
+
+    {
+        dateAdded: "2026-07-13",
+        title: "Competitive Spirit",
+        category: "business",
+        categoryLabel: "Business English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "💼",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_competetive_spirit.jpg",
+        keywords: "competition rivalry collaboration Direct Indirect Replacement SERP competitors bid-rigging predatory pricing bait-and-switch intraspecific interspecific collusion deceptive advertising bribery business b1 b2",
+        objectives: [
+            "Define the core concepts of competition and distinguish between related synonyms, antonyms, and grammatical forms;",
+            "Categorize different types of business competitors and analyze the biological concepts of intraspecific and interspecific competition in nature;",
+            "Identify and evaluate unethical business practices through listening comprehension and scenario-based discussions."
+        ],
+        description: "In this lesson, students begin by exploring the grammatical forms of the word \"competition\" and expanding their lexical range by matching synonyms (e.g., rivalry, showdown) and antonyms (e.g., collaboration, teamwork) to their respective categories.\n\nThe lesson transitions to the business world, where learners categorize six distinct types of competitors (e.g., Direct, Indirect, Replacement, SERP) based on their market threats, followed by a gap-fill exercise outlining the strategic advantages of analyzing competitors. Students then shift to the natural world to differentiate between intraspecific and interspecific competition using animal behavior examples.\n\nThe core of the lesson tackles corporate ethics as students match ten unfair competitive methods — such as bid-rigging, predatory pricing, bait-and-switch, and identity theft — to illustrative scenarios. Finally, learners listen to an expert break down the legal and practical dangers of unethical business behavior, completing multiple-choice comprehension tasks.",
+        pdfUrl: "materials/b1_competetive_spirit.pdf",
+        audioUrl: "audio/b1_competetive_spirit_6_types_podcast.mp3",
+        audioUrls: [
+            { label: "6 Types Podcast", url: "audio/b1_competetive_spirit_6_types_podcast.mp3" },
+            { label: "10 Methods", url: "audio/b1_competetive_spirit_10_methods.mp3" }
+        ],
+        rarUrl: "zips/b1_competetive_spirit.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=BiEzZVqx_2g" }]
+    },
+
+    {
+        dateAdded: "2026-07-13",
+        title: "Dopamine Decor",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_dopamine_decor.jpg",
+        keywords: "dopamine decor serotonin oxytocin cortisol melatonin endorphins interior design biophilic neurosensory cultural maximalism dark dopamine hero colors bold patterns renovation mood b1 b2",
+        objectives: [
+            "Explore the relationship between brain chemicals (such as dopamine, serotonin, and oxytocin) and environmental stimuli;",
+            "Learn and apply interior design vocabulary, including patterns, color palettes, and the core principles of \"Dopamine Decor\";",
+            "Critically evaluate common interior design mistakes and analyze emerging aesthetic trends to create personalized, mood-boosting living spaces."
+        ],
+        description: "In this lesson, students begin by discussing how they would allocate a hypothetical renovation budget before diving into the science of mood, matching ten key brain chemicals and hormones (e.g., dopamine, cortisol, melatonin, endorphins) to their primary biological roles and natural boosters.\n\nThey then transition to the concept of \"Dopamine Decor,\" learning how to intentionally use hero colors, bold patterns, and dramatic scale to create joyful spaces that trigger feel-good chemicals. Students personalize this approach by selecting their own seasonal color palettes and preferred art styles.\n\nThe lesson expands into a broader exploration of modern interior design trends, where learners match emerging styles — such as Biophilic Design, Neurosensory Spaces, Cultural Maximalism, and Dark Dopamine — to visual examples.\n\nFinally, students review a guide on the \"10 Common Interior Design Mistakes and How to Fix Them,\" reflecting on their own living spaces and discussing how to balance traditional aesthetic rules with personal happiness.",
+        pdfUrl: "materials/b1_dopamine_decor.pdf",
+        audioUrl: "audio/b1_dopamine_decor_10_mistakes.mp3",
+        rarUrl: "zips/b1_dopamine_decor.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=Y_dNkszWB2o" }]
+    },
+
+    {
+        dateAdded: "2026-07-13",
+        title: "Enshittification",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video",
+        mediaIcon: "▶️",
+        categoryIcon: "🎓",
+        level: "b1-b2",
+        levelLabel: "B1-B2",
+        duration: "90 min",
+        visualSource: "images/b1_enshittification.jpg",
+        keywords: "enshittification digital platforms Facebook Instagram Cambridge Analytica data privacy targeted advertising subscriptions airlines video games smartphones planned obsolescence journalism clickbait en- prefix b1 b2 technology",
+        objectives: [
+            "Understand the concept of \"enshittification\" and analyze the lifecycle of digital platforms as they prioritize profit over user experience;",
+            "Expand vocabulary related to digital platforms and practice using verbs with the prefix \"en-\";",
+            "Critically evaluate the ethical implications of data privacy, targeted advertising, and profit-driven degradation across various modern industries."
+        ],
+        description: "In this lesson, students begin by matching definitions to a wide array of digital platforms (e.g., microblogging sites, content management systems, photo-sharing apps) and discussing their personal usage. They then expand their lexical range by exploring words with the prefix \"en-\" (e.g., enrage, enlighten, entangle, envision).\n\nThe core introduces the term \"enshittification\" — the three-stage lifecycle of platforms: starting with a great product to attract users, degrading the experience to benefit advertisers, and finally extracting all remaining value through subscriptions.\n\nStudents then analyze how tech giants like Facebook and Instagram actually make money, watching a video about targeted advertising, data collection, and the Cambridge Analytica scandal.\n\nFinally, students explore how \"enshittification\" extends beyond tech into airlines (hidden fees, shrinking legroom), video games (microtransactions), smartphones (planned obsolescence), urban housing, and journalism (clickbait), brainstorming other areas where systems are degrading.",
+        pdfUrl: "materials/b1_enshittification.pdf",
+        audioUrl: null,
+        rarUrl: "zips/b1_enshittification.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=SCt6l15nJpY" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=zKk9to7Zcdg" }
+        ]
+    },
+
+    {
+        dateAdded: "2026-07-13",
+        title: "Dealing with Change",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video",
+        mediaIcon: "▶️",
+        categoryIcon: "🎓",
+        level: "b1",
+        levelLabel: "B1",
+        duration: "90 min",
+        visualSource: "images/b1_dealing_with_change.jpg",
+        keywords: "change coping stages shock disorientation anger acceptance Maslow Alan Watts firm belief stand firm resentment pessimistic blessing in disguise roll with the punches weather the storm b1 psychology",
+        objectives: [
+            "Explore the psychological and emotional stages of coping with significant life changes and transitions;",
+            "Practice targeted vocabulary related to emotions, collocations with the word \"firm,\" and idioms for adapting to new situations;",
+            "Evaluate personal attitudes toward change and discuss practical strategies for managing uncertainty."
+        ],
+        description: "In this lesson, students begin by discussing their personal experiences with change and analyzing philosophical quotes from figures like Abraham Maslow and Alan Watts about embracing uncertainty. They then expand their lexical range by matching words like resentment, pessimistic, and disorientation to their definitions, followed by a focused grammar task on collocations with the word \"firm\" (e.g., firm belief, stand firm, firm handshake).\n\nThe core features a video outlining the \"Four Stages of Coping with Change\" — from initial shock and disorientation to anger, coming to terms with the situation, and finally acceptance. Students answer comprehension questions about managing strong emotions, seeking reliable information, and avoiding gossip.\n\nAfterward, learners evaluate true/false statements about the nature of change before learning six practical idioms (e.g., a blessing in disguise, roll with the punches, weather the storm). They apply these expressions in gap-fill exercises and conclude with personal discussion questions about times they had to start fresh or adapt to difficult circumstances.",
+        pdfUrl: "materials/b1_dealing_with_change.pdf",
+        audioUrl: null,
+        rarUrl: "zips/b1_dealing_with_change.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=pYGBYDgwtR8" }]
+    },
+
+    {
+        dateAdded: "2026-07-13",
+        title: "Dark Triad",
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b2-c1",
+        levelLabel: "B2-C1",
+        duration: "90 min",
+        visualSource: "images/b2_dark_triad.jpg",
+        keywords: "dark triad narcissism machiavellianism psychopathy Big Five neuroticism extraversion openness agreeableness conscientiousness Batman Walter White Miranda Priestly Steve Jobs Carl Jung shadow Yin Yang Oskar Schindler b2 c1 psychology",
+        objectives: [
+            "Explore the Five-Factor Model (Big Five) of personality and contrast it with the \"Dark Triad\" traits (Narcissism, Machiavellianism, and Psychopathy);",
+            "Analyze the psychological and evolutionary characteristics of dark personality traits through research-based multiple-choice questions;",
+            "Evaluate the presence of these traits in pop culture and real-world figures, and examine the philosophical coexistence of good and evil within human nature."
+        ],
+        description: "In this lesson, students begin by examining photos of universally admired celebrities and matching positive personality adjectives to them. This leads into an introduction to the Five-Factor Model (the Big Five), where learners review the global distribution of standard traits like Neuroticism, Extraversion, Openness, Agreeableness, and Conscientiousness.\n\nThe lesson then shifts to the \"Dark Triad.\" Students match definitions to Narcissism (exaggerated self-importance), Machiavellianism (manipulation and deceit), and Psychopathy (lack of remorse), then test their knowledge with a multiple-choice quiz covering genetic components, evolutionary life strategies, and correlations with low agreeableness.\n\nLearners apply these concepts to pop culture by analyzing Batman through the lens of the Dark Triad, then categorize famous fictional characters (e.g., Walter White, Miranda Priestly, Gregory House) and controversial real-life figures (e.g., Steve Jobs, Donald Trump) according to specific dark traits.\n\nFinally, the class explores whether a person can be both good and evil simultaneously, referencing Carl Jung's concept of the \"shadow,\" the Yin and Yang philosophy, and historical figures like Oskar Schindler and Pablo Escobar.",
+        pdfUrl: "materials/b2_dark_triad.pdf",
+        audioUrl: "audio/b2_dark_triad_good_and_evil.mp3",
+        rarUrl: "zips/b2_dark_triad.rar",
+        mediaLabel: "The video links:",
+        links: [{ label: "Video", url: "https://www.youtube.com/watch?v=VpX6ts5Z2cU" }]
+    },
+
+    {
         dateAdded: "2026-07-12",
         title: "Altruism vs Egoism",
         category: "general",
