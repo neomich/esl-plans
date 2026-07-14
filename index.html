@@ -1725,6 +1725,8 @@
             updatePricingButtons();
             window.scrollTo(0, 0);
         }
+
+        function handlePricingClick(tier) {
             const userTier = currentUser ? (currentUser.profile_tier || 'free') : null;
 
             if (tier === 'guest') {
