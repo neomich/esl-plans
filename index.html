@@ -1546,6 +1546,9 @@
                         <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
                         <button type="button" class="auth-eye" onclick="togglePass('auth-password',this)">👁</button>
                     </div>
+                    <div id="forgot-link-wrap" style="text-align:right; margin-top:6px;">
+                        <a onclick="showForgotPassword()" style="font-size:13px; color:#c95210; cursor:pointer; text-decoration:none;">Forgot password?</a>
+                    </div>
                 </div>
                 <div class="auth-field" id="confirm-field" style="display:none;">
                     <label>Confirm Password</label>
@@ -1557,6 +1560,18 @@
                 <button class="auth-submit" id="auth-submit-btn" onclick="handleAuth()">Sign In</button>
                 <p class="auth-switch" id="auth-switch-text">
                     Don't have an account? <a onclick="switchTab('signup')" style="color:#c95210;cursor:pointer;">Sign Up</a>
+                </p>
+            </div>
+
+            <div id="forgot-form" style="display:none;">
+                <p style="font-size:14px; color:#666; margin-bottom:16px;">Enter your email and we'll send you a reset link.</p>
+                <div class="auth-field">
+                    <label>Email</label>
+                    <input type="email" id="forgot-email" placeholder="your@email.com" autocomplete="email">
+                </div>
+                <button class="auth-submit" onclick="handleForgotPassword()">Send Reset Link</button>
+                <p class="auth-switch">
+                    <a onclick="showSignInForm()" style="color:#c95210;cursor:pointer;">← Back to Sign In</a>
                 </p>
             </div>
         </div>
@@ -2249,6 +2264,47 @@
             setLessonHash(index);
         };
 
+        function showForgotPassword() {
+            document.getElementById('auth-form').style.display = 'none';
+            document.getElementById('forgot-form').style.display = 'block';
+            document.getElementById('auth-tabs').style.display = 'none';
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+            setTimeout(() => document.getElementById('forgot-email').focus(), 100);
+        }
+
+        function showSignInForm() {
+            document.getElementById('forgot-form').style.display = 'none';
+            document.getElementById('auth-form').style.display = 'block';
+            document.getElementById('auth-tabs').style.display = 'flex';
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+            switchTab('signin');
+        }
+
+        async function handleForgotPassword() {
+            const email = document.getElementById('forgot-email').value.trim();
+            if (!email) { showAuthError('Please enter your email.'); return; }
+
+            const btn = document.querySelector('#forgot-form .auth-submit');
+            btn.disabled = true;
+            btn.innerText = 'Sending...';
+
+            const { error } = await _supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: 'https://esl-plans.com'
+            });
+
+            if (error) {
+                showAuthError(error.message);
+                btn.disabled = false;
+                btn.innerText = 'Send Reset Link';
+            } else {
+                showAuthSuccess('✅ Reset link sent! Check your email.');
+                btn.disabled = false;
+                btn.innerText = 'Send Reset Link';
+            }
+        }
+
         function togglePass(inputId, btn) {
             const input = document.getElementById(inputId);
             if (input.type === 'password') {
@@ -2402,6 +2458,9 @@
             document.getElementById('auth-email').value = '';
             document.getElementById('auth-password').value = '';
             document.getElementById('auth-confirm').value = '';
+            document.getElementById('forgot-form').style.display = 'none';
+            document.getElementById('auth-form').style.display = 'block';
+            document.getElementById('auth-tabs').style.display = 'flex';
             switchTab('signin');
             setTimeout(() => document.getElementById('auth-email').focus(), 100);
         }
