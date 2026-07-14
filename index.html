@@ -1416,16 +1416,16 @@
         <div class="topic-scroll-wrapper">
             <div class="topic-scroll-track" id="topic-scroll-track">
                 <button class="topic-pill active" onclick="applyTopicFilter('all', this)">All Lessons</button>
-                <button class="topic-pill" onclick="applyTopicFilter('grammar', this)">Grammar</button>
-                <button class="topic-pill" onclick="applyTopicFilter('business', this)">Business</button>
-                <button class="topic-pill" onclick="applyTopicFilter('travel', this)">Travel & Tourism</button>
                 <button class="topic-pill" onclick="applyTopicFilter('psychology', this)">Psychology</button>
-                <button class="topic-pill" onclick="applyTopicFilter('technology', this)">Technology</button>
-                <button class="topic-pill" onclick="applyTopicFilter('culture', this)">Culture</button>
-                <button class="topic-pill" onclick="applyTopicFilter('media', this)">Media & Fame</button>
-                <button class="topic-pill" onclick="applyTopicFilter('art', this)">Art</button>
                 <button class="topic-pill" onclick="applyTopicFilter('society', this)">Society</button>
+                <button class="topic-pill" onclick="applyTopicFilter('technology', this)">Technology</button>
                 <button class="topic-pill" onclick="applyTopicFilter('work', this)">Work & Career</button>
+                <button class="topic-pill" onclick="applyTopicFilter('business', this)">Business</button>
+                <button class="topic-pill" onclick="applyTopicFilter('life', this)">Life & Relationships</button>
+                <button class="topic-pill" onclick="applyTopicFilter('travel', this)">Travel</button>
+                <button class="topic-pill" onclick="applyTopicFilter('media', this)">Media & Fame</button>
+                <button class="topic-pill" onclick="applyTopicFilter('art', this)">Art & Culture</button>
+                <button class="topic-pill" onclick="applyTopicFilter('grammar', this)">Grammar</button>
                 <button class="topic-pill" onclick="applyTopicFilter('food', this)">Food & Drink</button>
             </div>
         </div>
@@ -1838,7 +1838,6 @@
 
         function applyFiltersAndRender(resetPage) {
             const searchFilter = (document.getElementById('catalog-search-input').value || '').toLowerCase().trim();
-            const keywords = activeFilters.topic !== 'all' ? (topicKeywords[activeFilters.topic] || []) : [];
 
             filteredLessons = [];
             lessonsCatalog.forEach((lesson, index) => {
@@ -1863,7 +1862,7 @@
                     ? true
                     : activeFilters.topic === 'free'
                         ? lesson.isFree === true
-                        : keywords.some(kw => (lesson.keywords || '').toLowerCase().includes(kw.toLowerCase()) || lesson.title.toLowerCase().includes(kw.toLowerCase()));
+                        : (lesson.topics || []).includes(activeFilters.topic);
 
                 if (matchesLevel && matchesCategory && matchesSearch && matchesTopic) filteredLessons.push(index);
             });
