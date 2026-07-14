@@ -923,6 +923,15 @@
         .guest-btn { background: white; border: 2px solid #1a4fa0; color: #1a4fa0; }
         .contributor-btn { background: #222; color: white; }
         .friend-btn { background: #2e7d32; color: white; }
+        .pricing-btn.subscribed {
+            background: #e8f5e9 !important;
+            color: #2e7d32 !important;
+            border: 2px solid #2e7d32 !important;
+            cursor: default;
+            transform: none !important;
+            box-shadow: none !important;
+            font-size: 14px !important;
+        }
 
         .pricing-divider {
             width: 100%;
@@ -1280,7 +1289,7 @@
                 <div class="pricing-badge-icon">🖐️</div>
                 <div class="pricing-tier-name guest-color">GUEST</div>
                 <div class="pricing-price free-price">FREE</div>
-                <button class="pricing-btn guest-btn" onclick="openAuthModal()">Join the Community</button>
+                <button class="pricing-btn guest-btn" id="pricing-guest-btn" onclick="handlePricingClick('guest')">Join the Community</button>
                 <div class="pricing-divider"></div>
                 <ul class="pricing-features">
                     <li><span class="feat-icon">📖</span><span>Access <strong>free</strong> lesson plans tailored for online teaching.</span></li>
@@ -1294,7 +1303,7 @@
                 <div class="pricing-badge-icon">📣</div>
                 <div class="pricing-tier-name contributor-color">CONTRIBUTOR</div>
                 <div class="pricing-price contributor-price">$60<span class="price-period">/month</span></div>
-                <a href="https://payform.ru/noc13uv/" target="_blank" class="pricing-btn contributor-btn" style="text-decoration:none; display:block; text-align:center;">Start Teaching</a>
+                <button class="pricing-btn contributor-btn" id="pricing-contributor-btn" onclick="handlePricingClick('contributor')">Start Teaching</button>
                 <div class="pricing-divider"></div>
                 <ul class="pricing-features">
                     <li>
@@ -1328,7 +1337,7 @@
                 <div class="pricing-badge-icon">👥</div>
                 <div class="pricing-tier-name friend-color">FRIEND</div>
                 <div class="pricing-price friend-price">$120<span class="price-period">/year</span></div>
-                <a href="https://payform.ru/pac13vl/" target="_blank" class="pricing-btn friend-btn" style="text-decoration:none; display:block; text-align:center;">Get Full Access</a>
+                <button class="pricing-btn friend-btn" id="pricing-friend-btn" onclick="handlePricingClick('friend')">Get Full Access</button>
                 <div class="pricing-divider"></div>
                 <ul class="pricing-features">
                     <li><span class="feat-icon friend-icon">👑</span><span>Everything in the Contributor tier, plus bi-weekly updates with fresh, exclusive content.</span></li>
@@ -1710,7 +1719,90 @@
             applyFiltersAndRender();
         }
 
-        function showPricingView() { hideAllViews(); document.getElementById('pricing-view').style.display = 'block'; window.scrollTo(0, 0); }
+        function showPricingView() {
+            hideAllViews();
+            document.getElementById('pricing-view').style.display = 'block';
+            updatePricingButtons();
+            window.scrollTo(0, 0);
+        }
+            const userTier = currentUser ? (currentUser.profile_tier || 'free') : null;
+
+            if (tier === 'guest') {
+                if (!currentUser) {
+                    openAuthModal();
+                } else {
+                    // Already logged in as guest → go home
+                    showDashboardView();
+                }
+                return;
+            }
+
+            // Contributor or Friend button
+            if (!currentUser) {
+                // Not logged in → prompt login first
+                openAuthModal();
+                // After login, they can come back to pricing
+                return;
+            }
+
+            if (userTier === tier || (tier === 'contributor' && userTier === 'friend')) {
+                // Already subscribed — button is inactive, do nothing
+                return;
+            }
+
+            // Logged in, not yet subscribed → go to payment
+            const urls = {
+                contributor: 'https://payform.ru/noc13uv/',
+                friend: 'https://payform.ru/pac13vl/'
+            };
+            window.open(urls[tier], '_blank');
+        }
+
+        function updatePricingButtons() {
+            const guestBtn = document.getElementById('pricing-guest-btn');
+            const contBtn = document.getElementById('pricing-contributor-btn');
+            const friendBtn = document.getElementById('pricing-friend-btn');
+            if (!guestBtn || !contBtn || !friendBtn) return;
+
+            const tier = currentUser ? (currentUser.profile_tier || 'free') : null;
+            const profile = currentUser ? currentUser.profile_data : null;
+
+            // Format expiry date
+            function formatExpiry(dateStr) {
+                if (!dateStr) return '';
+                const d = new Date(dateStr);
+                return `Active until ${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear().toString().slice(2)}`;
+            }
+
+            // Reset all buttons first
+            [guestBtn, contBtn, friendBtn].forEach(b => b.classList.remove('subscribed'));
+
+            if (!currentUser) {
+                // Not logged in
+                guestBtn.innerText = 'Join the Community';
+                contBtn.innerText = 'Start Teaching';
+                friendBtn.innerText = 'Get Full Access';
+            } else if (tier === 'free' || tier === null) {
+                // Logged in as guest
+                guestBtn.innerText = '✅ You\'re In!';
+                guestBtn.classList.add('subscribed');
+                contBtn.innerText = 'Start Teaching';
+                friendBtn.innerText = 'Get Full Access';
+            } else if (tier === 'contributor') {
+                guestBtn.innerText = '✅ You\'re In!';
+                guestBtn.classList.add('subscribed');
+                contBtn.innerText = profile && profile.expires_at ? formatExpiry(profile.expires_at) : '✅ Active Plan';
+                contBtn.classList.add('subscribed');
+                friendBtn.innerText = 'Upgrade to Friend';
+            } else if (tier === 'friend') {
+                guestBtn.innerText = '✅ You\'re In!';
+                guestBtn.classList.add('subscribed');
+                contBtn.innerText = '✅ Included';
+                contBtn.classList.add('subscribed');
+                friendBtn.innerText = profile && profile.expires_at ? formatExpiry(profile.expires_at) : '✅ Active Plan';
+                friendBtn.classList.add('subscribed');
+            }
+        }
 
         function applyTopicFilter(topic, pillEl) {
             document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
@@ -1852,7 +1944,7 @@
             document.getElementById('dynamic-media-section').innerHTML = html;
 
             // ── PAYWALL: replace downloads with Upgrade Now for premium lessons ──
-            const isSubscribed = currentUser && currentUser.user_metadata && currentUser.user_metadata.tier && currentUser.user_metadata.tier !== 'free';
+            const isSubscribed = currentUser && currentUser.profile_tier && currentUser.profile_tier !== 'free';
             const isFreeLesson = lesson.isFree === true;
 
             if (!isFreeLesson && !isSubscribed) {
@@ -2239,7 +2331,7 @@
             else setLoggedOut();
         });
 
-        function setLoggedIn(user) {
+        async function setLoggedIn(user) {
             currentUser = user;
             const btn = document.getElementById('nav-login-btn');
             const shortEmail = user.email.length > 18 ? user.email.substring(0, 18) + '…' : user.email;
@@ -2248,20 +2340,31 @@
             btn.onclick = toggleUserMenu;
             document.getElementById('user-email-display').innerText = user.email;
 
-            // Show subscription status
-            const meta = user.user_metadata || {};
-            const tier = meta.tier || 'free';
+            // Fetch tier from secure profiles table
+            const { data: profile } = await _supabase
+                .from('profiles')
+                .select('tier, expires_at')
+                .eq('id', user.id)
+                .single();
+
+            const tier = profile ? profile.tier : 'free';
+            currentUser.profile_tier = tier;
+            currentUser.profile_data = profile;
+
             const badge = document.getElementById('user-sub-status');
             if (tier === 'contributor') {
                 badge.className = 'sub-status-badge sub-contributor';
                 badge.innerText = '⭐ Contributor';
             } else if (tier === 'friend') {
                 badge.className = 'sub-status-badge sub-friend';
-                badge.innerText = '👑 Friend';
+                badge.innerText = '👑 Friend — Full Access';
             } else {
                 badge.className = 'sub-status-badge sub-free';
                 badge.innerText = 'Guest — Upgrade to unlock all lessons';
             }
+
+            // Update pricing buttons if pricing page is visible
+            updatePricingButtons();
         }
 
         function setLoggedOut() {
