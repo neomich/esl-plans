@@ -8,6 +8,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Freaks",
+        topics: ["society", "psychology", "media"],
         isFree: true,
         category: "general",
         categoryLabel: "General English",
@@ -39,6 +40,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Dyson",
+        topics: ["technology", "work"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video",
@@ -69,6 +71,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Eggs",
+        topics: ["food"],
         isFree: true,
         category: "general",
         categoryLabel: "General English",
@@ -96,6 +99,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Competitive Spirit",
+        topics: ["business", "work"],
         category: "business",
         categoryLabel: "Business English",
         mediaType: "Video & Audio",
@@ -126,6 +130,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Dopamine Decor",
+        topics: ["life", "psychology"],
         isFree: true,
         category: "general",
         categoryLabel: "General English",
@@ -153,6 +158,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Enshittification",
+        topics: ["technology", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video",
@@ -182,6 +188,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Dealing with Change",
+        topics: ["psychology", "life"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video",
@@ -208,6 +215,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-13",
         title: "Dark Triad",
+        topics: ["psychology", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -234,6 +242,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Altruism vs Egoism",
+        topics: ["psychology", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -260,6 +269,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Belief",
+        topics: ["psychology", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video",
@@ -289,6 +299,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Annoyances",
+        topics: ["psychology", "life"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -318,6 +329,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Change Your Mind",
+        topics: ["psychology", "life"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -347,6 +359,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Best of CES 2026",
+        topics: ["technology"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -373,6 +386,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Dating a 10",
+        topics: ["psychology", "life", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -402,6 +416,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Asynchronous Work",
+        topics: ["business", "work", "technology"],
         isFree: true,
         category: "business",
         categoryLabel: "Business English",
@@ -433,6 +448,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "All About Feet",
+        topics: ["psychology", "life"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -462,6 +478,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "AI Scam",
+        topics: ["technology", "society"],
         isFree: true,
         category: "general",
         categoryLabel: "General English",
@@ -493,6 +510,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Quote of the Day",
+        topics: ["life", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -519,6 +537,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "A Cult",
+        topics: ["psychology", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -549,6 +568,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "12 Rules for Life",
+        topics: ["psychology", "life"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -579,6 +599,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Absurdism",
+        topics: ["psychology", "art"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -605,6 +626,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "AI Anxiety",
+        topics: ["technology", "work", "psychology"],
         isFree: true,
         category: "general",
         categoryLabel: "General English",
@@ -632,6 +654,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "I've Been to 25 Countries...",
+        topics: ["travel", "grammar"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -662,6 +685,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-12",
         title: "Astrology",
+        topics: ["psychology", "society", "life"],
         isFree: true,
         category: "general",
         categoryLabel: "General English",
@@ -693,6 +717,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-11",
         title: "Snoring",
+        topics: ["life", "psychology"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -723,6 +748,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-11",
         title: "Sauna",
+        topics: ["travel", "life"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video",
@@ -752,6 +778,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-11",
         title: "Abu Dhabi",
+        topics: ["travel"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -782,6 +809,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-11",
         title: "Learned Helplessness",
+        topics: ["psychology", "grammar"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video",
@@ -811,6 +839,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-11",
         title: "Girls Labels",
+        topics: ["society", "life"],
         isFree: true,
         category: "general",
         categoryLabel: "General English",
@@ -838,6 +867,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-11",
         title: "Chinese English",
+        topics: ["grammar", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -867,6 +897,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-11",
         title: "Underbelly of the Internet",
+        topics: ["technology", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -897,6 +928,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-11",
         title: "A One-Hit Wonder",
+        topics: ["media", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -923,6 +955,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-11",
         title: "The Apple Doesn't Fall Far From a Tree",
+        topics: ["life", "psychology"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -954,6 +987,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-10",
         title: "Your Job Won't Love You Back",
+        topics: ["business", "work", "psychology"],
         category: "business",
         categoryLabel: "Business English",
         mediaType: "Video & Audio",
@@ -988,6 +1022,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-10",
         title: "Great Stories",
+        topics: ["media", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -1015,6 +1050,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-10",
         title: "Coffee Of All Beverages",
+        topics: ["food", "psychology"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -1044,6 +1080,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-10",
         title: "The Seven Digital Deadly Sins",
+        topics: ["technology", "society", "psychology"],
         isFree: true,
         category: "general",
         categoryLabel: "General English",
@@ -1072,6 +1109,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-10",
         title: "Appification",
+        topics: ["technology", "life"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -1106,6 +1144,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-10",
         title: "USSR",
+        topics: ["society", "travel"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -1137,6 +1176,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-10",
         title: "The Insomniacs",
+        topics: ["psychology", "life"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -1168,6 +1208,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-09",
         title: "The Everywhere Girl!",
+        topics: ["media", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -1197,6 +1238,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-09",
         title: "Tiny Joys & Rituals",
+        topics: ["life", "psychology"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -1226,6 +1268,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-09",
         title: "Why Do We Gossip?",
+        topics: ["society", "psychology"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -1256,6 +1299,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-09",
         title: "Cultural Appropriation",
+        topics: ["society", "grammar"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -1288,6 +1332,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-07-09",
         title: "Europe",
+        topics: ["travel", "society"],
         isFree: true,
         category: "general",
         categoryLabel: "General English",
@@ -1323,6 +1368,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-06-28",
         title: "Life 3.0",
+        topics: ["technology", "psychology", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -1350,6 +1396,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-06-28",
         title: "Pawn Shop",
+        topics: ["psychology", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -1380,6 +1427,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-06-27",
         title: "The Culture of Overwork",
+        topics: ["business", "work", "psychology"],
         category: "business",
         categoryLabel: "Business English",
         mediaType: "Audio & Video",
@@ -1409,6 +1457,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-06-27",
         title: "Confusing English Language",
+        topics: ["grammar"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -1440,6 +1489,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-06-26",
         title: "The Movie Industry of the Future",
+        topics: ["media", "technology"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video",
@@ -1470,6 +1520,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-06-25",
         title: "Affectations",
+        topics: ["society", "psychology", "life"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -1500,6 +1551,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-06-24",
         title: "Algorithms",
+        topics: ["technology", "society"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video & Audio",
@@ -1529,6 +1581,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-06-24",
         title: "Modern Remakes Of Famous Paintings",
+        topics: ["art"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Audio",
@@ -1556,6 +1609,7 @@ const lessonsCatalog = [
     {
         dateAdded: "2026-06-20",
         title: "What's The Most Popular Age To Be?",
+        topics: ["society", "life"],
         category: "general",
         categoryLabel: "General English",
         mediaType: "Video",
