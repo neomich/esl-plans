@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://esl-plans.com</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://esl-plans.com/reset.html</loc>
+        <changefreq>never</changefreq>
+        <priority>0.1</priority>
+    </url>
+    <url>
+        <loc>https://esl-plans.com/docs/terms.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+</urlset>
