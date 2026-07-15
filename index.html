@@ -2454,15 +2454,18 @@
         });
 
         // Listen for auth changes
+        let _recoveryMode = false;
         _supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'PASSWORD_RECOVERY') {
-                // This fires when user clicks reset link - show the set password form
-                showResetPasswordModal();
-            } else if (session) {
-                setLoggedIn(session.user);
-            } else {
-                setLoggedOut();
+                _recoveryMode = true;
+                // Don't log them in normally - show reset form instead
+                // But we need to be on reset.html for this
+                window.location.href = 'https://esl-plans.com/reset.html';
+                return;
             }
+            if (_recoveryMode) return; // ignore SIGNED_IN that follows PASSWORD_RECOVERY
+            if (session) setLoggedIn(session.user);
+            else setLoggedOut();
         });
 
         async function setLoggedIn(user) {
