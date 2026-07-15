@@ -1,1 +1,230 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password — ESL-plans</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c95210'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>ESL</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body {
+            background: #fff5ee;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .logo {
+            font-size: 32px;
+            margin-bottom: 32px;
+            cursor: pointer;
+        }
+        .logo .esl { font-weight: 900; font-style: italic; color: #c95210; }
+        .logo .dash { color: #c95210; font-weight: 300; }
+        .logo .plans { font-weight: 300; color: #222; font-family: 'Georgia', serif; }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 36px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        p.sub {
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .field { margin-bottom: 16px; }
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .input-wrap { position: relative; display: flex; align-items: center; }
+        .input-wrap input {
+            width: 100%;
+            padding: 12px 44px 12px 16px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-wrap input:focus { border-color: #c95210; }
+        .eye {
+            position: absolute; right: 12px;
+            background: none; border: none;
+            cursor: pointer; font-size: 16px; color: #888;
+        }
+        .btn {
+            width: 100%;
+            background: #c95210;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #b0460b; }
+        .btn:disabled { background: #ccc; cursor: not-allowed; }
+        .msg {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .msg.error { background: #fff5f5; border: 1px solid #fca5a5; color: #e03131; }
+        .msg.success { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .back-link a {
+            color: #c95210;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .loading {
+            text-align: center;
+            color: #888;
+            padding: 20px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo" onclick="window.location='https://esl-plans.com'">
+        <span class="esl">ESL</span><span class="dash">-</span><span class="plans">plans</span>
+    </div>
+
+    <div class="card">
+        <h2>Set New Password</h2>
+        <p class="sub">Choose a strong password for your account</p>
+
+        <div class="msg error" id="msg-error"></div>
+        <div class="msg success" id="msg-success"></div>
+        <div class="loading" id="loading">Verifying your reset link...</div>
+
+        <div id="form-area">
+            <div class="field">
+                <label>New Password</label>
+                <div class="input-wrap">
+                    <input type="password" id="new-pass" placeholder="At least 6 characters">
+                    <button class="eye" type="button" onclick="toggleEye('new-pass', this)">👁</button>
+                </div>
+            </div>
+            <div class="field">
+                <label>Confirm Password</label>
+                <div class="input-wrap">
+                    <input type="password" id="confirm-pass" placeholder="Repeat password">
+                    <button class="eye" type="button" onclick="toggleEye('confirm-pass', this)">👁</button>
+                </div>
+            </div>
+            <button class="btn" id="submit-btn" onclick="setNewPassword()">Set New Password</button>
+        </div>
+
+        <div class="back-link">
+            <a href="https://esl-plans.com">← Back to ESL-plans</a>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://uhyapbinngjpotcifdbc.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_JNvGyFm_d1QGKCGj7SmXQQ_TNJ-vB-D';
+        const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        function toggleEye(id, btn) {
+            const input = document.getElementById(id);
+            input.type = input.type === 'password' ? 'text' : 'password';
+            btn.innerText = input.type === 'password' ? '👁' : '🙈';
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('msg-error');
+            el.innerText = msg;
+            el.style.display = 'block';
+            document.getElementById('msg-success').style.display = 'none';
+        }
+
+        function showSuccess(msg) {
+            const el = document.getElementById('msg-success');
+            el.innerText = msg;
+            el.style.display = 'block';
+            document.getElementById('msg-error').style.display = 'none';
+        }
+
+        // Verify the session from the reset link
+        async function init() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('form-area').style.display = 'none';
+
+            // Supabase automatically processes the token from the URL hash
+            const { data, error } = await _sb.auth.getSession();
+
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('form-area').style.display = 'block';
+
+            if (error || !data.session) {
+                showError('This reset link is invalid or has expired. Please request a new one.');
+                document.getElementById('submit-btn').disabled = true;
+            }
+        }
+
+        async function setNewPassword() {
+            const newPass = document.getElementById('new-pass').value;
+            const confirm = document.getElementById('confirm-pass').value;
+
+            if (!newPass || newPass.length < 6) {
+                showError('Password must be at least 6 characters.');
+                return;
+            }
+            if (newPass !== confirm) {
+                showError("Passwords don't match.");
+                return;
+            }
+
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerText = 'Saving...';
+
+            const { error } = await _sb.auth.updateUser({ password: newPass });
+
+            if (error) {
+                showError(error.message);
+                btn.disabled = false;
+                btn.innerText = 'Set New Password';
+            } else {
+                showSuccess('✅ Password updated successfully! Redirecting you to the site...');
+                setTimeout(() => window.location.href = 'https://esl-plans.com', 2500);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
