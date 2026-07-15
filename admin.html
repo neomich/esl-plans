@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESL-plans Admin</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+        body { background: #f0f0f0; min-height: 100vh; }
+
+        .topbar {
+            background: #c95210;
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .topbar-logo { font-size: 22px; color: white; font-weight: 300; font-family: Georgia, serif; }
+        .topbar-logo strong { font-weight: 900; font-style: italic; font-family: 'Segoe UI', sans-serif; }
+        .topbar-right { font-size: 13px; color: rgba(255,255,255,0.8); }
+        .topbar-right a { color: white; cursor: pointer; text-decoration: underline; }
+
+        /* LOGIN */
+        #login-screen {
+            display: flex; align-items: center; justify-content: center;
+            min-height: calc(100vh - 52px);
+        }
+        .login-card {
+            background: white; border-radius: 20px; padding: 40px 36px;
+            max-width: 380px; width: 90%;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .login-card h2 { font-size: 20px; color: #333; margin-bottom: 6px; }
+        .login-card p { font-size: 14px; color: #888; margin-bottom: 24px; }
+        .login-card input {
+            width: 100%; padding: 12px 16px; border: 1.5px solid #e0e0e0;
+            border-radius: 10px; font-size: 15px; margin-bottom: 12px; outline: none;
+        }
+        .login-card input:focus { border-color: #c95210; }
+        .login-btn {
+            width: 100%; background: #c95210; color: white; border: none;
+            border-radius: 10px; padding: 13px; font-size: 15px; font-weight: 700;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .login-btn:hover { background: #b0460b; }
+        .login-error { color: #e03131; font-size: 13px; margin-top: 10px; }
+
+        /* ADMIN */
+        #admin-screen { display: none; padding: 32px; max-width: 900px; margin: 0 auto; }
+
+        .section-title {
+            font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #c95210; margin-bottom: 12px;
+        }
+
+        .card {
+            background: white; border-radius: 16px; padding: 24px;
+            margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .form-row { margin-bottom: 18px; }
+        .form-row label {
+            display: block; font-size: 12px; font-weight: 700;
+            color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
+        }
+        .form-row input[type="text"], .form-row textarea, .form-row select {
+            width: 100%; padding: 11px 14px; border: 1.5px solid #e0e0e0;
+            border-radius: 10px; font-size: 15px; outline: none;
+            transition: border-color 0.2s; font-family: inherit;
+        }
+        .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
+            border-color: #c95210;
+        }
+        .form-row textarea { min-height: 120px; resize: vertical; }
+
+        /* TOGGLES */
+        .toggle-group { display: flex; flex-wrap: wrap; gap: 8px; }
+        .toggle-btn {
+            padding: 8px 16px; border-radius: 20px; border: 1.5px solid #ddd;
+            background: white; color: #555; font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: all 0.15s; user-select: none;
+        }
+        .toggle-btn.active {
+            background: #c95210; border-color: #c95210; color: white;
+        }
+        .toggle-btn.green.active { background: #2e7d32; border-color: #2e7d32; }
+
+        /* OBJECTIVES */
+        .obj-list { display: flex; flex-direction: column; gap: 8px; }
+        .obj-row { display: flex; gap: 8px; align-items: center; }
+        .obj-row input { flex: 1; }
+        .obj-row button {
+            background: none; border: none; color: #ccc;
+            font-size: 18px; cursor: pointer; padding: 4px;
+            line-height: 1; flex-shrink: 0;
+        }
+        .obj-row button:hover { color: #e03131; }
+        .add-btn {
+            background: none; border: 1.5px dashed #ddd; border-radius: 8px;
+            padding: 8px 16px; color: #aaa; font-size: 13px; cursor: pointer;
+            width: 100%; margin-top: 6px; transition: all 0.2s;
+        }
+        .add-btn:hover { border-color: #c95210; color: #c95210; }
+
+        /* FILE ROWS */
+        .file-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        @media (max-width: 600px) { .file-grid { grid-template-columns: 1fr; } }
+
+        /* TOPICS */
+        .topics-auto {
+            font-size: 12px; color: #888; margin-top: 6px;
+            font-style: italic;
+        }
+
+        /* PREVIEW */
+        #preview-area {
+            background: #1e1e1e; border-radius: 12px; padding: 20px;
+            font-family: 'Courier New', monospace; font-size: 12px;
+            color: #9cdcfe; overflow-x: auto; max-height: 400px;
+            overflow-y: auto; white-space: pre; display: none;
+        }
+
+        /* SUBMIT */
+        .submit-area { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn-preview {
+            flex: 1; padding: 14px; border-radius: 12px; border: 2px solid #c95210;
+            background: white; color: #c95210; font-size: 15px; font-weight: 700;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn-preview:hover { background: #fff5f0; }
+        .btn-submit {
+            flex: 2; padding: 14px; border-radius: 12px; border: none;
+            background: #c95210; color: white; font-size: 15px; font-weight: 700;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .btn-submit:hover { background: #b0460b; }
+        .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
+
+        .status-msg {
+            padding: 12px 16px; border-radius: 10px; font-size: 14px;
+            margin-top: 12px; display: none;
+        }
+        .status-msg.success { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+        .status-msg.error { background: #fff5f5; border: 1px solid #fca5a5; color: #e03131; }
+
+        .github-setup {
+            background: #fffbeb; border: 1px solid #fcd34d; border-radius: 12px;
+            padding: 16px; margin-bottom: 20px; font-size: 13px; color: #92400e;
+        }
+        .github-setup input {
+            width: 100%; margin-top: 8px; padding: 8px 12px;
+            border: 1px solid #fcd34d; border-radius: 8px; font-size: 13px;
+            background: white; outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="topbar-logo"><strong>ESL</strong>-plans Admin</div>
+    <div class="topbar-right" id="topbar-user"></div>
+</div>
+
+<!-- LOGIN -->
+<div id="login-screen">
+    <div class="login-card">
+        <h2>Admin Access</h2>
+        <p>Sign in with your ESL-plans account</p>
+        <input type="email" id="login-email" placeholder="esl-plans@proton.me">
+        <input type="password" id="login-pass" placeholder="Password">
+        <button class="login-btn" onclick="adminLogin()">Sign In</button>
+        <div class="login-error" id="login-error"></div>
+    </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin-screen">
+
+    <div class="github-setup" id="github-setup-panel">
+        ⚙️ <strong>One-time setup:</strong> Enter your GitHub Personal Access Token to enable automatic uploads.
+        <a href="https://github.com/settings/tokens/new?scopes=repo&description=ESLplans+Admin" target="_blank" style="color:#c95210;">Create token here</a> (select <strong>repo</strong> scope)
+        <input type="password" id="github-token-input" placeholder="ghp_xxxxxxxxxxxx" oninput="saveToken()">
+    </div>
+
+    <h1 style="font-size:24px; font-weight:800; color:#333; margin-bottom:24px;">➕ Add New Lesson</h1>
+
+    <!-- BASIC INFO -->
+    <div class="card">
+        <div class="section-title">Basic Information</div>
+
+        <div class="form-row">
+            <label>Title</label>
+            <input type="text" id="f-title" placeholder="e.g. The Art of Small Talk">
+        </div>
+
+        <div class="form-row">
+            <label>Level</label>
+            <div class="toggle-group" id="levels-group">
+                <div class="toggle-btn" data-val="a2" onclick="toggleLevel(this)">A2</div>
+                <div class="toggle-btn" data-val="b1" onclick="toggleLevel(this)">B1</div>
+                <div class="toggle-btn" data-val="b2" onclick="toggleLevel(this)">B2</div>
+                <div class="toggle-btn" data-val="c1" onclick="toggleLevel(this)">C1</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label>Category</label>
+            <div class="toggle-group">
+                <div class="toggle-btn active" data-cat="general" onclick="toggleCat(this)">General English</div>
+                <div class="toggle-btn" data-cat="business" onclick="toggleCat(this)">Business English</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label>Duration</label>
+            <div class="toggle-group">
+                <div class="toggle-btn" data-dur="60" onclick="toggleDur(this)">60 min</div>
+                <div class="toggle-btn" data-dur="60-90" onclick="toggleDur(this)">60-90 min</div>
+                <div class="toggle-btn active" data-dur="90" onclick="toggleDur(this)">90 min</div>
+                <div class="toggle-btn" data-dur="90-120" onclick="toggleDur(this)">90-120 min</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label>Media Type</label>
+            <div class="toggle-group" id="media-group">
+                <div class="toggle-btn" data-media="audio" onclick="toggleMedia(this)">🎵 Audio</div>
+                <div class="toggle-btn" data-media="video" onclick="toggleMedia(this)">▶️ Video</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label>Free Lesson?</label>
+            <div class="toggle-group">
+                <div class="toggle-btn active" data-free="no" onclick="toggleFree(this)">🔒 Premium</div>
+                <div class="toggle-btn green" data-free="yes" onclick="toggleFree(this)">⭐ FREE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OBJECTIVES -->
+    <div class="card">
+        <div class="section-title">Main Objectives</div>
+        <div class="obj-list" id="obj-list">
+            <div class="obj-row">
+                <input type="text" placeholder="Objective 1...">
+                <button onclick="removeObj(this)">✕</button>
+            </div>
+            <div class="obj-row">
+                <input type="text" placeholder="Objective 2...">
+                <button onclick="removeObj(this)">✕</button>
+            </div>
+            <div class="obj-row">
+                <input type="text" placeholder="Objective 3...">
+                <button onclick="removeObj(this)">✕</button>
+            </div>
+        </div>
+        <button class="add-btn" onclick="addObj()">+ Add objective</button>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="card">
+        <div class="section-title">Description</div>
+        <div class="form-row">
+            <textarea id="f-description" placeholder="In this lesson, students begin by...&#10;&#10;The lesson transitions to...&#10;&#10;Finally, students..."></textarea>
+        </div>
+    </div>
+
+    <!-- FILES -->
+    <div class="card">
+        <div class="section-title">Files (R2 filenames — just the filename, e.g. b1_lesson.pdf)</div>
+        <div class="file-grid">
+            <div class="form-row">
+                <label>📄 PDF filename</label>
+                <input type="text" id="f-pdf" placeholder="b1_lesson_title.pdf">
+            </div>
+            <div class="form-row">
+                <label>🗜️ RAR filename</label>
+                <input type="text" id="f-rar" placeholder="b1_lesson_title.rar">
+            </div>
+            <div class="form-row">
+                <label>🖼️ Image filename (in GitHub images/)</label>
+                <input type="text" id="f-image" placeholder="b1_lesson_title.jpg">
+            </div>
+        </div>
+
+        <div class="section-title" style="margin-top:16px;">Audio Files</div>
+        <div id="audio-list">
+            <div class="form-row">
+                <label>Audio 1 label</label>
+                <input type="text" placeholder="e.g. 4 Speakers" style="margin-bottom:6px;">
+                <label>Audio 1 filename</label>
+                <input type="text" placeholder="b1_lesson_title_4_speakers.mp3">
+            </div>
+        </div>
+        <button class="add-btn" onclick="addAudio()">+ Add another audio file</button>
+
+        <div class="section-title" style="margin-top:16px;">Video Links</div>
+        <div id="video-list">
+            <div class="form-row">
+                <input type="text" placeholder="https://www.youtube.com/watch?v=...">
+            </div>
+        </div>
+        <button class="add-btn" onclick="addVideo()">+ Add another video link</button>
+    </div>
+
+    <!-- TOPICS -->
+    <div class="card">
+        <div class="section-title">Topics (select all that apply)</div>
+        <div class="toggle-group" id="topics-group">
+            <div class="toggle-btn" data-topic="psychology" onclick="toggleTopic(this)">Psychology</div>
+            <div class="toggle-btn" data-topic="society" onclick="toggleTopic(this)">Society</div>
+            <div class="toggle-btn" data-topic="technology" onclick="toggleTopic(this)">Technology</div>
+            <div class="toggle-btn" data-topic="work" onclick="toggleTopic(this)">Work & Career</div>
+            <div class="toggle-btn" data-topic="business" onclick="toggleTopic(this)">Business</div>
+            <div class="toggle-btn" data-topic="life" onclick="toggleTopic(this)">Life & Relationships</div>
+            <div class="toggle-btn" data-topic="travel" onclick="toggleTopic(this)">Travel</div>
+            <div class="toggle-btn" data-topic="media" onclick="toggleTopic(this)">Media & Fame</div>
+            <div class="toggle-btn" data-topic="art" onclick="toggleTopic(this)">Art & Culture</div>
+            <div class="toggle-btn" data-topic="grammar" onclick="toggleTopic(this)">Grammar</div>
+            <div class="toggle-btn" data-topic="food" onclick="toggleTopic(this)">Food & Drink</div>
+        </div>
+    </div>
+
+    <!-- PREVIEW + SUBMIT -->
+    <div class="card">
+        <div class="section-title">Submit</div>
+        <div class="submit-area">
+            <button class="btn-preview" onclick="previewLesson()">👁 Preview JSON</button>
+            <button class="btn-submit" id="submit-btn" onclick="submitLesson()">🚀 Add to lessons.js</button>
+        </div>
+        <div class="status-msg" id="status-msg"></div>
+        <pre id="preview-area"></pre>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const SUPABASE_URL = 'https://uhyapbinngjpotcifdbc.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_JNvGyFm_d1QGKCGj7SmXQQ_TNJ-vB-D';
+    const ADMIN_EMAIL = 'esl-plans@proton.me';
+    const GITHUB_OWNER = 'neomich';
+    const GITHUB_REPO = 'esl-plans';
+    const R2_BASE = 'https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev';
+
+    const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    let currentUser = null;
+
+    // ── AUTH ──
+    _sb.auth.getSession().then(({ data: { session } }) => {
+        if (session && session.user.email === ADMIN_EMAIL) {
+            showAdmin(session.user);
+        }
+    });
+
+    async function adminLogin() {
+        const email = document.getElementById('login-email').value.trim();
+        const pass = document.getElementById('login-pass').value;
+        const err = document.getElementById('login-error');
+
+        if (email !== ADMIN_EMAIL) {
+            err.innerText = 'Access denied. Admin only.';
+            return;
+        }
+
+        const { data, error } = await _sb.auth.signInWithPassword({ email, password: pass });
+        if (error) { err.innerText = error.message; return; }
+        showAdmin(data.user);
+    }
+
+    function showAdmin(user) {
+        currentUser = user;
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-screen').style.display = 'block';
+        document.getElementById('topbar-user').innerHTML = `${user.email} — <a onclick="signOut()">Sign out</a>`;
+
+        // Load saved token
+        const token = localStorage.getItem('gh_token');
+        if (token) {
+            document.getElementById('github-token-input').value = token;
+            document.getElementById('github-setup-panel').style.display = 'none';
+        }
+    }
+
+    async function signOut() {
+        await _sb.auth.signOut();
+        location.reload();
+    }
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
+            adminLogin();
+        }
+    });
+
+    // ── GITHUB TOKEN ──
+    function saveToken() {
+        const token = document.getElementById('github-token-input').value.trim();
+        if (token.startsWith('ghp_') || token.startsWith('github_pat_')) {
+            localStorage.setItem('gh_token', token);
+        }
+    }
+
+    // ── TOGGLES ──
+    let selectedLevels = [];
+    let selectedCat = 'general';
+    let selectedDur = '90';
+    let selectedMedia = [];
+    let isFree = false;
+    let selectedTopics = [];
+
+    function toggleLevel(el) {
+        el.classList.toggle('active');
+        const val = el.dataset.val;
+        if (selectedLevels.includes(val)) {
+            selectedLevels = selectedLevels.filter(v => v !== val);
+        } else {
+            selectedLevels.push(val);
+        }
+    }
+
+    function toggleCat(el) {
+        document.querySelectorAll('[data-cat]').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+        selectedCat = el.dataset.cat;
+    }
+
+    function toggleDur(el) {
+        document.querySelectorAll('[data-dur]').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+        selectedDur = el.dataset.dur;
+    }
+
+    function toggleMedia(el) {
+        el.classList.toggle('active');
+        const val = el.dataset.media;
+        if (selectedMedia.includes(val)) {
+            selectedMedia = selectedMedia.filter(v => v !== val);
+        } else {
+            selectedMedia.push(val);
+        }
+    }
+
+    function toggleFree(el) {
+        document.querySelectorAll('[data-free]').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+        isFree = el.dataset.free === 'yes';
+    }
+
+    function toggleTopic(el) {
+        el.classList.toggle('active');
+        const val = el.dataset.topic;
+        if (selectedTopics.includes(val)) {
+            selectedTopics = selectedTopics.filter(v => v !== val);
+        } else {
+            selectedTopics.push(val);
+        }
+    }
+
+    // ── OBJECTIVES ──
+    function addObj() {
+        const list = document.getElementById('obj-list');
+        const count = list.children.length + 1;
+        const row = document.createElement('div');
+        row.className = 'obj-row';
+        row.innerHTML = `<input type="text" placeholder="Objective ${count}..."><button onclick="removeObj(this)">✕</button>`;
+        list.appendChild(row);
+    }
+
+    function removeObj(btn) {
+        const list = document.getElementById('obj-list');
+        if (list.children.length > 1) btn.parentElement.remove();
+    }
+
+    // ── AUDIO ──
+    function addAudio() {
+        const list = document.getElementById('audio-list');
+        const count = list.children.length + 1;
+        const div = document.createElement('div');
+        div.className = 'form-row';
+        div.innerHTML = `
+            <label>Audio ${count+1} label</label>
+            <input type="text" placeholder="e.g. Podcast" style="margin-bottom:6px;">
+            <label>Audio ${count+1} filename</label>
+            <input type="text" placeholder="b1_lesson_title_podcast.mp3">
+        `;
+        list.appendChild(div);
+    }
+
+    // ── VIDEOS ──
+    function addVideo() {
+        const list = document.getElementById('video-list');
+        const div = document.createElement('div');
+        div.className = 'form-row';
+        div.innerHTML = `<input type="text" placeholder="https://www.youtube.com/watch?v=...">`;
+        list.appendChild(div);
+    }
+
+    // ── BUILD LESSON OBJECT ──
+    function buildLesson() {
+        const title = document.getElementById('f-title').value.trim();
+        if (!title) throw new Error('Title is required');
+        if (selectedLevels.length === 0) throw new Error('Select at least one level');
+
+        // Level string
+        const levelOrder = ['a2', 'b1', 'b2', 'c1'];
+        const sorted = selectedLevels.sort((a, b) => levelOrder.indexOf(a) - levelOrder.indexOf(b));
+        const level = sorted.join('-');
+        const levelLabel = sorted.map(l => l.toUpperCase()).join('-');
+
+        // Media
+        const hasAudio = selectedMedia.includes('audio');
+        const hasVideo = selectedMedia.includes('video');
+        let mediaType, mediaIcon;
+        if (hasAudio && hasVideo) { mediaType = 'Video & Audio'; mediaIcon = '▶️🎵'; }
+        else if (hasVideo) { mediaType = 'Video'; mediaIcon = '▶️'; }
+        else if (hasAudio) { mediaType = 'Audio'; mediaIcon = '🎵'; }
+        else { mediaType = 'PDF only'; mediaIcon = '📄'; }
+
+        // Category
+        const categoryLabel = selectedCat === 'business' ? 'Business English' : 'General English';
+        const categoryIcon = selectedCat === 'business' ? '💼' : '🎓';
+
+        // Objectives
+        const objectives = Array.from(document.querySelectorAll('#obj-list input'))
+            .map(i => i.value.trim()).filter(Boolean);
+
+        // Description
+        const description = document.getElementById('f-description').value.trim();
+
+        // Files
+        const pdfFile = document.getElementById('f-pdf').value.trim();
+        const rarFile = document.getElementById('f-rar').value.trim();
+        const imageFile = document.getElementById('f-image').value.trim();
+
+        // Audio files
+        const audioRows = document.querySelectorAll('#audio-list .form-row');
+        const audioFiles = [];
+        audioRows.forEach(row => {
+            const inputs = row.querySelectorAll('input');
+            if (inputs.length >= 2) {
+                const label = inputs[0].value.trim();
+                const filename = inputs[1].value.trim();
+                if (filename) audioFiles.push({ label: label || 'Audio', url: `${R2_BASE}/audio/${filename}` });
+            }
+        });
+
+        // Video links
+        const videoInputs = document.querySelectorAll('#video-list input');
+        const videoLinks = Array.from(videoInputs)
+            .map((inp, i) => ({ label: `Link ${i+1}`, url: inp.value.trim() }))
+            .filter(l => l.url);
+
+        // Keywords from title + topics + level
+        const keywords = `${title.toLowerCase()} ${selectedTopics.join(' ')} ${level}`;
+
+        // Date
+        const today = new Date().toISOString().split('T')[0];
+
+        const lesson = {
+            dateAdded: today,
+            title,
+            topics: selectedTopics,
+            isFree,
+            category: selectedCat,
+            categoryLabel,
+            mediaType,
+            mediaIcon,
+            categoryIcon,
+            level,
+            levelLabel,
+            duration: `${selectedDur} min`,
+            visualSource: imageFile ? `images/${imageFile}` : `images/${title.toLowerCase().replace(/[^a-z0-9]/g, '_')}.jpg`,
+            keywords,
+            objectives,
+            description,
+            pdfUrl: pdfFile ? `${R2_BASE}/materials/${pdfFile}` : '',
+            audioUrl: audioFiles.length > 0 ? audioFiles[0].url : null,
+            ...(audioFiles.length > 1 ? { audioUrls: audioFiles } : {}),
+            rarUrl: rarFile ? `${R2_BASE}/zips/${rarFile}` : null,
+            mediaLabel: videoLinks.length > 0 ? 'The video links:' : 'The audio streams:',
+            links: videoLinks
+        };
+
+        return lesson;
+    }
+
+    function previewLesson() {
+        try {
+            const lesson = buildLesson();
+            const pre = document.getElementById('preview-area');
+            pre.style.display = 'block';
+            pre.innerText = JSON.stringify(lesson, null, 4);
+        } catch (e) {
+            showStatus(e.message, 'error');
+        }
+    }
+
+    // ── GITHUB API: read → prepend → write ──
+    async function submitLesson() {
+        const token = localStorage.getItem('gh_token');
+        if (!token) {
+            showStatus('Please enter your GitHub token first (see setup panel above)', 'error');
+            document.getElementById('github-setup-panel').style.display = 'block';
+            return;
+        }
+
+        let lesson;
+        try {
+            lesson = buildLesson();
+        } catch (e) {
+            showStatus(e.message, 'error');
+            return;
+        }
+
+        const btn = document.getElementById('submit-btn');
+        btn.disabled = true;
+        btn.innerText = 'Uploading...';
+
+        try {
+            // 1. Get current lessons.js from GitHub
+            const getResp = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/lessons.js`, {
+                headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+            });
+            const fileData = await getResp.json();
+            const sha = fileData.sha;
+            const currentContent = atob(fileData.content.replace(/\n/g, ''));
+
+            // 2. Build new lesson entry string
+            const lessonStr = '    ' + JSON.stringify(lesson, null, 4).replace(/\n/g, '\n    ') + ',\n\n';
+
+            // 3. Insert after "const lessonsCatalog = ["
+            const insertPoint = currentContent.indexOf('const lessonsCatalog = [') + 'const lessonsCatalog = ['.length;
+            const newContent = currentContent.slice(0, insertPoint) + '\n\n' + lessonStr + currentContent.slice(insertPoint);
+
+            // 4. Push back to GitHub
+            const pushResp = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/lessons.js`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: `Add lesson: ${lesson.title}`,
+                    content: btoa(unescape(encodeURIComponent(newContent))),
+                    sha: sha
+                })
+            });
+
+            if (pushResp.ok) {
+                showStatus(`✅ "${lesson.title}" added successfully! GitHub is deploying... (takes ~1 min)`, 'success');
+                resetForm();
+            } else {
+                const err = await pushResp.json();
+                showStatus(`GitHub error: ${err.message}`, 'error');
+            }
+
+        } catch (err) {
+            showStatus(`Error: ${err.message}`, 'error');
+        }
+
+        btn.disabled = false;
+        btn.innerText = '🚀 Add to lessons.js';
+    }
+
+    function showStatus(msg, type) {
+        const el = document.getElementById('status-msg');
+        el.innerText = msg;
+        el.className = `status-msg ${type}`;
+        el.style.display = 'block';
+        setTimeout(() => el.style.display = 'none', 8000);
+    }
+
+    function resetForm() {
+        document.getElementById('f-title').value = '';
+        document.getElementById('f-description').value = '';
+        document.getElementById('f-pdf').value = '';
+        document.getElementById('f-rar').value = '';
+        document.getElementById('f-image').value = '';
+        document.querySelectorAll('#obj-list input').forEach(i => i.value = '');
+        document.querySelectorAll('#audio-list input').forEach(i => i.value = '');
+        document.querySelectorAll('#video-list input').forEach(i => i.value = '');
+        selectedLevels = [];
+        selectedTopics = [];
+        selectedMedia = [];
+        document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-cat="general"]').classList.add('active');
+        document.querySelector('[data-dur="90"]').classList.add('active');
+        document.querySelector('[data-free="no"]').classList.add('active');
+        document.getElementById('preview-area').style.display = 'none';
+    }
+</script>
+</body>
+</html>
