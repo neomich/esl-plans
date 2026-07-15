@@ -2359,7 +2359,7 @@
             btn.innerText = 'Sending...';
 
             const { error } = await _supabase.auth.resetPasswordForEmail(email, {
-                redirectTo: 'https://esl-plans.com'
+                redirectTo: 'https://esl-plans.com/reset.html'
             });
 
             if (error) {
