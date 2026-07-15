@@ -6,6 +6,41 @@
 const lessonsCatalog = [
 
     {
+        dateAdded: "2026-07-16",
+        title: "Couples",
+        topics: ["society", "life", "psychology"],
+        isFree: false,
+        category: "general",
+        categoryLabel: "General English",
+        mediaType: "Video & Audio",
+        mediaIcon: "▶️🎵",
+        categoryIcon: "🎓",
+        level: "b1-c1",
+        levelLabel: "B1-C1",
+        duration: "90 min",
+        visualSource: "images/b2_couples.jpg",
+        keywords: "couples relationships intercultural power couples stereotypes American Russian French German Italian Chinese Napoleon Josephine Frida Kahlo Jay-Z Beyonce dual career communication boundaries b1 c1",
+        objectives: [
+            "Analyze and discuss cultural stereotypes in relationships through humorous descriptions of six distinct national couples;",
+            "Expand vocabulary related to intercultural dynamics and relationship transitions through targeted video comprehension tasks;",
+            "Identify the defining traits and habits of \"power couples\" through a podcast listening activity and apply these concepts to personal relationship dynamics."
+        ],
+        description: "In this lesson, students begin by reading or listening to exaggerated, humorous descriptions of six stereotypical couples (American, Russian, French, German, Italian, and Chinese). They analyze the couples' habits, appearances, and relationship dynamics, practice synonyms for \"funny\" (e.g., amusing, entertaining, humorous), and discuss the accuracy of these cultural tropes.\n\nThe lesson then transitions to its first video, which explores the statement that \"an interracial relationship is one of the least stereotyped relationships you can have.\" Students complete a vocabulary matching task for bolded terms (e.g., ground breakers, fascinated, stopgap, before the tide) and discuss their perspectives on intercultural partnerships.\n\nThe core media task is an audio podcast about \"power couples\" — influential pairs whose combined impact exceeds their individual influence. Students review the \"Six Habits of Strong Couples\" and listen to the podcast to match these habits to specific historical and modern famous pairs, such as Napoleon and Josephine, Diego Rivera and Frida Kahlo, and Jay-Z and Beyoncé.\n\nNext, students watch a second video titled \"Quick Study: Dual-Career Couples,\" answering multiple-choice comprehension questions about the major issues these couples face, the typical timing of their first transition, recommended alignment exercises like \"couple contracting,\" and the emotional impact of shifting roles.\n\nFinally, the lesson concludes with a critical discussion on how to set boundaries when careers demand significant time or travel, how to avoid getting \"stuck\" in rigid roles, and how to ensure that pursuing new personal passions does not negatively impact the relationship's foundation.",
+        pdfUrl: "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_couples.pdf",
+        audioUrl: "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_couples_6_couples.mp3",
+        audioUrls: [
+            { label: "6 Couples", url: "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_couples_6_couples.mp3" },
+            { label: "Podcast", url: "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_couples_podcast.mp3" }
+        ],
+        rarUrl: "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_couples.rar",
+        mediaLabel: "The video links:",
+        links: [
+            { label: "Link 1", url: "https://www.youtube.com/watch?v=tXdy1TZ20_o" },
+            { label: "Link 2", url: "https://www.youtube.com/watch?v=6NiQKO1H4fU" }
+        ]
+    },
+
+    {
         dateAdded: "2026-07-13",
         title: "Freaks",
         topics: ["society", "psychology", "media"],
