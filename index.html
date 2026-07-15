@@ -1422,8 +1422,8 @@
                 <ul class="pricing-features">
                     <li><span class="feat-icon friend-icon">👑</span><span>Everything in the Contributor tier, plus bi-weekly updates with fresh, exclusive content.</span></li>
                     <li><span class="feat-icon friend-icon">📅</span><span>Manage your teaching schedule seamlessly with my personal <strong>planner app.</strong> <span style="color:#e03131; font-weight:700;">(Coming soon!)</span></span></li>
-                    <li><span class="feat-icon friend-icon">🎥</span><span>One-on-one mentorship: A 30-minute Zoom session to discuss your teaching challenges or explore the tools I use. <a href="https://t.me/alex_the_master" target="_blank" style="color:#229ED9; font-weight:700; white-space:nowrap;">Schedule on Telegram →</a></span></li>
-                    <li><span class="feat-icon friend-icon">💬</span><span>Join our private TG Friends chat — I'll prioritize your questions and issues there.</span></li>
+                    <li><span class="feat-icon friend-icon">🎥</span><span>One-on-one mentorship: A 30-minute Zoom session to discuss your teaching challenges or explore the tools I use. <span id="zoom-link-wrap"><span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span></span></span></li>
+                    <li><span class="feat-icon friend-icon">💬</span><span>Join our private TG Friends chat — I'll prioritize your questions and issues there. <span id="tg-friends-link-wrap"><span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span></span></span></li>
                 </ul>
             </div>
 
@@ -1867,6 +1867,19 @@
 
             const tier = currentUser ? (currentUser.profile_tier || 'free') : null;
             const profile = currentUser ? currentUser.profile_data : null;
+
+            // Show/hide premium links based on Friend tier
+            const zoomWrap = document.getElementById('zoom-link-wrap');
+            const tgWrap = document.getElementById('tg-friends-link-wrap');
+            if (zoomWrap && tgWrap) {
+                if (tier === 'friend') {
+                    zoomWrap.innerHTML = '<a href="https://t.me/alex_the_master" target="_blank" style="color:#229ED9; font-weight:700; white-space:nowrap;">Schedule on Telegram →</a>';
+                    tgWrap.innerHTML = '<a href="https://t.me/+IWqW1LKYejg5YWZi" target="_blank" style="color:#229ED9; font-weight:700; white-space:nowrap;">Join private chat →</a>';
+                } else {
+                    zoomWrap.innerHTML = '<span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span>';
+                    tgWrap.innerHTML = '<span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span>';
+                }
+            }
 
             // Format expiry date
             function formatExpiry(dateStr) {
