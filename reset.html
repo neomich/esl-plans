@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,12 +177,34 @@
             document.getElementById('msg-error').style.display = 'none';
         }
 
+        // Listen for PASSWORD_RECOVERY event - most reliable method
+        _sb.auth.onAuthStateChange((event, session) => {
+            if (event === 'PASSWORD_RECOVERY') {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('form-area').style.display = 'block';
+                document.getElementById('msg-error').style.display = 'none';
+                document.getElementById('submit-btn').disabled = false;
+            }
+        });
+
         // Verify the session from the reset link
         async function init() {
             document.getElementById('loading').style.display = 'block';
             document.getElementById('form-area').style.display = 'none';
 
-            // Supabase automatically processes the token from the URL hash
+            // Check if we have a recovery token in the URL
+            const hash = window.location.hash;
+            if (hash && hash.includes('error=')) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('form-area').style.display = 'block';
+                showError('This reset link has expired. Please request a new one from the login page.');
+                document.getElementById('submit-btn').disabled = true;
+                return;
+            }
+
+            // Wait briefly for Supabase to process the URL hash token
+            await new Promise(r => setTimeout(r, 1000));
+
             const { data, error } = await _sb.auth.getSession();
 
             document.getElementById('loading').style.display = 'none';
