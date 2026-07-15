@@ -627,7 +627,9 @@
             });
             const fileData = await getResp.json();
             const sha = fileData.sha;
-            const currentContent = atob(fileData.content.replace(/\n/g, ''));
+            const currentContent = new TextDecoder('utf-8').decode(
+                Uint8Array.from(atob(fileData.content.replace(/\n/g, '')), c => c.charCodeAt(0))
+            );
 
             // 2. Build new lesson entry string
             const lessonStr = '    ' + JSON.stringify(lesson, null, 4).replace(/\n/g, '\n    ') + ',\n\n';
@@ -646,7 +648,7 @@
                 },
                 body: JSON.stringify({
                     message: `Add lesson: ${lesson.title}`,
-                    content: btoa(unescape(encodeURIComponent(newContent))),
+                    content: btoa(String.fromCharCode(...new TextEncoder().encode(newContent))),
                     sha: sha
                 })
             });
