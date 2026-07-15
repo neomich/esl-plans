@@ -1522,7 +1522,7 @@
 
     <!-- AUTH MODAL -->
     <div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:3000; align-items:center; justify-content:center;">
-        <div class="auth-box">
+        <div class="auth-box" id="auth-box-inner">
             <button onclick="closeAuthModal()" class="auth-close">✕</button>
 
             <div class="auth-logo"><span style="font-weight:900;font-style:italic;color:#c95210;font-family:'Segoe UI',sans-serif;">ESL</span><span style="font-weight:300;font-family:'Georgia',serif;">-plans</span></div>
@@ -2186,6 +2186,74 @@
             }
         }, 500);
 
+        // ── PASSWORD RESET: detect token on page load ──
+        async function checkForPasswordReset() {
+            const hash = window.location.hash;
+            if (hash && hash.includes('type=recovery')) {
+                const { data } = await _supabase.auth.getSession();
+                if (data && data.session) showResetPasswordModal();
+            }
+        }
+
+        function showResetPasswordModal() {
+            document.getElementById('auth-modal').style.display = 'flex';
+            document.getElementById('auth-tabs').style.display = 'none';
+            document.getElementById('auth-form').style.display = 'none';
+            document.getElementById('forgot-form').style.display = 'none';
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+
+            let resetForm = document.getElementById('reset-password-form');
+            if (!resetForm) {
+                resetForm = document.createElement('div');
+                resetForm.id = 'reset-password-form';
+                resetForm.innerHTML = `
+                    <p style="font-size:15px;font-weight:600;color:#333;margin-bottom:16px;text-align:center;">Set your new password</p>
+                    <div class="auth-field">
+                        <label>New Password</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="new-password" placeholder="••••••••">
+                            <button type="button" class="auth-eye" onclick="togglePass('new-password',this)">👁</button>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label>Confirm New Password</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="new-password-confirm" placeholder="••••••••">
+                            <button type="button" class="auth-eye" onclick="togglePass('new-password-confirm',this)">👁</button>
+                        </div>
+                    </div>
+                    <button class="auth-submit" onclick="handleSetNewPassword()">Set New Password</button>
+                `;
+                document.getElementById('auth-box-inner').appendChild(resetForm);
+            }
+            resetForm.style.display = 'block';
+        }
+
+        async function handleSetNewPassword() {
+            const newPass = document.getElementById('new-password').value;
+            const confirm = document.getElementById('new-password-confirm').value;
+            if (!newPass || newPass.length < 6) { showAuthError('Password must be at least 6 characters.'); return; }
+            if (newPass !== confirm) { showAuthError('Passwords don\'t match.'); return; }
+
+            const btn = document.querySelector('#reset-password-form .auth-submit');
+            btn.disabled = true;
+            btn.innerText = 'Saving...';
+
+            const { error } = await _supabase.auth.updateUser({ password: newPass });
+            if (error) {
+                showAuthError(error.message);
+                btn.disabled = false;
+                btn.innerText = 'Set New Password';
+            } else {
+                showAuthSuccess('✅ Password updated! You are now logged in.');
+                setTimeout(() => {
+                    history.replaceState(null, '', window.location.pathname);
+                    closeAuthModal();
+                }, 2000);
+            }
+        }
+
         function toggleMobileMenu() {
             document.getElementById('hamburger-btn').classList.toggle('open');
             document.getElementById('nav-menu').classList.toggle('open');
@@ -2550,6 +2618,7 @@
         }
         updatePinBadge();
         setTimeout(() => updateNavPin(), 0);
+        setTimeout(() => checkForPasswordReset(), 500);
     </script>
 </body>
 </html>
