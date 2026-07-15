@@ -2455,8 +2455,14 @@
 
         // Listen for auth changes
         _supabase.auth.onAuthStateChange((event, session) => {
-            if (session) setLoggedIn(session.user);
-            else setLoggedOut();
+            if (event === 'PASSWORD_RECOVERY') {
+                // This fires when user clicks reset link - show the set password form
+                showResetPasswordModal();
+            } else if (session) {
+                setLoggedIn(session.user);
+            } else {
+                setLoggedOut();
+            }
         });
 
         async function setLoggedIn(user) {
@@ -2611,14 +2617,29 @@
         lessonsCatalog.sort((a, b) => new Date(b.dateAdded || "2000-01-01") - new Date(a.dateAdded || "2000-01-01"));
 
         // Boot: load from hash if present, otherwise show dashboard
-        if (!loadFromHash()) {
+        // ── BOOT ──
+        lessonsCatalog.sort((a, b) => new Date(b.dateAdded || "2000-01-01") - new Date(a.dateAdded || "2000-01-01"));
+
+        // Check for password reset FIRST before anything touches the hash
+        const _bootHash = window.location.hash;
+        if (_bootHash && _bootHash.includes('type=recovery')) {
             applyFiltersAndRender();
+            updatePinBadge();
+            setTimeout(() => updateNavPin(), 0);
+            // Wait for Supabase to process the token from the URL
+            setTimeout(async () => {
+                const { data } = await _supabase.auth.getSession();
+                if (data && data.session) showResetPasswordModal();
+            }, 800);
         } else {
-            applyFiltersAndRender(); // still build the catalog in background
+            if (!loadFromHash()) {
+                applyFiltersAndRender();
+            } else {
+                applyFiltersAndRender();
+            }
+            updatePinBadge();
+            setTimeout(() => updateNavPin(), 0);
         }
-        updatePinBadge();
-        setTimeout(() => updateNavPin(), 0);
-        setTimeout(() => checkForPasswordReset(), 500);
     </script>
 </body>
 </html>
