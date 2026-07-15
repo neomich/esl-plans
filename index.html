@@ -3,7 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>ESL-plans — Conversation-Driven Lesson Plans</title>
+    <title>ESL-plans — Ready-Made Lesson Plans for Online English Tutors</title>
+    <meta name="description" content="Ready-made ESL lesson plans for online tutors working with adult learners. Each plan includes a PDF handout, audio materials and video links. Topics cover psychology, business English, technology, travel and more. Levels B1, B2, C1.">
+    <meta name="keywords" content="ESL lesson plans, English lesson plans, ESL handouts, adult ESL materials, online ESL tutor resources, conversation lesson plans, B1 B2 C1 English lessons, English PDF handouts, ESL audio lessons, business English lesson plans, zero prep ESL lessons, English lesson plans with audio, ESL plans for adults">
+    <meta name="author" content="ESL-plans">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://esl-plans.com">
+
+    <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esl-plans.com">
+    <meta property="og:title" content="ESL-plans — Ready-Made Lesson Plans for Online English Tutors">
+    <meta property="og:description" content="A library of conversation-driven ESL lesson plans for online tutors. PDF handouts, audio and video included. Adult learners, B1–C1 levels.">
+    <meta property="og:image" content="https://esl-plans.com/images/og-image.jpg">
+    <meta property="og:site_name" content="ESL-plans">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter/X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://esl-plans.com">
+    <meta name="twitter:title" content="ESL-plans — Ready-Made Lesson Plans for Online English Tutors">
+    <meta name="twitter:description" content="A library of conversation-driven ESL lesson plans for online tutors. PDF handouts, audio and video included. Adult learners, B1–C1 levels.">
+    <meta name="twitter:image" content="https://esl-plans.com/images/og-image.jpg">
+
+    <!-- Structured Data: Educational Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "ESL-plans",
+        "url": "https://esl-plans.com",
+        "description": "Ready-made conversation-driven ESL lesson plans for online tutors working with adult learners.",
+        "founder": {
+            "@type": "Person",
+            "name": "Alex Selivanov"
+        },
+        "offers": {
+            "@type": "Offer",
+            "description": "ESL lesson plans with PDF handouts, audio and video materials for B1-C1 adult learners"
+        }
+    }
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c95210'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>ESL</text></svg>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -187,9 +228,17 @@
         .hero-banner-container h2 {
             font-size: 20px;
             font-weight: 400;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             color: white;
         }
+        .hero-seo-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.75);
+            max-width: 700px;
+            margin: 0 auto 16px;
+            line-height: 1.6;
+        }
+        .hero-seo-text strong { color: rgba(255,255,255,0.95); }
 
         .topic-scroll-wrapper {
             max-width: 900px;
@@ -1416,6 +1465,7 @@
 
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
+        <p class="hero-seo-text">A growing library of ready-made <strong>English lesson plans</strong> for online tutors working with adult learners. Every plan includes a <strong>PDF handout</strong>, audio materials and video links — covering topics from psychology and business English to travel and technology. Designed for <strong>B1, B2 and C1</strong> levels.</p>
         <div class="topic-scroll-wrapper">
             <div class="topic-scroll-track" id="topic-scroll-track">
                 <button class="topic-pill active" onclick="applyTopicFilter('all', this)">All Lessons</button>
