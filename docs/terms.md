@@ -41,5 +41,5 @@ The Contractor is not liable for subjective dissatisfaction with materials that 
 
 ## VIII. Contact
 
-Email: neomich@mail.ru
+Email: esl-plans@proton.me
 Website: https://esl-plans.com
