@@ -2182,6 +2182,13 @@
         }
 
         function togglePin() {
+            if (!currentUser) {
+                // Not logged in — prompt to sign up
+                openAuthModal();
+                switchTab('signup');
+                showAuthSuccess('Create a free account to pin and save your favourite lessons!');
+                return;
+            }
             if (currentLessonIndex === null) return;
             const idx = pinnedIds.indexOf(currentLessonIndex);
             if (idx === -1) pinnedIds.push(currentLessonIndex);
