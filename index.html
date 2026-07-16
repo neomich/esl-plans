@@ -1,0 +1,2752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>ESL Lesson Plans for Adults — Conversation-Driven | ESL-plans.com</title>
+    <meta name="description" content="Ready-made ESL lesson plans for adult learners. Conversation-driven topics covering psychology, business English, technology and society. PDF handouts, audio and video included. B1, B2, C1 levels. Perfect for online ESL tutors.">
+    <meta name="keywords" content="ESL lesson plans for adults, adult English lesson plans, conversation ESL lesson plans, ESL lesson plans with audio, ESL lesson plans PDF, B1 B2 C1 English lesson plans, online ESL tutor resources, business English lesson plans adults, ESL handouts adults, English lesson plans psychology, English lesson plans technology, zero prep ESL lessons, ESL lesson plans online tutors, adult conversation English lessons">
+    <meta name="author" content="ESL-plans.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://esl-plans.com">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esl-plans.com">
+    <meta property="og:title" content="ESL Lesson Plans for Adults — Conversation-Driven | ESL-plans.com">
+    <meta property="og:description" content="Ready-made conversation-driven ESL lesson plans for online tutors working with adult learners. PDF handouts, audio and video included. B1–C1 levels.">
+    <meta property="og:image" content="https://esl-plans.com/images/og-image.png">
+    <meta property="og:image:width" content="1400">
+    <meta property="og:image:height" content="933">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:site_name" content="ESL-plans.com">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://esl-plans.com">
+    <meta name="twitter:title" content="ESL Lesson Plans for Adults — Conversation-Driven | ESL-plans.com">
+    <meta name="twitter:description" content="Ready-made conversation-driven ESL lesson plans for online tutors. PDF handouts, audio and video included. B1–C1 levels.">
+    <meta name="twitter:image" content="https://esl-plans.com/images/og-image.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "ESL-plans.com",
+        "url": "https://esl-plans.com",
+        "description": "Ready-made conversation-driven ESL lesson plans for online tutors working with adult learners. Topics cover psychology, business English, technology, society and more.",
+        "founder": {
+            "@type": "Person",
+            "name": "Alex Selivanov"
+        },
+        "teaches": "English as a Second Language",
+        "educationalLevel": "B1, B2, C1",
+        "audience": {
+            "@type": "Audience",
+            "audienceType": "Online ESL Tutors, English Language Teachers"
+        },
+        "offers": {
+            "@type": "Offer",
+            "description": "ESL lesson plans with PDF handouts, audio and video for adult learners at B1-C1 level",
+            "price": "19",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c95210'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>ESL</text></svg>">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        body {
+            background-color: #fff5ee;
+            color: #333;
+        }
+
+        header {
+            background-color: #c95210;
+            padding: 20px 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 35px;
+            padding: 12px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .logo-link { text-decoration: none; cursor: pointer; }
+        .logo {
+            font-size: 28px;
+            font-weight: 400;
+            color: #000;
+            letter-spacing: -0.5px;
+            font-family: 'Georgia', serif;
+        }
+        .logo .esl-part {
+            font-weight: 900;
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: -1px;
+            font-style: italic;
+            color: #c95210;
+        }
+        .logo .dash-part {
+            color: #c95210;
+            font-weight: 300;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .logo .plans-part {
+            font-weight: 300;
+            font-family: 'Georgia', serif;
+            color: #222;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 700;
+            font-size: 17px;
+            padding: 10px 18px;
+            border-radius: 25px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover { background-color: #c95210; color: white; }
+
+        .nav-free-btn {
+            background: #2e7d32;
+            color: white !important;
+            border-radius: 25px;
+            padding: 10px 20px !important;
+            font-weight: 800 !important;
+            font-size: 16px !important;
+            letter-spacing: 0.2px;
+        }
+        .nav-free-btn:hover { background: #1b5e20 !important; color: white !important; }
+
+        /* ── HAMBURGER ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #333;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .nav-close-row { display: none; }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 200px;
+                background: white;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+                padding: 8px 0 16px;
+                z-index: 1000;
+                gap: 0;
+                border-radius: 12px;
+            }
+            .nav-menu.open { display: flex; }
+            .nav-menu li { width: 100%; }
+            .nav-menu a {
+                display: block;
+                padding: 13px 22px;
+                border-radius: 0;
+                font-size: 16px;
+                border-bottom: 1px solid #f0f0f0;
+                text-align: center;
+            }
+            .nav-menu li:nth-child(1) a { color: #1a4fa0; font-weight: 800; }
+            .nav-menu li:nth-child(2) a { color: #ff7a00; font-weight: 800; }
+            .nav-menu li:nth-child(3) a { color: #e03131; font-weight: 800; }
+            .nav-menu li:nth-child(4) a { color: #2e7d32; font-weight: 800; }
+            .nav-menu .nav-user-btn {
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+            }
+            .nav-close-row { display: flex; justify-content: center; padding: 10px 14px 0; }
+            .nav-close-btn {
+                background: none;
+                border: 2px solid #ddd;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+                cursor: pointer;
+                color: #888;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+            }
+        }
+
+        .hero-banner-container {
+            background-color: #c95210;
+            text-align: center;
+            padding: 16px 20px 20px 20px;
+        }
+        .hero-banner-container h2 {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .hero-seo-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.75);
+            max-width: 700px;
+            margin: 0 auto 16px;
+            line-height: 1.6;
+        }
+        .hero-seo-text strong { color: rgba(255,255,255,0.95); }
+
+        .topic-scroll-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .topic-scroll-wrapper::-webkit-scrollbar { display: none; }
+
+        .topic-scroll-track {
+            display: flex;
+            gap: 10px;
+            padding: 4px 4px 8px;
+            width: max-content;
+            margin: 0 auto;
+        }
+
+        .topic-pill {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .topic-pill:hover { background: rgba(255,255,255,0.3); }
+        .topic-pill.active { background: white; color: #c95210; border-color: white; }
+
+        .topic-slider-wrapper {
+            max-width: 860px;
+            margin: 6px auto 0;
+            padding: 0 4px;
+        }
+        .topic-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.3);
+            outline: none;
+            cursor: pointer;
+        }
+        .topic-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            cursor: grab;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        .topic-slider::-webkit-slider-thumb:active { cursor: grabbing; }
+        .topic-slider::-moz-range-thumb {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: white;
+            cursor: grab;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .filter-panel-tray {
+            background-color: #fcece1;
+            border-bottom: 1px solid #ebd0be;
+            padding: 15px 20px;
+            text-align: center;
+            display: none;
+        }
+        .filter-panel-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #8a3607;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-right: 8px;
+        }
+        .filter-pill {
+            background-color: white;
+            border: 1px solid #ebd0be;
+            color: #444;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-pill:hover, .filter-pill.active {
+            background-color: #ff7a00;
+            border-color: #ff7a00;
+            color: white;
+            box-shadow: 0 2px 8px rgba(255,122,0,0.2);
+        }
+        .free-pill {
+            background: #e8f5e9;
+            border-color: #2e7d32;
+            color: #2e7d32;
+            font-weight: 700;
+        }
+        .free-pill:hover, .free-pill.active {
+            background: #2e7d32;
+            border-color: #2e7d32;
+            color: white;
+        }
+
+        .content-container {
+            max-width: 1100px;
+            margin: 40px auto 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            border: 2px solid transparent;
+        }
+        .lesson-card.general { background-color: #f1fbf4; }
+        .lesson-card.business { background-color: #f6f0ff; }
+
+        .card-image-box {
+            height: 180px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .mock-3d-illustration {
+            width: 100%;
+            height: 100%;
+            border-radius: 22px 22px 0 0;
+        }
+
+        .card-title-strip {
+            padding: 12px 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+        }
+        .general .card-title-strip { background-color: #79d28b; color: #12461e; }
+        .business .card-title-strip { background-color: #bfa3ff; color: #2a1160; }
+
+        .free-badge {
+            font-family: 'Georgia', serif;
+            font-size: 11px;
+            font-weight: 700;
+            font-style: italic;
+            background: #ffd600;
+            color: #333;
+            padding: 2px 7px;
+            border-radius: 8px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .card-details {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .tag-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+        }
+        .tag-item { display: flex; align-items: center; gap: 6px; }
+
+        .view-btn {
+            background-color: white;
+            border: 1px solid #79d28b;
+            color: #12461e;
+            padding: 14px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .business .view-btn { border-color: #bfa3ff; color: #2a1160; }
+        .view-btn:hover { transform: scale(1.02); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+        /* Pagination */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 50px;
+        }
+        .pagination-item {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ff7a00;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .pagination-item.active { background-color: #ff7a00; color: white; font-weight: 700; }
+        .pagination-item:hover:not(.active):not(.ellipsis) { background-color: #fcece1; }
+        .pagination-item.ellipsis { cursor: default; color: #ff7a00; }
+        .pagination-item.disabled { opacity: 0.3; cursor: default; pointer-events: none; }
+
+        /* ── WORKSPACE (lesson detail) ── */
+        .workspace-view {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 0 50px;
+            align-items: start;
+            margin-top: 40px;
+        }
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            min-width: 0;
+        }
+
+        @media (max-width: 768px) {
+            .workspace-view {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .left-column { width: 100%; }
+            .info-panel { padding: 20px; border-radius: 16px; }
+            .info-panel h1 { font-size: 22px; }
+            .panel-header-row { gap: 10px; }
+            .description-frame { font-size: 15px; padding: 16px; }
+            .links-list { max-width: 100%; }
+            .downloads-wrapper { flex-wrap: wrap; gap: 12px; }
+            .video-links-wrapper { flex-wrap: wrap; }
+            .pdf-preview-scroll-box { height: 280px; }
+            .media-section > div { flex-wrap: wrap; }
+        }
+
+        .info-panel {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            min-width: 0;
+        }
+        .panel-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .info-panel h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ff7a00;
+            font-style: italic;
+        }
+
+        @keyframes pinBounce {
+            0%   { transform: scale(1); }
+            30%  { transform: scale(1.4) rotate(-15deg); }
+            60%  { transform: scale(0.9) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        .pin-animate { animation: pinBounce 0.4s ease; }
+
+        .favorite-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .favorite-badge:hover { transform: scale(1.1); }
+        .favorite-badge .pin-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ff7a00;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+        .favorite-badge .pin-label.pinned { color: #2e7d32; }
+        .favorite-badge .pin-icon { font-size: 32px; line-height: 1; transition: filter 0.3s; }
+        .favorite-badge .pin-icon.pinned { filter: hue-rotate(90deg) saturate(3) brightness(0.8); }
+
+        .objectives-label { font-size: 18px; margin-bottom: 15px; color: #444; }
+        .objectives-label strong { color: #000; }
+        .objectives-list { list-style: none; margin-bottom: 30px; }
+        .objectives-list li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+        }
+        .objectives-list li::before {
+            content: "•";
+            color: #c95210;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .description-frame {
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 25px;
+            background-color: #fff;
+            line-height: 1.6;
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 35px;
+        }
+
+        .media-section {
+            border-top: 1px dashed #ddd;
+            padding-top: 30px;
+            margin-bottom: 35px;
+        }
+
+        .media-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .video-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .video-row .links-list {
+            max-width: 100%;
+            flex: 1;
+            padding-top: 22px;
+        }
+
+        .downloads-wrapper {
+            display: flex;
+            gap: 20px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+
+        .download-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .download-label { font-weight: 600; font-size: 14px; color: #e03131; }
+        .download-label.audio-label { color: #ff7a00; }
+        .download-label.rar-label { color: #6a0dad; }
+
+        .pdf-icon-btn {
+            width: 55px; height: 52px;
+            background-color: #e03131;
+            border-radius: 12px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: white; font-weight: 800; font-size: 11px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(224,49,49,0.3);
+            transition: transform 0.2s;
+        }
+        .pdf-icon-btn:hover { transform: scale(1.05); }
+        .pdf-icon-btn::before { content: "📄"; font-size: 16px; margin-bottom: -3px; }
+
+        .mp3-icon-btn {
+            width: 55px; height: 52px;
+            background-color: #ff7a00;
+            border-radius: 12px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: white; font-weight: 800; font-size: 11px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(255,122,0,0.3);
+            transition: transform 0.2s;
+        }
+        .mp3-icon-btn:hover { transform: scale(1.05); }
+        .mp3-icon-btn::before { content: "🎵"; font-size: 16px; margin-bottom: -3px; }
+
+        /* ── RAR ICON ── */
+        .rar-icon-btn {
+            width: 55px; height: 52px;
+            background-color: #6a0dad;
+            border-radius: 12px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: white; font-weight: 800; font-size: 11px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(106,13,173,0.3);
+            transition: transform 0.2s;
+        }
+        .rar-icon-btn:hover { transform: scale(1.05); }
+        .rar-icon-btn::before { content: "🗜️"; font-size: 16px; margin-bottom: -3px; }
+
+        .links-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow: hidden;
+            flex: 1;
+        }
+        .links-label { font-weight: 600; font-size: 14px; color: #e03131; }
+
+        .video-links-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            overflow: hidden;
+            width: 100%;
+        }
+        .youtube-logo-placeholder {
+            width: 75px; height: 52px;
+            background-color: #ff0000;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(255,0,0,0.2);
+            flex-shrink: 0;
+        }
+        .youtube-logo-placeholder::after {
+            content: "";
+            width: 0; height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 14px solid white;
+            margin-left: 4px;
+        }
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            overflow: hidden;
+            flex: 1;
+            max-width: 380px;
+        }
+        .links-list p {
+            display: flex;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            font-size: 15px;
+        }
+        .links-list span { color: #555; font-weight: 600; margin-right: 5px; flex-shrink: 0; }
+        .links-list a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+        }
+        .links-list a:hover { text-decoration: underline; }
+
+        .back-btn-container { margin-top: 25px; }
+        .back-btn-oblong {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #c95210;
+            color: #ffffff !important;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 10px rgba(201,82,16,0.25);
+            border: none;
+        }
+        .back-btn-oblong:hover { background-color: #b0460b; transform: translateY(-1px); }
+        .back-arrow-icon { font-size: 16px; color: #ffffff; }
+
+        /* PDF preview */
+        .pdf-preview-section { margin-bottom: 0; margin-top: 8px; }
+        .pdf-preview-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #e03131;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .pdf-preview-scroll-box {
+            height: 380px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            background: #f5f5f5;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #c95210 #f5f5f5;
+        }
+        .pdf-preview-scroll-box::-webkit-scrollbar { width: 6px; }
+        .pdf-preview-scroll-box::-webkit-scrollbar-track { background: #f5f5f5; border-radius: 10px; }
+        .pdf-preview-scroll-box::-webkit-scrollbar-thumb { background-color: #c95210; border-radius: 10px; }
+        .pdf-preview-scroll-box canvas {
+            width: 100% !important; height: auto !important;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: block;
+        }
+        .pdf-preview-loading { text-align: center; color: #888; font-size: 14px; padding: 40px 0; }
+
+        #dynamic-sidebar-card .view-btn { display: none; }
+
+        /* Contacts page */
+        .contacts-view { max-width: 860px; margin: 50px auto; padding: 0 20px 60px; text-align: left; }
+        .contacts-view h2 {
+            font-size: 32px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-family: 'Georgia', serif;
+        }
+        .contacts-view h2 strong {
+            font-weight: 900;
+            font-family: 'Segoe UI', sans-serif;
+            font-style: italic;
+            color: #c95210;
+        }
+
+        .bio-card { display: flex; gap: 36px; align-items: flex-start; margin-bottom: 40px; }
+        .bio-photo-col { flex-shrink: 0; }
+        .bio-photo {
+            width: 210px;
+            height: auto;
+            max-height: 420px;
+            border-radius: 16px;
+            object-fit: cover;
+            object-position: center top;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+        .bio-text-col { display: flex; flex-direction: column; gap: 16px; }
+        .bio-text-col p {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.75;
+            text-align: justify;
+            text-indent: 1.4em;
+        }
+
+        .contacts-social { text-align: center; }
+        .contacts-social-label { font-size: 17px; color: #555; margin-bottom: 20px; }
+        .contacts-social-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+        .tg-link {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: #229ED9; color: white; text-decoration: none;
+            padding: 14px 28px; border-radius: 50px;
+            font-size: 17px; font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .tg-link:hover { background: #1a86b8; transform: scale(1.04); }
+        .wa-link {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: #25D366; color: white; text-decoration: none;
+            padding: 14px 28px; border-radius: 50px;
+            font-size: 17px; font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .wa-link:hover { background: #1ebe5a; transform: scale(1.04); }
+
+        @media (max-width: 600px) {
+            .bio-card { flex-direction: column; align-items: center; }
+        }
+
+        /* Pinned page */
+        .pinned-view { max-width: 1100px; margin: 40px auto 60px auto; padding: 0 20px; text-align: left; }
+        .pinned-view h2 { font-size: 28px; font-weight: 700; color: #333; margin-bottom: 8px; }
+
+        /* ── PRICING PAGE ── */
+        #pricing-view {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        .pricing-hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .pricing-hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #222;
+            margin-bottom: 10px;
+        }
+        .pricing-hero p {
+            font-size: 18px;
+            color: #777;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: start;
+            margin-bottom: 60px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px 28px;
+            position: relative;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .pricing-card.guest { border-color: #e03131; }
+        .pricing-card.contributor { border-color: #ff9800; background: #fffaf2; }
+        .pricing-card.friend { border-color: #2e7d32; background: #f4fbf4; }
+
+        .pricing-most-popular {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2e7d32;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 5px 18px;
+            border-radius: 20px;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-badge-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            margin-top: 8px;
+        }
+
+        .pricing-tier-name {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        .guest-color { color: #1a4fa0; }
+        .contributor-color { color: #e67e00; }
+        .friend-color { color: #2e7d32; }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+        .free-price { color: #1a4fa0; }
+        .contributor-price { color: #e67e00; }
+        .friend-price { color: #2e7d32; }
+        .price-period { font-size: 18px; font-weight: 500; color: #888; }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 24px;
+        }
+        .pricing-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+        .guest-btn { background: white; border: 2px solid #1a4fa0; color: #1a4fa0; }
+        .contributor-btn { background: #222; color: white; }
+        .friend-btn { background: #2e7d32; color: white; }
+        .pricing-btn.subscribed {
+            background: #e8f5e9 !important;
+            color: #2e7d32 !important;
+            border: 2px solid #2e7d32 !important;
+            cursor: default;
+            transform: none !important;
+            box-shadow: none !important;
+            font-size: 14px !important;
+        }
+
+        .pricing-divider {
+            width: 100%;
+            height: 1px;
+            background: #eee;
+            margin-bottom: 24px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .pricing-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.5;
+        }
+        .feat-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+        }
+        .contributor-icon { background: #fff0d6; }
+        .friend-icon { background: #e8f5e9; }
+
+        .feat-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .feat-tag {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        /* Stats row */
+        .pricing-stats {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            border-top: 1px solid #eee;
+            padding-top: 40px;
+            flex-wrap: wrap;
+        }
+        .pricing-stat {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0 40px;
+            border-right: 1px solid #eee;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+        .pricing-stat:last-child { border-right: none; }
+        .stat-icon {
+            font-size: 28px;
+            width: 48px;
+            height: 48px;
+            background: #e8f5e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+            .pricing-stats {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+                padding: 30px 0 0;
+            }
+            .pricing-stat {
+                border-right: none;
+                border-bottom: none;
+                padding: 0;
+            }
+            .pricing-hero h1 { font-size: 26px; }
+        }
+
+        .terms-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px 20px 30px;
+            border-top: 1px solid #eee;
+            width: 100%;
+        }
+        .terms-footer p {
+            font-size: 13px;
+            color: #aaa;
+            text-align: center;
+            width: 100%;
+            display: block;
+        }
+        .terms-footer a {
+            color: #c95210;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Pin nav button */
+        .pin-nav-btn { position: relative; font-size: 20px !important; cursor: pointer; }
+        .pin-nav-btn.has-pins { color: #2e7d32 !important; }
+        .pin-nav-btn.no-pins  { color: #e03131 !important; }
+        #pin-count-badge {
+            position: absolute; top: -6px; right: -8px;
+            background: #e03131; color: white;
+            font-size: 10px; font-weight: 700;
+            border-radius: 50%; width: 16px; height: 16px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        /* ── PAYWALL ── */
+        .paywall-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            background: #fff8f0;
+            border: 2px dashed #ff7a00;
+            border-radius: 16px;
+            margin-bottom: 8px;
+            text-align: center;
+            width: 100%;
+        }
+        .upgrade-btn {
+            display: inline-block;
+            background: #c95210;
+            color: white !important;
+            font-weight: 800;
+            font-size: 16px;
+            padding: 14px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+        .upgrade-btn:hover { background: #b0460b; transform: translateY(-1px); }
+        .paywall-note {
+            font-size: 13px;
+            color: #888;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ── SUBSCRIPTION STATUS in user menu ── */
+        .sub-status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .sub-free { background: #f0f0f0; color: #666; }
+        .sub-contributor { background: #fff0d6; color: #e67e00; }
+        .sub-friend { background: #e8f5e9; color: #2e7d32; }
+        .auth-box {
+            background: white;
+            border-radius: 24px;
+            padding: 36px 32px;
+            max-width: 380px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .auth-close {
+            position: absolute; top: 14px; right: 18px;
+            background: none; border: none;
+            font-size: 20px; cursor: pointer; color: #aaa;
+        }
+        .auth-close:hover { color: #333; }
+        .auth-logo {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+        .auth-tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 24px;
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #888;
+            transition: all 0.2s;
+        }
+        .auth-tab.active {
+            background: white;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .auth-field {
+            margin-bottom: 16px;
+        }
+        .auth-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #555;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .auth-field input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .auth-field input:focus { border-color: #c95210; }
+        .auth-submit {
+            width: 100%;
+            background: #c95210;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .auth-submit:hover { background: #b0460b; transform: translateY(-1px); }
+        .auth-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+        .auth-switch {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 16px;
+        }
+        .auth-error {
+            background: #fff5f5;
+            border: 1px solid #fca5a5;
+            color: #e03131;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .auth-success {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        /* logged-in nav state */
+        .nav-user-btn {
+            background: #f0fdf4 !important;
+            color: #166534 !important;
+            border: 1.5px solid #86efac !important;
+            border-radius: 20px !important;
+            padding: 6px 14px !important;
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* User dropdown menu */
+        #user-menu {
+            position: fixed;
+            top: 80px;
+            right: 30px;
+            background: #f8f8f8;
+            border: 1px solid #e0e0e0;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            padding: 16px;
+            z-index: 2000;
+            min-width: 220px;
+        }
+
+        /* Password show/hide */
+        .auth-input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .auth-input-wrap input {
+            flex: 1;
+            padding-right: 44px;
+        }
+        .auth-eye {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #888;
+            padding: 0;
+            line-height: 1;
+        }
+        .auth-eye:hover { color: #333; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a onclick="showDashboardView()" class="logo-link" style="cursor:pointer; text-decoration:none;">
+                <div class="logo">
+                    <span class="esl-part">ESL</span><span class="dash-part">-</span><span class="plans-part">plans</span>
+                </div>
+            </a>
+            <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <a onclick="applyTopicFilter('free', null)" class="nav-free-btn" style="cursor:pointer; text-decoration:none; background:#2e7d32; color:white; padding:10px 20px; border-radius:25px; font-weight:800; font-size:16px; white-space:nowrap;">⭐ FREE ESL-plans</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a onclick="showContactsView()">Contacts</a></li>
+                <li><a onclick="showPricingView()">Pricing</a></li>
+                <li><a onclick="showPinnedView()" class="pin-nav-btn" title="Pinned lessons">📌 Pinned Lessons <span id="pin-count-badge" style="display:none"></span></a></li>
+                <li><a onclick="openAuthModal()" id="nav-login-btn">Login</a></li>
+                <li class="nav-close-row"><button class="nav-close-btn" onclick="closeMobileMenu()">✕</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- PRICING PAGE -->
+    <div id="pricing-view" style="display:none;">
+        <div class="pricing-hero">
+            <h1>Simple, honest pricing</h1>
+            <p>Pick the plan that fits how you teach</p>
+            <div style="display:inline-block; margin-top:16px; background:#fff8e1; border:2px solid #ffd600; border-radius:50px; padding:10px 24px; font-size:14px; font-weight:700; color:#c95210;">
+                🌟 Founding Member Price — Lock it in forever while you stay subscribed
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+
+            <!-- GUEST -->
+            <div class="pricing-card guest">
+                <div class="pricing-badge-icon">🖐️</div>
+                <div class="pricing-tier-name guest-color">GUEST</div>
+                <div class="pricing-price free-price">FREE</div>
+                <button class="pricing-btn guest-btn" id="pricing-guest-btn" onclick="handlePricingClick('guest')">Join the Community</button>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li><span class="feat-icon">📖</span><span>Access <strong>free</strong> lesson plans tailored for online teaching.</span></li>
+                    <li><span class="feat-icon">🔖</span><span>Pin-save your favorite plans for later.</span></li>
+                    <li><span class="feat-icon">💬</span><span>Join our community chat on Telegram.</span></li>
+                </ul>
+            </div>
+
+            <!-- CONTRIBUTOR -->
+            <div class="pricing-card contributor">
+                <div class="pricing-badge-icon">📣</div>
+                <div class="pricing-tier-name contributor-color">CONTRIBUTOR</div>
+                <div class="pricing-price contributor-price">$19<span class="price-period">/month</span></div>
+                <button class="pricing-btn contributor-btn" id="pricing-contributor-btn" onclick="handlePricingClick('contributor')">Start Teaching</button>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li>
+                        <span class="feat-icon contributor-icon">📚</span>
+                        <span>Unlock the <strong>entire ESLplans library.</strong>
+                            <div class="feat-tags">
+                                <span class="feat-tag">All Levels</span>
+                                <span class="feat-tag">50+ Topics</span>
+                                <span class="feat-tag">Full Library</span>
+                            </div>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="feat-icon contributor-icon">⬇️</span>
+                        <span>Download full lesson packages, including PDFs and media assets.
+                            <div class="feat-tags">
+                                <span class="feat-tag">PDF</span>
+                                <span class="feat-tag">Audio</span>
+                                <span class="feat-tag">Images</span>
+                                <span class="feat-tag">Video</span>
+                            </div>
+                        </span>
+                    </li>
+                    <li><span class="feat-icon contributor-icon">💬</span><span>Join our community chat on Telegram.</span></li>
+                </ul>
+            </div>
+
+            <!-- FRIEND -->
+            <div class="pricing-card friend">
+                <div class="pricing-most-popular">⭐ MOST POPULAR</div>
+                <div class="pricing-badge-icon" style="filter: hue-rotate(90deg) saturate(2) brightness(1.2);">👥</div>
+                <div class="pricing-tier-name friend-color">FRIEND</div>
+                <div class="pricing-price friend-price">$99<span class="price-period">/year</span></div>
+                <button class="pricing-btn friend-btn" id="pricing-friend-btn" onclick="handlePricingClick('friend')">Get Full Access</button>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li><span class="feat-icon friend-icon">👑</span><span>Everything in the Contributor tier, plus bi-weekly updates with fresh, exclusive content.</span></li>
+                    <li><span class="feat-icon friend-icon">📅</span><span>Manage your teaching schedule seamlessly with my personal <strong>planner app.</strong> <span style="color:#e03131; font-weight:700;">(Coming soon!)</span></span></li>
+                    <li><span class="feat-icon friend-icon">🎥</span><span>One-on-one mentorship: A 30-minute Zoom session to discuss your teaching challenges or explore the tools I use. <span id="zoom-link-wrap"><span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span></span></span></li>
+                    <li><span class="feat-icon friend-icon">💬</span><span>Join our private TG Friends chat — I'll prioritize your questions and issues there. <span id="tg-friends-link-wrap"><span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span></span></span></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Stats row -->
+        <div class="pricing-stats">
+            <div class="pricing-stat">
+                <span class="stat-icon">📖</span>
+                <div><strong>New lessons</strong><br>2 per week</div>
+            </div>
+            <div class="pricing-stat">
+                <span class="stat-icon">🎓</span>
+                <div><strong>Created by a practicing</strong><br>online ESL teacher</div>
+            </div>
+            <div class="pricing-stat">
+                <span class="stat-icon">📄</span>
+                <div><strong>50+ lesson plans</strong><br>and growing</div>
+            </div>
+            <div class="pricing-stat">
+                <span class="stat-icon">🌍</span>
+                <div><strong>Used by teachers</strong><br>worldwide</div>
+            </div>
+        <div class="terms-footer">
+            <p>By purchasing you agree to our <a href="docs/terms.html" target="_blank">Terms of Service</a></p>
+        </div>
+        </div>
+    </div>
+
+    <!-- CONTACTS PAGE -->
+    <div id="contacts-view" style="display:none;" class="contacts-view">
+        <h2><strong>ESL</strong>-plans — Welcome!</h2>
+
+        <div class="bio-card">
+            <div class="bio-photo-col">
+                <img src="images/alex.jpg" alt="Alex" class="bio-photo">
+            </div>
+            <div class="bio-text-col">
+                <p>Hi there, I'm <strong>Alex!</strong> Back when I was a student, a teacher of mine used to scribble on the board: <em>"Learn without learning!"</em> It completely flipped my perspective on education. I followed in those footsteps and became an English tutor myself — until I thought, why not turn the tables? <em>"Teach without teaching!"</em> I've spent the last <strong>15 years</strong> "not teaching" and having a blast instead. The truth is, if you're actually having fun in class, there's always going to be a room full of smiling faces waiting for you.</p>
+
+                <p>Sure, I've slogged through all the textbooks we love to hate, but it didn't take long to realize you don't need to be a disciple of <em>Spotlight</em> or <em>English File.</em> Instead, I build my own unique ESL plans filled with <strong>original topics</strong> and a healthy spoonful of <strong>weirdness and quirks!</strong> Love it or hate it, that's my style.</p>
+
+                <p>My goal is to help you <strong>break out of that rigid tutor routine</strong> and inspire you to create your own worlds. Our profession offers unmatched freedom and the chance to build genuine bonds with our students — no, wait, I call them <strong><em>"friends!"</em></strong></p>
+
+                <p>Please consider <strong>subscribing to the ESL-plans library</strong> and joining our community channels! I'm a one-man band, and since each plan takes me up to <strong>6 hours</strong> to craft, your support gives me the time I need to keep creating these resources!</p>
+            </div>
+        </div>
+
+        <div class="contacts-social">
+            <p class="contacts-social-label">Join our community chats — won't miss any new ESLplans!</p>
+            <div class="contacts-social-btns">
+                <a href="https://t.me/eslplans" target="_blank" class="tg-link">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    t.me/eslplans
+                </a>
+                <a href="https://chat.whatsapp.com/EZq24ihIjYk8shqHgKDLUO" target="_blank" class="wa-link">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                    chat.whatsapp.com
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PINNED PAGE -->
+    <div id="pinned-view" style="display:none;" class="pinned-view">
+        <h2>📌 Pinned Lessons</h2>
+        <div id="pinned-grid-root" class="catalog-grid" style="margin-top:20px;"></div>
+        <div class="pagination-container" id="pinned-pagination-root"></div>
+    </div>
+
+    <div id="hero-banner-view" class="hero-banner-container">
+        <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
+        <p class="hero-seo-text">A growing library of ready-made <strong>ESL lesson plans for adults</strong> — designed for online tutors who want engaging, conversation-driven classes. Every plan includes a <strong>PDF handout</strong>, audio materials and video links covering psychology, business English, technology, society and more. Ideal for <strong>B1, B2 and C1</strong> levels.</p>
+        <div class="topic-scroll-wrapper">
+            <div class="topic-scroll-track" id="topic-scroll-track">
+                <button class="topic-pill active" onclick="applyTopicFilter('all', this)">All Lessons</button>
+                <button class="topic-pill" onclick="applyTopicFilter('psychology', this)">Psychology</button>
+                <button class="topic-pill" onclick="applyTopicFilter('society', this)">Society</button>
+                <button class="topic-pill" onclick="applyTopicFilter('technology', this)">Technology</button>
+                <button class="topic-pill" onclick="applyTopicFilter('work', this)">Work & Career</button>
+                <button class="topic-pill" onclick="applyTopicFilter('business', this)">Business</button>
+                <button class="topic-pill" onclick="applyTopicFilter('life', this)">Life & Relationships</button>
+                <button class="topic-pill" onclick="applyTopicFilter('travel', this)">Travel</button>
+                <button class="topic-pill" onclick="applyTopicFilter('media', this)">Media & Fame</button>
+                <button class="topic-pill" onclick="applyTopicFilter('art', this)">Art & Culture</button>
+                <button class="topic-pill" onclick="applyTopicFilter('grammar', this)">Grammar</button>
+                <button class="topic-pill" onclick="applyTopicFilter('food', this)">Food & Drink</button>
+            </div>
+        </div>
+        <div class="topic-slider-wrapper">
+            <input type="range" id="topic-slider" min="0" max="100" value="0" class="topic-slider" oninput="syncSliderToScroll()">
+        </div>
+    </div>
+
+    <input type="hidden" id="catalog-search-input" value="">
+    <div id="level-filter-tray" class="filter-panel-tray" style="display:block;">
+        <div class="filter-panel-container">
+            <span class="filter-label">Filter by CEFR Level:</span>
+            <button class="filter-pill active" onclick="applyPillFilter('level', 'all', this)">All Levels</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'a2', this)">A2 (Elementary)</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'b1', this)">B1 (Intermediate)</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'b2', this)">B2 (Upper-Intermediate)</button>
+            <button class="filter-pill" onclick="applyPillFilter('level', 'c1', this)">C1 (Advanced)</button>
+        </div>
+    </div>
+
+    <main class="content-container">
+
+        <div id="dashboard-catalog-view">
+            <h3 class="section-title" id="catalog-section-title">Latest Lessons</h3>
+            <div class="catalog-grid" id="catalog-grid-root"></div>
+            <div class="pagination-container" id="catalog-pagination-root"></div>
+        </div>
+
+        <div id="lesson-detail-view" style="display:none;" class="workspace-view">
+
+            <div class="left-column">
+                <div id="dynamic-sidebar-card" class="lesson-card">
+                    <div class="card-image-box">
+                        <div id="dynamic-card-artwork" class="mock-3d-illustration"></div>
+                    </div>
+                    <div id="dynamic-card-title" class="card-title-strip"></div>
+                    <div class="card-details">
+                        <div class="tag-row">
+                            <div id="dynamic-card-type" class="tag-item"></div>
+                            <div id="dynamic-card-media" class="tag-item"></div>
+                        </div>
+                        <div class="tag-row">
+                            <div id="dynamic-card-level" class="tag-item"></div>
+                            <div id="dynamic-card-duration" class="tag-item"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-section">
+                    <div class="pdf-preview-label">— ESLplan overview —</div>
+                    <div class="pdf-preview-scroll-box" id="pdf-preview-box">
+                        <div class="pdf-preview-loading">Loading preview...</div>
+                    </div>
+                </div>
+
+                <div class="back-btn-container" style="margin-top:12px;">
+                    <button onclick="goBackToCatalog()" class="back-btn-oblong" style="background:#1b5e20; width:100%; justify-content:center; padding:16px; font-size:17px;">
+                        <span class="back-arrow-icon">⬅</span> Go Back
+                    </button>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="panel-header-row">
+                    <h1 id="dynamic-panel-heading">What's this all about?</h1>
+                    <div style="display:flex; gap:16px; align-items:flex-start; flex-shrink:0;">
+                        <div class="favorite-badge" id="pin-lesson-btn" onclick="togglePin()">
+                            <span class="pin-label" id="pin-btn-label">Pin it!</span>
+                            <span class="pin-icon" id="pin-btn-icon">📌</span>
+                        </div>
+                        <div class="favorite-badge" onclick="openShareModal()">
+                            <span class="pin-label" style="color:#1a73e8;">Share</span>
+                            <span class="pin-icon">🔗</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="objectives-label">The <strong>main objectives</strong> of this ESL lesson are to:</p>
+                <ul class="objectives-list" id="dynamic-objectives-list"></ul>
+
+                <div class="description-frame" id="dynamic-description-frame"></div>
+
+                <div class="media-section">
+                    <div id="dynamic-media-section"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- AUTH MODAL -->
+    <div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:3000; align-items:center; justify-content:center;">
+        <div class="auth-box" id="auth-box-inner">
+            <button onclick="closeAuthModal()" class="auth-close">✕</button>
+
+            <div class="auth-logo"><span style="font-weight:900;font-style:italic;color:#c95210;font-family:'Segoe UI',sans-serif;">ESL</span><span style="font-weight:300;font-family:'Georgia',serif;">-plans</span></div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-signin" onclick="switchTab('signin')">Sign In</button>
+                <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <div id="auth-error" class="auth-error" style="display:none;"></div>
+            <div id="auth-success" class="auth-success" style="display:none;"></div>
+
+            <div id="auth-form">
+                <div class="auth-field">
+                    <label>Email</label>
+                    <input type="email" id="auth-email" placeholder="your@email.com" autocomplete="email">
+                </div>
+                <div class="auth-field">
+                    <label>Password</label>
+                    <div class="auth-input-wrap">
+                        <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
+                        <button type="button" class="auth-eye" onclick="togglePass('auth-password',this)">👁</button>
+                    </div>
+                    <div id="forgot-link-wrap" style="text-align:right; margin-top:6px;">
+                        <a onclick="showForgotPassword()" style="font-size:13px; color:#c95210; cursor:pointer; text-decoration:none;">Forgot password?</a>
+                    </div>
+                </div>
+                <div class="auth-field" id="confirm-field" style="display:none;">
+                    <label>Confirm Password</label>
+                    <div class="auth-input-wrap">
+                        <input type="password" id="auth-confirm" placeholder="••••••••" autocomplete="new-password">
+                        <button type="button" class="auth-eye" onclick="togglePass('auth-confirm',this)">👁</button>
+                    </div>
+                </div>
+                <button class="auth-submit" id="auth-submit-btn" onclick="handleAuth()">Sign In</button>
+                <p class="auth-switch" id="auth-switch-text">
+                    Don't have an account? <a onclick="switchTab('signup')" style="color:#c95210;cursor:pointer;">Sign Up</a>
+                </p>
+            </div>
+
+            <div id="forgot-form" style="display:none;">
+                <p style="font-size:14px; color:#666; margin-bottom:16px;">Enter your email and we'll send you a reset link.</p>
+                <div class="auth-field">
+                    <label>Email</label>
+                    <input type="email" id="forgot-email" placeholder="your@email.com" autocomplete="email">
+                </div>
+                <button class="auth-submit" onclick="handleForgotPassword()">Send Reset Link</button>
+                <p class="auth-switch">
+                    <a onclick="showSignInForm()" style="color:#c95210;cursor:pointer;">← Back to Sign In</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- USER MENU DROPDOWN -->
+    <div id="user-menu" style="display:none;">
+        <p id="user-email-display" style="font-size:14px;color:#888;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #eee;word-break:break-all;"></p>
+        <div id="user-sub-status" class="sub-status-badge sub-free">Guest</div>
+        <button onclick="handleSignOut()" style="width:100%;background:#e03131;color:white;border:none;border-radius:10px;padding:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;">Sign Out</button>
+    </div>
+
+    <!-- SHARE MODAL -->
+    <div id="share-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
+        <div style="background:white; border-radius:20px; padding:32px; max-width:400px; width:90%; text-align:center; position:relative;">
+            <button onclick="closeShareModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#888;">✕</button>
+            <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">Share this lesson</h3>
+            <p style="color:#888;font-size:14px;margin-bottom:20px;">Copy the link or share directly</p>
+            <div style="display:flex;align-items:center;gap:8px;background:#f5f5f5;border-radius:10px;padding:10px 14px;margin-bottom:24px;">
+                <span id="share-url" style="font-size:13px;color:#444;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;"></span>
+                <button onclick="copyShareLink()" style="background:#ff7a00;color:white;border:none;border-radius:8px;padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;" id="copy-btn">Copy</button>
+            </div>
+            <div style="display:flex;justify-content:center;gap:20px;">
+                <a id="share-telegram" href="#" target="_blank" style="display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:#444;font-size:12px;font-weight:600;">
+                    <span style="width:48px;height:48px;background:#229ED9;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    </span>Telegram
+                </a>
+                <a id="share-whatsapp" href="#" target="_blank" style="display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:#444;font-size:12px;font-weight:600;">
+                    <span style="width:48px;height:48px;background:#25D366;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                    </span>WhatsApp
+                </a>
+                <a id="share-instagram" href="#" target="_blank" style="display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:#444;font-size:12px;font-weight:600;">
+                    <span style="width:48px;height:48px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                    </span>Instagram
+                </a>
+                <a id="share-x" href="#" target="_blank" style="display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:#444;font-size:12px;font-weight:600;">
+                    <span style="width:48px;height:48px;background:#000;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </span>X (Twitter)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="lessons.js"></script>
+    <script>
+        let activeFilters = { level: 'all', category: 'all', topic: 'all' };
+        const LESSONS_PER_PAGE = 6;
+        let currentPage = 1;
+        let filteredLessons = [];
+
+        // ── IMAGE: try both .JPG and .jpg/.jpeg if one fails ──
+        function getImageStyle(src) {
+            if (src.includes('linear-gradient')) return `background: ${src};`;
+            return `background-image: url('${src}'); background-size: cover; background-position: center; background-repeat: no-repeat;`;
+        }
+
+        function setImageWithFallback(el, src) {
+            if (src.includes('linear-gradient')) { el.style.background = src; return; }
+            const img = new Image();
+            img.onload = () => { el.style.backgroundImage = `url('${src}')`; el.style.backgroundSize = 'cover'; el.style.backgroundPosition = 'center'; };
+            img.onerror = () => {
+                // Try flipping extension case
+                let alt = src;
+                if (src.endsWith('.JPG')) alt = src.slice(0, -4) + '.jpg';
+                else if (src.endsWith('.jpg')) alt = src.slice(0, -4) + '.JPG';
+                else if (src.endsWith('.jpeg')) alt = src.slice(0, -5) + '.JPG';
+                else if (src.endsWith('.PNG')) alt = src.slice(0, -4) + '.png';
+                else if (src.endsWith('.png')) alt = src.slice(0, -4) + '.PNG';
+                if (alt !== src) { el.style.backgroundImage = `url('${alt}')`; el.style.backgroundSize = 'cover'; el.style.backgroundPosition = 'center'; }
+            };
+            img.src = src;
+        }
+
+        function renderCatalogGrid() {
+            const container = document.getElementById('catalog-grid-root');
+            container.innerHTML = "";
+            const start = (currentPage - 1) * LESSONS_PER_PAGE;
+            const pageSlice = filteredLessons.slice(start, start + LESSONS_PER_PAGE);
+
+            pageSlice.forEach((catalogIndex) => {
+                const lesson = lessonsCatalog[catalogIndex];
+                const card = document.createElement('div');
+                card.className = `lesson-card ${lesson.category}`;
+                card.innerHTML = `
+                    <div class="card-image-box">
+                        <div class="mock-3d-illustration" id="img-${catalogIndex}"></div>
+                    </div>
+                    <div class="card-title-strip">
+                        <span>${lesson.title}</span>
+                        ${lesson.isFree ? '<span class="free-badge">FREE</span>' : ''}
+                    </div>
+                    <div class="card-details">
+                        <div class="tag-row">
+                            <div class="tag-item">${lesson.categoryIcon} ${lesson.categoryLabel}</div>
+                            <div class="tag-item">${lesson.mediaIcon} ${lesson.mediaType}</div>
+                        </div>
+                        <div class="tag-row">
+                            <div class="tag-item">🥇 ${lesson.levelLabel}</div>
+                            <div class="tag-item">🕒 ${lesson.duration}</div>
+                        </div>
+                        <div onclick="initiateDetailViewByIndex(${catalogIndex})" class="view-btn">View Lesson</div>
+                    </div>`;
+                container.appendChild(card);
+                setImageWithFallback(document.getElementById(`img-${catalogIndex}`), lesson.visualSource);
+            });
+            renderPaginationUI();
+        }
+
+        function renderPaginationUI() {
+            const root = document.getElementById('catalog-pagination-root');
+            root.innerHTML = "";
+            const totalPages = Math.ceil(filteredLessons.length / LESSONS_PER_PAGE);
+            if (totalPages <= 1) { root.style.display = "none"; return; }
+            root.style.display = "flex";
+            const prev = document.createElement('span');
+            prev.className = "pagination-item" + (currentPage === 1 ? " disabled" : "");
+            prev.innerText = "‹";
+            if (currentPage > 1) prev.onclick = () => goToPage(currentPage - 1);
+            root.appendChild(prev);
+            buildPageRange(currentPage, totalPages).forEach(p => {
+                const item = document.createElement('span');
+                if (p === '...') { item.className = "pagination-item ellipsis"; item.innerText = "..."; }
+                else { item.className = "pagination-item" + (p === currentPage ? " active" : ""); item.innerText = p; item.onclick = () => goToPage(p); }
+                root.appendChild(item);
+            });
+            const next = document.createElement('span');
+            next.className = "pagination-item" + (currentPage === totalPages ? " disabled" : "");
+            next.innerText = "›";
+            if (currentPage < totalPages) next.onclick = () => goToPage(currentPage + 1);
+            root.appendChild(next);
+        }
+
+        function buildPageRange(current, total) {
+            if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+            const pages = [1];
+            if (current > 3) pages.push('...');
+            for (let p = Math.max(2, current - 1); p <= Math.min(total - 1, current + 1); p++) pages.push(p);
+            if (current < total - 2) pages.push('...');
+            pages.push(total);
+            return pages;
+        }
+
+        function goToPage(page) { currentPage = page; renderCatalogGrid(); window.scrollTo(0, 0); }
+
+        function toggleFilterTray(trayType) {
+            hideAllViews();
+            document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('hero-banner-view').style.display = 'block';
+            const levelTray = document.getElementById('level-filter-tray');
+            const categoryTray = document.getElementById('category-filter-tray');
+            if (trayType === 'level') { categoryTray.style.display = 'none'; levelTray.style.display = 'block'; }
+            else { levelTray.style.display = 'none'; categoryTray.style.display = 'block'; }
+        }
+
+        function applyPillFilter(filterType, selectionValue, pillElement) {
+            Array.from(pillElement.parentNode.getElementsByClassName('filter-pill')).forEach(p => p.classList.remove('active'));
+            pillElement.classList.add('active');
+            activeFilters[filterType] = selectionValue;
+            applyFiltersAndRender();
+        }
+
+        function showPricingView() {
+            hideAllViews();
+            document.getElementById('pricing-view').style.display = 'block';
+            updatePricingButtons();
+            window.scrollTo(0, 0);
+        }
+
+        function handlePricingClick(tier) {
+            const userTier = currentUser ? (currentUser.profile_tier || 'free') : null;
+
+            if (tier === 'guest') {
+                if (!currentUser) {
+                    openAuthModal();
+                } else {
+                    // Already logged in as guest → go home
+                    showDashboardView();
+                }
+                return;
+            }
+
+            // Contributor or Friend button
+            if (!currentUser) {
+                // Not logged in → prompt login first
+                openAuthModal();
+                // After login, they can come back to pricing
+                return;
+            }
+
+            if (userTier === tier || (tier === 'contributor' && userTier === 'friend')) {
+                // Already subscribed — button is inactive, do nothing
+                return;
+            }
+
+            // Logged in, not yet subscribed → go to payment
+            const urls = {
+                contributor: 'https://payform.ru/noc13uv/',
+                friend: 'https://payform.ru/pac13vl/'
+            };
+            window.open(urls[tier], '_blank');
+        }
+
+        function updatePricingButtons() {
+            const guestBtn = document.getElementById('pricing-guest-btn');
+            const contBtn = document.getElementById('pricing-contributor-btn');
+            const friendBtn = document.getElementById('pricing-friend-btn');
+            if (!guestBtn || !contBtn || !friendBtn) return;
+
+            const tier = currentUser ? (currentUser.profile_tier || 'free') : null;
+            const profile = currentUser ? currentUser.profile_data : null;
+
+            // Show/hide premium links based on Friend tier
+            const zoomWrap = document.getElementById('zoom-link-wrap');
+            const tgWrap = document.getElementById('tg-friends-link-wrap');
+            if (zoomWrap && tgWrap) {
+                if (tier === 'friend') {
+                    zoomWrap.innerHTML = '<a href="https://t.me/alex_the_master" target="_blank" style="color:#229ED9; font-weight:700; white-space:nowrap;">Schedule on Telegram →</a>';
+                    tgWrap.innerHTML = '<a href="https://t.me/+IWqW1LKYejg5YWZi" target="_blank" style="color:#229ED9; font-weight:700; white-space:nowrap;">Join private chat →</a>';
+                } else {
+                    zoomWrap.innerHTML = '<span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span>';
+                    tgWrap.innerHTML = '<span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span>';
+                }
+            }
+
+            // Format expiry date
+            function formatExpiry(dateStr) {
+                if (!dateStr) return '';
+                const d = new Date(dateStr);
+                return `Active until ${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear().toString().slice(2)}`;
+            }
+
+            // Reset all buttons first
+            [guestBtn, contBtn, friendBtn].forEach(b => b.classList.remove('subscribed'));
+
+            if (!currentUser) {
+                // Not logged in
+                guestBtn.innerText = 'Join the Community';
+                contBtn.innerText = 'Start Teaching';
+                friendBtn.innerText = 'Get Full Access';
+            } else if (tier === 'free' || tier === null) {
+                // Logged in as guest
+                guestBtn.innerText = '✅ You\'re In!';
+                guestBtn.classList.add('subscribed');
+                contBtn.innerText = 'Start Teaching';
+                friendBtn.innerText = 'Get Full Access';
+            } else if (tier === 'contributor') {
+                guestBtn.innerText = '✅ You\'re In!';
+                guestBtn.classList.add('subscribed');
+                contBtn.innerText = profile && profile.expires_at ? formatExpiry(profile.expires_at) : '✅ Active Plan';
+                contBtn.classList.add('subscribed');
+                friendBtn.innerText = 'Upgrade to Friend';
+            } else if (tier === 'friend') {
+                guestBtn.innerText = '✅ You\'re In!';
+                guestBtn.classList.add('subscribed');
+                contBtn.innerText = '✅ Included';
+                contBtn.classList.add('subscribed');
+                friendBtn.innerText = profile && profile.expires_at ? formatExpiry(profile.expires_at) : '✅ Active Plan';
+                friendBtn.classList.add('subscribed');
+            }
+        }
+
+        function applyTopicFilter(topic, pillEl) {
+            document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+            if (pillEl) pillEl.classList.add('active');
+            activeFilters.topic = topic;
+            hideAllViews();
+            document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('hero-banner-view').style.display = 'block';
+            document.getElementById('level-filter-tray').style.display = 'block';
+            applyFiltersAndRender();
+            window.scrollTo(0, 0);
+        }
+
+        function executeCatalogSearch() { applyFiltersAndRender(); }
+
+        // Topic keyword map
+        const topicKeywords = {
+            grammar: ['grammar', 'adjective', 'modal', 'verb', 'tense', 'present perfect', 'past simple', 'few', 'little', 'obligation', 'prohibition'],
+            business: ['business', 'overwork', 'corporate', 'consulting', 'career', 'workplace', 'burnout', 'scope creep'],
+            travel: ['travel', 'europe', 'flight', 'tourism', 'countries', 'geography', 'national'],
+            psychology: ['psychology', 'endowment', 'loss aversion', 'hoarding', 'ritual', 'habit', 'anxiety', 'comfort', 'gossip', 'behaviour'],
+            technology: ['algorithm', 'AI', 'artificial intelligence', 'technology', 'digital', 'social media', 'data', 'computer'],
+            culture: ['culture', 'appropriation', 'appreciation', 'heritage', 'identity', 'national', 'stereotype', 'generation'],
+            media: ['media', 'fame', 'celebrity', 'stock photo', 'viral', 'internet', 'film', 'movie', 'cinema'],
+            art: ['art', 'painting', 'museum', 'remake', 'masterpiece', 'preposition'],
+            society: ['society', 'age', 'ageing', 'generations', 'gossip', 'overwork', 'affectation', 'vocal fry'],
+            work: ['work', 'overwork', 'burnout', 'career', 'corporate', 'business', 'consulting', 'job', 'passion', 'loyalty'],
+            food: ['coffee', 'beverage', 'drink', 'food', 'matcha', 'yerba', 'tea', 'tasting'],
+            free: ['free']
+        };
+
+        function applyFiltersAndRender(resetPage) {
+            const searchFilter = (document.getElementById('catalog-search-input').value || '').toLowerCase().trim();
+
+            filteredLessons = [];
+            lessonsCatalog.forEach((lesson, index) => {
+                // Expand level ranges: b1-c1 includes b1, b2, c1
+                const levelOrder = ['a1','a2','b1','b2','c1','c2'];
+                function levelInRange(lessonLevel, filterLevel) {
+                    if (filterLevel === 'all') return true;
+                    const parts = lessonLevel.toLowerCase().split(/[-\/]/).map(s => s.trim());
+                    if (parts.length === 1) return parts[0] === filterLevel;
+                    const startIdx = levelOrder.indexOf(parts[0]);
+                    const endIdx = levelOrder.indexOf(parts[parts.length - 1]);
+                    const filterIdx = levelOrder.indexOf(filterLevel);
+                    return filterIdx >= startIdx && filterIdx <= endIdx;
+                }
+                const matchesLevel = activeFilters.level === 'all' || levelInRange(lesson.level, activeFilters.level);
+                const matchesCategory = activeFilters.category === 'all' || lesson.category === activeFilters.category;
+                const matchesSearch = searchFilter === ''
+                    || lesson.title.toLowerCase().includes(searchFilter)
+                    || (lesson.keywords || '').toLowerCase().includes(searchFilter)
+                    || (lesson.description || '').toLowerCase().includes(searchFilter);
+                const matchesTopic = activeFilters.topic === 'all'
+                    ? true
+                    : activeFilters.topic === 'free'
+                        ? lesson.isFree === true
+                        : (lesson.topics || []).includes(activeFilters.topic);
+
+                if (matchesLevel && matchesCategory && matchesSearch && matchesTopic) filteredLessons.push(index);
+            });
+
+            // Only reset to page 1 when filtering/searching, not when returning from a lesson
+            if (resetPage !== false) currentPage = 1;
+            document.getElementById('catalog-section-title').innerText = filteredLessons.length === 0 ? "No matching lessons found" : "Latest Lessons";
+            renderCatalogGrid();
+        }
+
+        function initiateDetailViewByIndex(index) {
+            currentLessonIndex = index;
+            const lesson = lessonsCatalog[index];
+            if (!lesson) return;
+
+            document.getElementById('dynamic-card-title').innerText = lesson.title;
+            document.getElementById('dynamic-sidebar-card').className = "lesson-card " + lesson.category;
+            const artworkEl = document.getElementById('dynamic-card-artwork');
+            setImageWithFallback(artworkEl, lesson.visualSource);
+            document.getElementById('dynamic-card-type').innerText = `${lesson.categoryIcon} ${lesson.categoryLabel}`;
+            document.getElementById('dynamic-card-media').innerText = `${lesson.mediaIcon} ${lesson.mediaType}`;
+            document.getElementById('dynamic-card-level').innerText = '🥇 ' + lesson.levelLabel;
+            document.getElementById('dynamic-card-duration').innerText = '🕒 ' + lesson.duration;
+            document.getElementById('dynamic-description-frame').innerText = lesson.description;
+
+            renderPdfPreview(lesson.pdfUrl);
+
+            // ── SMART MEDIA SECTION ──
+            const audioFiles = lesson.audioUrls
+                ? lesson.audioUrls
+                : (lesson.audioUrl ? [{ label: null, url: lesson.audioUrl }] : []);
+            const videoLinks = (lesson.links || []).filter(l =>
+                l.url.includes('youtube') || l.url.includes('youtu.be') || l.url.includes('vimeo')
+            );
+
+            let html = '<div class="media-layout">';
+            html += '<div class="downloads-wrapper">';
+
+            // RAR first
+            if (lesson.rarUrl) {
+                html += `<div class="download-box">
+                    <div class="download-label rar-label">Full Pack</div>
+                    <a href="${lesson.rarUrl}" class="rar-icon-btn" target="_blank">RAR</a>
+                </div>`;
+            }
+
+            // PDF
+            html += `<div class="download-box">
+                <div class="download-label">ESLplan</div>
+                <a href="${lesson.pdfUrl}" class="pdf-icon-btn" target="_blank">PDF</a>
+            </div>`;
+
+            // Audio files
+            audioFiles.forEach((audio, i) => {
+                const label = audioFiles.length > 1 ? `Audio ${i + 1}` : 'Audio';
+                html += `<div class="download-box">
+                    <div class="download-label audio-label">${label}</div>
+                    <a href="${audio.url}" class="mp3-icon-btn" target="_blank">MP3</a>
+                </div>`;
+            });
+
+            html += '</div>'; // end downloads-wrapper
+
+            // Video links: YouTube icon + links as a second row
+            if (videoLinks.length > 0) {
+                html += `<div class="video-row">
+                    <div class="download-box">
+                        <div class="download-label" style="color:#e03131;">Video</div>
+                        <div class="youtube-logo-placeholder"></div>
+                    </div>
+                    <div class="links-list">`;
+                videoLinks.forEach(link => {
+                    const printableUrl = link.url.replace('https://www.', '').replace('https://', '');
+                    html += `<p><span>${link.label}:</span> <a href="${link.url}" target="_blank">${printableUrl}</a></p>`;
+                });
+                html += `</div></div>`;
+            }
+
+            html += '</div>'; // end media-layout
+            document.getElementById('dynamic-media-section').innerHTML = html;
+
+            // ── PAYWALL: replace downloads with Upgrade Now for premium lessons ──
+            const isSubscribed = currentUser && currentUser.profile_tier && currentUser.profile_tier !== 'free';
+            const isFreeLesson = lesson.isFree === true;
+
+            if (!isFreeLesson && !isSubscribed) {
+                const mediaSectionEl = document.getElementById('dynamic-media-section');
+                const videoRow = mediaSectionEl.querySelector('.video-row');
+                const videoHtml = videoRow ? videoRow.outerHTML : '';
+                mediaSectionEl.innerHTML = `<div class="media-layout">
+                    <div class="paywall-section">
+                        <a href="#" onclick="showPricingView(); return false;" class="upgrade-btn">🔒 Upgrade Now to Download</a>
+                        <p class="paywall-note">Get access to full lesson package</p>
+                    </div>
+                    ${videoHtml}
+                    <div style="margin-top:12px;">
+                        <button onclick="goBackToCatalog()" class="back-btn-oblong" style="background:#1b5e20; width:100%; justify-content:center; padding:16px; font-size:17px; display:flex;">
+                            <span class="back-arrow-icon">⬅</span> Go Back
+                        </button>
+                    </div>
+                </div>`;
+            } else {
+                // Free/subscribed: add second Go Back below video links
+                const mediaSectionEl = document.getElementById('dynamic-media-section');
+                const existingLayout = mediaSectionEl.querySelector('.media-layout');
+                if (existingLayout) {
+                    const extraBtn = document.createElement('div');
+                    extraBtn.style.marginTop = '12px';
+                    extraBtn.innerHTML = `<button onclick="goBackToCatalog()" class="back-btn-oblong" style="background:#1b5e20; width:100%; justify-content:center; padding:16px; font-size:17px; display:flex;">
+                        <span class="back-arrow-icon">⬅</span> Go Back
+                    </button>`;
+                    existingLayout.appendChild(extraBtn);
+                }
+            }
+
+            // Objectives
+            const objContainer = document.getElementById('dynamic-objectives-list');
+            objContainer.innerHTML = "";
+            lesson.objectives.forEach(text => {
+                const li = document.createElement('li');
+                li.innerText = text;
+                objContainer.appendChild(li);
+            });
+
+            hideAllViews();
+            document.getElementById('lesson-detail-view').style.display = 'grid';
+            updatePinButton();
+            window.scrollTo(0, 0);
+        }
+
+        function hideAllViews() {
+            document.getElementById('lesson-detail-view').style.display = 'none';
+            document.getElementById('dashboard-catalog-view').style.display = 'none';
+            document.getElementById('hero-banner-view').style.display = 'none';
+            document.getElementById('contacts-view').style.display = 'none';
+            document.getElementById('pinned-view').style.display = 'none';
+            document.getElementById('pricing-view').style.display = 'none';
+            document.getElementById('level-filter-tray').style.display = 'none';
+        }
+
+        function showDashboardView() {
+            hideAllViews();
+            document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('hero-banner-view').style.display = 'block';
+            document.getElementById('level-filter-tray').style.display = 'block';
+            activeFilters = { level: 'all', category: 'all', topic: 'all' };
+            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.filter-pill:first-of-type').forEach(p => p.classList.add('active'));
+            document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+            const firstPill = document.querySelector('.topic-pill');
+            if (firstPill) firstPill.classList.add('active');
+            applyFiltersAndRender();
+            clearHash();
+            window.scrollTo(0, 0);
+        }
+
+        function renderPdfPreview(pdfUrl) {
+            const box = document.getElementById('pdf-preview-box');
+            box.innerHTML = '<div class="pdf-preview-loading">Loading preview...</div>';
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+                box.innerHTML = '';
+                const scale = 0.4;
+                const renderPage = function(pageNum) {
+                    pdf.getPage(pageNum).then(function(page) {
+                        const viewport = page.getViewport({ scale });
+                        const canvas = document.createElement('canvas');
+                        canvas.width = viewport.width;
+                        canvas.height = viewport.height;
+                        page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise.then(function() {
+                            box.appendChild(canvas);
+                            if (pageNum < pdf.numPages) renderPage(pageNum + 1);
+                        });
+                    });
+                };
+                renderPage(1);
+            }).catch(function() {
+                box.innerHTML = '<div class="pdf-preview-loading">Preview unavailable.</div>';
+            });
+        }
+
+        function showContactsView() { hideAllViews(); document.getElementById('contacts-view').style.display = 'block'; window.scrollTo(0, 0); }
+        function showPinnedView() { hideAllViews(); renderPinnedPage(); document.getElementById('pinned-view').style.display = 'block'; window.scrollTo(0, 0); }
+
+        let pinnedIds = JSON.parse(localStorage.getItem('eslplans-pinned') || '[]');
+        let currentLessonIndex = null;
+
+        function savePins() { localStorage.setItem('eslplans-pinned', JSON.stringify(pinnedIds)); updatePinBadge(); updateNavPin(); }
+
+        function updateNavPin() {
+            const navPin = document.querySelector('.pin-nav-btn');
+            if (navPin) {
+                navPin.classList.toggle('has-pins', pinnedIds.length > 0);
+                navPin.classList.toggle('no-pins', pinnedIds.length === 0);
+            }
+        }
+
+        function updatePinBadge() {
+            const badge = document.getElementById('pin-count-badge');
+            badge.style.display = pinnedIds.length > 0 ? 'flex' : 'none';
+            badge.innerText = pinnedIds.length;
+        }
+
+        function togglePin() {
+            if (!currentUser) {
+                // Not logged in — prompt to sign up
+                openAuthModal();
+                switchTab('signup');
+                showAuthSuccess('Create a free account to pin and save your favourite lessons!');
+                return;
+            }
+            if (currentLessonIndex === null) return;
+            const idx = pinnedIds.indexOf(currentLessonIndex);
+            if (idx === -1) pinnedIds.push(currentLessonIndex);
+            else pinnedIds.splice(idx, 1);
+            savePins();
+            updatePinButton();
+        }
+
+        function updatePinButton() {
+            if (currentLessonIndex === null) return;
+            const isPinned = pinnedIds.includes(currentLessonIndex);
+            const label = document.getElementById('pin-btn-label');
+            const icon = document.getElementById('pin-btn-icon');
+            if (label) { label.innerText = isPinned ? 'Pinned!' : 'Pin it!'; label.classList.toggle('pinned', isPinned); }
+            if (icon) {
+                icon.classList.toggle('pinned', isPinned);
+                icon.classList.remove('pin-animate');
+                void icon.offsetWidth;
+                icon.classList.add('pin-animate');
+            }
+            updateNavPin();
+        }
+
+        let pinnedPage = 1;
+        const PINNED_PER_PAGE = 6;
+
+        function renderPinnedPage() {
+            const grid = document.getElementById('pinned-grid-root');
+            const paginationRoot = document.getElementById('pinned-pagination-root');
+            if (pinnedIds.length === 0) {
+                grid.innerHTML = '<p style="color:#888; font-size:16px; grid-column:1/-1;">No pinned lessons yet. Open a lesson and click 📌 Pin it! to save it here.</p>';
+                paginationRoot.innerHTML = ''; return;
+            }
+            const totalPages = Math.ceil(pinnedIds.length / PINNED_PER_PAGE);
+            pinnedPage = Math.min(pinnedPage, totalPages);
+            const pageSlice = pinnedIds.slice((pinnedPage - 1) * PINNED_PER_PAGE, pinnedPage * PINNED_PER_PAGE);
+            grid.innerHTML = pageSlice.map((idx, i) => {
+                const l = lessonsCatalog[idx];
+                return `<div class="lesson-card ${l.category}">
+                    <div class="card-image-box"><div class="mock-3d-illustration" id="pinimg-${i}"></div></div>
+                    <div class="card-title-strip">${l.title}</div>
+                    <div class="card-details">
+                        <div class="tag-row">
+                            <div class="tag-item">${l.categoryIcon} ${l.categoryLabel}</div>
+                            <div class="tag-item">${l.mediaIcon} ${l.mediaType}</div>
+                        </div>
+                        <div class="tag-row">
+                            <div class="tag-item">🥇 ${l.levelLabel}</div>
+                            <div class="tag-item">🕒 ${l.duration}</div>
+                        </div>
+                    </div>
+                    <div onclick="initiateDetailViewByIndex(${idx})" class="view-btn">View Lesson</div>
+                </div>`;
+            }).join('');
+            pageSlice.forEach((idx, i) => {
+                setImageWithFallback(document.getElementById(`pinimg-${i}`), lessonsCatalog[idx].visualSource);
+            });
+            if (totalPages <= 1) { paginationRoot.innerHTML = ''; return; }
+            paginationRoot.innerHTML = '';
+            const prev = document.createElement('span');
+            prev.className = 'pagination-item' + (pinnedPage === 1 ? ' disabled' : '');
+            prev.innerText = '‹';
+            if (pinnedPage > 1) prev.onclick = () => { pinnedPage--; renderPinnedPage(); window.scrollTo(0,0); };
+            paginationRoot.appendChild(prev);
+            for (let p = 1; p <= totalPages; p++) {
+                const item = document.createElement('span');
+                item.className = 'pagination-item' + (p === pinnedPage ? ' active' : '');
+                item.innerText = p;
+                item.onclick = ((pg) => () => { pinnedPage = pg; renderPinnedPage(); window.scrollTo(0,0); })(p);
+                paginationRoot.appendChild(item);
+            }
+            const next = document.createElement('span');
+            next.className = 'pagination-item' + (pinnedPage === totalPages ? ' disabled' : '');
+            next.innerText = '›';
+            if (pinnedPage < totalPages) next.onclick = () => { pinnedPage++; renderPinnedPage(); window.scrollTo(0,0); };
+            paginationRoot.appendChild(next);
+        }
+
+        function unpinLesson(idx) { pinnedIds = pinnedIds.filter(id => id !== idx); savePins(); updatePinButton(); }
+        function togglePinnedPanel() { showPinnedView(); }
+
+        // ── TOPIC SLIDER sync ──
+        function syncSliderToScroll() {
+            const slider = document.getElementById('topic-slider');
+            const wrapper = document.querySelector('.topic-scroll-wrapper');
+            if (!slider || !wrapper) return;
+            const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+            wrapper.scrollLeft = (slider.value / 100) * maxScroll;
+        }
+        // Update slider when user finger-scrolls the pills
+        setTimeout(function() {
+            const wrapper = document.querySelector('.topic-scroll-wrapper');
+            const slider = document.getElementById('topic-slider');
+            if (wrapper && slider) {
+                wrapper.addEventListener('scroll', function() {
+                    const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+                    if (maxScroll > 0) slider.value = (wrapper.scrollLeft / maxScroll) * 100;
+                });
+            }
+        }, 500);
+
+        // ── PASSWORD RESET: detect token on page load ──
+        async function checkForPasswordReset() {
+            const hash = window.location.hash;
+            if (hash && hash.includes('type=recovery')) {
+                const { data } = await _supabase.auth.getSession();
+                if (data && data.session) showResetPasswordModal();
+            }
+        }
+
+        function showResetPasswordModal() {
+            document.getElementById('auth-modal').style.display = 'flex';
+            document.getElementById('auth-tabs').style.display = 'none';
+            document.getElementById('auth-form').style.display = 'none';
+            document.getElementById('forgot-form').style.display = 'none';
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+
+            let resetForm = document.getElementById('reset-password-form');
+            if (!resetForm) {
+                resetForm = document.createElement('div');
+                resetForm.id = 'reset-password-form';
+                resetForm.innerHTML = `
+                    <p style="font-size:15px;font-weight:600;color:#333;margin-bottom:16px;text-align:center;">Set your new password</p>
+                    <div class="auth-field">
+                        <label>New Password</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="new-password" placeholder="••••••••">
+                            <button type="button" class="auth-eye" onclick="togglePass('new-password',this)">👁</button>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label>Confirm New Password</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="new-password-confirm" placeholder="••••••••">
+                            <button type="button" class="auth-eye" onclick="togglePass('new-password-confirm',this)">👁</button>
+                        </div>
+                    </div>
+                    <button class="auth-submit" onclick="handleSetNewPassword()">Set New Password</button>
+                `;
+                document.getElementById('auth-box-inner').appendChild(resetForm);
+            }
+            resetForm.style.display = 'block';
+        }
+
+        async function handleSetNewPassword() {
+            const newPass = document.getElementById('new-password').value;
+            const confirm = document.getElementById('new-password-confirm').value;
+            if (!newPass || newPass.length < 6) { showAuthError('Password must be at least 6 characters.'); return; }
+            if (newPass !== confirm) { showAuthError('Passwords don\'t match.'); return; }
+
+            const btn = document.querySelector('#reset-password-form .auth-submit');
+            btn.disabled = true;
+            btn.innerText = 'Saving...';
+
+            const { error } = await _supabase.auth.updateUser({ password: newPass });
+            if (error) {
+                showAuthError(error.message);
+                btn.disabled = false;
+                btn.innerText = 'Set New Password';
+            } else {
+                showAuthSuccess('✅ Password updated! You are now logged in.');
+                setTimeout(() => {
+                    history.replaceState(null, '', window.location.pathname);
+                    closeAuthModal();
+                }, 2000);
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('hamburger-btn').classList.toggle('open');
+            document.getElementById('nav-menu').classList.toggle('open');
+        }
+        function closeMobileMenu() {
+            document.getElementById('hamburger-btn').classList.remove('open');
+            document.getElementById('nav-menu').classList.remove('open');
+        }
+        document.getElementById('nav-menu').querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // ── URL HASH: shareable lesson links ──
+        function setLessonHash(index) {
+            const lesson = lessonsCatalog[index];
+            if (lesson) {
+                const slug = lesson.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                history.replaceState(null, '', '#lesson-' + slug);
+            }
+        }
+
+        function clearHash() {
+            history.replaceState(null, '', window.location.pathname);
+        }
+
+        function loadFromHash() {
+            const hash = window.location.hash;
+            if (!hash.startsWith('#lesson-')) return false;
+            const slug = hash.replace('#lesson-', '');
+            const idx = lessonsCatalog.findIndex(l => {
+                const s = l.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                return s === slug;
+            });
+            if (idx !== -1) { initiateDetailViewByIndex(idx); return true; }
+            return false;
+        }
+
+        // ── SHARE MODAL ──
+        function openShareModal() {
+            if (currentLessonIndex === null) return;
+            setLessonHash(currentLessonIndex);
+            const url = window.location.href;
+            const lesson = lessonsCatalog[currentLessonIndex];
+            const text = `Check out this ESL lesson plan: ${lesson.title}`;
+            document.getElementById('share-url').innerText = url;
+            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+            document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+            document.getElementById('share-instagram').href = `https://www.instagram.com/`;
+            document.getElementById('share-x').href = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+            document.getElementById('share-modal').style.display = 'flex';
+        }
+
+        function closeShareModal() {
+            document.getElementById('share-modal').style.display = 'none';
+        }
+
+        function copyShareLink() {
+            const url = document.getElementById('share-url').innerText;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('copy-btn');
+                btn.innerText = 'Copied!';
+                btn.style.background = '#2e7d32';
+                setTimeout(() => { btn.innerText = 'Copy'; btn.style.background = '#ff7a00'; }, 2000);
+            });
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('share-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeShareModal();
+        });
+
+        // Also update hash when opening lesson
+        const _origInitiate = initiateDetailViewByIndex;
+        initiateDetailViewByIndex = function(index) {
+            _origInitiate(index);
+            setLessonHash(index);
+        };
+
+        function showForgotPassword() {
+            document.getElementById('auth-form').style.display = 'none';
+            document.getElementById('forgot-form').style.display = 'block';
+            document.getElementById('auth-tabs').style.display = 'none';
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+            setTimeout(() => document.getElementById('forgot-email').focus(), 100);
+        }
+
+        function showSignInForm() {
+            document.getElementById('forgot-form').style.display = 'none';
+            document.getElementById('auth-form').style.display = 'block';
+            document.getElementById('auth-tabs').style.display = 'flex';
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+            switchTab('signin');
+        }
+
+        async function handleForgotPassword() {
+            const email = document.getElementById('forgot-email').value.trim();
+            if (!email) { showAuthError('Please enter your email.'); return; }
+
+            const btn = document.querySelector('#forgot-form .auth-submit');
+            btn.disabled = true;
+            btn.innerText = 'Sending...';
+
+            const { error } = await _supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: 'https://esl-plans.com/reset.html'
+            });
+
+            if (error) {
+                showAuthError(error.message);
+                btn.disabled = false;
+                btn.innerText = 'Send Reset Link';
+            } else {
+                showAuthSuccess('✅ Reset link sent! Check your email.');
+                btn.disabled = false;
+                btn.innerText = 'Send Reset Link';
+            }
+        }
+
+        function togglePass(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.innerText = '🙈';
+            } else {
+                input.type = 'password';
+                btn.innerText = '👁';
+            }
+        }
+
+        // ── NAVIGATION: remember page position, fix browser back/forward ──
+        let savedCatalogPage = 1;
+        let savedScrollY = 0;
+
+        function goBackToCatalog() {
+            hideAllViews();
+            document.getElementById('dashboard-catalog-view').style.display = 'block';
+            document.getElementById('hero-banner-view').style.display = 'block';
+            document.getElementById('level-filter-tray').style.display = 'block';
+            // Set page BEFORE rendering so applyFiltersAndRender uses it
+            currentPage = savedCatalogPage;
+            applyFiltersAndRender(false);
+            clearHash();
+            history.pushState({ view: 'catalog', page: savedCatalogPage }, '', window.location.pathname);
+            // Restore scroll position after render
+            const scrollTarget = savedScrollY;
+            setTimeout(() => window.scrollTo(0, scrollTarget), 80);
+        }
+
+        // Patch goToPage to save current page
+        const _realGoToPage = goToPage;
+        goToPage = function(page) {
+            savedCatalogPage = page;
+            currentPage = page;
+            renderCatalogGrid();
+            history.pushState({ view: 'catalog', page: page }, '', window.location.pathname);
+            window.scrollTo(0, 0);
+        };
+
+        // Browser back/forward
+        window.addEventListener('popstate', function(e) {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#lesson-')) {
+                loadFromHash();
+            } else {
+                const page = (e.state && e.state.page) ? e.state.page : 1;
+                currentPage = page;
+                savedCatalogPage = page;
+                hideAllViews();
+                document.getElementById('dashboard-catalog-view').style.display = 'block';
+                document.getElementById('hero-banner-view').style.display = 'block';
+                document.getElementById('level-filter-tray').style.display = 'block';
+                applyFiltersAndRender();
+                window.scrollTo(0, 0);
+            }
+        });
+
+        // Patch initiateDetailViewByIndex to save page + scroll before opening lesson
+        const _realInitiateDetail = initiateDetailViewByIndex;
+        initiateDetailViewByIndex = function(index) {
+            savedCatalogPage = currentPage;
+            savedScrollY = window.scrollY;
+            _realInitiateDetail(index);
+            history.pushState({ view: 'lesson', index: index }, '', window.location.hash);
+        };
+
+        // ── SUPABASE AUTH ──
+        const SUPABASE_URL = 'https://uhyapbinngjpotcifdbc.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_JNvGyFm_d1QGKCGj7SmXQQ_TNJ-vB-D';
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let currentUser = null;
+        let authMode = 'signin'; // 'signin' or 'signup'
+
+        // Check session on load
+        _supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) setLoggedIn(session.user);
+        });
+
+        // Listen for auth changes
+        let _recoveryMode = false;
+        _supabase.auth.onAuthStateChange((event, session) => {
+            if (event === 'PASSWORD_RECOVERY') {
+                _recoveryMode = true;
+                // Don't log them in normally - show reset form instead
+                // But we need to be on reset.html for this
+                window.location.href = 'https://esl-plans.com/reset.html';
+                return;
+            }
+            if (_recoveryMode) return; // ignore SIGNED_IN that follows PASSWORD_RECOVERY
+            if (session) setLoggedIn(session.user);
+            else setLoggedOut();
+        });
+
+        async function setLoggedIn(user) {
+            currentUser = user;
+            const btn = document.getElementById('nav-login-btn');
+            const shortEmail = user.email.length > 18 ? user.email.substring(0, 18) + '…' : user.email;
+            btn.innerText = '✅ ' + shortEmail;
+            btn.className = 'nav-user-btn';
+            btn.onclick = toggleUserMenu;
+            document.getElementById('user-email-display').innerText = user.email;
+
+            // Fetch tier from secure profiles table
+            const { data: profile } = await _supabase
+                .from('profiles')
+                .select('tier, expires_at')
+                .eq('id', user.id)
+                .single();
+
+            const tier = profile ? profile.tier : 'free';
+            currentUser.profile_tier = tier;
+            currentUser.profile_data = profile;
+
+            const badge = document.getElementById('user-sub-status');
+            if (tier === 'contributor') {
+                badge.className = 'sub-status-badge sub-contributor';
+                badge.innerText = '⭐ Contributor';
+            } else if (tier === 'friend') {
+                badge.className = 'sub-status-badge sub-friend';
+                badge.innerText = '👑 Friend — Full Access';
+            } else {
+                badge.className = 'sub-status-badge sub-free';
+                badge.innerText = 'Guest — Upgrade to unlock all lessons';
+            }
+
+            // Update pricing buttons if pricing page is visible
+            updatePricingButtons();
+        }
+
+        function setLoggedOut() {
+            currentUser = null;
+            const btn = document.getElementById('nav-login-btn');
+            btn.innerText = 'Login';
+            btn.className = '';
+            btn.onclick = openAuthModal;
+            document.getElementById('user-menu').style.display = 'none';
+        }
+
+        function toggleUserMenu() {
+            const menu = document.getElementById('user-menu');
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Close user menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('user-menu');
+            const btn = document.getElementById('nav-login-btn');
+            if (menu.style.display === 'block' && !menu.contains(e.target) && e.target !== btn) {
+                menu.style.display = 'none';
+            }
+        });
+
+        function openAuthModal() {
+            closeMobileMenu();
+            document.getElementById('auth-modal').style.display = 'flex';
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+            document.getElementById('auth-email').value = '';
+            document.getElementById('auth-password').value = '';
+            document.getElementById('auth-confirm').value = '';
+            document.getElementById('forgot-form').style.display = 'none';
+            document.getElementById('auth-form').style.display = 'block';
+            document.getElementById('auth-tabs').style.display = 'flex';
+            switchTab('signin');
+            setTimeout(() => document.getElementById('auth-email').focus(), 100);
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').style.display = 'none';
+        }
+
+        // Close on backdrop click
+        document.getElementById('auth-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeAuthModal();
+        });
+
+        function switchTab(mode) {
+            authMode = mode;
+            document.getElementById('tab-signin').classList.toggle('active', mode === 'signin');
+            document.getElementById('tab-signup').classList.toggle('active', mode === 'signup');
+            document.getElementById('confirm-field').style.display = mode === 'signup' ? 'block' : 'none';
+            document.getElementById('auth-submit-btn').innerText = mode === 'signin' ? 'Sign In' : 'Create Account';
+            document.getElementById('auth-switch-text').innerHTML = mode === 'signin'
+                ? 'Don\'t have an account? <a onclick="switchTab(\'signup\')" style="color:#c95210;cursor:pointer;">Sign Up</a>'
+                : 'Already have an account? <a onclick="switchTab(\'signin\')" style="color:#c95210;cursor:pointer;">Sign In</a>';
+            document.getElementById('auth-error').style.display = 'none';
+            document.getElementById('auth-success').style.display = 'none';
+        }
+
+        function showAuthError(msg) {
+            const el = document.getElementById('auth-error');
+            el.innerText = msg;
+            el.style.display = 'block';
+            document.getElementById('auth-success').style.display = 'none';
+        }
+
+        function showAuthSuccess(msg) {
+            const el = document.getElementById('auth-success');
+            el.innerText = msg;
+            el.style.display = 'block';
+            document.getElementById('auth-error').style.display = 'none';
+        }
+
+        async function handleAuth() {
+            const email = document.getElementById('auth-email').value.trim();
+            const password = document.getElementById('auth-password').value;
+            const confirm = document.getElementById('auth-confirm').value;
+            const btn = document.getElementById('auth-submit-btn');
+
+            if (!email || !password) { showAuthError('Please fill in all fields.'); return; }
+            if (authMode === 'signup' && password !== confirm) { showAuthError('Passwords don\'t match.'); return; }
+            if (password.length < 6) { showAuthError('Password must be at least 6 characters.'); return; }
+
+            btn.disabled = true;
+            btn.innerText = authMode === 'signin' ? 'Signing in...' : 'Creating account...';
+
+            if (authMode === 'signin') {
+                const { error } = await _supabase.auth.signInWithPassword({ email, password });
+                if (error) { showAuthError(error.message); btn.disabled = false; btn.innerText = 'Sign In'; }
+                else { closeAuthModal(); }
+            } else {
+                const { error } = await _supabase.auth.signUp({ email, password });
+                if (error) { showAuthError(error.message); btn.disabled = false; btn.innerText = 'Create Account'; }
+                else {
+                    showAuthSuccess('Account created! You are now logged in.');
+                    btn.disabled = false;
+                    btn.innerText = 'Create Account';
+                    setTimeout(closeAuthModal, 1500);
+                }
+            }
+        }
+
+        async function handleSignOut() {
+            await _supabase.auth.signOut();
+            document.getElementById('user-menu').style.display = 'none';
+        }
+
+        // Allow Enter key in auth form
+        document.getElementById('auth-modal').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') handleAuth();
+        });
+
+        lessonsCatalog.sort((a, b) => new Date(b.dateAdded || "2000-01-01") - new Date(a.dateAdded || "2000-01-01"));
+
+        // Boot: load from hash if present, otherwise show dashboard
+        // ── BOOT ──
+        lessonsCatalog.sort((a, b) => new Date(b.dateAdded || "2000-01-01") - new Date(a.dateAdded || "2000-01-01"));
+
+        // Check for password reset FIRST before anything touches the hash
+        const _bootHash = window.location.hash;
+        if (_bootHash && _bootHash.includes('type=recovery')) {
+            applyFiltersAndRender();
+            updatePinBadge();
+            setTimeout(() => updateNavPin(), 0);
+            // Wait for Supabase to process the token from the URL
+            setTimeout(async () => {
+                const { data } = await _supabase.auth.getSession();
+                if (data && data.session) showResetPasswordModal();
+            }, 800);
+        } else {
+            if (!loadFromHash()) {
+                applyFiltersAndRender();
+            } else {
+                applyFiltersAndRender();
+            }
+            updatePinBadge();
+            setTimeout(() => updateNavPin(), 0);
+        }
+    </script>
+</body>
+</html>
