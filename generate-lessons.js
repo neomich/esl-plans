@@ -18,6 +18,24 @@ lessons.forEach(lesson => {
     const descSafe = (lesson.description || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const objList = (lesson.objectives || []).map(o => `<li>${o.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</li>`).join('\n');
 
+    // Find 3 related lessons by shared topics
+    const currentIdx = lessons.indexOf(lesson);
+    const related = lessons
+        .filter((l, i) => i !== currentIdx && l.topics && lesson.topics && l.topics.some(t => (lesson.topics || []).includes(t)))
+        .slice(0, 3);
+
+    const relatedHtml = related.length > 0 ? `
+        <div style="margin-top:32px;border-top:1px dashed #ddd;padding-top:24px;">
+            <h3 style="font-size:14px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">You may also like</h3>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                ${related.map(r => `<a href="https://esl-plans.com/lessons/${slugify(r.title)}" style="flex:1;min-width:180px;background:white;border-radius:12px;padding:14px;text-decoration:none;border:1px solid #eee;display:block;">
+                    <div style="font-size:14px;font-weight:700;color:#333;margin-bottom:4px;">${r.title}</div>
+                    <div style="font-size:12px;color:#aaa;">${r.levelLabel} &middot; ${r.duration}</div>
+                    <div style="font-size:12px;color:#c95210;font-weight:700;margin-top:8px;">View Lesson &rarr;</div>
+                </a>`).join('')}
+            </div>
+        </div>` : '';
+
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +62,7 @@ lessons.forEach(lesson => {
         <ul>${objList}</ul>
         <h2>About This Lesson</h2>
         <p class="desc">${descSafe}</p>
+        ${relatedHtml}
         <a class="back" href="https://esl-plans.com">&larr; Back to ESL-plans.com</a>
     </div>
 </body>
