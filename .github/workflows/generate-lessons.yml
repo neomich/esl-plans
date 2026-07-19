@@ -1,0 +1,30 @@
+name: Generate Lesson Pages
+
+on:
+  push:
+    paths:
+      - 'lessons.js'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Generate lesson pages and sitemap
+        run: node generate-lessons.js
+
+      - name: Commit and push generated files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add lessons/ sitemap.xml
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate lesson pages [skip ci]"
+          git push
