@@ -771,8 +771,8 @@
         const description = document.getElementById('f-description').value.trim();
 
         // Files
-        const pdfFile = document.getElementById('f-pdf').value.trim();
-        const rarFile = document.getElementById('f-rar').value.trim();
+        const pdfFile = document.getElementById('f-pdf').value.trim().replace(/\.pdf$/i,'') + (document.getElementById('f-pdf').value.trim() ? '.pdf' : '');
+        const rarFile = document.getElementById('f-rar').value.trim().replace(/\.rar$/i,'') + (document.getElementById('f-rar').value.trim() ? '.rar' : '');
         const imageFile = document.getElementById('f-image').value.trim();
 
         // Audio files
@@ -782,7 +782,8 @@
             const inputs = row.querySelectorAll('input');
             if (inputs.length >= 2) {
                 const label = inputs[0].value.trim();
-                const filename = inputs[1].value.trim();
+                let filename = inputs[1].value.trim();
+                if (filename && !filename.toLowerCase().endsWith('.mp3')) filename += '.mp3';
                 if (filename) audioFiles.push({ label: label || 'Audio', url: `${R2_BASE}/audio/${filename}` });
             }
         });
