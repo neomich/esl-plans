@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 // ── GENERATE LESSON PAGES ──
-const lessonsContent = fs.readFileSync('lessons.js', 'utf8');
+const lessonsContent = fs.readFileSync('lessons.js', 'utf8'); 
 const getLessons = new Function(lessonsContent.replace('const lessonsCatalog', 'var lessonsCatalog') + '\nreturn lessonsCatalog;');
 const lessons = getLessons();
 console.log(`Found ${lessons.length} lessons`);
