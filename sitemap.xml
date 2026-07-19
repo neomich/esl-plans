@@ -12,6 +12,12 @@
         <priority>0.3</priority>
     </url>
     <url>
+        <loc>https://esl-plans.com/lessons/the-magical-number-7</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2026-07-19</lastmod>
+    </url>
+    <url>
         <loc>https://esl-plans.com/lessons/couples</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -341,4 +347,5 @@
         <priority>0.8</priority>
         <lastmod>2026-07-19</lastmod>
     </url>
+
 </urlset>
