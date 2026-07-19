@@ -52,7 +52,7 @@ lessons.forEach(lesson => {
     <meta property="og:site_name" content="ESL-plans.com">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${lesson.title.replace(/"/g,'\\"')}","description":"${descMeta.replace(/"/g,'\\"')}","provider":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"educationalLevel":"${lesson.levelLabel}","inLanguage":"en","url":"https://esl-plans.com/lessons/${slug}"}</script>
     <style>body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}.container{max-width:800px;margin:0 auto;padding:40px 20px}h1{color:#c95210;font-size:28px;margin-bottom:8px}.meta{color:#888;font-size:14px;margin-bottom:24px}h2{color:#333;font-size:18px;margin:24px 0 12px}ul{color:#444;line-height:1.8;padding-left:20px}.desc{color:#444;line-height:1.7;white-space:pre-line}.back{display:inline-block;margin-top:30px;color:#c95210;text-decoration:none;font-weight:600}</style>
-    <script>window.location.href='https://esl-plans.com/#lesson-${slug}';</script>
+    <script>setTimeout(function(){ window.location.href='https://esl-plans.com/#lesson-${slug}'; }, 500);</script>
 </head>
 <body>
     <div class="container">
