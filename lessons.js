@@ -30,9 +30,9 @@ const lessonsCatalog = [
             "apply critical thinking to real-world examples where the 7±2 limit shapes design, communication, and daily life."
         ],
         "description": "In this lesson, students begin with an engaging visual puzzle: a set of seemingly unrelated images (e.g., Continents, Wonders, Rainbow, Notes etc.), prompting them to search for a hidden pattern—leading naturally into the theme of cognitive grouping and mental limits.\nThe core of the lesson is structured around three media tasks:\nIntro Audio + Game: Students listen to an audio clip that introduces the concept through a playful “game”. \nFirst Video (Concept Explainer): A short explainer video (featuring Dr. Raluca Budiu and referencing George Miller’s classic 1956 study) clearly defines:\nChunks as meaningful units (not just letters or digits),\nThe role of chunking in expanding memory capacity,\nWhy “7 ± 2” is a robust empirical finding across domains (e.g., phone numbers, musical notes, team sizes).\nStudents answer comprehension questions (e.g., Who studied human memory? What is the process called?) to verify their understanding.\nThey then complete a matching task linking everyday examples (e.g., Meeting Agenda, Password Complexity, Dashboard Elements) to the idea of chunking — reinforcing that humans can reliably hold only ~5–9 discrete items in working memory.\nSecond Video (Movie Review + Grammar Task): Students watch a fictional movie trailer/review for Lucky Numbers—a heist-style film about lottery fraud—and then complete a Past Simple gap-fill exercise reconstructing the plot. This reinforces regular/irregular verb forms while embedding grammar practice in a narrative context.\nThis lesson elegantly bridges cognitive science, language form, and real-world relevance—making abstract psychology tangible through games, storytelling, and practical grammar use.",
-        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_number_7",
-        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_number_7_conversation",
-        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_number_7",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_number_7.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_number_7_conversation.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_number_7.rar",
         "mediaLabel": "The video links:",
         "links": [
             {
