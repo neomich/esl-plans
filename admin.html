@@ -773,7 +773,8 @@
         // Files
         const pdfFile = document.getElementById('f-pdf').value.trim().replace(/\.pdf$/i,'') + (document.getElementById('f-pdf').value.trim() ? '.pdf' : '');
         const rarFile = document.getElementById('f-rar').value.trim().replace(/\.rar$/i,'') + (document.getElementById('f-rar').value.trim() ? '.rar' : '');
-        const imageFile = document.getElementById('f-image').value.trim();
+        let imageFile = document.getElementById('f-image').value.trim();
+        if (imageFile && !/\.(jpg|jpeg|png|JPG|JPEG|PNG)$/i.test(imageFile)) imageFile += '.jpg';
 
         // Audio files
         const audioRows = document.querySelectorAll('#audio-list .form-row');
