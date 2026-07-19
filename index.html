@@ -814,6 +814,81 @@
 
         #dynamic-sidebar-card .view-btn { display: none; }
 
+        /* ── TEACHER'S CORNER ── */
+        .teachers-corner-container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 20px;
+        }
+        .teachers-corner-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .teachers-corner-header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .teachers-corner-header p {
+            font-size: 16px;
+            color: #888;
+        }
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .article-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 4px solid #c95210;
+        }
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .article-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .article-card .article-preview {
+            font-size: 14px;
+            color: #777;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .article-card .article-date {
+            font-size: 12px;
+            color: #bbb;
+            margin-top: 14px;
+        }
+        .article-card .read-more {
+            font-size: 13px;
+            color: #c95210;
+            font-weight: 700;
+            margin-top: 10px;
+            display: block;
+        }
+        .articles-empty {
+            grid-column: 1/-1;
+            text-align: center;
+            color: #aaa;
+            font-size: 16px;
+            padding: 60px 0;
+        }
+        .pin-nav-label { font-size: 13px; }
+
         /* Contacts page */
         .contacts-view { max-width: 860px; margin: 50px auto; padding: 0 20px 60px; text-align: left; }
         .contacts-view h2 {
@@ -1346,9 +1421,10 @@
             </button>
             <a onclick="applyTopicFilter('free', null)" class="nav-free-btn" style="cursor:pointer; text-decoration:none; background:#2e7d32; color:white; padding:10px 20px; border-radius:25px; font-weight:800; font-size:16px; white-space:nowrap;">⭐ FREE ESL-plans</a>
             <ul class="nav-menu" id="nav-menu">
+                <li><a onclick="showTeacherCorner()">Teacher's Corner</a></li>
                 <li><a onclick="showContactsView()">Contacts</a></li>
                 <li><a onclick="showPricingView()">Pricing</a></li>
-                <li><a onclick="showPinnedView()" class="pin-nav-btn" title="Pinned lessons">📌 Pinned Lessons <span id="pin-count-badge" style="display:none"></span></a></li>
+                <li><a onclick="showPinnedView()" class="pin-nav-btn" title="Pinned lessons">📌 <span class="pin-nav-label">Pinned</span> <span id="pin-count-badge" style="display:none"></span></a></li>
                 <li><a onclick="openAuthModal()" id="nav-login-btn">Login</a></li>
                 <li class="nav-close-row"><button class="nav-close-btn" onclick="closeMobileMenu()">✕</button></li>
             </ul>
@@ -1453,6 +1529,31 @@
         <div class="terms-footer">
             <p>By purchasing you agree to our <a href="docs/terms.html" target="_blank">Terms of Service</a></p>
         </div>
+        </div>
+    </div>
+
+    <!-- TEACHER'S CORNER -->
+    <div id="teachers-corner-view" style="display:none;">
+        <div class="teachers-corner-container">
+            <div class="teachers-corner-header">
+                <h1>✏️ Teacher's Corner</h1>
+                <p>Practical advice, ideas and insights for online ESL tutors</p>
+            </div>
+            <div id="articles-grid" class="articles-grid">
+                <div class="articles-empty">No articles yet — check back soon!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ARTICLE DETAIL VIEW -->
+    <div id="article-detail-view" style="display:none;">
+        <div class="teachers-corner-container">
+            <button onclick="showTeacherCorner()" class="back-btn-oblong" style="background:#1b5e20; margin-bottom:24px;">
+                <span class="back-arrow-icon">⬅</span> Back to Teacher's Corner
+            </button>
+            <h1 id="article-detail-title" style="font-size:28px; color:#333; margin-bottom:16px;"></h1>
+            <div id="article-detail-date" style="font-size:13px; color:#aaa; margin-bottom:32px;"></div>
+            <div id="article-detail-body" style="font-size:16px; line-height:1.8; color:#444; white-space:pre-wrap;"></div>
         </div>
     </div>
 
@@ -2115,6 +2216,8 @@
             document.getElementById('contacts-view').style.display = 'none';
             document.getElementById('pinned-view').style.display = 'none';
             document.getElementById('pricing-view').style.display = 'none';
+            document.getElementById('teachers-corner-view').style.display = 'none';
+            document.getElementById('article-detail-view').style.display = 'none';
             document.getElementById('level-filter-tray').style.display = 'none';
         }
 
@@ -2356,6 +2459,59 @@
                     closeAuthModal();
                 }, 2000);
             }
+        }
+
+        // ── TEACHER'S CORNER ──
+        let articlesCache = null;
+
+        async function loadArticles() {
+            if (articlesCache) return articlesCache;
+            try {
+                const resp = await fetch('articles.js?v=' + Date.now());
+                if (!resp.ok) return [];
+                const text = await resp.text();
+                const fn = new Function(text + '\nreturn typeof articlesCatalog !== "undefined" ? articlesCatalog : [];');
+                articlesCache = fn();
+                return articlesCache;
+            } catch {
+                return [];
+            }
+        }
+
+        async function showTeacherCorner() {
+            hideAllViews();
+            document.getElementById('teachers-corner-view').style.display = 'block';
+            closeMobileMenu();
+            window.scrollTo(0, 0);
+
+            const articles = await loadArticles();
+            const grid = document.getElementById('articles-grid');
+
+            if (!articles || articles.length === 0) {
+                grid.innerHTML = '<div class="articles-empty">No articles yet — check back soon!</div>';
+                return;
+            }
+
+            grid.innerHTML = articles.map((a, i) => `
+                <div class="article-card" onclick="openArticle(${i})">
+                    <h3>${a.title}</h3>
+                    <p class="article-preview">${a.body.replace(/\n/g, ' ')}</p>
+                    <span class="read-more">Read more →</span>
+                    <div class="article-date">${a.date || ''}</div>
+                </div>
+            `).join('');
+        }
+
+        async function openArticle(index) {
+            const articles = await loadArticles();
+            const article = articles[index];
+            if (!article) return;
+            hideAllViews();
+            document.getElementById('article-detail-view').style.display = 'block';
+            document.getElementById('article-detail-title').innerText = article.title;
+            document.getElementById('article-detail-date').innerText = article.date || '';
+            document.getElementById('article-detail-body').innerText = article.body;
+            window.scrollTo(0, 0);
         }
 
         function toggleMobileMenu() {
