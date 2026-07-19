@@ -69,7 +69,7 @@ if (!fs.existsSync('articles')) fs.mkdirSync('articles');
 
 articles.forEach(article => {
     const slug = slugify(article.title);
-    const bodySafe = (article.body || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const bodySafe = article.body || '';
     const bodyMeta = (article.body || '').substring(0, 160).replace(/\n/g, ' ').replace(/"/g, '&quot;');
 
     const html = `<!DOCTYPE html>
@@ -95,7 +95,7 @@ articles.forEach(article => {
         .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif}
         h1{color:#333;font-size:28px;line-height:1.3;margin-bottom:8px}
         .meta{color:#aaa;font-size:13px;margin-bottom:32px}
-        .body{color:#444;font-size:16px;line-height:1.8;white-space:pre-wrap}
+        .body{color:#444;font-size:16px;line-height:1.8;}
         .cta{margin-top:40px;padding:24px;background:white;border-radius:16px;border-left:4px solid #c95210;text-align:center}
         .cta p{color:#555;margin-bottom:16px}
         .cta a{display:inline-block;background:#c95210;color:white;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700}
