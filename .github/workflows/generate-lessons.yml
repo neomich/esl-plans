@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'lessons.js'
+      - 'articles.js'
 
 jobs:
   generate:
@@ -19,7 +20,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Generate lesson pages and sitemap
+      - name: Generate lesson and article pages
         run: node generate-lessons.js
 
       - name: Commit and push generated files
@@ -27,5 +28,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate lesson pages [skip ci]"
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate pages [skip ci]"
           git push
