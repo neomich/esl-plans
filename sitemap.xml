@@ -347,5 +347,10 @@
         <priority>0.8</priority>
         <lastmod>2026-07-19</lastmod>
     </url>
-
+    <url>
+        <loc>https://esl-plans.com/articles/how-to-teach-adult-esl-learners-what-actually-works</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <lastmod>2026-07-19</lastmod>
+    </url>
 </urlset>
