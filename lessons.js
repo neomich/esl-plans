@@ -22,7 +22,7 @@ const lessonsCatalog = [
         "level": "a2-b1",
         "levelLabel": "A2-B1",
         "duration": "90 min",
-        "visualSource": "images/a2_number_7",
+        "visualSource": "images/a2_number_7.jpg",
         "keywords": "the magical number 7 grammar society psychology a2-b1",
         "objectives": [
             "explore the cognitive principle of Miller’s Law (the “magical number 7 ± 2”) and how chunking enhances memory capacity;",
