@@ -184,7 +184,14 @@
         <input type="password" id="github-token-input" placeholder="ghp_xxxxxxxxxxxx" oninput="saveToken()">
     </div>
 
-    <h1 style="font-size:24px; font-weight:800; color:#333; margin-bottom:24px;">➕ Add New Lesson</h1>
+    <!-- TAB SWITCHER -->
+    <div style="display:flex; gap:12px; margin-bottom:28px;">
+        <button id="tab-lessons-btn" onclick="switchAdminTab('lessons')" style="flex:1; padding:14px; border-radius:12px; border:2px solid #c95210; background:#c95210; color:white; font-size:16px; font-weight:700; cursor:pointer;">📚 Add Lesson</button>
+        <button id="tab-articles-btn" onclick="switchAdminTab('articles')" style="flex:1; padding:14px; border-radius:12px; border:2px solid #c95210; background:white; color:#c95210; font-size:16px; font-weight:700; cursor:pointer;">✏️ Add Article</button>
+    </div>
+
+    <!-- LESSONS PANEL -->
+    <div id="lessons-panel">
 
     <!-- BASIC INFO -->
     <div class="card">
@@ -335,6 +342,33 @@
         <pre id="preview-area"></pre>
     </div>
 
+    </div> <!-- end lessons-panel -->
+
+    <!-- ARTICLES PANEL -->
+    <div id="articles-panel" style="display:none;">
+        <h1 style="font-size:24px; font-weight:800; color:#333; margin-bottom:24px;">✏️ Add New Article</h1>
+
+        <div class="card">
+            <div class="section-title">Article Details</div>
+            <div class="form-row">
+                <label>Title</label>
+                <input type="text" id="a-title" placeholder="e.g. How to Keep Adult ESL Learners Engaged">
+            </div>
+            <div class="form-row">
+                <label>Article Text</label>
+                <textarea id="a-body" style="min-height:400px; font-size:15px; line-height:1.7;" placeholder="Write your article here...&#10;&#10;You can use multiple paragraphs.&#10;&#10;Each paragraph will be displayed as written."></textarea>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Publish</div>
+            <div class="submit-area">
+                <button class="btn-submit" id="article-submit-btn" onclick="submitArticle()">✏️ Publish Article</button>
+            </div>
+            <div class="status-msg" id="article-status-msg"></div>
+        </div>
+    </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -395,6 +429,105 @@
             adminLogin();
         }
     });
+
+    // ── TAB SWITCHING ──
+    function switchAdminTab(tab) {
+        const lessonsPanel = document.getElementById('lessons-panel');
+        const articlesPanel = document.getElementById('articles-panel');
+        const lessonsBtn = document.getElementById('tab-lessons-btn');
+        const articlesBtn = document.getElementById('tab-articles-btn');
+
+        if (tab === 'lessons') {
+            lessonsPanel.style.display = 'block';
+            articlesPanel.style.display = 'none';
+            lessonsBtn.style.background = '#c95210';
+            lessonsBtn.style.color = 'white';
+            articlesBtn.style.background = 'white';
+            articlesBtn.style.color = '#c95210';
+        } else {
+            lessonsPanel.style.display = 'none';
+            articlesPanel.style.display = 'block';
+            articlesBtn.style.background = '#c95210';
+            articlesBtn.style.color = 'white';
+            lessonsBtn.style.background = 'white';
+            lessonsBtn.style.color = '#c95210';
+        }
+    }
+
+    // ── ARTICLE SUBMISSION ──
+    async function submitArticle() {
+        const token = localStorage.getItem('gh_token');
+        if (!token) {
+            showArticleStatus('Please enter your GitHub token first', 'error');
+            return;
+        }
+
+        const title = document.getElementById('a-title').value.trim();
+        const body = document.getElementById('a-body').value.trim();
+
+        if (!title) { showArticleStatus('Please enter a title', 'error'); return; }
+        if (!body) { showArticleStatus('Please write the article text', 'error'); return; }
+
+        const btn = document.getElementById('article-submit-btn');
+        btn.disabled = true;
+        btn.innerText = 'Publishing...';
+
+        const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+        try {
+            // Get current articles.js
+            const getResp = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/articles.js`, {
+                headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+            });
+            const fileData = await getResp.json();
+            const sha = fileData.sha;
+            const currentContent = new TextDecoder('utf-8').decode(
+                Uint8Array.from(atob(fileData.content.replace(/\n/g, '')), c => c.charCodeAt(0))
+            );
+
+            const article = { title, body, date: today };
+            const articleStr = '    ' + JSON.stringify(article, null, 4).replace(/\n/g, '\n    ') + ',\n\n';
+
+            const insertPoint = currentContent.indexOf('const articlesCatalog = [') + 'const articlesCatalog = ['.length;
+            const newContent = currentContent.slice(0, insertPoint) + '\n\n' + articleStr + currentContent.slice(insertPoint);
+
+            const pushResp = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/articles.js`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: `Add article: ${title}`,
+                    content: btoa(String.fromCharCode(...new TextEncoder().encode(newContent))),
+                    sha: sha
+                })
+            });
+
+            if (pushResp.ok) {
+                showArticleStatus(`✅ "${title}" published! Live in ~1 minute.`, 'success');
+                document.getElementById('a-title').value = '';
+                document.getElementById('a-body').value = '';
+            } else {
+                const err = await pushResp.json();
+                showArticleStatus(`GitHub error: ${err.message}`, 'error');
+            }
+        } catch (err) {
+            showArticleStatus(`Error: ${err.message}`, 'error');
+        }
+
+        btn.disabled = false;
+        btn.innerText = '✏️ Publish Article';
+    }
+
+    function showArticleStatus(msg, type) {
+        const el = document.getElementById('article-status-msg');
+        el.innerText = msg;
+        el.className = `status-msg ${type}`;
+        el.style.display = 'block';
+        setTimeout(() => el.style.display = 'none', 8000);
+    }
 
     // ── GITHUB TOKEN ──
     function saveToken() {
