@@ -1,5 +1,5 @@
 // ============================================================
-//  ESLplans — Lesson Catalog 
+//  ESLplans — Lesson Catalog
 //  Add new lessons here. Never touch index.html for content.
 // ============================================================
 
