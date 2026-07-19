@@ -154,6 +154,65 @@
             border: 1px solid #fcd34d; border-radius: 8px; font-size: 13px;
             background: white; outline: none;
         }
+        /* ── RICH TEXT EDITOR ── */
+        .editor-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            align-items: center;
+            background: #f8f8f8;
+            border: 1.5px solid #e0e0e0;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            padding: 8px 10px;
+        }
+        .editor-toolbar button {
+            background: white;
+            border: 1.5px solid #ddd;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #333;
+            transition: all 0.15s;
+            line-height: 1.4;
+        }
+        .editor-toolbar button:hover {
+            background: #c95210;
+            color: white;
+            border-color: #c95210;
+        }
+        .toolbar-sep {
+            width: 1px;
+            height: 24px;
+            background: #ddd;
+            margin: 0 4px;
+        }
+        .editor-body {
+            min-height: 400px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 0 0 10px 10px;
+            padding: 16px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+            outline: none;
+            background: white;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .editor-body:focus {
+            border-color: #c95210;
+        }
+        .editor-body[placeholder]:empty::before {
+            content: attr(placeholder);
+            color: #aaa;
+            pointer-events: none;
+        }
+        .editor-body h2 { font-size: 20px; color: #c95210; margin: 16px 0 8px; }
+        .editor-body h3 { font-size: 17px; color: #555; margin: 14px 0 6px; }
+        .editor-body p { margin: 0 0 12px; }
+        .editor-body ul, .editor-body ol { padding-left: 24px; margin: 8px 0; }
+        .editor-body li { margin-bottom: 4px; }
     </style>
 </head>
 <body>
@@ -356,7 +415,34 @@
             </div>
             <div class="form-row">
                 <label>Article Text</label>
-                <textarea id="a-body" style="min-height:400px; font-size:15px; line-height:1.7;" placeholder="Write your article here...&#10;&#10;You can use multiple paragraphs.&#10;&#10;Each paragraph will be displayed as written."></textarea>
+
+                <!-- Toolbar -->
+                <div class="editor-toolbar">
+                    <button type="button" onclick="fmt('bold')" title="Bold"><b>B</b></button>
+                    <button type="button" onclick="fmt('italic')" title="Italic"><i>I</i></button>
+                    <button type="button" onclick="fmt('underline')" title="Underline"><u>U</u></button>
+                    <div class="toolbar-sep"></div>
+                    <button type="button" onclick="fmtBlock('h2')" title="Heading">H2</button>
+                    <button type="button" onclick="fmtBlock('h3')" title="Subheading">H3</button>
+                    <button type="button" onclick="fmtBlock('p')" title="Paragraph">¶</button>
+                    <div class="toolbar-sep"></div>
+                    <button type="button" onclick="fmt('insertUnorderedList')" title="Bullet list">• List</button>
+                    <button type="button" onclick="fmt('insertOrderedList')" title="Numbered list">1. List</button>
+                    <div class="toolbar-sep"></div>
+                    <select onchange="fmtSize(this.value); this.value=''" style="padding:4px 8px; border:1.5px solid #ddd; border-radius:6px; font-size:13px; cursor:pointer;">
+                        <option value="">Font size</option>
+                        <option value="2">Small</option>
+                        <option value="3">Normal</option>
+                        <option value="4">Large</option>
+                        <option value="5">X-Large</option>
+                    </select>
+                </div>
+
+                <!-- Editable div instead of textarea -->
+                <div id="a-body"
+                    contenteditable="true"
+                    class="editor-body"
+                    placeholder="Write your article here..."></div>
             </div>
         </div>
 
@@ -430,6 +516,21 @@
         }
     });
 
+    // ── RICH TEXT EDITOR ──
+    function fmt(cmd) {
+        document.getElementById('a-body').focus();
+        document.execCommand(cmd, false, null);
+    }
+    function fmtBlock(tag) {
+        document.getElementById('a-body').focus();
+        document.execCommand('formatBlock', false, tag);
+    }
+    function fmtSize(size) {
+        if (!size) return;
+        document.getElementById('a-body').focus();
+        document.execCommand('fontSize', false, size);
+    }
+
     // ── TAB SWITCHING ──
     function switchAdminTab(tab) {
         const lessonsPanel = document.getElementById('lessons-panel');
@@ -463,7 +564,7 @@
         }
 
         const title = document.getElementById('a-title').value.trim();
-        const body = document.getElementById('a-body').value.trim();
+        const body = document.getElementById('a-body').innerHTML.trim();
 
         if (!title) { showArticleStatus('Please enter a title', 'error'); return; }
         if (!body) { showArticleStatus('Please write the article text', 'error'); return; }
@@ -508,7 +609,7 @@
             if (pushResp.ok) {
                 showArticleStatus(`✅ "${title}" published! Live in ~1 minute.`, 'success');
                 document.getElementById('a-title').value = '';
-                document.getElementById('a-body').value = '';
+                document.getElementById('a-body').innerHTML = '';
             } else {
                 const err = await pushResp.json();
                 showArticleStatus(`GitHub error: ${err.message}`, 'error');
