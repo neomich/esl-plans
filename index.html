@@ -57,6 +57,19 @@
     </script>
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c95210'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>ESL</text></svg>">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type":"Question","name":"What are ESL-plans.com lesson plans?","acceptedAnswer":{"@type":"Answer","text":"ESL-plans.com offers ready-made, zero-prep conversation-driven ESL lesson plans specifically designed for online tutors working with adult learners at B1, B2 and C1 levels. Each plan includes a PDF handout, audio materials and video links on engaging topics like psychology, technology, society and business English."}},
+            {"@type":"Question","name":"Are the ESL lesson plans suitable for adult learners?","acceptedAnswer":{"@type":"Answer","text":"Yes, all lesson plans on ESL-plans.com are specifically designed for adult learners. Topics reflect adult interests — psychology, workplace culture, current affairs, technology and society — rather than standard textbook scenarios."}},
+            {"@type":"Question","name":"What levels do the ESL lesson plans cover?","acceptedAnswer":{"@type":"Answer","text":"ESL-plans.com covers A2, B1, B2 and C1 levels according to the CEFR. Most plans target B1-B2 and B2-C1 adult learners."}},
+            {"@type":"Question","name":"Do the lesson plans include audio and video materials?","acceptedAnswer":{"@type":"Answer","text":"Yes, most lesson plans include a PDF handout, audio MP3 files, and curated YouTube video links. The full package is downloadable as a RAR file."}},
+            {"@type":"Question","name":"How much do ESL-plans.com lesson plans cost?","acceptedAnswer":{"@type":"Answer","text":"ESL-plans.com offers free lesson plans and two paid tiers. Contributor costs $19/month. Friend costs $99/year and includes mentorship and private community access."}}
+        ]
+    }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -1708,9 +1721,9 @@
             <div class="bio-text-col">
                 <p>Hi there, I'm <strong>Alex!</strong> Back when I was a student, a teacher of mine used to scribble on the board: <em>"Learn without learning!"</em> It completely flipped my perspective on education. I followed in those footsteps and became an English tutor myself — until I thought, why not turn the tables? <em>"Teach without teaching!"</em> I've spent the last <strong>15 years</strong> "not teaching" and having a blast instead. The truth is, if you're actually having fun in class, there's always going to be a room full of smiling faces waiting for you.</p>
 
-                <p>Sure, I've slogged through all the textbooks we love to hate, but it didn't take long to realize you don't need to be a disciple of <em>Spotlight</em> or <em>English File.</em> Instead, I build my own unique ESL plans filled with <strong>original topics</strong> and a healthy spoonful of <strong>weirdness and quirks!</strong> Love it or hate it, that's my style.</p>
+                <p>I specialise in teaching <strong>adult learners online</strong> — professionals, executives, and curious minds aged 25-55 who want real conversations, not textbook drills. My students have ranged from Russian IT engineers to French marketing directors to Brazilian entrepreneurs. What they all have in common: they're smart, busy, and bored of <em>Spotlight</em> and <em>English File.</em> So I build my own unique <strong>ESL lesson plans for adults</strong> filled with original topics and a healthy spoonful of weirdness and quirks. Love it or hate it, that's my style.</p>
 
-                <p>My goal is to help you <strong>break out of that rigid tutor routine</strong> and inspire you to create your own worlds. Our profession offers unmatched freedom and the chance to build genuine bonds with our students — no, wait, I call them <strong><em>"friends!"</em></strong></p>
+                <p><strong>My goal is to help online ESL tutors break out of that rigid routine</strong> and inspire them to create their own worlds. Our profession offers unmatched freedom and the chance to build genuine bonds with our students — no, wait, I call them <strong><em>"friends!"</em></strong></p>
 
                 <p>Please consider <strong>subscribing to the ESL-plans library</strong> and joining our community channels! I'm a one-man band, and since each plan takes me up to <strong>6 hours</strong> to craft, your support gives me the time I need to keep creating these resources!</p>
             </div>
@@ -1744,7 +1757,7 @@
 
     <div id="hero-banner-view" class="hero-banner-container">
         <h2>Zero-prep, conversation-driven lesson plans for online ESL tutors!</h2>
-        <p class="hero-seo-text">A growing library of ready-made <strong>ESL lesson plans for adults</strong> — designed for online tutors who want engaging, conversation-driven classes. Every plan includes a <strong>PDF handout</strong>, audio materials and video links covering psychology, business English, technology, society and more. Ideal for <strong>B1, B2 and C1</strong> levels.</p>
+        <p class="hero-seo-text">A growing library of ready-made <strong>ESL lesson plans for adult learners</strong> — built for online tutors who are tired of textbooks. Every plan covers a topic adults genuinely care about: psychology, workplace culture, technology, society and more. Includes <strong>PDF handout, audio and video</strong>. Designed for <strong>B1, B2 and C1</strong> levels. Zero prep. Just download and teach.</p>
         <div class="topic-scroll-wrapper">
             <div class="topic-scroll-track" id="topic-scroll-track">
                 <button class="topic-pill active" onclick="applyTopicFilter('all', this)">All Lessons</button>
@@ -2737,7 +2750,9 @@
             document.getElementById('article-detail-view').style.display = 'block';
             document.getElementById('article-detail-title').innerText = article.title;
             document.getElementById('article-detail-date').innerText = article.date || '';
-            document.getElementById('article-detail-body').innerHTML = article.body;
+            // Show direct answer intro if present
+            const intro = article.intro ? `<p style="font-style:italic; color:#666; border-left:3px solid #c95210; padding-left:14px; margin-bottom:24px; line-height:1.7;">${article.intro}</p>` : '';
+            document.getElementById('article-detail-body').innerHTML = intro + article.body;
             window.scrollTo(0, 0);
         }
 
