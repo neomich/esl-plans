@@ -601,7 +601,12 @@
                 },
                 body: JSON.stringify({
                     message: `Add article: ${title}`,
-                    content: btoa(String.fromCharCode(...new TextEncoder().encode(newContent))),
+                    content: (function(str) {
+                        const bytes = new TextEncoder().encode(str);
+                        let binary = '';
+                        for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+                        return btoa(binary);
+                    })(newContent),
                     sha: sha
                 })
             });
@@ -882,7 +887,12 @@
                 },
                 body: JSON.stringify({
                     message: `Add lesson: ${lesson.title}`,
-                    content: btoa(String.fromCharCode(...new TextEncoder().encode(newContent))),
+                    content: (function(str) {
+                        const bytes = new TextEncoder().encode(str);
+                        let binary = '';
+                        for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+                        return btoa(binary);
+                    })(newContent),
                     sha: sha
                 })
             });
