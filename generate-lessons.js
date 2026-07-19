@@ -43,7 +43,7 @@ lessons.forEach(lesson => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${lesson.title} — ESL Lesson Plan | ESL-plans.com</title>
     <meta name="description" content="${descMeta}">
-    <meta name="keywords" content="${(lesson.keywords||'')}, ESL lesson plan, English lesson plan, ${lesson.levelLabel} English">
+    <meta name="keywords" content="${(lesson.keywords||'')}, ESL lesson plan for adults, adult English lesson plan, online ESL tutor resources, ${lesson.levelLabel} ESL adults, conversation ESL lesson">
     <link rel="canonical" href="https://esl-plans.com/lessons/${slug}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://esl-plans.com/lessons/${slug}">
@@ -51,6 +51,7 @@ lessons.forEach(lesson => {
     <meta property="og:description" content="${descMeta}">
     <meta property="og:site_name" content="ESL-plans.com">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${lesson.title.replace(/"/g,'\\"')}","description":"${descMeta.replace(/"/g,'\\"')}","provider":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"educationalLevel":"${lesson.levelLabel}","inLanguage":"en","url":"https://esl-plans.com/lessons/${slug}"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${lesson.title} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson plan is designed for ${lesson.levelLabel} level adult learners. It takes approximately ${lesson.duration} to complete."}},{"@type":"Question","name":"What materials are included in the ${lesson.title} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson includes a PDF handout${lesson.audioUrl ? ', audio materials' : ''}${lesson.links && lesson.links.length > 0 ? ', and video links' : ''}. The full package is available as a downloadable RAR file."}},{"@type":"Question","name":"Is the ${lesson.title} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${lesson.title} lesson is specifically designed for online ESL tutors working with adult learners. It is zero-prep and conversation-driven, requiring no additional preparation beyond downloading the materials."}}]}</script>
     <style>body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}.container{max-width:800px;margin:0 auto;padding:40px 20px}h1{color:#c95210;font-size:28px;margin-bottom:8px}.meta{color:#888;font-size:14px;margin-bottom:24px}h2{color:#333;font-size:18px;margin:24px 0 12px}ul{color:#444;line-height:1.8;padding-left:20px}.desc{color:#444;line-height:1.7;white-space:pre-line}.back{display:inline-block;margin-top:30px;color:#c95210;text-decoration:none;font-weight:600}</style>
     <script>setTimeout(function(){ window.location.href='https://esl-plans.com/#lesson-${slug}'; }, 500);</script>
 </head>
@@ -106,6 +107,7 @@ articles.forEach(article => {
     <meta property="og:description" content="${bodyMeta}">
     <meta property="og:site_name" content="ESL-plans.com">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${article.title.replace(/"/g,'\\"')}","description":"${bodyMeta.replace(/"/g,'\\"')}","author":{"@type":"Person","name":"Alex Selivanov"},"publisher":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"datePublished":"${article.date||''}","url":"https://esl-plans.com/articles/${slug}"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"${article.title.replace(/"/g,'\\"')}","acceptedAnswer":{"@type":"Answer","text":"${bodyMeta.replace(/"/g,'\\"')}"}}]}</script>
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:760px;margin:0 auto;padding:40px 20px}
