@@ -814,6 +814,59 @@
 
         #dynamic-sidebar-card .view-btn { display: none; }
 
+        /* ── RELATED LESSONS ── */
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        @media (max-width: 600px) {
+            .related-grid { grid-template-columns: 1fr; }
+        }
+        .related-card {
+            background: #f9f9f9;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #eee;
+        }
+        .related-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .related-card-img {
+            height: 90px;
+            background-size: cover;
+            background-position: center;
+            background-color: #ddd;
+        }
+        .related-card-body {
+            padding: 10px 12px 12px;
+        }
+        .related-card-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        .related-card-meta {
+            font-size: 11px;
+            color: #aaa;
+        }
+        .related-card-btn {
+            display: block;
+            text-align: center;
+            background: #c95210;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px;
+            margin-top: 8px;
+            border-radius: 6px;
+        }
+
         /* ── TEACHER'S CORNER ── */
         .teachers-corner-container {
             max-width: 1200px;
@@ -1738,6 +1791,12 @@
                 <div class="media-section">
                     <div id="dynamic-media-section"></div>
                 </div>
+
+                <!-- YOU MAY ALSO LIKE -->
+                <div id="related-lessons-section" style="margin-top:32px; border-top:1px dashed #ddd; padding-top:28px; display:none;">
+                    <h3 style="font-size:16px; font-weight:700; color:#888; text-transform:uppercase; letter-spacing:1px; margin-bottom:16px;">You may also like</h3>
+                    <div id="related-lessons-grid" class="related-grid"></div>
+                </div>
             </div>
 
         </div>
@@ -2245,6 +2304,7 @@
             hideAllViews();
             document.getElementById('lesson-detail-view').style.display = 'grid';
             updatePinButton();
+            renderRelatedLessons(index);
             window.scrollTo(0, 0);
         }
 
@@ -2498,6 +2558,48 @@
                     closeAuthModal();
                 }, 2000);
             }
+        }
+
+        // ── RELATED LESSONS ──
+        function renderRelatedLessons(currentIndex) {
+            const current = lessonsCatalog[currentIndex];
+            if (!current || !current.topics || current.topics.length === 0) return;
+
+            // Find lessons sharing at least one topic, excluding current
+            const related = lessonsCatalog
+                .map((lesson, idx) => ({ lesson, idx }))
+                .filter(({ lesson, idx }) => {
+                    if (idx === currentIndex) return false;
+                    if (!lesson.topics) return false;
+                    return lesson.topics.some(t => current.topics.includes(t));
+                });
+
+            if (related.length === 0) {
+                document.getElementById('related-lessons-section').style.display = 'none';
+                return;
+            }
+
+            // Shuffle and pick 3
+            const shuffled = related.sort(() => Math.random() - 0.5).slice(0, 3);
+
+            const grid = document.getElementById('related-lessons-grid');
+            grid.innerHTML = shuffled.map(({ lesson, idx }) => `
+                <div class="related-card" onclick="initiateDetailViewByIndex(${idx})">
+                    <div class="related-card-img" id="related-img-${idx}"></div>
+                    <div class="related-card-body">
+                        <div class="related-card-title">${lesson.title}</div>
+                        <div class="related-card-meta">${lesson.levelLabel} · ${lesson.duration}</div>
+                        <span class="related-card-btn">View Lesson</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Load images with fallback
+            shuffled.forEach(({ lesson, idx }) => {
+                setImageWithFallback(document.getElementById(`related-img-${idx}`), lesson.visualSource);
+            });
+
+            document.getElementById('related-lessons-section').style.display = 'block';
         }
 
         // ── TEACHER'S CORNER ──
