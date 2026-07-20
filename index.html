@@ -2185,30 +2185,23 @@
             // Reset all buttons first
             [guestBtn, contBtn, friendBtn].forEach(b => b.classList.remove('subscribed'));
 
+            // Contributor and Friend are Coming Soon — always show this regardless of login state
+            contBtn.innerText = '🕐 Coming Soon!';
+            contBtn.style.cssText = 'cursor:default; background:white; border:2px solid #e03131; color:#e03131; font-weight:800;';
+            friendBtn.innerText = '🕐 Coming Soon!';
+            friendBtn.style.cssText = 'cursor:default; background:white; border:2px solid #e03131; color:#e03131; font-weight:800;';
+
             if (!currentUser) {
-                // Not logged in
                 guestBtn.innerText = 'Join the Community';
-                contBtn.innerText = 'Start Teaching';
-                friendBtn.innerText = 'Get Full Access';
             } else if (tier === 'free' || tier === null) {
-                // Logged in as guest
                 guestBtn.innerText = '✅ You\'re In!';
                 guestBtn.classList.add('subscribed');
-                contBtn.innerText = 'Start Teaching';
-                friendBtn.innerText = 'Get Full Access';
             } else if (tier === 'contributor') {
                 guestBtn.innerText = '✅ You\'re In!';
                 guestBtn.classList.add('subscribed');
-                contBtn.innerText = profile && profile.expires_at ? formatExpiry(profile.expires_at) : '✅ Active Plan';
-                contBtn.classList.add('subscribed');
-                friendBtn.innerText = 'Upgrade to Friend';
             } else if (tier === 'friend') {
                 guestBtn.innerText = '✅ You\'re In!';
                 guestBtn.classList.add('subscribed');
-                contBtn.innerText = '✅ Included';
-                contBtn.classList.add('subscribed');
-                friendBtn.innerText = profile && profile.expires_at ? formatExpiry(profile.expires_at) : '✅ Active Plan';
-                friendBtn.classList.add('subscribed');
             }
         }
 
