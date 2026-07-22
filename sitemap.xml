@@ -347,5 +347,28 @@
         <priority>0.8</priority>
         <lastmod>2026-07-22</lastmod>
     </url>
-
+    <url>
+        <loc>https://esl-plans.com/articles/teaching-adults-vs-young-learners-whats-the-difference</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <lastmod>2026-07-22</lastmod>
+    </url>
+    <url>
+        <loc>https://esl-plans.com/articles/how-to-make-business-english-lessons-actually-interesting</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <lastmod>2026-07-22</lastmod>
+    </url>
+    <url>
+        <loc>https://esl-plans.com/articles/teaching-b2-c1-adults-online-8-things-ive-learned-the-hard-way</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <lastmod>2026-07-22</lastmod>
+    </url>
+    <url>
+        <loc>https://esl-plans.com/articles/how-to-teach-adult-esl-learners-what-actually-works</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <lastmod>2026-07-22</lastmod>
+    </url>
 </urlset>
