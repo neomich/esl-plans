@@ -405,22 +405,30 @@
 
     <!-- ARTICLES PANEL -->
     <div id="articles-panel" style="display:none;">
-        <h1 style="font-size:24px; font-weight:800; color:#333; margin-bottom:24px;">✏️ Add New Article</h1>
+        <h1 style="font-size:24px; font-weight:800; color:#333; margin-bottom:24px;">✏️ Articles</h1>
 
+        <!-- Published articles list -->
+        <div class="card" id="published-articles-card">
+            <div class="section-title">Published Articles</div>
+            <div id="published-articles-list" style="margin-top:8px;">
+                <p style="color:#aaa; font-size:14px;">Loading...</p>
+            </div>
+        </div>
+
+        <!-- Article form -->
         <div class="card">
-            <div class="section-title">Article Details</div>
+            <div class="section-title" id="article-form-title">New Article</div>
+            <input type="hidden" id="a-edit-index" value="-1">
             <div class="form-row">
                 <label>Title</label>
                 <input type="text" id="a-title" placeholder="e.g. How to Keep Adult ESL Learners Engaged">
             </div>
             <div class="form-row">
-                <label>Direct Answer (shown in italics at top — 40-60 words, answers the core question)</label>
+                <label>Direct Answer (shown in italics at top — 40-60 words)</label>
                 <textarea id="a-intro" style="min-height:80px; font-size:14px; font-style:italic;" placeholder="How do you keep adult ESL learners engaged? The most effective method is..."></textarea>
             </div>
             <div class="form-row">
                 <label>Article Text</label>
-
-                <!-- Toolbar -->
                 <div class="editor-toolbar">
                     <button type="button" onclick="fmt('bold')" title="Bold"><b>B</b></button>
                     <button type="button" onclick="fmt('italic')" title="Italic"><i>I</i></button>
@@ -433,6 +441,8 @@
                     <button type="button" onclick="fmt('insertUnorderedList')" title="Bullet list">• List</button>
                     <button type="button" onclick="fmt('insertOrderedList')" title="Numbered list">1. List</button>
                     <div class="toolbar-sep"></div>
+                    <button type="button" onclick="insertLink()" title="Insert link">🔗 Link</button>
+                    <div class="toolbar-sep"></div>
                     <select onchange="fmtSize(this.value); this.value=''" style="padding:4px 8px; border:1.5px solid #ddd; border-radius:6px; font-size:13px; cursor:pointer;">
                         <option value="">Font size</option>
                         <option value="2">Small</option>
@@ -441,19 +451,15 @@
                         <option value="5">X-Large</option>
                     </select>
                 </div>
-
-                <!-- Editable div instead of textarea -->
-                <div id="a-body"
-                    contenteditable="true"
-                    class="editor-body"
-                    placeholder="Write your article here..."></div>
+                <div id="a-body" contenteditable="true" class="editor-body" placeholder="Write your article here..."></div>
             </div>
         </div>
 
         <div class="card">
             <div class="section-title">Publish</div>
-            <div class="submit-area">
-                <button class="btn-submit" id="article-submit-btn" onclick="submitArticle()">✏️ Publish Article</button>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <button class="btn-preview" onclick="cancelEdit()" id="cancel-edit-btn" style="display:none; flex:1;">✕ Cancel Edit</button>
+                <button class="btn-submit" id="article-submit-btn" onclick="submitArticle()" style="flex:2;">✏️ Publish Article</button>
             </div>
             <div class="status-msg" id="article-status-msg"></div>
         </div>
@@ -534,6 +540,72 @@
         document.getElementById('a-body').focus();
         document.execCommand('fontSize', false, size);
     }
+    function insertLink() {
+        const url = prompt('Enter URL (include https://):');
+        if (!url) return;
+        const text = prompt('Enter link text:');
+        if (!text) return;
+        document.getElementById('a-body').focus();
+        document.execCommand('insertHTML', false, `<a href="${url}" target="_blank">${text}</a>`);
+    }
+
+    // ── LOAD PUBLISHED ARTICLES ──
+    async function loadPublishedArticles() {
+        const token = localStorage.getItem('gh_token');
+        if (!token) return;
+        try {
+            const getResp = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/articles.js`, {
+                headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+            });
+            const fileData = await getResp.json();
+            const currentContent = new TextDecoder('utf-8').decode(
+                Uint8Array.from(atob(fileData.content.replace(/\n/g, '')), c => c.charCodeAt(0))
+            );
+            const fn = new Function(currentContent.replace('const articlesCatalog', 'var articlesCatalog') + '\nreturn articlesCatalog;');
+            const articles = fn();
+            const list = document.getElementById('published-articles-list');
+            if (!articles || articles.length === 0) {
+                list.innerHTML = '<p style="color:#aaa; font-size:14px;">No articles yet.</p>';
+                return;
+            }
+            list.innerHTML = articles.map((a, i) => `
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-bottom:1px solid #f0f0f0;">
+                    <div>
+                        <div style="font-size:15px; font-weight:600; color:#333;">${a.title}</div>
+                        <div style="font-size:12px; color:#aaa;">${a.date || ''}</div>
+                    </div>
+                    <button onclick="editArticle(${i})" style="background:#c95210; color:white; border:none; border-radius:8px; padding:8px 14px; cursor:pointer; font-size:13px; font-weight:600;">✏️ Edit</button>
+                </div>
+            `).join('');
+            // Store articles for editing
+            window._loadedArticles = articles;
+        } catch(e) {
+            document.getElementById('published-articles-list').innerHTML = '<p style="color:#e03131; font-size:14px;">Could not load articles.</p>';
+        }
+    }
+
+    function editArticle(index) {
+        const article = window._loadedArticles[index];
+        if (!article) return;
+        document.getElementById('a-edit-index').value = index;
+        document.getElementById('a-title').value = article.title;
+        document.getElementById('a-intro').value = article.intro || '';
+        document.getElementById('a-body').innerHTML = article.body || '';
+        document.getElementById('article-form-title').innerText = '✏️ Editing: ' + article.title;
+        document.getElementById('cancel-edit-btn').style.display = 'block';
+        document.getElementById('article-submit-btn').innerText = '💾 Save Changes';
+        document.getElementById('a-title').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function cancelEdit() {
+        document.getElementById('a-edit-index').value = '-1';
+        document.getElementById('a-title').value = '';
+        document.getElementById('a-intro').value = '';
+        document.getElementById('a-body').innerHTML = '';
+        document.getElementById('article-form-title').innerText = 'New Article';
+        document.getElementById('cancel-edit-btn').style.display = 'none';
+        document.getElementById('article-submit-btn').innerText = '✏️ Publish Article';
+    }
 
     // ── TAB SWITCHING ──
     function switchAdminTab(tab) {
@@ -556,6 +628,7 @@
             articlesBtn.style.color = 'white';
             lessonsBtn.style.background = 'white';
             lessonsBtn.style.color = '#c95210';
+            loadPublishedArticles();
         }
     }
 
@@ -570,16 +643,16 @@
         const title = document.getElementById('a-title').value.trim();
         const intro = document.getElementById('a-intro').value.trim();
         const body = document.getElementById('a-body').innerHTML.trim();
+        const editIndex = parseInt(document.getElementById('a-edit-index').value);
 
         if (!title) { showArticleStatus('Please enter a title', 'error'); return; }
         if (!body) { showArticleStatus('Please write the article text', 'error'); return; }
 
         const btn = document.getElementById('article-submit-btn');
         btn.disabled = true;
-        btn.innerText = 'Publishing...';
+        btn.innerText = editIndex >= 0 ? 'Saving...' : 'Publishing...';
 
         const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-        const article = { title, intro, body, date: today };
 
         try {
             // Get current articles.js
@@ -592,10 +665,26 @@
                 Uint8Array.from(atob(fileData.content.replace(/\n/g, '')), c => c.charCodeAt(0))
             );
 
-            const articleStr = '    ' + JSON.stringify(article, null, 4).replace(/\n/g, '\n    ') + ',\n\n';
+            // Get existing articles
+            const fn = new Function(currentContent.replace('const articlesCatalog', 'var articlesCatalog') + '\nreturn articlesCatalog;');
+            const articles = fn();
 
-            const insertPoint = currentContent.indexOf('const articlesCatalog = [') + 'const articlesCatalog = ['.length;
-            const newContent = currentContent.slice(0, insertPoint) + '\n\n' + articleStr + currentContent.slice(insertPoint);
+            let newContent;
+
+            if (editIndex >= 0) {
+                // EDIT mode — replace existing article, keep original date
+                articles[editIndex] = { title, intro, body, date: articles[editIndex].date || today };
+                const header = '// ============================================================\n//  ESL-plans — Articles Catalog (Teacher\'s Corner)\n//  Add new articles via the Admin panel\n// ============================================================\n\nconst articlesCatalog = [\n\n';
+                const footer = '\n];\n';
+                const articlesStr = articles.map(a => '    ' + JSON.stringify(a, null, 4).replace(/\n/g, '\n    ') + ',').join('\n\n');
+                newContent = header + articlesStr + footer;
+            } else {
+                // NEW article — prepend to top
+                const article = { title, intro, body, date: today };
+                const articleStr = '    ' + JSON.stringify(article, null, 4).replace(/\n/g, '\n    ') + ',\n\n';
+                const insertPoint = currentContent.indexOf('const articlesCatalog = [') + 'const articlesCatalog = ['.length;
+                newContent = currentContent.slice(0, insertPoint) + '\n\n' + articleStr + currentContent.slice(insertPoint);
+            }
 
             const pushResp = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/articles.js`, {
                 method: 'PUT',
@@ -605,7 +694,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    message: `Add article: ${title}`,
+                    message: editIndex >= 0 ? `Edit article: ${title}` : `Add article: ${title}`,
                     content: (function(str) {
                         const bytes = new TextEncoder().encode(str);
                         let binary = '';
@@ -617,10 +706,9 @@
             });
 
             if (pushResp.ok) {
-                showArticleStatus(`✅ "${title}" published! Live in ~1 minute.`, 'success');
-                document.getElementById('a-title').value = '';
-                document.getElementById('a-intro').value = '';
-                document.getElementById('a-body').innerHTML = '';
+                showArticleStatus(editIndex >= 0 ? `✅ "${title}" updated! Live in ~1 minute.` : `✅ "${title}" published! Live in ~1 minute.`, 'success');
+                cancelEdit();
+                loadPublishedArticles();
             } else {
                 const err = await pushResp.json();
                 showArticleStatus(`GitHub error: ${err.message}`, 'error');
@@ -630,7 +718,7 @@
         }
 
         btn.disabled = false;
-        btn.innerText = '✏️ Publish Article';
+        btn.innerText = editIndex >= 0 ? '💾 Save Changes' : '✏️ Publish Article';
     }
 
     function showArticleStatus(msg, type) {
