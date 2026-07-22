@@ -2691,15 +2691,20 @@
         let articlesCache = null;
 
         async function loadArticles() {
-            if (articlesCache) return articlesCache;
+            if (articlesCache && articlesCache.length > 0) return articlesCache;
             try {
                 const resp = await fetch('articles.js?v=' + Date.now());
                 if (!resp.ok) return [];
                 const text = await resp.text();
-                const fn = new Function(text + '\nreturn typeof articlesCatalog !== "undefined" ? articlesCatalog : [];');
-                articlesCache = fn();
-                return articlesCache;
-            } catch {
+                const modified = text.replace('const articlesCatalog', 'var articlesCatalog');
+                const fn = new Function(modified + '\nreturn typeof articlesCatalog !== "undefined" ? articlesCatalog : [];');
+                const result = fn();
+                if (Array.isArray(result) && result.length > 0) {
+                    articlesCache = result;
+                }
+                return result || [];
+            } catch(e) {
+                console.error('loadArticles error:', e);
                 return [];
             }
         }
