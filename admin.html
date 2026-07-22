@@ -674,10 +674,25 @@
             if (editIndex >= 0) {
                 // EDIT mode — replace existing article, keep original date
                 articles[editIndex] = { title, intro, body, date: articles[editIndex].date || today };
-                const header = '// ============================================================\n//  ESL-plans — Articles Catalog (Teacher\'s Corner)\n//  Add new articles via the Admin panel\n// ============================================================\n\nconst articlesCatalog = [\n\n';
-                const footer = '\n];\n';
-                const articlesStr = articles.map(a => '    ' + JSON.stringify(a, null, 4).replace(/\n/g, '\n    ') + ',').join('\n\n');
-                newContent = header + articlesStr + footer;
+                const articlesStr = articles.map(a => {
+                    return `    {
+        "title": ${JSON.stringify(a.title)},
+        "intro": ${JSON.stringify(a.intro || '')},
+        "body": ${JSON.stringify(a.body || '')},
+        "date": ${JSON.stringify(a.date || '')}
+    }`;
+                }).join(',\n\n');
+                newContent = `// ============================================================
+//  ESL-plans — Articles Catalog (Teacher's Corner)
+//  Add new articles via the Admin panel
+// ============================================================
+
+const articlesCatalog = [
+
+${articlesStr}
+
+];
+`;
             } else {
                 // NEW article — prepend to top
                 const article = { title, intro, body, date: today };
