@@ -90,7 +90,8 @@ if (!fs.existsSync('articles')) fs.mkdirSync('articles');
 articles.forEach(article => {
     const slug = slugify(article.title);
     const bodySafe = article.body || '';
-    const bodyMeta = (article.body || '').substring(0, 160).replace(/\n/g, ' ').replace(/"/g, '&quot;');
+    const introSafe = article.intro || '';
+    const bodyMeta = (article.intro || article.body || '').replace(/<[^>]+>/g, '').substring(0, 160).replace(/\n/g, ' ').replace(/"/g, '&quot;');
 
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -130,6 +131,7 @@ articles.forEach(article => {
         </div>
         <h1>${article.title}</h1>
         <p class="meta">${article.date || ''} &middot; ESL-plans Teacher's Corner</p>
+        ${introSafe ? `<p style="font-style:italic; color:#666; border-left:3px solid #c95210; padding-left:14px; margin-bottom:24px; line-height:1.7;">${introSafe}</p>` : ''}
         <div class="body">${bodySafe}</div>
         <div class="cta">
             <p>Looking for ready-made ESL lesson plans for adult learners?</p>
