@@ -3,61 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service — ESL-plans</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c95210'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>ESL</text></svg>">
+    <title>Terms of Service / Условия использования — ESL-plans.com</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #fff5ee;
-            color: #333;
-            padding: 40px 20px 60px;
-        }
-        .container {
-            max-width: 760px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 40px 48px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        .logo {
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 32px;
-            cursor: pointer;
-        }
-        .logo .esl { font-weight: 900; font-style: italic; color: #c95210; font-family: 'Segoe UI', sans-serif; }
-        .logo .dash { color: #c95210; }
-        .logo .plans { font-weight: 300; color: #222; font-family: 'Georgia', serif; }
-        h1 { font-size: 26px; font-weight: 800; color: #222; margin-bottom: 6px; }
-        .date { font-size: 14px; color: #888; margin-bottom: 32px; }
-        h2 { font-size: 16px; font-weight: 700; color: #c95210; margin: 28px 0 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-        p { font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 8px; }
-        .back {
-            text-align: center;
-            margin-top: 36px;
-        }
-        .back a {
-            color: #c95210;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        .back a:hover { text-decoration: underline; }
-        @media (max-width: 600px) {
-            .container { padding: 28px 20px; }
-        }
+        body { font-family: 'Segoe UI', sans-serif; background: #fff5ee; padding: 40px 20px 60px; }
+        .container { max-width: 760px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px 48px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .logo { text-align: center; font-size: 26px; margin-bottom: 32px; cursor: pointer; }
+        .logo .esl { font-weight: 900; font-style: italic; color: #c95210; }
+        .logo .plans { font-weight: 300; color: #222; font-family: Georgia, serif; }
+        .lang-tabs { display: flex; gap: 8px; margin-bottom: 32px; justify-content: center; }
+        .lang-tab { padding: 8px 24px; border-radius: 20px; border: 2px solid #c95210; background: white; color: #c95210; font-weight: 700; cursor: pointer; font-size: 14px; }
+        .lang-tab.active { background: #c95210; color: white; }
+        h1 { font-size: 22px; font-weight: 800; color: #222; margin-bottom: 6px; }
+        .date { font-size: 13px; color: #aaa; margin-bottom: 32px; }
+        h2 { font-size: 14px; font-weight: 700; color: #c95210; margin: 24px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        p { font-size: 14px; line-height: 1.7; color: #555; margin-bottom: 8px; }
+        .back { text-align: center; margin-top: 32px; }
+        .back a { color: #c95210; text-decoration: none; font-weight: 600; font-size: 14px; }
+        @media (max-width: 600px) { .container { padding: 28px 20px; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo" onclick="window.location='https://esl-plans.com'">
-            <span class="esl">ESL</span><span class="dash">-</span><span class="plans">plans</span>
-        </div>
+<div class="container">
+    <div class="logo" onclick="window.location='https://esl-plans.com'">
+        <span class="esl">ESL</span>-<span class="plans">plans</span>
+    </div>
 
+    <div class="lang-tabs">
+        <button class="lang-tab active" onclick="showLang('en', this)">English</button>
+        <button class="lang-tab" onclick="showLang('ru', this)">Русский</button>
+    </div>
+
+    <!-- ENGLISH -->
+    <div id="lang-en">
         <h1>Terms of Service</h1>
-        <p class="date">Effective date: July 13, 2026 &nbsp;·&nbsp; Contractor: Alexander Alexandrovich Selivanov, Self-Employed</p>
+        <p class="date">Effective date: July 13, 2026 · Contractor: Alexander Alexandrovich Selivanov, Self-Employed · INN: 550313408403</p>
 
         <h2>I. General</h2>
         <p>This agreement governs the use of services provided through esl-plans.com. By completing payment, the Client confirms acceptance of all terms.</p>
@@ -66,26 +46,58 @@
         <p>The Contractor provides ESL lesson plan materials (PDFs, audio files, and related resources) via digital delivery to the Client's registered email address.</p>
 
         <h2>III. Payment</h2>
-        <p>Payment is made 100% in advance. All prices are displayed on the website. The Contractor reserves the right to change prices at any time.</p>
+        <p>Payment is made 100% in advance. Prices: Contributor — $19/month (2,000 ₽/month); Friend — $99/year (9,000 ₽/year). The Contractor reserves the right to change prices at any time.</p>
 
         <h2>IV. Access</h2>
         <p>Access to purchased materials is for personal use only. The Client may not share, distribute, resell, or reproduce the materials in any form without written permission.</p>
 
         <h2>V. Refunds</h2>
-        <p>Refunds are available before the service is rendered. Once access to materials has been provided, refunds are not available.</p>
+        <p>Refunds are available before access to materials has been provided. Once access is granted, refunds are not available. To request a refund, email esl-plans@proton.me with subject "Refund Request". Refunds are processed within 7 business days with no deductions.</p>
 
         <h2>VI. Intellectual Property</h2>
-        <p>All content, materials, and resources on esl-plans.com remain the intellectual property of the Contractor. No rights are transferred to the Client.</p>
+        <p>All content on esl-plans.com remains the intellectual property of the Contractor. No rights are transferred to the Client.</p>
 
-        <h2>VII. Liability</h2>
-        <p>The Contractor is not liable for subjective dissatisfaction with materials that have been duly delivered. The Client is responsible for ensuring compatibility with their devices.</p>
-
-        <h2>VIII. Contact</h2>
-        <p>Email: <a href="mailto:esl-plans@proton.me" style="color:#c95210;">neomich@mail.ru</a><br>Website: <a href="https://esl-plans.com" style="color:#c95210;">esl-plans.com</a></p>
-
-        <div class="back">
-            <a href="https://esl-plans.com">← Back to ESL-plans</a>
-        </div>
+        <h2>VII. Contact</h2>
+        <p>Email: esl-plans@proton.me · Phone: +7 (903) 284-09-33 · Website: https://esl-plans.com</p>
     </div>
+
+    <!-- RUSSIAN -->
+    <div id="lang-ru" style="display:none;">
+        <h1>Условия использования</h1>
+        <p class="date">Дата вступления в силу: 13 июля 2026 г. · Исполнитель: Селиванов Александр Александрович, Самозанятый · ИНН: 550313408403</p>
+
+        <h2>I. Общие положения</h2>
+        <p>Настоящее соглашение регулирует использование услуг, предоставляемых через esl-plans.com. Оформляя оплату, Клиент подтверждает принятие всех условий.</p>
+
+        <h2>II. Описание услуг</h2>
+        <p>Исполнитель предоставляет доступ к материалам планов уроков английского языка (PDF, аудиофайлы и сопутствующие ресурсы) путём цифровой доставки на зарегистрированный email Клиента.</p>
+
+        <h2>III. Оплата</h2>
+        <p>Оплата производится 100% авансом. Цены: Contributor — 2 000 ₽/месяц (≈$19); Friend — 9 000 ₽/год (≈$99). Исполнитель вправе изменять цены в любое время.</p>
+
+        <h2>IV. Доступ</h2>
+        <p>Доступ к приобретённым материалам предназначен исключительно для личного использования. Клиент не вправе распространять, перепродавать или воспроизводить материалы без письменного разрешения.</p>
+
+        <h2>V. Возврат средств</h2>
+        <p>Возврат возможен до момента предоставления доступа к материалам. После активации доступа возврат не производится. Для запроса возврата направьте письмо на esl-plans@proton.me с темой «Возврат средств». Средства возвращаются в течение 7 рабочих дней в полном объёме без удержаний.</p>
+
+        <h2>VI. Интеллектуальная собственность</h2>
+        <p>Весь контент на esl-plans.com является интеллектуальной собственностью Исполнителя. Никакие права Клиенту не передаются.</p>
+
+        <h2>VII. Контакты</h2>
+        <p>Email: esl-plans@proton.me · Телефон: +7 (903) 284-09-33 · Сайт: https://esl-plans.com</p>
+    </div>
+
+    <div class="back"><a href="https://esl-plans.com">← Back to ESL-plans.com / На главную</a></div>
+</div>
+
+<script>
+    function showLang(lang, btn) {
+        document.getElementById('lang-en').style.display = lang === 'en' ? 'block' : 'none';
+        document.getElementById('lang-ru').style.display = lang === 'ru' ? 'block' : 'none';
+        document.querySelectorAll('.lang-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+</script>
 </body>
 </html>
