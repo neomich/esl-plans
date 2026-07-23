@@ -750,8 +750,10 @@
         if (!lessons.length) { grid.innerHTML = '<p style="color:#aaa;grid-column:1/-1;text-align:center;padding:40px;">Уроков не найдено</p>'; return; }
         grid.innerHTML = lessons.map((l, i) => {
             const idx = allLessons.indexOf(l);
+            const imgUrl = `https://esl-plans.com/${l.visualSource}`;
             return `<div class="lesson-card" onclick="openLesson(${idx})">
-                <div class="card-img" id="card-img-${idx}" style="background-image:url('https://esl-plans.com/${l.visualSource}')"></div>
+                <div class="card-img" style="background-image:url('${imgUrl}')" 
+                     onerror="this.style.backgroundImage='url(https://esl-plans.com/images/og-image.png)'"></div>
                 <div class="card-footer">
                     <span class="card-title">${l.title}</span>
                     ${l.isFree ? '<span class="free-badge">FREE</span>' : ''}
@@ -773,7 +775,9 @@
         currentLesson = l;
         hideAll();
         document.getElementById('lesson-detail').style.display = 'block';
-        document.getElementById('detail-img').src = `https://esl-plans.com/${l.visualSource}`;
+        const detailImg = document.getElementById('detail-img');
+        detailImg.src = `https://esl-plans.com/${l.visualSource}`;
+        detailImg.onerror = function() { this.src = 'https://esl-plans.com/images/og-image.png'; };
         document.getElementById('detail-title').innerText = l.title;
         document.getElementById('detail-meta').innerHTML = `
             <span>🎓 ${l.categoryLabel}</span>
@@ -783,9 +787,14 @@
         `;
         const objList = document.getElementById('detail-objectives');
         objList.innerHTML = (l.objectives || []).map(o => `<li>${o}</li>`).join('');
-        document.getElementById('detail-description').innerHTML = l.description ? l.description.replace(/\n/g, '<br>') : '';
-        document.getElementById('translate-btn').style.display = 'block';
-        document.getElementById('translation-note').style.display = 'none';
+        
+        // Show description with translation note
+        const descEl = document.getElementById('detail-description');
+        descEl.innerHTML = (l.description || '').replace(/\n/g, '<br>');
+        
+        const transNote = document.getElementById('translation-note');
+        transNote.style.display = 'block';
+        transNote.innerText = '📝 Описание на английском языке. Нажмите кнопку ниже для перевода.';
 
         // Downloads
         const dl = document.getElementById('download-section');
@@ -825,7 +834,10 @@
         try {
             const resp = await fetch('https://api.anthropic.com/v1/messages', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'anthropic-dangerous-direct-browser-access': 'true'
+                },
                 body: JSON.stringify({
                     model: 'claude-sonnet-4-6',
                     max_tokens: 1000,
@@ -841,10 +853,12 @@
                 desc.innerHTML = translated.replace(/\n/g, '<br>');
                 note.innerText = '✅ Переведено с помощью ИИ';
             } else {
-                note.innerText = 'Ошибка перевода';
+                note.innerText = 'Ошибка перевода — попробуйте позже';
+                btn.style.display = 'block';
             }
         } catch(e) {
-            note.innerText = 'Ошибка перевода';
+            note.innerText = 'Ошибка перевода — попробуйте позже';
+            btn.style.display = 'block';
         }
     }
 
