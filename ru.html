@@ -8,6 +8,26 @@
     <link rel="canonical" href="https://esl-plans.com/ru">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c95210'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>ESL</text></svg>">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Google Translate -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'ru,en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        /* Hide Google translate bar branding */
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0 !important; }
+        .goog-te-gadget { font-size: 0 !important; }
+        .goog-te-gadget .goog-te-combo { font-size: 13px !important; padding: 6px 12px; border-radius: 20px; border: 1.5px solid #c95210; color: #c95210; font-weight: 600; cursor: pointer; outline: none; }
+    </style>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
 
@@ -390,9 +410,12 @@
             <a onclick="openAuthModal()">Войти</a>
         </li>
     </ul>
-    <div class="lang-toggle">
-        <button class="lang-btn" onclick="window.location.href='https://esl-plans.com'">ENG</button>
-        <button class="lang-btn active">РУС</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+        <div id="google_translate_element"></div>
+        <div class="lang-toggle">
+            <button class="lang-btn" onclick="window.location.href='https://esl-plans.com'">ENG</button>
+            <button class="lang-btn active">РУС</button>
+        </div>
     </div>
 </nav>
 
@@ -439,8 +462,6 @@
                 <h3>Цели урока</h3>
                 <ul id="detail-objectives"></ul>
             </div>
-            <button class="translate-btn" id="translate-btn" onclick="translateDescription()">🌐 Перевести описание на русский</button>
-            <div class="translation-note" id="translation-note" style="display:none;">Переводится с помощью ИИ...</div>
             <div class="description" id="detail-description"></div>
             <div class="download-section" id="download-section"></div>
         </div>
