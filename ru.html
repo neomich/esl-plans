@@ -772,9 +772,9 @@
         grid.innerHTML = lessons.map((l, i) => {
             const idx = allLessons.indexOf(l);
             const imgUrl = `https://esl-plans.com/${l.visualSource}`;
+            const imgUrlAlt = imgUrl.endsWith('.jpg') ? imgUrl.slice(0,-4)+'.JPG' : imgUrl.slice(0,-4)+'.jpg';
             return `<div class="lesson-card" onclick="openLesson(${idx})">
-                <div class="card-img" style="background-image:url('${imgUrl}')" 
-                     onerror="this.style.backgroundImage='url(https://esl-plans.com/images/og-image.png)'"></div>
+                <div class="card-img" id="ruimg-${idx}"></div>
                 <div class="card-footer">
                     <span class="card-title">${l.title}</span>
                     ${l.isFree ? '<span class="free-badge">FREE</span>' : ''}
@@ -788,6 +788,24 @@
                 <button class="view-btn">Открыть урок</button>
             </div>`;
         }).join('');
+
+        // Load images with fallback
+        lessons.forEach((l, i) => {
+            const idx = allLessons.indexOf(l);
+            const el = document.getElementById(`ruimg-${idx}`);
+            if (!el) return;
+            const imgUrl = `https://esl-plans.com/${l.visualSource}`;
+            const imgUrlAlt = imgUrl.endsWith('.jpg') ? imgUrl.slice(0,-4)+'.JPG' : imgUrl.slice(0,-4)+'.jpg';
+            const img = new Image();
+            img.onload = () => el.style.backgroundImage = `url('${imgUrl}')`;
+            img.onerror = () => {
+                const img2 = new Image();
+                img2.onload = () => el.style.backgroundImage = `url('${imgUrlAlt}')`;
+                img2.onerror = () => el.style.backgroundImage = `url('https://esl-plans.com/images/og-image.png')`;
+                img2.src = imgUrlAlt;
+            };
+            img.src = imgUrl;
+        });
     }
 
     // ── OPEN LESSON ──
@@ -797,8 +815,13 @@
         hideAll();
         document.getElementById('lesson-detail').style.display = 'block';
         const detailImg = document.getElementById('detail-img');
-        detailImg.src = `https://esl-plans.com/${l.visualSource}`;
-        detailImg.onerror = function() { this.src = 'https://esl-plans.com/images/og-image.png'; };
+        const imgUrl = `https://esl-plans.com/${l.visualSource}`;
+        const imgUrlAlt = imgUrl.endsWith('.jpg') ? imgUrl.slice(0,-4)+'.JPG' : imgUrl.slice(0,-4)+'.jpg';
+        detailImg.src = imgUrl;
+        detailImg.onerror = function() {
+            this.onerror = function() { this.src = 'https://esl-plans.com/images/og-image.png'; };
+            this.src = imgUrlAlt;
+        };
         document.getElementById('detail-title').innerText = l.title;
         document.getElementById('detail-meta').innerHTML = `
             <span>🎓 ${l.categoryLabel}</span>
