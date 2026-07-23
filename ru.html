@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESL-plans — Готовые планы уроков английского для взрослых</title>
+    <meta name="description" content="Готовые планы уроков английского языка для онлайн-преподавателей. PDF, аудио и видео материалы. Уровни B1, B2, C1. Темы: психология, технологии, бизнес и общество.">
+    <link rel="canonical" href="https://esl-plans.com/ru">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c95210'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>ESL</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+        body { background: #fff5ee; min-height: 100vh; }
+
+        /* NAV */
+        .nav {
+            background: white;
+            border-radius: 50px;
+            margin: 16px auto;
+            max-width: 1100px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+        }
+        .nav-logo {
+            font-size: 22px;
+            font-weight: 300;
+            color: #222;
+            font-family: Georgia, serif;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .nav-logo strong { font-weight: 900; font-style: italic; color: #c95210; font-family: 'Segoe UI', sans-serif; }
+        .nav-links { display: flex; align-items: center; gap: 20px; list-style: none; }
+        .nav-links a { color: #555; text-decoration: none; font-size: 14px; font-weight: 500; cursor: pointer; }
+        .nav-links a:hover { color: #c95210; }
+        .lang-toggle {
+            display: flex;
+            gap: 4px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            padding: 3px;
+        }
+        .lang-btn {
+            padding: 4px 12px;
+            border-radius: 16px;
+            border: none;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            background: transparent;
+            color: #888;
+        }
+        .lang-btn.active { background: #c95210; color: white; }
+        .free-btn {
+            background: #1b5e20;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #c95210 0%, #8b3510 100%);
+            border-radius: 24px;
+            margin: 0 16px 24px;
+            padding: 48px 32px;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+        .hero p { font-size: 15px; opacity: 0.85; max-width: 700px; margin: 0 auto 20px; line-height: 1.6; }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat .num { font-size: 28px; font-weight: 900; }
+        .hero-stat .label { font-size: 12px; opacity: 0.7; }
+
+        /* CATALOG */
+        .catalog-section { max-width: 1200px; margin: 0 auto; padding: 0 16px 40px; }
+        .section-heading {
+            font-size: 22px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .filter-btn {
+            padding: 7px 16px;
+            border-radius: 20px;
+            border: 1.5px solid #ddd;
+            background: white;
+            color: #555;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .filter-btn.active { background: #c95210; border-color: #c95210; color: white; }
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        @media (max-width: 900px) { .lessons-grid { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width: 600px) { .lessons-grid { grid-template-columns: 1fr; } }
+
+        .lesson-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .lesson-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .card-img {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            background-color: #ddd;
+            position: relative;
+        }
+        .card-footer {
+            background: #4caf50;
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-title { font-size: 15px; font-weight: 700; color: white; }
+        .free-badge {
+            background: #ffd600;
+            color: #333;
+            font-size: 11px;
+            font-weight: 800;
+            font-style: italic;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        .card-meta { padding: 12px 14px; display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; color: #888; }
+        .card-meta span { display: flex; align-items: center; gap: 4px; }
+        .view-btn {
+            display: block;
+            margin: 0 14px 14px;
+            text-align: center;
+            background: white;
+            border: 2px solid #c95210;
+            color: #c95210;
+            border-radius: 25px;
+            padding: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .view-btn:hover { background: #c95210; color: white; }
+
+        /* LESSON DETAIL */
+        #lesson-detail { display: none; max-width: 1100px; margin: 0 auto; padding: 0 16px 40px; }
+        .detail-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; }
+        @media (max-width: 700px) { .detail-grid { grid-template-columns: 1fr; } }
+        .detail-left { }
+        .detail-cover { width: 100%; border-radius: 16px; aspect-ratio: 4/3; object-fit: cover; background: #ddd; }
+        .detail-right { }
+        .detail-title { font-size: 24px; font-weight: 800; color: #333; margin-bottom: 8px; }
+        .detail-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 13px; color: #888; margin-bottom: 20px; }
+        .detail-meta span { display: flex; align-items: center; gap: 4px; }
+        .objectives { margin-bottom: 20px; }
+        .objectives h3 { font-size: 14px; font-weight: 700; color: #c95210; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+        .objectives ul { list-style: none; padding: 0; }
+        .objectives li { padding: 6px 0 6px 20px; position: relative; font-size: 14px; color: #555; line-height: 1.5; border-bottom: 1px solid #f5f5f5; }
+        .objectives li::before { content: '→'; position: absolute; left: 0; color: #c95210; }
+        .description { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 20px; }
+        .translation-note { font-size: 12px; color: #aaa; font-style: italic; margin-bottom: 12px; }
+        .translate-btn {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 12px;
+            cursor: pointer;
+            color: #555;
+            margin-bottom: 16px;
+        }
+        .translate-btn:hover { background: #c95210; color: white; }
+        .download-section { margin-top: 20px; }
+        .download-section h3 { font-size: 14px; font-weight: 700; color: #c95210; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        .download-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dl-btn {
+            padding: 10px 18px;
+            border-radius: 25px;
+            border: none;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .dl-pdf { background: #e53935; color: white; }
+        .dl-rar { background: #7b1fa2; color: white; }
+        .dl-audio { background: #f57c00; color: white; }
+        .paywall-box {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 16px;
+        }
+        .paywall-box p { color: #e65100; font-weight: 600; margin-bottom: 12px; }
+        .upgrade-btn {
+            background: #c95210;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 28px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .back-btn {
+            background: #1b5e20;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* PRICING */
+        #pricing-section { display: none; max-width: 1000px; margin: 0 auto; padding: 0 16px 60px; }
+        .pricing-header { text-align: center; margin-bottom: 40px; }
+        .pricing-header h2 { font-size: 28px; font-weight: 800; color: #333; margin-bottom: 8px; }
+        .pricing-header p { color: #888; }
+        .founding-banner {
+            display: inline-block;
+            margin-top: 16px;
+            background: #fff8e1;
+            border: 2px solid #ffd600;
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #c95210;
+        }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+        @media (max-width: 700px) { .pricing-grid { grid-template-columns: 1fr; } }
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px 24px;
+            border: 2px solid #eee;
+            position: relative;
+        }
+        .pricing-card.popular { border-color: #4caf50; background: #f1f8e9; }
+        .popular-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1b5e20;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+        .pricing-icon { font-size: 36px; text-align: center; margin-bottom: 12px; }
+        .pricing-name { font-size: 14px; font-weight: 800; text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .pricing-name.blue { color: #1565c0; }
+        .pricing-name.orange { color: #c95210; }
+        .pricing-name.green { color: #2e7d32; }
+        .pricing-price { font-size: 36px; font-weight: 900; text-align: center; margin-bottom: 4px; }
+        .pricing-price.blue { color: #1565c0; }
+        .pricing-price.orange { color: #c95210; }
+        .pricing-price.green { color: #2e7d32; }
+        .pricing-period { font-size: 15px; font-weight: 400; }
+        .pricing-usd { font-size: 12px; color: #aaa; text-align: center; margin-bottom: 16px; }
+        .pricing-btn {
+            width: 100%;
+            padding: 13px;
+            border-radius: 25px;
+            border: none;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: opacity 0.2s;
+        }
+        .pricing-btn:hover { opacity: 0.9; }
+        .pricing-btn.blue-btn { background: #1565c0; color: white; border: 2px solid #1565c0; }
+        .pricing-btn.coming-soon { background: white; border: 2px solid #e03131; color: #e03131; cursor: default; }
+        .pricing-features { list-style: none; padding: 0; }
+        .pricing-features li { padding: 8px 0; font-size: 13px; color: #555; border-bottom: 1px solid #f0f0f0; display: flex; gap: 8px; }
+        .pricing-features li:last-child { border-bottom: none; }
+        .feat-icon { font-size: 16px; flex-shrink: 0; }
+
+        /* LEGAL SECTION */
+        #legal-section { display: none; max-width: 800px; margin: 0 auto; padding: 0 16px 60px; }
+        .legal-card {
+            background: white;
+            border-radius: 20px;
+            padding: 36px 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+        .legal-card h2 { font-size: 20px; font-weight: 800; color: #333; margin-bottom: 24px; }
+        .legal-card h3 { font-size: 14px; font-weight: 700; color: #c95210; text-transform: uppercase; letter-spacing: 0.5px; margin: 20px 0 8px; }
+        .legal-card p, .legal-card li { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 8px; }
+        .legal-card ul, .legal-card ol { padding-left: 20px; }
+        .requisites-box { background: #f9f9f9; border-radius: 12px; padding: 16px; margin: 12px 0; }
+        .requisites-box p { margin-bottom: 4px; }
+
+        /* ABOUT */
+        #about-section { display: none; max-width: 800px; margin: 0 auto; padding: 0 16px 60px; }
+        .about-card { background: white; border-radius: 20px; padding: 36px 40px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+        .bio-photo { width: 160px; height: 160px; border-radius: 16px; object-fit: cover; float: right; margin: 0 0 16px 24px; }
+        .about-card h2 { font-size: 22px; font-weight: 800; color: #333; margin-bottom: 16px; }
+        .about-card p { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 14px; }
+        .social-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+        .tg-link { background: #229ED9; color: white; padding: 12px 22px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+        .wa-link { background: #25D366; color: white; padding: 12px 22px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+
+        /* FOOTER */
+        .site-footer { background: #222; color: #aaa; padding: 32px 20px; margin-top: 40px; }
+        .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .footer-brand strong { font-style: italic; color: #c95210; }
+        .footer-logo { font-size: 18px; font-weight: 300; color: white; font-family: Georgia, serif; }
+        .footer-brand p { font-size: 13px; color: #666; margin-top: 4px; }
+        .footer-social { display: flex; gap: 14px; }
+        .footer-social-link { color: #666; transition: color 0.2s; display: flex; align-items: center; }
+        .footer-social-link:hover { color: white; }
+        .footer-copy { font-size: 12px; color: #555; width: 100%; text-align: center; border-top: 1px solid #333; padding-top: 16px; margin-top: 8px; }
+        .footer-copy a { color: #666; text-decoration: none; }
+        .footer-copy a:hover { color: #c95210; }
+        .requisites-footer { font-size: 11px; color: #444; text-align: center; margin-top: 8px; }
+
+        /* AUTH MODAL */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-overlay.open { display: flex; }
+        .modal { background: white; border-radius: 20px; padding: 36px; max-width: 400px; width: 90%; position: relative; }
+        .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 20px; cursor: pointer; color: #aaa; }
+        .modal h2 { font-size: 20px; font-weight: 800; text-align: center; margin-bottom: 20px; }
+        .modal input { width: 100%; padding: 12px 14px; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: 15px; margin-bottom: 12px; outline: none; }
+        .modal input:focus { border-color: #c95210; }
+        .modal-btn { width: 100%; background: #c95210; color: white; border: none; border-radius: 25px; padding: 13px; font-size: 15px; font-weight: 700; cursor: pointer; }
+        .modal-error { color: #e03131; font-size: 13px; text-align: center; margin-top: 8px; }
+
+        /* LOADING */
+        .loading { text-align: center; padding: 60px; color: #aaa; font-size: 16px; }
+        .spinner { display: inline-block; width: 32px; height: 32px; border: 3px solid #f0f0f0; border-top-color: #c95210; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <a class="nav-logo" href="/ru"><strong>ESL</strong>-plans</a>
+    <ul class="nav-links">
+        <li><a onclick="showCatalog()">Уроки</a></li>
+        <li><a onclick="showPricing()">Цены</a></li>
+        <li><a onclick="showLegal()">Оферта</a></li>
+        <li><a onclick="showAbout()">О нас</a></li>
+        <li id="nav-auth">
+            <a onclick="openAuthModal()">Войти</a>
+        </li>
+    </ul>
+    <div class="lang-toggle">
+        <button class="lang-btn" onclick="window.location.href='https://esl-plans.com'">ENG</button>
+        <button class="lang-btn active">РУС</button>
+    </div>
+</nav>
+
+<!-- HERO (catalog view) -->
+<div id="catalog-view">
+    <div class="hero">
+        <h1>Готовые планы уроков английского для онлайн-преподавателей</h1>
+        <p>Библиотека планов уроков для взрослых учащихся. Темы: психология, технологии, бизнес, общество и многое другое. PDF, аудио и видео в каждом уроке. Уровни B1, B2, C1. Нулевая подготовка — просто скачай и преподавай.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="num">55+</div><div class="label">планов уроков</div></div>
+            <div class="hero-stat"><div class="num">2×</div><div class="label">новых урока в неделю</div></div>
+            <div class="hero-stat"><div class="num">B1–C1</div><div class="label">уровни CEFR</div></div>
+            <div class="hero-stat"><div class="num">12</div><div class="label">тематических категорий</div></div>
+        </div>
+    </div>
+
+    <div class="catalog-section">
+        <h2 class="section-heading">Все уроки</h2>
+        <div class="filters" id="filters">
+            <button class="filter-btn active" onclick="filterLevel('all', this)">Все уровни</button>
+            <button class="filter-btn" onclick="filterLevel('a2', this)">A2</button>
+            <button class="filter-btn" onclick="filterLevel('b1', this)">B1</button>
+            <button class="filter-btn" onclick="filterLevel('b2', this)">B2</button>
+            <button class="filter-btn" onclick="filterLevel('c1', this)">C1</button>
+        </div>
+        <div class="lessons-grid" id="lessons-grid">
+            <div class="loading"><div class="spinner"></div><br>Загрузка уроков...</div>
+        </div>
+    </div>
+</div>
+
+<!-- LESSON DETAIL -->
+<div id="lesson-detail">
+    <button class="back-btn" onclick="showCatalog()">⬅ Назад к каталогу</button>
+    <div class="detail-grid">
+        <div class="detail-left">
+            <img id="detail-img" class="detail-cover" src="" alt="">
+            <div id="pdf-preview" style="margin-top:16px;"></div>
+        </div>
+        <div class="detail-right">
+            <h2 class="detail-title" id="detail-title"></h2>
+            <div class="detail-meta" id="detail-meta"></div>
+            <div class="objectives">
+                <h3>Цели урока</h3>
+                <ul id="detail-objectives"></ul>
+            </div>
+            <button class="translate-btn" id="translate-btn" onclick="translateDescription()">🌐 Перевести описание на русский</button>
+            <div class="translation-note" id="translation-note" style="display:none;">Переводится с помощью ИИ...</div>
+            <div class="description" id="detail-description"></div>
+            <div class="download-section" id="download-section"></div>
+        </div>
+    </div>
+    <button class="back-btn" onclick="showCatalog()" style="margin-top:24px;">⬅ Назад к каталогу</button>
+</div>
+
+<!-- PRICING -->
+<div id="pricing-section">
+    <div class="pricing-header">
+        <h2>Простые и честные цены</h2>
+        <p>Выберите план, который подходит именно вам</p>
+        <div class="founding-banner">🌟 Цена для первых подписчиков — зафиксирована навсегда</div>
+    </div>
+    <div class="pricing-grid">
+        <!-- GUEST -->
+        <div class="pricing-card">
+            <div class="pricing-icon">👋</div>
+            <div class="pricing-name blue">Гость</div>
+            <div class="pricing-price blue">Бесплатно</div>
+            <div class="pricing-usd">&nbsp;</div>
+            <button class="pricing-btn blue-btn" onclick="openAuthModal()">Присоединиться</button>
+            <ul class="pricing-features">
+                <li><span class="feat-icon">📖</span>Доступ к бесплатным урокам</li>
+                <li><span class="feat-icon">📌</span>Сохранение любимых уроков</li>
+                <li><span class="feat-icon">💬</span>Вступление в чат сообщества</li>
+            </ul>
+        </div>
+        <!-- CONTRIBUTOR -->
+        <div class="pricing-card">
+            <div class="pricing-icon">📣</div>
+            <div class="pricing-name orange">Contributor</div>
+            <div class="pricing-price orange">2 000 ₽<span class="pricing-period">/мес</span></div>
+            <div class="pricing-usd">≈ $19 / месяц</div>
+            <button class="pricing-btn coming-soon" disabled>🕐 Скоро!</button>
+            <ul class="pricing-features">
+                <li><span class="feat-icon">📚</span>Вся библиотека уроков (55+)</li>
+                <li><span class="feat-icon">⬇️</span>Скачивание PDF, аудио, RAR</li>
+                <li><span class="feat-icon">🆕</span>Новые уроки 2 раза в неделю</li>
+                <li><span class="feat-icon">💬</span>Чат сообщества</li>
+            </ul>
+        </div>
+        <!-- FRIEND -->
+        <div class="pricing-card popular">
+            <div class="popular-badge">⭐ САМЫЙ ПОПУЛЯРНЫЙ</div>
+            <div class="pricing-icon">👥</div>
+            <div class="pricing-name green">Friend</div>
+            <div class="pricing-price green">9 000 ₽<span class="pricing-period">/год</span></div>
+            <div class="pricing-usd">≈ $99 / год · 750 ₽/мес</div>
+            <button class="pricing-btn coming-soon" disabled>🕐 Скоро!</button>
+            <ul class="pricing-features">
+                <li><span class="feat-icon">👑</span>Всё из Contributor + эксклюзивный контент</li>
+                <li><span class="feat-icon">📅</span>Планировщик уроков (скоро)</li>
+                <li><span class="feat-icon">🎥</span>Менторская сессия Zoom 30 мин</li>
+                <li><span class="feat-icon">💬</span>Приватный чат с Алексом</li>
+            </ul>
+        </div>
+    </div>
+    <p style="text-align:center; font-size:13px; color:#aaa; margin-top:24px;">
+        Оформляя подписку, вы принимаете условия <a href="/docs/oferta.html" target="_blank" style="color:#c95210;">Публичной оферты</a>
+    </p>
+</div>
+
+<!-- LEGAL -->
+<div id="legal-section">
+    <div class="legal-card">
+        <h2>Публичная оферта на оказание услуг</h2>
+        <p style="color:#aaa; font-size:13px; margin-bottom:20px;">Дата публикации: 22 июля 2026 г.</p>
+
+        <h3>I. Реквизиты исполнителя</h3>
+        <div class="requisites-box">
+            <p><strong>ФИО:</strong> Селиванов Александр Александрович</p>
+            <p><strong>Статус:</strong> Самозанятый (НПД)</p>
+            <p><strong>ИНН:</strong> 550313408403</p>
+            <p><strong>Город:</strong> Москва</p>
+            <p><strong>Email:</strong> esl-plans@proton.me</p>
+            <p><strong>Телефон:</strong> +7 (903) 284-09-33</p>
+            <p><strong>Сайт:</strong> https://esl-plans.com</p>
+        </div>
+
+        <h3>II. Описание услуг</h3>
+        <p>Исполнитель предоставляет доступ к онлайн-библиотеке готовых планов уроков английского языка для взрослых учащихся. Каждый план включает PDF-материал, аудиозаписи MP3, ссылки на видео и архив RAR.</p>
+
+        <h3>III. Тарифы и цены</h3>
+        <table style="width:100%; border-collapse:collapse; font-size:14px; margin:12px 0;">
+            <tr style="background:#c95210; color:white;">
+                <th style="padding:10px 14px; text-align:left;">Тариф</th>
+                <th style="padding:10px 14px; text-align:left;">Стоимость</th>
+                <th style="padding:10px 14px; text-align:left;">Включено</th>
+            </tr>
+            <tr style="border-bottom:1px solid #eee;">
+                <td style="padding:10px 14px; color:#555;">Гость</td>
+                <td style="padding:10px 14px; color:#555;">Бесплатно</td>
+                <td style="padding:10px 14px; color:#555;">Бесплатные уроки</td>
+            </tr>
+            <tr style="border-bottom:1px solid #eee;">
+                <td style="padding:10px 14px; color:#555;">Contributor</td>
+                <td style="padding:10px 14px; color:#555;">2 000 ₽/мес (≈$19)</td>
+                <td style="padding:10px 14px; color:#555;">Вся библиотека</td>
+            </tr>
+            <tr>
+                <td style="padding:10px 14px; color:#555;">Friend</td>
+                <td style="padding:10px 14px; color:#555;">9 000 ₽/год (≈$99)</td>
+                <td style="padding:10px 14px; color:#555;">Всё + менторство</td>
+            </tr>
+        </table>
+
+        <h3>IV. Порядок оформления заказа</h3>
+        <ol>
+            <li>Зарегистрируйтесь на сайте esl-plans.com</li>
+            <li>Выберите тариф на странице «Цены»</li>
+            <li>Нажмите кнопку оплаты и перейдите к платёжному сервису</li>
+            <li>После оплаты доступ активируется автоматически в течение нескольких минут</li>
+            <li>Подтверждение направляется на ваш email</li>
+        </ol>
+
+        <h3>V. Способы оплаты</h3>
+        <p>Оплата производится 100% авансом. Принимаются: банковские карты Visa, Mastercard, МИР, электронные кошельки. Платежи обрабатываются через сервис ROBOKASSA.</p>
+
+        <h3>VI. Оказание услуг</h3>
+        <p>После оплаты подписка активируется на аккаунте пользователя автоматически. Доступ предоставляется на оплаченный период (1 месяц или 1 год). Услуга считается оказанной с момента предоставления доступа.</p>
+
+        <h3>VII. Возврат средств</h3>
+        <p>Возврат возможен до момента предоставления доступа к материалам. После активации возврат не производится согласно п. 4 ст. 26.1 Закона РФ «О защите прав потребителей».</p>
+        <p><strong>Порядок возврата:</strong></p>
+        <ol>
+            <li>Направьте письмо на esl-plans@proton.me с темой «Возврат средств»</li>
+            <li>Укажите ФИО, email, дату и сумму платежа</li>
+            <li>Обращение рассматривается в течение 3 рабочих дней</li>
+            <li>Средства возвращаются в полном объёме без удержаний в течение 7 рабочих дней</li>
+        </ol>
+
+        <h3>VIII. Политика персональных данных</h3>
+        <p>Исполнитель обрабатывает email-адрес пользователя для идентификации и предоставления услуг. Данные не передаются третьим лицам, кроме платёжного сервиса ROBOKASSA. Хранение данных — на серверах Supabase (supabase.com). Пользователь вправе запросить удаление данных по email esl-plans@proton.me.</p>
+
+        <div style="text-align:center; margin-top:28px;">
+            <a href="/docs/oferta.html" target="_blank" style="color:#c95210; font-weight:600; font-size:14px;">Открыть полную версию оферты →</a>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about-section">
+    <div class="about-card">
+        <img src="https://esl-plans.com/images/alex.jpg" alt="Алекс" class="bio-photo">
+        <h2>Привет! Я Алекс 👋</h2>
+        <p>Я провёл последние <strong>15 лет</strong>, обучая взрослых английскому онлайн — и за это время понял одну вещь: если тема скучная, урок обречён. Именно поэтому я создаю планы уроков вокруг тем, которые по-настоящему интересуют взрослых: психология, технологии, рабочая культура, современное общество.</p>
+        <p>Каждый урок занимает у меня до <strong>6 часов</strong> на разработку. Зато вам — нулевая подготовка. Скачал и преподаёшь.</p>
+        <p>Моя цель — помочь онлайн-преподавателям вырваться из рутины учебников и создать уроки, которые студенты будут помнить ещё долго после занятия.</p>
+        <div class="social-links">
+            <a href="https://t.me/eslplans" target="_blank" class="tg-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                Telegram
+            </a>
+            <a href="https://chat.whatsapp.com/EZq24ihIjYk8shqHgKDLUO" target="_blank" class="wa-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="auth-modal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeAuthModal()">✕</button>
+        <h2>Вход / Регистрация</h2>
+        <input type="email" id="auth-email" placeholder="ваш@email.com">
+        <input type="password" id="auth-pass" placeholder="Пароль">
+        <button class="modal-btn" onclick="authAction()">Войти / Зарегистрироваться</button>
+        <div class="modal-error" id="auth-error"></div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div class="footer-logo"><strong>ESL</strong>-plans.com</div>
+            <p>Готовые планы уроков английского для онлайн-преподавателей</p>
+        </div>
+        <div class="footer-social">
+            <a href="https://t.me/eslplans" target="_blank" class="footer-social-link" title="Telegram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/eslplans" target="_blank" class="footer-social-link" title="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+        </div>
+        <div class="footer-copy">
+            © 2026 ESL-plans.com ·
+            <a href="/docs/terms.html" target="_blank">Terms of Service</a> ·
+            <a href="/docs/oferta.html" target="_blank">Публичная оферта</a>
+        </div>
+        <div class="requisites-footer">
+            Самозанятый Селиванов Александр Александрович · ИНН 550313408403 · Москва · esl-plans@proton.me
+        </div>
+    </div>
+</footer>
+
+<script>
+    const SUPABASE_URL = 'https://uhyapbinngjpotcifdbc.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_JNvGyFm_d1QGKCGj7SmXQQ_TNJ-vB-D';
+    const R2_BASE = 'https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev';
+    const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let allLessons = [];
+    let currentLesson = null;
+    let currentUser = null;
+    let currentTier = 'free';
+    let activeLevel = 'all';
+
+    // ── AUTH ──
+    _sb.auth.getSession().then(({ data: { session } }) => {
+        if (session) setLoggedIn(session.user);
+    });
+
+    _sb.auth.onAuthStateChange((event, session) => {
+        if (session) setLoggedIn(session.user);
+        else setLoggedOut();
+    });
+
+    async function setLoggedIn(user) {
+        currentUser = user;
+        const { data } = await _sb.from('profiles').select('tier').eq('id', user.id).single();
+        currentTier = data?.tier || 'free';
+        const nav = document.getElementById('nav-auth');
+        nav.innerHTML = `<a onclick="signOut()" style="font-size:12px; color:#888;">${user.email.split('@')[0]} · Выйти</a>`;
+    }
+
+    function setLoggedOut() {
+        currentUser = null;
+        currentTier = 'free';
+        document.getElementById('nav-auth').innerHTML = '<a onclick="openAuthModal()">Войти</a>';
+    }
+
+    async function authAction() {
+        const email = document.getElementById('auth-email').value.trim();
+        const pass = document.getElementById('auth-pass').value;
+        const err = document.getElementById('auth-error');
+        err.innerText = '';
+
+        let { error } = await _sb.auth.signInWithPassword({ email, password: pass });
+        if (error) {
+            const { error: e2 } = await _sb.auth.signUp({ email, password: pass });
+            if (e2) { err.innerText = e2.message; return; }
+        }
+        closeAuthModal();
+    }
+
+    async function signOut() {
+        await _sb.auth.signOut();
+    }
+
+    function openAuthModal() { document.getElementById('auth-modal').classList.add('open'); }
+    function closeAuthModal() { document.getElementById('auth-modal').classList.remove('open'); }
+
+    // ── VIEWS ──
+    function hideAll() {
+        ['catalog-view','lesson-detail','pricing-section','legal-section','about-section']
+            .forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    function showCatalog() {
+        hideAll();
+        document.getElementById('catalog-view').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function showPricing() {
+        hideAll();
+        document.getElementById('pricing-section').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function showLegal() {
+        hideAll();
+        document.getElementById('legal-section').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function showAbout() {
+        hideAll();
+        document.getElementById('about-section').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    // ── LOAD LESSONS ──
+    async function loadLessons() {
+        const resp = await fetch('https://esl-plans.com/lessons.js?v=' + Date.now());
+        const text = await resp.text();
+        const fn = new Function(text.replace('const lessonsCatalog', 'var lessonsCatalog') + '\nreturn lessonsCatalog;');
+        allLessons = fn();
+        renderGrid(allLessons);
+    }
+
+    function filterLevel(level, btn) {
+        activeLevel = level;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filtered = level === 'all' ? allLessons : allLessons.filter(l => l.level && l.level.includes(level));
+        renderGrid(filtered);
+    }
+
+    function renderGrid(lessons) {
+        const grid = document.getElementById('lessons-grid');
+        if (!lessons.length) { grid.innerHTML = '<p style="color:#aaa;grid-column:1/-1;text-align:center;padding:40px;">Уроков не найдено</p>'; return; }
+        grid.innerHTML = lessons.map((l, i) => {
+            const idx = allLessons.indexOf(l);
+            return `<div class="lesson-card" onclick="openLesson(${idx})">
+                <div class="card-img" id="card-img-${idx}" style="background-image:url('https://esl-plans.com/${l.visualSource}')"></div>
+                <div class="card-footer">
+                    <span class="card-title">${l.title}</span>
+                    ${l.isFree ? '<span class="free-badge">FREE</span>' : ''}
+                </div>
+                <div class="card-meta">
+                    <span>🎓 ${l.categoryLabel}</span>
+                    <span>${l.mediaIcon} ${l.mediaType}</span>
+                    <span>🥉 ${l.levelLabel}</span>
+                    <span>⏱ ${l.duration}</span>
+                </div>
+                <button class="view-btn">Открыть урок</button>
+            </div>`;
+        }).join('');
+    }
+
+    // ── OPEN LESSON ──
+    function openLesson(idx) {
+        const l = allLessons[idx];
+        currentLesson = l;
+        hideAll();
+        document.getElementById('lesson-detail').style.display = 'block';
+        document.getElementById('detail-img').src = `https://esl-plans.com/${l.visualSource}`;
+        document.getElementById('detail-title').innerText = l.title;
+        document.getElementById('detail-meta').innerHTML = `
+            <span>🎓 ${l.categoryLabel}</span>
+            <span>🥉 ${l.levelLabel}</span>
+            <span>⏱ ${l.duration}</span>
+            <span>${l.mediaIcon} ${l.mediaType}</span>
+        `;
+        const objList = document.getElementById('detail-objectives');
+        objList.innerHTML = (l.objectives || []).map(o => `<li>${o}</li>`).join('');
+        document.getElementById('detail-description').innerHTML = l.description ? l.description.replace(/\n/g, '<br>') : '';
+        document.getElementById('translate-btn').style.display = 'block';
+        document.getElementById('translation-note').style.display = 'none';
+
+        // Downloads
+        const dl = document.getElementById('download-section');
+        const canDownload = l.isFree || currentTier === 'contributor' || currentTier === 'friend';
+        if (canDownload) {
+            let btns = '<h3>Скачать материалы</h3><div class="download-btns">';
+            if (l.pdfUrl) btns += `<a href="${l.pdfUrl}" target="_blank" class="dl-btn dl-pdf">📄 PDF</a>`;
+            if (l.rarUrl) btns += `<a href="${l.rarUrl}" target="_blank" class="dl-btn dl-rar">📦 RAR</a>`;
+            if (l.audioUrl) btns += `<a href="${l.audioUrl}" target="_blank" class="dl-btn dl-audio">🎵 Аудио</a>`;
+            if (l.audioUrls) l.audioUrls.forEach(a => { btns += `<a href="${a.url}" target="_blank" class="dl-btn dl-audio">🎵 ${a.label}</a>`; });
+            btns += '</div>';
+            if (l.links && l.links.length) {
+                btns += '<div style="margin-top:12px;"><h3>Видео</h3>';
+                l.links.forEach((lk, i) => { btns += `<a href="${lk.url}" target="_blank" style="display:block;color:#c95210;font-size:14px;margin-bottom:6px;">▶️ Видео ${i+1}</a>`; });
+                btns += '</div>';
+            }
+            dl.innerHTML = btns;
+        } else {
+            dl.innerHTML = `<div class="paywall-box">
+                <p>🔒 Скачивание доступно после оформления подписки</p>
+                <button class="upgrade-btn" onclick="showPricing()">Посмотреть тарифы</button>
+            </div>`;
+        }
+        window.scrollTo(0, 0);
+    }
+
+    // ── AI TRANSLATE ──
+    async function translateDescription() {
+        if (!currentLesson) return;
+        const btn = document.getElementById('translate-btn');
+        const note = document.getElementById('translation-note');
+        const desc = document.getElementById('detail-description');
+        btn.style.display = 'none';
+        note.style.display = 'block';
+        note.innerText = 'Переводится с помощью ИИ...';
+
+        try {
+            const resp = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: 'claude-sonnet-4-6',
+                    max_tokens: 1000,
+                    messages: [{
+                        role: 'user',
+                        content: `Переведи следующее описание урока английского языка на русский язык. Сохрани структуру и форматирование. Отвечай только переводом, без пояснений.\n\n${currentLesson.description}`
+                    }]
+                })
+            });
+            const data = await resp.json();
+            const translated = data.content?.[0]?.text || '';
+            if (translated) {
+                desc.innerHTML = translated.replace(/\n/g, '<br>');
+                note.innerText = '✅ Переведено с помощью ИИ';
+            } else {
+                note.innerText = 'Ошибка перевода';
+            }
+        } catch(e) {
+            note.innerText = 'Ошибка перевода';
+        }
+    }
+
+    // ── INIT ──
+    loadLessons();
+</script>
+</body>
+</html>
