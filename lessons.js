@@ -6,6 +6,50 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-07-23",
+        "title": "The 15-Minute City",
+        "topics": [
+            "society",
+            "technology",
+            "life",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "90 min",
+        "visualSource": "images/b1_the_15_minute_city.jpg",
+        "keywords": "the 15-minute city society technology life art b1-b2",
+        "objectives": [
+            "explore the philosophical tension between freedom and comfort, and how it applies to modern living and urban design;",
+            "understand the core principles of the \"15-minute city\" concept and evaluate the pros and cons of urban versus rural lifestyles;",
+            "critically analyze media narratives and conspiracy theories surrounding urban planning through two distinct video comprehension tasks and guided discussion."
+        ],
+        "description": "In this lesson, students begin by matching six fundamental freedoms (e.g., Freedom of Movement, Financial Independence, Freedom of Thought) to their definitions, sparking a debate on whether freedom is ultimately more valuable than comfort. This is illustrated through a thought experiment comparing a bird in a safe cage to one in the wild, and choosing between a tiny, safe room versus a large, unpredictable acre of land. Students then listen to an audio segment answering comprehension questions about why people stay in restrictive environments (like 9-to-5 jobs or unhealthy relationships) and what it means to choose freedom over comfort.\nNext, learners brainstorm the \"Love\" and \"Hate\" aspects of city life (e.g., opportunity vs. noise, convenience vs. cost) before being introduced to the \"15-Minute City\" concept. They complete a multiple-choice quiz covering key urban planning facts, such as the priority of walking/cycling, the waste of commuting, and the goal of serving multiple purposes per square meter. \nThe core of the lesson features two video tasks. First, students watch a BBC Ideas video explaining how the 15-minute city could transform urban life. They then analyze real, highly critical YouTube comments from the video (e.g., claims about \"concentration camps,\" \"fines for leaving,\" and \"prison cities\") to discuss how legitimate urban planning concepts can be hijacked by conspiracy theories.\nFor the second video task, students complete a True/False comprehension check designed to debunk these myths and confirm facts (e.g., verifying that the concept promotes active travel and is being adopted by Australian cities, while debunking false claims about forced lockdowns, increased surveillance, or residents needing permission to leave their districts). \nThe lesson concludes with a reflection on the book The 15-Minute City by Carlos Moreno, using the historical analogy of Galileo being called a heretic to discuss how valid, modern ideas are sometimes unfairly labeled as \"crazy,\" and asking students to evaluate their own gut reactions to such societal shifts.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_the_15_minute_city.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_the_15_minute_city_bird_cage.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_the_15_minute_city.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=mnb9OF_19Rg&t"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=RV2Fo95ffT0"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-07-19",
         "title": "The Magical Number 7",
         "topics": [
