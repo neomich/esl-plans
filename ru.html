@@ -777,7 +777,7 @@
                 <div class="card-img" id="ruimg-${idx}"></div>
                 <div class="card-footer">
                     <span class="card-title">${l.title}</span>
-                    ${l.isFree ? '<span class="free-badge">FREE</span>' : ''}
+                    ${l.isFree ? '<span class="free-badge">БЕСПЛАТНО</span>' : ''}
                 </div>
                 <div class="card-meta">
                     <span>🎓 ${l.categoryLabel}</span>
@@ -847,19 +847,24 @@
             let btns = '<h3>Скачать материалы</h3><div class="download-btns">';
             if (l.pdfUrl) btns += `<a href="${l.pdfUrl}" target="_blank" class="dl-btn dl-pdf">📄 PDF</a>`;
             if (l.rarUrl) btns += `<a href="${l.rarUrl}" target="_blank" class="dl-btn dl-rar">📦 RAR</a>`;
-            if (l.audioUrl) btns += `<a href="${l.audioUrl}" target="_blank" class="dl-btn dl-audio">🎵 Аудио</a>`;
-            if (l.audioUrls) l.audioUrls.forEach(a => { btns += `<a href="${a.url}" target="_blank" class="dl-btn dl-audio">🎵 ${a.label}</a>`; });
+            // Show audioUrls if available, otherwise fall back to audioUrl
+            if (l.audioUrls && l.audioUrls.length) {
+                l.audioUrls.forEach(a => { btns += `<a href="${a.url}" target="_blank" class="dl-btn dl-audio">🎵 ${a.label}</a>`; });
+            } else if (l.audioUrl) {
+                btns += `<a href="${l.audioUrl}" target="_blank" class="dl-btn dl-audio">🎵 Аудио</a>`;
+            }
             btns += '</div>';
             if (l.links && l.links.length) {
-                btns += '<div style="margin-top:12px;"><h3>Видео</h3>';
-                l.links.forEach((lk, i) => { btns += `<a href="${lk.url}" target="_blank" style="display:block;color:#c95210;font-size:14px;margin-bottom:6px;">▶️ Видео ${i+1}</a>`; });
+                btns += '<div style="margin-top:16px;"><h3>Видеоматериалы</h3>';
+                l.links.forEach((lk, i) => { btns += `<a href="${lk.url}" target="_blank" style="display:block;color:#c95210;font-size:14px;margin-bottom:8px;">▶️ Видео ${i+1}</a>`; });
                 btns += '</div>';
             }
             dl.innerHTML = btns;
         } else {
             dl.innerHTML = `<div class="paywall-box">
-                <p>🔒 Скачивание доступно после оформления подписки</p>
-                <button class="upgrade-btn" onclick="showPricing()">Посмотреть тарифы</button>
+                <p>🔒 Это платный урок</p>
+                <p style="font-size:13px; color:#888; margin-bottom:16px;">Оформите подписку Contributor (2 000 ₽/мес) или Friend (9 000 ₽/год) для получения доступа ко всем материалам.</p>
+                <button class="upgrade-btn" onclick="showPricing()">Выбрать тариф</button>
             </div>`;
         }
         window.scrollTo(0, 0);
