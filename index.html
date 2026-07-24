@@ -2119,35 +2119,6 @@
             window.scrollTo(0, 0);
         }
 
-        async function handleTributePayment(tier) {
-            // Must be logged in
-            if (!currentUser) {
-                openAuthModal();
-                switchTab('signup');
-                showAuthSuccess('Create a free account first, then subscribe!');
-                return;
-            }
-
-            const TRIBUTE_URLS = {
-                contributor: 'https://web.tribute.tg/p/AA9',
-                friend: 'https://web.tribute.tg/p/AAa'
-            };
-
-            // Save pending purchase to Supabase so webhook can match user
-            try {
-                await _supabase.from('pending_purchases').insert({
-                    user_id: currentUser.id,
-                    email: currentUser.email,
-                    tier: tier
-                });
-            } catch(e) {
-                console.error('Could not save pending purchase:', e);
-            }
-
-            // Redirect to Tribute checkout
-            window.open(TRIBUTE_URLS[tier], '_blank');
-        }
-
         function handlePricingClick(tier) {
             const userTier = currentUser ? (currentUser.profile_tier || 'free') : null;
 
@@ -2975,6 +2946,34 @@
         const SUPABASE_URL = 'https://uhyapbinngjpotcifdbc.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_JNvGyFm_d1QGKCGj7SmXQQ_TNJ-vB-D';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function handleTributePayment(tier) {
+            if (!currentUser) {
+                openAuthModal();
+                switchTab('signup');
+                showAuthSuccess('Create a free account first, then subscribe!');
+                return;
+            }
+
+            const TRIBUTE_URLS = {
+                contributor: 'https://web.tribute.tg/p/AA9',
+                friend: 'https://web.tribute.tg/p/AAa'
+            };
+
+            try {
+                const { error } = await _supabase.from('pending_purchases').insert({
+                    user_id: currentUser.id,
+                    email: currentUser.email,
+                    tier: tier
+                });
+                if (error) console.error('pending_purchases insert error:', error);
+                else console.log('pending purchase saved:', tier, currentUser.email);
+            } catch(e) {
+                console.error('Could not save pending purchase:', e);
+            }
+
+            window.open(TRIBUTE_URLS[tier], '_blank');
+        }
 
         let currentUser = null;
         let authMode = 'signin'; // 'signin' or 'signup'
