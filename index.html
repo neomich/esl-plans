@@ -1610,7 +1610,7 @@
                 <div class="pricing-badge-icon">📣</div>
                 <div class="pricing-tier-name contributor-color">CONTRIBUTOR</div>
                 <div class="pricing-price contributor-price">$19<span class="price-period">/month</span></div>
-                <button class="pricing-btn contributor-btn" id="pricing-contributor-btn" style="cursor:default; background:white; border:2px solid #e03131; color:#e03131; font-weight:800;">🕐 Coming Soon!</button>
+                <button class="pricing-btn contributor-btn" id="pricing-contributor-btn" onclick="handleTributePayment('contributor')">Start Teaching</button>
                 <div class="pricing-divider"></div>
                 <ul class="pricing-features">
                     <li>
@@ -1644,7 +1644,7 @@
                 <div class="pricing-badge-icon" style="filter: hue-rotate(90deg) saturate(2) brightness(1.2);">👥</div>
                 <div class="pricing-tier-name friend-color">FRIEND</div>
                 <div class="pricing-price friend-price">$99<span class="price-period">/year</span></div>
-                <button class="pricing-btn friend-btn" id="pricing-friend-btn" style="cursor:default; background:white; border:2px solid #e03131; color:#e03131; font-weight:800;">🕐 Coming Soon!</button>
+                <button class="pricing-btn friend-btn" id="pricing-friend-btn" onclick="handleTributePayment('friend')">Get Full Access</button>
                 <div class="pricing-divider"></div>
                 <ul class="pricing-features">
                     <li><span class="feat-icon friend-icon">👑</span><span>Everything in the Contributor tier, plus bi-weekly updates with fresh, exclusive content.</span></li>
@@ -2119,6 +2119,35 @@
             window.scrollTo(0, 0);
         }
 
+        async function handleTributePayment(tier) {
+            // Must be logged in
+            if (!currentUser) {
+                openAuthModal();
+                switchTab('signup');
+                showAuthSuccess('Create a free account first, then subscribe!');
+                return;
+            }
+
+            const TRIBUTE_URLS = {
+                contributor: 'https://web.tribute.tg/p/AA9',
+                friend: 'https://web.tribute.tg/p/AAa'
+            };
+
+            // Save pending purchase to Supabase so webhook can match user
+            try {
+                await _supabase.from('pending_purchases').insert({
+                    user_id: currentUser.id,
+                    email: currentUser.email,
+                    tier: tier
+                });
+            } catch(e) {
+                console.error('Could not save pending purchase:', e);
+            }
+
+            // Redirect to Tribute checkout
+            window.open(TRIBUTE_URLS[tier], '_blank');
+        }
+
         function handlePricingClick(tier) {
             const userTier = currentUser ? (currentUser.profile_tier || 'free') : null;
 
@@ -2185,11 +2214,13 @@
             // Reset all buttons first
             [guestBtn, contBtn, friendBtn].forEach(b => b.classList.remove('subscribed'));
 
-            // Contributor and Friend are Coming Soon — always show this regardless of login state
-            contBtn.innerText = '🕐 Coming Soon!';
-            contBtn.style.cssText = 'cursor:default; background:white; border:2px solid #e03131; color:#e03131; font-weight:800;';
-            friendBtn.innerText = '🕐 Coming Soon!';
-            friendBtn.style.cssText = 'cursor:default; background:white; border:2px solid #e03131; color:#e03131; font-weight:800;';
+            // Contributor and Friend — live Tribute payment buttons
+            contBtn.innerText = 'Start Teaching';
+            contBtn.style.cssText = '';
+            contBtn.onclick = () => handleTributePayment('contributor');
+            friendBtn.innerText = 'Get Full Access';
+            friendBtn.style.cssText = '';
+            friendBtn.onclick = () => handleTributePayment('friend');
 
             if (!currentUser) {
                 guestBtn.innerText = 'Join the Community';
