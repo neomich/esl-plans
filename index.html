@@ -827,6 +827,11 @@
 
         #dynamic-sidebar-card .view-btn { display: none; }
 
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
         /* ── FOOTER ── */
         .site-footer {
             background: #222;
@@ -1117,7 +1122,7 @@
         .pricing-hero h1 {
             font-size: 36px;
             font-weight: 800;
-            color: #222;
+            color: #2e7d32;
             margin-bottom: 10px;
         }
         .pricing-hero p {
@@ -1601,8 +1606,7 @@
                 <ul class="pricing-features">
                     <li><span class="feat-icon">📖</span><span>Access <strong>free</strong> lesson plans tailored for online teaching.</span></li>
                     <li><span class="feat-icon">🔖</span><span>Pin-save your favorite plans for later.</span></li>
-                    <li><span class="feat-icon">💬</span><span>Join our community chat on Telegram.</span></li>
-                </ul>
+                    <li><span class="feat-icon">💬</span><span>Join our community chat on <a href="https://t.me/eslplans" target="_blank" style="color:#229ED9; font-weight:700;">Telegram →</a></span></li>                </ul>
             </div>
 
             <!-- CONTRIBUTOR -->
@@ -1634,7 +1638,7 @@
                             </div>
                         </span>
                     </li>
-                    <li><span class="feat-icon contributor-icon">💬</span><span>Join our community chat on Telegram.</span></li>
+                    <li><span class="feat-icon contributor-icon">💬</span><span>Join our community chat on <a href="https://t.me/eslplans" target="_blank" style="color:#229ED9; font-weight:700;">Telegram →</a></span></li>
                 </ul>
             </div>
 
@@ -1647,7 +1651,7 @@
                 <button class="pricing-btn friend-btn" id="pricing-friend-btn" onclick="handleTributePayment('friend')">Get Full Access</button>
                 <div class="pricing-divider"></div>
                 <ul class="pricing-features">
-                    <li><span class="feat-icon friend-icon">👑</span><span>Everything in the Contributor tier, plus bi-weekly updates with fresh, exclusive content.</span></li>
+                    <li><span class="feat-icon friend-icon">👑</span><span>Everything in the Contributor tier, plus weekly updates with fresh, exclusive content.</span></li>
                     <li><span class="feat-icon friend-icon">📅</span><span>Manage your teaching schedule seamlessly with my personal <strong>planner app.</strong> <span style="color:#e03131; font-weight:700;">(Coming soon!)</span></span></li>
                     <li><span class="feat-icon friend-icon">🎥</span><span>One-on-one mentorship: A 30-minute Zoom session to discuss your teaching challenges or explore the tools I use. <span id="zoom-link-wrap"><span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span></span></span></li>
                     <li><span class="feat-icon friend-icon">💬</span><span>Join our private TG Friends chat — I'll prioritize your questions and issues there. <span id="tg-friends-link-wrap"><span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span></span></span></li>
@@ -1660,7 +1664,7 @@
         <div class="pricing-stats">
             <div class="pricing-stat">
                 <span class="stat-icon">📖</span>
-                <div><strong>New lessons</strong><br>2 per week</div>
+                <div><strong>New lessons</strong><br>Weekly</div>
             </div>
             <div class="pricing-stat">
                 <span class="stat-icon">🎓</span>
@@ -2167,7 +2171,7 @@
             const tgWrap = document.getElementById('tg-friends-link-wrap');
             if (zoomWrap && tgWrap) {
                 if (tier === 'friend') {
-                    zoomWrap.innerHTML = '<a href="https://t.me/alex_the_master" target="_blank" style="color:#229ED9; font-weight:700; white-space:nowrap;">Schedule on Telegram →</a>';
+                    zoomWrap.innerHTML = '<a href="https://t.me/alex_the_master" target="_blank" style="color:#229ED9; font-weight:700; white-space:nowrap;">PM me @alex_the_master →</a>';
                     tgWrap.innerHTML = '<a href="https://t.me/+IWqW1LKYejg5YWZi" target="_blank" style="color:#229ED9; font-weight:700; white-space:nowrap;">Join private chat →</a>';
                 } else {
                     zoomWrap.innerHTML = '<span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span>';
@@ -2179,32 +2183,88 @@
             function formatExpiry(dateStr) {
                 if (!dateStr) return '';
                 const d = new Date(dateStr);
-                return `Active until ${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear().toString().slice(2)}`;
+                return `✅ Active until ${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`;
             }
 
-            // Reset all buttons first
-            [guestBtn, contBtn, friendBtn].forEach(b => b.classList.remove('subscribed'));
-
-            // Contributor and Friend — live Tribute payment buttons
-            contBtn.innerText = 'Start Teaching';
-            contBtn.style.cssText = '';
-            contBtn.onclick = () => handleTributePayment('contributor');
-            friendBtn.innerText = 'Get Full Access';
-            friendBtn.style.cssText = '';
-            friendBtn.onclick = () => handleTributePayment('friend');
+            // Reset buttons
+            [guestBtn, contBtn, friendBtn].forEach(b => {
+                b.classList.remove('subscribed');
+                b.style.cssText = '';
+            });
 
             if (!currentUser) {
                 guestBtn.innerText = 'Join the Community';
+                contBtn.innerText = 'Start Teaching';
+                contBtn.onclick = () => handleTributePayment('contributor');
+                friendBtn.innerText = 'Get Full Access';
+                friendBtn.onclick = () => handleTributePayment('friend');
             } else if (tier === 'free' || tier === null) {
                 guestBtn.innerText = '✅ You\'re In!';
                 guestBtn.classList.add('subscribed');
+                contBtn.innerText = 'Start Teaching';
+                contBtn.onclick = () => handleTributePayment('contributor');
+                friendBtn.innerText = 'Get Full Access';
+                friendBtn.onclick = () => handleTributePayment('friend');
             } else if (tier === 'contributor') {
                 guestBtn.innerText = '✅ You\'re In!';
                 guestBtn.classList.add('subscribed');
+                contBtn.innerText = formatExpiry(profile?.expires_at);
+                contBtn.classList.add('subscribed');
+                contBtn.onclick = null;
+                friendBtn.innerText = 'Upgrade to Friend';
+                friendBtn.onclick = () => handleTributePayment('friend');
             } else if (tier === 'friend') {
                 guestBtn.innerText = '✅ You\'re In!';
                 guestBtn.classList.add('subscribed');
+                contBtn.innerText = '✅ Included';
+                contBtn.classList.add('subscribed');
+                contBtn.onclick = null;
+                friendBtn.innerText = formatExpiry(profile?.expires_at);
+                friendBtn.classList.add('subscribed');
+                friendBtn.onclick = null;
             }
+
+            // Check expiry and show reminder
+            checkSubscriptionExpiry(tier, profile);
+        }
+
+        function checkSubscriptionExpiry(tier, profile) {
+            if (!tier || tier === 'free' || !profile?.expires_at) return;
+
+            // Use server-side date from expires_at — immune to client date manipulation
+            const expiresAt = new Date(profile.expires_at);
+            const now = new Date();
+            const daysLeft = Math.ceil((expiresAt - now) / (1000 * 60 * 60 * 24));
+
+            if (daysLeft <= 0) {
+                // Subscription expired — show expired notice
+                showExpiryBanner(`Your subscription has expired. Renew to keep access to all lessons!`, true);
+            } else if (daysLeft <= 3) {
+                // Show countdown reminder
+                showExpiryBanner(`⏰ Your subscription expires in ${daysLeft} day${daysLeft === 1 ? '' : 's'}. I hope you've been enjoying the lesson plans! Consider renewing to keep your access.`, false);
+            }
+        }
+
+        let expiryBannerShown = false;
+        function showExpiryBanner(message, isExpired) {
+            if (expiryBannerShown) return;
+            expiryBannerShown = true;
+
+            const banner = document.createElement('div');
+            banner.style.cssText = `
+                position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+                background: ${isExpired ? '#e03131' : '#c95210'}; color: white;
+                padding: 16px 24px; border-radius: 16px; max-width: 480px; width: 90%;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.2); z-index: 9999;
+                font-size: 14px; line-height: 1.5; text-align: center;
+                animation: slideUp 0.3s ease;
+            `;
+            banner.innerHTML = `
+                <div style="margin-bottom:12px;">${message}</div>
+                <button onclick="showPricingView(); this.parentElement.remove();" style="background:white; color:${isExpired ? '#e03131' : '#c95210'}; border:none; border-radius:20px; padding:8px 20px; font-weight:700; cursor:pointer; margin-right:8px;">Renew Now</button>
+                <button onclick="this.parentElement.remove();" style="background:rgba(255,255,255,0.2); color:white; border:none; border-radius:20px; padding:8px 16px; cursor:pointer;">Dismiss</button>
+            `;
+            document.body.appendChild(banner);
         }
 
         function applyTopicFilter(topic, pillEl) {
