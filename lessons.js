@@ -1,6 +1,6 @@
 // ============================================================
 //  ESLplans — Lesson Catalog
-//  Add new lessons here. Never touch index.html for content. 
+//  Add new lessons here. Never touch index.html for content.
 // ============================================================
 
 const lessonsCatalog = [
