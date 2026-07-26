@@ -36,34 +36,102 @@ lessons.forEach(lesson => {
             </div>
         </div>` : '';
 
+    // Build topics tags
+    const topicLabels = {
+        psychology: 'Psychology', society: 'Society', technology: 'Technology',
+        work: 'Work & Career', business: 'Business', life: 'Life & Relationships',
+        travel: 'Travel', media: 'Media & Fame', art: 'Art & Culture',
+        grammar: 'Grammar', food: 'Food & Drink'
+    };
+    const topicTags = (lesson.topics || []).map(t => topicLabels[t] || t).join(' · ');
+
+    // Materials list
+    const materials = [];
+    if (lesson.pdfUrl) materials.push('PDF handout');
+    if (lesson.audioUrl || lesson.audioUrls) materials.push('audio materials (MP3)');
+    if (lesson.links && lesson.links.length) materials.push('video links');
+    if (lesson.rarUrl) materials.push('full downloadable package (RAR)');
+    const materialsText = materials.join(', ');
+
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${lesson.title} — ESL Lesson Plan | ESL-plans.com</title>
+    <title>${lesson.title} — ESL Lesson Plan for Adults | ESL-plans.com</title>
     <meta name="description" content="${descMeta}">
-    <meta name="keywords" content="${(lesson.keywords||'')}, ESL lesson plan for adults, adult English lesson plan, online ESL tutor resources, ${lesson.levelLabel} ESL adults, conversation ESL lesson">
+    <meta name="keywords" content="${(lesson.keywords||'')}, ESL lesson plan for adults, adult English lesson plan, online ESL tutor resources, ${lesson.levelLabel} ESL adults, conversation ESL lesson, ${topicTags.toLowerCase()}">
     <link rel="canonical" href="https://esl-plans.com/lessons/${slug}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://esl-plans.com/lessons/${slug}">
-    <meta property="og:title" content="${lesson.title} — ESL Lesson Plan">
+    <meta property="og:title" content="${lesson.title} — ESL Lesson Plan for Adults">
     <meta property="og:description" content="${descMeta}">
     <meta property="og:site_name" content="ESL-plans.com">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${lesson.title.replace(/"/g,'\\"')}","description":"${descMeta.replace(/"/g,'\\"')}","provider":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"educationalLevel":"${lesson.levelLabel}","inLanguage":"en","url":"https://esl-plans.com/lessons/${slug}"}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${lesson.title} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson plan is designed for ${lesson.levelLabel} level adult learners. It takes approximately ${lesson.duration} to complete."}},{"@type":"Question","name":"What materials are included in the ${lesson.title} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson includes a PDF handout${lesson.audioUrl ? ', audio materials' : ''}${lesson.links && lesson.links.length > 0 ? ', and video links' : ''}. The full package is available as a downloadable RAR file."}},{"@type":"Question","name":"Is the ${lesson.title} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${lesson.title} lesson is specifically designed for online ESL tutors working with adult learners. It is zero-prep and conversation-driven, requiring no additional preparation beyond downloading the materials."}}]}</script>
-    <style>body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}.container{max-width:800px;margin:0 auto;padding:40px 20px}h1{color:#c95210;font-size:28px;margin-bottom:8px}.meta{color:#888;font-size:14px;margin-bottom:24px}h2{color:#333;font-size:18px;margin:24px 0 12px}ul{color:#444;line-height:1.8;padding-left:20px}.desc{color:#444;line-height:1.7;white-space:pre-line}.back{display:inline-block;margin-top:30px;color:#c95210;text-decoration:none;font-weight:600}</style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${lesson.title} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson plan is designed for ${lesson.levelLabel} level adult learners. It takes approximately ${lesson.duration} to complete."}},{"@type":"Question","name":"What materials are included in the ${lesson.title} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson includes ${materialsText}."}},{"@type":"Question","name":"Is the ${lesson.title} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${lesson.title} lesson is specifically designed for online ESL tutors working with adult learners at ${lesson.levelLabel} level. It is zero-prep and conversation-driven, covering the topic of ${topicTags}."}}]}</script>
+    <style>
+        body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
+        .container{max-width:820px;margin:0 auto;padding:40px 20px}
+        .logo{font-size:22px;margin-bottom:28px;text-decoration:none;display:block;}
+        .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
+        .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
+        h1{color:#c95210;font-size:28px;margin-bottom:8px;line-height:1.3;}
+        .meta{color:#888;font-size:14px;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;}
+        .meta-badge{background:white;border-radius:20px;padding:4px 12px;font-size:13px;color:#555;border:1px solid #eee;}
+        h2{color:#333;font-size:17px;font-weight:700;margin:28px 0 12px;text-transform:uppercase;letter-spacing:0.5px;}
+        ul{color:#444;line-height:1.8;padding-left:20px;margin-bottom:16px;}
+        li{margin-bottom:4px;}
+        .desc{color:#444;line-height:1.8;white-space:pre-line;margin-bottom:24px;}
+        .info-box{background:white;border-radius:16px;padding:20px 24px;margin:24px 0;border-left:4px solid #c95210;}
+        .info-box h3{font-size:14px;font-weight:700;color:#c95210;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
+        .info-box p{font-size:14px;color:#555;line-height:1.7;margin:0;}
+        .topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+        .topic-tag{background:#fff3e0;color:#c95210;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;}
+        .cta-box{background:#c95210;border-radius:16px;padding:24px;text-align:center;margin:32px 0;color:white;}
+        .cta-box p{margin-bottom:14px;font-size:15px;opacity:0.9;}
+        .cta-btn{display:inline-block;background:white;color:#c95210;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700;font-size:15px;}
+        .back{display:inline-block;margin-top:20px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
+    </style>
     <script>setTimeout(function(){ window.location.href='https://esl-plans.com/#lesson-${slug}'; }, 500);</script>
 </head>
 <body>
     <div class="container">
+        <a class="logo" href="https://esl-plans.com"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+
         <h1>${lesson.title}</h1>
-        <p class="meta">${lesson.levelLabel} &middot; ${lesson.categoryLabel} &middot; ${lesson.duration}</p>
+        <div class="meta">
+            <span class="meta-badge">🎓 ${lesson.categoryLabel}</span>
+            <span class="meta-badge">🥉 ${lesson.levelLabel}</span>
+            <span class="meta-badge">⏱ ${lesson.duration}</span>
+            <span class="meta-badge">${lesson.mediaIcon} ${lesson.mediaType}</span>
+            ${lesson.isFree ? '<span class="meta-badge" style="background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7;">⭐ Free Lesson</span>' : ''}
+        </div>
+
+        ${topicTags ? `<div class="topics">${(lesson.topics||[]).map(t => `<span class="topic-tag">${topicLabels[t]||t}</span>`).join('')}</div>` : ''}
+
         <h2>Main Objectives</h2>
         <ul>${objList}</ul>
+
         <h2>About This Lesson</h2>
         <p class="desc">${descSafe}</p>
+
+        <div class="info-box">
+            <h3>What's Included</h3>
+            <p>${materialsText.charAt(0).toUpperCase() + materialsText.slice(1)}. Everything you need to run this lesson is ready to download — zero preparation required.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Who Is This For?</h3>
+            <p>This lesson plan is designed for online ESL tutors working with adult learners at <strong>${lesson.levelLabel}</strong> level. It uses a conversation-driven approach with authentic materials to keep adult students genuinely engaged throughout the session.</p>
+        </div>
+
         ${relatedHtml}
+
+        <div class="cta-box">
+            <p>Looking for more ESL lesson plans for adult learners? Browse our full library of 55+ conversation-driven plans.</p>
+            <a href="https://esl-plans.com" class="cta-btn">Browse All Lesson Plans →</a>
+        </div>
+
         <a class="back" href="https://esl-plans.com">&larr; Back to ESL-plans.com</a>
     </div>
 </body>
