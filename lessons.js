@@ -6,6 +6,46 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-07-26",
+        "title": "Psychology of Money",
+        "topics": [
+            "business",
+            "psychology",
+            "society",
+            "work"
+        ],
+        "isFree": true,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "💼",
+        "level": "b1-b2-c1",
+        "levelLabel": "B1-B2-C1",
+        "duration": "90-120 min",
+        "visualSource": "images/b1_psychology_of_money.jpg",
+        "keywords": "psychology of money business psychology society work b1-b2-c1",
+        "objectives": [
+            "explore the behavioral and psychological aspects of personal finance, distinguishing between the concepts of wealth, income, and financial freedom;",
+            "analyze the roles of luck, risk, and emotional decision-making in financial success through targeted video comprehension and case studies;",
+            "evaluate the difference between \"rational\" and \"reasonable\" financial planning, and apply key financial vocabulary through a structured reading task."
+        ],
+        "description": "In this lesson, students begin with a thought-provoking riddle about money setting the stage for a discussion on financial independence.\nThe core of the lesson is structured around five distinct video lessons based on Morgan Housel’s book The Psychology of Money, each with its own dedicated set of tasks:\nLesson 1: Luck and Risk. Students complete a True/False task evaluating the role of luck and risk in financial success. They analyze case studies like Bill Gates's rare, lucky access to a computer and Jesse Livermore's failures to understand that success isn't just about hard work, and failure isn't always a personal mistake.\nLesson 2: Getting vs. Staying Wealthy. Students complete a sentence-matching task to understand a core dichotomy: getting wealthy requires taking big risks, optimism, and bold leaps, while preserving wealth requires a mindset of humility, patience, and avoiding reckless behavior. The ultimate goal is not just to make money, but to never have to worry about it again.\nLesson 3: The \"F$ck you Fund\" & Buying Time. Students complete a gap-fill summary explaining that the true purpose of saving is not merely delayed spending for future purchases. Instead, it is to buy freedom and control over your time. This financial safety net (the \"F$ck you Fund\") provides the peace of mind to walk away from negative situations, like a toxic job.\nLesson 4: Wealth is What You Don't See. Students answer multiple-choice comprehension questions based on the story of Ronald Reed, a janitor who secretly left behind an $8 million fortune. The key takeaway is that wealth is the money you didn't spend, contrasting the \"looking rich\" game (buying flashy items like Ferraris) with the \"being rich\" game (saving, investing, and buying freedom).\nLesson 5: Rational vs. Reasonable. Students answer comprehension questions about why most investors fail. They explore the difference between \"rational\" (mathematically optimal) and \"reasonable\" (emotionally sustainable) financial planning, and discuss how \"analysis paralysis\" and human emotions often derail good financial strategies.\nFinally, the lesson concludes with a Reading & Consolidation task. Students read a book review of The Psychology of Money by Cody Allen and answer True/False questions to verify their understanding of the text's core arguments (e.g., that good investing is about repeatable returns over a long time horizon, not the highest possible returns). They wrap up by reviewing key financial vocabulary (e.g., time horizon, margin of safety, compound, analysis paralysis, stick to a strategy) and discussing the book's \"Key Take-Aways\" summary box.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_psychology_of_money.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_psychology_of_money.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=yhq1cPRHR6k"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-07-23",
         "title": "The 15-Minute City",
         "topics": [
