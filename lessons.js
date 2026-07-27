@@ -6,6 +6,49 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-07-27",
+        "title": "Zombies",
+        "topics": [
+            "psychology",
+            "society",
+            "art"
+        ],
+        "isFree": true,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "💼",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "90 min",
+        "visualSource": "images/b2_zombies.jpg",
+        "keywords": "zombies psychology society art b2-c1",
+        "objectives": [
+            "practice critical viewing and listening comprehension through a short film analysis and a True/False video task on the zombie genre;",
+            "master procedural and survival-themed vocabulary by analyzing a tactical \"Zombie Survival Guide\";",
+            "explore the psychological appeal of dystopian fiction and horror as a coping mechanism for real-world societal anxieties."
+        ],
+        "description": "In this lesson, students begin by immersing themselves in a post-apocalyptic scenario, acting as recruits for a \"Rescue Station.\" They review a tactical survival guide and answer multiple-choice questions to determine the correct protocols for neutralizing threats (e.g., aiming for center mass when a headshot isn't possible), securing perimeters, and executing the \"Tape & Tag\" and incineration processes for zombie remains.\nIn this lesson, students begin by watching a narrative short film, which sets the stage for a deep psychological analysis of the genre. Students watch a video essay exploring why audiences are so universally drawn to zombie apocalypses and dystopian fiction. This sparks a profound discussion on whether consuming these dark stories is a healthy psychological coping mechanism. Students debate if people watch these narratives not for a \"happy escape,\" but to \"work out\" real-world fear, anger, and feelings of helplessness—such as a lack of control over the economy or government—by vicariously watching characters take control of catastrophic situations.\nThen they immerse themselves in a post-apocalyptic scenario, acting as recruits for a \"Rescue Station.\" They review a tactical survival guide and answer multiple-choice questions to determine the correct protocols for neutralizing threats (e.g., aiming for center mass when a headshot isn't possible), securing perimeters, and executing the \"Tape & Tag\" and incineration processes for zombie remains.\nThe lesson then transitions to the last page, students watch a second video (focusing on the cultural, historical, or cinematic aspects of the zombie genre) and complete a True/False comprehension task to verify key facts and theories presented in the clip, wrapping up the class with a final reflection on what our fascination with the undead reveals about modern human nature. \nFinally, on the last page, students watch a second video (focusing on the cultural, historical, or cinematic aspects of the zombie genre) and complete a True/False comprehension task to verify key facts and theories presented in the clip, wrapping up the class with a final reflection on what our fascination with the undead reveals about modern human nature.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_zombies.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_zombies.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=gryenlQKTbE"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=dZuokFyOSOU"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-07-26",
         "title": "Psychology of Money",
         "topics": [
