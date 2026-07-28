@@ -6,6 +6,46 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-07-28",
+        "title": "Smoking Will Kill You",
+        "topics": [
+            "psychology",
+            "society",
+            "work",
+            "life"
+        ],
+        "isFree": false,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "💼",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_smoking_will_kill_you.jpg",
+        "keywords": "smoking will kill you psychology society work life b1-b2",
+        "objectives": [
+            "reflect on personal well-being, job satisfaction, and the \"anchors\" in life (such as hobbies, pets, and supportive relationships);",
+            "practice reading and sequencing comprehension by reconstructing the plot of a short film about workplace isolation;",
+            "analyze the psychological themes of loneliness, disconnection, and the critical need for emotional support through targeted vocabulary and gap-fill exercises."
+        ],
+        "description": "In this lesson, students begin with a series of reflective, personal questions about their work environment, passions, and social connections (e.g., Do you ever hate your job? Do you have people who love and miss you? Do you have any pets?), setting a thoughtful tone for the class.\nThe core of the lesson focuses on a short film. Students are tasked with putting the events of the movie in chronological order. The narrative follows a man named Bill, whose workplace nickname is \"BUB.\" He goes to the roof for a cigarette and is approached by a colleague who frantically tries to talk him out of suicide by reminding him of his job, family, hobbies, and dog. However, Bill denies having any of these anchors and ultimately jumps, leaving behind the tragic realization that \"No one likes BUB.\"\nFollowing the sequencing task, the class engages in a deep thematic analysis of the film. They discuss its strong secondary message about isolation and the human need for connection, exploring how lacking typical life anchors leaves individuals emotionally vulnerable and how profound loneliness can drive desperate acts.\nFinally, the lesson transitions to emotional intelligence and support systems. Students complete a matching task with phrases related to stability and empathy (e.g., to be always there and steady, to find a fair compromise, to help someone stay calm and sensible, to accept them without criticism). They then apply these concepts in a contextual gap-fill exercise, describing how different types of emotional support help individuals navigate anger, exhaustion, sadness, and overwhelming workplace problems.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_smoking_will_kill_you.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_smoking_will_kill_you_3_people_talk.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_smoking_will_kill_you.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=EzCS9HTEb78"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-07-27",
         "title": "Zombies",
         "topics": [
