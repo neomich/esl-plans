@@ -12,6 +12,12 @@
         <priority>0.3</priority>
     </url>
     <url>
+        <loc>https://esl-plans.com/lessons/attractive-men</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2026-07-29</lastmod>
+    </url>
+    <url>
         <loc>https://esl-plans.com/lessons/the-star-method-job-interview</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
