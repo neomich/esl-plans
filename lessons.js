@@ -6,6 +6,44 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-07-29",
+        "title": "The STAR method: job interview",
+        "topics": [
+            "work",
+            "business"
+        ],
+        "isFree": true,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "💼",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_star_method.jpg",
+        "keywords": "the star method: job interview work business b2-c1",
+        "objectives": [
+            "categorize and articulate key professional competencies, including personal, interpersonal, workplace, and applied knowledge skills;",
+            "understand and apply the STAR method (Situation, Task, Action, Result) to structure compelling answers for behavioral job interviews;",
+            "practice listening comprehension and critical analysis by evaluating mock interview responses and mapping them to the STAR framework."
+        ],
+        "description": "In this lesson, students begin with a humorous, slightly cynical look at the \"origin of job interviews,\" framing resumes as creative stories and cover letters as pleas for money, which helps lower the affective filter and makes the topic highly relatable. The lesson then transitions to skill categorization, where learners match definitions to four key areas: Personal Skills (e.g., accountability, resilience), People Skills (e.g., empathy, persuasion), Workplace Skills (e.g., efficiency, resource allocation), and Applied Knowledge (e.g., quality control, tech literacy).\nNext, the core framework is introduced: the STAR method. Students learn how to systematically answer behavioral questions (\"Tell us about a time when you...\") by setting the scene (Situation), explaining their specific responsibility (Task), detailing the steps they took (Action), and highlighting the measurable impact (Result). The central media task involves listening to an online job interview featuring two candidates, Phillip and Camila. Students must identify which specific behavioral questions the candidates are answering and then fill out detailed STAR matrices with the exact information provided by each speaker.\nFinally, the lesson concludes with a set of practical, high-impact interview tips. Students review strategies for success, such as building a versatile \"story bank\" of 10 experiences, using strong professional vocabulary, keeping responses concise (aiming for 1 to 2 minutes), and practicing quick adaptation to different prompts. The class wraps up with a discussion on why skill-based questions have become so popular in modern hiring and how students can effectively refine their own professional narratives.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_star_method.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_star_method_phillip_camila.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_star_method.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=b56eAUCTLok"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-07-28",
         "title": "Smoking Will Kill You",
         "topics": [
