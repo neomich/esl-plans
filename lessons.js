@@ -7,6 +7,49 @@ const lessonsCatalog = [
 
     {
         "dateAdded": "2026-07-29",
+        "title": "Attractive men",
+        "topics": [
+            "life",
+            "society",
+            "psychology"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_attractive_men.jpg",
+        "keywords": "attractive men life society psychology b1-b2",
+        "objectives": [
+            "explore cultural and historical shifts in perceptions of male attractiveness through video analysis and discussion;",
+            "categorize and evaluate modern male archetypes (e.g., The Hustle-Bro, The Nice Guy, The Corporate Shark) based on behavioral traits and relationship dynamics;",
+            "analyze the rise of \"Manosphere\" influencers, their core messaging, and their impact on contemporary views of masculinity through a targeted video comprehension task."
+        ],
+        "description": "In this lesson, students begin by constructing their \"perfect man\" using physical descriptors (e.g., slim and trim, well-built, Apollo type) before watching a vintage 1967 clip where Irish women share their criteria for an ideal partner. This sparks a debate on how standards of beauty and attraction have evolved for men over the last 50 years. \nThe lesson then transitions to a modern context, where learners match distinct male archetypes—ranging from the Manipulative/Parasitic to the Ambitious/Wealthy and the Compliant/Submissive—to detailed behavioral descriptions. Students listen to five women share personal anecdotes about their partners or family members, matching each speaker to the specific archetype that best describes the man in their story. This leads to a vocabulary focus on predicates and adjectives used to describe negative relationship behaviors (e.g., spineless, stagnation, disingenuous, entitlement). \nFinally, the class examines the digital influence on masculinity by watching a second media segment about \"Manosphere\" influencers like Andrew and Tristan Tate. Students answer comprehension questions regarding the origins of the movement (the \"Red Pill\"), its three main pillars, and the legal controversies surrounding its most famous figures, concluding with a critical discussion on whether these online narratives help or harm young men’s understanding of identity and success.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_attractive_men.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_attractive_men_5_females.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_attractive_men.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=LvGgYcpSi8U"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=KSYyPFyYtYs"
+            }
+        ]
+    },
+
+
+
+    {
+        "dateAdded": "2026-07-29",
         "title": "The STAR method: job interview",
         "topics": [
             "work",
