@@ -6,6 +6,45 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-07-30",
+        "title": "Being in debt is a new norm",
+        "topics": [
+            "society",
+            "psychology",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_being_in_debt_is_a_new_norm.jpg",
+        "keywords": "being in debt is a new norm society psychology life b1-b2",
+        "objectives": [
+            "analyze striking global statistics about modern debt and its prevalence across various demographics and life events;",
+            "identify and categorize different types of financial debt (e.g., mortgages, BNPL, student loans) through targeted matching tasks;",
+            "evaluate personal and societal attitudes toward borrowing, credit scores, and financial leverage through opinion statements and listening comprehension."
+        ],
+        "description": "In this lesson, students begin by examining shocking global facts about debt, such as the $348 trillion global debt record, the normalization of 40-year mortgages, and the rise of \"Buy Now, Pay Later\" (BNPL) services that allow people to finance even a $25 pizza order. They discuss which statistics are most surprising and share their own experiences with debt. The lesson then transitions to vocabulary building, where learners match specific debt categories (e.g., payday loans, overdraft fees, medical debt, utility debt) to their real-world contexts.\nNext, students watch a short video highlighting that 77% of Americans carry some form of debt, identifying the most common types people struggle with. The core of the lesson involves a critical evaluation of nine provocative statements about debt. Students debate whether debt is a \"financial ladder\" or a \"trap,\" if credit scores merely make people \"servants to interest,\" and whether \"smart debt\" is simply leverage used by the wealthy to grow their assets. Finally, learners listen to three speakers (Marcus, Naomi, and Rosalind) share their perspectives on debt, matching each person's viewpoint to the corresponding statements and analyzing how they justify their financial realities and choices.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_being_in_debt_is_a_new_norm.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_being_in_debt_is_a_new_norm_3_speakers.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_being_in_debt_is_a_new_norm.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=WWlIGiXmfi8"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-07-29",
         "title": "Attractive men",
         "topics": [
