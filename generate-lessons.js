@@ -250,3 +250,44 @@ ${articleUrls}
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
 console.log(`Sitemap: ${lessons.length + articles.length + 2} URLs`);
 console.log('All done!');
+
+// ── INDEXNOW — notify Bing/Yandex of all URLs ──
+const https = require('https');
+
+const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
+const allUrls = [
+    'https://esl-plans.com',
+    'https://esl-plans.com/docs/terms.html',
+    ...lessons.map(l => `https://esl-plans.com/lessons/${slugify(l.title)}.html`),
+    ...articles.map(a => `https://esl-plans.com/articles/${slugify(a.title)}.html`)
+];
+
+const indexNowPayload = JSON.stringify({
+    host: 'esl-plans.com',
+    key: INDEXNOW_KEY,
+    keyLocation: `https://esl-plans.com/${INDEXNOW_KEY}.txt`,
+    urlList: allUrls
+});
+
+const options = {
+    hostname: 'api.indexnow.org',
+    path: '/indexnow',
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Length': Buffer.byteLength(indexNowPayload)
+    }
+};
+
+const req = https.request(options, res => {
+    console.log(`IndexNow response: ${res.statusCode}`);
+    if (res.statusCode === 200 || res.statusCode === 202) {
+        console.log(`✅ IndexNow: ${allUrls.length} URLs submitted to Bing/Yandex`);
+    } else {
+        console.log(`⚠️ IndexNow returned status ${res.statusCode}`);
+    }
+});
+
+req.on('error', err => console.log('IndexNow error:', err.message));
+req.write(indexNowPayload);
+req.end();
