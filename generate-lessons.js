@@ -1,4 +1,10 @@
 const fs = require('fs');
+const https = require('https');
+
+// Read secrets at top level
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
+const TELEGRAM_CHAT = '@eslplans';
+console.log('Telegram token at startup:', TELEGRAM_BOT_TOKEN ? `yes (${TELEGRAM_BOT_TOKEN.length} chars)` : 'NO');
 
 // ── GENERATE LESSON PAGES ──
 const lessonsContent = fs.readFileSync('lessons.js', 'utf8');
@@ -254,8 +260,8 @@ console.log('All done!');
 // ── TELEGRAM AUTO-POST for new lessons ──
 async function postToTelegram(lesson) {
     const slug = slugify(lesson.title);
-    const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
-    const CHAT_ID = '@eslplans';
+    const BOT_TOKEN = TELEGRAM_BOT_TOKEN;
+    const CHAT_ID = TELEGRAM_CHAT;
     console.log('Telegram token present:', BOT_TOKEN ? `yes (${BOT_TOKEN.length} chars)` : 'NO');
     if (!BOT_TOKEN) { console.log('No Telegram token — skipping post'); return; }
 
@@ -327,8 +333,6 @@ async function postToTelegram(lesson) {
 if (lessons.length > 0) {
     postToTelegram(lessons[0]).catch(console.error);
 }
-const https = require('https');
-const http = require('http');
 
 const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
 const allUrls = [
