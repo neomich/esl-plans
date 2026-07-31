@@ -20,6 +20,16 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Test secret
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ]; then
+            echo "SECRET IS EMPTY"
+          else
+            echo "SECRET IS SET (length: ${#TELEGRAM_BOT_TOKEN})"
+          fi
+
       - name: Generate lesson and article pages
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
