@@ -396,7 +396,60 @@ async function postToBluesky(lesson) {
             return;
         }
 
-        // Step 2 — create post with link card
+        // Step 2 — upload image if available
+        let imageEmbed = null;
+        const imgBase = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
+        const imgUpper = imgBase.endsWith('.jpg') ? imgBase.slice(0,-4)+'.JPG' : imgBase;
+        const imgLower = imgBase.endsWith('.JPG') ? imgBase.slice(0,-4)+'.jpg' : imgBase;
+
+        async function checkImg(url) {
+            return new Promise(resolve => {
+                const req = https.get(url, res => resolve(res.statusCode === 200 ? url : null));
+                req.on('error', () => resolve(null));
+            });
+        }
+
+        let imageUrl = await checkImg(imgUpper);
+        if (!imageUrl) imageUrl = await checkImg(imgLower);
+
+        if (imageUrl) {
+            try {
+                // Download image
+                const imgData = await new Promise((resolve, reject) => {
+                    https.get(imageUrl, res => {
+                        const chunks = [];
+                        res.on('data', chunk => chunks.push(chunk));
+                        res.on('end', () => resolve({ buffer: Buffer.concat(chunks), type: res.headers['content-type'] || 'image/jpeg' }));
+                        res.on('error', reject);
+                    }).on('error', reject);
+                });
+
+                // Upload to Bluesky
+                const blobResp = await fetch('https://bsky.social/xrpc/com.atproto.repo.uploadBlob', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': imgData.type,
+                        'Authorization': `Bearer ${session.accessJwt}`
+                    },
+                    body: imgData.buffer
+                });
+                const blobResult = await blobResp.json();
+                if (blobResult.blob) {
+                    imageEmbed = {
+                        $type: 'app.bsky.embed.images',
+                        images: [{
+                            image: blobResult.blob,
+                            alt: `ESL Lesson Plan — ${lesson.title}`
+                        }]
+                    };
+                    console.log('Bluesky image uploaded ✅');
+                }
+            } catch(e) {
+                console.log('Bluesky image upload failed:', e.message);
+            }
+        }
+
+        // Step 3 — create post
         const postResp = await fetch('https://bsky.social/xrpc/com.atproto.repo.createRecord', {
             method: 'POST',
             headers: {
@@ -410,6 +463,7 @@ async function postToBluesky(lesson) {
                     $type: 'app.bsky.feed.post',
                     text: postText,
                     createdAt: new Date().toISOString(),
+                    ...(imageEmbed ? { embed: imageEmbed } : {}),
                     facets: [{
                         index: {
                             byteStart: Buffer.byteLength(postText.slice(0, postText.lastIndexOf(link))),
