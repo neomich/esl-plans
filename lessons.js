@@ -7,6 +7,74 @@ const lessonsCatalog = [
 
     {
         "dateAdded": "2026-07-31",
+        "title": "Unusual Jobs",
+        "topics": [
+            "society",
+            "work",
+            "media"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "b1",
+        "levelLabel": "B1",
+        "duration": "90 min",
+        "visualSource": "images/b1_unusual_jobs.jpg",
+        "keywords": "unusual jobs society work media b1",
+        "objectives": [
+            "identify and discuss key professional qualities and workplace vocabulary (e.g., reliability, flexibility, punctuality, teamwork);",
+            "analyze modern social trends and their impact on the job market, consumer behavior, and daily life;",
+            "evaluate personal opinions on work culture through structured debate and apply listening comprehension skills to analyze unconventional careers."
+        ],
+        "description": "In this lesson, students begin by analyzing two contrasting job profiles: Tom, a traditional office worker, and Nora, an Instagram blogger. They use these profiles to identify and match 12 core professional qualities (such as reliability, positive attitude, willingness to learn, and safety-minded) to their definitions, discussing how these traits apply to different modern roles.\nThe lesson then transitions to a broader societal analysis, where students examine images and discuss current social trends driving the popularity of things like plant-based milk, remote work, electric cars, dating apps, and mobile gaming.\nOn the second page, the class engages in a critical discussion by evaluating six provocative statements about work culture. Students debate whether they agree or disagree with claims such as \"Robots will do all jobs soon,\" \"The easiest jobs are the best jobs,\" \"Working alone is better than working in a team,\" and \"All jobs should pay the same money,\" defending their positions with reasoned arguments.\nFollowing this discussion, the lesson moves into its core media section, featuring a series of short videos about people doing highly unusual jobs (e.g., a \"People Walker,\" a \"Dumpster Diving Mama,\" a professional who gives free haircuts to the homeless, and a \"Professional Mattress Tester\"). For each video, learners complete a targeted four-part comprehension task:\n-Identifying the specific job.\n-Outlining the person's daily responsibilities.\n-Determining the personal qualities needed to do the job well.\n-Connecting the unconventional role to a broader social trend.\nFinally, the lesson concludes with a personalized speaking task where students reflect on their own current or dream jobs, detailing their responsibilities, the qualities required to succeed, and the social trends their profession reflects.",
+        "telegramRecap": "Boost your students' professional vocabulary, spark debates on modern work culture, and explore wild careers with this B1 zero-prep lesson!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_unusual_jobs.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_unusual_jobs.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=Znx_oZWj1MQ"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=xBfU_SlssDc"
+            },
+            {
+                "label": "Link 3",
+                "url": "https://www.youtube.com/watch?v=AgAbLlDAMZg"
+            },
+            {
+                "label": "Link 4",
+                "url": "https://www.youtube.com/watch?v=q7CZmeWDwDY"
+            },
+            {
+                "label": "Link 5",
+                "url": "https://www.youtube.com/watch?v=3EBFODoXcXc"
+            },
+            {
+                "label": "Link 6",
+                "url": "https://www.youtube.com/watch?v=kQgTcXJkwTc"
+            },
+            {
+                "label": "Link 7",
+                "url": "https://www.youtube.com/watch?v=TGx5CJcF044"
+            },
+            {
+                "label": "Link 8",
+                "url": "https://www.youtube.com/watch?v=aqWi93MQ1WY"
+            }
+        ]
+    },
+
+
+
+    {
+        "dateAdded": "2026-07-31",
         "title": "Basic finance",
         "topics": [
             "work",
