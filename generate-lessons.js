@@ -365,6 +365,76 @@ if (lessons.length > 0) {
     postToTelegram(lessons[0]).catch(console.error);
 }
 
+// ── BLUESKY AUTO-POST ──
+async function postToBluesky(lesson) {
+    const BSKY_IDENTIFIER = 'esl-plans.com';
+    const BSKY_PASSWORD = process.env.BLUESKY_APP_PASSWORD || '';
+
+    if (!BSKY_PASSWORD) {
+        console.log('No Bluesky password — skipping');
+        return;
+    }
+
+    const slug = slugify(lesson.title);
+    const recap = lesson.telegramRecap ||
+        (lesson.description || '').replace(/\n/g, ' ').split(/[.!?]/)[0].trim() + '.';
+    const link = `https://esl-plans.com/#lesson-${slug}`;
+    const freeTag = lesson.isFree ? '\n⭐ FREE — no subscription needed!' : '';
+
+    const postText = `📚 ESL Plan — ${lesson.title}\n🎓 ${lesson.categoryLabel} · ${lesson.mediaIcon} ${lesson.mediaType} · 🥉 ${lesson.levelLabel} · ⏱ ${lesson.duration}\n${recap}${freeTag}\n🔗 ${link}`;
+
+    try {
+        // Step 1 — get session token
+        const loginResp = await fetch('https://bsky.social/xrpc/com.atproto.server.createSession', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ identifier: BSKY_IDENTIFIER, password: BSKY_PASSWORD })
+        });
+        const session = await loginResp.json();
+        if (!session.accessJwt) {
+            console.log('⚠️ Bluesky login failed:', session.message || JSON.stringify(session));
+            return;
+        }
+
+        // Step 2 — create post with link card
+        const postResp = await fetch('https://bsky.social/xrpc/com.atproto.repo.createRecord', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${session.accessJwt}`
+            },
+            body: JSON.stringify({
+                repo: session.did,
+                collection: 'app.bsky.feed.post',
+                record: {
+                    $type: 'app.bsky.feed.post',
+                    text: postText,
+                    createdAt: new Date().toISOString(),
+                    facets: [{
+                        index: {
+                            byteStart: Buffer.byteLength(postText.slice(0, postText.lastIndexOf(link))),
+                            byteEnd: Buffer.byteLength(postText.slice(0, postText.lastIndexOf(link))) + Buffer.byteLength(link)
+                        },
+                        features: [{ $type: 'app.bsky.richtext.facet#link', uri: link }]
+                    }]
+                }
+            })
+        });
+        const postResult = await postResp.json();
+        if (postResult.uri) {
+            console.log(`✅ Bluesky: posted "${lesson.title}"`);
+        } else {
+            console.log('⚠️ Bluesky post error:', JSON.stringify(postResult));
+        }
+    } catch(e) {
+        console.log('Bluesky error:', e.message);
+    }
+}
+
+if (lessons.length > 0) {
+    postToBluesky(lessons[0]).catch(console.error);
+}
+
 const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
 const allUrls = [
     'https://esl-plans.com',
