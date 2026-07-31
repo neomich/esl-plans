@@ -251,7 +251,97 @@ fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
 console.log(`Sitemap: ${lessons.length + articles.length + 2} URLs`);
 console.log('All done!');
 
-// ── INDEXNOW — notify Bing/Yandex of all URLs ──
+// ── TELEGRAM AUTO-POST for new lessons ──
+async function postToTelegram(lesson) {
+    const slug = slugify(lesson.title);
+    const BOT_TOKEN = '8032943426:AAEfA7S5TRaY_6ITAmmoVGPuE7XlVg09luE';
+    const CHAT_ID = '2652006770';
+
+    // Build media line
+    const mediaLine = [
+        lesson.categoryIcon ? `${lesson.categoryIcon} ${lesson.categoryLabel}` : null,
+        lesson.mediaIcon ? `${lesson.mediaIcon} ${lesson.mediaType.replace(' & ', '&')}` : null,
+        lesson.levelLabel ? `🥉 ${lesson.levelLabel}` : null,
+        lesson.duration ? `⏱ ${lesson.duration}` : null
+    ].filter(Boolean).join(' · ');
+
+    // Generate 2-line recap using Claude API
+    let recap = '';
+    try {
+        const claudeResp = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': process.env.ANTHROPIC_API_KEY || '',
+                'anthropic-version': '2023-06-01'
+            },
+            body: JSON.stringify({
+                model: 'claude-sonnet-4-6',
+                max_tokens: 100,
+                messages: [{
+                    role: 'user',
+                    content: `Write a 2-sentence Telegram post recap for this ESL lesson plan. Be direct, specific and keyword-rich. No phrases like "In this lesson students". Just what the lesson covers and why it's interesting. Max 30 words total.\n\nLesson: ${lesson.title}\nDescription: ${(lesson.description || '').substring(0, 500)}`
+                }]
+            })
+        });
+        const claudeData = await claudeResp.json();
+        recap = claudeData.content?.[0]?.text?.trim() || '';
+    } catch(e) {
+        // Fallback: use first 150 chars of description
+        recap = (lesson.description || '').replace(/\n/g, ' ').substring(0, 150).trim();
+        if (recap.length === 150) recap += '...';
+    }
+
+    const link = `https://esl-plans.com/#lesson-${slug}`;
+    const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n${recap}\n🔗 ${link}`;
+
+    // Send photo with caption
+    const imageUrl = `https://esl-plans.com/${lesson.visualSource}`;
+
+    const payload = JSON.stringify({
+        chat_id: `@eslplans`,
+        photo: imageUrl,
+        caption: caption,
+        parse_mode: 'HTML'
+    });
+
+    return new Promise((resolve) => {
+        const options = {
+            hostname: 'api.telegram.org',
+            path: `/bot${BOT_TOKEN}/sendPhoto`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(payload)
+            }
+        };
+
+        const req = https.request(options, res => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+                const result = JSON.parse(data);
+                if (result.ok) {
+                    console.log(`✅ Telegram: posted "${lesson.title}"`);
+                } else {
+                    console.log(`⚠️ Telegram error: ${result.description}`);
+                }
+                resolve();
+            });
+        });
+        req.on('error', err => {
+            console.log('Telegram error:', err.message);
+            resolve();
+        });
+        req.write(payload);
+        req.end();
+    });
+}
+
+// Only post the NEWEST lesson (first in catalog = most recently added)
+if (lessons.length > 0) {
+    postToTelegram(lessons[0]).catch(console.error);
+}
 const https = require('https');
 
 const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
