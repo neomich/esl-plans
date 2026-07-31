@@ -287,7 +287,7 @@ async function postToTelegram(lesson) {
     const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n${recap}${freeTag}\n🔗 ${link}`;
 
     // Send photo with caption
-    const imageUrl = `https://esl-plans.com/${lesson.visualSource}`;
+    const imageUrl = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
 
     const payload = JSON.stringify({
         chat_id: `@eslplans`,
