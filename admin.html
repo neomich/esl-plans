@@ -334,7 +334,14 @@
         </div>
     </div>
 
-    <!-- FILES -->
+    <!-- TELEGRAM RECAP -->
+    <div class="card">
+        <div class="section-title">📱 Telegram Post Recap <span style="font-size:11px; color:#aaa; font-weight:400;">(max 150 chars — used for auto-post to @eslplans)</span></div>
+        <div class="form-row">
+            <input type="text" id="f-telegram-recap" maxlength="150" placeholder="e.g. Dark psychology meets English learning — explore narcissism, psychopathy and Machiavellianism through real pop culture examples." oninput="updateRecapCount(this)">
+            <div style="font-size:12px; color:#aaa; text-align:right; margin-top:4px;"><span id="recap-count">0</span>/150</div>
+        </div>
+    </div>
     <div class="card">
         <div class="section-title">Files (R2 filenames — just the filename, e.g. b1_lesson.pdf)</div>
         <div class="file-grid">
@@ -527,6 +534,10 @@
     });
 
     // ── RICH TEXT EDITOR ──
+    function updateRecapCount(el) {
+        document.getElementById('recap-count').innerText = el.value.length;
+    }
+
     function fmt(cmd) {
         document.getElementById('a-body').focus();
         document.execCommand(cmd, false, null);
@@ -879,6 +890,9 @@ ${articlesStr}
         // Description
         const description = document.getElementById('f-description').value.trim();
 
+        // Telegram recap
+        const telegramRecap = document.getElementById('f-telegram-recap').value.trim();
+
         // Files
         const pdfFile = document.getElementById('f-pdf').value.trim().replace(/\.pdf$/i,'') + (document.getElementById('f-pdf').value.trim() ? '.pdf' : '');
         const rarFile = document.getElementById('f-rar').value.trim().replace(/\.rar$/i,'') + (document.getElementById('f-rar').value.trim() ? '.rar' : '');
@@ -927,6 +941,7 @@ ${articlesStr}
             keywords,
             objectives,
             description,
+            telegramRecap: telegramRecap || null,
             pdfUrl: pdfFile ? `${R2_BASE}/materials/${pdfFile}` : '',
             audioUrl: audioFiles.length > 0 ? audioFiles[0].url : null,
             ...(audioFiles.length > 1 ? { audioUrls: audioFiles } : {}),
@@ -1035,6 +1050,8 @@ ${articlesStr}
     function resetForm() {
         document.getElementById('f-title').value = '';
         document.getElementById('f-description').value = '';
+        document.getElementById('f-telegram-recap').value = '';
+        document.getElementById('recap-count').innerText = '0';
         document.getElementById('f-pdf').value = '';
         document.getElementById('f-rar').value = '';
         document.getElementById('f-image').value = '';
