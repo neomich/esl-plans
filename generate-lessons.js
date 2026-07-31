@@ -288,45 +288,62 @@ async function postToTelegram(lesson) {
 
     // Send photo with caption
     const imageUrl = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
+    console.log('Attempting to post image:', imageUrl);
 
-    const payload = JSON.stringify({
-        chat_id: `@eslplans`,
+    // Try sending as photo first, fall back to text if image fails
+    const photoPayload = JSON.stringify({
+        chat_id: CHAT_ID,
         photo: imageUrl,
         caption: caption,
         parse_mode: 'HTML'
     });
 
-    return new Promise((resolve) => {
-        const options = {
-            hostname: 'api.telegram.org',
-            path: `/bot${BOT_TOKEN}/sendPhoto`,
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(payload)
-            }
-        };
-
-        const req = https.request(options, res => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                const result = JSON.parse(data);
-                if (result.ok) {
-                    console.log(`✅ Telegram: posted "${lesson.title}"`);
-                } else {
-                    console.log(`⚠️ Telegram error: ${result.description}`);
-                }
-                resolve();
-            });
-        });
-        req.on('error', err => {
-            console.log('Telegram error:', err.message);
-            resolve();
-        });
-        req.write(payload);
-        req.end();
+    const textPayload = JSON.stringify({
+        chat_id: CHAT_ID,
+        text: caption,
+        parse_mode: 'HTML'
     });
+
+    function sendTelegram(path, payload) {
+        return new Promise((resolve) => {
+            const options = {
+                hostname: 'api.telegram.org',
+                path: `/bot${BOT_TOKEN}/${path}`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Content-Length': Buffer.byteLength(payload)
+                }
+            };
+            const req = https.request(options, res => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                    try {
+                        const result = JSON.parse(data);
+                        if (result.ok) {
+                            console.log(`✅ Telegram: posted "${lesson.title}"`);
+                        } else {
+                            console.log(`⚠️ Telegram error: ${result.description}`);
+                        }
+                        resolve(result.ok);
+                    } catch(e) {
+                        resolve(false);
+                    }
+                });
+            });
+            req.on('error', err => { console.log('Telegram error:', err.message); resolve(false); });
+            req.write(payload);
+            req.end();
+        });
+    }
+
+    // Try photo first, fall back to text
+    const photoOk = await sendTelegram('sendPhoto', photoPayload);
+    if (!photoOk) {
+        console.log('Photo failed, sending as text...');
+        await sendTelegram('sendMessage', textPayload);
+    }
 }
 
 // Only post the NEWEST lesson (first in catalog = most recently added)
