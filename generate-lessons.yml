@@ -23,6 +23,7 @@ jobs:
       - name: Generate lesson and article pages
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: node generate-lessons.js
 
       - name: Commit and push generated files
