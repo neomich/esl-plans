@@ -287,8 +287,24 @@ async function postToTelegram(lesson) {
     const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n<b>${recap}</b>${freeTag}\n🔗 ${link}`;
 
     // Send photo with caption
-    const imageUrl = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
-    console.log('Attempting to post image:', imageUrl);
+    const imgBase = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
+    const imgUpper = imgBase.endsWith('.jpg') ? imgBase.slice(0,-4)+'.JPG' : imgBase;
+    const imgLower = imgBase.endsWith('.JPG') ? imgBase.slice(0,-4)+'.jpg' : imgBase;
+    console.log('Checking images:', imgUpper, imgLower);
+
+    function checkImage(url) {
+        return new Promise((resolve) => {
+            const req = https.get(url, res => {
+                console.log(`Image check: ${res.statusCode} for ${url}`);
+                resolve(res.statusCode === 200 ? url : null);
+            });
+            req.on('error', () => resolve(null));
+        });
+    }
+
+    let foundImageUrl = await checkImage(imgUpper);
+    if (!foundImageUrl) foundImageUrl = await checkImage(imgLower);
+    console.log('Found image URL:', foundImageUrl || 'none');
 
     function sendTelegram(path, payload) {
         return new Promise((resolve) => {
@@ -324,23 +340,10 @@ async function postToTelegram(lesson) {
         });
     }
 
-    // First verify image exists
-    function checkImage(url) {
-        return new Promise((resolve) => {
-            const req = https.get(url, res => {
-                console.log(`Image check status: ${res.statusCode} for ${url}`);
-                resolve(res.statusCode === 200);
-            });
-            req.on('error', () => resolve(false));
-        });
-    }
-
-    const imageExists = await checkImage(imageUrl);
-
-    if (imageExists) {
+    if (foundImageUrl) {
         const photoPayload = JSON.stringify({
             chat_id: CHAT_ID,
-            photo: imageUrl,
+            photo: foundImageUrl,
             caption: caption,
             parse_mode: 'HTML'
         });
@@ -350,6 +353,7 @@ async function postToTelegram(lesson) {
         const textPayload = JSON.stringify({
             chat_id: CHAT_ID,
             text: caption,
+            parse_mode: 'HTML',
             disable_web_page_preview: true
         });
         await sendTelegram('sendMessage', textPayload);
