@@ -7,7 +7,7 @@ const lessonsCatalog = [
 
     {
         "dateAdded": "2026-07-31",
-        "title": "Unusual Jobs",
+        "title": "Unusual Jobs", 
         "topics": [
             "society",
             "work",
