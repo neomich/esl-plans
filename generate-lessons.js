@@ -365,6 +365,88 @@ if (lessons.length > 0) {
     postToTelegram(lessons[0]).catch(console.error);
 }
 
+// ── PINTEREST AUTO-POST ──
+async function postToPinterest(lesson) {
+    const PINTEREST_TOKEN = process.env.PINTEREST_ACCESS_TOKEN || '';
+    const BOARD_ID = process.env.PINTEREST_BOARD_ID || '';
+
+    if (!PINTEREST_TOKEN || !BOARD_ID) {
+        console.log('No Pinterest credentials — skipping');
+        return;
+    }
+
+    const slug = slugify(lesson.title);
+    const imgBase = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
+    const imgUpper = imgBase.endsWith('.jpg') ? imgBase.slice(0,-4)+'.JPG' : imgBase;
+    const imgLower = imgBase.endsWith('.JPG') ? imgBase.slice(0,-4)+'.jpg' : imgBase;
+
+    // Check which image exists
+    function checkImg(url) {
+        return new Promise(resolve => {
+            const req = https.get(url, res => resolve(res.statusCode === 200 ? url : null));
+            req.on('error', () => resolve(null));
+        });
+    }
+    let imageUrl = await checkImg(imgUpper);
+    if (!imageUrl) imageUrl = await checkImg(imgLower);
+
+    if (!imageUrl) {
+        console.log('Pinterest: no image found, skipping');
+        return;
+    }
+
+    const description = lesson.telegramRecap ||
+        (lesson.description || '').replace(/\n/g, ' ').split(/[.!?]/)[0].trim() + '.';
+
+    const pinData = JSON.stringify({
+        board_id: BOARD_ID,
+        title: `ESL Lesson Plan — ${lesson.title}`,
+        description: `${description}\n\n🎓 ${lesson.levelLabel} · ⏱ ${lesson.duration}\n\n#ESL #EnglishLesson #ESLteacher #AdultLearners #TeachingEnglish`,
+        link: `https://esl-plans.com/#lesson-${slug}`,
+        media_source: {
+            source_type: 'image_url',
+            url: imageUrl
+        }
+    });
+
+    return new Promise(resolve => {
+        const options = {
+            hostname: 'api.pinterest.com',
+            path: '/v5/pins',
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${PINTEREST_TOKEN}`,
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(pinData)
+            }
+        };
+        const req = https.request(options, res => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+                try {
+                    const result = JSON.parse(data);
+                    if (result.id) {
+                        console.log(`✅ Pinterest: pinned "${lesson.title}" — ${result.id}`);
+                    } else {
+                        console.log(`⚠️ Pinterest error:`, JSON.stringify(result));
+                    }
+                } catch(e) {
+                    console.log('Pinterest parse error:', e.message);
+                }
+                resolve();
+            });
+        });
+        req.on('error', err => { console.log('Pinterest error:', err.message); resolve(); });
+        req.write(pinData);
+        req.end();
+    });
+}
+
+if (lessons.length > 0) {
+    postToPinterest(lessons[0]).catch(console.error);
+}
+
 const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
 const allUrls = [
     'https://esl-plans.com',
