@@ -23,12 +23,7 @@ jobs:
       - name: Test secret
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        run: |
-          if [ -z "$TELEGRAM_BOT_TOKEN" ]; then
-            echo "SECRET IS EMPTY"
-          else
-            echo "SECRET IS SET (length: ${#TELEGRAM_BOT_TOKEN})"
-          fi
+        run: echo "Token length is ${#TELEGRAM_BOT_TOKEN}"
 
       - name: Generate lesson and article pages
         env:
