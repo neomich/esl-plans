@@ -284,25 +284,11 @@ async function postToTelegram(lesson) {
 
     const freeTag = lesson.isFree ? '\n⭐ FREE lesson — no subscription needed!' : '';
     const link = `https://esl-plans.com/#lesson-${slug}`;
-    const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n${recap}${freeTag}\n🔗 ${link}`;
+    const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n<b>${recap}</b>${freeTag}\n🔗 ${link}`;
 
     // Send photo with caption
     const imageUrl = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
     console.log('Attempting to post image:', imageUrl);
-
-    // Try sending as photo first, fall back to text if image fails
-    const photoPayload = JSON.stringify({
-        chat_id: CHAT_ID,
-        photo: imageUrl,
-        caption: caption,
-        parse_mode: 'HTML'
-    });
-
-    const textPayload = JSON.stringify({
-        chat_id: CHAT_ID,
-        text: caption,
-        parse_mode: 'HTML'
-    });
 
     function sendTelegram(path, payload) {
         return new Promise((resolve) => {
@@ -338,10 +324,34 @@ async function postToTelegram(lesson) {
         });
     }
 
-    // Try photo first, fall back to text
-    const photoOk = await sendTelegram('sendPhoto', photoPayload);
-    if (!photoOk) {
-        console.log('Photo failed, sending as text...');
+    // First verify image exists
+    function checkImage(url) {
+        return new Promise((resolve) => {
+            const req = https.get(url, res => {
+                console.log(`Image check status: ${res.statusCode} for ${url}`);
+                resolve(res.statusCode === 200);
+            });
+            req.on('error', () => resolve(false));
+        });
+    }
+
+    const imageExists = await checkImage(imageUrl);
+
+    if (imageExists) {
+        const photoPayload = JSON.stringify({
+            chat_id: CHAT_ID,
+            photo: imageUrl,
+            caption: caption,
+            parse_mode: 'HTML'
+        });
+        await sendTelegram('sendPhoto', photoPayload);
+    } else {
+        console.log('Image not found, sending as text without preview...');
+        const textPayload = JSON.stringify({
+            chat_id: CHAT_ID,
+            text: caption,
+            disable_web_page_preview: true
+        });
         await sendTelegram('sendMessage', textPayload);
     }
 }
