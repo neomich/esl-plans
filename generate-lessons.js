@@ -256,6 +256,7 @@ async function postToTelegram(lesson) {
     const slug = slugify(lesson.title);
     const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
     const CHAT_ID = '@eslplans';
+    console.log('Telegram token present:', BOT_TOKEN ? `yes (${BOT_TOKEN.length} chars)` : 'NO');
     if (!BOT_TOKEN) { console.log('No Telegram token — skipping post'); return; }
 
     // Build media line
@@ -327,6 +328,7 @@ if (lessons.length > 0) {
     postToTelegram(lessons[0]).catch(console.error);
 }
 const https = require('https');
+const http = require('http');
 
 const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
 const allUrls = [
