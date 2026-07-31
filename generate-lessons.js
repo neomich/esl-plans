@@ -282,9 +282,10 @@ async function postToTelegram(lesson) {
         recap = firstSentence.length > 10 ? firstSentence + '.' : (lesson.description || '').replace(/\n/g, ' ').substring(0, 150).trim();
     }
 
+    const hashtags = '#ESL #ELT #TEFL #EnglishTeaching #LessonPlan #AdultLearners #OnlineTutor #ESLteacher #ELTcommunity';
     const freeTag = lesson.isFree ? '\n⭐ FREE lesson — no subscription needed!' : '';
     const link = `https://esl-plans.com/#lesson-${slug}`;
-    const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n<b>${recap}</b>${freeTag}\n🔗 ${link}`;
+    const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n<b>${recap}</b>${freeTag}\n🔗 ${link}\n\n${hashtags}`;
 
     // Send photo with caption
     const imgBase = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
@@ -380,8 +381,8 @@ async function postToBluesky(lesson) {
         (lesson.description || '').replace(/\n/g, ' ').split(/[.!?]/)[0].trim() + '.';
     const link = `https://esl-plans.com/#lesson-${slug}`;
     const freeTag = lesson.isFree ? '\n⭐ FREE — no subscription needed!' : '';
-
-    const postText = `📚 ESL Plan — ${lesson.title}\n🎓 ${lesson.categoryLabel} · ${lesson.mediaIcon} ${lesson.mediaType} · 🥉 ${lesson.levelLabel} · ⏱ ${lesson.duration}\n${recap}${freeTag}\n🔗 ${link}`;
+    const bskyHashtags = '#ESL #ELT #TEFL #EnglishTeaching #LessonPlan #AdultLearners #OnlineTutor #ESLteacher #ELTcommunity';
+    const postText = `📚 ESL Plan — ${lesson.title}\n🎓 ${lesson.categoryLabel} · ${lesson.mediaIcon} ${lesson.mediaType} · 🥉 ${lesson.levelLabel} · ⏱ ${lesson.duration}\n${recap}${freeTag}\n🔗 ${link}\n\n${bskyHashtags}`;
 
     try {
         // Step 1 — get session token
