@@ -6,6 +6,39 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-07-31",
+        "title": "Basic finance",
+        "topics": [
+            "work",
+            "society"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "a2",
+        "levelLabel": "A2",
+        "duration": "60 min",
+        "visualSource": "images/b1_basic_finance.jpg",
+        "keywords": "basic finance work society a2",
+        "objectives": [
+            "master core personal finance vocabulary (e.g., salary, budget, loan, interest, debt, taxes, expense, receipt, bill);",
+            "practice listening comprehension by extracting specific financial details from a realistic conversation between a couple managing their monthly finances;",
+            "expand financial lexicon through a comprehensive word bank and apply these terms in practical, context-based gap-fill exercises."
+        ],
+        "description": "In this lesson, students begin by being introduced to nine essential financial terms, setting the foundation for the unit. They then engage in a listening comprehension task featuring a couple, Mark and Anna, discussing their household finances. Students answer multiple-choice questions to verify their understanding of key details, such as the amount of the electricity bill, tax deadlines, the reasons for their credit card debt, changes in their car loan interest rate, and their specific budget plan to save money.\nFollowing the listening task, learners consolidate their understanding of the core vocabulary by matching each of the nine terms to its precise definition and contextual example sentence (e.g., distinguishing between a loan, an expense, and a receipt). This transitions into a personalized speaking segment, where students discuss their own financial realities, answering questions about their monthly salaries, biggest daily expenses, local tax rates, and personal budgeting habits.\nFinally, the lesson expands students' financial lexicon with a broad word bank covering banking and transactions (e.g., mortgage, withdraw, transaction, digital wallet, savings, vault, banker). Students apply this expanded vocabulary by completing a 16-sentence gap-fill exercise, reinforcing how these terms are used in everyday financial contexts, before wrapping up with a final review of the key concepts.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_basic_finance.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_basic_finance_mark_anna.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_basic_finance.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-07-30",
         "title": "Being in debt is a new norm",
         "topics": [
