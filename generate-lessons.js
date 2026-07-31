@@ -254,8 +254,9 @@ console.log('All done!');
 // ── TELEGRAM AUTO-POST for new lessons ──
 async function postToTelegram(lesson) {
     const slug = slugify(lesson.title);
-    const BOT_TOKEN = '8032943426:AAEfA7S5TRaY_6ITAmmoVGPuE7XlVg09luE';
-    const CHAT_ID = '2652006770';
+    const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
+    const CHAT_ID = '@eslplans';
+    if (!BOT_TOKEN) { console.log('No Telegram token — skipping post'); return; }
 
     // Build media line
     const mediaLine = [
