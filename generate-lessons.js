@@ -265,35 +265,18 @@ async function postToTelegram(lesson) {
         lesson.duration ? `⏱ ${lesson.duration}` : null
     ].filter(Boolean).join(' · ');
 
-    // Generate 2-line recap using Claude API
+    // Use telegramRecap field if available, otherwise first sentence of description
     let recap = '';
-    try {
-        const claudeResp = await fetch('https://api.anthropic.com/v1/messages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': process.env.ANTHROPIC_API_KEY || '',
-                'anthropic-version': '2023-06-01'
-            },
-            body: JSON.stringify({
-                model: 'claude-sonnet-4-6',
-                max_tokens: 100,
-                messages: [{
-                    role: 'user',
-                    content: `Write a 2-sentence Telegram post recap for this ESL lesson plan. Be direct, specific and keyword-rich. No phrases like "In this lesson students". Just what the lesson covers and why it's interesting. Max 30 words total.\n\nLesson: ${lesson.title}\nDescription: ${(lesson.description || '').substring(0, 500)}`
-                }]
-            })
-        });
-        const claudeData = await claudeResp.json();
-        recap = claudeData.content?.[0]?.text?.trim() || '';
-    } catch(e) {
-        // Fallback: use first 150 chars of description
-        recap = (lesson.description || '').replace(/\n/g, ' ').substring(0, 150).trim();
-        if (recap.length === 150) recap += '...';
+    if (lesson.telegramRecap) {
+        recap = lesson.telegramRecap.substring(0, 150);
+    } else {
+        const firstSentence = (lesson.description || '').replace(/\n/g, ' ').split(/[.!?]/)[0].trim();
+        recap = firstSentence.length > 10 ? firstSentence + '.' : (lesson.description || '').replace(/\n/g, ' ').substring(0, 150).trim();
     }
 
+    const freeTag = lesson.isFree ? '\n⭐ FREE lesson — no subscription needed!' : '';
     const link = `https://esl-plans.com/#lesson-${slug}`;
-    const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n${recap}\n🔗 ${link}`;
+    const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n${recap}${freeTag}\n🔗 ${link}`;
 
     // Send photo with caption
     const imageUrl = `https://esl-plans.com/${lesson.visualSource}`;
