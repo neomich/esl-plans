@@ -6,7 +6,7 @@
 const lessonsCatalog = [
 
     {
-        "dateAdded": "2026-08-01",
+        "dateAdded": "2026-08-01", 
         "title": "Work is optional",
         "topics": [
             "technology",
