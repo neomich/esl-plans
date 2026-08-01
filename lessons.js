@@ -6,6 +6,47 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-01",
+        "title": "Work is optional",
+        "topics": [
+            "technology",
+            "work",
+            "business",
+            "grammar"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_work_is_optional.jpg",
+        "keywords": "work is optional technology work business grammar b1-b2",
+        "objectives": [
+            "analyze philosophical quotations about the nature and value of work;",
+            "identify and practice natural discourse markers (fillers, hedging, agreement) through a targeted listening task;",
+            "evaluate Elon Musk’s predictions regarding AI, humanoid robots, and the potential obsolescence of traditional work and currency."
+        ],
+        "description": "The main objectives of this lesson are to:\nanalyze philosophical quotations about the nature and value of work;\nidentify and practice natural discourse markers (fillers, hedging, agreement) through a targeted listening task;\nevaluate Elon Musk’s predictions regarding AI, humanoid robots, and the potential obsolescence of traditional work and currency.\nIn this lesson, students begin by interpreting famous quotes about work from figures like Oscar Wilde, Voltaire, and Maya Angelou. They then listen to an audio track featuring four speakers reflecting on their own work experiences, matching each speaker to a quote while identifying common conversational discourse markers (e.g., you know, kind of, exactly, let me see). This transitions into a provocative warm-up discussion: what would you actually do if work became truly optional and money became irrelevant?\nThe core media task is a video comprehension segment featuring Elon Musk’s predictions from the US-Saudi Investment Forum. Students answer multiple-choice questions about his vision for the next 10–20 years, including the idea that work will become a voluntary hobby (like growing vegetables), AI and humanoid robots will eliminate poverty, and traditional currency may lose its relevance. \nFinally, the lesson concludes with a critical discussion on the \"unintended consequences\" of such a utopian/dystopian shift, prompting students to formulate and defend their own 10-to-20-year predictions for the future of labor and society.",
+        "telegramRecap": "Is work a trap or privilege? 🤔 Analyze quotes, master natural speech markers & debate Elon Musk’s vision of a post-money, AI-driven future!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_work_is_optional.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_work_is_optional_4_speakers.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_work_is_optional.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=NiJIpcrgEA0"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-07-31",
         "title": "Unusual Jobs",
         "topics": [
