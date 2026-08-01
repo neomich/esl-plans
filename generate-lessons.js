@@ -381,8 +381,14 @@ async function postToBluesky(lesson) {
         (lesson.description || '').replace(/\n/g, ' ').split(/[.!?]/)[0].trim() + '.';
     const link = `https://esl-plans.com/#lesson-${slug}`;
     const freeTag = lesson.isFree ? '\n⭐ FREE — no subscription needed!' : '';
-    const bskyHashtags = '#ESL #ELT #TEFL #LessonPlan #AdultLearners #ESLteacher';
-    const postText = `📚 ESL Plan — ${lesson.title}\n🎓 ${lesson.categoryLabel} · ${lesson.mediaIcon} ${lesson.mediaType} · 🥉 ${lesson.levelLabel} · ⏱ ${lesson.duration}\n${recap}${freeTag}\n🔗 ${link}\n\n${bskyHashtags}`;
+    const bskyHeader = `📚 ESL Plan — ${lesson.title}\n🎓 ${lesson.categoryLabel} · ${lesson.mediaIcon} ${lesson.mediaType} · 🥉 ${lesson.levelLabel} · ⏱ ${lesson.duration}\n`;
+    const bskyFooter = `${freeTag}\n🔗 ${link}`;
+    let bskyRecap = recap;
+    while ([...bskyHeader + bskyRecap + bskyFooter].length > 299 && bskyRecap.length > 10) {
+        bskyRecap = bskyRecap.slice(0, -3).trim();
+    }
+    const postText = bskyHeader + bskyRecap + (bskyRecap !== recap ? '...' : '') + bskyFooter;
+    console.log(`Bluesky post: ${[...postText].length} graphemes`);
 
     try {
         // Step 1 — get session token
