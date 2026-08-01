@@ -381,7 +381,7 @@ async function postToBluesky(lesson) {
         (lesson.description || '').replace(/\n/g, ' ').split(/[.!?]/)[0].trim() + '.';
     const link = `https://esl-plans.com/#lesson-${slug}`;
     const freeTag = lesson.isFree ? '\n⭐ FREE — no subscription needed!' : '';
-    const bskyHashtags = '#ESL #ELT #TEFL #EnglishTeaching #LessonPlan #AdultLearners #OnlineTutor #ESLteacher #ELTcommunity';
+    const bskyHashtags = '#ESL #ELT #TEFL #LessonPlan #AdultLearners #ESLteacher';
     const postText = `📚 ESL Plan — ${lesson.title}\n🎓 ${lesson.categoryLabel} · ${lesson.mediaIcon} ${lesson.mediaType} · 🥉 ${lesson.levelLabel} · ⏱ ${lesson.duration}\n${recap}${freeTag}\n🔗 ${link}\n\n${bskyHashtags}`;
 
     try {
