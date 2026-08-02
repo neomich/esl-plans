@@ -2554,7 +2554,8 @@
             document.getElementById('lesson-detail-view').style.display = 'grid';
             updatePinButton();
             renderRelatedLessons(index);
-            loadComments(slugify(lesson.title));
+            const lessonSlug = lesson.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+            loadComments(lessonSlug);
             window.scrollTo(0, 0);
         }
 
