@@ -835,7 +835,60 @@
             to { transform: translateX(-50%) translateY(0); opacity: 1; }
         }
 
-        /* ── FOOTER ── */
+        /* ── COMMENT SECTION ── */
+        .comments-section { margin-top: 32px; border-top: 1px dashed #ddd; padding-top: 28px; }
+        .comments-section h3 { font-size: 16px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+        .comment-form { margin-bottom: 20px; }
+        .comment-textarea {
+            width: 100%; padding: 12px 14px; border: 1.5px solid #e0e0e0; border-radius: 12px;
+            font-size: 14px; font-family: inherit; resize: vertical; min-height: 80px;
+            outline: none; transition: border-color 0.2s;
+        }
+        .comment-textarea:focus { border-color: #c95210; }
+        .comment-submit-btn {
+            margin-top: 8px; background: #c95210; color: white; border: none;
+            border-radius: 20px; padding: 9px 22px; font-size: 14px; font-weight: 700;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .comment-submit-btn:hover { background: #b0460b; }
+        .comment-error { color: #e03131; font-size: 13px; margin-top: 6px; display: none; }
+        .comment-login-prompt {
+            background: #fff5ee; border: 1.5px solid #c95210; border-radius: 12px;
+            padding: 14px 18px; font-size: 14px; color: #555; text-align: center;
+        }
+        .comment-login-prompt a { color: #c95210; font-weight: 700; cursor: pointer; }
+        .comment-item {
+            background: #fafafa; border-radius: 12px; padding: 14px 16px;
+            margin-bottom: 10px; border: 1px solid #f0f0f0;
+        }
+        .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .comment-author { font-size: 13px; font-weight: 700; color: #c95210; }
+        .comment-date { font-size: 11px; color: #aaa; }
+        .comment-text { font-size: 14px; color: #444; line-height: 1.6; }
+        .comment-actions { display: flex; gap: 10px; margin-top: 8px; }
+        .comment-action-btn {
+            background: none; border: none; font-size: 12px; color: #aaa;
+            cursor: pointer; padding: 0; font-weight: 600;
+        }
+        .comment-action-btn:hover { color: #c95210; }
+        .comment-edit-area { width: 100%; padding: 8px; border: 1.5px solid #c95210; border-radius: 8px; font-size: 14px; font-family: inherit; margin-top: 8px; }
+        .comment-save-btn { background: #c95210; color: white; border: none; border-radius: 16px; padding: 6px 16px; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+
+        /* ── FREE GIFT BANNER ── */
+        .free-gift-banner {
+            background: linear-gradient(135deg, #fff8e1, #fff3e0);
+            border: 2px solid #ffd600; border-radius: 16px;
+            padding: 18px 20px; margin: 16px 0; text-align: center;
+        }
+        .free-gift-banner p { font-size: 15px; color: #333; margin-bottom: 12px; font-weight: 600; }
+        .free-gift-btn {
+            background: #c95210; color: white; border: none; border-radius: 25px;
+            padding: 11px 24px; font-size: 14px; font-weight: 700; cursor: pointer;
+        }
+        .free-gift-contact { margin-top: 14px; font-size: 13px; color: #555; line-height: 1.8; }
+        .free-gift-contact a { color: #c95210; font-weight: 700; text-decoration: none; }
+
+        /* ── END COMMENT/GIFT CSS ── */
         .site-footer {
             background: #222;
             color: #aaa;
@@ -1612,7 +1665,20 @@
                 <ul class="pricing-features">
                     <li><span class="feat-icon">📖</span><span>Access <strong>free</strong> lesson plans tailored for online teaching.</span></li>
                     <li><span class="feat-icon">🔖</span><span>Pin-save your favorite plans for later.</span></li>
-                    <li><span class="feat-icon">💬</span><span>Join our community chat on <a href="https://t.me/eslplans" target="_blank" style="color:#229ED9; font-weight:700;">Telegram →</a></span></li>                </ul>
+                    <li><span class="feat-icon">💬</span><span>Join our community chat on <a href="https://t.me/eslplans" target="_blank" style="color:#229ED9; font-weight:700;">Telegram →</a></span></li>
+                </ul>
+                <!-- FREE GIFT — unregistered only -->
+                <div id="pricing-free-gift" style="display:none;" class="free-gift-banner">
+                    <p>🎁 Get 1 free premium lesson — register now!</p>
+                    <button class="free-gift-btn" onclick="openAuthModal(); switchTab('signup');">Create Free Account</button>
+                </div>
+                <!-- FREE GIFT CONTACTS — registered guests only -->
+                <div id="pricing-free-gift-contacts" style="display:none;" class="free-gift-contact">
+                    <strong>🎁 Claim your free premium lesson!</strong><br>
+                    Contact me with your <em>registered email + lesson title</em>:<br>
+                    <a href="https://t.me/alex_the_master" target="_blank">📱 Telegram: @alex_the_master</a><br>
+                    <a href="https://wa.me/message/eslplanscom" target="_blank">💬 WhatsApp: @eslplanscom</a>
+                </div>
             </div>
 
             <!-- CONTRIBUTOR -->
@@ -1873,6 +1939,13 @@
                 <div id="related-lessons-section" style="margin-top:32px; border-top:1px dashed #ddd; padding-top:28px; display:none;">
                     <h3 style="font-size:16px; font-weight:700; color:#888; text-transform:uppercase; letter-spacing:1px; margin-bottom:16px;">You may also like</h3>
                     <div id="related-lessons-grid" class="related-grid"></div>
+                </div>
+
+                <!-- COMMENTS SECTION -->
+                <div class="comments-section" id="comments-section" style="display:none;">
+                    <h3>💬 Comments</h3>
+                    <div id="comment-form-area"></div>
+                    <div id="comments-list"></div>
                 </div>
             </div>
 
@@ -2180,6 +2253,12 @@
             const tier = currentUser ? (currentUser.profile_tier || 'free') : null;
             const profile = currentUser ? currentUser.profile_data : null;
 
+            // Free gift visibility
+            const giftBanner = document.getElementById('pricing-free-gift');
+            const giftContacts = document.getElementById('pricing-free-gift-contacts');
+            if (giftBanner) giftBanner.style.display = !currentUser ? 'block' : 'none';
+            if (giftContacts) giftContacts.style.display = (currentUser && tier === 'free') ? 'block' : 'none';
+
             // Show/hide premium links based on Friend tier
             const zoomWrap = document.getElementById('zoom-link-wrap');
             const tgWrap = document.getElementById('tg-friends-link-wrap');
@@ -2431,6 +2510,15 @@
                     <div class="paywall-section">
                         <a href="#" onclick="showPricingView(); return false;" class="upgrade-btn">🔒 Upgrade Now to Download</a>
                         <p class="paywall-note">Get access to full lesson package</p>
+                        ${!currentUser ? `<div class="free-gift-banner" style="margin-top:16px;">
+                            <p>🎁 Get 1 free premium lesson — register now!</p>
+                            <button class="free-gift-btn" onclick="openAuthModal(); switchTab('signup');">Create Free Account</button>
+                        </div>` : (currentUser.profile_tier === 'free' ? `<div class="free-gift-contact" style="margin-top:16px; background:#fff8e1; border:1px solid #ffd600; border-radius:12px; padding:14px;">
+                            <strong>🎁 Claim your free premium lesson!</strong><br>
+                            Contact me with your <em>registered email + lesson title</em>:<br>
+                            <a href="https://t.me/alex_the_master" target="_blank" style="color:#c95210; font-weight:700;">📱 Telegram: @alex_the_master</a><br>
+                            <a href="https://wa.me/message/eslplanscom" target="_blank" style="color:#c95210; font-weight:700;">💬 WhatsApp: @eslplanscom</a>
+                        </div>` : '')}
                     </div>
                     ${videoHtml}
                     <div style="margin-top:12px;">
@@ -2466,6 +2554,7 @@
             document.getElementById('lesson-detail-view').style.display = 'grid';
             updatePinButton();
             renderRelatedLessons(index);
+            loadComments(slugify(lesson.title));
             window.scrollTo(0, 0);
         }
 
@@ -2479,6 +2568,9 @@
             document.getElementById('teachers-corner-view').style.display = 'none';
             document.getElementById('article-detail-view').style.display = 'none';
             document.getElementById('level-filter-tray').style.display = 'none';
+            document.getElementById('comments-section').style.display = 'none';
+            document.getElementById('comments-list').innerHTML = '';
+            document.getElementById('comment-form-area').innerHTML = '';
         }
 
         function showDashboardView() {
@@ -3229,6 +3321,165 @@
 
         // Check for password reset FIRST before anything touches the hash
         const _bootHash = window.location.hash;
+        // ── COMMENT SYSTEM ──
+        const NOTIF_BOT_TOKEN = '7316734712:AAH6nwcCUtvqFCDDO-1Sx_xHtxsvYuQ5O54';
+        const NOTIF_CHAT_ID = '1385220815';
+        const ADMIN_EMAIL = 'esl-plans@proton.me';
+
+        async function loadComments(lessonSlug) {
+            const section = document.getElementById('comments-section');
+            const formArea = document.getElementById('comment-form-area');
+            const listEl = document.getElementById('comments-list');
+            section.style.display = 'block';
+            listEl.innerHTML = '<p style="color:#aaa; font-size:13px;">Loading comments...</p>';
+
+            // Render form
+            if (!currentUser) {
+                formArea.innerHTML = `<div class="comment-login-prompt">
+                    Want to leave a comment? <a onclick="openAuthModal(); switchTab('signup');">Register for free</a> or <a onclick="openAuthModal(); switchTab('signin');">sign in</a>.
+                </div>`;
+            } else {
+                formArea.innerHTML = `<div class="comment-form">
+                    <textarea class="comment-textarea" id="comment-input" placeholder="Share your thoughts about this lesson..." maxlength="500"></textarea>
+                    <div class="comment-error" id="comment-error"></div>
+                    <button class="comment-submit-btn" onclick="submitComment('${lessonSlug}')">Post Comment</button>
+                </div>`;
+            }
+
+            // Load comments from Supabase
+            try {
+                const { data, error } = await _supabase
+                    .from('comments')
+                    .select('*')
+                    .eq('lesson_slug', lessonSlug)
+                    .order('created_at', { ascending: true });
+
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    listEl.innerHTML = '<p style="color:#aaa; font-size:13px; margin-top:8px;">No comments yet — be the first!</p>';
+                    return;
+                }
+
+                listEl.innerHTML = data.map(c => renderComment(c)).join('');
+            } catch(e) {
+                listEl.innerHTML = '<p style="color:#aaa; font-size:13px;">Could not load comments.</p>';
+            }
+        }
+
+        function renderComment(c) {
+            const isOwner = currentUser && currentUser.email === c.user_email;
+            const isAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
+            const date = new Date(c.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            const displayName = c.user_email ? c.user_email.split('@')[0] : 'User';
+
+            return `<div class="comment-item" id="comment-${c.id}">
+                <div class="comment-header">
+                    <span class="comment-author">${displayName}</span>
+                    <span class="comment-date">${date}</span>
+                </div>
+                <div class="comment-text" id="comment-text-${c.id}">${escapeHtml(c.content)}</div>
+                ${(isOwner || isAdmin) ? `<div class="comment-actions">
+                    ${isOwner ? `<button class="comment-action-btn" onclick="editComment('${c.id}', '${escapeHtml(c.content).replace(/'/g, "\\'")}')">Edit</button>` : ''}
+                    <button class="comment-action-btn" onclick="deleteComment('${c.id}', '${c.lesson_slug}')">Delete</button>
+                </div>` : ''}
+            </div>`;
+        }
+
+        function escapeHtml(str) {
+            return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        async function submitComment(lessonSlug) {
+            const input = document.getElementById('comment-input');
+            const errEl = document.getElementById('comment-error');
+            const content = input.value.trim();
+
+            // Validate
+            if (!content) { showCommentError('Please write something before posting.'); return; }
+            if (content.length < 3) { showCommentError('Comment is too short.'); return; }
+
+            // No URLs allowed
+            const urlPattern = /https?:\/\/|www\.|\.com|\.org|\.net|\.ru/i;
+            if (urlPattern.test(content)) {
+                showCommentError('⚠️ Links are not allowed in comments. Please remove any URLs.');
+                return;
+            }
+
+            try {
+                const { data, error } = await _supabase.from('comments').insert({
+                    lesson_slug: lessonSlug,
+                    user_id: currentUser.id,
+                    user_email: currentUser.email,
+                    content: content
+                }).select().single();
+
+                if (error) throw error;
+
+                input.value = '';
+                errEl.style.display = 'none';
+
+                // Add to list
+                const listEl = document.getElementById('comments-list');
+                if (listEl.innerHTML.includes('No comments yet')) listEl.innerHTML = '';
+                listEl.innerHTML += renderComment(data);
+
+                // Send TG notification
+                sendCommentNotification(lessonSlug, currentUser.email, content);
+
+            } catch(e) {
+                showCommentError('Could not post comment. Please try again.');
+            }
+        }
+
+        function showCommentError(msg) {
+            const el = document.getElementById('comment-error');
+            if (el) { el.innerText = msg; el.style.display = 'block'; }
+        }
+
+        async function deleteComment(commentId, lessonSlug) {
+            if (!confirm('Delete this comment?')) return;
+            await _supabase.from('comments').delete().eq('id', commentId);
+            document.getElementById(`comment-${commentId}`)?.remove();
+        }
+
+        function editComment(commentId, currentText) {
+            const textEl = document.getElementById(`comment-text-${commentId}`);
+            if (!textEl) return;
+            textEl.innerHTML = `<textarea class="comment-edit-area" id="edit-${commentId}">${currentText}</textarea>
+                <button class="comment-save-btn" onclick="saveEdit('${commentId}')">Save</button>
+                <button class="comment-action-btn" style="margin-left:8px;" onclick="cancelEdit('${commentId}', '${currentText.replace(/'/g, "\\'")}')">Cancel</button>`;
+        }
+
+        async function saveEdit(commentId) {
+            const textarea = document.getElementById(`edit-${commentId}`);
+            const content = textarea?.value.trim();
+            if (!content) return;
+
+            const urlPattern = /https?:\/\/|www\.|\.com|\.org|\.net|\.ru/i;
+            if (urlPattern.test(content)) { alert('Links are not allowed in comments.'); return; }
+
+            await _supabase.from('comments').update({ content }).eq('id', commentId);
+            const textEl = document.getElementById(`comment-text-${commentId}`);
+            if (textEl) textEl.innerHTML = escapeHtml(content);
+        }
+
+        function cancelEdit(commentId, originalText) {
+            const textEl = document.getElementById(`comment-text-${commentId}`);
+            if (textEl) textEl.innerHTML = originalText;
+        }
+
+        function sendCommentNotification(lessonSlug, email, content) {
+            const lessonTitle = lessonSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            const msg = `💬 New comment on "${lessonTitle}"\n👤 ${email}\n💬 "${content.substring(0, 200)}"\n🔗 https://esl-plans.com/#lesson-${lessonSlug}`;
+            fetch(`https://api.telegram.org/bot${NOTIF_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: NOTIF_CHAT_ID, text: msg })
+            }).catch(() => {});
+        }
+        // ── END COMMENT SYSTEM ──
+
         if (_bootHash && _bootHash.includes('type=recovery')) {
             applyFiltersAndRender();
             updatePinBadge();
