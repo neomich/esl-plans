@@ -6,6 +6,44 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-02",
+        "title": "The Rumsfeld Matrix",
+        "topics": [
+            "psychology",
+            "society",
+            "grammar",
+            "life",
+            "work"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_rumsfeld_matrix.jpg",
+        "keywords": "the rumsfeld matrix psychology society grammar life work b2-c1",
+        "objectives": [
+            "define and explore the concept of \"awareness\" and its related synonyms and antonyms;",
+            "understand and apply the Rumsfeld Matrix to risk assessment and real-life scenarios;",
+            "practice listening comprehension by identifying topics and categorizing specific details into the matrix for three different speakers;",
+            "review and apply eight distinct future tense structures and modals (e.g., Future Continuous, Future Perfect, going to, will, might, likely to) to make predictions and discuss future plans."
+        ],
+        "description": "The lesson introduces the Rumsfeld Matrix through a hypothetical \"new pandemic\" scenario, where learners categorize facts, risks, hidden assets, and surprises into the four quadrants of the matrix.\nNext, students read about the historical context of the matrix, learning about Donald Rumsfeld’s infamous 2002 press conference, the initial public mockery of his answer as \"word salad\" (even winning a \"Foot in Mouth\" award), and its eventual adoption by NASA, scientists, and business leaders as a brilliant tool for crisis management and risk assessment.\nThe core media task is a two-part listening activity featuring three callers (Barrett, Juniper, and Mateo) on a radio show. First, students identify the general topic each person is discussing (e.g., AI, personal finances, future life). Then, they listen again to extract specific details and fill in the corresponding Rumsfeld Matrix boxes for each speaker.\nFinally, the lesson concludes with a comprehensive grammar focus on future forms. Students match eight different future structures and modals—including Future Continuous, Future Perfect, going to (for planned intentions), will (for confident predictions), might (for weaker possibilities), likely to (for probability), the First Conditional, and could—to their specific functional definitions and real-life example sentences about technology, careers, and relationships.",
+        "telegramRecap": "Master the Rumsfeld Matrix! 🧠 Categorize knowns & unknowns, predict the future with grammar forms, and ace risk assessment.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_rumsfeld_matrix.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_rumsfeld_matrix_3_calls.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_rumsfeld_matrix.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-08-01",
         "title": "Work is optional",
         "topics": [
