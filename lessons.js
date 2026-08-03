@@ -6,6 +6,50 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-03",
+        "title": "Aliens and Chickens",
+        "topics": [
+            "food",
+            "grammar",
+            "society"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_vegan_aliens.jpg",
+        "keywords": "aliens and chickens food grammar society b1-b2",
+        "objectives": [
+            "analyze human behavior and dietary habits from an outsider’s (alien) perspective to spark critical thinking;",
+            "practice narrative sequencing and syntax by reconstructing a short film’s plot and unscrambling dialogue questions;",
+            "interpret global data on meat consumption and master culinary vocabulary through a practical video tutorial."
+        ],
+        "description": "In this lesson, students begin with a thought-provoking warm-up, filling in the blanks of an \"alien's guide to Earth\" that highlights human contradictions (e.g., fighting over resources, staring at screens, valuing wealth over health).\nThe lesson then transitions to its first media task: a short film featuring aliens observing human meat-eating habits. Students sequence eight key events from the video in chronological order (from the aliens' arrival to their confusion over human clothing). Following this, they tackle a syntax challenge, unscrambling mixed-up words to form the exact questions the aliens ask in the film.\nNext, learners analyze global meat consumption data, examining maps and bar charts to identify which countries lead in consuming specific meats (e.g., chicken, pork, beef, and seafood) and discussing cultural dietary trends.\nFinally, the lesson concludes with its second media task: a \"How to Break Down a Chicken\" video tutorial. Students learn specific culinary and anatomical vocabulary (e.g., backbone, oyster, breastbone, joint) and complete a step-by-step gap-fill exercise detailing the proper technique for butchering a whole bird to ensure even cooking and make homemade stock.",
+        "telegramRecap": "Aliens judge our meat habits! 👽 Sequence a short film, analyze global food data, and master butchering a whole chicken.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_vegan_aliens.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_vegan_aliens.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=_gz9Vj8TMCc"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=nDIK8loUT1k"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-02",
         "title": "The Rumsfeld Matrix",
         "topics": [
