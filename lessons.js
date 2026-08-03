@@ -7,6 +7,65 @@ const lessonsCatalog = [
 
     {
         "dateAdded": "2026-08-03",
+        "title": "Redhead people",
+        "topics": [
+            "grammar",
+            "society",
+            "life",
+            "media"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_redhead_people.jpg",
+        "keywords": "redhead people grammar society life media a2-b1",
+        "objectives": [
+            "master practical salon vocabulary and functional phrases for booking appointments and communicating hairstyle preferences;",
+            "practice listening comprehension through realistic salon dialogues and a True/False task about hairdressing myths;",
+            "explore the cultural and historical significance of red hair by analyzing famous redheads throughout history."
+        ],
+        "description": "In this lesson, students begin with a video and True/False task about hair salon realities, testing their knowledge of statements like \"Thais has been cutting hair for 20 years,\" \"Barbershops and salons are the same,\" and \"The final step in a haircut is washing the hair.\"\nNext, learners master essential salon phrases through an audio task, matching common questions and requests (e.g., \"How would you like your hair...?\", \"Can you cut about 2 inches off?\", \"I want a trim\", \"Can you layer my hair?\") to complete realistic dialogues between stylists and clients.\nThe core listening segment features an audio dialogue of a salon visit, where students follow a customer's experience (including potential mishaps like getting shampoo in their eyes or dyeing hair the wrong color) and answer comprehension questions about the client's profession, reasons for the visit, and their reaction to second-rate service.\nFinally, the lesson transitions to a podcast about famous redheads throughout history. Students listen and complete a chart matching historical figures (Elizabeth I, Vincent van Gogh, Vladimir Lenin, Mary Magdalene, Galileo Galilei) to their achievements and redhead-related traits. The class concludes by learning 10 hair-related idioms (e.g., \"let your hair down,\" \"split hairs,\" \"hair-raising,\" \"tear your hair out\") and discussing personal experiences with bad haircuts and salon disasters.",
+        "telegramRecap": "\"Let your hair down!\" Practice salon English, listen to a haircut disaster, and explore the history of red hair icons.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_redhead_people.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_redhead_people_1_salon_phrases.mp3",
+        "audioUrls": [
+            {
+                "label": "Audio",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_redhead_people_1_salon_phrases.mp3"
+            },
+            {
+                "label": "Audio",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_redhead_people_1_salon_visit.mp3"
+            },
+            {
+                "label": "Audio",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_redhead_people_2_haircolor_rating.mp3"
+            },
+            {
+                "label": "Audio",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_redhead_people_3_the_reds.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_redhead_people.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=Fm6WUxIXous"
+            }
+        ]
+    },
+
+
+
+    {
+        "dateAdded": "2026-08-03",
         "title": "Aliens and Chickens",
         "topics": [
             "food",
