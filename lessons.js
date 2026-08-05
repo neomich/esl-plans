@@ -6,6 +6,61 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-05",
+        "title": "Phobias",
+        "topics": [
+            "psychology",
+            "society",
+            "media",
+            "life"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_phobias.jpg",
+        "keywords": "phobias psychology society media life b1-b2",
+        "objectives": [
+            "identify and define various specific phobias and common fears through vocabulary matching and contextual multiple-choice questions;",
+            "practice listening and viewing comprehension by analyzing personal accounts of phobias through two audio interviews/podcasts and two video segments;",
+            "evaluate the prevalence of common fears using statistical data and discuss the psychological distinctions between normal fears and clinical phobias."
+        ],
+        "description": "In this lesson, students begin with a \"phobias workshop\" warm-up, answering questions about everyday sounds and social situations (e.g., awkward, borderline, silence) to set the context of fear and discomfort. They then explore specific phobias by matching terms to their definitions.\nThe core of the lesson features personal accounts from individuals (such as Chloe, Elena, Mark, Mike, Sarah, and David) sharing their experiences with different fears. Students analyze these accounts through two dedicated audio listening tasks to understand the real-life impact of these phobias. Additionally, the lesson incorporates two video comprehension tasks to further explore the nature, causes, and remedies of specific fears.\nStudents complete matching exercises related to these causes and treatments, verifying their answers through a final podcast listening activity. Finally, learners examine a statistical chart displaying the most common phobias (e.g., public speaking, animals, heights, blood) and their prevalence percentages. The class concludes with a critical discussion on the relatability of these fears, the role of childhood experiences in shaping adult phobias, the distinction between a \"normal\" fear and a clinical phobia, and the effectiveness of exposure therapy as a treatment.",
+        "telegramRecap": "Explore real phobia stories, analyze fear statistics, and discover if exposure therapy really works!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_phobias.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_phobias_6_people.mp3",
+        "audioUrls": [
+            {
+                "label": "Audio",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_phobias_6_people.mp3"
+            },
+            {
+                "label": "Audio",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_phobias_podcast.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_phobias.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=koNwUeG-iKE"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=6bAm9VY0XFU"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-03",
         "title": "Redhead people",
         "topics": [
