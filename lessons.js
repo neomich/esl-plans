@@ -6,6 +6,52 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-06",
+        "title": "Word of The Year",
+        "topics": [
+            "society",
+            "grammar",
+            "media",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_word_of_the_year.jpg",
+        "keywords": "word of the year society grammar media art b1-b2",
+        "objectives": [
+            "explore the origins of human language through four major linguistic theories (Bow-Wow, Pooh-Pooh, La-La, and Yo-He-Ho);",
+            "analyze the evolution of modern vocabulary through word formation processes like blending, clipping, and affixation;",
+            "evaluate the cultural significance of \"Words of the Year\" from major dictionaries (2020–2025) and their reflection of societal trends."
+        ],
+        "description": "In this lesson, students begin by investigating the mystery of how language began. They examine four competing theories: the Bow-Wow Theory (imitation of natural sounds), the Pooh-Pooh Theory (instinctive emotional cries), the La-La Theory (musical and poetic play), and the Yo-He-Ho Theory (rhythmic chants for coordinated labor). After discussing which theory they find most plausible, they watch a short video explaining these four concepts to verify their understanding.\nThe lesson then transitions to a reading of an excerpt from Leo Tolstoy's Wise Thoughts for Every Day (\"The Object of Life\"), prompting a philosophical discussion on the purpose of existence and how language preserves these thoughts for future generations.\nNext, learners explore how new words enter the English language today. They analyze three key mechanisms: blending (e.g., textpectation), affixation (e.g., subprime, awesomeness), and clipping (e.g., blog, flu). Students discuss personal examples of these new terms and how technology accelerates linguistic change.\nThe core media task is an audio podcast featuring a lexicographer discussing the \"Words of the Year\" from 2020 to 2025. Students match recent viral terms—such as goblin mode, rizz, brain rot, permacrisis, brat, hallucinate (AI context), and parasocial—to their definitions. They then engage in a lively discussion about which of these words resonate with their own experiences, asking questions like: \"When was the last time you fully went into goblin mode?\" or \"Do you feel like the world is living in a permacrisis?\"\nFinally, the class reflects on how these \"Words of the Year\" serve as time capsules, capturing the anxieties, humor, and technological shifts of each specific era.",
+        "telegramRecap": "How did language begin? 🤔 From Tolstoy to 'goblin mode', explore 4 origin theories and the viral words defining our modern era.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_word_of_the_year.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_word_of_the_year_tolstoy.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_word_of_the_year_tolstoy.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_word_of_the_year_podcast.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_word_of_the_year.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-08-05",
         "title": "Phobias",
         "topics": [
