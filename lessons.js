@@ -6,6 +6,46 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-07",
+        "title": "Design: Ford Aurora",
+        "topics": [
+            "technology",
+            "society",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_design_ford_aurora.jpg",
+        "keywords": "design: ford aurora technology society art a2-b1",
+        "objectives": [
+            "evaluate the principles of good design by contrasting visual appeal with practical usefulness through real-world examples;",
+            "master essential automotive vocabulary by matching 18 car parts to their corresponding images;",
+            "practice listening and viewing comprehension by analyzing a futuristic 1960s concept car and debating the shift toward modern utilitarian design."
+        ],
+        "description": "In this lesson, students begin by examining a series of bizarre and humorous design fails (e.g., a horse toilet, a face-down tanning chair) to discuss what makes a design truly \"good\" (attractive + useful). The lesson then transitions to the history of car design, where learners expand their lexical range by matching 18 core automotive parts (e.g., bonnet, dashboard, exhaust pipe, rearview mirror) to visual diagrams.\nThe core media task features a short video about the Ford Aurora, a wildly futuristic concept station wagon introduced in 1964. Before watching, students match intriguing descriptions of its features (e.g., a romper room, electroluminescent body panels, a polarized glass roof, a swivel seat) to corresponding images. After the video, the class engages in a critical discussion about why these visionary designs never made it to the mass market, why modern cars often feel \"boring\" or strictly utilitarian, and which retro-futuristic features they would love to see in today's vehicles.",
+        "telegramRecap": "Step into 1964! 🚗 Watch the Ford Aurora concept video, learn essential car parts, and debate why today's cars are so boring.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_design_ford_aurora.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_design_ford_aurora.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=e3bH2d_nVik"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-06",
         "title": "Word of The Year",
         "topics": [
