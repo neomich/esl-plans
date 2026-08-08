@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-08",
+        "title": "Switching jobs",
+        "topics": [
+            "work",
+            "business",
+            "society"
+        ],
+        "isFree": false,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "💼",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_switching_jobs.jpg",
+        "keywords": "switching jobs work business society b2-c1",
+        "objectives": [
+            "explore the deeper psychological and practical meanings of work (e.g., survival, identity, fulfillment, growth);",
+            "analyze the modern phenomenon of \"job hopping,\" evaluating its pros, cons, and strategic execution through targeted listening tasks;",
+            "master advanced professional vocabulary for career transitions and interview discussions."
+        ],
+        "description": "In this lesson, students begin by reflecting on what a job truly means to them, matching core concepts like Survival, Stability, Identity, Fulfillment, Purpose, Growth, Independence, and Security to their definitions.\nThe first core media task is an audio segment featuring three speakers (Amelia, Daniel, and Maya). Students listen to identify each person's profession, the two main meanings they assign to their work, and their extra motivations. Along the way, they learn and match advanced workplace phrases like validate sacrifice, consistently booked out, tangible contribution, and high-stakes decisions.\nNext, the lesson tackles the reality of modern career moves, presenting striking statistics (e.g., 30% of job hoppers received four or more raises in three years). This leads into the second media task: an audio podcast with Alex and Sarah discussing the advantages and disadvantages of job hopping. Students match \"Ways to Successfully Job Hop\" (e.g., leave on good terms, research strategic tenure, have a forward-looking explanation) to their practical descriptions.\nFinally, the class concludes with a critical discussion on real-world career dilemmas: Income vs. Stability (would you take a 20% raise or stay for security?), The Time Risk (is leaving after 8 months a red flag?), and Future Focus (how to frame job changes positively in interviews).",
+        "telegramRecap": "What does your job really mean to you? 💼 Master career vocab, analyze job-hopping stats, and learn to switch roles strategically!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_switching_jobs.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_switching_jobs_3_speakers.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_switching_jobs_3_speakers.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_switching_jobs_podcast.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_switching_jobs.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-08-07",
         "title": "Design: Ford Aurora",
         "topics": [
