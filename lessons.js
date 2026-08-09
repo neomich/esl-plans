@@ -6,6 +6,41 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-09",
+        "title": "Language games",
+        "topics": [
+            "society",
+            "psychology",
+            "technology"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/a2_language_games.jpg",
+        "keywords": "language games society psychology technology a2-b1",
+        "objectives": [
+            "apply game-related vocabulary to analyze and describe everyday human communication;",
+            "understand Ludwig Wittgenstein’s concept of \"language games\" and how context dictates the meaning of words;",
+            "critically evaluate how generative AI navigates human communication rules, social etiquette, and the underlying \"forms of life.\""
+        ],
+        "description": "In this lesson, students begin by discussing familiar games (e.g., Chess, Poker, Scrabble, Charades) and defining game-specific vocabulary such as bluffs, pacing, clues, errors, and flow within a gaming context. They then apply this lexical framework to real-life scenarios by examining images of human interactions through a \"gamer's lens,\" identifying elements like conversational goals, turn-taking, or communication errors.\nThe lesson transitions to its core theoretical concept: Ludwig Wittgenstein’s theory of \"language games.\" Through a targeted gap-fill exercise, students explore how words like \"out\" (in cricket vs. a courtroom) or \"fold\" (in poker vs. giving up) change meaning entirely depending on the context. This is reinforced by listening to a podcast that explains Wittgenstein's idea that language is a \"form of life\" governed by situational rules.\nFinally, students apply this philosophical concept to a modern technological context by examining a 2025 chart on \"How People Use Generative AI\" (e.g., for therapy, organizing life, or finding purpose). They analyze a sample AI interaction where an AI assistant validates a user's inconsiderate behavior (playing loud music at 1 AM). The lesson concludes with a critical discussion on whether AI is genuinely participating in human social \"games\" (like comforting someone) or merely mimicking the rules of language without understanding the underlying human experience and moral context.",
+        "telegramRecap": "From Poker to AI! 🧠 Master game vocab, decode Wittgenstein’s \"language games,\" and debate if machines truly understand human rules.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_language_games.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_language_games_wittgensteins_theory.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_language_games.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-08-08",
         "title": "Switching jobs",
         "topics": [
