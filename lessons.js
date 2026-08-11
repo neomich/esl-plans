@@ -6,6 +6,50 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-11",
+        "title": "Familiar Strangers",
+        "topics": [
+            "psychology",
+            "society",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_familiar_strangers.jpg",
+        "keywords": "familiar strangers psychology society life b1-b2",
+        "objectives": [
+            "explore the concept of \"familiar strangers,\" social impact, and Dunbar’s Number (the cognitive limit of 150 stable relationships);",
+            "practice narrative sequencing and listening comprehension through a short film, an audio podcast on stranger typologies, and a video podcast on social psychology;",
+            "reflect on personal social routines and the unspoken rules of human interaction in public spaces."
+        ],
+        "description": "In this lesson, students begin with a thought-provoking warm-up titled \"How Big is Life?\", analyzing the staggering statistic that we cross paths with roughly 80,000 strangers in a lifetime, yet only maintain about 150 meaningful connections (Dunbar’s Number).\nThe core of the lesson is structured around three distinct media tasks:\nShort Film (\"Two Strangers Who Meet Five Times\"): Students sequence the evolving, unspoken connection between two characters, Alistair and Samir, as they repeatedly cross paths from childhood sandcastles to adult job interviews, analyzing their shifting dynamics and recognition.\nAudio Podcast (\"6 Types of Strangers\"): Learners listen to Kimberly and Dr. Edward Thompson to define and categorize different social encounters. They complete a True/False task and a matching exercise to identify Familiar, Ghost, Liminal, Digital, Service, and Total strangers.\nVideo Podcast (\"All The People You Don't Know\" - The Rest Is Science): Students answer comprehension questions about why we classify strangers, the social contract of ignoring familiar faces without hostility, the \"epiphany\" of realizing a stranger recognizes you, and why embracing a unique appearance (like wearing bright colors) can be empowering.\nFinally, the lesson concludes with a personalized discussion, prompting students to identify the \"familiar stranger\" in their own daily routines and debate what would happen if they finally broke the unspoken rule and said \"hello.\"",
+        "telegramRecap": "Who is that person you see every day but never speak to? 🤔 Unpack the psychology of \"Familiar Strangers\" in this engaging ESL lesson plan!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_familiar_strangers.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_familiar_strangers_podcast.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_familiar_strangers.pdf.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=BzKtI9OfEpk"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=ROjWM4nUE64"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-09",
         "title": "Language games",
         "topics": [
