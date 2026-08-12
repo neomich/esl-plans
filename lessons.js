@@ -6,6 +6,57 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-12",
+        "title": "Girl bands",
+        "topics": [
+            "society",
+            "media",
+            "grammar",
+            "work",
+            "art"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_girl_bands.jpg",
+        "keywords": "girl bands society media grammar work art b1-b2",
+        "objectives": [
+            "explore the history, cultural impact, and recent decline of pop girl bands through audio analysis and discussion;",
+            "analyze the distinct personas of the Spice Girls and evaluate how modern music marketing and relatability have shifted;",
+            "practice the Present Perfect tense to describe life experiences, changes over time, and the career achievements of famous celebrities."
+        ],
+        "description": "In this lesson, students begin by matching iconic hit songs to legendary girl bands (e.g., Destiny's Child, Spice Girls, Pussycat Dolls, BLACKPINK) and discussing their personal fandoms. They then analyze data and read an article exploring why girl bands have seemingly declined in recent years. This leads into the first audio task, where students listen to pop culture commentator Cayla Harris discuss her nostalgia for childhood girl bands, the current state of music marketing, and why modern groups often feel \"less relatable\" to listeners.\nThe lesson then shifts to the ultimate 90s phenomenon: The Spice Girls. Students match each member (Ginger, Posh, Scary, Baby, Sporty) to the specific qualities and \"spice\" they represented. They listen to Part 1 of a podcast to verify these personas and discuss which Spice Girl they identify with most. Next, they look at the band members' lives in 2025, matching them to their current careers (e.g., Victoria Beckham as a fashion designer, Mel C as a solo artist and radio presenter), and listen to Part 2 of the podcast to check their answers.\nFinally, the lesson transitions to a grammar focus on the Present Perfect tense. Students learn how to use it for life experiences, changes over time, and present results. They apply this by completing a gap-fill exercise detailing the career trajectories and achievements of various global superstars (e.g., Taylor Swift, Beyoncé, Rihanna, Adele), reinforcing the grammar through the lens of pop culture success.",
+        "telegramRecap": "What happened to girl bands? 🎤 Explore the Spice Girls' legacy, decode pop marketing, and master the Present Perfect tense with music icons!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_girl_bands.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_girl_bands_cayla.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_girl_bands_cayla.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_girl_bands_part1.mp3"
+            },
+            {
+                "label": "3",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_girl_bands_part2.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_girl_bands.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-08-11",
         "title": "Familiar Strangers",
         "topics": [
