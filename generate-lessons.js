@@ -1,10 +1,4 @@
 const fs = require('fs');
-const https = require('https');
-
-// Read secrets at top level
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
-const TELEGRAM_CHAT = '@eslplans';
-console.log('Telegram token at startup:', TELEGRAM_BOT_TOKEN ? `yes (${TELEGRAM_BOT_TOKEN.length} chars)` : 'NO');
 
 // ── GENERATE LESSON PAGES ──
 const lessonsContent = fs.readFileSync('lessons.js', 'utf8');
@@ -98,7 +92,13 @@ lessons.forEach(lesson => {
         .cta-btn{display:inline-block;background:white;color:#c95210;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700;font-size:15px;}
         .back{display:inline-block;margin-top:20px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
     </style>
-    <script>setTimeout(function(){ window.location.href='https://esl-plans.com/#lesson-${slug}'; }, 500);</script>
+    <script>
+        // Highlight the view lesson button after 1 second to draw attention
+        setTimeout(function() {
+            const btn = document.getElementById('view-on-site-btn');
+            if (btn) btn.style.transform = 'scale(1.03)';
+        }, 1000);
+    </script>
 </head>
 <body>
     <div class="container">
@@ -138,7 +138,14 @@ lessons.forEach(lesson => {
             <a href="https://esl-plans.com" class="cta-btn">Browse All Lesson Plans →</a>
         </div>
 
-        <a class="back" href="https://esl-plans.com">&larr; Back to ESL-plans.com</a>
+        <div style="text-align:center; margin:32px 0;">
+            <a id="view-on-site-btn" href="https://esl-plans.com/#lesson-${slug}"
+               style="display:inline-block; background:#c95210; color:white; padding:16px 36px; border-radius:50px; text-decoration:none; font-size:18px; font-weight:800; box-shadow:0 4px 16px rgba(201,82,16,0.3); transition:transform 0.2s;">
+                🎓 View &amp; Download This Lesson →
+            </a>
+            <p style="margin-top:12px; font-size:13px; color:#aaa;">Free PDF, audio and video included for free lessons</p>
+        </div>
+        <a class="back" href="https://esl-plans.com">&larr; Browse all lesson plans</a>
     </div>
 </body>
 </html>`;
@@ -256,280 +263,3 @@ ${articleUrls}
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
 console.log(`Sitemap: ${lessons.length + articles.length + 2} URLs`);
 console.log('All done!');
-
-// ── TELEGRAM AUTO-POST for new lessons ──
-async function postToTelegram(lesson) {
-    const slug = slugify(lesson.title);
-    const BOT_TOKEN = TELEGRAM_BOT_TOKEN;
-    const CHAT_ID = TELEGRAM_CHAT;
-    console.log('Telegram token present:', BOT_TOKEN ? `yes (${BOT_TOKEN.length} chars)` : 'NO');
-    if (!BOT_TOKEN) { console.log('No Telegram token — skipping post'); return; }
-
-    // Build media line
-    const mediaLine = [
-        lesson.categoryIcon ? `${lesson.categoryIcon} ${lesson.categoryLabel}` : null,
-        lesson.mediaIcon ? `${lesson.mediaIcon} ${lesson.mediaType.replace(' & ', '&')}` : null,
-        lesson.levelLabel ? `🥉 ${lesson.levelLabel}` : null,
-        lesson.duration ? `⏱ ${lesson.duration}` : null
-    ].filter(Boolean).join(' · ');
-
-    // Use telegramRecap field if available, otherwise first sentence of description
-    let recap = '';
-    if (lesson.telegramRecap) {
-        recap = lesson.telegramRecap.substring(0, 150);
-    } else {
-        const firstSentence = (lesson.description || '').replace(/\n/g, ' ').split(/[.!?]/)[0].trim();
-        recap = firstSentence.length > 10 ? firstSentence + '.' : (lesson.description || '').replace(/\n/g, ' ').substring(0, 150).trim();
-    }
-
-    const hashtags = '#ESL #ELT #TEFL #EnglishTeaching #LessonPlan #AdultLearners #OnlineTutor #ESLteacher #ELTcommunity';
-    const freeTag = lesson.isFree ? '\n⭐ FREE lesson — no subscription needed!' : '';
-    const link = `https://esl-plans.com/#lesson-${slug}`;
-    const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n<b>${recap}</b>${freeTag}\n🔗 ${link}\n\n${hashtags}`;
-
-    // Send photo with caption
-    const imgBase = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
-    const imgUpper = imgBase.endsWith('.jpg') ? imgBase.slice(0,-4)+'.JPG' : imgBase;
-    const imgLower = imgBase.endsWith('.JPG') ? imgBase.slice(0,-4)+'.jpg' : imgBase;
-    console.log('Checking images:', imgUpper, imgLower);
-
-    function checkImage(url) {
-        return new Promise((resolve) => {
-            const req = https.get(url, res => {
-                console.log(`Image check: ${res.statusCode} for ${url}`);
-                resolve(res.statusCode === 200 ? url : null);
-            });
-            req.on('error', () => resolve(null));
-        });
-    }
-
-    let foundImageUrl = await checkImage(imgUpper);
-    if (!foundImageUrl) foundImageUrl = await checkImage(imgLower);
-    console.log('Found image URL:', foundImageUrl || 'none');
-
-    function sendTelegram(path, payload) {
-        return new Promise((resolve) => {
-            const options = {
-                hostname: 'api.telegram.org',
-                path: `/bot${BOT_TOKEN}/${path}`,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Content-Length': Buffer.byteLength(payload)
-                }
-            };
-            const req = https.request(options, res => {
-                let data = '';
-                res.on('data', chunk => data += chunk);
-                res.on('end', () => {
-                    try {
-                        const result = JSON.parse(data);
-                        if (result.ok) {
-                            console.log(`✅ Telegram: posted "${lesson.title}"`);
-                        } else {
-                            console.log(`⚠️ Telegram error: ${result.description}`);
-                        }
-                        resolve(result.ok);
-                    } catch(e) {
-                        resolve(false);
-                    }
-                });
-            });
-            req.on('error', err => { console.log('Telegram error:', err.message); resolve(false); });
-            req.write(payload);
-            req.end();
-        });
-    }
-
-    if (foundImageUrl) {
-        const photoPayload = JSON.stringify({
-            chat_id: CHAT_ID,
-            photo: foundImageUrl,
-            caption: caption,
-            parse_mode: 'HTML'
-        });
-        await sendTelegram('sendPhoto', photoPayload);
-    } else {
-        console.log('Image not found, sending as text without preview...');
-        const textPayload = JSON.stringify({
-            chat_id: CHAT_ID,
-            text: caption,
-            parse_mode: 'HTML',
-            disable_web_page_preview: true
-        });
-        await sendTelegram('sendMessage', textPayload);
-    }
-}
-
-// Only post the NEWEST lesson (first in catalog = most recently added)
-if (lessons.length > 0) {
-    postToTelegram(lessons[0]).catch(console.error);
-}
-
-// ── BLUESKY AUTO-POST ──
-async function postToBluesky(lesson) {
-    const BSKY_IDENTIFIER = 'esl-plans.com';
-    const BSKY_PASSWORD = process.env.BLUESKY_APP_PASSWORD || '';
-
-    if (!BSKY_PASSWORD) {
-        console.log('No Bluesky password — skipping');
-        return;
-    }
-
-    const slug = slugify(lesson.title);
-    const recap = lesson.telegramRecap ||
-        (lesson.description || '').replace(/\n/g, ' ').split(/[.!?]/)[0].trim() + '.';
-    const link = `https://esl-plans.com/#lesson-${slug}`;
-    const freeTag = lesson.isFree ? '\n⭐ FREE — no subscription needed!' : '';
-    const bskyHeader = `📚 ESL Plan — ${lesson.title}\n🎓 ${lesson.categoryLabel} · ${lesson.mediaIcon} ${lesson.mediaType} · 🥉 ${lesson.levelLabel} · ⏱ ${lesson.duration}\n`;
-    const bskyFooter = `${freeTag}\n🔗 ${link}`;
-    let bskyRecap = recap;
-    while ([...bskyHeader + bskyRecap + bskyFooter].length > 299 && bskyRecap.length > 10) {
-        bskyRecap = bskyRecap.slice(0, -3).trim();
-    }
-    const postText = bskyHeader + bskyRecap + (bskyRecap !== recap ? '...' : '') + bskyFooter;
-    console.log(`Bluesky post: ${[...postText].length} graphemes`);
-
-    try {
-        // Step 1 — get session token
-        const loginResp = await fetch('https://bsky.social/xrpc/com.atproto.server.createSession', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ identifier: BSKY_IDENTIFIER, password: BSKY_PASSWORD })
-        });
-        const session = await loginResp.json();
-        if (!session.accessJwt) {
-            console.log('⚠️ Bluesky login failed:', session.message || JSON.stringify(session));
-            return;
-        }
-
-        // Step 2 — upload image if available
-        let imageEmbed = null;
-        const imgBase = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
-        const imgUpper = imgBase.endsWith('.jpg') ? imgBase.slice(0,-4)+'.JPG' : imgBase;
-        const imgLower = imgBase.endsWith('.JPG') ? imgBase.slice(0,-4)+'.jpg' : imgBase;
-
-        async function checkImg(url) {
-            return new Promise(resolve => {
-                const req = https.get(url, res => resolve(res.statusCode === 200 ? url : null));
-                req.on('error', () => resolve(null));
-            });
-        }
-
-        let imageUrl = await checkImg(imgUpper);
-        if (!imageUrl) imageUrl = await checkImg(imgLower);
-
-        if (imageUrl) {
-            try {
-                // Download image
-                const imgData = await new Promise((resolve, reject) => {
-                    https.get(imageUrl, res => {
-                        const chunks = [];
-                        res.on('data', chunk => chunks.push(chunk));
-                        res.on('end', () => resolve({ buffer: Buffer.concat(chunks), type: res.headers['content-type'] || 'image/jpeg' }));
-                        res.on('error', reject);
-                    }).on('error', reject);
-                });
-
-                // Upload to Bluesky
-                const blobResp = await fetch('https://bsky.social/xrpc/com.atproto.repo.uploadBlob', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': imgData.type,
-                        'Authorization': `Bearer ${session.accessJwt}`
-                    },
-                    body: imgData.buffer
-                });
-                const blobResult = await blobResp.json();
-                if (blobResult.blob) {
-                    imageEmbed = {
-                        $type: 'app.bsky.embed.images',
-                        images: [{
-                            image: blobResult.blob,
-                            alt: `ESL Lesson Plan — ${lesson.title}`
-                        }]
-                    };
-                    console.log('Bluesky image uploaded ✅');
-                }
-            } catch(e) {
-                console.log('Bluesky image upload failed:', e.message);
-            }
-        }
-
-        // Step 3 — create post
-        const postResp = await fetch('https://bsky.social/xrpc/com.atproto.repo.createRecord', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${session.accessJwt}`
-            },
-            body: JSON.stringify({
-                repo: session.did,
-                collection: 'app.bsky.feed.post',
-                record: {
-                    $type: 'app.bsky.feed.post',
-                    text: postText,
-                    createdAt: new Date().toISOString(),
-                    ...(imageEmbed ? { embed: imageEmbed } : {}),
-                    facets: [{
-                        index: {
-                            byteStart: Buffer.byteLength(postText.slice(0, postText.lastIndexOf(link))),
-                            byteEnd: Buffer.byteLength(postText.slice(0, postText.lastIndexOf(link))) + Buffer.byteLength(link)
-                        },
-                        features: [{ $type: 'app.bsky.richtext.facet#link', uri: link }]
-                    }]
-                }
-            })
-        });
-        const postResult = await postResp.json();
-        if (postResult.uri) {
-            console.log(`✅ Bluesky: posted "${lesson.title}"`);
-        } else {
-            console.log('⚠️ Bluesky post error:', JSON.stringify(postResult));
-        }
-    } catch(e) {
-        console.log('Bluesky error:', e.message);
-    }
-}
-
-if (lessons.length > 0) {
-    postToBluesky(lessons[0]).catch(console.error);
-}
-
-const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
-const allUrls = [
-    'https://esl-plans.com',
-    'https://esl-plans.com/docs/terms.html',
-    ...lessons.map(l => `https://esl-plans.com/lessons/${slugify(l.title)}.html`),
-    ...articles.map(a => `https://esl-plans.com/articles/${slugify(a.title)}.html`)
-];
-
-const indexNowPayload = JSON.stringify({
-    host: 'esl-plans.com',
-    key: INDEXNOW_KEY,
-    keyLocation: `https://esl-plans.com/${INDEXNOW_KEY}.txt`,
-    urlList: allUrls
-});
-
-const options = {
-    hostname: 'api.indexnow.org',
-    path: '/indexnow',
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Content-Length': Buffer.byteLength(indexNowPayload)
-    }
-};
-
-const req = https.request(options, res => {
-    console.log(`IndexNow response: ${res.statusCode}`);
-    if (res.statusCode === 200 || res.statusCode === 202) {
-        console.log(`✅ IndexNow: ${allUrls.length} URLs submitted to Bing/Yandex`);
-    } else {
-        console.log(`⚠️ IndexNow returned status ${res.statusCode}`);
-    }
-});
-
-req.on('error', err => console.log('IndexNow error:', err.message));
-req.write(indexNowPayload);
-req.end();
