@@ -37,7 +37,13 @@
         .cta-btn{display:inline-block;background:white;color:#c95210;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700;font-size:15px;}
         .back{display:inline-block;margin-top:20px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
     </style>
-    <script>setTimeout(function(){ window.location.href='https://esl-plans.com/#lesson-work-is-optional'; }, 500);</script>
+    <script>
+        // Highlight the view lesson button after 1 second to draw attention
+        setTimeout(function() {
+            const btn = document.getElementById('view-on-site-btn');
+            if (btn) btn.style.transform = 'scale(1.03)';
+        }, 1000);
+    </script>
 </head>
 <body>
     <div class="container">
@@ -103,7 +109,14 @@ Finally, the lesson concludes with a critical discussion on the "unintended cons
             <a href="https://esl-plans.com" class="cta-btn">Browse All Lesson Plans →</a>
         </div>
 
-        <a class="back" href="https://esl-plans.com">&larr; Back to ESL-plans.com</a>
+        <div style="text-align:center; margin:32px 0;">
+            <a id="view-on-site-btn" href="https://esl-plans.com/#lesson-work-is-optional"
+               style="display:inline-block; background:#c95210; color:white; padding:16px 36px; border-radius:50px; text-decoration:none; font-size:18px; font-weight:800; box-shadow:0 4px 16px rgba(201,82,16,0.3); transition:transform 0.2s;">
+                🎓 View &amp; Download This Lesson →
+            </a>
+            <p style="margin-top:12px; font-size:13px; color:#aaa;">Free PDF, audio and video included for free lessons</p>
+        </div>
+        <a class="back" href="https://esl-plans.com">&larr; Browse all lesson plans</a>
     </div>
 </body>
 </html>
