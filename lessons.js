@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-16",
+        "title": "ASMR",
+        "topics": [
+            "psychology",
+            "society",
+            "media",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_asmr.jpg",
+        "keywords": "asmr psychology society media art b1-b2",
+        "objectives": [
+            "identify and categorize everyday sounds based on their emotional impact (e.g., soothing, annoying, stimulating);",
+            "understand the psychological and neurological science behind ASMR (Autonomous Sensory Meridian Response) and related conditions like misophonia;",
+            "practice listening comprehension through expert medical explanations and a celebrity ASMR interview."
+        ],
+        "description": "In this lesson, students begin with a fun, interactive audio task where they listen to 12 distinct sounds and categorize them by their emotional response (e.g., soothing, annoying, scary, romantic). This naturally transitions into a discussion about modern media trends and the massive popularity of ASMR content online.\nThe first core media task is an educational video featuring psychiatrist Dr. Tracey Marks, who breaks down the science of ASMR. Students answer multiple-choice questions to verify their understanding of the physiological \"tingles\", the difference between ASMR and frisson, common triggers (mouth sounds, personal attention, repetitive sounds), and the neurological condition of misophonia (intense negative reactions to specific sounds).\nThe second media task features a video of actress Salma Hayek exploring ASMR. Students answer targeted comprehension questions about her hometown, the languages she speaks, her favorite language sounds, and her personal reflections on art, pain, and career fallbacks.\nNext, learners expand their lexical range by matching 12 specific ASMRist techniques (e.g., whispering, tapping, squishing, brushing, crackling) to their corresponding actions.\nFinally, the lesson concludes with a reflective discussion on students' personal experiences with ASMR triggers, the benefits of mindful focus for daily stress relief, and an analysis of 18 effective, science-backed stress relievers to combat modern life triggers (like overstimulation, disrupted sleep, and sugar crashes).",
+        "telegramRecap": "From tapping to whispering! 🎙️ Explore the psychology of ASMR, understand misophonia, and discover proven ways to relieve stress.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_asmr.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_asmr_12_sounds.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_asmr.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=S3wi6Fu2NRY"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=xe16ywwrW1E"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-12",
         "title": "Girl bands",
         "topics": [
