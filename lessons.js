@@ -6,6 +6,62 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-18",
+        "title": "How to make money",
+        "topics": [
+            "society",
+            "work",
+            "business",
+            "media",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_how_to_make_money.jpg",
+        "keywords": "how to make money society work business media life b2-c1",
+        "objectives": [
+            "analyze financial risks, investment strategies, and advanced wealth-building vocabulary (e.g., loss aversion, house money effect, diversification);",
+            "practice listening and viewing comprehension through a high-stakes game show parody and a realistic dialogue about the pitfalls of mixing business with friendship;",
+            "critically evaluate the \"startup way\" of making money by deconstructing a 16-step flowchart and debating modern financial philosophies."
+        ],
+        "description": "In this lesson, students begin by evaluating a chart of common financial risks (e.g., cryptocurrency, lending to family, unpaid internships) and discussing their personal tolerance for risk.\nThe first media task is a short film parodying a \"Who Wants to Be a Millionaire\" style game show, where a hostage situation hilariously intersects with a trivia question about classical composers. Students mark statements True/False and master business idioms like the money's tied up, lock it in, and a bit of a lead.\nThe core analytical task is a flowchart titled \"How to Make Money the Startup Way.\" Students map out the 16 steps from finding a co-founder to listing on the NASDAQ, critically discussing concepts like \"The Founder's Dilemma\" (splitting equity), \"The Validation Trap,\" and the \"Illusion of Linearity.\"\nNext, learners listen to an audio dialogue featuring two speakers, Luna and Hazel, dissecting their failed friendship-turned-business. Students identify the root causes of their conflict (e.g., prioritizing beauty over cost, missed deadlines, lack of approval) and debate the golden rules of partnering with friends.\nFinally, the lesson concludes with advanced financial vocabulary matching and a provocative discussion on \"Ramit’s Money Rules,\" prompting students to debate whether they agree with principles like \"buy the best and keep it\" or \"never question spending on health and education.\"",
+        "telegramRecap": "Start a biz with your best friend? 💸 Analyze a startup flowchart, decode business idioms, and debate the real cost of mixing money & friendship!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_how_to_make_money.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_how_to_make_money_15_stages.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_how_to_make_money_15_stages.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_how_to_make_money_hazel.mp3"
+            },
+            {
+                "label": "3",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_how_to_make_money_luna.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_how_to_make_money.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=disj0pQdcuI"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-16",
         "title": "ASMR",
         "topics": [
