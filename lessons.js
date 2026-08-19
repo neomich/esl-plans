@@ -7,6 +7,61 @@ const lessonsCatalog = [
 
     {
         "dateAdded": "2026-08-19",
+        "title": "PB&J",
+        "topics": [
+            "food",
+            "grammar",
+            "life"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/a2_pbj.jpg",
+        "keywords": "pb&j food grammar life a2-b1",
+        "objectives": [
+            "identify, pronounce, and discuss the culinary uses of 12 common nut varieties;",
+            "practice listening comprehension through a podcast on fascinating peanut facts and a rhythmic video song about making a PBJ sandwich;",
+            "analyze the surprising history of the PB&J sandwich through a targeted True/False video task;",
+            "master the Past Simple Passive Voice by transforming active sentences about global snacks into passive ones."
+        ],
+        "description": "In this lesson, students begin by analyzing a chart of \"America's Favorite Snacks\" (e.g., cookies, chips, ice cream, nuts) to discuss their own snacking habits and frequencies. They then transition to a vocabulary and audio task, matching 12 common nut varieties (e.g., pecans, cashews, macadamias, pili nuts) to their corresponding images and listening to an audio track to verify correct pronunciation, followed by a discussion on which nuts are best for salads, baking, or snacking.\nNext, learners read a list of fascinating trivia (e.g., it takes 540 peanuts to make a single jar of spread, the shells are used for kitty litter and fireplace logs, and the oil has a high smoke point for frying) and guess which nut is being described. They then listen to a short podcast to confirm the answers are indeed about peanuts, sparking a discussion on consumption habits and health benefits.\nThe lesson then shifts to a fun, interactive media task where students are given jumbled instructions for making a classic Peanut Butter and Jelly sandwich. They must logically sequence the steps, then watch a rhythmic video song (\"you take the bread and you spread it...\") to check their chronological order. This is followed by a historical video about the origins of the PB&J sandwich. Students learn key vocabulary (crustless, spreadable, affordable, staple, rations) and complete a True/False comprehension task covering surprising facts, such as its first mention in 1901, its origins as a delicacy for high-society tea parties, and its rise as a WW1 military staple.\nFinally, the class concludes with a grammar focus on the Past Simple Passive Voice (was/were + past participle). Students analyze why the agent is often omitted in sentences like \"Peanut butter was considered a delicacy.\" They then practice converting 10 active voice sentences about global snacks (e.g., \"Street vendors in Mexico sell spicy mango slices\") into the passive voice, reinforcing the grammar through a delicious, real-world context.",
+        "telegramRecap": "From high-society tea parties to WW1 rations! 🥪 Discover the wild history of the PB&J, master nut vocab, and learn the passive voice.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_pbj.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_pbj_12_nuts.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_pbj_12_nuts.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_pbj_peanuts_podcast.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_pbj.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=klDHM_sxYxs"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=5jsd53W7O_k"
+            }
+        ]
+    },
+
+
+
+    {
+        "dateAdded": "2026-08-19",
         "title": "Who Is Tilly Norwood?",
         "topics": [
             "society",
