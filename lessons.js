@@ -6,6 +6,50 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-19",
+        "title": "Who Is Tilly Norwood?",
+        "topics": [
+            "society",
+            "media",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_tilly_norwood.jpg",
+        "keywords": "who is tilly norwood? society media art b1-b2",
+        "objectives": [
+            "explore movie genres, essential cinematography vocabulary, and the core skills and qualities of successful actors;",
+            "practice listening comprehension by analyzing personal preferences for favorite actors and celebrity opinions on AI-generated performers;",
+            "critically evaluate the rise of artificial intelligence in Hollywood and the future of human connection in storytelling through targeted media tasks."
+        ],
+        "description": "In this lesson, students begin with a warm-up matching iconic actors (e.g., Robert De Niro, Meryl Streep, Leonardo DiCaprio) to their signature movie genres.\nThe first core media task is an audio segment featuring four speakers discussing their favorite actors, memorable movies, and recent controversies. Students use this context to master 12 essential cinematography terms (e.g., protagonist, antagonist, montage, close-up, establishing shot) by matching them to their definitions. Next, learners categorize 12 essential acting skills and qualities (such as emotional availability, vocal control, and improvisational ability) to understand what makes a performer truly compelling.\nThe lesson then introduces a major twist: \"Tilly Norwood,\" an up-and-coming actress who is actually 100% AI-generated. In the first video task, students watch real celebrities (including George Clooney, Emily Blunt, and Laura Dern) discuss the implications of synthetic performers. They answer comprehension questions about the recent SAG-AFTRA strike, industry regulations, and the consensus that nothing can replace a human being.\nFinally, the lesson concludes with a second video: an \"AI Commissioner\" comedy sketch. Students analyze real, passionate YouTube comments debating whether AI can truly replicate human emotional connection (e.g., \"We connect with the stories BECAUSE the actors have pulses\"). This sparks a lively, critical discussion on the ethics of AI in the arts, the \"Black Mirror\" reality of synthetic media, and whether audiences will ever truly accept a performer without a heartbeat.",
+        "telegramRecap": "Can AI replace human actors? 🎭 Analyze celebrity interviews, review film terms, and debate the ethics of AI in Hollywood!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_tilly_norwood.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_tilly_norwood_4_callins.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_tilly_norwood.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=Juh9FAXt-E0"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=3sVO_j4czYs"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-18",
         "title": "How to make money",
         "topics": [
