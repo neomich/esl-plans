@@ -7,6 +7,49 @@ const lessonsCatalog = [
 
     {
         "dateAdded": "2026-08-23",
+        "title": "Chinese Century",
+        "topics": [
+            "society",
+            "technology",
+            "work",
+            "life",
+            "travel",
+            "media"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "90-120 min",
+        "visualSource": "images/b1_chinese_century.jpg",
+        "keywords": "chinese century society technology work life travel media b1-b2",
+        "objectives": [
+            "explore China’s role as a global manufacturing superpower and analyze its modern cultural and demographic shifts;",
+            "critically evaluate common cultural stereotypes versus the complex realities of modern Chinese society;",
+            "master practical travel vocabulary and essential tips for navigating daily life in China through targeted media tasks."
+        ],
+        "description": "In this lesson, students begin by analyzing a chart of global manufacturing output and identifying popular Chinese brands (e.g., Huawei, TikTok, Haier), sparking a discussion on product perception and quality. They then examine demographic data, including declining birthrates and the global Chinese diaspora, before tackling a critical matching task designed to debunk 10 common cultural stereotypes about China.\nThe core media tasks bring the topic to life:\nAudio Task (3 Speakers): Students listen to Mei Lin, David Miller, and Jessica Lau share their personal experiences living in or visiting Hangzhou, Guilin, and Hong Kong. Learners answer comprehension questions about what each speaker loves, dislikes, and recommends.\nVideo Task (Travel Tips): Students watch an \"Everything You MUST Know Before Visiting China\" video, extracting crucial practical advice on navigating payment apps (QR codes), internet access, dining etiquette, public transport, and crowds.\nFinally, the lesson concludes with a nuanced critical discussion based on an infographic about the \"Dark Sides of China.\" Students analyze complex modern issues such as \"ghost cities,\" the \"996\" work culture versus the \"lying flat\" movement, social credit systems, environmental pollution, and internet censorship, prompting a mature debate on the realities of contemporary life.",
+        "telegramRecap": "From \"996\" culture to QR code payments! 🐉 Analyze China's demographic shifts, debunk stereotypes, and master practical travel English.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_chinese_century.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_chinese_century_3_callins.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_chinese_century.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=rKEchbI7FLk"
+            }
+        ]
+    },
+
+
+
+    {
+        "dateAdded": "2026-08-23",
         "title": "The Great Fatigue",
         "topics": [
             "psychology",
