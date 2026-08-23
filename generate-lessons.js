@@ -1,4 +1,9 @@
 const fs = require('fs');
+const https = require('https');
+
+// Read secrets at top level
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
+console.log('Telegram token at startup:', TELEGRAM_BOT_TOKEN ? `yes (${TELEGRAM_BOT_TOKEN.length} chars)` : 'NO');
 
 // ── GENERATE LESSON PAGES ──
 const lessonsContent = fs.readFileSync('lessons.js', 'utf8');
@@ -263,3 +268,211 @@ ${articleUrls}
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
 console.log(`Sitemap: ${lessons.length + articles.length + 2} URLs`);
 console.log('All done!');
+
+// ── TELEGRAM AUTO-POST ──
+async function postToTelegram(lesson) {
+    const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
+    const CHAT_ID = '@eslplans';
+    console.log('Telegram token present:', BOT_TOKEN ? `yes (${BOT_TOKEN.length} chars)` : 'NO');
+    if (!BOT_TOKEN) { console.log('No Telegram token — skipping post'); return; }
+
+    const slug = lesson.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+    const mediaLine = [
+        lesson.categoryIcon ? `${lesson.categoryIcon} ${lesson.categoryLabel}` : null,
+        lesson.mediaIcon ? `${lesson.mediaIcon} ${lesson.mediaType.replace(' & ', '&')}` : null,
+        lesson.levelLabel ? `🥉 ${lesson.levelLabel}` : null,
+        lesson.duration ? `⏱ ${lesson.duration}` : null
+    ].filter(Boolean).join(' · ');
+
+    const recap = lesson.telegramRecap ||
+        (lesson.description || '').replace(/\n/g, ' ').split(/[.!?]/)[0].trim() + '.';
+
+    const hashtags = '#ESL #ELT #TEFL #EnglishTeaching #LessonPlan #AdultLearners #OnlineTutor #ESLteacher #ELTcommunity';
+    const freeTag = lesson.isFree ? '\n⭐ FREE lesson — no subscription needed!' : '';
+    const link = `https://esl-plans.com/#lesson-${slug}`;
+    const caption = `📚 ESL Plan — ${lesson.title}\n${mediaLine}\n<b>${recap}</b>${freeTag}\n🔗 ${link}\n\n${hashtags}`;
+
+    const imgBase = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
+    const imgUpper = imgBase.endsWith('.jpg') ? imgBase.slice(0,-4)+'.JPG' : imgBase;
+    const imgLower = imgBase.endsWith('.JPG') ? imgBase.slice(0,-4)+'.jpg' : imgBase;
+
+    function checkImage(url) {
+        return new Promise(resolve => {
+            const req = https.get(url, res => resolve(res.statusCode === 200 ? url : null));
+            req.on('error', () => resolve(null));
+        });
+    }
+
+    let foundImageUrl = await checkImage(imgUpper);
+    if (!foundImageUrl) foundImageUrl = await checkImage(imgLower);
+    console.log('Found image URL:', foundImageUrl || 'none');
+
+    function sendTelegram(path, payload) {
+        return new Promise((resolve) => {
+            const options = {
+                hostname: 'api.telegram.org',
+                path: `/bot${BOT_TOKEN}/${path}`,
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) }
+            };
+            const req = https.request(options, res => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                    try {
+                        const result = JSON.parse(data);
+                        if (result.ok) console.log(`✅ Telegram: posted "${lesson.title}"`);
+                        else console.log(`⚠️ Telegram error: ${result.description}`);
+                        resolve(result.ok);
+                    } catch(e) { resolve(false); }
+                });
+            });
+            req.on('error', err => { console.log('Telegram error:', err.message); resolve(false); });
+            req.write(payload);
+            req.end();
+        });
+    }
+
+    if (foundImageUrl) {
+        const photoPayload = JSON.stringify({ chat_id: CHAT_ID, photo: foundImageUrl, caption, parse_mode: 'HTML' });
+        await sendTelegram('sendPhoto', photoPayload);
+    } else {
+        const textPayload = JSON.stringify({ chat_id: CHAT_ID, text: caption, parse_mode: 'HTML', disable_web_page_preview: true });
+        await sendTelegram('sendMessage', textPayload);
+    }
+}
+
+// ── BLUESKY AUTO-POST ──
+async function postToBluesky(lesson) {
+    const BSKY_IDENTIFIER = 'esl-plans.com';
+    const BSKY_PASSWORD = process.env.BLUESKY_APP_PASSWORD || '';
+    if (!BSKY_PASSWORD) { console.log('No Bluesky password — skipping'); return; }
+
+    const slug = lesson.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+    const recap = lesson.telegramRecap ||
+        (lesson.description || '').replace(/\n/g, ' ').split(/[.!?]/)[0].trim() + '.';
+    const link = `https://esl-plans.com/#lesson-${slug}`;
+    const freeTag = lesson.isFree ? '\n⭐ FREE — no subscription needed!' : '';
+    const bskyHeader = `📚 ESL Plan — ${lesson.title}\n🎓 ${lesson.categoryLabel} · ${lesson.mediaIcon} ${lesson.mediaType} · 🥉 ${lesson.levelLabel} · ⏱ ${lesson.duration}\n`;
+    const bskyFooter = `${freeTag}\n🔗 ${link}`;
+    let bskyRecap = recap;
+    while ([...bskyHeader + bskyRecap + bskyFooter].length > 299 && bskyRecap.length > 10) {
+        bskyRecap = bskyRecap.slice(0, -3).trim();
+    }
+    const postText = bskyHeader + bskyRecap + (bskyRecap !== recap ? '...' : '') + bskyFooter;
+    console.log(`Bluesky post: ${[...postText].length} graphemes`);
+
+    try {
+        const loginResp = await fetch('https://bsky.social/xrpc/com.atproto.server.createSession', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ identifier: BSKY_IDENTIFIER, password: BSKY_PASSWORD })
+        });
+        const session = await loginResp.json();
+        if (!session.accessJwt) { console.log('⚠️ Bluesky login failed:', session.message); return; }
+
+        // Upload image
+        let imageEmbed = null;
+        const imgBase = `https://raw.githubusercontent.com/neomich/esl-plans/main/${lesson.visualSource}`;
+        const imgUpper = imgBase.endsWith('.jpg') ? imgBase.slice(0,-4)+'.JPG' : imgBase;
+        const imgLower = imgBase.endsWith('.JPG') ? imgBase.slice(0,-4)+'.jpg' : imgBase;
+
+        async function checkImg(url) {
+            return new Promise(resolve => {
+                const req = https.get(url, res => resolve(res.statusCode === 200 ? url : null));
+                req.on('error', () => resolve(null));
+            });
+        }
+        let imageUrl = await checkImg(imgUpper);
+        if (!imageUrl) imageUrl = await checkImg(imgLower);
+
+        if (imageUrl) {
+            try {
+                const imgData = await new Promise((resolve, reject) => {
+                    https.get(imageUrl, res => {
+                        const chunks = [];
+                        res.on('data', chunk => chunks.push(chunk));
+                        res.on('end', () => resolve({ buffer: Buffer.concat(chunks), type: res.headers['content-type'] || 'image/jpeg' }));
+                        res.on('error', reject);
+                    }).on('error', reject);
+                });
+                const blobResp = await fetch('https://bsky.social/xrpc/com.atproto.repo.uploadBlob', {
+                    method: 'POST',
+                    headers: { 'Content-Type': imgData.type, 'Authorization': `Bearer ${session.accessJwt}` },
+                    body: imgData.buffer
+                });
+                const blobResult = await blobResp.json();
+                if (blobResult.blob) {
+                    imageEmbed = { $type: 'app.bsky.embed.images', images: [{ image: blobResult.blob, alt: `ESL Lesson Plan — ${lesson.title}` }] };
+                    console.log('Bluesky image uploaded ✅');
+                }
+            } catch(e) { console.log('Bluesky image upload failed:', e.message); }
+        }
+
+        const postResp = await fetch('https://bsky.social/xrpc/com.atproto.repo.createRecord', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.accessJwt}` },
+            body: JSON.stringify({
+                repo: session.did,
+                collection: 'app.bsky.feed.post',
+                record: {
+                    $type: 'app.bsky.feed.post',
+                    text: postText,
+                    createdAt: new Date().toISOString(),
+                    ...(imageEmbed ? { embed: imageEmbed } : {}),
+                    facets: [{
+                        index: {
+                            byteStart: Buffer.byteLength(postText.slice(0, postText.lastIndexOf(link))),
+                            byteEnd: Buffer.byteLength(postText.slice(0, postText.lastIndexOf(link))) + Buffer.byteLength(link)
+                        },
+                        features: [{ $type: 'app.bsky.richtext.facet#link', uri: link }]
+                    }]
+                }
+            })
+        });
+        const postResult = await postResp.json();
+        if (postResult.uri) console.log(`✅ Bluesky: posted "${lesson.title}"`);
+        else console.log('⚠️ Bluesky post error:', JSON.stringify(postResult));
+    } catch(e) { console.log('Bluesky error:', e.message); }
+}
+
+// ── POST NEWEST LESSON ──
+if (lessons.length > 0) {
+    Promise.all([
+        postToTelegram(lessons[0]).catch(console.error),
+        postToBluesky(lessons[0]).catch(console.error)
+    ]);
+}
+
+// ── INDEXNOW — notify Bing/Yandex of all URLs ──
+const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
+const allUrls = [
+    'https://esl-plans.com',
+    'https://esl-plans.com/docs/terms.html',
+    ...lessons.map(l => `https://esl-plans.com/lessons/${slugify(l.title)}.html`),
+    ...articles.map(a => `https://esl-plans.com/articles/${slugify(a.title)}.html`)
+];
+
+const indexNowPayload = JSON.stringify({
+    host: 'esl-plans.com',
+    key: INDEXNOW_KEY,
+    keyLocation: `https://esl-plans.com/${INDEXNOW_KEY}.txt`,
+    urlList: allUrls
+});
+
+const options = {
+    hostname: 'api.indexnow.org',
+    path: '/indexnow',
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': Buffer.byteLength(indexNowPayload) }
+};
+
+const req = https.request(options, res => {
+    console.log(`IndexNow response: ${res.statusCode}`);
+    if (res.statusCode === 200 || res.statusCode === 202) {
+        console.log(`✅ IndexNow: ${allUrls.length} URLs submitted to Bing/Yandex`);
+    }
+});
+req.on('error', err => console.log('IndexNow error:', err.message));
+req.write(indexNowPayload);
+req.end();
