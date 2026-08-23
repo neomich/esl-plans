@@ -6,6 +6,46 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-23",
+        "title": "The Great Fatigue",
+        "topics": [
+            "psychology",
+            "society",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_fatigue.jpg",
+        "keywords": "the great fatigue psychology society life b1-b2",
+        "objectives": [
+            "analyze the emotional and societal causes of modern exhaustion through poetry and critical discussion;",
+            "evaluate the physiological and lifestyle factors contributing to daily fatigue through a targeted video comprehension task;",
+            "master advanced vocabulary related to tiredness and burnout through matching and contextual gap-fill exercises."
+        ],
+        "description": "Students begin by reading a highly relatable, modern poem titled \"The Great Fatigue,\" which captures the exhaustion of modern life, digital overload, and \"hustle culture.\" They complete a vocabulary matching task to define underlined terms from the poem (e.g., curated, pundits, fatigue, hollow, hustle, partisan). Next, learners answer comprehension questions to analyze the speaker's overall emotion, the role of society and media in their frustration, and what the speaker truly longs for at the end. This naturally sparks a critical discussion on how technology contributes to exhaustion, whether the poem accurately reflects modern burnout, and how students personally feel about \"hustle culture.\"\nThe lesson transitions to the physiological causes of fatigue. Students first brainstorm common reasons for feeling tired, then watch the video \"Why Are You Always Tired\" to verify their ideas. They complete a True/False comprehension task covering key facts from the clip (e.g., the impact of light exercise, the dangers of late-day caffeine, hydration, alcohol's effect on REM sleep, and genetic predispositions to being a night owl). Afterward, students read and analyze humorous, relatable YouTube comments from the video (e.g., \"Being tired has become more of a lifestyle than an emotion,\") to discuss real-world experiences with tiredness. \nFinally, the class consolidates their learning with a vocabulary matching and 10-sentence gap-fill exercise focusing on advanced terms related to exhaustion (e.g., burnout, drained, weary, run down, wear out).",
+        "telegramRecap": "From \"hustle culture\" to iron deficiency! 🥱 Read a relatable fatigue poem, analyze a tiredness video, and master burnout vocab.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_fatigue.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_fatigue_poem.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_fatigue.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=nn42RC1zT_A"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-19",
         "title": "PB&J",
         "topics": [
