@@ -12,6 +12,12 @@
         <priority>0.3</priority>
     </url>
     <url>
+        <loc>https://esl-plans.com/lessons/chinese-century</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2026-08-23</lastmod>
+    </url>
+    <url>
         <loc>https://esl-plans.com/lessons/the-great-fatigue</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
