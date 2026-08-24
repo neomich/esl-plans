@@ -84,6 +84,7 @@ lessons.forEach(lesson => {
         .meta{color:#888;font-size:14px;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;}
         .meta-badge{background:white;border-radius:20px;padding:4px 12px;font-size:13px;color:#555;border:1px solid #eee;}
         h2{color:#333;font-size:17px;font-weight:700;margin:28px 0 12px;text-transform:uppercase;letter-spacing:0.5px;}
+        h3{color:#333;font-size:15px;font-weight:700;margin:20px 0 10px;text-transform:uppercase;letter-spacing:0.5px;}
         ul{color:#444;line-height:1.8;padding-left:20px;margin-bottom:16px;}
         li{margin-bottom:4px;}
         .desc{color:#444;line-height:1.8;white-space:pre-line;margin-bottom:24px;}
@@ -120,10 +121,13 @@ lessons.forEach(lesson => {
 
         ${topicTags ? `<div class="topics">${(lesson.topics||[]).map(t => `<span class="topic-tag">${topicLabels[t]||t}</span>`).join('')}</div>` : ''}
 
-        <h2>Main Objectives</h2>
+        <h2>What's the "${lesson.title}" ESL Lesson About?</h2>
+        <p style="color:#888;font-size:13px;margin-bottom:20px;">${lesson.levelLabel} · ${lesson.categoryLabel}</p>
+
+        <h3>Main Objectives</h3>
         <ul>${objList}</ul>
 
-        <h2>About This Lesson</h2>
+        <h3>About This Lesson</h3>
         <p class="desc">${descSafe}</p>
 
         <div class="info-box">
