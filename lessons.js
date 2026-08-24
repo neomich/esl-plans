@@ -6,7 +6,7 @@
 const lessonsCatalog = [
 
     {
-        "dateAdded": "2026-08-23",
+        "dateAdded": "2026-08-23", 
         "title": "Chinese Century",
         "topics": [
             "society",
