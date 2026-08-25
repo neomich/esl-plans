@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-25",
+        "title": "What is your MOJO?",
+        "topics": [
+            "psychology",
+            "society",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_what_is_your_mojo.jpg",
+        "keywords": "what is your mojo? psychology society life b2-c1",
+        "objectives": [
+            "define and explore the concept of \"mojo\" as a unique personal charm, energy, and magnetic confidence;",
+            "analyze different \"mojo archetypes\" (e.g., The Secure Maverick, The Room Commander, The Optimism Radiator) and reflect on personal strengths;",
+            "practice listening comprehension by identifying how three speakers cultivate their mojo and evaluating \"Mojo vs. Nojo\" attitudes in a targeted podcast task."
+        ],
+        "description": "In this lesson, students begin by examining pictures of people displaying their mojo and matching ten distinct mojo archetypes (e.g., The Storyteller's Hold, The Pitch Master, The Knowing Smirk, The Ultimate Host) to the correct images, sparking a discussion on who in their lives embodies these traits.\nThe lesson then transitions to a reading of a post by Dushka Zapata titled \"Everyone has mojo,\" where learners match highlighted vocabulary (e.g., aplomb, impudence, saunter, swashbuckle, coiled) to their definitions and reflect on the author's core questions: What is your mojo? Can you really lose it?\nThe core media tasks feature three speakers (Alexandra, Paavo, and Natalia) sharing the specific activities that give them mojo (e.g., growing herbs, dancing while cooking, fixing broken things, wearing green for confidence). Students identify which activities belong to which speaker and note the small details they provide. \nFinally, the lesson concludes with a podcast task titled \"Do You Have Mojo or Nojo?\" where students mark a list of attitudes as either \"M\" (Mojo - e.g., Inspire others, Run the extra mile, Show a zest for life) or \"N\" (Nojo - e.g., Act like a zombie, Are lazy, Act like a victim) before listening to verify their answers.",
+        "telegramRecap": "Stop acting like a zombie, start showing zest! ⚡ Analyze mojo archetypes, listen to 3 speakers' secrets, and master the Mojo vs Nojo mindset!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_what_is_your_mojo.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_what_is_your_mojo_3_speakers.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_what_is_your_mojo_3_speakers.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_what_is_your_mojo_mojo_vs_nojo.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_what_is_your_mojo.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-08-23", 
         "title": "Chinese Century",
         "topics": [
