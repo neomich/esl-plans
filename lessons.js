@@ -6,6 +6,46 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-27",
+        "title": "Cognitive Behavioral Therapy (CBT)",
+        "topics": [
+            "psychology",
+            "society",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_cbt.rar.jpg",
+        "keywords": "cognitive behavioral therapy (cbt) psychology society life b2-c1",
+        "objectives": [
+            "identify and define 15 common cognitive distortions (e.g., catastrophizing, mind reading, black-and-white thinking, personalization);",
+            "practice listening comprehension by matching personal accounts of thinking traps to specific cognitive distortions;",
+            "analyze a real-world Cognitive Behavioral Therapy (CBT) success story to understand triggers, coping plans, and behavioral change."
+        ],
+        "description": "In this lesson, students begin with a relatable warm-up, reflecting on their own \"thinking traps\" (e.g., assuming a friend is angry because they didn't text back, or catastrophizing a small mistake). This naturally introduces the core concept: the 15 Common Cognitive Distortions, where learners review definitions of faulty thinking patterns like emotional reasoning, mental filtering, and overgeneralization.\nThe first core media task is an audio segment featuring five speakers (Sonya, Marco, Lena, David, and Chloe). Students listen to their personal stories and match each speaker to the specific cognitive distortion they exhibit, reinforcing the concepts with a targeted vocabulary matching exercise.\nThe second media task is a video detailing \"Frank's Experience in CBT.\" Students follow Frank’s journey as he works with a therapist to overcome substance use and improve his marriage. They answer comprehension questions about his specific triggers (work stress, arguments), the coping plans he develops, and the importance of assertive communication and setting boundaries.\nFinally, the lesson concludes with a highly practical extension. Students identify their own personal triggers, draft a hypothetical healthy coping plan, and analyze modern stressors (backed by generational cell phone usage statistics) that contribute to cognitive-behavioral challenges, sparking a mature discussion on mental health and digital wellness.",
+        "telegramRecap": "Trap your thinking traps! 🧠 Master 15 cognitive distortions, analyze real CBT success stories, and build your own coping plan.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_cbt.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_cbt_5_callins.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_cbt.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=zxS4KDNKPdI"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-25",
         "title": "What is your MOJO?",
         "topics": [
