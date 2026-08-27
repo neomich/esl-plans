@@ -22,7 +22,7 @@ const lessonsCatalog = [
         "level": "b2-c1",
         "levelLabel": "B2-C1",
         "duration": "60-90 min",
-        "visualSource": "images/b2_cbt.rar.jpg",
+        "visualSource": "images/b2_cbt.jpg",
         "keywords": "cognitive behavioral therapy (cbt) psychology society life b2-c1",
         "objectives": [
             "identify and define 15 common cognitive distortions (e.g., catastrophizing, mind reading, black-and-white thinking, personalization);",
