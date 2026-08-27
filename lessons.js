@@ -7,6 +7,48 @@ const lessonsCatalog = [
 
     {
         "dateAdded": "2026-08-27",
+        "title": "Purpose",
+        "topics": [
+            "psychology",
+            "society",
+            "work",
+            "life",
+            "grammar"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_purpose.jpg",
+        "keywords": "purpose psychology society work life grammar b2-c1",
+        "objectives": [
+            "distinguish between nuanced vocabulary related to goals and intentions (e.g., purpose, objective, target, mission) through targeted elimination tasks;",
+            "categorize reflective life questions into five specific grammatical structures (Yes/No, Wh-, Subject, Object, and Indirect questions);",
+            "explore the psychological concepts of quarter-life and mid-life crises, and analyze how everyday responsibilities shape our sense of purpose through a video featuring Bob Odenkirk."
+        ],
+        "description": "Students begin by analyzing real-world corporate jargon and distinguishing between closely related vocabulary terms (e.g., purpose, goal, aim, objective, target, intention, design, function, mission). They apply these terms through a targeted elimination task, crossing out the word that does not fit naturally in 10 contextual sentences. This is followed by a personal reflection, prompting students to discuss their own professional aims, financial targets, and life missions.\nThe lesson transitions to the psychological concepts of the \"quarter-life crisis\" (uncertainty about work, relationships, identity in one's 20s/30s) and \"mid-life crisis\" (questioning life's trajectory in one's 40s/50s/60s). Students then touch on grammar, analyzing 12 reflective life questions (e.g., \"Where did the last twenty years go?\", \"I sometimes wonder why I stopped doing the things I used to enjoy\"). They must categorize each question into one of five grammatical structures: Yes/No, Wh-, Subject, Object, or Indirect questions, reinforcing their understanding of question formation and word order.\nThe core media task features a video of actor Bob Odenkirk discussing jealousy, parenting, and finding purpose in a busy life. Before watching, students debate whether a busy family life protects people from overthinking or makes life more complicated. During the video, they answer targeted comprehension questions about who Odenkirk is jealous of, what he saw as his main job when his children were young, and what larger existential questions his busy schedule kept him from asking. The lesson concludes with a profound discussion on whether having many choices or a clear duty makes life easier, and what ordinary things help us stop overthinking.",
+        "telegramRecap": "Quarter-life or mid-life crisis? 🤔 Acquire goal vocabulary, categorize complex question types, and find your purpose with Bob Odenkirk!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_purpose.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_purpose.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/shorts/MNhpnEczGQA"
+            }
+        ]
+    },
+
+
+
+    {
+        "dateAdded": "2026-08-27",
         "title": "Cognitive Behavioral Therapy (CBT)",
         "topics": [
             "psychology",
