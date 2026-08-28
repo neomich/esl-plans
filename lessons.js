@@ -6,6 +6,57 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-28",
+        "title": "I love horses!",
+        "topics": [
+            "psychology",
+            "society",
+            "life",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/a2_i_love_horses.jpg",
+        "keywords": "i love horses! psychology society life art a2-b1",
+        "objectives": [
+            "identify and describe various domestic and farm animals, their sounds, and the reasons people are drawn to them;",
+            "evaluate factual knowledge about horse anatomy, behavior, and history through a targeted True/False media task;",
+            "analyze the sociological and psychological reasons behind the strong, unique bond between women/girls and horses."
+        ],
+        "description": "In this lesson, students begin with a fun, interactive warm-up, matching animals to their pictures and solving riddles based on the sounds they make (e.g., oinking, purring, gobbling).\nThe first core media task is an audio segment featuring five speakers sharing their favorite animals. Students listen actively to extract specific details, filling out cards with each person's chosen animal, fun facts, and their personal reasons for loving them.\nNext, learners test their equestrian knowledge with a True/False video/listening task about horses. They evaluate statements regarding horse history (domesticated 5,000 years ago), biology (largest eyes of land mammals, sleeping standing up, obligate nasal breathing), and behavior, correcting the false myths along the way. \nThe final media task is an audio podcast exploring \"Why Many Girls and Women Love Horses So Much.\" Students analyze striking statistics (e.g., 85–90% of horse owners and riders are female) and discuss the underlying reasons: the contrast between boys' play (strength/fighting) and girls' play (caring/influencing), the effectiveness of \"gentling\" (training through patience and communication rather than force), and the historical/mythological trope of women gaining power through magical animal partners.\nThe lesson concludes with a reflective discussion, prompting students to share their own childhood animal connections and consider how patience and trust can be used to solve problems in their own lives.",
+        "telegramRecap": "Why do 90% of horse riders love them? 🐎 Explore the unique bond between women and horses, plus fun animal trivia!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_i_love_horses.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_i_love_horses_5_callers.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_i_love_horses_5_callers.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_i_love_horses_horses_podcast.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_i_love_horses.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=ZxrEgghMA_k"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-27",
         "title": "Purpose",
         "topics": [
