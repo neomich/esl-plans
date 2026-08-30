@@ -6,7 +6,7 @@
 const lessonsCatalog = [
 
     {
-        "dateAdded": "2026-08-30", 
+        "dateAdded": "2026-08-30",
         "title": "Newcomb's paradox",
         "topics": [
             "psychology",
