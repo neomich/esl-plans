@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-08-30",
+        "title": "Newcomb's paradox",
+        "topics": [
+            "psychology",
+            "society",
+            "work",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_newcombs_paradox.jpg",
+        "keywords": "newcomb's paradox psychology society work life b2-c1",
+        "objectives": [
+            "analyze risk perception across different life domains and master the 6-step framework for effective decision-making;",
+            "understand the psychology of \"analysis paralysis\" and learn practical strategies to overcome overthinking;",
+            "explore Newcomb’s Paradox and four distinct decision theories (Expected Utility, Evidential, Strategic Dominance, and Causal) by applying them to high-stakes real-life dilemmas."
+        ],
+        "description": "In this lesson, students begin by examining a detailed chart of risky life choices (e.g., accepting a new job, investing, getting surgery), discussing how risk perception varies by gender, age, and domain. They then match the 6 Steps of Decision Making to their definitions and debate which steps are the most difficult or time-consuming.\nThe first media task is a short animation on \"Analysis Paralysis.\" Students complete a gap-fill exercise to understand why people get stuck when faced with too many choices and learn actionable tips to overcome it, such as setting time limits and restricting options.\nNext, the lesson dives into game theory with a video intro to Newcomb’s Paradox. Students are presented with a mind-bending scenario involving a highly accurate supercomputer and two boxes. They learn four complex decision theories and debate whether to take one box or both, testing their logical reasoning.\nThe core listening task features an audio segment with three speakers facing massive life crossroads: Monica (choosing between a safe VP job and a risky startup equity offer), Liam (sacrificing his weekends for a financial certification to boost his career), and Maya (deciding whether to leave a secure, predictable boyfriend for a mysterious artist in Paris). Students must analyze their dilemmas and match each person's choice to the correct decision theory.\nFinally, the class concludes with a personalized discussion on their own decision-making styles, asking students to rank everyday choices from easiest to most difficult and reflect on times they’ve experienced analysis paralysis.",
+        "telegramRecap": "Quit your safe job or take a risk? 💼 Analyze real-life dilemmas, overcome overthinking, and learn 4 powerful decision theories!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_newcombs_paradox.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_newcombs_paradox_choices.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_newcombs_paradox.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=ind0SHif3Vs"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=Ol18JoeXlVI"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-28",
         "title": "I love horses!",
         "topics": [
