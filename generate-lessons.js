@@ -50,6 +50,56 @@ function buildLogisticsSentence(lesson) {
     return sentence;
 }
 
+// ── NETWORK TIMEOUT HELPERS ──
+// Every outbound network call in this script MUST go through one of these two
+// helpers so the GitHub Action can never hang indefinitely waiting on a
+// silent/slow third-party response.
+const DEFAULT_TIMEOUT_MS = 10000;
+
+// For https.get / https.request based calls
+function httpGetWithTimeout(url, ms = DEFAULT_TIMEOUT_MS) {
+    return new Promise((resolve) => {
+        const req = https.get(url, res => {
+            resolve(res);
+        });
+        req.setTimeout(ms, () => {
+            req.destroy();
+            resolve({ statusCode: 0, timedOut: true });
+        });
+        req.on('error', () => resolve({ statusCode: 0, timedOut: true }));
+    });
+}
+
+function httpsRequestWithTimeout(options, payload, ms = DEFAULT_TIMEOUT_MS) {
+    return new Promise((resolve) => {
+        const req = https.request(options, res => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => resolve({ statusCode: res.statusCode, body: data }));
+        });
+        req.setTimeout(ms, () => {
+            req.destroy();
+            resolve({ statusCode: 0, body: '', timedOut: true });
+        });
+        req.on('error', () => resolve({ statusCode: 0, body: '', timedOut: true }));
+        if (payload) req.write(payload);
+        req.end();
+    });
+}
+
+// For global fetch() based calls (Bluesky)
+async function fetchWithTimeout(url, options = {}, ms = DEFAULT_TIMEOUT_MS) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), ms);
+    try {
+        return await fetch(url, { ...options, signal: controller.signal });
+    } catch (e) {
+        return { ok: false, json: async () => ({ error: 'timeout_or_network', message: e.message }) };
+    } finally {
+        clearTimeout(timer);
+    }
+}
+
 lessons.forEach(lesson => {
     const slug = slugify(lesson.title);
     const descMeta = (lesson.description || '').substring(0, 160).replace(/\n/g, ' ').replace(/"/g, '&quot;');
@@ -430,40 +480,31 @@ async function postToTelegram(lesson) {
     const imgLower = imgBase.endsWith('.JPG') ? imgBase.slice(0,-4)+'.jpg' : imgBase;
 
     function checkImage(url) {
-        return new Promise(resolve => {
-            const req = https.get(url, res => resolve(res.statusCode === 200 ? url : null));
-            req.on('error', () => resolve(null));
-        });
+        return httpGetWithTimeout(url).then(res => res.statusCode === 200 ? url : null);
     }
 
     let foundImageUrl = await checkImage(imgUpper);
     if (!foundImageUrl) foundImageUrl = await checkImage(imgLower);
     console.log('Found image URL:', foundImageUrl || 'none');
 
-    function sendTelegram(path, payload) {
-        return new Promise((resolve) => {
-            const options = {
-                hostname: 'api.telegram.org',
-                path: `/bot${BOT_TOKEN}/${path}`,
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) }
-            };
-            const req = https.request(options, res => {
-                let data = '';
-                res.on('data', chunk => data += chunk);
-                res.on('end', () => {
-                    try {
-                        const result = JSON.parse(data);
-                        if (result.ok) console.log(`✅ Telegram: posted "${lesson.title}"`);
-                        else console.log(`⚠️ Telegram error: ${result.description}`);
-                        resolve(result.ok);
-                    } catch(e) { resolve(false); }
-                });
-            });
-            req.on('error', err => { console.log('Telegram error:', err.message); resolve(false); });
-            req.write(payload);
-            req.end();
-        });
+    async function sendTelegram(path, payload) {
+        const options = {
+            hostname: 'api.telegram.org',
+            path: `/bot${BOT_TOKEN}/${path}`,
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) }
+        };
+        const { statusCode, body, timedOut } = await httpsRequestWithTimeout(options, payload);
+        if (timedOut) { console.log('⚠️ Telegram request timed out'); return false; }
+        try {
+            const result = JSON.parse(body);
+            if (result.ok) console.log(`✅ Telegram: posted "${lesson.title}"`);
+            else console.log(`⚠️ Telegram error: ${result.description}`);
+            return result.ok;
+        } catch (e) {
+            console.log('⚠️ Telegram: could not parse response');
+            return false;
+        }
     }
 
     if (foundImageUrl) {
@@ -496,7 +537,7 @@ async function postToBluesky(lesson) {
     console.log(`Bluesky post: ${[...postText].length} graphemes`);
 
     try {
-        const loginResp = await fetch('https://bsky.social/xrpc/com.atproto.server.createSession', {
+        const loginResp = await fetchWithTimeout('https://bsky.social/xrpc/com.atproto.server.createSession', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ identifier: BSKY_IDENTIFIER, password: BSKY_PASSWORD })
@@ -511,38 +552,42 @@ async function postToBluesky(lesson) {
         const imgLower = imgBase.endsWith('.JPG') ? imgBase.slice(0,-4)+'.jpg' : imgBase;
 
         async function checkImg(url) {
-            return new Promise(resolve => {
-                const req = https.get(url, res => resolve(res.statusCode === 200 ? url : null));
-                req.on('error', () => resolve(null));
-            });
+            const res = await httpGetWithTimeout(url);
+            return res.statusCode === 200 ? url : null;
         }
         let imageUrl = await checkImg(imgUpper);
         if (!imageUrl) imageUrl = await checkImg(imgLower);
 
         if (imageUrl) {
             try {
-                const imgData = await new Promise((resolve, reject) => {
-                    https.get(imageUrl, res => {
+                const imgData = await new Promise((resolve) => {
+                    const req = https.get(imageUrl, res => {
                         const chunks = [];
                         res.on('data', chunk => chunks.push(chunk));
                         res.on('end', () => resolve({ buffer: Buffer.concat(chunks), type: res.headers['content-type'] || 'image/jpeg' }));
-                        res.on('error', reject);
-                    }).on('error', reject);
+                        res.on('error', () => resolve(null));
+                    });
+                    req.setTimeout(DEFAULT_TIMEOUT_MS, () => { req.destroy(); resolve(null); });
+                    req.on('error', () => resolve(null));
                 });
-                const blobResp = await fetch('https://bsky.social/xrpc/com.atproto.repo.uploadBlob', {
-                    method: 'POST',
-                    headers: { 'Content-Type': imgData.type, 'Authorization': `Bearer ${session.accessJwt}` },
-                    body: imgData.buffer
-                });
-                const blobResult = await blobResp.json();
-                if (blobResult.blob) {
-                    imageEmbed = { $type: 'app.bsky.embed.images', images: [{ image: blobResult.blob, alt: `ESL Lesson Plan — ${lesson.title}` }] };
-                    console.log('Bluesky image uploaded ✅');
+                if (imgData) {
+                    const blobResp = await fetchWithTimeout('https://bsky.social/xrpc/com.atproto.repo.uploadBlob', {
+                        method: 'POST',
+                        headers: { 'Content-Type': imgData.type, 'Authorization': `Bearer ${session.accessJwt}` },
+                        body: imgData.buffer
+                    });
+                    const blobResult = await blobResp.json();
+                    if (blobResult.blob) {
+                        imageEmbed = { $type: 'app.bsky.embed.images', images: [{ image: blobResult.blob, alt: `ESL Lesson Plan — ${lesson.title}` }] };
+                        console.log('Bluesky image uploaded ✅');
+                    }
+                } else {
+                    console.log('Bluesky image download timed out or failed — posting without image');
                 }
             } catch(e) { console.log('Bluesky image upload failed:', e.message); }
         }
 
-        const postResp = await fetch('https://bsky.social/xrpc/com.atproto.repo.createRecord', {
+        const postResp = await fetchWithTimeout('https://bsky.social/xrpc/com.atproto.repo.createRecord', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.accessJwt}` },
             body: JSON.stringify({
@@ -569,45 +614,59 @@ async function postToBluesky(lesson) {
     } catch(e) { console.log('Bluesky error:', e.message); }
 }
 
-// ── POST NEWEST LESSON ──
-if (lessons.length > 0) {
-    Promise.all([
-        postToTelegram(lessons[0]).catch(console.error),
-        postToBluesky(lessons[0]).catch(console.error)
-    ]);
-}
-
 // ── INDEXNOW — notify Bing/Yandex of all URLs ──
-const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
-const allUrls = [
-    'https://esl-plans.com',
-    'https://esl-plans.com/docs/terms.html',
-    ...lessons.map(l => `https://esl-plans.com/lessons/${slugify(l.title)}.html`),
-    ...articles.map(a => `https://esl-plans.com/articles/${slugify(a.title)}.html`),
-    ...topicArchiveUrls,
-    ...levelArchiveUrls
-];
+async function pingIndexNow() {
+    const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
+    const allUrls = [
+        'https://esl-plans.com',
+        'https://esl-plans.com/docs/terms.html',
+        ...lessons.map(l => `https://esl-plans.com/lessons/${slugify(l.title)}.html`),
+        ...articles.map(a => `https://esl-plans.com/articles/${slugify(a.title)}.html`),
+        ...topicArchiveUrls,
+        ...levelArchiveUrls
+    ];
 
-const indexNowPayload = JSON.stringify({
-    host: 'esl-plans.com',
-    key: INDEXNOW_KEY,
-    keyLocation: `https://esl-plans.com/${INDEXNOW_KEY}.txt`,
-    urlList: allUrls
-});
+    const indexNowPayload = JSON.stringify({
+        host: 'esl-plans.com',
+        key: INDEXNOW_KEY,
+        keyLocation: `https://esl-plans.com/${INDEXNOW_KEY}.txt`,
+        urlList: allUrls
+    });
 
-const options = {
-    hostname: 'api.indexnow.org',
-    path: '/indexnow',
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': Buffer.byteLength(indexNowPayload) }
-};
+    const options = {
+        hostname: 'api.indexnow.org',
+        path: '/indexnow',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': Buffer.byteLength(indexNowPayload) }
+    };
 
-const req = https.request(options, res => {
-    console.log(`IndexNow response: ${res.statusCode}`);
-    if (res.statusCode === 200 || res.statusCode === 202) {
+    const { statusCode, timedOut } = await httpsRequestWithTimeout(options, indexNowPayload);
+    if (timedOut) {
+        console.log('⚠️ IndexNow request timed out');
+        return;
+    }
+    console.log(`IndexNow response: ${statusCode}`);
+    if (statusCode === 200 || statusCode === 202) {
         console.log(`✅ IndexNow: ${allUrls.length} URLs submitted to Bing/Yandex`);
     }
-});
-req.on('error', err => console.log('IndexNow error:', err.message));
-req.write(indexNowPayload);
-req.end();
+}
+
+// ── MAIN — runs every network step with a timeout, then guarantees the
+//     process exits no matter what happens above. This is the safety net
+//     that makes an indefinitely-hung GitHub Action structurally impossible. ──
+async function main() {
+    if (lessons.length > 0) {
+        await Promise.allSettled([
+            postToTelegram(lessons[0]),
+            postToBluesky(lessons[0])
+        ]);
+    }
+    await pingIndexNow().catch(err => console.log('IndexNow error:', err.message));
+}
+
+main()
+    .catch(err => console.log('Unexpected error in main():', err.message))
+    .finally(() => {
+        console.log('Script finished — exiting.');
+        process.exit(0);
+    });
