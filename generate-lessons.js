@@ -17,6 +17,39 @@ function slugify(str) {
     return str.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
 }
 
+// Shared topic label map — used by both lesson pages and topic archive pages
+const topicLabels = {
+    psychology: 'Psychology', society: 'Society', technology: 'Technology',
+    work: 'Work & Career', business: 'Business', life: 'Life & Relationships',
+    travel: 'Travel', media: 'Media & Fame', art: 'Art & Culture',
+    grammar: 'Grammar', food: 'Food & Drink'
+};
+
+// Extract a YouTube video ID from a URL, if it is one
+function getYouTubeId(url) {
+    if (!url) return null;
+    const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{6,})/);
+    return m ? m[1] : null;
+}
+
+// Build one factual, data-derived sentence about lesson logistics — no invented content
+function buildLogisticsSentence(lesson) {
+    const isRange = (lesson.duration || '').includes('-');
+    let sentence = isRange
+        ? `This lesson runs ${lesson.duration} and can be split across two shorter sessions if needed.`
+        : `This lesson is designed to fit within a single ${lesson.duration} session.`;
+    const hasVideo = (lesson.mediaType || '').includes('Video');
+    const hasAudio = (lesson.mediaType || '').includes('Audio');
+    if (hasVideo && hasAudio) {
+        sentence += ' Both audio and video components are included, which also works well for homework-based or asynchronous practice.';
+    } else if (hasVideo) {
+        sentence += ' The video component works well as homework before the live session.';
+    } else if (hasAudio) {
+        sentence += ' The audio component works well for pre-class listening practice.';
+    }
+    return sentence;
+}
+
 lessons.forEach(lesson => {
     const slug = slugify(lesson.title);
     const descMeta = (lesson.description || '').substring(0, 160).replace(/\n/g, ' ').replace(/"/g, '&quot;');
@@ -42,12 +75,6 @@ lessons.forEach(lesson => {
         </div>` : '';
 
     // Build topics tags
-    const topicLabels = {
-        psychology: 'Psychology', society: 'Society', technology: 'Technology',
-        work: 'Work & Career', business: 'Business', life: 'Life & Relationships',
-        travel: 'Travel', media: 'Media & Fame', art: 'Art & Culture',
-        grammar: 'Grammar', food: 'Food & Drink'
-    };
     const topicTags = (lesson.topics || []).map(t => topicLabels[t] || t).join(' · ');
 
     // Materials list
@@ -92,7 +119,7 @@ lessons.forEach(lesson => {
         .info-box h3{font-size:14px;font-weight:700;color:#c95210;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
         .info-box p{font-size:14px;color:#555;line-height:1.7;margin:0;}
         .topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
-        .topic-tag{background:#fff3e0;color:#c95210;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;}
+        .topic-tag{background:#fff3e0;color:#c95210;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;text-decoration:none;}
         .cta-box{background:#c95210;border-radius:16px;padding:24px;text-align:center;margin:32px 0;color:white;}
         .cta-box p{margin-bottom:14px;font-size:15px;opacity:0.9;}
         .cta-btn{display:inline-block;background:white;color:#c95210;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700;font-size:15px;}
@@ -119,7 +146,26 @@ lessons.forEach(lesson => {
             ${lesson.isFree ? '<span class="meta-badge" style="background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7;">⭐ Free Lesson</span>' : ''}
         </div>
 
-        ${topicTags ? `<div class="topics">${(lesson.topics||[]).map(t => `<span class="topic-tag">${topicLabels[t]||t}</span>`).join('')}</div>` : ''}
+        ${topicTags ? `<div class="topics">${(lesson.topics||[]).map(t => `<a href="https://esl-plans.com/topics/${t}.html" class="topic-tag">${topicLabels[t]||t}</a>`).join('')}</div>` : ''}
+
+        <table style="width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px;background:white;border-radius:12px;overflow:hidden;border:1px solid #eee;">
+            <thead>
+                <tr style="background:#faf6f2;">
+                    <th style="padding:10px 14px;text-align:left;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Level</th>
+                    <th style="padding:10px 14px;text-align:left;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Category</th>
+                    <th style="padding:10px 14px;text-align:left;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Format</th>
+                    <th style="padding:10px 14px;text-align:left;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding:10px 14px;color:#333;">${lesson.levelLabel}</td>
+                    <td style="padding:10px 14px;color:#333;">${lesson.categoryLabel}</td>
+                    <td style="padding:10px 14px;color:#333;">${lesson.mediaType}</td>
+                    <td style="padding:10px 14px;color:#333;">${lesson.duration}</td>
+                </tr>
+            </tbody>
+        </table>
 
         <h2>What's the "${lesson.title}" ESL Lesson About?</h2>
         <p style="color:#888;font-size:13px;margin-bottom:20px;">${lesson.levelLabel} · ${lesson.categoryLabel}</p>
@@ -129,6 +175,16 @@ lessons.forEach(lesson => {
 
         <h3>About This Lesson</h3>
         <p class="desc">${descSafe}</p>
+        <p style="color:#777;font-size:13px;margin-top:-10px;margin-bottom:20px;font-style:italic;">${buildLogisticsSentence(lesson)}</p>
+
+        ${(lesson.links || []).filter(l => l && l.url).length ? `<h3>Watch the Video</h3>
+        ${(lesson.links || []).filter(l => l && l.url).map(l => {
+            const ytId = getYouTubeId(l.url);
+            if (ytId) {
+                return `<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.08);"><iframe src="https://www.youtube.com/embed/${ytId}" title="${lesson.title.replace(/"/g,'&quot;')} — video" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+            }
+            return `<a href="${l.url}" target="_blank" rel="noopener" style="display:block;color:#c95210;font-weight:700;text-decoration:none;margin-bottom:10px;">▶️ ${(l.label||'Watch Video').replace(/</g,'&lt;')} &rarr;</a>`;
+        }).join('')}` : ''}
 
         <div class="info-box">
             <h3>What's Included</h3>
@@ -235,6 +291,71 @@ articles.forEach(article => {
     console.log(`Article: articles/${slug}.html`);
 });
 
+// ── GENERATE TOPIC & LEVEL ARCHIVE PAGES ──
+if (!fs.existsSync('topics')) fs.mkdirSync('topics');
+if (!fs.existsSync('levels')) fs.mkdirSync('levels');
+
+function renderLessonCard(l) {
+    return `<a href="https://esl-plans.com/lessons/${slugify(l.title)}.html" style="display:block;background:white;border-radius:12px;padding:16px;text-decoration:none;border:1px solid #eee;margin-bottom:12px;">
+        <div style="font-size:15px;font-weight:700;color:#333;margin-bottom:6px;">${l.title}</div>
+        <div style="font-size:12px;color:#aaa;">${l.levelLabel} &middot; ${l.categoryLabel} &middot; ${l.duration}</div>
+    </a>`;
+}
+
+function renderArchivePage(heading, description, matchingLessons) {
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${heading} | ESL-plans.com</title>
+    <meta name="description" content="${description}">
+    <style>
+        body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
+        .container{max-width:820px;margin:0 auto;padding:40px 20px}
+        .logo{font-size:22px;margin-bottom:28px;text-decoration:none;display:block;}
+        .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
+        .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
+        h1{color:#c95210;font-size:26px;margin-bottom:8px;line-height:1.3;}
+        p.intro{color:#666;font-size:15px;margin-bottom:28px;line-height:1.6;}
+        .back{display:inline-block;margin-top:24px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="logo" href="https://esl-plans.com"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+        <h1>${heading}</h1>
+        <p class="intro">${description}</p>
+        ${matchingLessons.map(renderLessonCard).join('')}
+        <a class="back" href="https://esl-plans.com">&larr; Browse all lesson plans</a>
+    </div>
+</body>
+</html>`;
+}
+
+const topicArchiveUrls = [];
+Object.keys(topicLabels).forEach(topicCode => {
+    const matching = lessons.filter(l => (l.topics||[]).includes(topicCode));
+    if (matching.length === 0) return;
+    const heading = `${topicLabels[topicCode]} ESL Lesson Plans for Adults`;
+    const description = `Browse ${matching.length} ESL lesson plan${matching.length===1?'':'s'} on ${topicLabels[topicCode].toLowerCase()} — conversation-driven materials for adult learners and online ESL tutors.`;
+    fs.writeFileSync(`topics/${topicCode}.html`, renderArchivePage(heading, description, matching), 'utf8');
+    topicArchiveUrls.push(`https://esl-plans.com/topics/${topicCode}.html`);
+    console.log(`Topic archive: topics/${topicCode}.html (${matching.length} lessons)`);
+});
+
+const levelLabelsMap = { a2: 'A2', b1: 'B1', b2: 'B2', c1: 'C1' };
+const levelArchiveUrls = [];
+Object.keys(levelLabelsMap).forEach(levelCode => {
+    const matching = lessons.filter(l => (l.level||'').split('-').includes(levelCode));
+    if (matching.length === 0) return;
+    const heading = `${levelLabelsMap[levelCode]} ESL Lesson Plans for Adults`;
+    const description = `Browse ${matching.length} ${levelLabelsMap[levelCode]}-level ESL lesson plan${matching.length===1?'':'s'} for adult learners — conversation-driven, zero-prep materials for online ESL tutors.`;
+    fs.writeFileSync(`levels/${levelCode}.html`, renderArchivePage(heading, description, matching), 'utf8');
+    levelArchiveUrls.push(`https://esl-plans.com/levels/${levelCode}.html`);
+    console.log(`Level archive: levels/${levelCode}.html (${matching.length} lessons)`);
+});
+
 // ── GENERATE SITEMAP ──
 const today = new Date().toISOString().split('T')[0];
 
@@ -249,6 +370,13 @@ const articleUrls = articles.map(a => `    <url>
         <loc>https://esl-plans.com/articles/${slugify(a.title)}</loc>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
+        <lastmod>${today}</lastmod>
+    </url>`).join('\n');
+
+const archiveUrls = [...topicArchiveUrls, ...levelArchiveUrls].map(u => `    <url>
+        <loc>${u}</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
         <lastmod>${today}</lastmod>
     </url>`).join('\n');
 
@@ -267,10 +395,11 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     </url>
 ${lessonUrls}
 ${articleUrls}
+${archiveUrls}
 </urlset>`;
 
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
-console.log(`Sitemap: ${lessons.length + articles.length + 2} URLs`);
+console.log(`Sitemap: ${lessons.length + articles.length + topicArchiveUrls.length + levelArchiveUrls.length + 2} URLs`);
 console.log('All done!');
 
 // ── TELEGRAM AUTO-POST ──
@@ -454,7 +583,9 @@ const allUrls = [
     'https://esl-plans.com',
     'https://esl-plans.com/docs/terms.html',
     ...lessons.map(l => `https://esl-plans.com/lessons/${slugify(l.title)}.html`),
-    ...articles.map(a => `https://esl-plans.com/articles/${slugify(a.title)}.html`)
+    ...articles.map(a => `https://esl-plans.com/articles/${slugify(a.title)}.html`),
+    ...topicArchiveUrls,
+    ...levelArchiveUrls
 ];
 
 const indexNowPayload = JSON.stringify({
