@@ -1654,6 +1654,7 @@
                 <li><a onclick="showTeacherCorner()">Teacher's Corner</a></li>
                 <li><a onclick="showContactsView()">About</a></li>
                 <li><a onclick="showPricingView()">Pricing</a></li>
+                <li id="nav-my-schedule" style="display:none;"><a onclick="openMySchedule()">📅 My Schedule</a></li>
                 <li><a onclick="showPinnedView()" class="pin-nav-btn" title="Pinned lessons">📌 <span class="pin-nav-label">Pinned</span> <span id="pin-count-badge" style="display:none"></span></a></li>
                 <li><a onclick="openAuthModal()" id="nav-login-btn">Login</a></li>
                 <li class="nav-close-row"><button class="nav-close-btn" onclick="closeMobileMenu()">✕</button></li>
@@ -3221,6 +3222,9 @@
                 badge.innerText = 'Guest — Upgrade to unlock all lessons';
             }
 
+            const myScheduleLi = document.getElementById('nav-my-schedule');
+            if (myScheduleLi) myScheduleLi.style.display = (tier === 'friend') ? '' : 'none';
+
             // Update pricing buttons if pricing page is visible
             updatePricingButtons();
         }
@@ -3232,6 +3236,28 @@
             btn.className = '';
             btn.onclick = openAuthModal;
             document.getElementById('user-menu').style.display = 'none';
+            const myScheduleLi = document.getElementById('nav-my-schedule');
+            if (myScheduleLi) myScheduleLi.style.display = 'none';
+        }
+
+        // Sends a Friend-tier subscriber to their own scheduling app.
+        // esl-plans.com generates a one-time token here (only this
+        // backend can vouch for who's actually a paying subscriber);
+        // the schedule app verifies it before letting anyone in.
+        async function openMySchedule() {
+            if (!currentUser) return;
+            try {
+                const { data: token, error } = await _supabase.rpc('create_schedule_claim');
+                if (error || !token) {
+                    console.error('create_schedule_claim error:', error);
+                    alert('Could not open your schedule right now. Please try again in a moment.');
+                    return;
+                }
+                window.location.href = 'https://schedule.esl-plans.com/claim/' + token;
+            } catch (e) {
+                console.error('openMySchedule error:', e);
+                alert('Could not open your schedule right now. Please try again in a moment.');
+            }
         }
 
         function toggleUserMenu() {
