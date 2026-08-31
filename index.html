@@ -2276,19 +2276,20 @@
             if (!guestBtn || !contBtn || !friendBtn) return;
 
             const tier = currentUser ? (currentUser.profile_tier || 'free') : null;
+            const effectiveTier = currentUser ? (currentUser.effective_tier || 'free') : null;
             const profile = currentUser ? currentUser.profile_data : null;
 
             // Free gift visibility
             const giftBanner = document.getElementById('pricing-free-gift');
             const giftContacts = document.getElementById('pricing-free-gift-contacts');
             if (giftBanner) giftBanner.style.display = !currentUser ? 'block' : 'none';
-            if (giftContacts) giftContacts.style.display = (currentUser && tier === 'free') ? 'block' : 'none';
+            if (giftContacts) giftContacts.style.display = (currentUser && effectiveTier === 'free') ? 'block' : 'none';
 
             // Show/hide premium links based on Friend tier
             const zoomWrap = document.getElementById('zoom-link-wrap');
             const tgWrap = document.getElementById('tg-friends-link-wrap');
             if (zoomWrap && tgWrap) {
-                if (tier === 'friend') {
+                if (effectiveTier === 'friend') {
                     zoomWrap.innerHTML = '<a href="https://t.me/alex_the_master" target="_blank" style="color:#229ED9; font-weight:700; white-space:nowrap;">PM me @alex_the_master →</a>';
                     tgWrap.innerHTML = '<a href="https://t.me/+IWqW1LKYejg5YWZi" target="_blank" style="color:#229ED9; font-weight:700; white-space:nowrap;">Join private chat →</a>';
                 } else {
@@ -2316,14 +2317,14 @@
                 contBtn.onclick = () => handleTributePayment('contributor');
                 friendBtn.innerText = 'Get Full Access';
                 friendBtn.onclick = () => handleTributePayment('friend');
-            } else if (tier === 'free' || tier === null) {
+            } else if (effectiveTier === 'free' || effectiveTier === null) {
                 guestBtn.innerText = '✅ You\'re In!';
                 guestBtn.classList.add('subscribed');
                 contBtn.innerText = 'Start Teaching';
                 contBtn.onclick = () => handleTributePayment('contributor');
                 friendBtn.innerText = 'Get Full Access';
                 friendBtn.onclick = () => handleTributePayment('friend');
-            } else if (tier === 'contributor') {
+            } else if (effectiveTier === 'contributor') {
                 guestBtn.innerText = '✅ You\'re In!';
                 guestBtn.classList.add('subscribed');
                 contBtn.innerText = formatExpiry(profile?.expires_at);
@@ -2331,7 +2332,7 @@
                 contBtn.onclick = null;
                 friendBtn.innerText = 'Upgrade to Friend';
                 friendBtn.onclick = () => handleTributePayment('friend');
-            } else if (tier === 'friend') {
+            } else if (effectiveTier === 'friend') {
                 guestBtn.innerText = '✅ You\'re In!';
                 guestBtn.classList.add('subscribed');
                 contBtn.innerText = '✅ Included';
@@ -2342,7 +2343,9 @@
                 friendBtn.onclick = null;
             }
 
-            // Check expiry and show reminder
+            // Check expiry and show reminder — deliberately uses the RAW tier,
+            // not effectiveTier, so the "your subscription has expired" nag
+            // keeps firing even after access has already been downgraded.
             checkSubscriptionExpiry(tier, profile);
         }
 
@@ -2524,7 +2527,7 @@
             document.getElementById('dynamic-media-section').innerHTML = html;
 
             // ── PAYWALL: replace downloads with Upgrade Now for premium lessons ──
-            const isSubscribed = currentUser && currentUser.profile_tier && currentUser.profile_tier !== 'free';
+            const isSubscribed = currentUser && currentUser.effective_tier && currentUser.effective_tier !== 'free';
             const isFreeLesson = lesson.isFree === true;
 
             if (!isFreeLesson && !isSubscribed) {
@@ -2538,7 +2541,7 @@
                         ${!currentUser ? `<div class="free-gift-banner" style="margin-top:16px;">
                             <p>🎁 Get 1 free premium lesson — register now!</p>
                             <button class="free-gift-btn" onclick="openAuthModal(); switchTab('signup');">Create Free Account</button>
-                        </div>` : (currentUser.profile_tier === 'free' ? `<div class="free-gift-contact" style="margin-top:16px; background:#fff8e1; border:1px solid #ffd600; border-radius:12px; padding:14px;">
+                        </div>` : (currentUser.effective_tier === 'free' ? `<div class="free-gift-contact" style="margin-top:16px; background:#fff8e1; border:1px solid #ffd600; border-radius:12px; padding:14px;">
                             <strong>🎁 Claim your free premium lesson!</strong><br>
                             Contact me with your <em>registered email + lesson title</em>:<br>
                             <a href="https://t.me/alex_the_master" target="_blank" style="color:#c95210; font-weight:700;">📱 Telegram: @alex_the_master</a><br>
@@ -3190,6 +3193,17 @@
             else setLoggedOut();
         });
 
+        // Returns the tier a user should actually be treated as *right now*.
+        // A paid tier that has passed its expires_at is treated as 'free' —
+        // this is the single source of truth for every access/display decision.
+        // The raw tier + expires_at are still kept on currentUser untouched,
+        // since the renewal-reminder banner needs the true values to keep nagging.
+        function computeEffectiveTier(tier, expiresAt) {
+            if (!tier || tier === 'free') return 'free';
+            if (!expiresAt) return tier;
+            return new Date(expiresAt) < new Date() ? 'free' : tier;
+        }
+
         async function setLoggedIn(user) {
             currentUser = user;
             const btn = document.getElementById('nav-login-btn');
@@ -3209,12 +3223,13 @@
             const tier = profile ? profile.tier : 'free';
             currentUser.profile_tier = tier;
             currentUser.profile_data = profile;
+            currentUser.effective_tier = computeEffectiveTier(tier, profile?.expires_at);
 
             const badge = document.getElementById('user-sub-status');
-            if (tier === 'contributor') {
+            if (currentUser.effective_tier === 'contributor') {
                 badge.className = 'sub-status-badge sub-contributor';
                 badge.innerText = '⭐ Contributor';
-            } else if (tier === 'friend') {
+            } else if (currentUser.effective_tier === 'friend') {
                 badge.className = 'sub-status-badge sub-friend';
                 badge.innerText = '👑 Friend — Full Access';
             } else {
@@ -3223,7 +3238,7 @@
             }
 
             const myScheduleLi = document.getElementById('nav-my-schedule');
-            if (myScheduleLi) myScheduleLi.style.display = (tier === 'friend') ? '' : 'none';
+            if (myScheduleLi) myScheduleLi.style.display = (currentUser.effective_tier === 'friend') ? '' : 'none';
 
             // Update pricing buttons if pricing page is visible
             updatePricingButtons();
