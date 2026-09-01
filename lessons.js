@@ -6,6 +6,48 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-01",
+        "title": "Teenagers",
+        "topics": [
+            "psychology",
+            "society",
+            "life",
+            "media",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_teens.jpg",
+        "keywords": "teenagers psychology society life media art a2-b1",
+        "objectives": [
+            "identify and discuss controversial modern teenage behaviors and the unique challenges youth face today;",
+            "practice listening comprehension by matching specific personal struggles to authentic teen testimonials;",
+            "analyze the dark digital trend of \"trash streaming\" (patostreaming) through targeted video comprehension and ethical debate."
+        ],
+        "description": "In this lesson, students begin with a provocative warm-up featuring a list of 28 controversial teen behaviors (e.g., smartphone addiction, cyberbullying, dangerous stunts, inappropriate clothing). This sparks an immediate debate about modern youth challenges and whose problems are the most serious. The lesson then transitions to an audio task where students listen to five teenagers (Lily, Chloe, Beth, Ryan, and Mike) discuss their personal struggles, matching specific issues from the list to each speaker.\nThe core media offers a critical analysis of the deeply concerning 'trash streaming' trend. Students watch a video analyzing this toxic trend, answering comprehension questions about a tragic real-life case (a streamer's death on the platform Kick), the trend's origins, and the alarming motivations of both creators and viewers (e.g., viewer-dictated stunts, substance abuse, and physical aggression). The lesson concludes with a critical ethical debate, prompting students to discuss audience responsibility, the morality of funding humiliation for entertainment, and whether tech platforms secretly profit from this toxic content.",
+        "telegramRecap": "Are teens addicted to toxic content? 📱 Dive into \"trash streaming,\" dark digital trends, and fierce ethical debates in this engaging ESL lesson!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_teens.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_teens_teens_talk.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_teens.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=Fu_tMmjP19o"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-08-30", 
         "title": "Newcomb's paradox",
         "topics": [
