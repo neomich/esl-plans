@@ -7,6 +7,41 @@ const lessonsCatalog = [
 
     {
         "dateAdded": "2026-09-01",
+        "title": "Mac VS Windows",
+        "topics": [
+            "society",
+            "technology",
+            "grammar"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/a2_mac_vs_windows.jpg",
+        "keywords": "mac vs windows society technology grammar a2-b1",
+        "objectives": [
+            "identify and discuss preferences between Mac and Windows operating systems using targeted technology vocabulary;",
+            "practice listening comprehension by analyzing four speakers' opinions on their computer preferences and the specific reasons behind them;",
+            "master advanced comparative structures (e.g., much more affordable, far more customizable, fewer conversations, the more... the less...) to express nuanced differences and similarities."
+        ],
+        "description": "In this lesson, students begin with a warm-up discussion about their current devices and the main differences they perceive between Mac and Windows. They then expand their technical lexicon by matching 15 common computer terms (e.g., ecosystem, user-friendly, customization, crash, value for money, interface) to corresponding visual icons.\nThe core media task features an audio segment where four individuals (Madeline, Weston, Ella, and Johnathon) share their personal preferences for either Mac or Windows. Students listen actively to identify each person's choice and the specific reasons they provide, paying close attention to the newly introduced vocabulary in context.\nNext, the lesson transitions to a comprehensive grammar focus on comparative structures. Students review the basics of short and long adjectives before advancing to more nuanced, real-world forms. This includes adding emphasis (much/far more), comparing adverbs and nouns (more/less/fewer), expressing equality (as... as), using verbs with quantity (as much/many as), and constructing double comparatives (The more..., the less...).\nFinally, the class concludes with a personalized speaking task, where students evaluate various pairs of options (e.g., streaming services, lifestyle choices) and justify their preferences using a variety of the comparative structures practiced in the lesson.",
+        "telegramRecap": "Mac or Windows? 💻 Explore advanced comparative grammar, tech vocab, and debate the ultimate OS choice in this A2-B1 lesson!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_mac_vs_windows.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_mac_vs_windows_4_speakers.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_mac_vs_windows.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
+        "dateAdded": "2026-09-01",
         "title": "Teenagers",
         "topics": [
             "psychology",
