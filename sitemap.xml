@@ -12,6 +12,12 @@
         <priority>0.3</priority>
     </url>
     <url>
+        <loc>https://esl-plans.com/lessons/mac-vs-windows</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2026-09-01</lastmod>
+    </url>
+    <url>
         <loc>https://esl-plans.com/lessons/teenagers</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
