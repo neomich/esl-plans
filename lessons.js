@@ -6,6 +6,57 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-03",
+        "title": "Kisses",
+        "topics": [
+            "psychology",
+            "society",
+            "art",
+            "media",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_kisses.jpg",
+        "keywords": "kisses psychology society art media life b1-b2",
+        "objectives": [
+            "explore the cultural, historical, and modern psychological aspects of kissing and physical intimacy;",
+            "master advanced relationship and modern dating vocabulary (e.g., consent, breadcrumbing, situationships, spontaneity, love bombing);",
+            "practice listening and reading comprehension through song lyrics, a podcast on iconic historical kisses, and an article on the modern \"kissing recession.\""
+        ],
+        "description": "In this lesson, students begin with the classic song \"A Kiss to Build a Dream On.\" They learn poetic vocabulary from the lyrics (e.g., thrive, fancies, weaving, making believe) and discuss the emotional weight and different contexts of kissing (passion, parting, friendship, or social custom).\nNext, the lesson explores the evolutionary history of kissing, noting its shared origins with great apes over 21 million years ago. Students then match 12 specific types of kisses (e.g., French, Eskimo, Angel, Spiderman, Nibble) to their corresponding descriptions and images, sparking a fun debate on which kisses they have tried and whether traditional gestures like the hand kiss should make a comeback.\nThe first core media task is an audio podcast analyzing four \"World's Most Iconic Kisses\" in art and history: the V-J Day photograph, Gustav Klimt’s Thels Kiss, the famous Titanic scene, and the Berlin Wall mural (\"My God, Help Me to Survive This Deadly Love\"). Students answer comprehension questions about the deeper meanings behind each image and evaluate provocative statements about modern kissing dynamics.\nThe second core media task is a reading/listening article about the modern \"kissing recession\" and how \"Gen Z overthinks\" intimacy. Students learn contemporary dating vocabulary (e.g., attachment styles, love bombing, breadcrumbing, situationships) and complete a True/False comprehension task to verify their understanding of how screen-based socializing and an overabundance of choice have impacted physical spontaneity.\nFinally, the class concludes with a lively, critical discussion using 10 targeted questions. Students debate whether dating apps have made flirting harder, if screens kill romantic spontaneity, how to navigate first-kiss awkwardness, and how long-term couples can keep the spark alive without overanalyzing every move.",
+        "telegramRecap": "A kiss to build a dream on...\" 🎶💋 Analyze iconic kisses, explore dating vocab, and debate the kissing recession.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_kisses.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_kisses_louis_armstrong.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_kisses_louis_armstrong.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_kisses_iconic_kisses.mp3"
+            },
+            {
+                "label": "3",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_kisses_kissing_recession.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_kisses.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-09-01",
         "title": "Mac VS Windows",
         "topics": [
