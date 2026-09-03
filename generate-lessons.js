@@ -135,6 +135,16 @@ lessons.forEach(lesson => {
     if (lesson.rarUrl) materials.push('full downloadable package (RAR)');
     const materialsText = materials.join(', ');
 
+    // Find the first YouTube video (if any) to build VideoObject schema.
+    // Google requires actual structured VideoObject data — not just an
+    // <iframe> on the page — before it will index a page's embedded video
+    // at all. Reuses the exact same getYouTubeId() detection already used
+    // for the "Watch the Video" section below, so both stay consistent.
+    const firstYouTubeLink = (lesson.links || []).find(l => l && l.url && getYouTubeId(l.url));
+    const firstYouTubeId = firstYouTubeLink ? getYouTubeId(firstYouTubeLink.url) : null;
+    const videoSchema = firstYouTubeId ? `
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"${lesson.title.replace(/"/g,'\\"')}${firstYouTubeLink.label ? ' — ' + firstYouTubeLink.label.replace(/"/g,'\\"') : ''}","description":"${descMeta.replace(/"/g,'\\"')}","thumbnailUrl":"https://img.youtube.com/vi/${firstYouTubeId}/hqdefault.jpg","uploadDate":"${lesson.dateAdded || new Date().toISOString().split('T')[0]}","embedUrl":"https://www.youtube.com/embed/${firstYouTubeId}","publisher":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com","logo":{"@type":"ImageObject","url":"https://esl-plans.com/favicon-512.png"}}}</script>` : '';
+
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,7 +160,7 @@ lessons.forEach(lesson => {
     <meta property="og:description" content="${descMeta}">
     <meta property="og:site_name" content="ESL-plans.com">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${lesson.title.replace(/"/g,'\\"')}","description":"${descMeta.replace(/"/g,'\\"')}","provider":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"educationalLevel":"${lesson.levelLabel}","inLanguage":"en","url":"https://esl-plans.com/lessons/${slug}"}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${lesson.title} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson plan is designed for ${lesson.levelLabel} level adult learners. It takes approximately ${lesson.duration} to complete."}},{"@type":"Question","name":"What materials are included in the ${lesson.title} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson includes ${materialsText}."}},{"@type":"Question","name":"Is the ${lesson.title} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${lesson.title} lesson is specifically designed for online ESL tutors working with adult learners at ${lesson.levelLabel} level. It is zero-prep and conversation-driven, covering the topic of ${topicTags}."}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${lesson.title} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson plan is designed for ${lesson.levelLabel} level adult learners. It takes approximately ${lesson.duration} to complete."}},{"@type":"Question","name":"What materials are included in the ${lesson.title} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson includes ${materialsText}."}},{"@type":"Question","name":"Is the ${lesson.title} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${lesson.title} lesson is specifically designed for online ESL tutors working with adult learners at ${lesson.levelLabel} level. It is zero-prep and conversation-driven, covering the topic of ${topicTags}."}}]}</script>${videoSchema}
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:820px;margin:0 auto;padding:40px 20px}
