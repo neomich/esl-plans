@@ -6,6 +6,58 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-04",
+        "title": "My Hot Gran",
+        "topics": [
+            "society",
+            "work",
+            "life",
+            "media",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_my_hot_gran.jpg",
+        "keywords": "my hot gran society work life media art b1-b2",
+        "objectives": [
+            "challenge ageist stereotypes and discuss societal perceptions of aging through a video case study of a senior fitness influencer;",
+            "master functional language for expressing strong likes and dislikes through targeted listening comprehension;",
+            "analyze diverse, real-world perspectives on aging by evaluating personal testimonials from three seniors and reflecting on practical strategies for aging gracefully."
+        ],
+        "description": "In this lesson, students begin with a provocative video and comprehension task about Lesley Maxwell, a 64-year-old \"Hot Gran\" fitness influencer with over 35,000 followers. Learners answer multiple-choice questions addressing public reactions, her daughter's mixed feelings about her social media presence, and her personal motivations for staying active and confident.\nNext, the lesson transitions to Audio Task 1: Likes and Dislikes. Students study functional phrases for expressing strong preferences (e.g., I absolutely adore, I'm totally obsessed with, I can't stand, I'm sick and tired of). They then listen to two speakers discussing the \"Hot Gran\" phenomenon, identifying and extracting these expressions in context.\nThe core listening segment is Audio Task 2: Three Seniors. Students listen to three older adults (Marjorie, Victor, and Dolores) share their realities about their \"last 10 years.\" They complete a detailed chart noting each speaker's age, health status, perceived pros and cons of their current life stage, and the advice they would give to others about growing older.\nFinally, the lesson concludes with a reading and discussion segment on \"12 Ways to Age Gracefully\" (e.g., staying active, managing stress, maintaining a positive outlook). Students analyze inspiring quotes about aging from figures like Cher, David Bowie, and Warren Buffett, sparking a final debate on the difference between growing old with vitality versus succumbing to disease.",
+        "telegramRecap": "Meet the 64yo \"Hot Gran\" with 35k followers! 💪 Challenge age stereotypes, master likes/dislikes, and hear real senior life stories.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_my_hot_gran.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_my_hot_gran_2_people.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_my_hot_gran_2_people.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_my_hot_gran_3_people.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_my_hot_gran.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=J1k2UTuTcoQ"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-03", 
         "title": "Kisses",
         "topics": [
