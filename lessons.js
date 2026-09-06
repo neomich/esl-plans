@@ -6,6 +6,56 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-06",
+        "title": "ChatGPT Issues",
+        "topics": [
+            "society",
+            "technology",
+            "work",
+            "life",
+            "media"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_chatgpt_issues.jpg",
+        "keywords": "chatgpt issues society technology work life media b2-c1",
+        "objectives": [
+            "identify and discuss 13 major ethical and societal issues related to artificial intelligence;",
+            "analyze the impact of AI on human creativity, elderly care, and daily routines through targeted video and audio comprehension tasks;",
+            "evaluate personal attitudes toward AI adoption and practice summarizing practical, everyday applications for work and home."
+        ],
+        "description": "The lesson opens with a New Yorker cartoon comparing a robot’s massive pile of generated papers to a human’s single crumpled page. This sparks a conversation about what makes human creative effort valuable and what might be lost if we remove the \"struggle\" from the process. Students then match 13 real-world AI issues (such as systemic bias, job displacement, deepfakes, and energy consumption) to specific, concrete scenarios. This leads into a short film, where students watch and check off which of those 13 issues are actually portrayed on screen, followed by a discussion on their personal reactions to the film.\nThe focus shifts to a video report about Gill Small, a 75-year-old retiree who uses a companion robot (ElliQ) to combat isolation. Students answer multiple-choice questions about her daily routine, the robot's features, and statistics on senior loneliness. They also complete a fill-in-the-blank task based on a testimonial from another user, David Rutter. Afterward, the class reads and reacts to real YouTube comments on the story, discussing whether robot companions are a sad replacement for human contact or a genuinely helpful tool for aging populations.\nThe lesson wraps up with a more positive, practical perspective. Students read or listen to an audio article where a speaker shares six simple, everyday ways to use AI as a helpful tool rather than a threat. The examples include drafting polite emails, getting quick explanations for complex words, brainstorming recipes, planning trips, generating fun images, and summarizing long documents. The class finishes by reflecting on which of these six tasks would save them the most time in their own lives.",
+        "telegramRecap": "From AI ethics to elderly care robots. 🤖 Watch a short film, analyze real user comments, and learn 6 practical ways AI can actually help you.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_chatgpt_issues.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_chatgpt_issues_6_tips.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_chatgpt_issues.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=cOBTD45U_Ms"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=YLSgAt9kk1Y"
+            },
+            {
+                "label": "Link 3",
+                "url": "https://www.youtube.com/watch?v=l4vsQBmTf94"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-04",
         "title": "My Hot Gran",
         "topics": [
