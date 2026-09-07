@@ -116,7 +116,7 @@ lessons.forEach(lesson => {
         <div style="margin-top:32px;border-top:1px dashed #ddd;padding-top:24px;">
             <h3 style="font-size:14px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">You may also like</h3>
             <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                ${related.map(r => `<a href="https://esl-plans.com/lessons/${slugify(r.title)}" style="flex:1;min-width:180px;background:white;border-radius:12px;padding:14px;text-decoration:none;border:1px solid #eee;display:block;">
+                ${related.map(r => `<a href="https://esl-plans.com/lessons/${slugify(r.title)}.html" style="flex:1;min-width:180px;background:white;border-radius:12px;padding:14px;text-decoration:none;border:1px solid #eee;display:block;">
                     <div style="font-size:14px;font-weight:700;color:#333;margin-bottom:4px;">${r.title}</div>
                     <div style="font-size:12px;color:#aaa;">${r.levelLabel} &middot; ${r.duration}</div>
                     <div style="font-size:12px;color:#c95210;font-weight:700;margin-top:8px;">View Lesson &rarr;</div>
@@ -153,13 +153,13 @@ lessons.forEach(lesson => {
     <title>${lesson.title} — ESL Lesson Plan for Adults | ESL-plans.com</title>
     <meta name="description" content="${descMeta}">
     <meta name="keywords" content="${(lesson.keywords||'')}, ESL lesson plan for adults, adult English lesson plan, online ESL tutor resources, ${lesson.levelLabel} ESL adults, conversation ESL lesson, ${topicTags.toLowerCase()}">
-    <link rel="canonical" href="https://esl-plans.com/lessons/${slug}">
+    <link rel="canonical" href="https://esl-plans.com/lessons/${slug}.html">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://esl-plans.com/lessons/${slug}">
+    <meta property="og:url" content="https://esl-plans.com/lessons/${slug}.html">
     <meta property="og:title" content="${lesson.title} — ESL Lesson Plan for Adults">
     <meta property="og:description" content="${descMeta}">
     <meta property="og:site_name" content="ESL-plans.com">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${lesson.title.replace(/"/g,'\\"')}","description":"${descMeta.replace(/"/g,'\\"')}","provider":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"educationalLevel":"${lesson.levelLabel}","inLanguage":"en","url":"https://esl-plans.com/lessons/${slug}"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${lesson.title.replace(/"/g,'\\"')}","description":"${descMeta.replace(/"/g,'\\"')}","provider":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"educationalLevel":"${lesson.levelLabel}","inLanguage":"en","url":"https://esl-plans.com/lessons/${slug}.html"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${lesson.title} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson plan is designed for ${lesson.levelLabel} level adult learners. It takes approximately ${lesson.duration} to complete."}},{"@type":"Question","name":"What materials are included in the ${lesson.title} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson includes ${materialsText}."}},{"@type":"Question","name":"Is the ${lesson.title} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${lesson.title} lesson is specifically designed for online ESL tutors working with adult learners at ${lesson.levelLabel} level. It is zero-prep and conversation-driven, covering the topic of ${topicTags}."}}]}</script>${videoSchema}
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
@@ -259,7 +259,7 @@ lessons.forEach(lesson => {
         ${relatedHtml}
 
         <div class="cta-box">
-            <p>Looking for more ESL lesson plans for adult learners? Browse our full library of 55+ conversation-driven plans.</p>
+            <p>Looking for more ESL lesson plans for adult learners? Browse our full library of 100+ conversation-driven plans.</p>
             <a href="https://esl-plans.com" class="cta-btn">Browse All Lesson Plans →</a>
         </div>
 
@@ -307,13 +307,13 @@ articles.forEach(article => {
     <title>${article.title} | ESL-plans.com Teacher's Corner</title>
     <meta name="description" content="${bodyMeta}">
     <meta name="keywords" content="ESL teaching tips, online ESL tutor, adult ESL learners, ${slugify(article.title).replace(/-/g,' ')}">
-    <link rel="canonical" href="https://esl-plans.com/articles/${slug}">
+    <link rel="canonical" href="https://esl-plans.com/articles/${slug}.html">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://esl-plans.com/articles/${slug}">
+    <meta property="og:url" content="https://esl-plans.com/articles/${slug}.html">
     <meta property="og:title" content="${article.title}">
     <meta property="og:description" content="${bodyMeta}">
     <meta property="og:site_name" content="ESL-plans.com">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${article.title.replace(/"/g,'\\"')}","description":"${bodyMeta.replace(/"/g,'\\"')}","author":{"@type":"Person","name":"Alex Selivanov"},"publisher":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"datePublished":"${article.date||''}","url":"https://esl-plans.com/articles/${slug}"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${article.title.replace(/"/g,'\\"')}","description":"${bodyMeta.replace(/"/g,'\\"')}","author":{"@type":"Person","name":"Alex Selivanov"},"publisher":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"datePublished":"${article.date||''}","url":"https://esl-plans.com/articles/${slug}.html"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"${article.title.replace(/"/g,'\\"')}","acceptedAnswer":{"@type":"Answer","text":"${bodyMeta.replace(/"/g,'\\"')}"}}]}</script>
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
@@ -341,7 +341,7 @@ articles.forEach(article => {
         <div class="body">${bodySafe}</div>
         <div class="cta">
             <p>Looking for ready-made ESL lesson plans for adult learners?</p>
-            <a href="https://esl-plans.com">Browse 55+ Lesson Plans →</a>
+            <a href="https://esl-plans.com">Browse 100+ Lesson Plans →</a>
         </div>
         <a class="back" href="https://esl-plans.com">&larr; Back to ESL-plans.com</a>
     </div>
@@ -420,14 +420,14 @@ Object.keys(levelLabelsMap).forEach(levelCode => {
 const today = new Date().toISOString().split('T')[0];
 
 const lessonUrls = lessons.map(l => `    <url>
-        <loc>https://esl-plans.com/lessons/${slugify(l.title)}</loc>
+        <loc>https://esl-plans.com/lessons/${slugify(l.title)}.html</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
         <lastmod>${today}</lastmod>
     </url>`).join('\n');
 
 const articleUrls = articles.map(a => `    <url>
-        <loc>https://esl-plans.com/articles/${slugify(a.title)}</loc>
+        <loc>https://esl-plans.com/articles/${slugify(a.title)}.html</loc>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
         <lastmod>${today}</lastmod>
