@@ -6,7 +6,7 @@
 const lessonsCatalog = [
 
     {
-        "dateAdded": "2026-09-06",
+        "dateAdded": "2026-09-06", 
         "title": "ChatGPT Issues",
         "topics": [
             "society",
