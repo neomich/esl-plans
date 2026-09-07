@@ -351,6 +351,55 @@ articles.forEach(article => {
     console.log(`Article: articles/${slug}.html`);
 });
 
+// ── SPLICE A REAL, CRAWLABLE ARTICLE LIST INTO index.html ──
+// The live SPA's Teacher's Corner section used to hardcode a "No articles
+// yet" placeholder as its initial state, only replaced by JS after an async
+// fetch completes. Search engines and AI crawlers that don't fully execute
+// that JS were reading the false placeholder as the page's real content.
+// This writes real, static, linkable article cards directly into the two
+// marker comments in index.html so the true content is there from the start.
+try {
+    const indexPath = 'index.html';
+    const startMarker = '<!-- STATIC-ARTICLES-START -->';
+    const endMarker = '<!-- STATIC-ARTICLES-END -->';
+    const indexContent = fs.readFileSync(indexPath, 'utf8');
+    const startIdx = indexContent.indexOf(startMarker);
+    const endIdx = indexContent.indexOf(endMarker);
+
+    if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) {
+        console.log('⚠️ STATIC-ARTICLES markers not found in index.html — skipping article splice. index.html was NOT modified.');
+    } else {
+        let articleCardsHtml;
+        if (articles.length === 0) {
+            articleCardsHtml = '<div class="articles-empty">No articles yet — check back soon!</div>';
+        } else {
+            articleCardsHtml = articles.map(a => {
+                const plainText = (a.body || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+                const cardSlug = slugify(a.title);
+                return `<a href="https://esl-plans.com/articles/${cardSlug}.html" class="article-card" style="text-decoration:none; color:inherit; display:block;">
+                    <div class="article-card-body">
+                        <h3>${a.title.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</h3>
+                        <p class="article-preview">${plainText.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</p>
+                    </div>
+                    <div class="article-card-footer">
+                        <span class="read-more">Read more →</span>
+                        <span class="article-date">${a.date || ''}</span>
+                    </div>
+                </a>`;
+            }).join('\n                ');
+        }
+
+        const before = indexContent.slice(0, startIdx + startMarker.length);
+        const after = indexContent.slice(endIdx);
+        const newIndexContent = `${before}\n                ${articleCardsHtml}\n                ${after}`;
+
+        fs.writeFileSync(indexPath, newIndexContent, 'utf8');
+        console.log(`✅ Spliced ${articles.length} static article card(s) into index.html`);
+    }
+} catch (e) {
+    console.log('⚠️ Error splicing articles into index.html — index.html was NOT modified:', e.message);
+}
+
 // ── GENERATE TOPIC & LEVEL ARCHIVE PAGES ──
 if (!fs.existsSync('topics')) fs.mkdirSync('topics');
 if (!fs.existsSync('levels')) fs.mkdirSync('levels');
