@@ -7,6 +7,49 @@ const lessonsCatalog = [
 
     {
         "dateAdded": "2026-09-08",
+        "title": "Ozempic: Miracle or Menace",
+        "topics": [
+            "society",
+            "technology",
+            "life",
+            "media",
+            "art",
+            "food"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_ozempic_miracle_or_menace.jpg",
+        "keywords": "ozempic: miracle or menace society technology life media art food b1-b2",
+        "objectives": [
+            "understand the concept of \"food noise\" and how modern weight-loss medications actually work in the body;",
+            "learn and apply common English idioms related to body shape, weight, and aging;",
+            "critically talk about the societal and personal implications of using drugs like Ozempic for weight loss."
+        ],
+        "description": "In this lesson, students begin by examining natural body changes as we age. They match terms like wrinkles, varicose veins, brittle nails, and stiff joints to pictures, sparking a conversation about aging, lifestyle choices, and what changes we find most difficult to accept.\nNext, the class listens to an audio segment explaining \"food noise.\" Students learn that this isn't just about hunger, but the constant, overwhelming mental pull of food cravings that goes beyond simple willpower. They review key vocabulary (like cravings, GLP-1s, nutrition, and medications) and read an Instagram post by Dr. Jack Mosley about his book. This leads to questions about why society often blames a lack of willpower and how these new treatments aim to bring people back into control.\nThe core media task is a video explaining exactly how Ozempic works. Students answer multiple-choice questions covering its original medical purpose (diabetes), its generic name (semaglutide), how it mimics the GLP-1 hormone to suppress cravings in the brain, and common side effects like nausea. This naturally leads to questions about whether fixing obesity requires a miracle drug or if our stomachs and brains are simply out of sync.\nFinally, the lesson shifts to a vocabulary focus on idioms related to weight and body shape. Students match expressions like muffin top, beer belly, living off the fat of the land, and fat cat to their meanings, fill in the blanks in context, and wrap up with a lively conversation about body image, societal pressures, and personal health choices.",
+        "telegramRecap": "What is \"food noise\"? Listen to the podcast, watch how Ozempic works, and learn fun idioms about body shape!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_ozempic_miracle_or_menace.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_ozempic_miracle_or_menace_food_noise.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_ozempic_miracle_or_menace.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=laPaezEsteI"
+            }
+        ]
+    },
+
+
+
+    {
+        "dateAdded": "2026-09-08",
         "title": "Compliments",
         "topics": [
             "psychology",
