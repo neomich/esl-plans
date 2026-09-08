@@ -6,6 +6,47 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-08",
+        "title": "Compliments",
+        "topics": [
+            "psychology",
+            "society",
+            "life",
+            "media"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_compliments.jpg",
+        "keywords": "compliments psychology society life media b1-b2",
+        "objectives": [
+            "identify and use authentic phrases for giving and receiving compliments in everyday situations;",
+            "distinguish between sincere praise and empty flattery using targeted vocabulary;",
+            "explore the psychological and social benefits of positive reinforcement through engaging media tasks."
+        ],
+        "description": "In this lesson, students begin by exploring the \"Art of Compliments,\" matching natural introductory phrases (e.g., \"I really admire how you...\", \"You have a great way of...\") with appropriate, polite responses. This sets a positive tone and introduces core vocabulary like sincere, genuine, flattery, and awkward. Learners then apply these terms in a contextual gap-fill exercise to understand the fine line between boosting someone's confidence and simply exaggerating.\nBuilding on this foundation, the class watches a short video about a man complimenting strangers on the street. Students observe his approach, noting exactly what he praises and how the strangers react, which sparks a real-world discussion on how unexpected kindness impacts daily interactions.\nThe lesson then shifts to a practical application through an audio task following Sarah’s \"5 Compliments a Day\" challenge. Learners listen to her experiences - such as interacting with a barista named Jake, a woman named Priya, and her crush Ethan - and answer comprehension questions to track her journey from initial nervousness to the realization that giving compliments genuinely builds trust and connection.\nFinally, the class wraps up by reviewing the proven benefits of positive reinforcement, such as boosting self-esteem, improving teamwork, and increasing overall happiness. Students brainstorm specific, personalized compliments using a provided list of 20 examples, practicing how to observe details and express gratitude without making comparisons, ensuring their praise feels both thoughtful and authentic.",
+        "telegramRecap": "Give 5 compliments a day! Listen to real-life challenges, learn the difference between sincere praise and flattery, and build better relationships.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_compliments.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_compliments_challenge.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_compliments.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=FFJuw9qAU28"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-06", 
         "title": "ChatGPT Issues",
         "topics": [
