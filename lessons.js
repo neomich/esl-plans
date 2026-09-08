@@ -7,6 +7,50 @@ const lessonsCatalog = [
 
     {
         "dateAdded": "2026-09-08",
+        "title": "Creator Economy: OnlyFans",
+        "topics": [
+            "society",
+            "technology",
+            "work",
+            "business",
+            "life",
+            "media",
+            "art"
+        ],
+        "isFree": false,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "💼",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_onlyfans.jpg",
+        "keywords": "creator economy: onlyfans society technology work business life media art b2-c1",
+        "objectives": [
+            "understand key vocabulary related to the creator economy and how independent creators earn money online;",
+            "analyze a real-world case study of a former nurse who transitioned to OnlyFans through a targeted video task;",
+            "critically evaluate the serious personal, professional, and emotional risks associated with the platform through reading and discussion."
+        ],
+        "description": "The lesson begins by introducing the \"creator economy.\" Students match essential industry terms (like monetize, gatekeepers, parasocial bonds, target audience, and creative freedom) to their definitions. They then read quotes from creators across different platforms (Patreon, YouTube, Pinterest, OnlyFans, etc.) to see how these individuals describe their work, income streams, and audience engagement.\nNext, the class watches a video about \"Allie,\" a former ICU nurse who left her job to become a full-time OnlyFans creator, reportedly earning up to $350k a month. Students answer comprehension questions about her daily routine, the ultimatum her hospital gave her, how she manages fan requests, and how her family supports her despite societal judgment. Afterward, students read and react to real YouTube comments on the video, discussing why society often views this career path differently than traditional corporate sponsorships.\nThe lesson then shifts to a more serious tone with a reading titled \"The Dark Side of OnlyFans.\" The text outlines 10 major risks, including the impossibility of stopping leaked content, the pressure to constantly cross personal boundaries, unstable income, sexual harassment from subscribers, the threat of stalkers, and long-term emotional damage from being treated as a product rather than a person.\nFinally, students complete a True/False comprehension task based on the article. The class wraps up with a discussion on whether the potential financial rewards of this industry are worth the high personal and professional costs.",
+        "telegramRecap": "Is the creator economy worth the risk? Learn industry terms, watch a video about an OnlyFans success story, and read about the platform's hidden dange",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_onlyfans.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_onlyfans.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=H0cY-8Pu9Ik"
+            }
+        ]
+    },
+
+
+
+    {
+        "dateAdded": "2026-09-08",
         "title": "Ozempic: Miracle or Menace",
         "topics": [
             "society",
