@@ -6,6 +6,54 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-10",
+        "title": "Derren Brown: The Language Barrier",
+        "topics": [
+            "psychology",
+            "society",
+            "media",
+            "art",
+            "grammar",
+            "technology",
+            "life"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "b1-b2-c1",
+        "levelLabel": "B1-B2-C1",
+        "duration": "90 min",
+        "visualSource": "images/b1_broken_language_barrier.jpg",
+        "keywords": "derren brown: the language barrier psychology society media art grammar technology life b1-b2-c1",
+        "objectives": [
+            "analyze the power of nonverbal communication and the Mehrabian 7-38-55 rule through targeted body language vocabulary;",
+            "critically evaluate a multi-stage psychological experiment to understand how subtle cues and expectations shape perception;",
+            "explore the real-world implications of human suggestibility and the ethics of psychological manipulation."
+        ],
+        "description": "In this lesson, students begin with a thought-provoking hook based on a Derren Brown quote about how language can both connect us and make us \"unapproachable.\" This introduces essential body language vocabulary (posture, gestures, fidgeting, mirroring, gaze, glance, grimace, smirk) and sets the scene: imagining yourself in a café in Poland, Paris, or Japan, overhearing conversations you cannot linguistically understand, and guessing how much you could actually comprehend through nonverbal cues alone.\nThe core of the lesson is a captivating, multi-stage viewing of Derren Brown’s experiment, \"The Language Barrier Is Broken.\"\nStage 1 (The Setup): Students meet Basil (who speaks Hungarian) and Susan (who speaks Arabic). Susan is asked to draw a simple picture and describe it in Hungarian. Basil’s task is to ignore the words he doesn't understand and focus entirely on forming a mental image from her voice and gestures, which he then draws.\nStage 2 (Student Participation): The class is invited to play along. Students listen to Susan’s description, close their eyes, trust their intuition, and draw the image that comes to their own minds.\nStage 3 (The Reveal & Analysis): Basil correctly draws an elephant! The class then reverse-engineers the \"magic,\" analyzing Derren’s brilliant, subtle manipulation from the very beginning: the spiral-staircase venue mimicking a trunk, Derren’s own trunk-like hand gestures while giving instructions, and Susan’s embedded keywords (\"India,\" \"Africa\").\nFinally, the lesson transitions to its second media segment, exploring the science of \"suggestibility\" (based on Erik Vance’s Suggestible You). Students examine real-world examples of how expectation changes reality, such as athletes performing better with a fake Gatorade label, students scoring higher with an \"MIT pen,\" or wine tasting better from a fancy bottle. The class concludes with a mature, critical discussion on personal suggestibility, the ethics of professional manipulation (by politicians, marketers, or police), and whether understanding these psychological tricks is a tool for self-protection or exploitation.",
+        "telegramRecap": "Can you guess a drawing in a language you don’t speak? Watch Derren Brown’s mind-bending experiment and explore the power of suggestibility!",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_broken_language_barrier.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_broken_language_barrier.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=mrbKfDEjic4"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=ibO2Nx6Cfy4"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-08",
         "title": "Creator Economy: OnlyFans",
         "topics": [
