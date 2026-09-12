@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-12",
+        "title": "What's for Breakfast?",
+        "topics": [
+            "food",
+            "art",
+            "travel",
+            "society"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/a2_breakfasts.jpg",
+        "keywords": "what's for breakfast? food art travel society a2-b1",
+        "objectives": [
+            "explore diverse breakfast traditions from around the world and analyze cultural food preferences through engaging video content;",
+            "understand the etymology and historical origins of the word \"breakfast\" and related vocabulary;",
+            "practice listening comprehension by matching international breakfast dishes to their countries of origin."
+        ],
+        "description": "Students begin by watching a video where American children taste and react to breakfast dishes from various countries (including century eggs and other traditional foods). They discuss which breakfasts the kids liked or disliked most and why, then reflect on their own breakfast preferences and whether they would enjoy trying these international dishes.\nLearners watch an educational video exploring the fascinating history and origin of the word \"breakfast.\" They answer comprehension questions about the etymology (breaking the fast from overnight), learn how \"fast\" functions as both a noun and verb, and discover how different languages express the same concept (e.g., Spanish \"desayuno\"). The video also features a colleague's surprise about breakfast during Ramadan, adding cultural context.\nStudents listen to an audio segment describing various international breakfast options. They complete a matching task, connecting 18 countries (Austria, Bulgaria, China, Colombia, Costa Rica, Eastern Africa, Finland, France, India, Israel, Japan, Malaysia, Morocco, Singapore, Thailand, United Kingdom, Venezuela, Vietnam) to their traditional breakfast dishes (e.g., Gallo pinto, Nasi lemak, Shakshuka, Miso soup, Xoi). This is followed by a proverbs matching activity and discussion questions about personal breakfast habits and cultural food sayings.",
+        "telegramRecap": "From century eggs to shakshuka! Explore global breakfast traditions, discover word origins, and test your knowledge of international morning meals.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_breakfasts.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_breakfasts_breakfast_around_the_world.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_breakfasts.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=JGjeaHe7GkY"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=3k0YmN8TfPM"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-10",
         "title": "Derren Brown: The Language Barrier",
         "topics": [
