@@ -6,6 +6,46 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-14",
+        "title": "Are cats lazy?",
+        "topics": [
+            "society",
+            "psychology",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_lazy_cats.jpg",
+        "keywords": "are cats lazy? society psychology life b1-b2",
+        "objectives": [
+            "identify and discuss 15 common habits associated with laziness and procrastination;",
+            "learn vocabulary for big cat species and understand feline sleep patterns through a targeted audio task;",
+            "evaluate the evolutionary and practical sides of human laziness, exploring how it can actually drive innovation and problem-solving."
+        ],
+        "description": "In this lesson, students start with a relatable, slightly humorous hook about laziness, followed by a discussion of 15 common \"lazy habits\" (such as snoozing alarms, excessive scrolling, or leaving tasks half-done). This sets a lighthearted tone for the class.\nThe focus then shifts to the animal kingdom. Students match 10 big cat species (like cheetah, jaguar, cougar, and lynx) to their pictures. This leads directly into an audio task exploring the question, \"Are cats lazy?\" Students listen for specific details about how many hours cats sleep, what a \"polyphasic sleep pattern\" is, how they react to stress, and what keeps a house cat active.\nPivoting back to humans, the lesson introduces a famous Bill Gates quote: \"I choose a lazy person to do a hard job. Because a lazy person will find an easy way to do it.\" This serves as the perfect bridge to the core video task, \"Why Laziness Can Actually Be Good.\" Students watch the clip and answer comprehension questions about human evolution, energy conservation, the Max Donelan walking experiment, and how the desire to save effort often drives technological invention.\nThe class wraps up with two highly engaging discussion prompts. First, students \"channel their inner inventor\" by dreaming up silly or creative gadgets designed to solve their laziest daily moments. Finally, they reflect on \"Laziness: Superpower or Kryptonite?\", sharing personal stories about when being lazy helped them find a clever shortcut, and when it held them back, aiming to find that healthy \"happy medium.",
+        "telegramRecap": "From snoozing alarms to evolutionary energy-saving. Explore 15 lazy habits, learn big cat facts, and discover when laziness is a superpower.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_lazy_cats.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_lazy_cats.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_lazy_cats.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=ruheiQ8swGs"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-12",
         "title": "What's for Breakfast?",
         "topics": [
