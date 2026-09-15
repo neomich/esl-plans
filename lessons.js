@@ -6,6 +6,56 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-15",
+        "title": "Accessories",
+        "topics": [
+            "society",
+            "life",
+            "media",
+            "art",
+            "grammar"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_accessories.jpg",
+        "keywords": "accessories society life media art grammar a2-b1",
+        "objectives": [
+            "identify and discuss various men's and women's accessories, exploring whether they are everyday necessities or personal luxuries;",
+            "practice listening for specific numerical data in a corporate context, focusing on how numbers are naturally spoken in English;",
+            "analyze personal stories of diverse women representing a brand's \"authentically you\" campaign through targeted video comprehension tasks."
+        ],
+        "description": "In this lesson, students start by exploring everyday accessories, from claw clips and silk scarves to signet rings and timepieces. This sparks a relaxed conversation about personal style preferences and whether these items are practical needs or just extra luxuries.\nThis naturally leads into a listening task focused on the British fashion brand \"Accessorize.\" Students fill in a short text with specific numerical data - such as the year the company started, the number of global stores, annual revenue, and future recycling goals. The key focus here is catching how numbers are naturally spoken in real English (e.g., hearing \"fifteen hundred\" instead of \"one thousand five hundred,\" or \"two K\").\nTo solidify this skill, the class practices expressing quantities, dates, and fractions in varied, natural ways. Students answer personal questions about their own shopping habits, shoe collections, and time spent online, using phrases like \"a couple of grand,\" \"three quarters,\" or \"nineteen ninety-nine.\"\nThe lesson then shifts to three short video stories featuring unique women (Sharron, Steph, and Miriam) who embody the brand's message of celebrating individuality. Students watch to find specific details about their backgrounds, answering targeted questions about Sharron's football journey, Steph's musical instrument, and Miriam's boxing career. The class wraps up by discussing how these women challenge everyday perceptions and how personal style can be a powerful form of self-expression.",
+        "telegramRecap": "Practice saying numbers, explore everyday accessories, and watch 3 real-life stories about women who celebrate being authentically themselves.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_accessories.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_accessories_accessorize.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_accessories.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=jLCK_t29chQ"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=Yq8XWGhit8M"
+            },
+            {
+                "label": "Link 3",
+                "url": "https://www.youtube.com/watch?v=b75IIaFanoo"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-14",
         "title": "Are cats lazy?",
         "topics": [
