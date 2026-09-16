@@ -172,8 +172,8 @@
             text-decoration: none;
             color: #444;
             font-weight: 700;
-            font-size: 17px;
-            padding: 10px 18px;
+            font-size: 15px;
+            padding: 10px 14px;
             border-radius: 25px;
             transition: all 0.2s ease;
             cursor: pointer;
@@ -3253,7 +3253,8 @@
         async function setLoggedIn(user) {
             currentUser = user;
             const btn = document.getElementById('nav-login-btn');
-            const shortEmail = user.email.length > 18 ? user.email.substring(0, 18) + '…' : user.email;
+            const localPart = user.email.split('@')[0];
+            const shortEmail = localPart.length > 18 ? localPart.substring(0, 18) + '…' : localPart;
             btn.innerText = '✅ ' + shortEmail;
             btn.className = 'nav-user-btn';
             btn.onclick = toggleUserMenu;
