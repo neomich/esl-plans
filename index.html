@@ -138,6 +138,7 @@
             color: #000;
             letter-spacing: -0.5px;
             font-family: 'Georgia', serif;
+            white-space: nowrap;
         }
         .logo .esl-part {
             font-weight: 900;
@@ -165,6 +166,8 @@
             align-items: center;
         }
 
+        .nav-menu li { flex-shrink: 0; }
+
         .nav-menu a {
             text-decoration: none;
             color: #444;
@@ -174,6 +177,7 @@
             border-radius: 25px;
             transition: all 0.2s ease;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .nav-menu a:hover { background-color: #c95210; color: white; }
@@ -230,7 +234,7 @@
                 border-radius: 12px;
             }
             .nav-menu.open { display: flex; }
-            .nav-menu li { width: 100%; }
+            .nav-menu li { width: 100%; flex-shrink: 1; }
             .nav-menu a {
                 display: block;
                 padding: 13px 22px;
@@ -238,6 +242,7 @@
                 font-size: 16px;
                 border-bottom: 1px solid #f0f0f0;
                 text-align: center;
+                white-space: normal;
             }
             .nav-menu li:nth-child(1) a { color: #1a4fa0; font-weight: 800; }
             .nav-menu li:nth-child(2) a { color: #ff7a00; font-weight: 800; }
