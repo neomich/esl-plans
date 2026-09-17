@@ -6,6 +6,56 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-17",
+        "title": "Blackrock",
+        "topics": [
+            "business",
+            "work",
+            "society"
+        ],
+        "isFree": false,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "💼",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_blackrock.jpg",
+        "keywords": "blackrock business work society b1-b2",
+        "objectives": [
+            "identify everyday products, services, and brands that are interconnected through a single massive financial firm;",
+            "understand the role of BlackRock as the world's largest asset manager and its influence on global markets and ordinary people;",
+            "analyze contrasting future scenarios through targeted listening tasks to evaluate the real-world impact of corporate consolidation."
+        ],
+        "description": "The lesson begins with a 20-question checklist asking students if they use common everyday items and services (e.g., Coca-Cola, Google, Amazon, Samsung, Mastercard, Pampers). This serves as an engaging hook to reveal how interconnected their daily lives are with a single, often invisible, corporate entity.\nNext, students review the results and are introduced to BlackRock, the world's largest asset manager with over $9 trillion in assets under management. They answer multiple-choice questions to understand the company's structure, its main clients (which include the pension funds of ordinary people), its risk-analysis software (Aladdin), and its broad influence across energy, finance, and technology sectors.\n\nThe core media section features a short video explaining \"The secret company that rules the world.\" This is immediately followed by two contrasting audio scenarios: \"A World Without BlackRock\" and \"A World With BlackRock.\" Students listen to compare how the disappearance or continued presence of this firm affects small businesses, global cities like London and Tokyo, and everyday life, noting specific narrative details like people fighting over a bag of chips or the sudden collapse of familiar tech services.\nThe lesson concludes with a broader discussion on business and capitalism. Students share their thoughts on entrepreneurship, the pros and cons of working for large versus small companies, and whether massive corporations hold too much influence over the global economy and government policies.",
+        "telegramRecap": "Explore the secret company managing $9 trillion. Watch a short video, listen to two alternate reality scenarios, and discuss global finance.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_blackrock.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_blackrock_blackrock_positive.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_blackrock_blackrock_positive.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_blackrock_blackrock_negative.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_blackrock.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=A4foal20UTA"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-15",
         "title": "Accessories",
         "topics": [
