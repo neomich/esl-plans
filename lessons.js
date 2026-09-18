@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-18",
+        "title": "Dreams Decoded",
+        "topics": [
+            "psychology",
+            "society",
+            "media"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_dreams_decoded.jpg",
+        "keywords": "dreams decoded psychology society media b1-b2",
+        "objectives": [
+            "identify 12 common dream scenarios and match them to their psychological interpretations;",
+            "practice listening comprehension through a classic 1950s song and an audio panel of dream experts;",
+            "evaluate the real-world science and ethical questions surrounding dream-recording technology."
+        ],
+        "description": "The lesson opens with a nostalgic touch, reviewing vocabulary through pictures before listening to the classic song \"Mr. Sandman\" by The Chordettes. Students fill in the missing lyrics and share what kind of dream they would ask the Sandman to bring them, setting a relaxed and imaginative tone for the class.\n\nNext, the focus shifts to 12 common dream scenarios, such as flying, falling, or showing up naked to work. Students match these scenarios to psychological interpretations like \"performance anxiety,\" \"desire for change,\" or \"vulnerability.\" They then listen to an audio panel featuring four dream experts (Lauri Loewenberg, Ian Wallace, Russell Grant, and Lauren Lawrence) to check their matches. This leads to a lively discussion about whether students have had similar dreams and if they agree with the experts' traditional interpretations.\nFinally, the lesson transitions to modern science. As a homework assignment, students read an article about Japanese scientists developing an fMRI device that can record and playback dreams with 60% accuracy. The text includes five reading comprehension questions and prompts students to consider the ethical concerns and potential mental health applications of decoding our subconscious minds.",
+        "telegramRecap": "Listen to \"Mr. Sandman\", match 12 common dreams to their meanings with expert audio, and read about a real dream-recording device for homework.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_dreams_decoded.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_dreams_decoded_the_chordettes.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_dreams_decoded_the_chordettes.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_dreams_decoded_dreams_decoded.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_dreams_decoded.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-09-17",
         "title": "Blackrock",
         "topics": [
