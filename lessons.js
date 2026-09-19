@@ -6,6 +6,47 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-19",
+        "title": "Spy Tricks: How to Get People Talking",
+        "topics": [
+            "psychology",
+            "society",
+            "media",
+            "art"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_spy_tricks.jpg",
+        "keywords": "spy tricks: how to get people talking psychology society media art b2-c1",
+        "objectives": [
+            "identify iconic secret agents from film and literature and match them to their signature mission activities;",
+            "master ten essential spy elicitation techniques (such as flattery, strategic silence, and false statements) and recognize them in context;",
+            "analyze a real-world behavioral analysis video and decode a covert conversation where spy tactics are used to extract information."
+        ],
+        "description": "The lesson begins with a fun warm-up where students match ten famous spies (including James Bond, Jason Bourne, Inspector Gadget, and Austin Powers) to their unique mission descriptions, sparking a conversation about which agent is the coolest, smartest, or funniest. This naturally introduces the core vocabulary of the unit: espionage, stealth, and intelligence gathering.\n\nNext, students dive into the theory, matching ten professional elicitation techniques (like elicitation, building rapport, mirroring, storytelling, and strategic silence) to their definitions. They then practice identifying these techniques in example sentences, such as recognizing \"flattery\" in a compliment or \"false statements\" in a故意 incorrect claim designed to prompt a correction.\nThe first core media task features a video with Chase Hughes, a former military veteran and behavioral analysis expert. Students complete gap-fill and matching tasks based on his explanation of why statements work better than questions for gathering information. They learn about concepts like \"friend mode,\" provocative statements, and the \"disbelief technique,\" analyzing real examples of how these tactics trigger people to share information voluntarily.\n\nThe lesson culminates with the second media task: an audio dialogue between Sam and Kerry at a community garden. On the surface, they are chatting about soil and gardening, but Sam is secretly using the techniques learned earlier to extract details about Kerry's secretive tech startup job and schedule. Students must \"decode the conversation,\" identifying which specific technique Sam uses in each bolded section (e.g., using a false statement about tech work hours to get Kerry to correct him with the real number, or using strategic silence to prompt her to fill the gap with more details). The class wraps up with a role-play activity where students practice these elicitation skills in pairs, trying to find out about a \"secret weekend trip\" without asking a single direct question.",
+        "telegramRecap": "From Bond to behavioral analysis! 🕵️‍♂️ Decode spy techniques, watch an expert video, and listen to a covert garden chat where every word is a clue.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_spy_tricks.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_spy_tricks_sam_kerry.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_spy_tricks.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/shorts/yJVWzaeJ_Fc"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-18",
         "title": "Dreams Decoded",
         "topics": [
