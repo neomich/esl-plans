@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 Disallow: /docs/
+Disallow: /admin.html
+Disallow: /ru
+Disallow: /ru.html
 
 User-agent: GPTBot
 Allow: /
