@@ -149,6 +149,19 @@ lessons.forEach(lesson => {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+        // GitHub Pages automatically serves this exact file at the same URL
+        // without the .html extension too, creating a genuine duplicate page
+        // that search engines discover independently of anything this site
+        // links to. This bounces that bare-URL twin to the real canonical
+        // .html page. It never fires when this page is already loaded via
+        // its proper .html URL — the condition is simply false there.
+        (function() {
+            if (!window.location.pathname.endsWith('.html')) {
+                window.location.replace(window.location.pathname + '.html' + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${lesson.title} — ESL Lesson Plan for Adults | ESL-plans.com</title>
     <meta name="description" content="${descMeta}">
@@ -303,6 +316,19 @@ articles.forEach(article => {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+        // GitHub Pages automatically serves this exact file at the same URL
+        // without the .html extension too, creating a genuine duplicate page
+        // that search engines discover independently of anything this site
+        // links to. This bounces that bare-URL twin to the real canonical
+        // .html page. It never fires when this page is already loaded via
+        // its proper .html URL — the condition is simply false there.
+        (function() {
+            if (!window.location.pathname.endsWith('.html')) {
+                window.location.replace(window.location.pathname + '.html' + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${article.title} | ESL-plans.com Teacher's Corner</title>
     <meta name="description" content="${bodyMeta}">
@@ -416,6 +442,19 @@ function renderArchivePage(heading, description, matchingLessons) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+        // GitHub Pages automatically serves this exact file at the same URL
+        // without the .html extension too, creating a genuine duplicate page
+        // that search engines discover independently of anything this site
+        // links to. This bounces that bare-URL twin to the real canonical
+        // .html page. It never fires when this page is already loaded via
+        // its proper .html URL — the condition is simply false there.
+        (function() {
+            if (!window.location.pathname.endsWith('.html')) {
+                window.location.replace(window.location.pathname + '.html' + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${heading} | ESL-plans.com</title>
     <meta name="description" content="${description}">
