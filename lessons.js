@@ -6,7 +6,7 @@
 const lessonsCatalog = [
 
     {
-        "dateAdded": "2026-09-22",
+        "dateAdded": "2026-09-22", 
         "title": "What is Luxury?",
         "topics": [
             "society",
