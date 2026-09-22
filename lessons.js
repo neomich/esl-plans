@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-22",
+        "title": "What is Luxury?",
+        "topics": [
+            "society",
+            "life",
+            "media",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_luxury.jpg",
+        "keywords": "what is luxury? society life media art b1-b2",
+        "objectives": [
+            "distinguish between needs, wants, and luxury through engaging visual and narrative examples;",
+            "analyze the psychological motivations behind buying luxury goods using targeted vocabulary and a podcast segment;",
+            "evaluate the modern trend of \"quiet luxury\" and its underlying social drivers through video comprehension and discussion."
+        ],
+        "description": "The lesson begins with a fundamental question: what is the difference between a need and a want? This leads directly into a short animated film, \"Peck Pocketed.\" In the cartoon, a bird steals luxury items like a brooch, a watch, and a phone from a sleeping woman to build his dream home, only for the heavy items to crush his actual house. This funny but sharp story sparks a conversation about obsession and the real cost of chasing status.\nNext, the class explores an analogy comparing money, necessity, and luxury (like choosing a Rolex over a Casio, or a gym membership over a home workout). This sets the stage for a podcast segment on why people buy luxury items. Students match key vocabulary—such as aspirational, indulge, pampered, and shallow—and listen to understand both the psychological benefits of luxury (feeling special and cared for) and its downsides (guilt or being perceived negatively).\n\nThe lesson then shifts to a visual discussion about luxury goods. Students look at a picture of high-end items, estimate their total value, and discuss whether buying second-hand luxury is a smart financial move or if it ruins the \"special\" feeling of owning something new.\nFinally, students watch a video on the rise of \"quiet luxury.\" They learn about the scarcity principle (like limited-edition Hermès bags) and social signaling (wearing a $3,000 unbranded sweater that only certain people recognize). The class wraps up by discussing why younger generations are drawn to subtle craftsmanship over flashy logos, and whether this trend is genuinely sustainable or just another form of exclusive marketing.",
+        "telegramRecap": "Is luxury a need or a want? Analyze a funny animated short, listen to why we buy luxury, and explore the psychology behind \"quiet luxury\" trends.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_luxury.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_luxury_luxury_pod.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_luxury.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=Cut4wA96lYY"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=wSUDQ-BgsUA"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-19",
         "title": "Spy Tricks: How to Get People Talking",
         "topics": [
