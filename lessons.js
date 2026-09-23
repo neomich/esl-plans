@@ -6,6 +6,47 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-23",
+        "title": "Moving to America: Is it Worth It?",
+        "topics": [
+            "society",
+            "work",
+            "life",
+            "travel"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_moving_to_america.jpg",
+        "keywords": "moving to america: is it worth it? society work life travel b2-c1",
+        "objectives": [
+            "evaluate the stress levels of major life events, specifically focusing on the challenges of relocating abroad;",
+            "analyze real-life experiences of immigrants adapting to a new country through a targeted video task;",
+            "learn and apply practical vocabulary related to the logistics of international relocation."
+        ],
+        "description": "Students begin by looking at a list of ten major life events, such as moving to a new country, changing jobs, getting married, or facing illness. They rate these experiences on a stress scale, discussing which ones feel like a walk in the park and which push people far out of their comfort zone. This sets a grounded, relatable tone for the topic of relocation and adaptation.\nThe focus shifts to a real-world scenario presented as a Reddit post, where a user asks for advice on how to actually move to another country and start a new life. Students read the post, talk through the specific questions posed by the user (like finding housing, getting jobs, and leaving their comfort zone), and share their own thoughts or advice on making such a massive leap.\nThe class watches a video titled \"Was Moving to America Worth It?\" featuring several individuals (Marita, Martin, Brandon, Mary, Farah, and Sheila) sharing their personal stories of immigrating to the US. Students track specific details about their backgrounds, their initial feelings of being an outsider, experiences with communication barriers, and the personal strengths that helped them eventually find a sense of belonging.\nFor homework, students read a practical guide outlining the essential steps for relocating abroad, such as researching the destination, financial planning, gathering documents, arranging the move, and preparing for daily life. They complete a matching task, connecting bolded vocabulary words from the text (like vital, seamless, possessions, lodgings, and criterion) to their correct synonyms, building a useful lexicon for international transitions.",
+        "telegramRecap": "Rate life stressors, watch real experiences of adapting to the US, and learn the 5 practical steps and vocab for moving to a new country.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_moving_to_america.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_moving_to_america.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=2th2JWZaGdM"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-22", 
         "title": "What is Luxury?",
         "topics": [
