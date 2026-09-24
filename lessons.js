@@ -6,6 +6,50 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-24",
+        "title": "Marriage cycle",
+        "topics": [
+            "psychology",
+            "society",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_marriage_cycle.jpg",
+        "keywords": "marriage cycle psychology society life b1-b2",
+        "objectives": [
+            "understand the typical stages and challenges of a committed relationship using targeted vocabulary;",
+            "analyze the practical and legal realities of marriage through video interviews and historical music;",
+            "distinguish between consensual arranged marriages and forced unions, while identifying early warning signs of unhealthy relationships."
+        ],
+        "description": "In this lesson, students begin by looking at the everyday pros and cons of marriage, matching real-life scenarios to the ups and downs of a shared life. \nThis naturally leads into the \"Committed Relationship Life Cycle,\" where students listen to an audio track describing the eight stages of a relationship. They complete a gap-fill task covering everything from the initial promise of courtship and the honeymoon phase to the reality of internal and external stressors, stagnation, and eventual rekindling or termination. After checking their answers, students talk about their own relationship timelines and how they navigate these phases.\n\nNext, the class examines the legal realities of marriage by watching a video featuring divorce lawyers. Students test their assumptions with a True/False task about marriage statistics and then read and react to real YouTube comments, talking about whether marriage is a gamble or a serious commitment. This is followed by a look at historical perspectives through Nina Simone’s 1965 song “Marriage Is For Old Folks,” analyzing her reasons for resisting traditional wedlock.\n\nFinally, the lesson broadens its cultural view with a video on arranged marriages. Students answer comprehension questions about how these matches are made, discuss Salma Hayek’s perspective on her grandmother’s forced marriage, and clearly distinguish between consensual arranged marriages and forced ones. The class wraps up by identifying 12 early warning signs of a \"Bad Romance,\" helping students recognize relationships that are not built to last.",
+        "telegramRecap": "From honeymoon to stagnation. Listen to relationship stages, hear divorce lawyers' realities, and look at arranged marriages.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_marriage_cycle.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_marriage_cycle_6_stages.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_marriage_cycle.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=eCLk-2iArYc"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=uhJ1JNS3_fM"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-23",
         "title": "Moving to America: Is it Worth It?",
         "topics": [
