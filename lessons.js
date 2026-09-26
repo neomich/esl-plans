@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-26",
+        "title": "Extreme Diets",
+        "topics": [
+            "food",
+            "media",
+            "society"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_extreme_diets.jpg",
+        "keywords": "extreme diets food media society b1-b2",
+        "objectives": [
+            "identify human internal organs and connect them to the specific foods that support them;",
+            "compare biological diets and evaluate whether humans are true omnivores;",
+            "examine the physical and mental results of extreme eating habits through a real-life video case study;",
+            "practice using natural collocations to weigh the pros and cons of various lifestyle choices."
+        ],
+        "description": "The lesson starts with a look at human anatomy. Students label a diagram of the internal organs and match them to their physical descriptions and functions. This sets the stage for an audio podcast about food, where learners connect specific everyday items - like walnuts, kimchi, cranberries, and steak - to the organs they positively affect. This naturally leads to a conversation about red meat consumption and how often it fits into a healthy weekly routine.\nNext, the focus shifts to the animal kingdom. Students examine a chart comparing herbivores, carnivores, and omnivores, looking at physical traits like teeth and stomach acid. After discussing some strange internet anomalies - like horses eating mice - the class talks about the massive online discussion surrounding human biology and whether we are truly designed to be omnivores.\nBefore tackling the main videos, students pick up useful vocabulary for evaluation. They match common collocations for discussing advantages and disadvantages, moving beyond just saying \"good\" or \"bad\" to express more nuanced opinions.\nThe core media task features two videos following Enrike, who experimented with six weeks on a strict carnivore diet and six weeks on a vegan diet. Students watch her sit down with a dietitian and check off the specific pros and cons she experienced, ranging from high energy levels and weight loss to \"keto flu,\" electrolyte imbalances, and B12 deficiencies.\nFinally, the lesson wraps up by applying this evaluative language to non-food extremes. Students look at contrasting lifestyle choices - such as digital nomad versus 9-to-5, strict versus gentle parenting, and renting versus buying a home - and use their new vocabulary to weigh the real-world pros and cons of each path.",
+        "telegramRecap": "6 weeks vegan, 6 weeks carnivore! 🥩🥦 Watch a real-life diet experiment, connect foods to organs, and weigh the pros and cons of extreme eating.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_extreme_diets.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_extreme_diets_food_pod.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_extreme_diets.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=kCW8wzrfiGs"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=APzta9opsA0"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-24",
         "title": "Marriage cycle",
         "topics": [
