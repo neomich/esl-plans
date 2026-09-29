@@ -6,6 +6,50 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-09-29",
+        "title": "Is Gen Z Dumb?",
+        "topics": [
+            "society",
+            "technology",
+            "media"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_is_gen_z_dumb.jpg",
+        "keywords": "is gen z dumb? society technology media b2-c1",
+        "objectives": [
+            "compare generational achievements and challenge stereotypes about modern youth;",
+            "analyze media portrayals of Gen Z through viral street interviews and historical footage;",
+            "evaluate the impact of technology on learning and attention through a targeted podcast task."
+        ],
+        "description": "In this lesson, students start by looking at the prominent achievements of different generations, from the Greatest Generation to Gen Z. This sparks a grounded conversation about what makes each era unique and introduces useful vocabulary for describing productivity and impact.\nThis naturally leads into the core media tasks. First, students watch a viral street interview video where young people struggle with basic trivia questions. This prompts a discussion on whether these answers reflect a lack of intelligence or just camera panic. Next, the class watches a 1966 BBC clip of schoolchildren predicting the future, comparing their articulate, thoughtful responses to modern perceptions of youth.\nBuilding on this contrast, students listen to a podcast discussing the claim that Gen Z is the first generation to score lower on standardized tests. While listening, they fill in the gaps with key terms. Afterward, they discuss whether constant screen time and short-form content are turning learners into \"skimmers,\" or if other factors like the pandemic are to blame.\nThe lesson wraps up by reviewing key terms like sustained attention and critical thinking. Students finish by discussing whether having Google at our fingertips makes memorizing facts less important than knowing how to think critically.",
+        "telegramRecap": "Are young people really getting dumber? Analyze viral street interviews, 1960s future predictions, and a podcast on Gen Z learning habits.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_is_gen_z_dumb.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_is_gen_z_dumb_podcast.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_is_gen_z_dumb.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=NhH43XRAKV0"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=zUSDPatbFeA"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-26",
         "title": "Extreme Diets",
         "topics": [
