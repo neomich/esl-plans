@@ -6,6 +6,52 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-01",
+        "title": "Microcredentials",
+        "topics": [
+            "society",
+            "technology",
+            "work",
+            "business",
+            "life"
+        ],
+        "isFree": false,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "💼",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_microcredentials.jpg",
+        "keywords": "microcredentials society technology work business life b1-b2",
+        "objectives": [
+            "understand the concept of microcredentials and how they compare to traditional degrees and video game achievements;",
+            "practice listening comprehension by identifying the pros and cons of short-term courses from four different perspectives;",
+            "evaluate the role of microcredentials in modern career development and lifelong learning."
+        ],
+        "description": "Students start by looking at GTA 5 Online statistics (active users, session length, revenue, and achievements). They discuss how in-game milestones motivate players and whether this concept can translate to real-world learning and professional development.\nLearners match key terms (e.g., microcredentials, pilot program, quality assurance, lifelong learning) to their definitions. They watch a short promotional video to verify their understanding and complete a True/False task. The class then discusses how microcredential badges compare to the achievements one might earn in a video game.\nThe core media task is an audio segment featuring four speakers (Ricky, Britany, Nataly, and Pavel). Students first match idiomatic phrases (e.g., pay a fortune, test the waters, game changer, digital paperweights) to their meanings. They then listen to each speaker to identify the specific pros and cons they mention regarding traditional degrees versus microcredentials, followed by a discussion on their personal preferences.\nThe lesson wraps up with a 10-question multiple-choice quiz comparing microcredentials to traditional degrees (covering cost, duration, the skills gap, and employer respect).\nSuggested Homework: Assign this 10-question quiz, and ask students to find and watch a short informational video about a specific microcredential or short course related to their dream job. They should write a brief paragraph explaining why it appeals to them and how it compares to a traditional university path.",
+        "telegramRecap": "Skip the 4-year degree? Weigh the pros and cons of microcredentials, match real-life idioms, and discover how short courses are changing careers.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_microcredentials.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_microcredentials_4_calls.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_microcredentials.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=bnjulFSpOsw"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=LsnlgB_RIlY"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-09-29",
         "title": "Is Gen Z Dumb?",
         "topics": [
