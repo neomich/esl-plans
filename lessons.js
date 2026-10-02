@@ -6,6 +6,56 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-02",
+        "title": "The Art of Pretending: Fake it till you make it!",
+        "topics": [
+            "psychology",
+            "society",
+            "work",
+            "life",
+            "media"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "b2",
+        "levelLabel": "B2",
+        "duration": "90 min",
+        "visualSource": "images/b2_pretending.jpg",
+        "keywords": "the art of pretending: fake it till you make it! psychology society work life media b2",
+        "objectives": [
+            "distinguish between biological mimicry, social mimicry, and conscious pretending;",
+            "analyze real-world examples of deception through targeted video tasks;",
+            "evaluate the ethical lines of \"faking it\" in business, social media, and everyday life."
+        ],
+        "description": "Students start by defining biological and social mimicry, discussing how we unconsciously copy others, and contrasting this with the conscious act of pretending.\nThe class watches a clip from Catch Me If You Can, completing a gap-fill summary of how Frank Abagnale Jr. evades the FBI. Next, students watch a second video explaining the phrase \"fake it till you make it\" and complete a True/False task about the pressure to fit in, the risks of losing personal values, and the difference between healthy adaptation and harmful deception. This leads to a discussion about famous fictional and real-life \"fakers\" pictured at the bottom of the page (Coco Chanel, Jay Gatsby, Bill Gates, Jordan Belfort, Scarlett O'Hara, and Madonna), analyzing why they succeeded and at what cost.\nThe lesson wraps up with a discussion on common, everyday forms of pretending. Students look at a list of real-world scenarios - such as marketers exaggerating claims, startups inflating valuations, influencers curating fake lifestyles, and politicians feigning empathy - and discuss where the line is crossed from harmless presentation to harmful manipulation.\nStudents watch a video detailing the reality behind the Theranos scandal. They match statements to the video content, noting how Holmes misled patients with faulty tests, used traditional machines instead of her own device, and justified her actions with quotes about \"living a life of purpose\" and avoiding \"backup plans.\"",
+        "telegramRecap": "Watch Catch Me If You Can, analyze the Theranos fraud, and discuss where \"faking it\" crosses the line into real deception.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_pretending.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_pretending.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=1X1yL29IKho"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=x_Q_gtAbvuI"
+            },
+            {
+                "label": "Link 3",
+                "url": "https://www.youtube.com/watch?v=fwHould1ePY"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-10-01",
         "title": "Microcredentials",
         "topics": [
