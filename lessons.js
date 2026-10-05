@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-05",
+        "title": "Memes: The Evolution of Internet Culture",
+        "topics": [
+            "society",
+            "technology",
+            "media",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_memes.jpg",
+        "keywords": "memes: the evolution of internet culture society technology media art b1-b2",
+        "objectives": [
+            "analyze the real-world cultural and economic impact of viral internet trends;",
+            "trace the historical evolution of meme culture from early image macros to modern formats;",
+            "compare biological evolution to internet meme replication using targeted listening and viewing tasks."
+        ],
+        "description": "The lesson opens with the iconic 2020 TikTok video of @420doggface208 skateboarding and drinking cranberry juice to Fleetwood Mac’s \"Dreams.\" Students read real comments and discuss why this specific video resonated so deeply. They then look at the massive ripple effect it had, analyzing how it boosted the creator's followers, sent the 43-year-old song back up the charts, and caused a sudden spike in Ocean Spray sales.\n\nShifting to everyday internet culture, students look at 12 classic image macro memes (like \"Madagascar,\" \"Aged like Bitcoin,\" and \"Waitress/Steak\"). They talk about which ones they relate to, share their own recent favorites from their social media feeds, and discuss why simple text-over-photo formats can sometimes communicate more than plain words.\n\nThe class listens to an audio podcast tracing the history of meme culture. Students place 8 iconic internet images (such as Bad Luck Brian, Dat Boi, and All Your Base) on a timeline ranging from 1976 to the present day. They then listen again to match specific descriptions to each era, looking at how memes shifted from early email forwards to surreal randomness and algorithmic generation.\n\nThe lesson wraps up with a BBC Ideas video explaining the link between Richard Dawkins’ biological concept of the \"meme\" and modern internet culture. Students fill in a chart comparing biological survival to meme replication, noting how memes \"use us to get ahead.\" Finally, they discuss whether corporate brands ruin the vibe of memes and how these digital images reflect the current mood and stresses of our generation.",
+        "telegramRecap": "From @420doggface208 to Richard Dawkins. Analyze a viral trend, trace meme history with a podcast, and watch a BBC video on meme evolution.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_memes.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_memes.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_memes.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.instagram.com/p/CFkxv93JvR5/?hl=en"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=4VS9cWmmu2k"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-10-02",
         "title": "The Art of Pretending: Fake it till you make it!",
         "topics": [
