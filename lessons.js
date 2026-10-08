@@ -6,6 +6,48 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-08",
+        "title": "Lazy Girl Jobs & AI Careers",
+        "topics": [
+            "society",
+            "technology",
+            "work",
+            "business",
+            "media"
+        ],
+        "isFree": false,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "💼",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_lazy_girl_jobs.jpg",
+        "keywords": "lazy girl jobs & ai careers society technology work business media b1-b2",
+        "objectives": [
+            "explore the \"Lazy Girl Job\" trend and its focus on work-life balance, remote work, and low stress;",
+            "practice listening comprehension through a podcast on workplace trends and a video on AI prompt engineering;",
+            "learn and apply everyday phrasal verbs and the 7 essential structures for writing effective AI prompts."
+        ],
+        "description": "Students start by evaluating six different job profiles (ranging from Daycare Teacher to ER Nurse). They match key workplace vocabulary and discuss the pros and cons of each role, setting the stage for a conversation about what people truly value in a job.\n\nThe class explores the viral \"Lazy Girl Job\" trend. After matching key phrasal verbs, students listen to a podcast discussing why this trend is growing, focusing on remote work, flexible hours, and setting boundaries. They fill in the blanks with the target phrasal verbs and discuss whether this trend is about actual laziness or a healthy rejection of hustle culture.\n\nThe focus shifts to a high-paying, remote alternative: AI Prompt Engineering. Students watch a WSJ Tech video following a reporter's investigation into this booming field. They complete a multiple-choice comprehension task about the skills required (like writing clear commands without needing to code) and discuss whether prompt engineering is a real professional skill and how AI will reshape the job market.\n\nFinally, students learn the 7 essential parts of a strong AI prompt: Role, Task, Context, Audience, Goal, Format, and Constraints. They match these steps to practical examples, learning how to transform a weak, vague request into a strong, highly specific prompt that yields better results.",
+        "telegramRecap": "Is prompt engineering the ultimate \"Lazy Girl Job\"? Watch a video, discuss AI's impact on work, and master the 7 steps of writing AI prompts.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_lazy_girl_jobs.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_lazy_girl_jobs_podcast.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_lazy_girl_jobs.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=whkge1rEamU"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-10-05",
         "title": "Memes: The Evolution of Internet Culture",
         "topics": [
