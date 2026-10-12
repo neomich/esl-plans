@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-12",
+        "title": "Meetings at Work: A Survival Guide",
+        "topics": [
+            "work",
+            "business",
+            "grammar"
+        ],
+        "isFree": false,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "💼",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/a2_work_meetings.jpg",
+        "keywords": "meetings at work: a survival guide work business grammar a2-b1",
+        "objectives": [
+            "identify appropriate and polite phrases for handling common challenges during workplace meetings;",
+            "practice listening comprehension through an expert audio quiz and real-world mini-dialogue scenarios;",
+            "apply diplomatic language functions to navigate professional conversations smoothly and confidently."
+        ],
+        "description": "Page 1: The Meeting Survival Guide\nThe lesson opens with a practical, scenario-based multiple-choice quiz. Students evaluate tricky workplace situations - such as politely interrupting a colleague, disagreeing with a budget estimate, asking for clarification when the audio cuts out, or buying time to think before answering a manager. After making their choices, they listen to an expert audio breakdown that reveals the best options and explains the nuanced reasoning behind polite workplace communication.\nThe focus shifts to the mechanics of diplomatic English. Students review 10 essential language functions for meetings (e.g., interrupting politely, bringing the conversation back to the agenda, requesting a reschedule). They then match 20 common workplace phrases - such as \"Can I jump in for a moment?\", \"I see it a little differently,\" and \"Let's get back to what we were discussing\" - to their correct functional categories, building a robust toolkit for professional interactions.\n\nPage 2: Mini-Dialogues & Real-World Application\nFinally, students put their new vocabulary into context by listening to a series of realistic mini-dialogues. These audio clips cover specific, relatable scenarios like dealing with a bad internet connection, steering an off-topic discussion back on track, and wrapping up a meeting gracefully. Students match the phrases they hear to the correct language function, finishing the class with a practical, confident understanding of how to handle corporate conversations.\n\nA2-B1 ESL Lesson: Mastering Diplomatic Meeting Phrases & Professional Communication\nWorkplace English Lesson: How to Interrupt, Disagree, and Reschedule Politely\nMeeting Survival Guide: A2-B1 Business English Lesson on Virtual & In-Person Etiquette\nTeach Professional English: Diplomatic Language Functions for Corporate Meetings\nA2-B1 English Lesson Plan: Navigating Bad Connections, Off-Topic Chats, and Meeting Agendas\n📄 Inside This Lesson Pack\n🎯 Lesson Highlights & Core Objectives\nThe Meeting Survival Guide: A highly interactive multiple-choice quiz where students navigate 10 common corporate friction points, from budget disagreements to technical glitches.\nExpert Audio Breakdown: An authentic listening task where an industry expert explains the psychology and etiquette behind choosing the most diplomatic responses.\n🗣️ Target Language & Diplomatic Functions\n10 Essential Meeting Functions: Checking screen share, suggesting alternatives politely, closing meetings, asking for clarification, disagreeing diplomatically, rescheduling, buying time, redirecting to the agenda, interrupting politely, and asking for repetition.\nKey Phrases to Master: \"Can I jump in for a moment?\", \"I see it a little differently,\" \"Let's get back to what we were discussing,\" \"Could we move it to another day?\", and \"Just to make sure I understand...\"\n🎧 Audio & Interactive Scenarios\nReal-World Mini-Dialogues: Six distinct audio scenarios covering the exact moments meetings go off the rails: a bad internet connection dropping audio, a colleague derailing the agenda, the awkwardness of rescheduling, and the polite art of ending a call.\nContextual Matching Task: Students listen to the dialogues and map the exact phrases used by the speakers to their specific language functions, bridging the gap between theory and practice.\n💡 Real-World Application & Discussion\nCorporate Etiquette Debates: When is it appropriate to interrupt a senior manager? How do you disagree with a budget estimate without causing offense? What is the most polite way to tell a colleague their audio is breaking up?\nPersonal Experience Sharing: Students reflect on their own recent meeting challenges and brainstorm alternative, polite phrases they can use in their specific professional environments.",
+        "telegramRecap": "Need to reschedule or disagree politely? Practice real meeting dialogues, learn essential workplace phrases, and boost your professional English.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_work_meetings.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_work_meetings_quiz.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_work_meetings_quiz.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_work_meetings_mini_dialogues.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_work_meetings.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-10-08",
         "title": "Lazy Girl Jobs & AI Careers",
         "topics": [
