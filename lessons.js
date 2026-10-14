@@ -6,6 +6,44 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-14",
+        "title": "The Apple Event Phenomenon",
+        "topics": [
+            "society",
+            "technology",
+            "business",
+            "life",
+            "media",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_apple.jpg",
+        "keywords": "the apple event phenomenon society technology business life media art b1-b2",
+        "objectives": [
+            "analyze the cultural, technological, and media impact of major tech product launches;",
+            "practice listening comprehension by verifying a 12-word vocabulary gap-fill with a targeted audio task;",
+            "master grammatical structures for describing purpose, function, and personal preferences within a tech context."
+        ],
+        "description": "Page 1: The Mystery Phenomenon\nThe lesson opens with an engaging guessing game. Students read 9 mind-blowing facts about a secret global phenomenon (e.g., generating more internet traffic than a nation in a month, factories hiring extra workers, people sleeping on sidewalks) and try to guess what it is before it’s revealed as the Apple Event. This sparks a lively discussion about tech hype, viral memes, manufacturing secrecy, and whether students would wait in line for a new gadget on Page 2.\n\nPage 3: The Three Pillars of Tech Culture\nStudents explore why the Apple Event is more than just a product announcement by examining its three main pillars: Culture, Tech, and Media. They complete a vocabulary matching and gap-fill task using 12 key terms (innovation, narrative, status, economy, publicity, identity, wireless, moments, loyalty, marketing, chain, slang) to understand concepts like the \"Apple Cult\" identity, shared global moments, and the company's influence on everyday English slang.\nThe lesson expands on the Tech and Media pillars, discussing how the company dominates the global supply chain, kills old technology (like headphone jacks), and controls the media narrative without traditional ads. Students then listen to an audio conversation between James and Rachel to check their answers for the 12-word gap-fill from the previous page, ensuring accurate pronunciation and contextual understanding. This is followed by a debate on tech influencers, wireless charging, and brand loyalty.\n\nPage 4: Grammar in Action – Purpose & Preferences\nFinally, students learn and apply specific grammar structures for describing purpose and function (used for + [verb-ing], designed to + [infinitive], allows you to + [infinitive], ideal for + [verb-ing/noun]). They then practice expressing preferences and giving reasons (I'd prefer to get... because, I'd rather buy... since, I lean toward... due to) by discussing various devices in the Apple ecosystem, such as the MacBook, iPhone, AirPods, and Apple Watch.\n\n📄 Inside This Lesson Pack\n🎯 Core Discussion Prompts & Speaking Activities\nThe Tech Hype Debate: Do you actively follow online tech influencers for shopping advice? Would you travel to California just to see the Steve Jobs Theater?\nStatus & Identity: Is technology a major status symbol to you personally? Do you buy things because they match your lifestyle identity?\nBrand Loyalty: Have you ever pre-ordered a product before it officially hit stores? Does high-quality creative marketing secretly change your shopping habits?\n🎧 Vocabulary & Listening Focus\nThe 3 Pillars Gap-Fill: A 12-word vocabulary task covering innovation, narrative, status, economy, publicity, identity, wireless, moments, loyalty, marketing, chain, and slang.\nAudio Verification: An authentic listening task featuring James and Rachel discussing the cultural and media significance of the Apple Event, allowing students to check their gap-fill answers and hear natural tech-related discourse.\n📱 Grammar & Real-World Application\nDescribing Purpose & Function: Master structures like used for + [verb-ing], designed to + [infinitive], and allows you to + [infinitive].\nExpressing Preferences: Practice nuanced decision-making phrases: \"I'd prefer to get... because,\" \"I'd rather buy... since,\" and \"I lean toward... due to.\"\nThe Ecosystem Task: Students apply these grammar structures to real Apple products (MacBook Air, iPad Pro, Apple Watch, AirPods, Apple Vision Pro), explaining why a specific device is ideal for their needs.\n💡 Critical Thinking Extension Work\nThe Supply Chain Effect: Discuss how one company's design changes (like removing physical SIM cards) force the entire global tech industry to adapt.\nThe \"Apple Cult\": Analyze why certain consumer brands generate front-page news coverage and unmatched loyalty compared to their competitors.",
+        "telegramRecap": "Why do we line up for new gadgets? Analyze the Apple Event's cultural impact, listen to a tech audio, and learn to describe device functions.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_apple.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_apple_talk.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_apple.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-10-12",
         "title": "Meetings at Work: A Survival Guide",
         "topics": [
