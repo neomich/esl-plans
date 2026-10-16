@@ -6,6 +6,53 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-16",
+        "title": "The Loneliness Economy",
+        "topics": [
+            "psychology",
+            "society",
+            "business",
+            "life",
+            "grammar"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_loneliness_economy.jpg",
+        "keywords": "the loneliness economy psychology society business life grammar b1-b2",
+        "objectives": [
+            "understand the concept of the \"loneliness economy\" and its measurable social and health impacts;",
+            "practice listening comprehension through a targeted song gap-fill and a podcast on how the market attempts to monetize isolation;",
+            "master and apply double comparative structures (\"the more... the less...\") to discuss modern life paradoxes."
+        ],
+        "description": "Page 1&2: Modern Isolation & Striking Statistics\nThe lesson opens by examining everyday modern products and services (like ASMR, self-checkouts, binge-watching, and AI chatbots) to identify their common thread. This naturally leads to a review of striking, data-driven statistics: 79% of Gen Z reports feeling lonely, the financial cost of loneliness in the U.S. reaches $460 billion, and weak social connections carry a health risk equivalent to smoking 15 cigarettes a day.\nStudents listen to a song about the \"lonely generation,\" completing a gap-fill task with evocative phrases like \"pixelated version\" and \"broken glass.\" Afterward, the class reads and discusses relatable quotes about solitude and the human condition from figures like Mark Twain and Henry Rollins, sharing their own perspectives on being alone versus being lonely.\n\nPage 3: The Loneliness Economy Podcast & Slang\nThe focus shifts to an audio podcast explaining the mechanics of the \"loneliness economy.\" Students answer comprehension questions about how the market sells solutions for isolation and what simple actions can fight it. This is paired with a robust vocabulary task where students match modern slang and idioms (such as doom-scrolling, ghosting, fill the void, and socially rusty) to their definitions and apply them in realistic conversational contexts.\n\nPage 4: Life Paradoxes & Double Comparatives\nThe lesson wraps up with a grammar focus on double comparatives. Students learn the structure (The more/less + [subject + verb], the more/less + [subject + verb]) and apply it by matching real-world life paradoxes (e.g., \"The more we rely on technology, the more we lose our true identity\"). They finish by debating the irony that spending money to avoid loneliness often makes us feel even more isolated.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Tech Trade-Off: Do you prefer chatting with a real cashier or using a self-checkout? Why do you think more places are switching to machines?\nDigital Solutions: Would you ever try an AI friend, a hugging pillow, or a virtual workout buddy to feel more connected? Why or whyا not?\nThe Core Irony: \"The more we spend to avoid feeling lonely, the lonelier we seem to get.\" Do you agree with this statement based on your own experiences?\n🎧 Vocabulary & Listening Focus\nThe Loneliness Economy Podcast: A targeted listening task exploring why people buy products to feel okay without needing others, and the simple actions suggested to fight isolation.\nModern Slang & Idioms: Doom-scrolling, ghosting, fill the void, socially rusty, algorithm-fed, VC pitch deck, cuddle hormone, and anti-tech rant.\nSong Gap-Fill: An engaging audio task focusing on lyrical themes of the \"lonely generation\" and \"pixelated\" identities.\n📊 Data & Real-World Context\nStriking Statistics: Visual analysis of data showing 79% of Gen Z feeling lonely, the $460 billion economic cost, and the \"15 cigarettes a day\" health equivalence.\nPhilosophical Quotes: Discussion prompts based on quotes from Mark Twain, Henry Rollins, and Paulo Coelho about the human condition and solitude.\n⚠️ Critical Thinking Extension Work\nLife Paradoxes Matching: Students pair the first half of a paradoxical statement (e.g., \"The more friends you have on social media...\") with its logical, ironic conclusion (\"...the more lonely you can feel in real life\").\nGrammar in Action: Applying the double comparative structure to personal habits, evaluating how modern routines impact genuine, face-to-face human connection.",
+        "telegramRecap": "From doom-scrolling to self-checkouts. Explore the true cost of loneliness, match modern idioms, and practice double comparative grammar.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_loneliness_economy.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_loneliness_economy_song.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_loneliness_economy_song.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_loneliness_economy_pod.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_loneliness_economy.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-10-14",
         "title": "The Apple Event Phenomenon",
         "topics": [
