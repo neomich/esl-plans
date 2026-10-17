@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-17",
+        "title": "Domestic Violence",
+        "topics": [
+            "psychology",
+            "society",
+            "life",
+            "media"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_dv.jpg",
+        "keywords": "domestic violence psychology society life media b2-c1",
+        "objectives": [
+            "identify common physical injuries and match them to appropriate first-aid remedies;",
+            "analyze visual storytelling and public reactions to a classic painting depicting relationship tension;",
+            "understand the realities, stages, and warning signs of domestic violence through stark statistics and real-life accounts."
+        ],
+        "description": "Page 1: Injuries and Remedies\nThe lesson opens with a practical, health-focused vocabulary task. Students match common physical injuries (such as bruises, scrapes, black eyes, fractures, and sprains) to their corresponding first-aid remedies, including the RICE method, antiseptic cream, ice packs, and blister pads. This grounded introduction sets a serious, empathetic tone for the sensitive topics to follow.\n\nPage 2: Visual Analysis and Public Reaction\nThe focus shifts to Norman Rockwell’s 1963 painting, \"Marriage Counselor.\" Students closely observe the couple's body language, speculating about the events leading up to the session and identifying the subtle hints the artist left behind. They watch a short video to verify their observations, then read and react to real Instagram comments on the artwork. This sparks a critical debate on whether the painting makes light of domestic tension or offers a subtle glimpse of hope.\n\nPage 3: The Reality of Domestic Violence\nThe lesson transitions to hard data, examining infographics that reveal how the majority of physical assaults, rapes, and stalking go unreported, and how domestic violence is a leading cause of family homelessness. Before the core media task, students master key vocabulary (escalate, controlling behavior, at rock bottom, lifeline). They then watch a video featuring the real-life accounts of two women, Zoe and Nina, taking detailed notes on the specific stages of abuse: the beginning, the turning point, the escalation, and the escape.\nThe class concludes with a thoughtful, solution-oriented discussion on how to support survivors. Students explore the mechanics of how abusers isolate their victims, identify early warning signs of toxic relationships, and brainstorm practical, actionable ways friends and family can act as a true lifeline for someone trying to leave a dangerous situation.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nVisual Decoding: What hidden hints did Norman Rockwell leave in \"Marriage Counselor\"? Does the painting minimize domestic tension or offer hope?\nComment Analysis: Debating real YouTube reactions to the artwork and what they reveal about societal perceptions of relationship conflict.\nSupport Strategies: How can friends or family act as a true \"lifeline\" for someone trapped in an abusive relationship? What advice would you give a friend having a breakdown?\n🧠 Target Lexicon & Vocabulary Focus\nMedical & First Aid: Bruise, scrape, black eye, cut, fracture, splinter, burn, blister, sprain, RICE method, antiseptic cream.\nDomestic Violence Terminology: Escalate, controlling behavior, at rock bottom, derogatory, to keep the peace, a breakdown, a lifeline, exhilarated.\n📺 Multimedia & Authentic Materials Included\nArt Analysis Video: A short video breakdown of Norman Rockwell’s \"Marriage Counselor\" to verify student observations on body language and hidden narrative clues.\nReal-Life Survivor Accounts: A targeted video featuring Zoe and Nina sharing their personal experiences, requiring students to map the 5 distinct stages of abuse (The Beginning, The Turning Point, The Abuse, The Escalation, The Escape).\nGlobal Infographics: Stark statistical data on unreported crimes (4/5 rapes, 3/4 physical assaults) and country rankings of reported violence against women.\n⚠️ Critical Thinking Extension Work\nWarning Signs Framework: Identifying the subtle shifts that indicate a relationship is escalating from normal arguments into toxic, controlling behavior.\nThe Isolation Mechanism: Analyzing how abusers systematically cut off their victims' support networks, making it nearly impossible for the victim to see a way out, and brainstorming community-level interventions.",
+        "telegramRecap": "Spot the warning signs. Learn injury vocabulary, analyze a famous painting's hidden meaning, and hear two raw accounts of escaping domestic violence.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_dv.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_dv.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.instagram.com/reels/DcOwoJ4n_gi"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=OOdPLr4zyNU"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-10-16",
         "title": "The Loneliness Economy",
         "topics": [
