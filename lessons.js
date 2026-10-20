@@ -6,6 +6,40 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-20",
+        "title": "Form vs Function",
+        "topics": [
+            "art",
+            "grammar"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Audio",
+        "mediaIcon": "🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_form_versus_function.jpg",
+        "keywords": "form vs function art grammar b1-b2",
+        "objectives": [
+            "distinguish between the \"form follows function\" and \"function follows form\" design philosophies;",
+            "describe everyday objects using specific sensory vocabulary (texture, color, shape, material);",
+            "evaluate personal preferences for design through a targeted listening task featuring four speakers and their favorite items."
+        ],
+        "description": "Page 1: Bench Designs & Personalities\nStudents begin by examining unique, unconventional bench designs and matching them to different personality types (e.g., a modern minimalist, a quiet dreamer, a romantic couple, or an energetic intellectual). This visual warm-up gets them thinking critically about how physical spaces and furniture reflect human traits and lifestyles.\nLearners describe these benches using targeted adjectives like eye-catching, impractical, cozy, or weird. They then read an Instagram post and real user comments debating whether practicality or creativity should lead design. This introduces the core theme of the lesson and sparks a natural discussion on personal aesthetic preferences.\n\nPage 2: Form vs. Function\nThe class defines the two main design rules: \"Form Follows Function\" (where purpose dictates shape, efficiency, and practicality) and \"Function Follows Form\" (where aesthetics, cultural expression, and emotion shape the purpose). Students apply these concepts by looking at pictures of everyday objects and debating which rule each item follows.\n\nPage 3: The Core Audio Task\nStudents listen to an audio segment featuring four speakers: Sandy (a samovar), Rhett (a rocking chair), Abbey (ornamented scissors), and Denis (a lucky cat). They fill out a detailed chart noting what each object is, where or how they got it, how and how often they use it, why they like it, and whether they value its form, function, or a balance of both.\n\nPage 4: Sensory Vocabulary & Personal Application\nStudents listen to the audio a second time to catch the specific descriptive words each speaker uses for their item, focusing on texture, color, shape, and material. The lesson wraps up with a personalized speaking task where students describe a meaningful object they own, applying this sensory vocabulary and evaluating its own balance of looks and practicality.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nDesign Debates: Does a stadium need to prioritize sport requirements (function) or evoke emotion (form)? Can a building be both?\nPersonal Aesthetics: Which of the quirky bench designs would you actually sit on, and which personality type does it match?\nThe Ultimate Trade-Off: If you had to choose, would you rather own something that looks beautiful but is uncomfortable, or something ugly that works perfectly?\n🧠 Target Lexicon & Sensory Focus\nDesign Philosophies: Form follows function, function follows form, practicality, aesthetics, ornamentation, efficiency.\nDescriptive Adjectives: Eye-catching, impractical, cozy, weird, unique, uncomfortable, imaginative.\nSensory Vocabulary: Texture, color, shape, material (applied to a samovar, rocking chair, ornamented scissors, and a lucky cat).\n🎧 Multimedia & Authentic Materials Included\n4-Speaker Audio Task: A targeted listening comprehension activity where students map the origins, usage habits, and design preferences of four distinct speakers regarding their favorite personal objects.\nReal-World Social Media Context: An authentic Instagram post and comment thread analyzing the clash between practicality and creativity in modern design.\n⚠️ Critical Thinking Extension Work\nPersonal Object Evaluation: Students bring the lesson home by describing a meaningful object they own, deliberately using the target sensory vocabulary to explain how it balances (or fails to balance) form and function.\nThe \"Why\" Behind the Buy: Analyzing why people keep items that are purely decorative versus those that are purely utilitarian, and how this reflects their personal values.",
+        "telegramRecap": "Form or function? Match quirky benches to personalities, read real design comments, and hear 4 speakers explain why they love their favorite items.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_form_versus_function.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_form_versus_function_4_speakers.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_form_versus_function.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-10-17",
         "title": "Domestic Violence",
         "topics": [
