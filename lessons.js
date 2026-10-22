@@ -6,6 +6,49 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-22",
+        "title": "Why Do Zoomers Love Retro Tech?",
+        "topics": [
+            "society",
+            "technology",
+            "life",
+            "media",
+            "art",
+            "grammar"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/a2_old_tech.jpg",
+        "keywords": "why do zoomers love retro tech? society technology life media art grammar a2-b1",
+        "objectives": [
+            "explore the idea of a \"throwaway culture\" and the modern charm of retro items",
+            "practice irregular past simple verbs by recounting the story of a short animated film",
+            "learn the specific grammar rules for using \"used to\" and \"would\" through real-life stories about vintage technology"
+        ],
+        "description": "Page 1: The Throwaway Culture & \"Flicker\"\nThe lesson opens with the classic idiom \"One man's trash is another man's treasure\" and a heartwarming short film called Flicker, which tells the story of a discarded, broken lamp finding a second chance at a new home. Students practice their irregular past tense verbs (e.g., took, fell, broke, felt) by filling in the blanks to summarize the lamp's journey. This naturally sparks a grounded conversation about \"throwaway culture\" - the habit of tossing things out instead of fixing them - and the modern appeal of imperfect, retro-style items like vinyl records, 80s fashion, and flip phones.\n\nPage 2: Vintage Tech Audio & Grammar Focus\nNext, students listen to an audio track featuring three young people (Peter, Lesley, and Martin) talking about their favorite pieces of old technology. They take notes on what items they collect, what annoys them about modern devices, and what vintage gadgets they want to buy next. This sets up the core grammar focus: using used to and would to talk about past routines. Students learn the \"Golden Rule\" (that would cannot be used for past states like have, live, or love) and apply it in a targeted gap-fill exercise. The class finishes by sharing their own favorite retro items and discussing what they dislike about today's modern equivalents.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Throwaway Culture Debate: Do you belong to a throwaway culture, or do you try to give old things a new life? Why do customers usually ignore faulty or second-hand items?\nRetro vs. Modern: Do you think clothes from the 80s and 90s look more unique than today's clothes? Do you ever wish you had a flip phone to disconnect from social media?\nPersonal Tech Preferences: What is your favorite old tech item, how did you get it, and what do you dislike about the modern version?\n🧠 Target Lexicon & Grammar Focus\nIrregular Past Verbs: work, take, light, limp, lose, notice, fall, step, break, feel, play, try.\nPast Habits Grammar: Mastering the difference between used to + infinitive and would + infinitive for repeated past actions.\nThe Golden Rule: Understanding that would cannot be used for past states (verbs about being, owning, or feeling, such as be, live, have, like, love).\n📺 Multimedia & Authentic Materials Included\nAnimated Short Film: Flicker, a heartwarming story about a discarded lamp, used as a narrative vehicle for irregular past tense verb practice.\n3-Speaker Audio Task: An authentic listening segment featuring Peter, Lesley, and Martin discussing their favorite vintage gadgets, modern tech frustrations, and future retro purchases.\n⚠️ Critical Thinking Extension Work\nValue Assessment: Analyzing why young people (\"zoomers\") are increasingly drawn to imperfect, retro-style photos and physical media (like vinyl artwork) in a highly digital, streaming-dominated world.\nGrammar in Context: Applying the \"used to\" vs. \"would\" rules to real-world shifts, such as how people used to buy paper maps but now use GPS, or how offices used to store documents locally but now use the cloud.",
+        "telegramRecap": "Do you prefer vinyl records or streaming? Explore throwaway culture, watch an animated short, and learn the grammar rules for \"used to\" vs \"would\".",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_old_tech.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_old_tech_3_speakers.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_old_tech.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=a0St3l2KpT8"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-10-20",
         "title": "Form vs Function",
         "topics": [
