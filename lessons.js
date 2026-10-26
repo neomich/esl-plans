@@ -6,6 +6,58 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-26",
+        "title": "Lost Motivation: Where Is My Drive?",
+        "topics": [
+            "psychology",
+            "society",
+            "work",
+            "business",
+            "life"
+        ],
+        "isFree": false,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "💼",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "90 min",
+        "visualSource": "images/b2_drive.jpg",
+        "keywords": "lost motivation: where is my drive? psychology society work business life b2-c1",
+        "objectives": [
+            "identify common reasons people give up on goals and the specific factors that lead to workplace demotivation",
+            "analyze workplace dynamics and hidden frustrations through a targeted short film viewing",
+            "evaluate personal work drivers and motivation levels using real-life audio profiles and a self-assessment quiz"
+        ],
+        "description": "Page 1: The Reality of Quitting & Demotivation Factors\nThe lesson opens with a look at 10 surprising statistics about people giving up on commitments, such as New Year’s resolutions, gym memberships, or learning a new language. \n\nPage 2: Short Film Analysis\nThis naturally leads to a vocabulary and matching task exploring 12 common factors that cause demotivation, including burnout, fear of failure, lack of recognition, and mismatch of skills. Students connect these abstract concepts to realistic, everyday scenarios (e.g., Alex’s non-stop overtime or David’s impossible deadlines).\nThe class watches a short film about \"Jerry,\" an \"Employee of the Month.\" Students actively apply the vocabulary from the previous page to diagnose which demotivating factors apply to his situation. They discuss how Jerry truly feels about his award, what the ironic ending suggests about his work environment, and how his experience mirrors real-world corporate culture.\n\nPage 3: Core Audio Task & Psychological Drivers\nStudents explore the \"4 Areas That Drive People,\" reviewing 20 specific psychological drivers at work (such as mastery, recognition, helping others, or proving others wrong). They then listen to an audio segment featuring four individuals (Keisha, Aiko, Boris, and Diego), identifying which specific drivers motivate each person based on their daily routines, backgrounds, and goals.\nThe lesson wraps up with the \"Motivation to Perform at Work\" self-assessment quiz. Students answer 9 targeted questions to score their own drive (Highly, Moderately, or Low Motivation). They read the detailed scoring breakdowns to discuss what their results mean for their current routines and brainstorm actionable steps to reignite their enthusiasm or adjust their work environment.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Quitting Reality: Which of the 10 quitting statistics (e.g., 90% of beginner guitarists, 80% of creative projects) surprises you the most, and why?\nThe \"Jerry\" Diagnosis: Which of the 12 demotivating factors best explains Jerry’s situation? Is the \"Employee of the Month\" award a genuine reward or a bandage for a toxic environment?\nPersonal Reflection: Based on your quiz results, what is one specific change you can make this week to boost your daily motivation?\n🧠 Target Lexicon & Vocabulary Focus\nDemotivation Factors: Burnout, stagnation, mismatch of skills, external distractions, inconsistent feedback, fear of failure, lack of social support.\nPsychological Drivers: Mastery, recognition, security, opposition, proving others wrong, need to avoid embarrassment, enlightenment.\nKey Idiom: \"Psych yourself up\" (to mentally prepare and boost confidence before a challenge).\n🎧 Multimedia & Authentic Materials Included\n10-Stat Infographic Analysis: A visual warm-up exploring the high failure rates of common personal and professional commitments.\n\"Employee of the Month\" Short Film: A targeted viewing task requiring students to map visual narrative cues to specific workplace demotivation vocabulary.\n4-Speaker Audio Task: An authentic listening comprehension exercise featuring Keisha, Aiko, Boris, and Diego, requiring students to extract specific motivational drivers from their personal stories.\nMotivation to Perform at Work Test: A 9-question, yes/no self-assessment quiz with a detailed 3-tier scoring rubric (0-6, 7-11, 12-15 points) for personalized reflection.\n⚠️ Critical Thinking Extension Work\nRoot Cause Analysis: Debating whether low motivation is primarily an internal failure of the individual or an external failure of management and company culture.\nActionable Goal Setting: Students use their quiz results to draft a \"re-engagement plan,\" identifying one demotivating factor they can actively eliminate and one psychological driver they can lean into at work.",
+        "telegramRecap": "From giving up to finding your drive. Match demotivation factors, listen to real work stories, and discover what truly motivates you.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_drive.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_drive_20_points.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_drive_20_points.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_drive_4_people.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_drive.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=-FmR-BBmYfM"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-10-22",
         "title": "Why Do Zoomers Love Retro Tech?",
         "topics": [
