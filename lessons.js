@@ -6,6 +6,57 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-27",
+        "title": "Stop Using Duolingo",
+        "topics": [
+            "technology",
+            "media",
+            "art",
+            "grammar"
+        ],
+        "isFree": true,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "💼",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/a2_duolingo.jpg",
+        "keywords": "stop using duolingo technology media art grammar a2-b1",
+        "objectives": [
+            "analyze the effectiveness and drawbacks of gamified language learning apps through real user reviews and expert critiques",
+            "practice targeted listening comprehension by extracting specific statistical data and design insights from audio interviews",
+            "evaluate pedagogical criticisms of mobile learning and debate the value of \"streaks\" versus actual language fluency"
+        ],
+        "description": "Page 1: The EdTech Landscape\nThe lesson opens by exploring the \"Top 50 Education Apps,\" highlighting giants like Duolingo, Babbel, and Coursera. Students discuss their personal experiences with these platforms, setting a relatable foundation for debating whether mobile apps can truly replace traditional language instruction.\n\nPage 2: Core Audio Tasks & Mascot Design\nThe focus shifts to two targeted listening exercises. First, students tackle the \"Duolingo Stats Challenge,\" filling in missing data points from an audio report (e.g., 58.7 million daily active users, a 9.0% premium conversion rate, and teen streak retention dropping below 5.0%). Next, they listen to an interview with Greg Hartman, Head of Art, answering specific questions about the design of the Duo owl mascot: why it was made green, what food its body resembles, and how the team navigated cultural concerns about owls. This page also features a vocabulary task where students match bolded review terms (steadily, gamified approach, stick with, addictive, predatory, refund) to their definitions.\n\nPage 3: Critical Video Analysis & Pedagogical Debates\nStudents watch a critical video titled \"Don't Use Duolingo,\" completing a gap-fill with key terms like fluency, mobile app, grammar rules, game, and eyeballs. They then analyze real YouTube comments debating whether the app’s \"streak\" feature builds genuine habits or just exploits psychology. The lesson concludes with a structured matching task covering the six main reasons educators criticize language apps (e.g., \"Game over learning,\" \"No human feedback,\" \"Too much translation\"), prompting a final discussion on how to balance app usage with real-world practice.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Streak Debate: Do you believe gamification (like daily streaks) actually builds a habit of learning, or is it just an addictive trap?\nContext vs. Vocabulary: Analyzing the comment: \"Duolingo teaches you that suitcase = maleta, but Spanish class teaches you that la maleta es importante para la vacacione.\" Do you agree?\nApp Limitations: Which of the 6 educator criticisms (e.g., No real conversations, Poor speaking practice) do you agree with the most based on your own experience?\n🎧 Vocabulary & Listening Focus\nApp Review Lexicon: Steadily (slowly, regularly), gamified approach (learning that feels like playing), stick with (keep doing), addictive (hard to stop), predatory (dishonest to get money), refund (money given back).\nAudio Task 1 (Stats): Extracting specific numbers: Monthly/Daily Active Users, Total Mobile Downloads, Premium Subscriber Conversion (9.0%), and age-based streak retention rates.\nAudio Task 2 (Design Interview): Comprehension questions about Greg Hartman’s insights: the owl’s green color, its food-like body shape, meme culture threats, and cultural sensitivities regarding owls.\n📺 Multimedia & Authentic Materials Included\nCritical Video Analysis: A gap-fill task based on a video arguing that Duolingo operates like an addictive game rather than learning software, failing to teach grammar rules or achieve true fluency.\nReal YouTube Comments: Authentic user reactions debating the value of repetition, the \"bullying\" nature of the owl mascot, and the difference between app learning and classroom context.\n⚠️ Critical Thinking Extension Work\nThe 6 Educator Criticisms: A matching exercise connecting pedagogical flaws (e.g., No human feedback, Too much translation) to their real-world consequences (e.g., \"A computer only tells you 'yes' or 'no'\").\nThe Hybrid Solution: Brainstorming how students can combine the motivational benefits of apps with the contextual depth of traditional lessons or real-world conversation practice.",
+        "telegramRecap": "Is Duolingo actually effective? Listen to app stats, interview the Head of Art about the Duo owl, and watch a video critiquing gamified learning.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_duolingo.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_duolingo_stats.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_duolingo_stats.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_duolingo_greg.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_duolingo.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/shorts/1Xcb6U0TuxI"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-10-26",
         "title": "Lost Motivation: Where Is My Drive?",
         "topics": [
