@@ -6,7 +6,7 @@
 const lessonsCatalog = [
 
     {
-        "dateAdded": "2026-10-30",
+        "dateAdded": "2026-10-30", 
         "title": "The Extraordinary Ordinary",
         "topics": [
             "psychology",
