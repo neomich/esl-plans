@@ -6,6 +6,48 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-10-30",
+        "title": "The Extraordinary Ordinary",
+        "topics": [
+            "psychology",
+            "society",
+            "life",
+            "technology",
+            "grammar"
+        ],
+        "isFree": true,
+        "category": "business",
+        "categoryLabel": "Business English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "💼",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_extraordinary_ordinary.jpg",
+        "keywords": "the extraordinary ordinary psychology society life technology grammar b1-b2",
+        "objectives": [
+            "analyze modern life paradoxes and the psychological reasons we take technological miracles for granted",
+            "master modal verbs for logical deduction and speculation (must have, might, can't, must) to evaluate human behavior",
+            "apply the concept of \"the little extra\" to personal and professional growth through targeted vocabulary and discussion tasks"
+        ],
+        "description": "Page 1 and 2: Juxtaposition & Modern Life Paradoxes\nThe lesson opens with a visual analysis of juxtaposition, followed by a review of 15 relatable examples of how we use mind-blowing technology for mundane tasks (e.g., carrying a device with more computing power than NASA used for the Moon landing, just to look at cat pictures). This sparks a grounded discussion on how science fiction has become our daily background noise and why we fail to appreciate the extraordinary.\n\nPage 3: The Psychology of the \"Ordinary\" & Grammar\nStudents read a compelling text explaining why the extraordinary feels ordinary, exploring three key concepts: Hedonic Adaptation (the biological treadmill), the Normalization of the Impossible (industrializing magic), and the Routine Trap. This naturally introduces the grammar focus: using modal verbs (must have, might, can't, must) not for physical ability, but to logically deduce, guess, and speculate about human psychology and history.\nThe class reviews advanced descriptive vocabulary (such as utterly, phenomenon, soul-crushing, pristine, and swallowed up) before applying the target grammar in a targeted gap-fill exercise. Students use modal verbs to complete logical deductions about everyday scenarios, solidifying their understanding of how to express certainty, possibility, and impossibility in English.\n\nPage 4: The \"Little Extra\" & Personal Application\nThe lesson wraps up with an inspiring quote by Jimmy Johnson about the difference between ordinary and extraordinary. Students complete a vocabulary gap-fill (using words like effort, opportunities, creativity, and development) and discuss how to apply this mindset to their own daily lives. The class concludes by brainstorming specific areas in their professional routines and English learning journey where they can intentionally give \"that little extra.\"\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Tech Trade-Off: We carry NASA-level computing power just to look at cat pictures. What modern convenience would you miss the most if it disappeared tomorrow?\nThe Comfort Trap: Do you think constant comfort and instant gratification make people less resilient over time?\nThe \"Little Extra\": In what aspects of your professional or daily life do you usually put in that extra effort? Do you think your English needs a little extra?\n🧠 Target Lexicon & Grammar Focus\nAdvanced Descriptive Vocabulary: Utterly, phenomenon, surge, flatline, reset baseline, immune to, sorcery, pristine, soul-crushing, sheer, swallowed up, tangled up.\nModal Verbs for Speculation: Mastering the use of must have / must (logical certainty), might / could (possibility), and can't / couldn't (impossibility) to deduce human psychology and behavior.\n📺 Multimedia & Authentic Materials Included\n15 Modern Life Paradoxes: A highly engaging list of everyday scenarios highlighting the absurdity of our advanced technological reality.\nPsychological Reading Text: A deep dive into Hedonic Adaptation, the Normalization of the Impossible, and the Routine Trap.\nJimmy Johnson Quote: An inspiring framework for discussing the fine line between ordinary results and extraordinary achievements.\n️ Critical Thinking Extension Work\nDeduction in Context: Applying modal verbs to logically deduce why humans quickly adapt to luxury and comfort, moving beyond simple grammar drills into real-world psychological analysis.\nActionable Goal Setting: Students draft a personal \"Little Extra\" plan, identifying one specific habit in their daily routine or language learning journey where they will intentionally go above and beyond the baseline requirement.",
+        "telegramRecap": "Explore why modern tech feels ordinary, master modal verbs for speculation, and discover how \"the little extra\" creates extraordinary results.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_extraordinary_ordinary.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_extraordinary_ordinary_article.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_extraordinary_ordinary.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/shorts/PbUMcY34ozY"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-10-27",
         "title": "Stop Using Duolingo",
         "topics": [
