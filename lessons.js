@@ -6,6 +6,51 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-01",
+        "title": "Cautionary Tales",
+        "topics": [
+            "society",
+            "life",
+            "grammar",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_cautionary_tales.jpg",
+        "keywords": "cautionary tales society life grammar art b1-b2",
+        "objectives": [
+            "identify and analyze common childhood cautionary tales and their exaggerated consequences",
+            "practice listening comprehension by extracting key lessons from real-life personal anecdotes and a motivational business video",
+            "evaluate the role of failure and mistakes in personal growth using conditional structures and advice-giving language"
+        ],
+        "description": "Pages 1: Absurd Warnings & The Short Film\nThe lesson opens with a fun, relatable warm-up where students match classic childhood warnings (e.g., \"If you swallow a pip, a tree will grow in your stomach\" or \"If you pull a face, it will stay that way\") to their absurd consequences. This leads directly into the first core media task: a humorous short film that brings these myths to life, following six different characters as they experience the ridiculous outcomes of their childhood misdeeds. This sparks a lively debate on whether these tales are just silly or if they serve a practical, protective purpose in raising children.\n\nPages 2: Real-World Cautionary Tales (Audio Task)\nThe focus transitions from childhood myths to adult realities. Students listen to an audio segment featuring three adults (Mark, Elena, and Andrew) sharing their own personal \"cautionary tales.\" Students take notes to extract the core event, the hard lesson each person learned, and the actionable advice they would give to others based on their experience, practicing real-world listening for specific details.\n\nPages 3 and 4: The Philosophy of Failure & Pop Culture\nThe final media task features a motivational video of business magnate Jack Ma sharing his powerful philosophy on failure. Students answer comprehension questions about his belief that \"every mistake becomes a legendary\" learning opportunity, the importance of collaborating with smart people, and his three-step rule for handling errors: admit it, learn from it, and don't repeat it. The lesson concludes by connecting these concepts to famous cautionary tales in literature and film (e.g., 1984, Jurassic Park, The Gulag Archipelago), prompting students to reframe their own past \"fuck ups\" into valuable life lessons.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nMyth vs. Reality: Do you think it’s silly to tell cautionary tales to kids, or do they have a practical use in keeping them safe?\nPersonal Reflection: Can you think of a time when you made a mistake but learned something valuable from it? How did it affect your approach to future challenges?\nReframing Failure: How can we reframe our own past \"fuck ups\" into valuable life lessons, and why is embracing failure the ultimate pathway to success?\n🧠 Target Lexicon & Vocabulary Focus\nCautionary Vocabulary: Cautionary tale, consequence, exaggerate, legendary, collaborate, admit, repeat.\nAdvice-Giving Language: Practicing structures for giving advice and reflecting on past actions (e.g., should have, could have, the lesson I learned was...).\n📺 Multimedia & Authentic Materials Included\nAnimated Short Film: A humorous visual breakdown of 6 classic childhood myths (e.g., The Boy Who Swallowed a Pip, The Girl Who Told Too Many Lies).\n3-Speaker Audio Task: Authentic listening comprehension featuring Mark, Elena, and Andrew sharing real-life personal anecdotes and the hard lessons they learned.\nJack Ma Motivational Video: A targeted viewing task exploring the billionaire’s philosophy on failure, collaboration, and his 3-step rule for handling mistakes.\n⚠️ Critical Thinking Extension Work\nPop Culture Cautionary Tales: Analyzing how famous books and movies (1984, Jurassic Park, Fahrenheit 451, The Terminator) serve as modern cautionary tales for society.\nThe 3-Step Rule Application: Students apply Jack Ma’s framework (Admit it, Learn from it, Don't repeat it) to a hypothetical or real-world professional scenario to practice constructive problem-solving.",
+        "telegramRecap": "Every mistake is a lesson! 🚀 Analyze funny cautionary tales, listen to real-life regrets, and discover Jack Ma’s formula for legendary success.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_cautionary_tales.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_cautionary_tales_3_people.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_cautionary_tales.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=lEsoDFBdQeU"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=rSDy5AdfRDI"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-10-30", 
         "title": "The Extraordinary Ordinary",
         "topics": [
