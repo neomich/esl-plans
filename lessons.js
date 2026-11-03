@@ -6,6 +6,71 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-03",
+        "title": "Bhavachakra - The Wheel of Life",
+        "topics": [
+            "psychology",
+            "society",
+            "work",
+            "business",
+            "life",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "90-120 min",
+        "visualSource": "images/b2_wheel.jpg",
+        "keywords": "bhavachakra - the wheel of life psychology society work business life art b2-c1",
+        "objectives": [
+            "explore philosophical perspectives on the meaning and purpose of life through targeted video and statistical analysis",
+            "understand the Tibetan Buddhist concept of the \"Wheel of Life\" (Bhavachakra) and its symbolism through a dedicated audio podcast",
+            "evaluate personal life balance using a visual template and real-life audio case studies, culminating in a reflective homework task on mortality and presence"
+        ],
+        "description": "Page 1: The Purpose of Life & Global Perspectives\nThe lesson opens with thought-provoking quotes from thinkers like Goethe, Seneca, and Einstein, alongside global statistics on what makes life feel \"full\" (e.g., family, career, material well-being). Students then watch a short video featuring people aged 0 to 100 sharing their perspectives on the purpose of life. They take notes on the speakers' ideas and identify patterns or shifts in priorities across different age groups.\n\nPage 2: The Wheel of Life (Bhavachakra) Audio\nStudents are introduced to the magnificent wood-carved image of the Bhavachakra, or \"Wheel of Life,\" a symbolic diagram used in Tibetan Buddhism to illustrate samsara (the cycle of birth, death, and rebirth). They listen to a short podcast explaining the wheel’s core components: the three animals in the center, the six realms, and the Twelve Links of Dependent Origination. Students answer targeted comprehension questions about how a person can ultimately step off the wheel.\n\nPage 3: Personal Template & Audio Analysis\nStudents apply the concept to their own lives using a \"Wheel of Life\" template, rating their satisfaction in areas like career, finances, health, personal growth, and relationships to see how \"round\" their wheel is. They then listen to an audio clip featuring Paul J. Meyer, followed by a second audio of three individuals (Lexi, Dan, and Tasha) discussing their daily lives. Students must match each speaker to their corresponding Wheel of Life diagram and justify their choices based on the audio details.\n\nPage 4: Homework – The Reality Check Video\nFor homework, students watch a thought-provoking video about mortality, the global death rate, and the impermanence of life. They complete a multiple-choice comprehension task covering metaphors for life, the law of impermanence, and the narrator’s final recommendation. The task prompts deep reflection on how acknowledging life's brevity can help individuals cherish present moments and resolve interpersonal conflicts.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nGenerational Shifts: What patterns did you notice in how different age groups define the \"purpose of life\"?\nThe \"Round\" Wheel: Look at your own Wheel of Life template. Are you happy with how balanced it is? Which area needs the most attention?\nMortality Reflection: If you imagined your own funeral, who would genuinely want to be there? How does remembering that life is short change how you handle daily conflicts?\n🧠 Target Lexicon & Vocabulary Focus\nPhilosophical & Spiritual Terms: Bhavachakra, samsara, nirvana, dependent origination, impermanence, law of cause and effect.\nLife Balance Categories: Career, finances, personal growth, health, romance, family and friends, fun and recreation, contribution to society.\nIdioms & Concepts: \"Cherish present moments,\" \"lose your temper,\" \"guarantee future suffering.\"\n🎧 Multimedia & Authentic Materials Included\nPage 1 Video: A cross-generational video compilation where people aged 0 to are interviewed about what makes life meaningful.\nPage 2 Audio: A podcast breaking down the symbolism of the Tibetan Wheel of Life (the 3 animals, 6 realms, and 12 links).\nPage 3 Audios: A clip featuring Paul J. Meyer, followed by an audio of three distinct speakers (Lexi, Dan, and Tasha) discussing their life priorities, requiring students to match them to visual Wheel of Life templates.\nPage 4 Homework Video: A reflective video on the global death rate, life metaphors, and the importance of letting go of attachments to cherish the present.\n⚠️ Critical Thinking Extension Work\nTemplate Application: Students don't just listen; they actively rate their own lives on a 1-10 scale across 8 categories, creating a personalized visual map of their current well-being.\nThe Impermanence Debate: Analyzing the video’s claim that becoming too attached to things guarantees future suffering, and discussing whether this is a helpful mindset or overly pessimistic for modern life.",
+        "telegramRecap": "Are you living a full life? Watch purpose-of-life videos, listen to the Wheel of Life podcast, and evaluate your personal life balance template.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b2_wheel.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_wheel_bhavachakra.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_wheel_bhavachakra.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_wheel_paul_jmeyer.mp3"
+            },
+            {
+                "label": "3",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b2_wheel_3_speakers.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b2_wheel.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=mK66az43EOI"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=BdTGkd_sbNs"
+            },
+            {
+                "label": "Link 3",
+                "url": "https://www.amcharts.com/demos/wheel-of-life"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-11-01",
         "title": "Cautionary Tales",
         "topics": [
