@@ -6,6 +6,60 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-05",
+        "title": "The Evolution of Hats",
+        "topics": [
+            "society",
+            "travel",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_hats.jpg",
+        "keywords": "the evolution of hats society travel art b1-b2",
+        "objectives": [
+            "identify and discuss various hat styles and their cultural significance across different countries",
+            "practice listening and viewing comprehension through targeted media tasks exploring global headwear and fashion history",
+            "analyze the evolution of hat-wearing from practical necessity to modern fashion statement through guided discussion"
+        ],
+        "description": "Page 1: Standby Hats & Personal Style\nThe lesson opens by examining some \"standby hats\" that have remained relevant throughout history: Dad Hats, Baseball Caps, Beach Hats, Cowboy Hats, Visors, and Bucket Hats. Students discuss which hats they own, which styles fit them best, and analyze why certain designs (like the baseball cap) have maintained their popularity across generations.\nPages 2 & 3: Global Hat Quiz & Mystery Audio\nThe focus shifts to a fun, interactive \"Round the World\" hat quiz. Students match 15 distinct hats to their countries of origin (e.g., the Gaucho hat from Argentina, the Chullo from Peru, the Fez from Morocco, the Sombrero from Mexico, and the Beret from France). This leads directly into a \"Mystery Hat\" listening task, where learners hear descriptive clues and must deduce the specific type of hat being described. Students watch an engaging video tour of a unique museum display featuring headdresses from around the globe. They answer eight targeted comprehension questions about specific cultural items, including the Akka women's headdresses, the Pende chief's hat, the Quechua montera, the Cuban laquette hat, Bhutanese monks' black hats, Chinese infant hats, and waterproof calabash gourd hats from the Philippines.\n\nPages 4: Fashion History (Fedoras & The Cloche)\nThe lesson concludes with a deep dive into fashion history. First, students watch a video about the resurgence of the fedora hat, learning about historical price ranges, why hats initially fell out of fashion, the celebrities who revived them, the cultural impact of the TV show Mad Men, and proper hat etiquette according to expert Lizzy Post. Finally, they listen to an audio segment about the cloche hat, exploring its French origin (\"bell\"), its peak popularity during the 1920s–30s Art Deco era, and how its versatile shape provides both style and weather protection.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Enduring Appeal: Why do you think the baseball cap has \"stayed relevant throughout history\" while other styles fade away?\nCultural Identity: Which of the 15 global hats (e.g., the Moroccan Fez, the French Beret) do you find most interesting, and what does it tell us about that culture?\nModern Etiquette: According to expert Lizzy Post, when is it appropriate to take off a hat? Do you think these old rules still apply today?\n🧠 Target Lexicon & Vocabulary Focus\nHat Anatomy & Styles: Unstructured, pre-curved brim, rounded dome, broad-brimmed, floppy brim, versatile, resurgence.\nFashion & History Terms: Art Deco era, etiquette, price range, fall out of fashion, weather protection, cultural artifact.\n📺 Multimedia & Authentic Materials Included\nMystery Hat Audio Task: A targeted listening exercise where students deduce hat types based on descriptive auditory clues.\nGlobal Headwear Video Tour: A visual exploration of 8 specific cultural headdresses (Akka, Pende, Quechua, Cuban, Bhutanese, Chinese, and Philippine), paired with a strict comprehension check.\nFedora Resurgence Video: An analysis of the fedora's journey from mainstream staple to outdated accessory, and back to trendy fashion, featuring insights from etiquette expert LizzyOKPost.\nCloche Hat Audio Segment: A historical breakdown of the 1920s \"bell\" hat, focusing on its practical weather benefits and seasonal material variations.\n⚠️ Critical Thinking Extension Work\nFunction vs. Fashion: Debating whether modern hats are worn primarily for practical reasons (sun protection, warmth) or purely as aesthetic fashion statements.\nThe \"Mad Men\" Effect: Analyzing how pop culture and television can single-handedly revive a decades-old fashion trend, and predicting what other vintage items might make a comeback.",
+        "telegramRecap": "Why did hats fall out of fashion? Analyze the fedora's resurgence, explore Art Deco cloche hats, and discuss modern hat etiquette.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_hats.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_hats_5_hats.mp3",
+        "audioUrls": [
+            {
+                "label": "1",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_hats_5_hats.mp3"
+            },
+            {
+                "label": "2",
+                "url": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_hats_cloche_hats.mp3"
+            }
+        ],
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/b1_hats.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=VnWqqVi_lkE"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=9zGYmClj9Qo"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-11-03",
         "title": "Bhavachakra - The Wheel of Life",
         "topics": [
