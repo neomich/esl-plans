@@ -865,6 +865,17 @@ ${articlesStr}
         if (!title) throw new Error('Title is required');
         if (selectedLevels.length === 0) throw new Error('Select at least one level');
 
+        // Read the visible state straight from the page instead of trusting the
+        // isFree / selectedCat / selectedDur variables. resetForm() only resets
+        // the buttons, not those variables, so the old values used to leak into
+        // the next lesson (a premium lesson saved as free, wrong category, etc).
+        const freeToggle = document.querySelector('[data-free].active');
+        const catToggle = document.querySelector('[data-cat].active');
+        const durToggle = document.querySelector('[data-dur].active');
+        const isFreeNow = freeToggle ? freeToggle.dataset.free === 'yes' : false;
+        const cat = catToggle ? catToggle.dataset.cat : 'general';
+        const dur = durToggle ? durToggle.dataset.dur : '90';
+
         // Level string
         const levelOrder = ['a2', 'b1', 'b2', 'c1'];
         const sorted = selectedLevels.sort((a, b) => levelOrder.indexOf(a) - levelOrder.indexOf(b));
@@ -881,8 +892,8 @@ ${articlesStr}
         else { mediaType = 'PDF only'; mediaIcon = '📄'; }
 
         // Category
-        const categoryLabel = selectedCat === 'business' ? 'Business English' : 'General English';
-        const categoryIcon = selectedCat === 'business' ? '💼' : '🎓';
+        const categoryLabel = cat === 'business' ? 'Business English' : 'General English';
+        const categoryIcon = cat === 'business' ? '💼' : '🎓';
 
         // Objectives
         const objectives = Array.from(document.querySelectorAll('#obj-list input'))
@@ -929,15 +940,15 @@ ${articlesStr}
             dateAdded: today,
             title,
             topics: selectedTopics,
-            isFree,
-            category: selectedCat,
+            isFree: isFreeNow,
+            category: cat,
             categoryLabel,
             mediaType,
             mediaIcon,
             categoryIcon,
             level,
             levelLabel,
-            duration: `${selectedDur} min`,
+            duration: `${dur} min`,
             visualSource: imageFile ? `images/${imageFile}` : `images/${title.toLowerCase().replace(/[^a-z0-9]/g, '_')}.jpg`,
             keywords,
             objectives,
@@ -965,6 +976,39 @@ ${articlesStr}
         }
     }
 
+    // ── PREMIUM vs FREE ──
+    // Premium lesson pages must never contain file URLs. They go to Supabase;
+    // lessons.js only gets boolean flags plus the public teaser URL.
+    function slugifyTitle(title) {
+        return title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+    }
+
+    function premiumFilesPayload(lesson, slug) {
+        const audio = lesson.audioUrls || (lesson.audioUrl ? [{ label: null, url: lesson.audioUrl }] : []);
+        return {
+            p_slug: slug,
+            p_is_free: false,
+            p_pdf_url: lesson.pdfUrl || null,
+            p_rar_url: lesson.rarUrl || null,
+            p_audio_urls: audio,
+            p_preview_url: `${R2_BASE}/previews/${slug}.pdf`
+        };
+    }
+
+    function entryFromLesson(lesson, slug) {
+        if (lesson.isFree === true) return lesson; // free lessons keep inline URLs
+        const entry = { ...lesson };
+        entry.hasPdf = !!lesson.pdfUrl;
+        entry.hasAudio = !!(lesson.audioUrl || (lesson.audioUrls && lesson.audioUrls.length));
+        entry.hasRar = !!lesson.rarUrl;
+        entry.previewUrl = `${R2_BASE}/previews/${slug}.pdf`;
+        delete entry.pdfUrl;
+        delete entry.audioUrl;
+        delete entry.audioUrls;
+        delete entry.rarUrl;
+        return entry;
+    }
+
     // ── GITHUB API: read → prepend → write ──
     async function submitLesson() {
         const token = localStorage.getItem('gh_token');
@@ -982,12 +1026,31 @@ ${articlesStr}
             return;
         }
 
+        const premium = lesson.isFree !== true;
+        const slug = slugifyTitle(lesson.title);
+        const entry = entryFromLesson(lesson, slug);
+
         const btn = document.getElementById('submit-btn');
         btn.disabled = true;
-        btn.innerText = 'Uploading...';
+        btn.innerText = premium ? 'Saving files...' : 'Uploading...';
 
         try {
-            // 1. Get current lessons.js from GitHub
+            // 1. Premium: save the file links to Supabase FIRST.
+            //    If this fails we abort before touching lessons.js, so a lesson
+            //    can never go live without its files behind the paywall.
+            //    Retrying is safe: the database call is an upsert.
+            if (premium) {
+                const { error: fileError } = await _sb.rpc('admin_upsert_lesson_files', premiumFilesPayload(lesson, slug));
+                if (fileError) {
+                    showStatus(`Supabase error: ${fileError.message}. Nothing was published — please try again.`, 'error');
+                    btn.disabled = false;
+                    btn.innerText = '🚀 Add to lessons.js';
+                    return;
+                }
+                btn.innerText = 'Uploading...';
+            }
+
+            // 2. Get current lessons.js from GitHub
             const getResp = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/lessons.js`, {
                 headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
             });
@@ -997,14 +1060,14 @@ ${articlesStr}
                 Uint8Array.from(atob(fileData.content.replace(/\n/g, '')), c => c.charCodeAt(0))
             );
 
-            // 2. Build new lesson entry string
-            const lessonStr = '    ' + JSON.stringify(lesson, null, 4).replace(/\n/g, '\n    ') + ',\n\n';
+            // 3. Build new lesson entry string
+            const lessonStr = '    ' + JSON.stringify(entry, null, 4).replace(/\n/g, '\n    ') + ',\n\n';
 
-            // 3. Insert after "const lessonsCatalog = ["
+            // 4. Insert after "const lessonsCatalog = ["
             const insertPoint = currentContent.indexOf('const lessonsCatalog = [') + 'const lessonsCatalog = ['.length;
             const newContent = currentContent.slice(0, insertPoint) + '\n\n' + lessonStr + currentContent.slice(insertPoint);
 
-            // 4. Push back to GitHub
+            // 5. Push back to GitHub
             const pushResp = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/lessons.js`, {
                 method: 'PUT',
                 headers: {
@@ -1025,7 +1088,11 @@ ${articlesStr}
             });
 
             if (pushResp.ok) {
-                showStatus(`✅ "${lesson.title}" added successfully! GitHub is deploying... (takes ~1 min)`, 'success');
+                if (premium) {
+                    showStatus(`✅ "${lesson.title}" added! Files are behind the paywall. GitHub is deploying... (~1 min)`, 'success');
+                } else {
+                    showStatus(`✅ "${lesson.title}" added successfully! GitHub is deploying... (takes ~1 min)`, 'success');
+                }
                 resetForm();
             } else {
                 const err = await pushResp.json();
@@ -1062,6 +1129,11 @@ ${articlesStr}
         selectedLevels = [];
         selectedTopics = [];
         selectedMedia = [];
+        // Keep the variables in sync with the buttons we are about to reset.
+        // (buildLesson() also reads the DOM, so this is belt and braces.)
+        selectedCat = 'general';
+        selectedDur = '90';
+        isFree = false;
         document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
         document.querySelector('[data-cat="general"]').classList.add('active');
         document.querySelector('[data-dur="90"]').classList.add('active');

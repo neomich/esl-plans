@@ -128,11 +128,14 @@ lessons.forEach(lesson => {
     const topicTags = (lesson.topics || []).map(t => topicLabels[t] || t).join(' · ');
 
     // Materials list
+    // Premium lessons carry hasPdf/hasAudio/hasRar flags instead of file URLs,
+    // because their real URLs live in Supabase. The `|| lesson.pdfUrl` keeps
+    // old/free entries (which still have inline URLs) working unchanged.
     const materials = [];
-    if (lesson.pdfUrl) materials.push('PDF handout');
-    if (lesson.audioUrl || lesson.audioUrls) materials.push('audio materials (MP3)');
+    if (lesson.hasPdf || lesson.pdfUrl) materials.push('PDF handout');
+    if (lesson.hasAudio || lesson.audioUrl || lesson.audioUrls) materials.push('audio materials (MP3)');
     if (lesson.links && lesson.links.length) materials.push('video links');
-    if (lesson.rarUrl) materials.push('full downloadable package (RAR)');
+    if (lesson.hasRar || lesson.rarUrl) materials.push('full downloadable package (RAR)');
     const materialsText = materials.join(', ');
 
     // Find the first YouTube video (if any) to build VideoObject schema.
@@ -749,15 +752,45 @@ async function pingIndexNow() {
     }
 }
 
+// ── DUPLICATE SOCIAL POST GUARD ──
+// The workflow can run more than once for the same catalog state (a manual
+// re-run, or a commit that only touches articles.js). Without this, the same
+// newest lesson gets posted to Telegram and Bluesky every single time.
+// We remember which lesson was last announced and refuse to announce it twice.
+const POSTED_STATE_FILE = 'last-posted.json';
+
+function readLastPosted() {
+    try {
+        const data = JSON.parse(fs.readFileSync(POSTED_STATE_FILE, 'utf8'));
+        return data && data.lastSlug ? data.lastSlug : null;
+    } catch (e) {
+        return null; // no state file yet — treat as "nothing posted"
+    }
+}
+
+function writeLastPosted(slug) {
+    try {
+        fs.writeFileSync(POSTED_STATE_FILE, JSON.stringify({ lastSlug: slug }, null, 2) + '\n', 'utf8');
+    } catch (e) {
+        console.log('⚠️ Could not write last-posted.json:', e.message);
+    }
+}
+
 // ── MAIN — runs every network step with a timeout, then guarantees the
 //     process exits no matter what happens above. This is the safety net
 //     that makes an indefinitely-hung GitHub Action structurally impossible. ──
 async function main() {
     if (lessons.length > 0) {
-        await Promise.allSettled([
-            postToTelegram(lessons[0]),
-            postToBluesky(lessons[0])
-        ]);
+        const newestSlug = slugify(lessons[0].title);
+        if (newestSlug === readLastPosted()) {
+            console.log(`Social posts skipped — "${lessons[0].title}" was already announced.`);
+        } else {
+            await Promise.allSettled([
+                postToTelegram(lessons[0]),
+                postToBluesky(lessons[0])
+            ]);
+            writeLastPosted(newestSlug);
+        }
     }
     await pingIndexNow().catch(err => console.log('IndexNow error:', err.message));
 }

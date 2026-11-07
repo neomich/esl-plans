@@ -1671,7 +1671,7 @@
     <div id="pricing-view" style="display:none;">
         <div class="pricing-hero">
             <h1>Simple, honest pricing</h1>
-            <p>Pick the plan that fits how you teach</p>
+            <p>No auto-renewals. Make a new payment anytime to extend.</p>
             <div style="display:inline-block; margin-top:16px; background:#fff8e1; border:2px solid #ffd600; border-radius:50px; padding:10px 24px; font-size:14px; font-weight:700; color:#c95210;">
                 🌟 Founding Member Price — Lock it in forever while you stay subscribed
             </div>
@@ -2536,103 +2536,16 @@
             document.getElementById('dynamic-card-duration').innerText = '🕒 ' + lesson.duration;
             document.getElementById('dynamic-description-frame').innerText = lesson.description;
 
-            renderPdfPreview(lesson.pdfUrl);
+            renderPdfPreview(lesson.previewUrl || lesson.pdfUrl, lesson.visualSource);
 
             // ── SMART MEDIA SECTION ──
-            const audioFiles = lesson.audioUrls
-                ? lesson.audioUrls
-                : (lesson.audioUrl ? [{ label: null, url: lesson.audioUrl }] : []);
-            const videoLinks = (lesson.links || []).filter(l =>
-                l.url.includes('youtube') || l.url.includes('youtu.be') || l.url.includes('vimeo')
-            );
-
-            let html = '<div class="media-layout">';
-            html += '<div class="downloads-wrapper">';
-
-            // RAR first
-            if (lesson.rarUrl) {
-                html += `<div class="download-box">
-                    <div class="download-label rar-label">Full Pack</div>
-                    <a href="${lesson.rarUrl}" class="rar-icon-btn" target="_blank">RAR</a>
-                </div>`;
-            }
-
-            // PDF
-            html += `<div class="download-box">
-                <div class="download-label">ESLplan</div>
-                <a href="${lesson.pdfUrl}" class="pdf-icon-btn" target="_blank">PDF</a>
-            </div>`;
-
-            // Audio files
-            audioFiles.forEach((audio, i) => {
-                const label = audioFiles.length > 1 ? `Audio ${i + 1}` : 'Audio';
-                html += `<div class="download-box">
-                    <div class="download-label audio-label">${label}</div>
-                    <a href="${audio.url}" class="mp3-icon-btn" target="_blank">MP3</a>
-                </div>`;
-            });
-
-            html += '</div>'; // end downloads-wrapper
-
-            // Video links: YouTube icon + links as a second row
-            if (videoLinks.length > 0) {
-                html += `<div class="video-row">
-                    <div class="download-box">
-                        <div class="download-label" style="color:#e03131;">Video</div>
-                        <div class="youtube-logo-placeholder"></div>
-                    </div>
-                    <div class="links-list">`;
-                videoLinks.forEach(link => {
-                    const printableUrl = link.url.replace('https://www.', '').replace('https://', '');
-                    html += `<p><span>${link.label}:</span> <a href="${link.url}" target="_blank">${printableUrl}</a></p>`;
-                });
-                html += `</div></div>`;
-            }
-
-            html += '</div>'; // end media-layout
-            document.getElementById('dynamic-media-section').innerHTML = html;
-
-            // ── PAYWALL: replace downloads with Upgrade Now for premium lessons ──
-            const isSubscribed = currentUser && currentUser.effective_tier && currentUser.effective_tier !== 'free';
-            const isFreeLesson = lesson.isFree === true;
-
-            if (!isFreeLesson && !isSubscribed) {
-                const mediaSectionEl = document.getElementById('dynamic-media-section');
-                const videoRow = mediaSectionEl.querySelector('.video-row');
-                const videoHtml = videoRow ? videoRow.outerHTML : '';
-                mediaSectionEl.innerHTML = `<div class="media-layout">
-                    <div class="paywall-section">
-                        <a href="#" onclick="showPricingView(); return false;" class="upgrade-btn">🔒 Upgrade Now to Download</a>
-                        <p class="paywall-note">Get access to full lesson package</p>
-                        ${!currentUser ? `<div class="free-gift-banner" style="margin-top:16px;">
-                            <p>🎁 Get 1 free premium lesson — register now!</p>
-                            <button class="free-gift-btn" onclick="openAuthModal(); switchTab('signup');">Create Free Account</button>
-                        </div>` : (currentUser.effective_tier === 'free' ? `<div class="free-gift-contact" style="margin-top:16px; background:#fff8e1; border:1px solid #ffd600; border-radius:12px; padding:14px;">
-                            <strong>🎁 Claim your free premium lesson!</strong><br>
-                            Contact me with your <em>registered email + lesson title</em>:<br>
-                            <a href="https://t.me/alex_the_master" target="_blank" style="color:#c95210; font-weight:700;">📱 Telegram: @alex_the_master</a><br>
-                            <a href="https://wa.me/message/eslplanscom" target="_blank" style="color:#c95210; font-weight:700;">💬 WhatsApp: @eslplanscom</a>
-                        </div>` : '')}
-                    </div>
-                    ${videoHtml}
-                    <div style="margin-top:12px;">
-                        <button onclick="goBackToCatalog()" class="back-btn-oblong" style="background:#1b5e20; width:100%; justify-content:center; padding:16px; font-size:17px; display:flex;">
-                            <span class="back-arrow-icon">⬅</span> Go Back
-                        </button>
-                    </div>
-                </div>`;
+            if (lesson.isFree === true) {
+                // Free lessons keep their file URLs inline in lessons.js — no database needed
+                renderLessonMedia(lesson, lessonFilesFromInline(lesson));
             } else {
-                // Free/subscribed: add second Go Back below video links
-                const mediaSectionEl = document.getElementById('dynamic-media-section');
-                const existingLayout = mediaSectionEl.querySelector('.media-layout');
-                if (existingLayout) {
-                    const extraBtn = document.createElement('div');
-                    extraBtn.style.marginTop = '12px';
-                    extraBtn.innerHTML = `<button onclick="goBackToCatalog()" class="back-btn-oblong" style="background:#1b5e20; width:100%; justify-content:center; padding:16px; font-size:17px; display:flex;">
-                        <span class="back-arrow-icon">⬅</span> Go Back
-                    </button>`;
-                    existingLayout.appendChild(extraBtn);
-                }
+                // Premium: file URLs live in Supabase and only arrive if the user may have them
+                renderMediaLoading();
+                loadPremiumLessonMedia(index, lesson);
             }
 
             // Objectives
@@ -2684,8 +2597,218 @@
             window.scrollTo(0, 0);
         }
 
-        function renderPdfPreview(pdfUrl) {
+        // ── LESSON FILES ────────────────────────────────────────────
+        // Premium file URLs are NOT in lessons.js any more. They live in the
+        // Supabase table `lesson_files`, and row-level security decides who
+        // receives them. The browser never sees a premium link it may not use.
+        function slugifyTitle(title) {
+            return title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+        }
+
+        function lessonFilesFromInline(lesson) {
+            return {
+                pdfUrl: lesson.pdfUrl,
+                rarUrl: lesson.rarUrl,
+                audioUrls: lesson.audioUrls ? lesson.audioUrls : (lesson.audioUrl ? [{ label: null, url: lesson.audioUrl }] : [])
+            };
+        }
+
+        function filesFromRow(row) {
+            const audio = Array.isArray(row.audio_urls) ? row.audio_urls : [];
+            return {
+                pdfUrl: row.pdf_url,
+                rarUrl: row.rar_url,
+                audioUrls: audio.map(a => (typeof a === 'string' ? { label: null, url: a } : a))
+            };
+        }
+
+        async function fetchLessonFiles(slug) {
+            try {
+                const { data, error } = await _supabase
+                    .from('lesson_files')
+                    .select('pdf_url, rar_url, audio_urls')
+                    .eq('lesson_slug', slug)
+                    .maybeSingle();
+                if (error) return { ok: false, row: null };
+                return { ok: true, row: data || null };
+            } catch (e) {
+                return { ok: false, row: null };
+            }
+        }
+
+        async function loadPremiumLessonMedia(index, lesson) {
+            // If the page was opened from a share link, the login session may
+            // still be restoring. Waiting here makes sure the request carries it.
+            if (!currentUser) {
+                try { await _supabase.auth.getSession(); } catch (e) {}
+            }
+            const result = await fetchLessonFiles(slugifyTitle(lesson.title));
+            if (currentLessonIndex !== index) return; // user opened another lesson meanwhile
+
+            if (!result.ok) {
+                // Guests get the normal upgrade box (there is nothing to retry);
+                // paying users get an honest error instead of a false paywall.
+                const paid = currentUser && currentUser.effective_tier && currentUser.effective_tier !== 'free';
+                if (paid) {
+                    renderMediaError(index, "Couldn't load the files right now. Check your connection and try again.");
+                } else {
+                    renderLessonMedia(lesson, null);
+                }
+                return;
+            }
+            if (!result.row) {
+                const paid = currentUser && currentUser.effective_tier && currentUser.effective_tier !== 'free';
+                if (paid) {
+                    // A subscriber should always get a row. If not, it's a data gap, not a paywall.
+                    renderMediaError(index, "Your files aren't available for this lesson yet. Please contact me and I'll fix it.");
+                } else {
+                    renderLessonMedia(lesson, null); // paywall
+                }
+                return;
+            }
+            renderLessonMedia(lesson, filesFromRow(result.row));
+        }
+
+        function buildVideoRowHtml(lesson) {
+            const videoLinks = (lesson.links || []).filter(l =>
+                l.url.includes('youtube') || l.url.includes('youtu.be') || l.url.includes('vimeo')
+            );
+            if (videoLinks.length === 0) return '';
+            let html = `<div class="video-row">
+                    <div class="download-box">
+                        <div class="download-label" style="color:#e03131;">Video</div>
+                        <div class="youtube-logo-placeholder"></div>
+                    </div>
+                    <div class="links-list">`;
+            videoLinks.forEach(link => {
+                const printableUrl = link.url.replace('https://www.', '').replace('https://', '');
+                html += `<p><span>${link.label}:</span> <a href="${link.url}" target="_blank">${printableUrl}</a></p>`;
+            });
+            html += `</div></div>`;
+            return html;
+        }
+
+        function goBackButtonHtml() {
+            return `<button onclick="goBackToCatalog()" class="back-btn-oblong" style="background:#1b5e20; width:100%; justify-content:center; padding:16px; font-size:17px; display:flex;">
+                        <span class="back-arrow-icon">⬅</span> Go Back
+                    </button>`;
+        }
+
+        function renderMediaLoading() {
+            document.getElementById('dynamic-media-section').innerHTML =
+                '<div class="pdf-preview-loading" style="padding:20px 0;">Loading files...</div>';
+        }
+
+        function renderMediaError(index, message) {
+            document.getElementById('dynamic-media-section').innerHTML = `<div class="media-layout">
+                    <div class="paywall-section">
+                        <p class="paywall-note" style="margin-bottom:14px;">${message}</p>
+                        <a href="#" onclick="loadPremiumLessonMedia(${index}, lessonsCatalog[${index}]); return false;" class="upgrade-btn">🔄 Try Again</a>
+                    </div>
+                    <div style="margin-top:12px;">
+                        ${goBackButtonHtml()}
+                    </div>
+                </div>`;
+        }
+
+        // files === null  -> premium lesson, database returned no links -> paywall
+        // files provided  -> free lesson or active subscriber -> download boxes
+        function renderLessonMedia(lesson, files) {
+            const mediaSectionEl = document.getElementById('dynamic-media-section');
+            const videoHtml = buildVideoRowHtml(lesson);
+
+            // ── PAYWALL ──
+            if (!files) {
+                mediaSectionEl.innerHTML = `<div class="media-layout">
+                    <div class="paywall-section">
+                        <a href="#" onclick="showPricingView(); return false;" class="upgrade-btn">🔒 Upgrade Now to Download</a>
+                        <p class="paywall-note">Get access to full lesson package</p>
+                        ${!currentUser ? `<div class="free-gift-banner" style="margin-top:16px;">
+                            <p>🎁 Get 1 free premium lesson — register now!</p>
+                            <button class="free-gift-btn" onclick="openAuthModal(); switchTab('signup');">Create Free Account</button>
+                        </div>` : (currentUser.effective_tier === 'free' ? `<div class="free-gift-contact" style="margin-top:16px; background:#fff8e1; border:1px solid #ffd600; border-radius:12px; padding:14px;">
+                            <strong>🎁 Claim your free premium lesson!</strong><br>
+                            Contact me with your <em>registered email + lesson title</em>:<br>
+                            <a href="https://t.me/alex_the_master" target="_blank" style="color:#c95210; font-weight:700;">📱 Telegram: @alex_the_master</a><br>
+                            <a href="https://wa.me/message/eslplanscom" target="_blank" style="color:#c95210; font-weight:700;">💬 WhatsApp: @eslplanscom</a>
+                        </div>` : '')}
+                    </div>
+                    ${videoHtml}
+                    <div style="margin-top:12px;">
+                        ${goBackButtonHtml()}
+                    </div>
+                </div>`;
+                return;
+            }
+
+            // ── DOWNLOADS ──
+            let html = '<div class="media-layout">';
+            html += '<div class="downloads-wrapper">';
+
+            // RAR first
+            if (files.rarUrl) {
+                html += `<div class="download-box">
+                    <div class="download-label rar-label">Full Pack</div>
+                    <a href="${files.rarUrl}" class="rar-icon-btn" target="_blank">RAR</a>
+                </div>`;
+            }
+
+            // PDF
+            if (files.pdfUrl) {
+                html += `<div class="download-box">
+                    <div class="download-label">ESLplan</div>
+                    <a href="${files.pdfUrl}" class="pdf-icon-btn" target="_blank">PDF</a>
+                </div>`;
+            }
+
+            // Audio files
+            files.audioUrls.forEach((audio, i) => {
+                const label = files.audioUrls.length > 1 ? `Audio ${i + 1}` : 'Audio';
+                html += `<div class="download-box">
+                    <div class="download-label audio-label">${label}</div>
+                    <a href="${audio.url}" class="mp3-icon-btn" target="_blank">MP3</a>
+                </div>`;
+            });
+
+            html += '</div>'; // end downloads-wrapper
+
+            // Video links: YouTube icon + links as a second row
+            html += videoHtml;
+
+            html += '</div>'; // end media-layout
+            mediaSectionEl.innerHTML = html;
+
+            // Second Go Back below the video links
+            const existingLayout = mediaSectionEl.querySelector('.media-layout');
+            if (existingLayout) {
+                const extraBtn = document.createElement('div');
+                extraBtn.style.marginTop = '12px';
+                extraBtn.innerHTML = goBackButtonHtml();
+                existingLayout.appendChild(extraBtn);
+            }
+        }
+
+        function renderPdfPreview(pdfUrl, fallbackImage) {
             const box = document.getElementById('pdf-preview-box');
+            const showFallback = function() {
+                if (fallbackImage) {
+                    box.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.src = fallbackImage;
+                    img.alt = 'Lesson preview';
+                    img.style.cssText = 'width:100%; height:auto; display:block; border-radius:8px;';
+                    img.onerror = function() {
+                        box.innerHTML = '<div class="pdf-preview-loading">Preview unavailable.</div>';
+                    };
+                    box.appendChild(img);
+                } else {
+                    box.innerHTML = '<div class="pdf-preview-loading">Preview unavailable.</div>';
+                }
+            };
+            if (!pdfUrl) {
+                showFallback();
+                return;
+            }
             box.innerHTML = '<div class="pdf-preview-loading">Loading preview...</div>';
             pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
             pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
@@ -2705,7 +2828,7 @@
                 };
                 renderPage(1);
             }).catch(function() {
-                box.innerHTML = '<div class="pdf-preview-loading">Preview unavailable.</div>';
+                showFallback();
             });
         }
 
