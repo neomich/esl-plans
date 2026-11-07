@@ -9,7 +9,7 @@ console.log('Telegram token at startup:', TELEGRAM_BOT_TOKEN ? `yes (${TELEGRAM_
 const lessonsContent = fs.readFileSync('lessons.js', 'utf8');
 const getLessons = new Function(lessonsContent.replace('const lessonsCatalog', 'var lessonsCatalog') + '\nreturn lessonsCatalog;');
 const lessons = getLessons();
-console.log(`Found ${lessons.length} lessons`);
+console.log(`Found ${lessons.length} lessons`); 
 
 if (!fs.existsSync('lessons')) fs.mkdirSync('lessons');
 
