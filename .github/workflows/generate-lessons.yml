@@ -5,6 +5,8 @@ on:
     paths:
       - 'lessons.js'
       - 'articles.js'
+      - 'generate-lessons.js'
+  workflow_dispatch:
 
 jobs:
   generate:
