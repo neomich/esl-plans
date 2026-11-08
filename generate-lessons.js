@@ -17,6 +17,116 @@ function slugify(str) {
     return str.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
 }
 
+// ── ONE ADDRESS PER PAGE ──
+// GitHub Pages serves every generated file at BOTH /lessons/foo and
+// /lessons/foo.html, with no HTTP redirect between them. Search engines
+// therefore discover two URLs for one page and split the ranking signals.
+// From here on, only the extensionless form is ever advertised: internal
+// links, canonical tags, og:url, schema.org URLs, the sitemap and IndexNow
+// all derive their addresses from these helpers, so the forms cannot drift
+// apart again. The files themselves stay <slug>.html on disk.
+const SITE = 'https://esl-plans.com';
+const lessonUrl = slug => `${SITE}/lessons/${slug}`;
+const topicUrl = code => `${SITE}/topics/${code}`;
+const levelUrl = code => `${SITE}/levels/${code}`;
+const articleUrl = slug => `${SITE}/articles/${slug}`;
+const ALL_LESSONS_URL = `${SITE}/lessons/`;
+
+const LEVEL_CODES = ['a2', 'b1', 'b2', 'c1'];
+const LEVEL_NAMES = { a2: 'A2', b1: 'B1', b2: 'B2', c1: 'C1' };
+
+// Safe to drop inside a JSON-LD string. Also neutralises "</script>".
+function jsonSafe(value) {
+    return String(value == null ? '' : value)
+        .replace(/\\/g, '\\\\')
+        .replace(/"/g, '\\"')
+        .replace(/</g, '\\u003c')
+        .replace(/\r?\n/g, ' ');
+}
+
+// Safe to drop inside an HTML attribute.
+function escapeAttr(value) {
+    return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+// Build a SERP-friendly description: ~150-152 characters, always cut on a
+// word boundary, never leaving a dangling half-word or a broken entity.
+// Also strips the "Page 1:" / "Pages 1&2:" prefixes that leaked in from the
+// PDF text extraction, which used to make lesson pages look like a document
+// dump in search results.
+function makeMetaDescription(raw, fallback) {
+    let t = String(raw || '')
+        .replace(/\s+/g, ' ')
+        .replace(/^Page[s]?\s*\d+\s*(?:&|and)\s*\d+\s*[:\-\u2013\u2014]\s*/i, '')
+        .replace(/^Page[s]?\s*\d+\s*[:\-\u2013\u2014]\s*/i, '')
+        .trim();
+    if (!t) t = String(fallback || '').replace(/\s+/g, ' ').trim();
+
+    const LIMIT = 152;
+    if (t.length <= LIMIT) return t;
+
+    // Prefer to end on a real sentence.
+    let sentenceCut = -1;
+    const re = /[.!?](?=\s|$)/g;
+    let m;
+    while ((m = re.exec(t)) !== null) {
+        const end = m.index + 1;
+        if (end >= 90 && end <= LIMIT) sentenceCut = end;
+        if (end > LIMIT) break;
+    }
+    if (sentenceCut > 0) return t.slice(0, sentenceCut).trim();
+
+    const slice = t.slice(0, LIMIT);
+    const space = slice.lastIndexOf(' ');
+    const cut = space >= 90 ? space : LIMIT;
+    return t.slice(0, cut).replace(/[\s,;:\-\u2013\u2014&]+$/, '') + '\u2026';
+}
+
+// makeMetaDescription counts plain characters, but the value is later placed
+// in an HTML attribute where & becomes &amp; (and " becomes &quot;). That
+// escaping can push a 152-character description well past Google's ~160-char
+// cut, so trim whole words from the end until the ESCAPED form fits too.
+// Returns the plain text; callers still run escapeAttr() themselves.
+function makeFittingDescription(raw, fallback) {
+    const MAX = 156; // leaves room under the ~160-char SERP cut
+    const plain = makeMetaDescription(raw, fallback);
+    if (escapeAttr(plain).length <= MAX) return plain;
+
+    const words = plain.replace(/\u2026$/, '').trim().split(/\s+/);
+    while (words.length > 1) {
+        words.pop();
+        const candidate = words.join(' ').replace(/[\s,;:\-\u2013\u2014&]+$/, '');
+        if (escapeAttr(candidate + '\u2026').length <= MAX) return candidate + '\u2026';
+    }
+    return plain;
+}
+
+// Human date ("4 November 2026") -> ISO date, for schema.org.
+function toISODate(value) {
+    const fallback = new Date().toISOString().split('T')[0];
+    if (!value) return fallback;
+    const d = new Date(value);
+    return isNaN(d.getTime()) ? fallback : d.toISOString().split('T')[0];
+}
+
+// First level code a lesson belongs to, e.g. "b1-b2" -> "b1".
+function primaryLevelCode(lesson) {
+    return (lesson.level || '').split('-').map(s => s.trim().toLowerCase())
+        .find(c => LEVEL_CODES.includes(c)) || null;
+}
+
+const today = new Date().toISOString().split('T')[0];
+
+// Most recent dateAdded in a set of lessons — used for honest hub lastmods.
+function latestDate(items) {
+    const dates = items.map(i => i.dateAdded).filter(Boolean).sort();
+    return dates.length ? dates[dates.length - 1] : today;
+}
+
 // Shared topic label map — used by both lesson pages and topic archive pages
 const topicLabels = {
     psychology: 'Psychology', society: 'Society', technology: 'Technology',
@@ -102,9 +212,25 @@ async function fetchWithTimeout(url, options = {}, ms = DEFAULT_TIMEOUT_MS) {
 
 lessons.forEach(lesson => {
     const slug = slugify(lesson.title);
-    const descMeta = (lesson.description || '').substring(0, 160).replace(/\n/g, ' ').replace(/"/g, '&quot;');
+    const firstObjective = (lesson.objectives || [])[0] || '';
+    const descPlain = makeFittingDescription(
+        lesson.description,
+        `${lesson.title} — a ${lesson.levelLabel} ESL lesson plan for adult learners. ${firstObjective}`
+    );
+    const descMeta = escapeAttr(descPlain);
     const descSafe = (lesson.description || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const objList = (lesson.objectives || []).map(o => `<li>${o.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</li>`).join('\n');
+
+    // Preview image: the lesson's own cover when it exists on disk, otherwise
+    // the site-wide card. Missing/renamed covers fall back instead of 404ing.
+    const coverRel = lesson.visualSource && fs.existsSync(lesson.visualSource)
+        ? lesson.visualSource
+        : 'images/og-image.png';
+    const ogImage = `${SITE}/${coverRel.replace(/\\/g, '/').replace(/^\.?\//, '')}`;
+
+    // Breadcrumb targets: level hub first, topic hub as the middle step.
+    const lessonLevel = primaryLevelCode(lesson);
+    const lessonTopic = (lesson.topics || [])[0] || null;
 
     // Find 3 related lessons by shared topics
     const currentIdx = lessons.indexOf(lesson);
@@ -116,7 +242,7 @@ lessons.forEach(lesson => {
         <div style="margin-top:32px;border-top:1px dashed #ddd;padding-top:24px;">
             <h3 style="font-size:14px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">You may also like</h3>
             <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                ${related.map(r => `<a href="https://esl-plans.com/lessons/${slugify(r.title)}.html" style="flex:1;min-width:180px;background:white;border-radius:12px;padding:14px;text-decoration:none;border:1px solid #eee;display:block;">
+                ${related.map(r => `<a href="${lessonUrl(slugify(r.title))}" style="flex:1;min-width:180px;background:white;border-radius:12px;padding:14px;text-decoration:none;border:1px solid #eee;display:block;">
                     <div style="font-size:14px;font-weight:700;color:#333;margin-bottom:4px;">${r.title}</div>
                     <div style="font-size:12px;color:#aaa;">${r.levelLabel} &middot; ${r.duration}</div>
                     <div style="font-size:12px;color:#c95210;font-weight:700;margin-top:8px;">View Lesson &rarr;</div>
@@ -146,37 +272,54 @@ lessons.forEach(lesson => {
     const firstYouTubeLink = (lesson.links || []).find(l => l && l.url && getYouTubeId(l.url));
     const firstYouTubeId = firstYouTubeLink ? getYouTubeId(firstYouTubeLink.url) : null;
     const videoSchema = firstYouTubeId ? `
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"${lesson.title.replace(/"/g,'\\"')}${firstYouTubeLink.label ? ' — ' + firstYouTubeLink.label.replace(/"/g,'\\"') : ''}","description":"${descMeta.replace(/"/g,'\\"')}","thumbnailUrl":"https://img.youtube.com/vi/${firstYouTubeId}/hqdefault.jpg","uploadDate":"${lesson.dateAdded || new Date().toISOString().split('T')[0]}","embedUrl":"https://www.youtube.com/embed/${firstYouTubeId}","publisher":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com","logo":{"@type":"ImageObject","url":"https://esl-plans.com/favicon-512.png"}}}</script>` : '';
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"${jsonSafe(lesson.title)}${firstYouTubeLink.label ? ' \u2014 ' + jsonSafe(firstYouTubeLink.label) : ''}","description":"${jsonSafe(descPlain)}","thumbnailUrl":"https://img.youtube.com/vi/${firstYouTubeId}/hqdefault.jpg","uploadDate":"${lesson.dateAdded || new Date().toISOString().split('T')[0]}","embedUrl":"https://www.youtube.com/embed/${firstYouTubeId}","publisher":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com","logo":{"@type":"ImageObject","url":"https://esl-plans.com/favicon-512.png"}}}</script>` : '';
+
+    // Visible breadcrumb + matching BreadcrumbList schema. The level step is
+    // also the site's only link path to the level hubs, which previously had
+    // zero inbound internal links.
+    const breadcrumbHtml = `<nav aria-label="Breadcrumb" style="font-size:13px;color:#aaa;margin-bottom:16px;">
+        <a href="${SITE}/" style="color:#c95210;text-decoration:none;">Home</a> &rsaquo;
+        ${lessonLevel ? `<a href="${levelUrl(lessonLevel)}" style="color:#c95210;text-decoration:none;">${LEVEL_NAMES[lessonLevel]} lesson plans</a> &rsaquo; ` : ''}<span>${lesson.title}</span>
+    </nav>`;
+
+    const breadcrumbSchema = `<script type="application/ld+json">${JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+            ...(lessonLevel ? [{ '@type': 'ListItem', position: 2, name: `${LEVEL_NAMES[lessonLevel]} lesson plans`, item: levelUrl(lessonLevel) }] : []),
+            { '@type': 'ListItem', position: lessonLevel ? 3 : 2, name: lesson.title, item: lessonUrl(slug) }
+        ]
+    })}</script>`;
+
+    const levelMoreHtml = lessonLevel ? `
+        <p style="text-align:center;margin:10px 0 0;">
+            <a href="${levelUrl(lessonLevel)}" style="color:#c95210;font-weight:600;text-decoration:none;font-size:14px;">Browse all ${LEVEL_NAMES[lessonLevel]} ESL lesson plans &rarr;</a>
+        </p>` : '';
 
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script>
-        // GitHub Pages automatically serves this exact file at the same URL
-        // without the .html extension too, creating a genuine duplicate page
-        // that search engines discover independently of anything this site
-        // links to. This bounces that bare-URL twin to the real canonical
-        // .html page. It never fires when this page is already loaded via
-        // its proper .html URL — the condition is simply false there.
-        (function() {
-            if (!window.location.pathname.endsWith('.html')) {
-                window.location.replace(window.location.pathname + '.html' + window.location.search + window.location.hash);
-            }
-        })();
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${lesson.title} — ESL Lesson Plan for Adults | ESL-plans.com</title>
     <meta name="description" content="${descMeta}">
     <meta name="keywords" content="${(lesson.keywords||'')}, ESL lesson plan for adults, adult English lesson plan, online ESL tutor resources, ${lesson.levelLabel} ESL adults, conversation ESL lesson, ${topicTags.toLowerCase()}">
-    <link rel="canonical" href="https://esl-plans.com/lessons/${slug}.html">
+    <link rel="canonical" href="${lessonUrl(slug)}">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://esl-plans.com/lessons/${slug}.html">
-    <meta property="og:title" content="${lesson.title} — ESL Lesson Plan for Adults">
+    <meta property="og:url" content="${lessonUrl(slug)}">
+    <meta property="og:title" content="${escapeAttr(lesson.title)} — ESL Lesson Plan for Adults">
     <meta property="og:description" content="${descMeta}">
+    <meta property="og:image" content="${ogImage}">
+    <meta property="og:image:alt" content="${escapeAttr(lesson.title)} — ESL lesson plan cover">
     <meta property="og:site_name" content="ESL-plans.com">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${lesson.title.replace(/"/g,'\\"')}","description":"${descMeta.replace(/"/g,'\\"')}","provider":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"educationalLevel":"${lesson.levelLabel}","inLanguage":"en","url":"https://esl-plans.com/lessons/${slug}.html"}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${lesson.title} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson plan is designed for ${lesson.levelLabel} level adult learners. It takes approximately ${lesson.duration} to complete."}},{"@type":"Question","name":"What materials are included in the ${lesson.title} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${lesson.title} lesson includes ${materialsText}."}},{"@type":"Question","name":"Is the ${lesson.title} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${lesson.title} lesson is specifically designed for online ESL tutors working with adult learners at ${lesson.levelLabel} level. It is zero-prep and conversation-driven, covering the topic of ${topicTags}."}}]}</script>${videoSchema}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${escapeAttr(lesson.title)} — ESL Lesson Plan for Adults">
+    <meta name="twitter:description" content="${descMeta}">
+    <meta name="twitter:image" content="${ogImage}">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${jsonSafe(lesson.title)}","description":"${jsonSafe(descPlain)}","provider":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"educationalLevel":"${jsonSafe(lesson.levelLabel)}","inLanguage":"en","url":"${lessonUrl(slug)}"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${jsonSafe(lesson.title)} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${jsonSafe(lesson.title)} lesson plan is designed for ${jsonSafe(lesson.levelLabel)} level adult learners. It takes approximately ${jsonSafe(lesson.duration)} to complete."}},{"@type":"Question","name":"What materials are included in the ${jsonSafe(lesson.title)} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${jsonSafe(lesson.title)} lesson includes ${jsonSafe(materialsText)}."}},{"@type":"Question","name":"Is the ${jsonSafe(lesson.title)} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${jsonSafe(lesson.title)} lesson is specifically designed for online ESL tutors working with adult learners at ${jsonSafe(lesson.levelLabel)} level. It is zero-prep and conversation-driven, covering the topic of ${jsonSafe(topicTags)}."}}]}</script>${videoSchema}
+    ${breadcrumbSchema}
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:820px;margin:0 auto;padding:40px 20px}
@@ -211,18 +354,20 @@ lessons.forEach(lesson => {
 </head>
 <body>
     <div class="container">
-        <a class="logo" href="https://esl-plans.com"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+        <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+
+        ${breadcrumbHtml}
 
         <h1>${lesson.title}</h1>
         <div class="meta">
             <span class="meta-badge">🎓 ${lesson.categoryLabel}</span>
-            <span class="meta-badge">🥉 ${lesson.levelLabel}</span>
+            <span class="meta-badge">🥉 ${lessonLevel ? `<a href="${levelUrl(lessonLevel)}" style="color:inherit;text-decoration:none;">${lesson.levelLabel}</a>` : lesson.levelLabel}</span>
             <span class="meta-badge">⏱ ${lesson.duration}</span>
             <span class="meta-badge">${lesson.mediaIcon} ${lesson.mediaType}</span>
             ${lesson.isFree ? '<span class="meta-badge" style="background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7;">⭐ Free Lesson</span>' : ''}
         </div>
 
-        ${topicTags ? `<div class="topics">${(lesson.topics||[]).map(t => `<a href="https://esl-plans.com/topics/${t}.html" class="topic-tag">${topicLabels[t]||t}</a>`).join('')}</div>` : ''}
+        ${topicTags ? `<div class="topics">${(lesson.topics||[]).map(t => `<a href="${topicUrl(t)}" class="topic-tag">${topicLabels[t]||t}</a>`).join('')}</div>` : ''}
 
         <table style="width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px;background:white;border-radius:12px;overflow:hidden;border:1px solid #eee;">
             <thead>
@@ -276,17 +421,18 @@ lessons.forEach(lesson => {
 
         <div class="cta-box">
             <p>Looking for more ESL lesson plans for adult learners? Browse our full library of 100+ conversation-driven plans.</p>
-            <a href="https://esl-plans.com" class="cta-btn">Browse All Lesson Plans →</a>
+            <a href="${ALL_LESSONS_URL}" class="cta-btn">Browse All Lesson Plans →</a>
         </div>
 
         <div style="text-align:center; margin:32px 0;">
-            <a id="view-on-site-btn" href="https://esl-plans.com/#lesson-${slug}"
+            <a id="view-on-site-btn" href="${SITE}/#lesson-${slug}"
                style="display:inline-block; background:#c95210; color:white; padding:16px 36px; border-radius:50px; text-decoration:none; font-size:18px; font-weight:800; box-shadow:0 4px 16px rgba(201,82,16,0.3); transition:transform 0.2s;">
                 🎓 View &amp; Download This Lesson →
             </a>
             <p style="margin-top:12px; font-size:13px; color:#aaa;">Free PDF, audio and video included for free lessons</p>
+            ${levelMoreHtml}
         </div>
-        <a class="back" href="https://esl-plans.com">&larr; Browse all lesson plans</a>
+        <a class="back" href="${ALL_LESSONS_URL}">&larr; Browse all lesson plans</a>
     </div>
 </body>
 </html>`;
@@ -313,37 +459,35 @@ articles.forEach(article => {
     const slug = slugify(article.title);
     const bodySafe = article.body || '';
     const introSafe = article.intro || '';
-    const bodyMeta = (article.intro || article.body || '').replace(/<[^>]+>/g, '').substring(0, 160).replace(/\n/g, ' ').replace(/"/g, '&quot;');
+    const bodyPlain = makeFittingDescription(
+        (article.intro || article.body || '').replace(/<[^>]+>/g, ' '),
+        article.title
+    );
+    const bodyMeta = escapeAttr(bodyPlain);
+    const articleISO = toISODate(article.date);
+    const articleImage = `${SITE}/images/og-image.png`;
 
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script>
-        // GitHub Pages automatically serves this exact file at the same URL
-        // without the .html extension too, creating a genuine duplicate page
-        // that search engines discover independently of anything this site
-        // links to. This bounces that bare-URL twin to the real canonical
-        // .html page. It never fires when this page is already loaded via
-        // its proper .html URL — the condition is simply false there.
-        (function() {
-            if (!window.location.pathname.endsWith('.html')) {
-                window.location.replace(window.location.pathname + '.html' + window.location.search + window.location.hash);
-            }
-        })();
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${article.title} | ESL-plans.com Teacher's Corner</title>
     <meta name="description" content="${bodyMeta}">
     <meta name="keywords" content="ESL teaching tips, online ESL tutor, adult ESL learners, ${slugify(article.title).replace(/-/g,' ')}">
-    <link rel="canonical" href="https://esl-plans.com/articles/${slug}.html">
+    <link rel="canonical" href="${articleUrl(slug)}">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://esl-plans.com/articles/${slug}.html">
-    <meta property="og:title" content="${article.title}">
+    <meta property="og:url" content="${articleUrl(slug)}">
+    <meta property="og:title" content="${escapeAttr(article.title)}">
     <meta property="og:description" content="${bodyMeta}">
+    <meta property="og:image" content="${articleImage}">
     <meta property="og:site_name" content="ESL-plans.com">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${article.title.replace(/"/g,'\\"')}","description":"${bodyMeta.replace(/"/g,'\\"')}","author":{"@type":"Person","name":"Alex Selivanov"},"publisher":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"datePublished":"${article.date||''}","url":"https://esl-plans.com/articles/${slug}.html"}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"${article.title.replace(/"/g,'\\"')}","acceptedAnswer":{"@type":"Answer","text":"${bodyMeta.replace(/"/g,'\\"')}"}}]}</script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${escapeAttr(article.title)}">
+    <meta name="twitter:description" content="${bodyMeta}">
+    <meta name="twitter:image" content="${articleImage}">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${jsonSafe(article.title)}","description":"${jsonSafe(bodyPlain)}","author":{"@type":"Person","name":"Alex Selivanov"},"publisher":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"datePublished":"${articleISO}","dateModified":"${articleISO}","url":"${articleUrl(slug)}"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"${jsonSafe(article.title)}","acceptedAnswer":{"@type":"Answer","text":"${jsonSafe(bodyPlain)}"}}]}</script>
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:760px;margin:0 auto;padding:40px 20px}
@@ -370,9 +514,9 @@ articles.forEach(article => {
         <div class="body">${bodySafe}</div>
         <div class="cta">
             <p>Looking for ready-made ESL lesson plans for adult learners?</p>
-            <a href="https://esl-plans.com">Browse 100+ Lesson Plans →</a>
+            <a href="${ALL_LESSONS_URL}">Browse 100+ Lesson Plans →</a>
         </div>
-        <a class="back" href="https://esl-plans.com">&larr; Back to ESL-plans.com</a>
+        <a class="back" href="${SITE}/">&larr; Back to ESL-plans.com</a>
     </div>
 </body>
 </html>`;
@@ -405,7 +549,7 @@ try {
             articleCardsHtml = articles.map(a => {
                 const plainText = (a.body || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
                 const cardSlug = slugify(a.title);
-                return `<a href="https://esl-plans.com/articles/${cardSlug}.html" class="article-card" style="text-decoration:none; color:inherit; display:block;">
+                return `<a href="${articleUrl(cardSlug)}" class="article-card" style="text-decoration:none; color:inherit; display:block;">
                     <div class="article-card-body">
                         <h3>${a.title.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</h3>
                         <p class="article-preview">${plainText.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</p>
@@ -429,120 +573,311 @@ try {
     console.log('⚠️ Error splicing articles into index.html — index.html was NOT modified:', e.message);
 }
 
+// ── SPLICE A STATIC "BROWSE" BLOCK INTO index.html ──
+// The SPA's raw HTML links to no lesson, topic or level at all, so the single
+// strongest page on the site contributes nothing to discovery. This writes a
+// plain-HTML footer navigation block — levels, topics, popular free lessons —
+// between two markers so it survives every rebuild.
+try {
+    const indexPath = 'index.html';
+    const navStart = '<!-- STATIC-NAV-START -->';
+    const navEnd = '<!-- STATIC-NAV-END -->';
+    const indexContent = fs.readFileSync(indexPath, 'utf8');
+    const navStartIdx = indexContent.indexOf(navStart);
+    const navEndIdx = indexContent.indexOf(navEnd);
+
+    if (navStartIdx === -1 || navEndIdx === -1 || navEndIdx < navStartIdx) {
+        console.log('⚠️ STATIC-NAV markers not found in index.html — skipping nav splice. index.html was NOT modified.');
+    } else {
+        // Free lessons that already earn impressions in Search Console.
+        const popularSlugs = [
+            'phobias', 'unusual-jobs', 'astrology', 'the-star-method-job-interview',
+            'purpose', 'europe', 'ai-anxiety', 'dopamine-decor'
+        ];
+        const popular = popularSlugs
+            .map(s => lessons.find(l => slugify(l.title) === s))
+            .filter(Boolean);
+
+        const navHtml = `<nav class="footer-nav" aria-label="Browse lesson plans">
+    <style>
+        .footer-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:26px;width:100%;max-width:1100px;margin:0 auto 30px;padding:0 20px;text-align:left}
+        .footer-nav h3{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#8a8a8a;margin-bottom:10px;font-weight:700}
+        .footer-nav a{display:block;color:#cfcfcf;text-decoration:none;font-size:14px;padding:3px 0;line-height:1.4}
+        .footer-nav a:hover{color:#fff;text-decoration:underline}
+        .footer-nav .all{color:#ffb27a;font-weight:700}
+    </style>
+    <div>
+        <h3>By level</h3>
+        ${LEVEL_CODES.map(c => `<a href="${levelUrl(c)}">${LEVEL_NAMES[c]} lesson plans</a>`).join('\n        ')}
+    </div>
+    <div>
+        <h3>By topic</h3>
+        ${Object.keys(topicLabels).map(t => `<a href="${topicUrl(t)}">${topicLabels[t]}</a>`).join('\n        ')}
+    </div>
+    <div>
+        <h3>Popular free lessons</h3>
+        ${popular.map(l => `<a href="${lessonUrl(slugify(l.title))}">${l.title}</a>`).join('\n        ')}
+    </div>
+    <div>
+        <h3>All lesson plans</h3>
+        <a class="all" href="${ALL_LESSONS_URL}">Browse all ${lessons.length} plans &rarr;</a>
+        <a href="#articles-grid">Teacher's Corner articles</a>
+    </div>
+</nav>`;
+
+        const before = indexContent.slice(0, navStartIdx + navStart.length);
+        const after = indexContent.slice(navEndIdx);
+        fs.writeFileSync(indexPath, `${before}\n${navHtml}\n${after}`, 'utf8');
+        console.log(`✅ Spliced static browse navigation into index.html (${lessons.length} plans in the /lessons/ directory)`);
+    }
+} catch (e) {
+    console.log('⚠️ Error splicing nav into index.html — index.html was NOT modified:', e.message);
+}
+
 // ── GENERATE TOPIC & LEVEL ARCHIVE PAGES ──
 if (!fs.existsSync('topics')) fs.mkdirSync('topics');
 if (!fs.existsSync('levels')) fs.mkdirSync('levels');
 
 function renderLessonCard(l) {
-    return `<a href="https://esl-plans.com/lessons/${slugify(l.title)}.html" style="display:block;background:white;border-radius:12px;padding:16px;text-decoration:none;border:1px solid #eee;margin-bottom:12px;">
+    return `<a href="${lessonUrl(slugify(l.title))}" style="display:block;background:white;border-radius:12px;padding:16px;text-decoration:none;border:1px solid #eee;margin-bottom:12px;">
         <div style="font-size:15px;font-weight:700;color:#333;margin-bottom:6px;">${l.title}</div>
         <div style="font-size:12px;color:#aaa;">${l.levelLabel} &middot; ${l.categoryLabel} &middot; ${l.duration}</div>
     </a>`;
 }
 
-function renderArchivePage(heading, description, matchingLessons) {
+function renderArchivePage(heading, description, matchingLessons, canonicalUrl, crossLinksHtml, crumbHtml) {
+    const image = `${SITE}/images/og-image.png`;
+    const descMeta = escapeAttr(description);
+    const collectionSchema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: heading,
+        description: description,
+        url: canonicalUrl,
+        isPartOf: { '@type': 'WebSite', name: 'ESL-plans.com', url: `${SITE}/` }
+    });
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script>
-        // GitHub Pages automatically serves this exact file at the same URL
-        // without the .html extension too, creating a genuine duplicate page
-        // that search engines discover independently of anything this site
-        // links to. This bounces that bare-URL twin to the real canonical
-        // .html page. It never fires when this page is already loaded via
-        // its proper .html URL — the condition is simply false there.
-        (function() {
-            if (!window.location.pathname.endsWith('.html')) {
-                window.location.replace(window.location.pathname + '.html' + window.location.search + window.location.hash);
-            }
-        })();
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${heading} | ESL-plans.com</title>
-    <meta name="description" content="${description}">
+    <meta name="description" content="${descMeta}">
+    <link rel="canonical" href="${canonicalUrl}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="${canonicalUrl}">
+    <meta property="og:title" content="${escapeAttr(heading)}">
+    <meta property="og:description" content="${descMeta}">
+    <meta property="og:image" content="${image}">
+    <meta property="og:site_name" content="ESL-plans.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${escapeAttr(heading)}">
+    <meta name="twitter:description" content="${descMeta}">
+    <meta name="twitter:image" content="${image}">
+    <script type="application/ld+json">${collectionSchema}</script>
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:820px;margin:0 auto;padding:40px 20px}
-        .logo{font-size:22px;margin-bottom:28px;text-decoration:none;display:block;}
+        .logo{font-size:22px;margin-bottom:18px;text-decoration:none;display:block;}
         .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
         .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
+        .crumb{font-size:13px;color:#aaa;margin-bottom:10px;}
+        .crumb a{color:#c95210;text-decoration:none;}
         h1{color:#c95210;font-size:26px;margin-bottom:8px;line-height:1.3;}
-        p.intro{color:#666;font-size:15px;margin-bottom:28px;line-height:1.6;}
+        p.intro{color:#666;font-size:15px;margin-bottom:20px;line-height:1.6;}
+        .cross{background:#fff3e0;border-radius:12px;padding:12px 16px;margin-bottom:24px;font-size:14px;color:#555;line-height:2;}
+        .cross a{color:#c95210;text-decoration:none;font-weight:600;margin-right:12px;white-space:nowrap;}
         .back{display:inline-block;margin-top:24px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
     </style>
 </head>
 <body>
     <div class="container">
-        <a class="logo" href="https://esl-plans.com"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+        <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+        ${crumbHtml}
         <h1>${heading}</h1>
         <p class="intro">${description}</p>
+        ${crossLinksHtml}
         ${matchingLessons.map(renderLessonCard).join('')}
-        <a class="back" href="https://esl-plans.com">&larr; Browse all lesson plans</a>
+        <a class="back" href="${ALL_LESSONS_URL}">&larr; Browse all lesson plans</a>
     </div>
 </body>
 </html>`;
 }
 
+const levelCrossLinks = `<div class="cross"><strong>Browse by level:</strong>${LEVEL_CODES.map(c => `<a href="${levelUrl(c)}">${LEVEL_NAMES[c]} lesson plans</a>`).join('')}<a href="${ALL_LESSONS_URL}">All lesson plans</a></div>`;
+
+const topicCrossLinks = `<div class="cross"><strong>Browse by topic:</strong>${Object.keys(topicLabels).map(t => `<a href="${topicUrl(t)}">${topicLabels[t]}</a>`).join('')}<a href="${ALL_LESSONS_URL}">All lesson plans</a></div>`;
+
 const topicArchiveUrls = [];
+const topicArchiveLastmod = {};
 Object.keys(topicLabels).forEach(topicCode => {
     const matching = lessons.filter(l => (l.topics||[]).includes(topicCode));
     if (matching.length === 0) return;
     const heading = `${topicLabels[topicCode]} ESL Lesson Plans for Adults`;
     const description = `Browse ${matching.length} ESL lesson plan${matching.length===1?'':'s'} on ${topicLabels[topicCode].toLowerCase()} — conversation-driven materials for adult learners and online ESL tutors.`;
-    fs.writeFileSync(`topics/${topicCode}.html`, renderArchivePage(heading, description, matching), 'utf8');
-    topicArchiveUrls.push(`https://esl-plans.com/topics/${topicCode}.html`);
+    const url = topicUrl(topicCode);
+    const crumb = `<nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <span>${topicLabels[topicCode]} lesson plans</span></nav>`;
+    fs.writeFileSync(`topics/${topicCode}.html`, renderArchivePage(heading, description, matching, url, levelCrossLinks, crumb), 'utf8');
+    topicArchiveUrls.push(url);
+    topicArchiveLastmod[url] = latestDate(matching);
     console.log(`Topic archive: topics/${topicCode}.html (${matching.length} lessons)`);
 });
 
-const levelLabelsMap = { a2: 'A2', b1: 'B1', b2: 'B2', c1: 'C1' };
 const levelArchiveUrls = [];
-Object.keys(levelLabelsMap).forEach(levelCode => {
+const levelArchiveLastmod = {};
+LEVEL_CODES.forEach(levelCode => {
     const matching = lessons.filter(l => (l.level||'').split('-').includes(levelCode));
     if (matching.length === 0) return;
-    const heading = `${levelLabelsMap[levelCode]} ESL Lesson Plans for Adults`;
-    const description = `Browse ${matching.length} ${levelLabelsMap[levelCode]}-level ESL lesson plan${matching.length===1?'':'s'} for adult learners — conversation-driven, zero-prep materials for online ESL tutors.`;
-    fs.writeFileSync(`levels/${levelCode}.html`, renderArchivePage(heading, description, matching), 'utf8');
-    levelArchiveUrls.push(`https://esl-plans.com/levels/${levelCode}.html`);
+    const heading = `${LEVEL_NAMES[levelCode]} ESL Lesson Plans for Adults`;
+    const description = `Browse ${matching.length} ${LEVEL_NAMES[levelCode]}-level ESL lesson plan${matching.length===1?'':'s'} for adult learners — conversation-driven, zero-prep materials for online ESL tutors.`;
+    const url = levelUrl(levelCode);
+    const crumb = `<nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <span>${LEVEL_NAMES[levelCode]} lesson plans</span></nav>`;
+    fs.writeFileSync(`levels/${levelCode}.html`, renderArchivePage(heading, description, matching, url, topicCrossLinks, crumb), 'utf8');
+    levelArchiveUrls.push(url);
+    levelArchiveLastmod[url] = latestDate(matching);
     console.log(`Level archive: levels/${levelCode}.html (${matching.length} lessons)`);
 });
 
+// ── GENERATE /lessons/ — THE CRAWLABLE DIRECTORY ──
+// The homepage is a JavaScript app: its raw HTML links to no lesson at all.
+// This page is plain HTML with a direct link to every lesson, grouped by
+// level, plus a topic grid. It is the crawl hub the site never had.
+function renderDirectoryPage() {
+    const freeCount = lessons.filter(l => l.isFree === true).length;
+    const grouped = LEVEL_CODES.map(code => ({ code, items: lessons.filter(l => primaryLevelCode(l) === code) }))
+        .filter(g => g.items.length > 0);
+    const assigned = new Set(grouped.flatMap(g => g.items));
+    const unassigned = lessons.filter(l => !assigned.has(l));
+
+    const sections = grouped.map(g => `
+        <section>
+            <h2>${LEVEL_NAMES[g.code]} ESL lesson plans</h2>
+            <p class="count">${g.items.length} plans${g.items.some(l => l.isFree === true) ? `, ${g.items.filter(l => l.isFree === true).length} free` : ''}</p>
+            ${g.items.map(l => `<a class="card" href="${lessonUrl(slugify(l.title))}">
+                <span class="card-title">${l.title}${l.isFree === true ? '<span class="free">FREE</span>' : ''}</span>
+                <span class="card-meta">${l.categoryLabel} &middot; ${l.duration} &middot; ${l.mediaType}</span>
+            </a>`).join('')}
+        </section>`).join('');
+
+    const extra = unassigned.length ? `
+        <section>
+            <h2>More lesson plans</h2>
+            <p class="count">${unassigned.length} plans</p>
+            ${unassigned.map(l => `<a class="card" href="${lessonUrl(slugify(l.title))}">
+                <span class="card-title">${l.title}</span>
+                <span class="card-meta">${l.levelLabel} &middot; ${l.duration}</span>
+            </a>`).join('')}
+        </section>` : '';
+
+    const title = `All ESL Lesson Plans for Adults — ${lessons.length} Plans by Level | ESL-plans.com`;
+    const description = `Browse all ${lessons.length} conversation-driven ESL lesson plans for adult learners, sorted by level (A2 to C1). ${freeCount} free plans, zero prep, ready to download.`;
+    const schema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: `All ESL Lesson Plans for Adults`,
+        description: description,
+        url: ALL_LESSONS_URL,
+        isPartOf: { '@type': 'WebSite', name: 'ESL-plans.com', url: `${SITE}/` },
+        hasPart: lessons.map(l => ({ '@type': 'Course', name: l.title, url: lessonUrl(slugify(l.title)) }))
+    });
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <meta name="description" content="${escapeAttr(description)}">
+    <link rel="canonical" href="${ALL_LESSONS_URL}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="${ALL_LESSONS_URL}">
+    <meta property="og:title" content="All ESL Lesson Plans for Adults | ESL-plans.com">
+    <meta property="og:description" content="${escapeAttr(description)}">
+    <meta property="og:image" content="${SITE}/images/og-image.png">
+    <meta property="og:site_name" content="ESL-plans.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="All ESL Lesson Plans for Adults | ESL-plans.com">
+    <meta name="twitter:description" content="${escapeAttr(description)}">
+    <meta name="twitter:image" content="${SITE}/images/og-image.png">
+    <script type="application/ld+json">${schema}</script>
+    <style>
+        body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
+        .container{max-width:820px;margin:0 auto;padding:40px 20px}
+        .logo{font-size:22px;margin-bottom:18px;text-decoration:none;display:block;}
+        .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
+        .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
+        .crumb{font-size:13px;color:#aaa;margin-bottom:10px;}
+        .crumb a{color:#c95210;text-decoration:none;}
+        h1{color:#c95210;font-size:28px;margin-bottom:8px;line-height:1.3;}
+        p.intro{color:#666;font-size:15px;margin-bottom:24px;line-height:1.6;}
+        .topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+        .topic-tag{background:#fff3e0;color:#c95210;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;text-decoration:none;}
+        h2{color:#333;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin:34px 0 4px;}
+        p.count{color:#999;font-size:13px;margin-bottom:12px;}
+        .card{display:block;background:white;border-radius:12px;padding:14px 16px;text-decoration:none;border:1px solid #eee;margin-bottom:10px;}
+        .card-title{font-size:15px;font-weight:700;color:#333;}
+        .free{font-size:11px;color:#2e7d32;font-weight:700;margin-left:8px;}
+        .card-meta{display:block;font-size:12px;color:#aaa;margin-top:4px;}
+        .back{display:inline-block;margin-top:26px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+        <nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <span>All lesson plans</span></nav>
+        <h1>All ESL Lesson Plans for Adults</h1>
+        <p class="intro">${description} Every plan is conversation-driven, zero-prep, and built for online tutors working with adult learners.</p>
+        <div class="topics">
+            ${Object.keys(topicLabels).map(t => `<a class="topic-tag" href="${topicUrl(t)}">${topicLabels[t]}</a>`).join('')}
+        </div>
+        <div class="topics">
+            ${LEVEL_CODES.map(c => `<a class="topic-tag" href="${levelUrl(c)}">${LEVEL_NAMES[c]} lesson plans</a>`).join('')}
+        </div>
+        ${sections}
+        ${extra}
+        <a class="back" href="${SITE}/">&larr; Back to ESL-plans.com</a>
+    </div>
+</body>
+</html>`;
+}
+
+if (lessons.some(l => slugify(l.title) === 'index')) {
+    console.log('⚠️ A lesson slug collides with lessons/index.html — directory page skipped.');
+} else {
+    fs.writeFileSync('lessons/index.html', renderDirectoryPage(), 'utf8');
+    console.log(`Directory: lessons/index.html (${lessons.length} lessons)`);
+}
+
 // ── GENERATE SITEMAP ──
-const today = new Date().toISOString().split('T')[0];
+// One <loc> per page, in the same extensionless form used by canonical tags
+// and internal links. lastmod is each page's real date instead of "today",
+// so Google can tell what actually changed. /docs/terms.html is omitted:
+// robots.txt blocks it, so listing it was contradictory.
 
 const lessonUrls = lessons.map(l => `    <url>
-        <loc>https://esl-plans.com/lessons/${slugify(l.title)}.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <lastmod>${today}</lastmod>
+        <loc>${lessonUrl(slugify(l.title))}</loc>
+        <lastmod>${l.dateAdded || today}</lastmod>
     </url>`).join('\n');
 
 const articleUrls = articles.map(a => `    <url>
-        <loc>https://esl-plans.com/articles/${slugify(a.title)}.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-        <lastmod>${today}</lastmod>
+        <loc>${articleUrl(slugify(a.title))}</loc>
+        <lastmod>${toISODate(a.date)}</lastmod>
     </url>`).join('\n');
 
 const archiveUrls = [...topicArchiveUrls, ...levelArchiveUrls].map(u => `    <url>
         <loc>${u}</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-        <lastmod>${today}</lastmod>
+        <lastmod>${topicArchiveLastmod[u] || levelArchiveLastmod[u] || today}</lastmod>
     </url>`).join('\n');
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://esl-plans.com</loc>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
         <lastmod>${today}</lastmod>
     </url>
     <url>
-        <loc>https://esl-plans.com/docs/terms.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.3</priority>
+        <loc>${ALL_LESSONS_URL}</loc>
+        <lastmod>${latestDate(lessons)}</lastmod>
     </url>
 ${lessonUrls}
 ${articleUrls}
@@ -720,9 +1055,9 @@ async function pingIndexNow() {
     const INDEXNOW_KEY = 'e95877c9-a948-4766-b0e0-5ed2c2dc31a3';
     const allUrls = [
         'https://esl-plans.com',
-        'https://esl-plans.com/docs/terms.html',
-        ...lessons.map(l => `https://esl-plans.com/lessons/${slugify(l.title)}.html`),
-        ...articles.map(a => `https://esl-plans.com/articles/${slugify(a.title)}.html`),
+        ALL_LESSONS_URL,
+        ...lessons.map(l => lessonUrl(slugify(l.title))),
+        ...articles.map(a => articleUrl(slugify(a.title))),
         ...topicArchiveUrls,
         ...levelArchiveUrls
     ];
@@ -793,6 +1128,14 @@ async function main() {
         }
     }
     await pingIndexNow().catch(err => console.log('IndexNow error:', err.message));
+}
+
+// Local/preview runs: SKIP_NETWORK=1 rebuilds every page and the sitemap but
+// never posts to Telegram/Bluesky or pings IndexNow. The GitHub Action never
+// sets this, so production behaviour is unchanged.
+if (process.env.SKIP_NETWORK === '1') {
+    console.log('SKIP_NETWORK=1 — social posts and IndexNow skipped.');
+    process.exit(0);
 }
 
 main()
