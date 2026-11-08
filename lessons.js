@@ -4,6 +4,42 @@
 // ============================================================
 
 const lessonsCatalog = [
+
+    {
+        "dateAdded": "2026-11-08",
+        "title": "WND: Woman of Numbered Days",
+        "topics": [
+            "psychology",
+            "society",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "90 min",
+        "visualSource": "images/b2_wnd.jpg",
+        "keywords": "wnd: woman of numbered days psychology society life b2-c1",
+        "objectives": [
+            "decode common digital acronyms and internet slang used in modern everyday communication",
+            "analyze the concept of \"temporary partners\" (WND/MND) and relationship red flags through targeted video and audio tasks",
+            "master essential relationship collocations and evaluate 11 distinct personality archetypes using pop-culture examples"
+        ],
+        "description": "Page 1: Digital Acronyms & Internet Slang\nThe lesson kicks off by exploring modern digital communication. Students match 20 common internet acronyms (such as FOMO, IRL, NSFW, ETA, ROI, and BRB) to their full meanings and definitions, setting a casual, conversational tone and activating prior knowledge of online slang.\nThe \"WND\" Concept & Video Analysis\nThis naturally leads into the first media task: watching a dramatic clip from the Spanish Netflix reality series Billionaires' Bunker. The interpersonal dynamics between characters Frida and Guillermo serve as a springboard to discuss modern dating habits. Students analyze Guillermo’s specific definition of a \"WND\" (Woman of Numbered Days) - a partner with a built-in expiration date, characterized by superficial charm, boring conversations, and a lack of deep personality.\n\nPage 2: The \"MND\" Concept & Core Audio Task\nBuilding on this theme, the lesson introduces the \"MND\" (Man of Numbered Days), defined by emotional unavailability and predictable disappearance. Students then listen to an audio conversation between Leo and Iris. While listening, they answer 10 targeted comprehension questions about specific dating red flags, such as keeping an active Tinder profile, avoiding talks about the future, using grand gestures to mask problems, or treating a relationship like a \"performance.\"\nRelationship Collocations\nThe focus shifts to practical language use. Students review 10 essential relationship collocations (e.g., have a crush on someone, make a commitment, lose interest, have chemistry). They match these phrases to their correct definitions and apply them in a personalized discussion, answering questions about worst breakup reasons, perfect date locations, and instant dealbreakers.\n\nPage 3: 11 Personality Archetypes\nThe lesson wraps up by exploring individual traits through 11 distinct female archetypes, including The Hustler, The Panda Girl, The Perfectionist, The Boss Lady, and The Daydreamer. Each type is paired with recognizable pop-culture examples (like Miranda Priestly, Hermione Granger, or Bridget Jones). Students finish with a fun, personalized discussion, figuring out which archetype they relate to most, which three they would want on a \"superhero team,\" and whether these labels apply to men just as much as women.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Expiration Date: Is it ethical to enter a relationship knowing it has a \"built-in expiration date,\" or is enjoying the present moment enough?\nArchetype Applicability: Can these 11 personality types (like The Panda Girl or The Boss Lady) apply to men, or are they culturally coded as female?\nSuperhero Squad: If you were forming a team, which three archetypes would you choose, and which famous celebrity perfectly fits your favorite type?\n🧠 Target Lexicon & Vocabulary Focus\nDigital Acronyms: FOMO, IRL, NSFW, ETA, ROI, KPI, VIP, TBA, FAQ, BRB, ASAP, FYI, OMG, IMO, TTYL, IDK, BFF, BTW, DM.\nRelationship Collocations: Ask someone out, have a crush on, fall in love, go on a date, be in a relationship, break up with, have chemistry, make a commitment, be attracted to, lose interest.\nThe 11 Archetypes: The Family Woman, The Caretaker, The Listener, The Gossip Girl, The Hustler, The Superwoman, The Boss Lady, The Perfectionist, The Panda Girl, The Party Animal, The Daydreamer.\n📺 Multimedia & Authentic Materials Included\nNetflix Video Clip: A targeted viewing task using Billionaires' Bunker to analyze Guillermo’s cynical but detailed criteria for identifying a \"Woman of Numbered Days\" (WND).\nLeo & Iris Audio Task: A 10-question listening comprehension exercise tracking specific dating scenarios (e.g., active dating profiles, fear of real intimacy, relationships as a \"performance\").\nPop-Culture Matching: Connecting archetypes to famous characters like Miranda Priestly (The Boss Lady), Hermione Granger (The Superwoman), and Bridget Jones (The Party Animal).\n⚠️ Critical Thinking Extension Work\nRed Flag Reflection: Students reflect on past relationships or friendships, identifying early signs that the connection was \"temporary\" or lacked a foundation for long-term commitment.\nArchetype Self-Assessment: Beyond just reading, students actively debate which archetype is the most misunderstood by society and which single positive trait (e.g., The Daydreamer's optimism) they would want to instantly acquire.",
+        "telegramRecap": "Is your partner a \"Person of Numbered Days\"? Watch a Netflix clip, listen to dating red flags, and match relationship collocations.",
+        "mediaLabel": "The audio streams:",
+        "links": [],
+        "hasPdf": true,
+        "hasAudio": true,
+        "hasRar": true,
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/wnd-woman-of-numbered-days.pdf"
+    },
+
+
     {
         "dateAdded": "2026-11-05",
         "title": "The Evolution of Hats",
