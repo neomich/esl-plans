@@ -264,15 +264,15 @@ lessons.forEach(lesson => {
     if (lesson.hasRar || lesson.rarUrl) materials.push('full downloadable package (RAR)');
     const materialsText = materials.join(', ');
 
-    // Find the first YouTube video (if any) to build VideoObject schema.
-    // Google requires actual structured VideoObject data — not just an
-    // <iframe> on the page — before it will index a page's embedded video
-    // at all. Reuses the exact same getYouTubeId() detection already used
-    // for the "Watch the Video" section below, so both stay consistent.
-    const firstYouTubeLink = (lesson.links || []).find(l => l && l.url && getYouTubeId(l.url));
-    const firstYouTubeId = firstYouTubeLink ? getYouTubeId(firstYouTubeLink.url) : null;
-    const videoSchema = firstYouTubeId ? `
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"${jsonSafe(lesson.title)}${firstYouTubeLink.label ? ' \u2014 ' + jsonSafe(firstYouTubeLink.label) : ''}","description":"${jsonSafe(descPlain)}","thumbnailUrl":"https://img.youtube.com/vi/${firstYouTubeId}/hqdefault.jpg","uploadDate":"${lesson.dateAdded || new Date().toISOString().split('T')[0]}","embedUrl":"https://www.youtube.com/embed/${firstYouTubeId}","publisher":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com","logo":{"@type":"ImageObject","url":"https://esl-plans.com/favicon-512.png"}}}</script>` : '';
+    // NO VideoObject schema here, deliberately.
+    // Google only supports video structured data on a "watch page" — a page
+    // whose main purpose is showing that one video. A lesson page's purpose is
+    // the lesson plan; the embedded video is supplementary, which is Google's
+    // own example of a page that is NOT a watch page ("a blog post that reviews
+    // an embedded video"). VideoObject here can never earn a video result and
+    // only produces permanent "Video isn't on a watch page" errors in Search
+    // Console. The <iframe> embed and "Watch the Video" links below stay, so
+    // users see exactly the same page.
 
     // Visible breadcrumb + matching BreadcrumbList schema. The level step is
     // also the site's only link path to the level hubs, which previously had
@@ -318,7 +318,7 @@ lessons.forEach(lesson => {
     <meta name="twitter:description" content="${descMeta}">
     <meta name="twitter:image" content="${ogImage}">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${jsonSafe(lesson.title)}","description":"${jsonSafe(descPlain)}","provider":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"educationalLevel":"${jsonSafe(lesson.levelLabel)}","inLanguage":"en","url":"${lessonUrl(slug)}"}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${jsonSafe(lesson.title)} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${jsonSafe(lesson.title)} lesson plan is designed for ${jsonSafe(lesson.levelLabel)} level adult learners. It takes approximately ${jsonSafe(lesson.duration)} to complete."}},{"@type":"Question","name":"What materials are included in the ${jsonSafe(lesson.title)} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${jsonSafe(lesson.title)} lesson includes ${jsonSafe(materialsText)}."}},{"@type":"Question","name":"Is the ${jsonSafe(lesson.title)} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${jsonSafe(lesson.title)} lesson is specifically designed for online ESL tutors working with adult learners at ${jsonSafe(lesson.levelLabel)} level. It is zero-prep and conversation-driven, covering the topic of ${jsonSafe(topicTags)}."}}]}</script>${videoSchema}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${jsonSafe(lesson.title)} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${jsonSafe(lesson.title)} lesson plan is designed for ${jsonSafe(lesson.levelLabel)} level adult learners. It takes approximately ${jsonSafe(lesson.duration)} to complete."}},{"@type":"Question","name":"What materials are included in the ${jsonSafe(lesson.title)} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${jsonSafe(lesson.title)} lesson includes ${jsonSafe(materialsText)}."}},{"@type":"Question","name":"Is the ${jsonSafe(lesson.title)} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${jsonSafe(lesson.title)} lesson is specifically designed for online ESL tutors working with adult learners at ${jsonSafe(lesson.levelLabel)} level. It is zero-prep and conversation-driven, covering the topic of ${jsonSafe(topicTags)}."}}]}</script>
     ${breadcrumbSchema}
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
