@@ -6,6 +6,47 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-09",
+        "title": "Going and Coming",
+        "topics": [
+            "society",
+            "life",
+            "travel",
+            "art"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60 min",
+        "visualSource": "images/a2_going _coming.jpg",
+        "keywords": "going and coming society life travel art a2-b1",
+        "objectives": [
+            "analyze visual details and emotional shifts in classic artwork to discuss family travel experiences",
+            "distinguish between the Past Simple and Present Perfect Simple to describe past actions with visible present results",
+            "practice irregular past participles through a targeted listening task about a cat’s changing life circumstances"
+        ],
+        "description": "Page 1: Norman Rockwell’s \"Going and Coming\"\nThe lesson opens with a close look at Norman Rockwell’s 1947 painting, Going and Coming. Students match descriptive phrases to specific numbered details in the artwork (e.g., \"is sitting much lower now,\" \"is blowing a bubble,\" \"wants its head outside\"). They discuss the emotional contrast between the excitement of leaving for a vacation and the exhaustion of returning home. To verify their answers, the class watches a short video that describes the painting in detail, which naturally leads to a conversation about \"post-vacation blues\" and personal travel memories.\n\nPage 2: Past Simple vs. Present Perfect \nThe focus shifts to grammar, using the painting to illustrate how characters changed from the first picture to the second (e.g., \"The boy was full of energy, but now he has slid down in his seat\"). Students learn to use have/has + past participle to show a past action with a visible result right now. They review irregular verb forms (e.g., move, sleep, throw, eat, fall) and complete a gap-fill exercise. Finally, they listen to an audio track about \"Barsik the cat\" to check their answers, tracking how his life improved from sleeping in the freezing rain to having a safe, comfortable home, before discussing their own personal changes over the past year.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Vacation Shift: How do the family members feel about leaving versus returning home? Which trip always feels longer: the way there or the way back?\nPost-Vacation Blues: Have you ever felt tired, sad, or worried when returning to your normal daily life after a trip? How long did it last?\nPersonal Growth: How have you changed in the past year? What new habits have you formed?\n🧠 Target Lexicon & Grammar Focus\nDescriptive Phrases: is sitting much lower, appears to be sleeping, is almost climbing out, face is resting in hands, is blowing a bubble, has become much smaller.\nIrregular Verbs: move/moved/moved, sleep/slept/asleep, throw/threw/thrown, eat/ate/eaten, upgrade/upgraded/upgraded, show/showed/shown, fight/fought/fought, fall/fell/fallen.\nGrammar Rule: Using have/has + past participle to highlight a past action that has a clear, visible result in the present moment.\n📺 Multimedia & Authentic Materials Included\nPage 1 Video Task: A short video description of Norman Rockwell’s Going and Coming used to verify the matching task and spark conversation about visual storytelling.\nPage 2 Audio Task: A listening exercise featuring \"Barsik’s story,\" where students check their gap-fill answers by hearing how the stray cat’s life improved (e.g., from throwing dirty scraps to eating from three different bowls, from fighting for turf to being loved inside a safe apartment).\n⚠️ Critical Thinking Extension Work\nVisible Results: Students practice identifying the \"visible result\" of their own past actions (e.g., \"I have saved a lot of money,\" \"I have learned how to cook healthy meals\").\nNarrative Contrast: Analyzing how a single image or story can effectively show a \"before and after\" transformation, and applying this structure to describe their own recent life changes.",
+        "telegramRecap": "From vacation excitement to post-vacation blues. Match painting details, learn Present Perfect grammar, and listen to a cat's life story.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_going _coming.pdf",
+        "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/a2_going_coming_cat.mp3",
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_going _coming.rar",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.instagram.com/reel/De9_MRfAdAi/?xtok=dnozeW05emVoaDFx"
+            }
+        ]
+    },
+
+
+
+    {
         "dateAdded": "2026-11-08",
         "title": "WND: Woman of Numbered Days",
         "topics": [
