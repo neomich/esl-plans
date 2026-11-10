@@ -24,6 +24,15 @@ try {
     console.log('⚠️ meta-descriptions.js not found — using auto-generated descriptions');
 }
 
+// Free conversation-question pages (/questions/<slug>). Optional: if the file
+// is missing the rest of the build is unaffected.
+let conversationQuestions = [];
+try {
+    conversationQuestions = require('./conversation-questions.js') || [];
+} catch (e) {
+    console.log('⚠️ conversation-questions.js not found — skipping question pages');
+}
+
 if (!fs.existsSync('lessons')) fs.mkdirSync('lessons');
 
 function slugify(str) {
@@ -105,7 +114,7 @@ function makeMetaDescription(raw, fallback) {
     const closes = (candidate.match(/\)/g) || []).length;
     if (opens > closes) {
         const paren = candidate.lastIndexOf('(');
-        if (paren >= 90) {
+        if (paren >= 45) {
             cut = paren;
             candidate = t.slice(0, cut);
         }
@@ -245,17 +254,189 @@ async function fetchWithTimeout(url, options = {}, ms = DEFAULT_TIMEOUT_MS) {
 let handWrittenCount = 0;
 let autoCount = 0;
 
+// Fallback for a lesson with no hand-written SERP description.
+// Order: Telegram recap (already written in a human voice, usually <150 chars)
+// -> first objective -> raw PDF text. Keeps level and duration at the end, the
+// same way the hand-written lines do.
+// Largest plain-text length for a fallback description. Google truncates
+// around 160 characters in the SERP, and escapeAttr() can add a few more.
+const AUTO_DESC_MAX = 152;
+
+// Remove what makes auto-generated text look broken:
+//   - an unclosed parenthesis: "vocabulary (e.g., salary, budget, loan,"
+//   - trailing list punctuation: "…, debt,"
+//   - a dangling connector: "…including", "…such as", "…and how it"
+function tidyTail(s) {
+    let out = String(s).replace(/\s+/g, ' ').trim();
+    const open = out.lastIndexOf('(');
+    const close = out.lastIndexOf(')');
+    if (open > close) out = out.slice(0, open).trim();
+    for (let i = 0; i < 3; i++) {
+        const before = out;
+        out = out.replace(/[\s,;:&\/\u2013\u2014-]+$/, '');
+        out = out.replace(/\s+\b(?:e\.g\.|i\.e\.|such as|including|like|for example|and|or|with|of|to|the|a)$/i, '');
+        out = out.replace(/[\s,;:&\/\u2013\u2014-]+$/, '');
+        if (out === before) break;
+    }
+    return out.trim();
+}
+
+// Cut to whole words. If the cut lands mid-sentence, prefer the last clause
+// boundary (comma / semicolon / dash) when it keeps at least half the text —
+// "Explore the philosophical tension between freedom and comfort" reads like a
+// summary, "…and how it applies" reads like a bug.
+function clipClause(s, max) {
+    const t = String(s).replace(/\s+/g, ' ').trim();
+    if (t.length <= max) return t;
+    const cut = t.slice(0, max);
+    const boundaries = [', ', '; ', ' \u2014 ', ': '].map(b => cut.lastIndexOf(b));
+    const best = Math.max(...boundaries);
+    if (best >= max * 0.5) return cut.slice(0, best).trim();
+    const sp = cut.lastIndexOf(' ');
+    return (sp > 30 ? cut.slice(0, sp) : cut).trim();
+}
+
+// Objectives from the PDF are full of lists inside brackets. Drop them before
+// anything else, or the description ends up as "(e.g., salary, budget, loan,".
+function stripParentheticals(s) {
+    return String(s)
+        .replace(/\([^)]*\)/g, ' ')
+        .replace(/\([^)]*$/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+// Trim an already-clipped description to `room` characters so level and
+// duration can be appended. Cuts on a word boundary, then backs out of any
+// bracket the cut landed inside — "(e.g., rivalry…" is worse than no bracket.
+function trimToRoom(text, room) {
+    const strip = s => s.replace(/[\s,;:\-&\/\u2013\u2014]+$/, '');
+    let t = String(text).replace(/\u2026$/, '').trim();
+
+    const open = t.lastIndexOf('(');
+    const close = t.lastIndexOf(')');
+    if (open > close) t = t.slice(0, open).trim();
+
+    if (t.length + 1 > room) {
+        const cut = t.slice(0, room - 1);
+        const sp = cut.lastIndexOf(' ');
+        t = (sp > 40 ? cut.slice(0, sp) : cut).trim();
+        const o2 = t.lastIndexOf('(');
+        const c2 = t.lastIndexOf(')');
+        if (o2 > c2) t = t.slice(0, o2).trim();
+    }
+    if (!t) return '';
+    return strip(t) + '\u2026';
+}
+
+function buildAutoDescription(lesson) {
+    const level = String(lesson.levelLabel || '').trim();
+    const dur = String(lesson.duration || '').trim();
+    const title = String(lesson.title || '').trim();
+    const tail = [level, dur].filter(Boolean).join(', ');
+
+    // 1. Telegram recap — written by hand, so it already sounds human.
+    const recap = String(lesson.telegramRecap || '').replace(/\s+/g, ' ').trim();
+    if (recap) {
+        const room = tail ? AUTO_DESC_MAX - tail.length - 2 : AUTO_DESC_MAX;
+        let body = tidyTail(clipClause(recap, room));
+        if (body) {
+            if (!/[.!?]$/.test(body)) body += '.';
+            return `${body}${tail ? ' ' + tail + '.' : ''}`;
+        }
+    }
+
+    // 2. First objective — but only when it fits in full. A half-clause
+    // ("…essential vocabulary related", "…hidden in") is worse than no clause,
+    // so anything too long falls through to the real description below.
+    const firstObjective = stripParentheticals((lesson.objectives || [])[0] || '')
+        .replace(/[\s,;:.!?\u2013\u2014-]+$/, '');
+    if (firstObjective) {
+        // "Zombies: practice critical viewing and listening comprehension.
+        //  B2-C1 lesson for adults, 90 min, zero prep."
+        const suffix = `${level ? level + ' ' : ''}lesson for adults, ${dur}, zero prep.`;
+        const prefix = title ? `${title}: ` : '';
+        const room = AUTO_DESC_MAX - prefix.length - suffix.length - 2;
+        if (room >= 45 && firstObjective.length <= room) {
+            const clause = firstObjective.charAt(0).toLowerCase() + firstObjective.slice(1);
+            return `${prefix}${clause}. ${suffix}`;
+        }
+    }
+
+    // 3. The lesson's own description. Take whole sentences where possible:
+    // PDF text usually opens with a usable line, and a complete sentence reads
+    // far better in the SERP than a clipped one. Only fall back to
+    // makeFittingDescription (which trails off with "…") when no sentence fits.
+    const raw = String(lesson.description || '')
+        .replace(/^Page[s]?\s*\d+\s*(?:&|and)\s*\d+\s*[:\-\u2013\u2014]\s*/i, '')
+        .replace(/^Page[s]?\s*\d+\s*[:\-\u2013\u2014]\s*/i, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    const cleaned = stripBoilerplate(raw);
+    if (cleaned) {
+        // Split on sentence ends only. A naive /[^.!?]+[.!?]/ scan breaks on
+        // abbreviations inside brackets ("(e.g., salary…") and starts a
+        // "sentence" mid-list, which is how descriptions used to begin with ", ".
+        const sentences = cleaned.split(/(?<=[.!?])\s+/).map(s => s.trim()).filter(Boolean);
+        let body = '';
+        for (const s of sentences) {
+            const next = body ? `${body} ${s}` : s;
+            const withTail = tail ? `${next} ${tail}.` : next;
+            if (withTail.length > AUTO_DESC_MAX) break;
+            body = next;
+        }
+        if (body) {
+            if (!/[.!?]$/.test(body)) body += '.';
+            const full = tail ? `${body} ${tail}.` : body;
+            // A very short whole sentence ("Defining altruism and egoism.")
+            // wastes the snippet; below ~100 chars a clean cut fills it better.
+            if (full.length >= 100) return full;
+        }
+
+        // Fall back to a clean word-boundary cut, then add level and duration
+        // if there is room for them.
+        let fd = makeFittingDescription(
+            cleaned,
+            `${title ? title + ' — ' : ''}a ${level} ESL lesson plan for adult learners.`
+        );
+        if (tail) {
+            const room = AUTO_DESC_MAX - tail.length - 2;
+            return `${trimToRoom(fd, room)} ${tail}.`;
+        }
+        return fd;
+    }
+
+    return makeFittingDescription(
+        lesson.description,
+        `${title ? title + ' — ' : ''}a ${level} ESL lesson plan for adult learners.`
+    );
+}
+
+// PDF descriptions all start the same way. Stripping the formula gets straight
+// to the content: "In this lesson, students begin by analysing a chart" ->
+// "Analysing a chart". Only leading boilerplate is touched.
+function stripBoilerplate(text) {
+    let out = String(text)
+        .replace(/^In this lesson,?\s+students\s+(?:begin|start)\s+(?:by|with)\s+/i, '')
+        .replace(/^In this lesson,?\s+/i, '')
+        .replace(/^In the lesson,?\s+students\s+(?:begin|start)\s+(?:by|with)\s+/i, '')
+        .replace(/^The lesson\s+(?:opens|starts|begins)\s+(?:with|by)\s+/i, '')
+        .replace(/^Students\s+(?:begin|start)\s+(?:by|with)\s+/i, '')
+        .replace(/^[\s,;:)\u2013\u2014-]+/, '')
+        .trim();
+    if (!out) return '';
+    out = out.charAt(0).toUpperCase() + out.slice(1);
+    return out;
+}
+
 lessons.forEach(lesson => {
     const slug = slugify(lesson.title);
-    const firstObjective = (lesson.objectives || [])[0] || '';    // Prefer the hand-written SERP description. Auto-generation from PDF text
+    // Prefer the hand-written SERP description. Auto-generation from PDF text
     // is only a safety net for lessons added before their description is written.
     const handWritten = String(lessonDescriptions[lesson.title] || '').trim();
     if (handWritten) handWrittenCount++;
     else autoCount++;
-    const descPlain = handWritten || makeFittingDescription(
-        lesson.description,
-        `${lesson.title} — a ${lesson.levelLabel} ESL lesson plan for adult learners. ${firstObjective}`
-    );
+    const descPlain = handWritten || buildAutoDescription(lesson);
     const descMeta = escapeAttr(descPlain);
     const descSafe = (lesson.description || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const objList = (lesson.objectives || []).map(o => `<li>${o.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</li>`).join('\n');
@@ -665,6 +846,7 @@ try {
     <div>
         <h3>All lesson plans</h3>
         <a class="all" href="${ALL_LESSONS_URL}">Browse all ${lessons.length} plans &rarr;</a>
+        <a href="${SITE}/questions/">Free conversation questions</a>
         <a href="#articles-grid">Teacher's Corner articles</a>
     </div>
 </nav>`;
@@ -689,7 +871,7 @@ function renderLessonCard(l) {
     </a>`;
 }
 
-function renderArchivePage(heading, description, matchingLessons, canonicalUrl, crossLinksHtml, crumbHtml) {
+function renderArchivePage(heading, description, matchingLessons, canonicalUrl, crossLinksHtml, crumbHtml, proseHtml = '') {
     const image = `${SITE}/images/og-image.png`;
     const descMeta = escapeAttr(description);
     const collectionSchema = JSON.stringify({
@@ -729,6 +911,11 @@ function renderArchivePage(heading, description, matchingLessons, canonicalUrl, 
         .crumb a{color:#c95210;text-decoration:none;}
         h1{color:#c95210;font-size:26px;margin-bottom:8px;line-height:1.3;}
         p.intro{color:#666;font-size:15px;margin-bottom:20px;line-height:1.6;}
+        .prose{margin:28px 0 32px;}
+        .prose h2{color:#333;font-size:19px;margin:30px 0 10px;line-height:1.35;}
+        .prose h2:first-child{margin-top:0;}
+        .prose p{color:#555;font-size:15px;line-height:1.75;margin:0 0 14px;}
+        .prose a{color:#c95210;text-decoration:none;font-weight:600;}
         .cross{background:#fff3e0;border-radius:12px;padding:12px 16px;margin-bottom:24px;font-size:14px;color:#555;line-height:2;}
         .cross a{color:#c95210;text-decoration:none;font-weight:600;margin-right:12px;white-space:nowrap;}
         .back{display:inline-block;margin-top:24px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
@@ -740,6 +927,7 @@ function renderArchivePage(heading, description, matchingLessons, canonicalUrl, 
         ${crumbHtml}
         <h1>${heading}</h1>
         <p class="intro">${description}</p>
+        ${proseHtml}
         ${crossLinksHtml}
         ${matchingLessons.map(renderLessonCard).join('')}
         <a class="back" href="${ALL_LESSONS_URL}">&larr; Browse all lesson plans</a>
@@ -749,6 +937,60 @@ function renderArchivePage(heading, description, matchingLessons, canonicalUrl, 
 }
 
 const levelCrossLinks = `<div class="cross"><strong>Browse by level:</strong>${LEVEL_CODES.map(c => `<a href="${levelUrl(c)}">${LEVEL_NAMES[c]} lesson plans</a>`).join('')}<a href="${ALL_LESSONS_URL}">All lesson plans</a></div>`;
+
+// Prose blocks for the level hubs. These pages already rank for
+// "<level> esl plans for adults", so they get real H2s and copy instead of a
+// bare list of links: the query family around them is "B2 conversation
+// questions", "C1 discussion topics", "B2 speaking lesson plans".
+const levelProse = {
+    a2: `
+        <div class="prose">
+            <h2>A2 ESL lesson plans for adults</h2>
+            <p>A2 students can survive a shop, a station and a short story about their weekend. What they cannot do yet is keep a conversation going once the easy questions run out. Every A2 plan here is built around one situation and one set of phrases they will actually need — not a vocabulary list to memorise and forget.</p>
+            <h2>A2 conversation topics that do not feel childish</h2>
+            <p>Adults at A2 are not children at A2. The topics are food, travel, money, work, habits and small everyday decisions, because that is what a forty-year-old talks about. The language is simple; the subject is not.</p>
+            <h2>How these A2 plans work online</h2>
+            <p>Each plan includes a PDF handout, audio and video, and is designed for a 60-minute one-to-one lesson over a screen share. No printing. The questions are short enough to answer with the grammar the student already has, and there is always an extension task for the student who turns out to be stronger than the level label.</p>
+        </div>`,
+    b1: `
+        <div class="prose">
+            <h2>B1 ESL lesson plans for adults</h2>
+            <p>B1 is the awkward middle: enough language to say almost anything, not enough control to say it well. Students at this level usually want to talk about real things — work, money, family, travel, the news — but freeze when the topic needs an opinion rather than a fact. These plans are built to push them from describing into arguing.</p>
+            <h2>B1 conversation questions and discussion topics</h2>
+            <p>Each lesson opens with questions that a B1 student can answer in one sentence, then escalates to questions that need two or three. That progression is deliberate: it gives them a running start before the difficult part. If you only need the questions, there are free sets on <a href="${SITE}/questions/">psychology, work, travel and more</a>.</p>
+            <h2>B1 speaking lesson plans for online tutors</h2>
+            <p>Every plan is one-to-one friendly: PDF, audio, video, and a lesson flow that fills 60-90 minutes without padding. Grammar and vocabulary are tied to the topic instead of bolted on, which is why students remember them a week later.</p>
+        </div>`,
+    b2: `
+        <div class="prose">
+            <h2>What a B2 ESL lesson plan has to do</h2>
+            <p>B2 is the level where students stop needing the language and start needing a reason to use it. They can already explain their job, tell a story and disagree politely. What they cannot always do is hold a position under pressure, notice register, or say the same thing three different ways. So every B2 plan here is built around one argument or one decision, not a vocabulary list.</p>
+            <h2>B2 ESL conversation questions</h2>
+            <p>Conversation is the engine. The questions move from concrete to uncomfortable: first what happened, then what you think, then what you would defend in front of someone who disagrees. If you only want the questions, the <a href="${SITE}/questions/">free conversation-question sets</a> cover psychology, work, travel, food, technology, society, relationships and media.</p>
+            <h2>B2 speaking lesson plans for online tutors</h2>
+            <p>These are made for one-to-one online teaching: a screen-shareable PDF, links that open in a browser, nothing to print. A typical B2 lesson runs 60-90 minutes — warm-up, core task, feedback you can actually get through. Teaching in 45-minute blocks? Split the plan at the second page; each half still works on its own.</p>
+            <h2>What B2 students usually still get wrong</h2>
+            <p>Not grammar. Register is the big one — "kids" in a job interview, "furthermore" in a bar. Then hedging: B2 students state opinions like facts. Both are easier to fix inside a topic they care about than inside a grammar exercise, which is the whole point of this library.</p>
+        </div>`,
+    c1: `
+        <div class="prose">
+            <h2>What a C1 lesson plan has to do</h2>
+            <p>C1 students are the easiest to bore and the hardest to impress. They have opinions, they have vocabulary, and they can smell a textbook exercise from across the room. A C1 lesson only works if the topic is genuinely difficult — an ethical trade-off, an uncomfortable statistic, a position they have never had to defend.</p>
+            <h2>C1 discussion topics that survive advanced students</h2>
+            <p>The topics here are the ones adults argue about when the small talk is over: status, debt, authenticity, attention, the ethics of work, what progress actually costs. Nothing is "advanced" because the words are long; it is advanced because there is no safe answer. If you only want the questions, start with the <a href="${SITE}/questions/">free conversation-question sets</a>.</p>
+            <h2>C1 speaking lesson plans and exam-style tasks</h2>
+            <p>Plans include a PDF, audio and video, and are built for 90-minute one-to-one sessions, though most split cleanly into two. You get discussion, a listening or reading text with real difficulty, and language work that targets precision — collocation, connotation, register — rather than another round of conditionals.</p>
+            <h2>Why there is no "advanced grammar" lesson here</h2>
+            <p>At C1, grammar is rarely the bottleneck. Precision is. A student who says "the government should invest more" is grammatically fine and communicatively vague. The lessons work on the second problem, because that is the one that shows up in a meeting, an interview or an exam.</p>
+        </div>`
+};
+
+const levelDescriptions = {
+    a2: n => `${n} A2 ESL lesson plans for adults — simple, conversation-led materials with PDF, audio and video. Zero prep for online tutors.`,
+    b1: n => `${n} B1 ESL lesson plans for adults — conversation-driven, zero-prep materials for online tutors. PDF, audio and video included.`,
+    b2: n => `${n} B2 ESL lesson plans for adults: conversation, speaking and discussion topics with PDF, audio and video. Zero prep for online tutors.`,
+    c1: n => `${n} C1 ESL lesson plans for adults — advanced conversation and discussion topics with PDF, audio and video. Zero prep for online tutors.`
+};
 
 const topicCrossLinks = `<div class="cross"><strong>Browse by topic:</strong>${Object.keys(topicLabels).map(t => `<a href="${topicUrl(t)}">${topicLabels[t]}</a>`).join('')}<a href="${ALL_LESSONS_URL}">All lesson plans</a></div>`;
 
@@ -761,7 +1003,11 @@ Object.keys(topicLabels).forEach(topicCode => {
     const description = `Browse ${matching.length} ESL lesson plan${matching.length===1?'':'s'} on ${topicLabels[topicCode].toLowerCase()} — conversation-driven materials for adult learners and online ESL tutors.`;
     const url = topicUrl(topicCode);
     const crumb = `<nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <span>${topicLabels[topicCode]} lesson plans</span></nav>`;
-    fs.writeFileSync(`topics/${topicCode}.html`, renderArchivePage(heading, description, matching, url, levelCrossLinks, crumb), 'utf8');
+    const qPage = conversationQuestions.find(q => q.topic === topicCode);
+    const topicCross = qPage
+        ? `${levelCrossLinks}<div class="cross"><strong>Just want the questions?</strong><a href="${SITE}/questions/${qPage.slug}">ESL conversation questions about ${topicLabels[topicCode].toLowerCase()}</a></div>`
+        : levelCrossLinks;
+    fs.writeFileSync(`topics/${topicCode}.html`, renderArchivePage(heading, description, matching, url, topicCross, crumb), 'utf8');
     topicArchiveUrls.push(url);
     topicArchiveLastmod[url] = latestDate(matching);
     console.log(`Topic archive: topics/${topicCode}.html (${matching.length} lessons)`);
@@ -773,14 +1019,210 @@ LEVEL_CODES.forEach(levelCode => {
     const matching = lessons.filter(l => (l.level||'').split('-').includes(levelCode));
     if (matching.length === 0) return;
     const heading = `${LEVEL_NAMES[levelCode]} ESL Lesson Plans for Adults`;
-    const description = `Browse ${matching.length} ${LEVEL_NAMES[levelCode]}-level ESL lesson plan${matching.length===1?'':'s'} for adult learners — conversation-driven, zero-prep materials for online ESL tutors.`;
+    const description = (levelDescriptions[levelCode] || (n => `Browse ${n} ${LEVEL_NAMES[levelCode]}-level ESL lesson plans for adult learners — conversation-driven, zero-prep materials for online ESL tutors.`))(matching.length);
     const url = levelUrl(levelCode);
     const crumb = `<nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <span>${LEVEL_NAMES[levelCode]} lesson plans</span></nav>`;
-    fs.writeFileSync(`levels/${levelCode}.html`, renderArchivePage(heading, description, matching, url, topicCrossLinks, crumb), 'utf8');
+    const prose = levelProse[levelCode] || '';
+    fs.writeFileSync(`levels/${levelCode}.html`, renderArchivePage(heading, description, matching, url, topicCrossLinks, crumb, prose), 'utf8');
     levelArchiveUrls.push(url);
     levelArchiveLastmod[url] = latestDate(matching);
     console.log(`Level archive: levels/${levelCode}.html (${matching.length} lessons)`);
 });
+
+// ── GENERATE /questions/ — FREE CONVERSATION-QUESTION PAGES ──
+// These target the biggest free-intent query family in the niche
+// ("ESL conversation questions about X"). They cost the reader nothing, need no
+// account, and hand off to the matching lessons at the bottom.
+if (!fs.existsSync('questions')) fs.mkdirSync('questions');
+
+const questionUrl = slug => `${SITE}/questions/${slug}`;
+const questionPageUrls = [];
+
+function renderQuestionPage(q) {
+    const url = questionUrl(q.slug);
+    const qMeta = String(q.meta || q.intro || '').replace(/\s+/g, ' ').trim();
+    const topicLessons = lessons.filter(l => (l.topics || []).includes(q.topic));
+    const freePicks = topicLessons.filter(l => l.isFree === true).slice(0, 2);
+    const paidPicks = topicLessons.filter(l => l.isFree !== true).slice(0, 2);
+    const picks = [...freePicks, ...paidPicks];
+    const total = q.groups.reduce((n, g) => n + g.items.length, 0);
+    const others = conversationQuestions.filter(o => o.slug !== q.slug);
+
+    const groupsHtml = q.groups.map(g => `
+        <section>
+            <h2>${g.heading}</h2>
+            <ol class="qlist">
+                ${g.items.map(item => `<li>${item}</li>`).join('')}
+            </ol>
+        </section>`).join('');
+
+    const picksHtml = picks.length ? `
+        <div class="cta">
+            <h2>Want the full lesson on this?</h2>
+            <p>These questions come out of real lesson plans — with the reading, audio, video and vocabulary already built around them.</p>
+            <div class="picks">
+                ${picks.map(l => `<a href="${lessonUrl(slugify(l.title))}">
+                    <strong>${l.title}</strong>
+                    <span>${l.levelLabel} &middot; ${l.duration}${l.isFree === true ? ' &middot; free' : ''}</span>
+                </a>`).join('')}
+            </div>
+            <a class="all" href="${topicUrl(q.topic)}">All ${topicLabels[q.topic] || q.topic} lesson plans &rarr;</a>
+        </div>` : '';
+
+    const schemaArticle = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: q.heading,
+        description: q.intro,
+        url: url,
+        inLanguage: 'en',
+        isAccessibleForFree: true,
+        author: { '@type': 'Person', name: 'Alex Selivanov' },
+        publisher: { '@type': 'Organization', name: 'ESL-plans.com', url: `${SITE}/` },
+        about: { '@type': 'Thing', name: `ESL conversation questions: ${q.topic}` }
+    });
+    const schemaCrumb = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+            { '@type': 'ListItem', position: 2, name: 'Conversation questions', item: `${SITE}/questions/` },
+            { '@type': 'ListItem', position: 3, name: q.title, item: url }
+        ]
+    });
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${q.title} | ESL-plans.com</title>
+    <meta name="description" content="${escapeAttr(qMeta.slice(0, 300))}">
+    <link rel="canonical" href="${url}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="${url}">
+    <meta property="og:title" content="${escapeAttr(q.title)}">
+    <meta property="og:description" content="${escapeAttr(qMeta.slice(0, 200))}">
+    <meta property="og:image" content="${SITE}/images/og-image.png">
+    <meta property="og:site_name" content="ESL-plans.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${escapeAttr(q.title)}">
+    <meta name="twitter:description" content="${escapeAttr(qMeta.slice(0, 200))}">
+    <meta name="twitter:image" content="${SITE}/images/og-image.png">
+    <script type="application/ld+json">${schemaArticle}</script>
+    <script type="application/ld+json">${schemaCrumb}</script>
+    <style>
+        body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
+        .container{max-width:760px;margin:0 auto;padding:40px 20px}
+        .logo{font-size:22px;margin-bottom:18px;text-decoration:none;display:block;}
+        .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
+        .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
+        .crumb{font-size:13px;color:#aaa;margin-bottom:10px;}
+        .crumb a{color:#c95210;text-decoration:none;}
+        h1{color:#c95210;font-size:28px;margin-bottom:8px;line-height:1.3;}
+        p.intro{color:#666;font-size:15px;margin-bottom:6px;line-height:1.65;}
+        p.note{color:#999;font-size:13px;margin-bottom:26px;}
+        h2{color:#333;font-size:17px;margin:32px 0 10px;}
+        ol.qlist{margin:0;padding-left:22px;color:#444;font-size:16px;line-height:1.75;}
+        ol.qlist li{margin-bottom:10px;}
+        .cta{background:white;border:1px solid #f0e0d0;border-radius:14px;padding:22px;margin-top:36px;}
+        .cta h2{margin-top:0;}
+        .cta p{color:#666;font-size:15px;line-height:1.6;}
+        .picks{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0;}
+        .picks a{flex:1;min-width:210px;background:#fff8f2;border:1px solid #f0e0d0;border-radius:12px;padding:12px 14px;text-decoration:none;display:block;}
+        .picks strong{display:block;color:#333;font-size:14px;margin-bottom:3px;}
+        .picks span{color:#aaa;font-size:12px;}
+        .all{color:#c95210;text-decoration:none;font-weight:700;font-size:14px;}
+        .more{margin-top:34px;font-size:14px;line-height:2.1;}
+        .more a{color:#c95210;text-decoration:none;font-weight:600;margin-right:14px;white-space:nowrap;}
+        .back{display:inline-block;margin-top:26px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+        <nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <a href="${SITE}/questions/">Conversation questions</a> &rsaquo; <span>${topicLabels[q.topic] || q.topic}</span></nav>
+        <h1>${q.heading}</h1>
+        <p class="intro">${q.intro}</p>
+        <p class="note">${total} questions &middot; free to use, no signup &middot; B1-C1</p>
+        ${groupsHtml}
+        ${picksHtml}
+        <div class="more">
+            <strong>More conversation questions:</strong><br>
+            ${others.map(o => `<a href="${questionUrl(o.slug)}">${topicLabels[o.topic] || o.topic}</a>`).join('')}
+            <a href="${ALL_LESSONS_URL}">All lesson plans</a>
+        </div>
+        <a class="back" href="${SITE}/">&larr; Back to ESL-plans.com</a>
+    </div>
+</body>
+</html>`;
+}
+
+conversationQuestions.forEach(q => {
+    const url = questionUrl(q.slug);
+    fs.writeFileSync(`questions/${q.slug}.html`, renderQuestionPage(q), 'utf8');
+    questionPageUrls.push(url);
+    console.log(`Question page: questions/${q.slug}.html (${q.groups.reduce((n, g) => n + g.items.length, 0)} questions)`);
+});
+
+// A plain index at /questions/ so the group is crawlable from one URL.
+if (conversationQuestions.length) {
+    const listItems = conversationQuestions.map(q => {
+        const total = q.groups.reduce((n, g) => n + g.items.length, 0);
+        return `<a class="card" href="${questionUrl(q.slug)}">
+            <span class="card-title">${q.title}</span>
+            <span class="card-meta">${total} questions &middot; ${topicLabels[q.topic] || q.topic} &middot; free</span>
+        </a>`;
+    }).join('');
+    const idxHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free ESL Conversation Questions for Adults | ESL-plans.com</title>
+    <meta name="description" content="Free ESL conversation questions for adult learners, grouped by topic: psychology, work, travel, food, technology, society, relationships and media. No signup.">
+    <link rel="canonical" href="${SITE}/questions/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="${SITE}/questions/">
+    <meta property="og:title" content="Free ESL Conversation Questions for Adults">
+    <meta property="og:description" content="Free ESL conversation questions for adult learners, grouped by topic: psychology, work, travel, food, technology, society, relationships and media. No signup.">
+    <meta property="og:image" content="${SITE}/images/og-image.png">
+    <meta property="og:site_name" content="ESL-plans.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free ESL Conversation Questions for Adults">
+    <meta name="twitter:description" content="Free ESL conversation questions for adult learners, grouped by topic: psychology, work, travel, food, technology, society, relationships and media. No signup.">
+    <meta name="twitter:image" content="${SITE}/images/og-image.png">
+    <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Free ESL Conversation Questions for Adults', url: `${SITE}/questions/`, isPartOf: { '@type': 'WebSite', name: 'ESL-plans.com', url: `${SITE}/` } })}</script>
+    <style>
+        body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
+        .container{max-width:760px;margin:0 auto;padding:40px 20px}
+        .logo{font-size:22px;margin-bottom:18px;text-decoration:none;display:block;}
+        .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
+        .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
+        .crumb{font-size:13px;color:#aaa;margin-bottom:10px;}
+        .crumb a{color:#c95210;text-decoration:none;}
+        h1{color:#c95210;font-size:28px;margin-bottom:8px;}
+        p.intro{color:#666;font-size:15px;margin-bottom:26px;line-height:1.6;}
+        .card{display:block;background:white;border-radius:12px;padding:16px;text-decoration:none;border:1px solid #eee;margin-bottom:10px;}
+        .card-title{font-size:15px;font-weight:700;color:#333;}
+        .card-meta{display:block;font-size:12px;color:#aaa;margin-top:4px;}
+        .back{display:inline-block;margin-top:26px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+        <nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <span>Conversation questions</span></nav>
+        <h1>Free ESL Conversation Questions for Adults</h1>
+        <p class="intro">Discussion questions you can use tomorrow, grouped by topic. Free, no account, no download. Each set is drawn from real lessons in the library — the full versions add the reading, audio and vocabulary.</p>
+        ${listItems}
+        <a class="back" href="${ALL_LESSONS_URL}">&larr; Browse all lesson plans</a>
+    </div>
+</body>
+</html>`;
+    fs.writeFileSync('questions/index.html', idxHtml, 'utf8');
+    console.log(`Question index: questions/index.html (${conversationQuestions.length} pages)`);
+}
 
 // ── GENERATE /lessons/ — THE CRAWLABLE DIRECTORY ──
 // The homepage is a JavaScript app: its raw HTML links to no lesson at all.
@@ -876,6 +1318,7 @@ function renderDirectoryPage() {
         </div>
         <div class="topics">
             ${LEVEL_CODES.map(c => `<a class="topic-tag" href="${levelUrl(c)}">${LEVEL_NAMES[c]} lesson plans</a>`).join('')}
+            ${conversationQuestions.length ? `<a class="topic-tag" href="${SITE}/questions/">Conversation questions</a>` : ''}
         </div>
         ${sections}
         ${extra}
@@ -913,6 +1356,11 @@ const archiveUrls = [...topicArchiveUrls, ...levelArchiveUrls].map(u => `    <ur
         <lastmod>${topicArchiveLastmod[u] || levelArchiveLastmod[u] || today}</lastmod>
     </url>`).join('\n');
 
+const questionSitemapUrls = [...(conversationQuestions.length ? [`${SITE}/questions/`] : []), ...questionPageUrls].map(u => `    <url>
+        <loc>${u}</loc>
+        <lastmod>${today}</lastmod>
+    </url>`).join('\n');
+
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
@@ -926,10 +1374,11 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 ${lessonUrls}
 ${articleUrls}
 ${archiveUrls}
+${questionSitemapUrls}
 </urlset>`;
 
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
-console.log(`Sitemap: ${lessons.length + articles.length + topicArchiveUrls.length + levelArchiveUrls.length + 2} URLs`);
+console.log(`Sitemap: ${lessons.length + articles.length + topicArchiveUrls.length + levelArchiveUrls.length + questionPageUrls.length + (conversationQuestions.length ? 1 : 0) + 2} URLs`);
 console.log('All done!');
 
 // ── TELEGRAM AUTO-POST ──
