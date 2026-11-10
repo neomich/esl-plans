@@ -6,6 +6,7 @@ on:
       - 'lessons.js'
       - 'articles.js'
       - 'generate-lessons.js'
+      - 'meta-descriptions.js'
   workflow_dispatch:
 
 jobs:
