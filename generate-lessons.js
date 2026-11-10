@@ -11,6 +11,19 @@ const getLessons = new Function(lessonsContent.replace('const lessonsCatalog', '
 const lessons = getLessons();
 console.log(`Found ${lessons.length} lessons`); 
 
+// Hand-written SERP descriptions, keyed by lesson title. Optional on purpose:
+// if the file is missing or a new lesson is not in it yet, the generator falls
+// back to the automatic description and still builds.
+let lessonDescriptions = {};
+let articleDescriptions = {};
+try {
+    const maps = require('./meta-descriptions.js') || {};
+    lessonDescriptions = maps.lessons || maps || {};
+    articleDescriptions = maps.articles || {};
+} catch (e) {
+    console.log('⚠️ meta-descriptions.js not found — using auto-generated descriptions');
+}
+
 if (!fs.existsSync('lessons')) fs.mkdirSync('lessons');
 
 function slugify(str) {
@@ -82,8 +95,27 @@ function makeMetaDescription(raw, fallback) {
 
     const slice = t.slice(0, LIMIT);
     const space = slice.lastIndexOf(' ');
-    const cut = space >= 90 ? space : LIMIT;
-    return t.slice(0, cut).replace(/[\s,;:\-\u2013\u2014&]+$/, '') + '\u2026';
+    let cut = space >= 90 ? space : LIMIT;
+
+    // Never cut inside a bracket. "(such as bruises…" reads like a broken page
+    // rather than a summary, and it is the single most common failure mode in
+    // PDF-derived text, where lists of examples live inside parentheses.
+    let candidate = t.slice(0, cut);
+    const opens = (candidate.match(/\(/g) || []).length;
+    const closes = (candidate.match(/\)/g) || []).length;
+    if (opens > closes) {
+        const paren = candidate.lastIndexOf('(');
+        if (paren >= 90) {
+            cut = paren;
+            candidate = t.slice(0, cut);
+        }
+    }
+
+    // Also refuse to trail off on a dangling connector ("…including", "…such as").
+    let out = candidate.replace(/[\s,;:\-\u2013\u2014&]+$/, '');
+    out = out.replace(/[\s,;:\-\u2013\u2014&]+(?:e\.g\.|i\.e\.|such as|including|like|for example)$/i, '');
+    out = out.replace(/[\s,;:\-\u2013\u2014&]+$/, '');
+    return out + '\u2026';
 }
 
 // makeMetaDescription counts plain characters, but the value is later placed
@@ -210,10 +242,17 @@ async function fetchWithTimeout(url, options = {}, ms = DEFAULT_TIMEOUT_MS) {
     }
 }
 
+let handWrittenCount = 0;
+let autoCount = 0;
+
 lessons.forEach(lesson => {
     const slug = slugify(lesson.title);
-    const firstObjective = (lesson.objectives || [])[0] || '';
-    const descPlain = makeFittingDescription(
+    const firstObjective = (lesson.objectives || [])[0] || '';    // Prefer the hand-written SERP description. Auto-generation from PDF text
+    // is only a safety net for lessons added before their description is written.
+    const handWritten = String(lessonDescriptions[lesson.title] || '').trim();
+    if (handWritten) handWrittenCount++;
+    else autoCount++;
+    const descPlain = handWritten || makeFittingDescription(
         lesson.description,
         `${lesson.title} — a ${lesson.levelLabel} ESL lesson plan for adult learners. ${firstObjective}`
     );
@@ -440,6 +479,8 @@ lessons.forEach(lesson => {
     console.log(`Lesson: lessons/${slug}.html`);
 });
 
+console.log(`Descriptions: ${handWrittenCount} hand-written, ${autoCount} auto-generated${autoCount ? ' ⚠️ add those to meta-descriptions.js' : ''}`);
+
 // ── GENERATE ARTICLE PAGES ──
 let articles = [];
 if (fs.existsSync('articles.js')) {
@@ -463,7 +504,10 @@ articles.forEach(article => {
         (article.intro || article.body || '').replace(/<[^>]+>/g, ' '),
         article.title
     );
-    const bodyMeta = escapeAttr(bodyPlain);
+    // Meta tags get the hand-written line when one exists; schema keeps the
+    // longer intro, which is more useful as structured data.
+    const metaPlain = String(articleDescriptions[slug] || '').trim() || bodyPlain;
+    const bodyMeta = escapeAttr(metaPlain);
     const articleISO = toISODate(article.date);
     const articleImage = `${SITE}/images/og-image.png`;
 
