@@ -1196,7 +1196,7 @@
 
         .pricing-hero {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 34px;
         }
         .pricing-hero h1 {
             font-size: 36px;
@@ -1207,6 +1207,34 @@
         .pricing-hero p {
             font-size: 18px;
             color: #777;
+        }
+
+        .pricing-intro {
+            max-width: 780px;
+            margin: 0 auto 42px;
+            background: white;
+            border: 1px solid #f0e0d0;
+            border-radius: 16px;
+            padding: 26px 30px;
+            text-align: left;
+        }
+        .pricing-intro p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #555;
+            margin: 0 0 16px;
+        }
+        .pricing-intro p:last-child { margin-bottom: 0; }
+        .pricing-intro strong { color: #222; }
+        .pricing-intro a { color: #c95210; font-weight: 700; text-decoration: none; cursor: pointer; }
+
+        .pricing-reassure {
+            max-width: 780px;
+            margin: -30px auto 50px;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            line-height: 1.6;
         }
 
         .pricing-grid {
@@ -1670,11 +1698,17 @@
     <!-- PRICING PAGE -->
     <div id="pricing-view" style="display:none;">
         <div class="pricing-hero">
-            <h1>Simple, honest pricing</h1>
-            <p>No auto-renewals. Make a new payment anytime to extend.</p>
+            <h1>One teacher. 125 lessons. No committee.</h1>
+            <p>No auto-renewals. Pay when you need to — nothing is charged behind your back.</p>
             <div style="display:inline-block; margin-top:16px; background:#fff8e1; border:2px solid #ffd600; border-radius:50px; padding:10px 24px; font-size:14px; font-weight:700; color:#c95210;">
                 🌟 Founding Member Price — Lock it in forever while you stay subscribed
             </div>
+        </div>
+
+        <div class="pricing-intro">
+            <p><strong>Why this is not $9 a month.</strong> The cheap end of this market sells worksheets: a text, six questions and a gap-fill. You can make one in an hour, and students can tell. Every plan here takes me up to six hours — finding a topic worth an adult's evening, cutting the video, recording the audio, writing questions that start an argument instead of a shrug, then teaching it to a paying student before it goes anywhere near the site. You are not buying a PDF dump. You are buying the lesson I would teach my own student tomorrow.</p>
+            <p><strong>Both paid tiers get the whole library.</strong> All 125 lessons, every level, every topic — $19 a month or $99 a year, same library. The $99 is not "more access". It is the extras: my planner app, a 30-minute call with me, and first answers in the private Friends chat. New lessons land in both tiers, because crippling the monthly plan to sell the annual one is a trick I am not going to play. No credits, no upsells, no "premium plus".</p>
+            <p><strong>Who is behind it.</strong> Me. Fifteen years of teaching adults online, still taking students, still writing every plan myself — <a onclick="showContactsView()">the long version is on the About page →</a></p>
         </div>
 
         <div class="pricing-grid">
@@ -1716,10 +1750,10 @@
                 <ul class="pricing-features">
                     <li>
                         <span class="feat-icon contributor-icon">📚</span>
-                        <span>Unlock the <strong>entire ESLplans library.</strong>
+                        <span>The entire library — <strong>125 lesson plans</strong>, every level, every topic. New lessons appear in your account as I publish them.
                             <div class="feat-tags">
                                 <span class="feat-tag">All Levels</span>
-                                <span class="feat-tag">100+ Topics</span>
+                                <span class="feat-tag">125 Lessons</span>
                                 <span class="feat-tag">Full Library</span>
                             </div>
                         </span>
@@ -1742,20 +1776,24 @@
             <!-- FRIEND -->
             <div class="pricing-card friend">
                 <a href="how-to-pay.html" target="_blank" style="position:absolute; top:12px; right:14px; color:#e03131; font-size:11px; font-weight:700; text-decoration:none; z-index:2;">❓ How to pay!</a>
-                <div class="pricing-most-popular">⭐ MOST POPULAR</div>
+                <div class="pricing-most-popular">⭐ BEST VALUE — $8.25/MONTH</div>
                 <div class="pricing-badge-icon" style="filter: hue-rotate(90deg) saturate(2) brightness(1.2);">👥</div>
                 <div class="pricing-tier-name friend-color">FRIEND</div>
                 <div class="pricing-price friend-price">$99<span class="price-period">/year</span></div>
-                <button class="pricing-btn friend-btn" id="pricing-friend-btn" onclick="handleTributePayment('friend')">Get Full Access</button>
+                <button class="pricing-btn friend-btn" id="pricing-friend-btn" onclick="handleTributePayment('friend')">Get Library + Extras</button>
                 <div class="pricing-divider"></div>
                 <ul class="pricing-features">
-                    <li><span class="feat-icon friend-icon">👑</span><span>Everything in the Contributor tier, plus weekly updates with fresh, exclusive content.</span></li>
+                    <li><span class="feat-icon friend-icon">👑</span><span>Everything in the Contributor tier, plus the three extras below — not "more library", the same library plus me.</span></li>
                     <li><span class="feat-icon friend-icon">📅</span><span>Manage your teaching schedule seamlessly with my personal <a href="how-to-schedule.html" target="_blank" style="color:#229ED9; font-weight:700;"><strong><em>planner app</em></strong></a>. <a href="how-to-schedule.html" target="_blank" style="color:#229ED9; font-weight:700;">(What's that?)</a></span></li>
                     <li><span class="feat-icon friend-icon">🎥</span><span>One-on-one mentorship: A 30-minute Zoom session to discuss your teaching challenges or explore the tools I use. <span id="zoom-link-wrap"><span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span></span></span></li>
                     <li><span class="feat-icon friend-icon">💬</span><span>Join our private TG Friends chat — I'll prioritize your questions and issues there. <span id="tg-friends-link-wrap"><span style="color:#aaa; font-size:13px;">🔒 Link available after purchase</span></span></span></li>
                 </ul>
             </div>
 
+        </div>
+
+        <div class="pricing-reassure">
+            Payments are one-off. Your access runs for the period you paid for, and you can renew whenever you like — nothing renews automatically. Questions before paying? <a href="https://t.me/alex_the_master" target="_blank" style="color:#c95210; font-weight:700;">Message me on Telegram</a> — you get me, not a support desk.
         </div>
 
         <!-- Stats row -->
@@ -1770,11 +1808,11 @@
             </div>
             <div class="pricing-stat">
                 <span class="stat-icon">📄</span>
-                <div><strong>100+ lesson plans</strong><br>and growing</div>
+                <div><strong>125 lesson plans</strong><br>26 free, no signup</div>
             </div>
             <div class="pricing-stat">
-                <span class="stat-icon">🌍</span>
-                <div><strong>Used by teachers</strong><br>worldwide</div>
+                <span class="stat-icon">🎥</span>
+                <div><strong>PDF, audio and video</strong><br>in every plan</div>
             </div>
         <div class="terms-footer">
             <p>By purchasing you agree to our <a href="docs/terms.html" target="_blank">Terms of Service</a></p>
@@ -2084,7 +2122,6 @@
     <div>
         <h3>All lesson plans</h3>
         <a class="all" href="https://esl-plans.com/lessons/">Browse all 125 plans &rarr;</a>
-        <a href="https://esl-plans.com/questions/">Free conversation questions</a>
         <a href="#articles-grid">Teacher's Corner articles</a>
     </div>
 </nav>
