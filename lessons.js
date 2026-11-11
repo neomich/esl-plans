@@ -6,6 +6,47 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-11",
+        "title": "Legacy Code: The Untouchables",
+        "topics": [
+            "society",
+            "work",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "90 min",
+        "visualSource": "images/b2_untouchables.jpg",
+        "keywords": "legacy code: the untouchables society work life b2-c1",
+        "objectives": [
+            "understand the concept of \"legacy code\" in both modern corporate environments and historical social structures",
+            "analyze the Indian caste system through a targeted audio mapping task and a video comprehension exercise",
+            "evaluate the long-term social impact of rigid hierarchies using advanced vocabulary extracted from real book reviews"
+        ],
+        "description": "Page 1: The Corporate \"Legacy Code\"\nThe lesson opens by exploring the concept of outdated, stubborn systems through real-world anecdotes from a corporate lawyer, a hotel receptionist, a head chef, and a school director. Students match advanced vocabulary (e.g., obsolete, sentimental, strict rule, henceforth) to their definitions. This sparks a grounded discussion about how these \"legacy codes\" waste time, resist change, and create friction in their own workplaces or daily lives.\n\nPage 2: The Ultimate Social Legacy Code (Core Media)\nThe focus pivots to a historical scale, introducing India’s caste system as a 3,000-year-old social \"legacy code.\" First, students complete an audio listening task where they must identify three modern professional examples for each of the five traditional caste groups (Brahmins, Kshatriyas, Vaishyas, Shudras, Dalits) based on the Brahma diagram. Next, they watch a video about author Sujatha Gidla, who was born into the lowest caste. Students complete a targeted multiple-choice comprehension task detailing her journey, the emotional impact of being deemed \"untouchable,\" her age of arrival in the US, and how pop music served as her escape.\nThe class concludes by analyzing real reader reviews of Gidla’s memoir, Ants Among Elephants. Students match advanced descriptive phrases from the text (e.g., brutally honest, food for thought, gross understatement, hypocritical attitude, lucid) to their meanings. They wrap up with a deep-dive discussion on whether traditional social labels provide safety or harm, how society can dismantle deeply ingrained unfair systems, and what it truly means to go from \"zero to hero.\"\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Workplace Legacy Code: What is one \"glitch\" or systemic trouble in your industry that management ignores? When did everyone realize it was broken?\nSystemic Fairness: Is it fair that birth dictates a person's job forever? Why do wealthy elites sometimes ignore broken social rules?\nDismantling History: Can you ever truly delete an ancient piece of culture, or does it just evolve into new forms of bias?\n🧠 Target Lexicon & Vocabulary Focus\nLegacy & Obsolescence: Obsolete, sentimental, strict rule, stubborn, henceforth, whereby.\nCritical Review Vocabulary: Hypocritical attitude, brutally honest, food for thought, gross understatement, lucid, amateurish, insight.\n🎧 Multimedia & Authentic Materials Included\nBrahma Diagram Audio Task: A targeted listening exercise where students map modern professional examples to the five traditional caste groups based on the ancient body-part mythology.\nSujatha Gidla Video Comprehension: A structured multiple-choice task tracking the author’s realization of inferiority, her fears of \"polluting\" others, her migration to America, and her use of pop music as an escape from stressful reality.\n⚠️ Critical Thinking Extension Work\nZero-to-Hero Analysis: Discussing Gidla’s story as a classic \"zero to hero\" narrative and evaluating whether the caste system historically served an economic, medical, or artistic function.\nReview Reaction: Analyzing real Amazon/Goodreads reviews of Ants Among Elephants to debate whether traditional social labels need to be completely demolished or if they provide a false sense of safety.",
+        "telegramRecap": "Analyze the \"ultimate social legacy code.\" Listen to caste system audio, watch Sujatha Gidla's story, and discuss dismantling unfair hierarchies.",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=1J4dKnYYIYk"
+            }
+        ],
+        "hasPdf": true,
+        "hasAudio": true,
+        "hasRar": true,
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/legacy-code-the-untouchables.pdf"
+    },
+
+
+
+    {
         "dateAdded": "2026-11-09", 
         "title": "Going and Coming",
         "topics": [
