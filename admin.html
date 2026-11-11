@@ -241,7 +241,7 @@
     <div class="github-setup" id="github-setup-panel">
         ⚙️ <strong>One-time setup:</strong> Enter your GitHub Personal Access Token to enable automatic uploads.
         <a href="https://github.com/settings/tokens/new?scopes=repo&description=ESLplans+Admin" target="_blank" style="color:#c95210;">Create token here</a> (select <strong>repo</strong> scope)
-        <input type="password" id="github-token-input" placeholder="ghp_xxxxxxxxxxxx" oninput="saveToken()">
+        <input type="password" id="github-token-input" placeholder="ghp_xxxxxxxxxxxx" oninput="saveToken()" onchange="loadPublishedLessons()">
     </div>
 
     <!-- TAB SWITCHER -->
@@ -287,6 +287,7 @@
                 <div class="toggle-btn" data-dur="60-90" onclick="toggleDur(this)">60-90 min</div>
                 <div class="toggle-btn active" data-dur="90" onclick="toggleDur(this)">90 min</div>
                 <div class="toggle-btn" data-dur="90-120" onclick="toggleDur(this)">90-120 min</div>
+                <div class="toggle-btn" data-dur="60-120" onclick="toggleDur(this)">60-120 min</div>
             </div>
         </div>
 
@@ -400,13 +401,29 @@
 
     <!-- PREVIEW + SUBMIT -->
     <div class="card">
-        <div class="section-title">Submit</div>
+        <div class="section-title" id="lesson-form-title">Submit</div>
         <div class="submit-area">
             <button class="btn-preview" onclick="previewLesson()">👁 Preview JSON</button>
+            <button class="btn-preview" id="cancel-edit-btn" onclick="cancelLessonEdit()" style="display:none; background:#eee; color:#555;">✖ Cancel edit</button>
             <button class="btn-submit" id="submit-btn" onclick="submitLesson()">🚀 Add to lessons.js</button>
         </div>
         <div class="status-msg" id="status-msg"></div>
         <pre id="preview-area"></pre>
+    </div>
+
+    <!-- PUBLISHED LESSONS: SCROLLABLE LIST + EDIT -->
+    <div class="card">
+        <div class="section-title">Published Lessons <span id="lessons-count-label" style="font-size:12px; color:#aaa; font-weight:400;"></span></div>
+        <input type="text" id="lesson-filter" placeholder="Filter by title..." oninput="renderLessonList()"
+               style="width:100%; padding:10px 12px; border:1px solid #e5e5e5; border-radius:10px; font-size:14px; margin-bottom:10px; box-sizing:border-box;">
+        <div id="published-lessons-list" style="max-height:300px; overflow-y:auto; border:1px solid #f0f0f0; border-radius:12px; padding:2px 12px; background:#fff;">
+            <p style="color:#aaa; font-size:14px; padding:12px 0;">Enter your GitHub token above to load the list.</p>
+        </div>
+        <p style="font-size:12px; color:#aaa; line-height:1.5; margin-top:10px;">
+            Alphabetical. Click <strong>Edit</strong> to load a lesson into the form above, change what you need, then press <strong>Save changes</strong>.
+            Premium file links (PDF/audio/RAR) live in Supabase and are never touched here — leave those fields blank to keep them.
+            Renaming a lesson changes its URL.
+        </p>
     </div>
 
     </div> <!-- end lessons-panel -->
@@ -520,6 +537,7 @@
         if (token) {
             document.getElementById('github-token-input').value = token;
             document.getElementById('github-setup-panel').style.display = 'none';
+            loadPublishedLessons();
         }
     }
 
@@ -1011,6 +1029,8 @@ ${articlesStr}
 
     // ── GITHUB API: read → prepend → write ──
     async function submitLesson() {
+        if (editingLessonIndex >= 0) { return saveLessonEdit(); }
+
         const token = localStorage.getItem('gh_token');
         if (!token) {
             showStatus('Please enter your GitHub token first (see setup panel above)', 'error');
@@ -1094,6 +1114,7 @@ ${articlesStr}
                     showStatus(`✅ "${lesson.title}" added successfully! GitHub is deploying... (takes ~1 min)`, 'success');
                 }
                 resetForm();
+                loadPublishedLessons();
             } else {
                 const err = await pushResp.json();
                 showStatus(`GitHub error: ${err.message}`, 'error');
@@ -1107,6 +1128,325 @@ ${articlesStr}
         btn.innerText = '🚀 Add to lessons.js';
     }
 
+    // ── PUBLISHED LESSONS: LIST + EDIT ──
+    // Mirrors the articles editor: pull lessons.js from GitHub, show it as a
+    // scrollable alphabetical list, load one into the form, then replace just
+    // that object in the file. Nothing else in lessons.js is rewritten.
+    let editingLessonIndex = -1;
+    let _originalLesson = null;
+
+    function escHtml(v) {
+        return String(v == null ? '' : v)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function b64Encode(str) {
+        const bytes = new TextEncoder().encode(str);
+        let binary = '';
+        for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+        return btoa(binary);
+    }
+
+    async function fetchLessonsFile() {
+        const token = localStorage.getItem('gh_token');
+        if (!token) throw new Error('no GitHub token saved');
+        const resp = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/lessons.js`, {
+            headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+        });
+        const fileData = await resp.json();
+        if (!fileData || !fileData.content) {
+            throw new Error((fileData && fileData.message) || 'could not read lessons.js');
+        }
+        const content = new TextDecoder('utf-8').decode(
+            Uint8Array.from(atob(fileData.content.replace(/\n/g, '')), c => c.charCodeAt(0))
+        );
+        const fn = new Function(content.replace('const lessonsCatalog', 'var lessonsCatalog') + '\nreturn lessonsCatalog;');
+        return { content, sha: fileData.sha, lessons: fn() };
+    }
+
+    async function loadPublishedLessons() {
+        const list = document.getElementById('published-lessons-list');
+        if (!list) return;
+        if (!localStorage.getItem('gh_token')) {
+            list.innerHTML = '<p style="color:#aaa; font-size:14px; padding:12px 0;">Enter your GitHub token above to load the list.</p>';
+            return;
+        }
+        list.innerHTML = '<p style="color:#aaa; font-size:14px; padding:12px 0;">Loading lessons...</p>';
+        try {
+            const { lessons } = await fetchLessonsFile();
+            window._loadedLessons = lessons || [];
+            renderLessonList();
+        } catch (e) {
+            list.innerHTML = '<p style="color:#e03131; font-size:14px; padding:12px 0;">Could not load lessons: ' + escHtml(e.message) + '</p>';
+        }
+    }
+
+    function renderLessonList() {
+        const list = document.getElementById('published-lessons-list');
+        const lessons = window._loadedLessons || [];
+        const label = document.getElementById('lessons-count-label');
+        if (label) label.innerText = lessons.length ? `(${lessons.length})` : '';
+        if (!lessons.length) return;
+
+        const q = (document.getElementById('lesson-filter').value || '').trim().toLowerCase();
+        const rows = lessons
+            .map((l, i) => ({ l, i }))
+            .filter(({ l }) => !q || String(l.title || '').toLowerCase().includes(q))
+            .sort((a, b) => String(a.l.title || '').localeCompare(String(b.l.title || ''), 'en', { sensitivity: 'base' }));
+
+        if (!rows.length) {
+            list.innerHTML = '<p style="color:#aaa; font-size:14px; padding:12px 0;">No lesson matches that filter.</p>';
+            return;
+        }
+
+        list.innerHTML = rows.map(({ l, i }) => `
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px solid #f4f4f4;">
+                <div style="min-width:0;">
+                    <div style="font-size:14px; font-weight:600; color:#333; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escHtml(l.title)}</div>
+                    <div style="font-size:11px; color:#aaa; margin-top:2px;">${escHtml(l.levelLabel || l.level || '')} · ${l.isFree ? 'FREE' : 'premium'} · ${escHtml(l.dateAdded || '')}</div>
+                </div>
+                <button onclick="editLesson(${i})" style="flex-shrink:0; background:#c95210; color:white; border:none; border-radius:8px; padding:7px 12px; cursor:pointer; font-size:12px; font-weight:600;">✏️ Edit</button>
+            </div>
+        `).join('');
+    }
+
+    function fileNameFromUrl(url) {
+        if (!url) return '';
+        const s = String(url).split('?')[0].split('#')[0];
+        return decodeURIComponent(s.substring(s.lastIndexOf('/') + 1));
+    }
+
+    function editLesson(index) {
+        const lesson = (window._loadedLessons || [])[index];
+        if (!lesson) return;
+
+        editingLessonIndex = index;
+        _originalLesson = lesson;
+
+        // Basic fields
+        document.getElementById('f-title').value = lesson.title || '';
+        document.getElementById('f-description').value = lesson.description || '';
+        document.getElementById('f-telegram-recap').value = lesson.telegramRecap || '';
+        document.getElementById('recap-count').innerText = String((lesson.telegramRecap || '').length);
+
+        // Levels
+        selectedLevels = String(lesson.level || '').split('-').filter(Boolean);
+        document.querySelectorAll('#levels-group .toggle-btn').forEach(b => {
+            b.classList.toggle('active', selectedLevels.includes(b.dataset.val));
+        });
+
+        // Category
+        selectedCat = lesson.category || 'general';
+        document.querySelectorAll('[data-cat]').forEach(b => b.classList.toggle('active', b.dataset.cat === selectedCat));
+
+        // Duration ("90 min" / "60-90 min")
+        const dur = String(lesson.duration || '').replace(/\s*min$/i, '');
+        selectedDur = dur;
+        document.querySelectorAll('[data-dur]').forEach(b => b.classList.toggle('active', b.dataset.dur === dur));
+
+        // Media type
+        const media = String(lesson.mediaType || '');
+        selectedMedia = [];
+        if (/video/i.test(media)) selectedMedia.push('video');
+        if (/audio/i.test(media)) selectedMedia.push('audio');
+        document.querySelectorAll('#media-group .toggle-btn').forEach(b => {
+            b.classList.toggle('active', selectedMedia.includes(b.dataset.media));
+        });
+
+        // Free / premium
+        isFree = lesson.isFree === true;
+        document.querySelectorAll('[data-free]').forEach(b => {
+            b.classList.toggle('active', (b.dataset.free === 'yes') === isFree);
+        });
+
+        // Topics
+        selectedTopics = Array.isArray(lesson.topics) ? lesson.topics.slice() : [];
+        document.querySelectorAll('#topics-group .toggle-btn').forEach(b => {
+            b.classList.toggle('active', selectedTopics.includes(b.dataset.topic));
+        });
+
+        // Objectives
+        const objList = document.getElementById('obj-list');
+        objList.innerHTML = '';
+        const objectives = Array.isArray(lesson.objectives) && lesson.objectives.length ? lesson.objectives : [''];
+        objectives.forEach(o => {
+            const row = document.createElement('div');
+            row.className = 'obj-row';
+            row.innerHTML = `<input type="text" value="${escHtml(o)}"><button onclick="removeObj(this)">✕</button>`;
+            objList.appendChild(row);
+        });
+
+        // Files. Inline URLs exist only for free lessons; premium URLs are in
+        // Supabase and are deliberately not fetched here.
+        document.getElementById('f-pdf').value = fileNameFromUrl(lesson.pdfUrl);
+        document.getElementById('f-rar').value = fileNameFromUrl(lesson.rarUrl);
+        const vs = String(lesson.visualSource || '');
+        document.getElementById('f-image').value = /^images\//i.test(vs) ? vs.replace(/^images\//i, '') : '';
+
+        // Audio rows
+        const audioList = document.getElementById('audio-list');
+        audioList.innerHTML = '';
+        const audio = Array.isArray(lesson.audioUrls) && lesson.audioUrls.length
+            ? lesson.audioUrls
+            : (lesson.audioUrl ? [{ label: '', url: lesson.audioUrl }] : [{ label: '', url: '' }]);
+        audio.forEach((a, i) => {
+            const row = document.createElement('div');
+            row.className = 'form-row';
+            row.innerHTML = `
+                <label>Audio ${i + 1} label</label>
+                <input type="text" value="${escHtml(a.label || '')}" placeholder="e.g. 4 Speakers" style="margin-bottom:6px;">
+                <label>Audio ${i + 1} filename</label>
+                <input type="text" value="${escHtml(fileNameFromUrl(a.url))}" placeholder="b1_lesson_title_4_speakers.mp3">
+            `;
+            audioList.appendChild(row);
+        });
+
+        // Video rows
+        const videoList = document.getElementById('video-list');
+        videoList.innerHTML = '';
+        const links = Array.isArray(lesson.links) && lesson.links.length ? lesson.links : [{ url: '' }];
+        links.forEach(l => {
+            const row = document.createElement('div');
+            row.className = 'form-row';
+            row.innerHTML = `<input type="text" value="${escHtml(l.url || '')}" placeholder="https://www.youtube.com/watch?v=...">`;
+            videoList.appendChild(row);
+        });
+
+        // Edit mode UI
+        document.getElementById('lesson-form-title').innerText = '✏️ Editing lesson';
+        document.getElementById('submit-btn').innerText = '💾 Save changes';
+        document.getElementById('cancel-edit-btn').style.display = 'block';
+        document.getElementById('preview-area').style.display = 'none';
+        showStatus(`Editing "${lesson.title}". File links for premium lessons are kept as they are.`, 'success');
+
+        document.getElementById('f-title').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function cancelLessonEdit() {
+        resetForm();
+        showStatus('Edit cancelled. The form is back to "new lesson" mode.', 'success');
+    }
+
+    // Returns [start, end) of every top-level object inside lessonsCatalog.
+    // String-aware, so braces inside descriptions cannot break the count.
+    function catalogEntryRanges(source) {
+        const anchor = source.indexOf('const lessonsCatalog = [');
+        if (anchor === -1) throw new Error('lessonsCatalog array not found');
+        const ranges = [];
+        let depth = 0, objStart = -1, inStr = false, quote = '', esc = false;
+        for (let i = source.indexOf('[', anchor); i < source.length; i++) {
+            const c = source[i];
+            if (inStr) {
+                if (esc) esc = false;
+                else if (c === '\\') esc = true;
+                else if (c === quote) inStr = false;
+                continue;
+            }
+            if (c === '"' || c === "'" || c === '`') { inStr = true; quote = c; continue; }
+            if (c === '/' && source[i + 1] === '/') { const nl = source.indexOf('\n', i); i = nl === -1 ? source.length : nl; continue; }
+            if (c === '/' && source[i + 1] === '*') { const end = source.indexOf('*/', i + 2); i = end === -1 ? source.length : end + 1; continue; }
+            if (c === '{') { if (depth === 1) objStart = i; depth++; }
+            else if (c === '}') { depth--; if (depth === 1 && objStart !== -1) { ranges.push([objStart, i + 1]); objStart = -1; } }
+            else if (c === '[') depth++;
+            else if (c === ']') depth--;
+        }
+        return ranges;
+    }
+
+    async function saveLessonEdit() {
+        const token = localStorage.getItem('gh_token');
+        if (!token) {
+            showStatus('Please enter your GitHub token first', 'error');
+            return;
+        }
+        if (editingLessonIndex < 0 || !_originalLesson) {
+            showStatus('Nothing selected to edit', 'error');
+            return;
+        }
+
+        let built;
+        try { built = buildLesson(); } catch (e) { showStatus(e.message, 'error'); return; }
+
+        // Keep every field the form does not manage (heading, categoryIcon, …)
+        // and never let a blank input wipe real data.
+        const entry = Object.assign({}, _originalLesson, built);
+        entry.dateAdded = _originalLesson.dateAdded || built.dateAdded;
+        // Keywords are hand-curated per lesson and are far richer than what the
+        // form can rebuild from title + topics + level. Keep the original set.
+        entry.keywords = _originalLesson.keywords || built.keywords;
+        // A few older entries carry a wider display label (e.g. level "a2" but
+        // label "A2-B1"). Do not silently narrow it while nothing changed.
+        if (built.level === _originalLesson.level && _originalLesson.levelLabel) {
+            entry.levelLabel = _originalLesson.levelLabel;
+        }
+
+        if (entry.isFree !== true) {
+            delete entry.pdfUrl;
+            delete entry.audioUrl;
+            delete entry.audioUrls;
+            delete entry.rarUrl;
+            entry.hasPdf = _originalLesson.hasPdf === true || !!built.pdfUrl;
+            entry.hasAudio = _originalLesson.hasAudio === true || !!(built.audioUrl || (built.audioUrls && built.audioUrls.length));
+            entry.hasRar = _originalLesson.hasRar === true || !!built.rarUrl;
+            entry.previewUrl = _originalLesson.previewUrl || `${R2_BASE}/previews/${slugifyTitle(entry.title)}.pdf`;
+        }
+        ['pdfUrl', 'rarUrl', 'audioUrl'].forEach(k => { if (entry[k] === '') delete entry[k]; });
+        if (Array.isArray(entry.audioUrls) && entry.audioUrls.length === 0) delete entry.audioUrls;
+
+        if (built.title !== _originalLesson.title) {
+            const oldSlug = slugifyTitle(_originalLesson.title);
+            const newSlug = slugifyTitle(built.title);
+            const ok = confirm(
+                `Rename this lesson?\n\n"${_originalLesson.title}"\n→ "${built.title}"\n\nThe page moves from /lessons/${oldSlug} to /lessons/${newSlug}. Old links and any ranking for the old address will be lost.`
+            );
+            if (!ok) return;
+        }
+
+        const btn = document.getElementById('submit-btn');
+        btn.disabled = true;
+        btn.innerText = 'Saving...';
+
+        try {
+            const { content, sha } = await fetchLessonsFile();
+            const ranges = catalogEntryRanges(content);
+            if (!ranges[editingLessonIndex]) throw new Error('could not locate that lesson inside lessons.js');
+
+            const [start, end] = ranges[editingLessonIndex];
+            const formatted = '    ' + JSON.stringify(entry, null, 4).replace(/\n/g, '\n    ');
+            const newContent = content.slice(0, start) + formatted + content.slice(end);
+
+            const pushResp = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/lessons.js`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: `Edit lesson: ${entry.title}`,
+                    content: b64Encode(newContent),
+                    sha: sha
+                })
+            });
+
+            if (!pushResp.ok) {
+                const err = await pushResp.json();
+                throw new Error(err.message || 'GitHub rejected the update');
+            }
+
+            showStatus(`✅ "${entry.title}" updated. GitHub is rebuilding... (~1 min)`, 'success');
+            resetForm();
+            loadPublishedLessons();
+        } catch (err) {
+            showStatus(`Error: ${err.message}`, 'error');
+            btn.disabled = false;
+            btn.innerText = '💾 Save changes';
+        }
+    }
+
     function showStatus(msg, type) {
         const el = document.getElementById('status-msg');
         el.innerText = msg;
@@ -1116,6 +1456,15 @@ ${articlesStr}
     }
 
     function resetForm() {
+        editingLessonIndex = -1;
+        _originalLesson = null;
+        const submitBtn = document.getElementById('submit-btn');
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerText = '🚀 Add to lessons.js'; }
+        const cancelBtn = document.getElementById('cancel-edit-btn');
+        if (cancelBtn) cancelBtn.style.display = 'none';
+        const formTitle = document.getElementById('lesson-form-title');
+        if (formTitle) formTitle.innerText = 'Submit';
+
         document.getElementById('f-title').value = '';
         document.getElementById('f-description').value = '';
         document.getElementById('f-telegram-recap').value = '';

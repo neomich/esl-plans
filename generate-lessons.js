@@ -749,6 +749,101 @@ articles.forEach(article => {
     console.log(`Article: articles/${slug}.html`);
 });
 
+// ── STATIC ARTICLE INDEX (/articles/) ──
+// The footer link "Teacher's Corner articles" used to point at #articles-grid,
+// an anchor that only exists inside the SPA. On a lesson page it did nothing,
+// and on the home page it just scrolled. This writes a real, crawlable hub at
+// /articles/ so every article has a parent page, the footer link has a target,
+// and the section can actually rank for "ESL teaching articles".
+if (articles.length && !articles.some(a => slugify(a.title) === 'index')) {
+    const cardsHtml = articles.map(a => {
+        const s = slugify(a.title);
+        const fallback = (a.body || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+        let excerpt = String(articleDescriptions[s] || '').trim() || fallback;
+        if (excerpt.length > 190) excerpt = excerpt.slice(0, 187).replace(/\s+\S*$/, '') + '…';
+        return `<a class="card" href="${articleUrl(s)}">
+            <h2>${escapeAttr(a.title)}</h2>
+            <p>${escapeAttr(excerpt)}</p>
+            <span class="date">${escapeAttr(a.date || '')}</span>
+        </a>`;
+    }).join('\n            ');
+
+    const listSchema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'ESL Teaching Articles for Online Tutors',
+        url: `${SITE}/articles/`,
+        description: 'Practical articles about teaching English to adults online: lesson ideas, student motivation, textbooks, grammar and what actually works in a real classroom.',
+        mainEntity: {
+            '@type': 'ItemList',
+            itemListElement: articles.map((a, i) => ({
+                '@type': 'ListItem',
+                position: i + 1,
+                url: articleUrl(slugify(a.title)),
+                name: a.title
+            }))
+        }
+    });
+    const crumbSchema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+            { '@type': 'ListItem', position: 2, name: "Teacher's Corner", item: `${SITE}/articles/` }
+        ]
+    });
+
+    const indexHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESL Teaching Articles for Online Tutors | Teacher's Corner</title>
+    <meta name="description" content="Practical articles about teaching English to adults online: lesson ideas, student motivation, textbook fatigue, grammar and what actually works with real students.">
+    <link rel="canonical" href="${SITE}/articles/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="${SITE}/articles/">
+    <meta property="og:title" content="ESL Teaching Articles for Online Tutors | Teacher's Corner">
+    <meta property="og:description" content="Practical articles about teaching English to adults online: lesson ideas, student motivation, textbook fatigue, grammar and what actually works with real students.">
+    <meta property="og:image" content="${SITE}/images/og-image.png">
+    <meta property="og:site_name" content="ESL-plans.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">${listSchema}</script>
+    <script type="application/ld+json">${crumbSchema}</script>
+    <style>
+        body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
+        .container{max-width:820px;margin:0 auto;padding:40px 20px}
+        .logo{font-size:22px;margin-bottom:18px;text-decoration:none;display:block}
+        .logo .esl{font-weight:900;font-style:italic;color:#c95210}
+        .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif}
+        .crumb{font-size:13px;color:#aaa;margin-bottom:10px}
+        .crumb a{color:#c95210;text-decoration:none}
+        h1{color:#c95210;font-size:28px;margin-bottom:10px;line-height:1.3}
+        p.intro{color:#666;font-size:15px;margin-bottom:26px;line-height:1.6}
+        .card{display:block;background:white;border-radius:12px;padding:18px 20px;text-decoration:none;border:1px solid #eee;margin-bottom:12px}
+        .card:hover{border-color:#ffc89a}
+        .card h2{font-size:18px;font-weight:700;color:#333;margin:0 0 6px;line-height:1.35}
+        .card p{font-size:14px;color:#666;line-height:1.6;margin:0 0 8px}
+        .card .date{font-size:12px;color:#aaa}
+        .back{display:inline-block;margin-top:26px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+        <nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <span>Teacher's Corner</span></nav>
+        <h1>Teacher's Corner</h1>
+        <p class="intro">Practical, opinionated writing about teaching English to adults online — what works, what wastes your time, and why so much textbook advice falls flat with real students. No fluff, no listicles for the sake of it.</p>
+            ${cardsHtml}
+        <a class="back" href="${ALL_LESSONS_URL}">Browse 100+ ESL lesson plans &rarr;</a>
+    </div>
+</body>
+</html>`;
+
+    fs.writeFileSync('articles/index.html', indexHtml, 'utf8');
+    console.log(`Article index: articles/index.html (${articles.length} articles)`);
+}
+
 // ── SPLICE A REAL, CRAWLABLE ARTICLE LIST INTO index.html ──
 // The live SPA's Teacher's Corner section used to hardcode a "No articles
 // yet" placeholder as its initial state, only replaced by JS after an async
@@ -845,9 +940,9 @@ try {
     </div>
     <div>
         <h3>All lesson plans</h3>
-        <a class="all" href="${ALL_LESSONS_URL}">Browse all ${lessons.length} plans &rarr;</a>
+        <a class="all" href="${ALL_LESSONS_URL}">Browse all 100+ plans &rarr;</a>
         <a href="${SITE}/questions/">Free conversation questions</a>
-        <a href="#articles-grid">Teacher's Corner articles</a>
+        <a href="${SITE}/articles/">Teacher's Corner articles</a>
     </div>
 </nav>`;
 
@@ -1351,6 +1446,12 @@ const articleUrls = articles.map(a => `    <url>
         <lastmod>${toISODate(a.date)}</lastmod>
     </url>`).join('\n');
 
+// The /articles/ hub only exists when at least one article does.
+const articleIndexUrls = articles.length ? `    <url>
+        <loc>${SITE}/articles/</loc>
+        <lastmod>${articles.map(a => toISODate(a.date)).sort().pop() || today}</lastmod>
+    </url>` : '';
+
 const archiveUrls = [...topicArchiveUrls, ...levelArchiveUrls].map(u => `    <url>
         <loc>${u}</loc>
         <lastmod>${topicArchiveLastmod[u] || levelArchiveLastmod[u] || today}</lastmod>
@@ -1372,13 +1473,14 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
         <lastmod>${latestDate(lessons)}</lastmod>
     </url>
 ${lessonUrls}
+${articleIndexUrls}
 ${articleUrls}
 ${archiveUrls}
 ${questionSitemapUrls}
 </urlset>`;
 
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
-console.log(`Sitemap: ${lessons.length + articles.length + topicArchiveUrls.length + levelArchiveUrls.length + questionPageUrls.length + (conversationQuestions.length ? 1 : 0) + 2} URLs`);
+console.log(`Sitemap: ${lessons.length + articles.length + topicArchiveUrls.length + levelArchiveUrls.length + questionPageUrls.length + (conversationQuestions.length ? 1 : 0) + (articles.length ? 1 : 0) + 2} URLs`);
 console.log('All done!');
 
 // ── TELEGRAM AUTO-POST ──

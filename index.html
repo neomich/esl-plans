@@ -930,7 +930,7 @@
         .footer-brand strong { font-style: italic; color: #c95210; font-family: 'Segoe UI', sans-serif; }
         .footer-logo { font-size: 18px; font-weight: 300; color: white; font-family: Georgia, serif; }
         .footer-brand p { font-size: 13px; color: #666; margin-top: 4px; }
-        .footer-social { display: flex; gap: 14px; align-items: center; }
+        .footer-social { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; justify-content: center; }
         .footer-social-link {
             color: #666;
             transition: color 0.2s;
@@ -1178,6 +1178,21 @@
             transition: opacity 0.2s, transform 0.2s;
         }
         .ig-link:hover { opacity: 0.9; transform: scale(1.04); }
+
+        /* Extra profiles: one shared pill, one brand colour each */
+        .sm-link {
+            display: inline-flex; align-items: center; gap: 10px;
+            color: white; text-decoration: none;
+            padding: 14px 28px; border-radius: 50px;
+            font-size: 17px; font-weight: 600;
+            transition: background 0.2s, transform 0.2s, filter 0.2s;
+        }
+        .sm-link:hover { transform: scale(1.04); filter: brightness(1.12); }
+        .threads-link { background: #000000; }
+        .quora-link { background: #b92b27; }
+        .freeed-link { background: #0f9b8e; }
+        .isl-link { background: #e14b32; }
+        .linkedin-link { background: #0a66c2; }
 
         @media (max-width: 600px) {
             .bio-card { flex-direction: column; align-items: center; }
@@ -1706,9 +1721,9 @@
         </div>
 
         <div class="pricing-intro">
-            <p><strong>Why this is not $9 a month.</strong> The cheap end of this market sells worksheets: a text, six questions and a gap-fill. You can make one in an hour, and students can tell. Every plan here takes me up to six hours — finding a topic worth an adult's evening, cutting the video, recording the audio, writing questions that start an argument instead of a shrug, then teaching it to a paying student before it goes anywhere near the site. You are not buying a PDF dump. You are buying the lesson plans that I have already taught to my students..</p>
+            <p><strong>Why this is not $9 a month.</strong> The cheap end of this market sells worksheets: a text, six questions and a gap-fill. You can make one in an hour, and students can tell. Every plan here takes me up to six hours — finding a topic worth an adult's evening, cutting the video, recording the audio, writing questions that start an argument instead of a shrug, then teaching it to a paying student before it goes anywhere near the site. You are not buying a PDF dump. You are buying the lesson plans that I have already taught to my students.</p>
             <p><strong>Both paid tiers get the whole library.</strong> All 100+ lessons, every level, every topic — $19 a month or $99 a year, same library. The $99 is not "more access". It is the extras: my planner app, a 30-minute call with me, and first answers in the private Friends chat. New lessons land in both tiers, because crippling the monthly plan to sell the annual one is a trick I am not going to play. No credits, no upsells, no "premium plus".</p>
-            <p><strong>Who is behind it.</strong> Me. Fifteen years of teaching adults online, still taking students, still writing every plan myself — <a onclick="showContactsView()">more info about me→</a></p>
+            <p><strong>Who is behind it.</strong> Me. Fifteen years of teaching adults online, still taking students, still writing every plan myself — <a onclick="showContactsView()">more info about me →</a></p>
         </div>
 
         <div class="pricing-grid">
@@ -1750,10 +1765,10 @@
                 <ul class="pricing-features">
                     <li>
                         <span class="feat-icon contributor-icon">📚</span>
-                        <span>The entire library — <strong>125 lesson plans</strong>, every level, every topic. New lessons appear in your account as I publish them.
+                        <span>The entire library — <strong>100+ lesson plans</strong>, every level, every topic. New lessons appear in your account as I publish them.
                             <div class="feat-tags">
                                 <span class="feat-tag">All Levels</span>
-                                <span class="feat-tag">125 Lessons</span>
+                                <span class="feat-tag">100+ Lessons</span>
                                 <span class="feat-tag">Full Library</span>
                             </div>
                         </span>
@@ -1808,7 +1823,7 @@
             </div>
             <div class="pricing-stat">
                 <span class="stat-icon">📄</span>
-                <div><strong>125 lesson plans</strong><br>26 free, no signup</div>
+                <div><strong>100+ lesson plans</strong><br>26 free, no signup</div>
             </div>
             <div class="pricing-stat">
                 <span class="stat-icon">🎥</span>
@@ -1944,6 +1959,26 @@
                 <a href="https://www.instagram.com/eslplans?igsh=MWp2eGE3bHJhb2IzNg==" target="_blank" class="ig-link">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
                     @eslplans
+                </a>
+                <a href="https://www.threads.com/@eslplans" target="_blank" class="sm-link threads-link">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg>
+                    @eslplans
+                </a>
+                <a href="https://www.linkedin.com/in/alex-esl-plans-8a3451235/" target="_blank" class="sm-link linkedin-link">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://eslplanscomconversationdriveneslplans.quora.com/" target="_blank" class="sm-link quora-link">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M7.3799.9483A11.9628 11.9628 0 0 1 21.248 19.5397l2.4096 2.4225c.7322.7362.21 1.9905-.8272 1.9905l-10.7105.01a12.52 12.52 0 0 1-.304 0h-.02A11.9628 11.9628 0 0 1 7.3818.9503Zm7.3217 4.428a7.1717 7.1717 0 1 0-5.4873 13.2512 7.1717 7.1717 0 0 0 5.4883-13.2511Z"/></svg>
+                    Quora
+                </a>
+                <a href="https://www.freeed.com/users/551959" target="_blank" class="sm-link freeed-link">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Freeed
+                </a>
+                <a href="https://en.islcollective.com/portfolio/12970284" target="_blank" class="sm-link isl-link">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    iSLCollective
                 </a>
             </div>
         </div>
@@ -2121,9 +2156,9 @@
     </div>
     <div>
         <h3>All lesson plans</h3>
-        <a class="all" href="https://esl-plans.com/lessons/">Browse all 125 plans &rarr;</a>
+        <a class="all" href="https://esl-plans.com/lessons/">Browse all 100+ plans &rarr;</a>
         <a href="https://esl-plans.com/questions/">Free conversation questions</a>
-        <a href="#articles-grid">Teacher's Corner articles</a>
+        <a href="https://esl-plans.com/articles/">Teacher's Corner articles</a>
     </div>
 </nav>
 <!-- STATIC-NAV-END -->
@@ -2156,6 +2191,21 @@
                 </a>
                 <a href="https://au.pinterest.com/alexeslplans/esl-lesson-plans/" target="_blank" title="Pinterest" class="footer-social-link">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                </a>
+                <a href="https://www.threads.com/@eslplans" target="_blank" title="Threads" class="footer-social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/alex-esl-plans-8a3451235/" target="_blank" title="LinkedIn" class="footer-social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://eslplanscomconversationdriveneslplans.quora.com/" target="_blank" title="Quora" class="footer-social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7.3799.9483A11.9628 11.9628 0 0 1 21.248 19.5397l2.4096 2.4225c.7322.7362.21 1.9905-.8272 1.9905l-10.7105.01a12.52 12.52 0 0 1-.304 0h-.02A11.9628 11.9628 0 0 1 7.3818.9503Zm7.3217 4.428a7.1717 7.1717 0 1 0-5.4873 13.2512 7.1717 7.1717 0 0 0 5.4883-13.2511Z"/></svg>
+                </a>
+                <a href="https://www.freeed.com/users/551959" target="_blank" title="Freeed" class="footer-social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </a>
+                <a href="https://en.islcollective.com/portfolio/12970284" target="_blank" title="iSLCollective" class="footer-social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                 </a>
             </div>
             <div class="footer-copy">
@@ -3257,10 +3307,17 @@
         });
 
         // ── URL HASH: shareable lesson links ──
+        // Must match generate-lessons.js slugify() exactly, because the same slug
+        // addresses the static /lessons/<slug> page that carries the per-lesson
+        // Open Graph tags and cover image.
+        function canonicalSlug(title) {
+            return String(title || '').toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+        }
+
         function setLessonHash(index) {
             const lesson = lessonsCatalog[index];
             if (lesson) {
-                const slug = lesson.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                const slug = canonicalSlug(lesson.title);
                 history.replaceState(null, '', '#lesson-' + slug);
             }
         }
@@ -3273,10 +3330,7 @@
             const hash = window.location.hash;
             if (!hash.startsWith('#lesson-')) return false;
             const slug = hash.replace('#lesson-', '');
-            const idx = lessonsCatalog.findIndex(l => {
-                const s = l.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-                return s === slug;
-            });
+            const idx = lessonsCatalog.findIndex(l => canonicalSlug(l.title) === slug);
             if (idx !== -1) { initiateDetailViewByIndex(idx); return true; }
             return false;
         }
@@ -3285,8 +3339,13 @@
         function openShareModal() {
             if (currentLessonIndex === null) return;
             setLessonHash(currentLessonIndex);
-            const url = window.location.href;
             const lesson = lessonsCatalog[currentLessonIndex];
+            // Share the STATIC lesson page, not the hash URL. Facebook, Telegram,
+            // LinkedIn, WhatsApp etc. never run the SPA's JavaScript, so they can
+            // only read the <head> of the URL they are given. /lessons/<slug> has
+            // this lesson's own og:title, og:description and og:image (the cover
+            // art from the card); /#lesson-<slug> only ever had the site default.
+            const url = `${window.location.origin}/lessons/${canonicalSlug(lesson.title)}`;
             const text = `Check out this ESL lesson plan: ${lesson.title}`;
             document.getElementById('share-url').innerText = url;
             document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
