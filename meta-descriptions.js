@@ -20,6 +20,8 @@
 
 const lessonDescriptions = {
 
+    "Legacy Code: The Untouchables": "Broken systems that survive: workplace legacy code, then India's 3,000-year-old caste system. Advanced vocabulary, audio and video. B2-C1, 90 min.",
+
     "Going and Coming": "Rockwell's holiday painting sparks talk of post-vacation blues, plus Past Simple vs Present Perfect and a stray cat's second chance. A2-B1, 60 min, free.",
 
     "WND: Woman of Numbered Days": "A Netflix clip on dating red flags, relationship collocations and the slang behind 'person of numbered days'. B2-C1 adult lesson, 90 min.",
