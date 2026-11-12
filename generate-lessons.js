@@ -57,6 +57,59 @@ const ALL_LESSONS_URL = `${SITE}/lessons/`;
 const LEVEL_CODES = ['a2', 'b1', 'b2', 'c1'];
 const LEVEL_NAMES = { a2: 'A2', b1: 'B1', b2: 'B2', c1: 'C1' };
 
+// ── AUTHOR / ORGANISATION ENTITY ──
+// Google and AI crawlers decide whether a page is worth citing partly on who
+// wrote it. The same Person @id is reused everywhere (lessons, articles, About)
+// and the sameAs list ties it to the real profiles, so they resolve to one
+// entity instead of a name that appears from nowhere.
+const AUTHOR_NAME = 'Alex Selivanov';
+const AUTHOR_URL = `${SITE}/about/`;
+const AUTHOR_SAMEAS = [
+    'https://www.linkedin.com/in/alex-esl-plans-8a3451235/',
+    'https://www.instagram.com/eslplans',
+    'https://www.threads.com/@eslplans',
+    'https://eslplanscomconversationdriveneslplans.quora.com/',
+    'https://www.freeed.com/users/551959',
+    'https://en.islcollective.com/portfolio/12970284',
+    'https://x.com/neomich',
+    'https://medium.com/@esl-plans',
+    'https://bsky.app/profile/esl-plans.com'
+];
+const ORG_SAMEAS = [
+    'https://t.me/eslplans',
+    'https://www.instagram.com/eslplans',
+    'https://www.threads.com/@eslplans',
+    'https://www.linkedin.com/in/alex-esl-plans-8a3451235/',
+    'https://www.reddit.com/r/FreeESLLessonPlans/',
+    'https://bsky.app/profile/esl-plans.com',
+    'https://medium.com/@esl-plans',
+    'https://au.pinterest.com/alexeslplans/esl-lesson-plans/',
+    'https://eslplanscomconversationdriveneslplans.quora.com/'
+];
+const AUTHOR_SCHEMA = JSON.stringify({ '@type': 'Person', name: AUTHOR_NAME, url: AUTHOR_URL, sameAs: AUTHOR_SAMEAS });
+const ORG_SCHEMA = JSON.stringify({ '@type': 'Organization', name: 'ESL-plans.com', url: `${SITE}/`, sameAs: ORG_SAMEAS });
+
+function formatLongDate(value) {
+    const m = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) return '';
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return `${Number(m[3])} ${months[Number(m[2]) - 1]} ${m[1]}`;
+}
+
+const SITE_FOOTER_CSS = `<style>
+        .site-foot{max-width:820px;margin:40px auto 0;padding:22px 20px 40px;border-top:1px solid #eee;text-align:center;font-size:13px;line-height:2;}
+        .site-foot a{color:#a9440c;text-decoration:none;}
+        .site-foot a:hover{text-decoration:underline;}
+        .site-foot .sep{color:#d8d8d8;padding:0 6px;}
+    </style>`;
+
+function renderSiteFooter() {
+    return `${SITE_FOOTER_CSS}
+        <footer class="site-foot">
+            <a href="${SITE}/">Home</a><span class="sep">·</span><a href="${ALL_LESSONS_URL}">All lesson plans</a><span class="sep">·</span><a href="${SITE}/free/">Free lessons</a><span class="sep">·</span><a href="${SITE}/questions/">Conversation questions</a><span class="sep">·</span><a href="${SITE}/articles/">Teacher's Corner</a><span class="sep">·</span><a href="${SITE}/about/">About Alex</a>
+        </footer>`;
+}
+
 // Safe to drop inside a JSON-LD string. Also neutralises "</script>".
 function jsonSafe(value) {
     return String(value == null ? '' : value)
@@ -445,7 +498,7 @@ lessons.forEach(lesson => {
     // the site-wide card. Missing/renamed covers fall back instead of 404ing.
     const coverRel = lesson.visualSource && fs.existsSync(lesson.visualSource)
         ? lesson.visualSource
-        : 'images/og-image.png';
+        : 'images/og-image.jpg';
     const ogImage = `${SITE}/${coverRel.replace(/\\/g, '/').replace(/^\.?\//, '')}`;
 
     // Breadcrumb targets: level hub first, topic hub as the middle step.
@@ -460,12 +513,12 @@ lessons.forEach(lesson => {
 
     const relatedHtml = related.length > 0 ? `
         <div style="margin-top:32px;border-top:1px dashed #ddd;padding-top:24px;">
-            <h3 style="font-size:14px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">You may also like</h3>
+            <h3 style="font-size:14px;font-weight:700;color:#6b6b6b;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">You may also like</h3>
             <div style="display:flex;gap:12px;flex-wrap:wrap;">
                 ${related.map(r => `<a href="${lessonUrl(slugify(r.title))}" style="flex:1;min-width:180px;background:white;border-radius:12px;padding:14px;text-decoration:none;border:1px solid #eee;display:block;">
                     <div style="font-size:14px;font-weight:700;color:#333;margin-bottom:4px;">${r.title}</div>
-                    <div style="font-size:12px;color:#aaa;">${r.levelLabel} &middot; ${r.duration}</div>
-                    <div style="font-size:12px;color:#c95210;font-weight:700;margin-top:8px;">View Lesson &rarr;</div>
+                    <div style="font-size:12px;color:#6b6b6b;">${r.levelLabel} &middot; ${r.duration}</div>
+                    <div style="font-size:12px;color:#a9440c;font-weight:700;margin-top:8px;">View Lesson &rarr;</div>
                 </a>`).join('')}
             </div>
         </div>` : '';
@@ -497,9 +550,9 @@ lessons.forEach(lesson => {
     // Visible breadcrumb + matching BreadcrumbList schema. The level step is
     // also the site's only link path to the level hubs, which previously had
     // zero inbound internal links.
-    const breadcrumbHtml = `<nav aria-label="Breadcrumb" style="font-size:13px;color:#aaa;margin-bottom:16px;">
-        <a href="${SITE}/" style="color:#c95210;text-decoration:none;">Home</a> &rsaquo;
-        ${lessonLevel ? `<a href="${levelUrl(lessonLevel)}" style="color:#c95210;text-decoration:none;">${LEVEL_NAMES[lessonLevel]} lesson plans</a> &rsaquo; ` : ''}<span>${lesson.title}</span>
+    const breadcrumbHtml = `<nav aria-label="Breadcrumb" style="font-size:13px;color:#6b6b6b;margin-bottom:16px;">
+        <a href="${SITE}/" style="color:#a9440c;text-decoration:underline;">Home</a> &rsaquo;
+        ${lessonLevel ? `<a href="${levelUrl(lessonLevel)}" style="color:#a9440c;text-decoration:underline;">${LEVEL_NAMES[lessonLevel]} lesson plans</a> &rsaquo; ` : ''}<span>${lesson.title}</span>
     </nav>`;
 
     const breadcrumbSchema = `<script type="application/ld+json">${JSON.stringify({
@@ -514,7 +567,7 @@ lessons.forEach(lesson => {
 
     const levelMoreHtml = lessonLevel ? `
         <p style="text-align:center;margin:10px 0 0;">
-            <a href="${levelUrl(lessonLevel)}" style="color:#c95210;font-weight:600;text-decoration:none;font-size:14px;">Browse all ${LEVEL_NAMES[lessonLevel]} ESL lesson plans &rarr;</a>
+            <a href="${levelUrl(lessonLevel)}" style="color:#a9440c;font-weight:600;text-decoration:none;font-size:14px;">Browse all ${LEVEL_NAMES[lessonLevel]} ESL lesson plans &rarr;</a>
         </p>` : '';
 
     const html = `<!DOCTYPE html>
@@ -537,32 +590,35 @@ lessons.forEach(lesson => {
     <meta name="twitter:title" content="${escapeAttr(lesson.title)} — ESL Lesson Plan for Adults">
     <meta name="twitter:description" content="${descMeta}">
     <meta name="twitter:image" content="${ogImage}">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${jsonSafe(lesson.title)}","description":"${jsonSafe(descPlain)}","provider":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"educationalLevel":"${jsonSafe(lesson.levelLabel)}","inLanguage":"en","url":"${lessonUrl(slug)}"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${jsonSafe(lesson.title)}","description":"${jsonSafe(descPlain)}","provider":${ORG_SCHEMA},"author":${AUTHOR_SCHEMA},"educationalLevel":"${jsonSafe(lesson.levelLabel)}","inLanguage":"en","isAccessibleForFree":${lesson.isFree ? 'true' : 'false'},"url":"${lessonUrl(slug)}"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${jsonSafe(lesson.title)} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${jsonSafe(lesson.title)} lesson plan is designed for ${jsonSafe(lesson.levelLabel)} level adult learners. It takes approximately ${jsonSafe(lesson.duration)} to complete."}},{"@type":"Question","name":"What materials are included in the ${jsonSafe(lesson.title)} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${jsonSafe(lesson.title)} lesson includes ${jsonSafe(materialsText)}."}},{"@type":"Question","name":"Is the ${jsonSafe(lesson.title)} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${jsonSafe(lesson.title)} lesson is specifically designed for online ESL tutors working with adult learners at ${jsonSafe(lesson.levelLabel)} level. It is zero-prep and conversation-driven, covering the topic of ${jsonSafe(topicTags)}."}}]}</script>
     ${breadcrumbSchema}
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:820px;margin:0 auto;padding:40px 20px}
         .logo{font-size:22px;margin-bottom:28px;text-decoration:none;display:block;}
-        .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
+        .logo .esl{font-weight:900;font-style:italic;color:#a9440c;}
         .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
-        h1{color:#c95210;font-size:28px;margin-bottom:8px;line-height:1.3;}
-        .meta{color:#888;font-size:14px;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;}
+        h1{color:#a9440c;font-size:28px;margin-bottom:8px;line-height:1.3;}
+        .meta{color:#6b6b6b;font-size:14px;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;}
         .meta-badge{background:white;border-radius:20px;padding:4px 12px;font-size:13px;color:#555;border:1px solid #eee;}
+        .byline{font-size:13px;color:#6b6b6b;margin:-14px 0 22px;}
+        .byline a{color:#a9440c;text-decoration:underline;}
+        .byline a:hover{text-decoration:underline;}
         h2{color:#333;font-size:17px;font-weight:700;margin:28px 0 12px;text-transform:uppercase;letter-spacing:0.5px;}
         h3{color:#333;font-size:15px;font-weight:700;margin:20px 0 10px;text-transform:uppercase;letter-spacing:0.5px;}
         ul{color:#444;line-height:1.8;padding-left:20px;margin-bottom:16px;}
         li{margin-bottom:4px;}
         .desc{color:#444;line-height:1.8;white-space:pre-line;margin-bottom:24px;}
         .info-box{background:white;border-radius:16px;padding:20px 24px;margin:24px 0;border-left:4px solid #c95210;}
-        .info-box h3{font-size:14px;font-weight:700;color:#c95210;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
+        .info-box h3{font-size:14px;font-weight:700;color:#a9440c;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
         .info-box p{font-size:14px;color:#555;line-height:1.7;margin:0;}
         .topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
-        .topic-tag{background:#fff3e0;color:#c95210;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;text-decoration:none;}
-        .cta-box{background:#c95210;border-radius:16px;padding:24px;text-align:center;margin:32px 0;color:white;}
-        .cta-box p{margin-bottom:14px;font-size:15px;opacity:0.9;}
-        .cta-btn{display:inline-block;background:white;color:#c95210;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700;font-size:15px;}
-        .back{display:inline-block;margin-top:20px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
+        .topic-tag{background:#fff3e0;color:#a9440c;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;text-decoration:none;}
+        .cta-box{background:#b8480d;border-radius:16px;padding:24px;text-align:center;margin:32px 0;color:white;}
+        .cta-box p{margin-bottom:14px;font-size:15px;}
+        .cta-btn{display:inline-block;background:white;color:#a9440c;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700;font-size:15px;}
+        .back{display:inline-block;margin-top:20px;color:#a9440c;text-decoration:none;font-weight:600;font-size:14px;}
     </style>
     <script>
         // Highlight the view lesson button after 1 second to draw attention
@@ -573,7 +629,7 @@ lessons.forEach(lesson => {
     </script>
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
 
         ${breadcrumbHtml}
@@ -587,15 +643,17 @@ lessons.forEach(lesson => {
             ${lesson.isFree ? '<span class="meta-badge" style="background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7;">⭐ Free Lesson</span>' : ''}
         </div>
 
+        <p class="byline">By <a href="${SITE}/about/">${AUTHOR_NAME}</a> &middot; ${formatLongDate(lesson.dateAdded) || 'ESL-plans'} &middot; taught to real adult students before it was published</p>
+
         ${topicTags ? `<div class="topics">${(lesson.topics||[]).map(t => `<a href="${topicUrl(t)}" class="topic-tag">${topicLabels[t]||t}</a>`).join('')}</div>` : ''}
 
         <table style="width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px;background:white;border-radius:12px;overflow:hidden;border:1px solid #eee;">
             <thead>
                 <tr style="background:#faf6f2;">
-                    <th style="padding:10px 14px;text-align:left;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Level</th>
-                    <th style="padding:10px 14px;text-align:left;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Category</th>
-                    <th style="padding:10px 14px;text-align:left;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Format</th>
-                    <th style="padding:10px 14px;text-align:left;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Duration</th>
+                    <th style="padding:10px 14px;text-align:left;color:#6b6b6b;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Level</th>
+                    <th style="padding:10px 14px;text-align:left;color:#6b6b6b;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Category</th>
+                    <th style="padding:10px 14px;text-align:left;color:#6b6b6b;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Format</th>
+                    <th style="padding:10px 14px;text-align:left;color:#6b6b6b;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">Duration</th>
                 </tr>
             </thead>
             <tbody>
@@ -609,14 +667,14 @@ lessons.forEach(lesson => {
         </table>
 
         <h2>What's the "${lesson.title}" ESL Lesson About?</h2>
-        <p style="color:#888;font-size:13px;margin-bottom:20px;">${lesson.levelLabel} · ${lesson.categoryLabel}</p>
+        <p style="color:#6b6b6b;font-size:13px;margin-bottom:20px;">${lesson.levelLabel} · ${lesson.categoryLabel}</p>
 
         <h3>Main Objectives</h3>
         <ul>${objList}</ul>
 
         <h3>About This Lesson</h3>
         <p class="desc">${descSafe}</p>
-        <p style="color:#777;font-size:13px;margin-top:-10px;margin-bottom:20px;font-style:italic;">${buildLogisticsSentence(lesson)}</p>
+        <p style="color:#5f5f5f;font-size:13px;margin-top:-10px;margin-bottom:20px;font-style:italic;">${buildLogisticsSentence(lesson)}</p>
 
         ${(lesson.links || []).filter(l => l && l.url).length ? `<h3>Watch the Video</h3>
         ${(lesson.links || []).filter(l => l && l.url).map(l => {
@@ -624,7 +682,7 @@ lessons.forEach(lesson => {
             if (ytId) {
                 return `<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.08);"><iframe src="https://www.youtube.com/embed/${ytId}" title="${lesson.title.replace(/"/g,'&quot;')} — video" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
             }
-            return `<a href="${l.url}" target="_blank" rel="noopener" style="display:block;color:#c95210;font-weight:700;text-decoration:none;margin-bottom:10px;">▶️ ${(l.label||'Watch Video').replace(/</g,'&lt;')} &rarr;</a>`;
+            return `<a href="${l.url}" target="_blank" rel="noopener" style="display:block;color:#a9440c;font-weight:700;text-decoration:none;margin-bottom:10px;">▶️ ${(l.label||'Watch Video').replace(/</g,'&lt;')} &rarr;</a>`;
         }).join('')}` : ''}
 
         <div class="info-box">
@@ -646,14 +704,15 @@ lessons.forEach(lesson => {
 
         <div style="text-align:center; margin:32px 0;">
             <a id="view-on-site-btn" href="${SITE}/#lesson-${slug}"
-               style="display:inline-block; background:#c95210; color:white; padding:16px 36px; border-radius:50px; text-decoration:none; font-size:18px; font-weight:800; box-shadow:0 4px 16px rgba(201,82,16,0.3); transition:transform 0.2s;">
+               style="display:inline-block; background:#b8480d; color:white; padding:16px 36px; border-radius:50px; text-decoration:none; font-size:18px; font-weight:800; box-shadow:0 4px 16px rgba(201,82,16,0.3); transition:transform 0.2s;">
                 🎓 View &amp; Download This Lesson →
             </a>
-            <p style="margin-top:12px; font-size:13px; color:#aaa;">Free PDF, audio and video included for free lessons</p>
+            <p style="margin-top:12px; font-size:13px; color:#6b6b6b;">Free PDF, audio and video included for free lessons</p>
             ${levelMoreHtml}
         </div>
         <a class="back" href="${ALL_LESSONS_URL}">&larr; Browse all lesson plans</a>
-    </div>
+    </main>
+    ${renderSiteFooter()}
 </body>
 </html>`;
     fs.writeFileSync(`lessons/${slug}.html`, html, 'utf8');
@@ -690,7 +749,7 @@ articles.forEach(article => {
     const metaPlain = String(articleDescriptions[slug] || '').trim() || bodyPlain;
     const bodyMeta = escapeAttr(metaPlain);
     const articleISO = toISODate(article.date);
-    const articleImage = `${SITE}/images/og-image.png`;
+    const articleImage = `${SITE}/images/og-image.jpg`;
 
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -701,6 +760,7 @@ articles.forEach(article => {
     <meta name="description" content="${bodyMeta}">
     <meta name="keywords" content="ESL teaching tips, online ESL tutor, adult ESL learners, ${slugify(article.title).replace(/-/g,' ')}">
     <link rel="canonical" href="${articleUrl(slug)}">
+    <link rel="alternate" type="application/rss+xml" title="ESL-plans.com — new lessons and articles" href="${SITE}/feed.xml">
     <meta property="og:type" content="article">
     <meta property="og:url" content="${articleUrl(slug)}">
     <meta property="og:title" content="${escapeAttr(article.title)}">
@@ -711,30 +771,30 @@ articles.forEach(article => {
     <meta name="twitter:title" content="${escapeAttr(article.title)}">
     <meta name="twitter:description" content="${bodyMeta}">
     <meta name="twitter:image" content="${articleImage}">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${jsonSafe(article.title)}","description":"${jsonSafe(bodyPlain)}","author":{"@type":"Person","name":"Alex Selivanov"},"publisher":{"@type":"Organization","name":"ESL-plans.com","url":"https://esl-plans.com"},"datePublished":"${articleISO}","dateModified":"${articleISO}","url":"${articleUrl(slug)}"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${jsonSafe(article.title)}","description":"${jsonSafe(bodyPlain)}","author":${AUTHOR_SCHEMA},"publisher":${ORG_SCHEMA},"datePublished":"${articleISO}","dateModified":"${articleISO}","inLanguage":"en","url":"${articleUrl(slug)}","mainEntityOfPage":{"@type":"WebPage","@id":"${articleUrl(slug)}"}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"${jsonSafe(article.title)}","acceptedAnswer":{"@type":"Answer","text":"${jsonSafe(bodyPlain)}"}}]}</script>
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:760px;margin:0 auto;padding:40px 20px}
         .logo{font-size:24px;margin-bottom:32px;cursor:pointer}
-        .logo .esl{font-weight:900;font-style:italic;color:#c95210;font-family:'Segoe UI',sans-serif}
+        .logo .esl{font-weight:900;font-style:italic;color:#a9440c;font-family:'Segoe UI',sans-serif}
         .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif}
         h1{color:#333;font-size:28px;line-height:1.3;margin-bottom:8px}
-        .meta{color:#aaa;font-size:13px;margin-bottom:32px}
+        .meta{color:#6b6b6b;font-size:13px;margin-bottom:32px}
         .body{color:#444;font-size:16px;line-height:1.8;}
         .cta{margin-top:40px;padding:24px;background:white;border-radius:16px;border-left:4px solid #c95210;text-align:center}
         .cta p{color:#555;margin-bottom:16px}
-        .cta a{display:inline-block;background:#c95210;color:white;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700}
-        .back{display:inline-block;margin-top:24px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px}
+        .cta a{display:inline-block;background:#b8480d;color:white;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700}
+        .back{display:inline-block;margin-top:24px;color:#a9440c;text-decoration:none;font-weight:600;font-size:14px}
     </style>
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <div class="logo" onclick="window.location='https://esl-plans.com'">
             <span class="esl">ESL</span>-<span class="plans">plans</span>
         </div>
         <h1>${article.title}</h1>
-        <p class="meta">${article.date || ''} &middot; ESL-plans Teacher's Corner</p>
+        <p class="meta">${article.date || ''} &middot; by <a href="${SITE}/about/" style="color:#a9440c;text-decoration:underline;">${AUTHOR_NAME}</a> &middot; ESL-plans Teacher's Corner</p>
         ${introSafe ? `<p style="font-style:italic; color:#666; border-left:3px solid #c95210; padding-left:14px; margin-bottom:24px; line-height:1.7;">${introSafe}</p>` : ''}
         <div class="body">${bodySafe}</div>
         <div class="cta">
@@ -742,7 +802,8 @@ articles.forEach(article => {
             <a href="${ALL_LESSONS_URL}">Browse 100+ Lesson Plans →</a>
         </div>
         <a class="back" href="${SITE}/">&larr; Back to ESL-plans.com</a>
-    </div>
+    </main>
+    ${renderSiteFooter()}
 </body>
 </html>`;
     fs.writeFileSync(`articles/${slug}.html`, html, 'utf8');
@@ -805,7 +866,7 @@ if (articles.length && !articles.some(a => slugify(a.title) === 'index')) {
     <meta property="og:url" content="${SITE}/articles/">
     <meta property="og:title" content="ESL Teaching Articles for Online Tutors | Teacher's Corner">
     <meta property="og:description" content="Practical articles about teaching English to adults online: lesson ideas, student motivation, textbook fatigue, grammar and what actually works with real students.">
-    <meta property="og:image" content="${SITE}/images/og-image.png">
+    <meta property="og:image" content="${SITE}/images/og-image.jpg">
     <meta property="og:site_name" content="ESL-plans.com">
     <meta name="twitter:card" content="summary_large_image">
     <script type="application/ld+json">${listSchema}</script>
@@ -814,29 +875,30 @@ if (articles.length && !articles.some(a => slugify(a.title) === 'index')) {
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:820px;margin:0 auto;padding:40px 20px}
         .logo{font-size:22px;margin-bottom:18px;text-decoration:none;display:block}
-        .logo .esl{font-weight:900;font-style:italic;color:#c95210}
+        .logo .esl{font-weight:900;font-style:italic;color:#a9440c}
         .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif}
-        .crumb{font-size:13px;color:#aaa;margin-bottom:10px}
-        .crumb a{color:#c95210;text-decoration:none}
-        h1{color:#c95210;font-size:28px;margin-bottom:10px;line-height:1.3}
+        .crumb{font-size:13px;color:#6b6b6b;margin-bottom:10px}
+        .crumb a{color:#a9440c;text-decoration:underline}
+        h1{color:#a9440c;font-size:28px;margin-bottom:10px;line-height:1.3}
         p.intro{color:#666;font-size:15px;margin-bottom:26px;line-height:1.6}
         .card{display:block;background:white;border-radius:12px;padding:18px 20px;text-decoration:none;border:1px solid #eee;margin-bottom:12px}
         .card:hover{border-color:#ffc89a}
         .card h2{font-size:18px;font-weight:700;color:#333;margin:0 0 6px;line-height:1.35}
         .card p{font-size:14px;color:#666;line-height:1.6;margin:0 0 8px}
-        .card .date{font-size:12px;color:#aaa}
-        .back{display:inline-block;margin-top:26px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px}
+        .card .date{font-size:12px;color:#6b6b6b}
+        .back{display:inline-block;margin-top:26px;color:#a9440c;text-decoration:none;font-weight:600;font-size:14px}
     </style>
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
         <nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <span>Teacher's Corner</span></nav>
         <h1>Teacher's Corner</h1>
         <p class="intro">Practical, opinionated writing about teaching English to adults online — what works, what wastes your time, and why so much textbook advice falls flat with real students. No fluff, no listicles for the sake of it.</p>
             ${cardsHtml}
         <a class="back" href="${ALL_LESSONS_URL}">Browse 100+ ESL lesson plans &rarr;</a>
-    </div>
+    </main>
+    ${renderSiteFooter()}
 </body>
 </html>`;
 
@@ -921,7 +983,7 @@ try {
         const navHtml = `<nav class="footer-nav" aria-label="Browse lesson plans">
     <style>
         .footer-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:26px;width:100%;max-width:1100px;margin:0 auto 30px;padding:0 20px;text-align:left}
-        .footer-nav h3{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#8a8a8a;margin-bottom:10px;font-weight:700}
+        .footer-nav h3{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#a8a8a8;margin-bottom:10px;font-weight:700}
         .footer-nav a{display:block;color:#cfcfcf;text-decoration:none;font-size:14px;padding:3px 0;line-height:1.4}
         .footer-nav a:hover{color:#fff;text-decoration:underline}
         .footer-nav .all{color:#ffb27a;font-weight:700}
@@ -941,8 +1003,10 @@ try {
     <div>
         <h3>All lesson plans</h3>
         <a class="all" href="${ALL_LESSONS_URL}">Browse all 100+ plans &rarr;</a>
+        <a href="${SITE}/free/">Free lesson plans</a>
         <a href="${SITE}/questions/">Free conversation questions</a>
         <a href="${SITE}/articles/">Teacher's Corner articles</a>
+        <a href="${SITE}/about/">About Alex</a>
     </div>
 </nav>`;
 
@@ -962,12 +1026,12 @@ if (!fs.existsSync('levels')) fs.mkdirSync('levels');
 function renderLessonCard(l) {
     return `<a href="${lessonUrl(slugify(l.title))}" style="display:block;background:white;border-radius:12px;padding:16px;text-decoration:none;border:1px solid #eee;margin-bottom:12px;">
         <div style="font-size:15px;font-weight:700;color:#333;margin-bottom:6px;">${l.title}</div>
-        <div style="font-size:12px;color:#aaa;">${l.levelLabel} &middot; ${l.categoryLabel} &middot; ${l.duration}</div>
+        <div style="font-size:12px;color:#6b6b6b;">${l.levelLabel} &middot; ${l.categoryLabel} &middot; ${l.duration}</div>
     </a>`;
 }
 
 function renderArchivePage(heading, description, matchingLessons, canonicalUrl, crossLinksHtml, crumbHtml, proseHtml = '') {
-    const image = `${SITE}/images/og-image.png`;
+    const image = `${SITE}/images/og-image.jpg`;
     const descMeta = escapeAttr(description);
     const collectionSchema = JSON.stringify({
         '@context': 'https://schema.org',
@@ -1000,24 +1064,24 @@ function renderArchivePage(heading, description, matchingLessons, canonicalUrl, 
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:820px;margin:0 auto;padding:40px 20px}
         .logo{font-size:22px;margin-bottom:18px;text-decoration:none;display:block;}
-        .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
+        .logo .esl{font-weight:900;font-style:italic;color:#a9440c;}
         .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
-        .crumb{font-size:13px;color:#aaa;margin-bottom:10px;}
-        .crumb a{color:#c95210;text-decoration:none;}
-        h1{color:#c95210;font-size:26px;margin-bottom:8px;line-height:1.3;}
+        .crumb{font-size:13px;color:#6b6b6b;margin-bottom:10px;}
+        .crumb a{color:#a9440c;text-decoration:underline;}
+        h1{color:#a9440c;font-size:26px;margin-bottom:8px;line-height:1.3;}
         p.intro{color:#666;font-size:15px;margin-bottom:20px;line-height:1.6;}
         .prose{margin:28px 0 32px;}
         .prose h2{color:#333;font-size:19px;margin:30px 0 10px;line-height:1.35;}
         .prose h2:first-child{margin-top:0;}
         .prose p{color:#555;font-size:15px;line-height:1.75;margin:0 0 14px;}
-        .prose a{color:#c95210;text-decoration:none;font-weight:600;}
+        .prose a{color:#a9440c;text-decoration:none;font-weight:600;}
         .cross{background:#fff3e0;border-radius:12px;padding:12px 16px;margin-bottom:24px;font-size:14px;color:#555;line-height:2;}
-        .cross a{color:#c95210;text-decoration:none;font-weight:600;margin-right:12px;white-space:nowrap;}
-        .back{display:inline-block;margin-top:24px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
+        .cross a{color:#a9440c;text-decoration:none;font-weight:600;margin-right:12px;white-space:nowrap;}
+        .back{display:inline-block;margin-top:24px;color:#a9440c;text-decoration:none;font-weight:600;font-size:14px;}
     </style>
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
         ${crumbHtml}
         <h1>${heading}</h1>
@@ -1026,7 +1090,8 @@ function renderArchivePage(heading, description, matchingLessons, canonicalUrl, 
         ${crossLinksHtml}
         ${matchingLessons.map(renderLessonCard).join('')}
         <a class="back" href="${ALL_LESSONS_URL}">&larr; Browse all lesson plans</a>
-    </div>
+    </main>
+    ${renderSiteFooter()}
 </body>
 </html>`;
 }
@@ -1198,25 +1263,25 @@ function renderQuestionPage(q) {
     <meta property="og:url" content="${url}">
     <meta property="og:title" content="${escapeAttr(q.title)}">
     <meta property="og:description" content="${escapeAttr(qMeta.slice(0, 200))}">
-    <meta property="og:image" content="${SITE}/images/og-image.png">
+    <meta property="og:image" content="${SITE}/images/og-image.jpg">
     <meta property="og:site_name" content="ESL-plans.com">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${escapeAttr(q.title)}">
     <meta name="twitter:description" content="${escapeAttr(qMeta.slice(0, 200))}">
-    <meta name="twitter:image" content="${SITE}/images/og-image.png">
+    <meta name="twitter:image" content="${SITE}/images/og-image.jpg">
     <script type="application/ld+json">${schemaArticle}</script>
     <script type="application/ld+json">${schemaCrumb}</script>
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:760px;margin:0 auto;padding:40px 20px}
         .logo{font-size:22px;margin-bottom:18px;text-decoration:none;display:block;}
-        .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
+        .logo .esl{font-weight:900;font-style:italic;color:#a9440c;}
         .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
-        .crumb{font-size:13px;color:#aaa;margin-bottom:10px;}
-        .crumb a{color:#c95210;text-decoration:none;}
-        h1{color:#c95210;font-size:28px;margin-bottom:8px;line-height:1.3;}
+        .crumb{font-size:13px;color:#6b6b6b;margin-bottom:10px;}
+        .crumb a{color:#a9440c;text-decoration:underline;}
+        h1{color:#a9440c;font-size:28px;margin-bottom:8px;line-height:1.3;}
         p.intro{color:#666;font-size:15px;margin-bottom:6px;line-height:1.65;}
-        p.note{color:#999;font-size:13px;margin-bottom:26px;}
+        p.note{color:#6b6b6b;font-size:13px;margin-bottom:26px;}
         h2{color:#333;font-size:17px;margin:32px 0 10px;}
         ol.qlist{margin:0;padding-left:22px;color:#444;font-size:16px;line-height:1.75;}
         ol.qlist li{margin-bottom:10px;}
@@ -1226,15 +1291,15 @@ function renderQuestionPage(q) {
         .picks{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0;}
         .picks a{flex:1;min-width:210px;background:#fff8f2;border:1px solid #f0e0d0;border-radius:12px;padding:12px 14px;text-decoration:none;display:block;}
         .picks strong{display:block;color:#333;font-size:14px;margin-bottom:3px;}
-        .picks span{color:#aaa;font-size:12px;}
-        .all{color:#c95210;text-decoration:none;font-weight:700;font-size:14px;}
+        .picks span{color:#6b6b6b;font-size:12px;}
+        .all{color:#a9440c;text-decoration:none;font-weight:700;font-size:14px;}
         .more{margin-top:34px;font-size:14px;line-height:2.1;}
-        .more a{color:#c95210;text-decoration:none;font-weight:600;margin-right:14px;white-space:nowrap;}
-        .back{display:inline-block;margin-top:26px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
+        .more a{color:#a9440c;text-decoration:none;font-weight:600;margin-right:14px;white-space:nowrap;}
+        .back{display:inline-block;margin-top:26px;color:#a9440c;text-decoration:none;font-weight:600;font-size:14px;}
     </style>
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
         <nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <a href="${SITE}/questions/">Conversation questions</a> &rsaquo; <span>${topicLabels[q.topic] || q.topic}</span></nav>
         <h1>${q.heading}</h1>
@@ -1248,7 +1313,8 @@ function renderQuestionPage(q) {
             <a href="${ALL_LESSONS_URL}">All lesson plans</a>
         </div>
         <a class="back" href="${SITE}/">&larr; Back to ESL-plans.com</a>
-    </div>
+    </main>
+    ${renderSiteFooter()}
 </body>
 </html>`;
 }
@@ -1281,38 +1347,39 @@ if (conversationQuestions.length) {
     <meta property="og:url" content="${SITE}/questions/">
     <meta property="og:title" content="Free ESL Conversation Questions for Adults">
     <meta property="og:description" content="Free ESL conversation questions for adult learners, grouped by topic: psychology, work, travel, food, technology, society, relationships and media. No signup.">
-    <meta property="og:image" content="${SITE}/images/og-image.png">
+    <meta property="og:image" content="${SITE}/images/og-image.jpg">
     <meta property="og:site_name" content="ESL-plans.com">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Free ESL Conversation Questions for Adults">
     <meta name="twitter:description" content="Free ESL conversation questions for adult learners, grouped by topic: psychology, work, travel, food, technology, society, relationships and media. No signup.">
-    <meta name="twitter:image" content="${SITE}/images/og-image.png">
+    <meta name="twitter:image" content="${SITE}/images/og-image.jpg">
     <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Free ESL Conversation Questions for Adults', url: `${SITE}/questions/`, isPartOf: { '@type': 'WebSite', name: 'ESL-plans.com', url: `${SITE}/` } })}</script>
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:760px;margin:0 auto;padding:40px 20px}
         .logo{font-size:22px;margin-bottom:18px;text-decoration:none;display:block;}
-        .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
+        .logo .esl{font-weight:900;font-style:italic;color:#a9440c;}
         .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
-        .crumb{font-size:13px;color:#aaa;margin-bottom:10px;}
-        .crumb a{color:#c95210;text-decoration:none;}
-        h1{color:#c95210;font-size:28px;margin-bottom:8px;}
+        .crumb{font-size:13px;color:#6b6b6b;margin-bottom:10px;}
+        .crumb a{color:#a9440c;text-decoration:underline;}
+        h1{color:#a9440c;font-size:28px;margin-bottom:8px;}
         p.intro{color:#666;font-size:15px;margin-bottom:26px;line-height:1.6;}
         .card{display:block;background:white;border-radius:12px;padding:16px;text-decoration:none;border:1px solid #eee;margin-bottom:10px;}
         .card-title{font-size:15px;font-weight:700;color:#333;}
-        .card-meta{display:block;font-size:12px;color:#aaa;margin-top:4px;}
-        .back{display:inline-block;margin-top:26px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
+        .card-meta{display:block;font-size:12px;color:#6b6b6b;margin-top:4px;}
+        .back{display:inline-block;margin-top:26px;color:#a9440c;text-decoration:none;font-weight:600;font-size:14px;}
     </style>
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
         <nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <span>Conversation questions</span></nav>
         <h1>Free ESL Conversation Questions for Adults</h1>
         <p class="intro">Discussion questions you can use tomorrow, grouped by topic. Free, no account, no download. Each set is drawn from real lessons in the library — the full versions add the reading, audio and vocabulary.</p>
         ${listItems}
         <a class="back" href="${ALL_LESSONS_URL}">&larr; Browse all lesson plans</a>
-    </div>
+    </main>
+    ${renderSiteFooter()}
 </body>
 </html>`;
     fs.writeFileSync('questions/index.html', idxHtml, 'utf8');
@@ -1374,36 +1441,36 @@ function renderDirectoryPage() {
     <meta property="og:url" content="${ALL_LESSONS_URL}">
     <meta property="og:title" content="All ESL Lesson Plans for Adults | ESL-plans.com">
     <meta property="og:description" content="${escapeAttr(description)}">
-    <meta property="og:image" content="${SITE}/images/og-image.png">
+    <meta property="og:image" content="${SITE}/images/og-image.jpg">
     <meta property="og:site_name" content="ESL-plans.com">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="All ESL Lesson Plans for Adults | ESL-plans.com">
     <meta name="twitter:description" content="${escapeAttr(description)}">
-    <meta name="twitter:image" content="${SITE}/images/og-image.png">
+    <meta name="twitter:image" content="${SITE}/images/og-image.jpg">
     <script type="application/ld+json">${schema}</script>
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
         .container{max-width:820px;margin:0 auto;padding:40px 20px}
         .logo{font-size:22px;margin-bottom:18px;text-decoration:none;display:block;}
-        .logo .esl{font-weight:900;font-style:italic;color:#c95210;}
+        .logo .esl{font-weight:900;font-style:italic;color:#a9440c;}
         .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
-        .crumb{font-size:13px;color:#aaa;margin-bottom:10px;}
-        .crumb a{color:#c95210;text-decoration:none;}
-        h1{color:#c95210;font-size:28px;margin-bottom:8px;line-height:1.3;}
+        .crumb{font-size:13px;color:#6b6b6b;margin-bottom:10px;}
+        .crumb a{color:#a9440c;text-decoration:underline;}
+        h1{color:#a9440c;font-size:28px;margin-bottom:8px;line-height:1.3;}
         p.intro{color:#666;font-size:15px;margin-bottom:24px;line-height:1.6;}
         .topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
-        .topic-tag{background:#fff3e0;color:#c95210;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;text-decoration:none;}
+        .topic-tag{background:#fff3e0;color:#a9440c;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;text-decoration:none;}
         h2{color:#333;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin:34px 0 4px;}
-        p.count{color:#999;font-size:13px;margin-bottom:12px;}
+        p.count{color:#6b6b6b;font-size:13px;margin-bottom:12px;}
         .card{display:block;background:white;border-radius:12px;padding:14px 16px;text-decoration:none;border:1px solid #eee;margin-bottom:10px;}
         .card-title{font-size:15px;font-weight:700;color:#333;}
         .free{font-size:11px;color:#2e7d32;font-weight:700;margin-left:8px;}
-        .card-meta{display:block;font-size:12px;color:#aaa;margin-top:4px;}
-        .back{display:inline-block;margin-top:26px;color:#c95210;text-decoration:none;font-weight:600;font-size:14px;}
+        .card-meta{display:block;font-size:12px;color:#6b6b6b;margin-top:4px;}
+        .back{display:inline-block;margin-top:26px;color:#a9440c;text-decoration:none;font-weight:600;font-size:14px;}
     </style>
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
         <nav class="crumb" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> &rsaquo; <span>All lesson plans</span></nav>
         <h1>All ESL Lesson Plans for Adults</h1>
@@ -1418,7 +1485,8 @@ function renderDirectoryPage() {
         ${sections}
         ${extra}
         <a class="back" href="${SITE}/">&larr; Back to ESL-plans.com</a>
-    </div>
+    </main>
+    ${renderSiteFooter()}
 </body>
 </html>`;
 }
@@ -1428,6 +1496,243 @@ if (lessons.some(l => slugify(l.title) === 'index')) {
 } else {
     fs.writeFileSync('lessons/index.html', renderDirectoryPage(), 'utf8');
     console.log(`Directory: lessons/index.html (${lessons.length} lessons)`);
+}
+
+// ── STATIC /about/ ──
+// The About copy only lived inside the SPA, so /about/ was a 404. Anyone
+// checking who is behind the site (a teacher deciding to pay, a journalist,
+// an AI answer engine building a citation) had no page to land on.
+if (!fs.existsSync('about')) fs.mkdirSync('about');
+{
+    const aboutDesc = 'Alex Selivanov is a practising online ESL tutor with 15 years of experience teaching adults. The teacher behind the 100+ lesson plans on ESL-plans.com.';
+    const aboutSchema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'AboutPage',
+        url: `${SITE}/about/`,
+        name: 'About Alex Selivanov — ESL-plans.com',
+        description: aboutDesc,
+        mainEntity: { '@type': 'Person', name: AUTHOR_NAME, url: AUTHOR_URL, sameAs: AUTHOR_SAMEAS, jobTitle: 'Online ESL tutor', knowsLanguage: ['en', 'ru'], worksFor: { '@type': 'Organization', name: 'ESL-plans.com', url: `${SITE}/` } }
+    });
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Alex Selivanov — ESL Lesson Plans for Adults | ESL-plans.com</title>
+    <meta name="description" content="${escapeAttr(aboutDesc)}">
+    <link rel="canonical" href="${SITE}/about/">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="${SITE}/about/">
+    <meta property="og:title" content="About Alex Selivanov — ESL-plans.com">
+    <meta property="og:description" content="${escapeAttr(aboutDesc)}">
+    <meta property="og:image" content="${SITE}/images/alex.jpg">
+    <meta property="og:site_name" content="ESL-plans.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">${aboutSchema}</script>
+    <style>
+        body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0;color:#333;}
+        .container{max-width:820px;margin:0 auto;padding:40px 20px;}
+        a.logo{font-size:22px;margin-bottom:28px;text-decoration:none;display:block;}
+        .logo .esl{font-weight:900;font-style:italic;color:#a9440c;}
+        .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
+        h1{color:#a9440c;font-size:30px;line-height:1.25;margin:0 0 8px;}
+        .standfirst{color:#5f5f5f;font-size:15px;margin:0 0 28px;}
+        .bio{display:grid;grid-template-columns:180px 1fr;gap:26px;align-items:start;background:white;border-radius:18px;padding:24px;border:1px solid #f0e6dd;}
+        .bio img{width:100%;border-radius:14px;display:block;}
+        .bio p{line-height:1.75;margin:0 0 14px;font-size:15px;}
+        .bio p:last-child{margin-bottom:0;}
+        h2{font-size:16px;text-transform:uppercase;letter-spacing:0.6px;color:#333;margin:36px 0 12px;}
+        ul.facts{color:#444;line-height:1.9;padding-left:20px;}
+        .links a{display:inline-block;margin:0 12px 10px 0;color:#a9440c;text-decoration:none;font-weight:600;font-size:14px;}
+        .cta{margin-top:32px;background:white;border-radius:18px;padding:24px;text-align:center;border:1px solid #f0e6dd;}
+        .cta a{display:inline-block;background:#b8480d;color:white;padding:13px 30px;border-radius:26px;text-decoration:none;font-weight:800;}
+        @media(max-width:600px){.bio{grid-template-columns:1fr}.bio img{max-width:200px}}
+    </style>
+</head>
+<body>
+    <main class="container">
+        <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+        <h1>About Alex Selivanov</h1>
+        <p class="standfirst">One teacher, 15 years of adult learners online, and every lesson plan on this site written by the same person.</p>
+
+        <div class="bio">
+            <img src="${SITE}/images/alex.jpg" alt="Alex Selivanov, online ESL tutor and founder of ESL-plans.com" width="180" height="176">
+            <div>
+                <p>Hi there, I'm <strong>Alex!</strong> Back when I was a student, a teacher of mine used to scribble on the board: <em>"Learn without learning!"</em> It completely flipped my perspective on education. I followed in those footsteps and became an English tutor myself — until I thought, why not turn the tables? <em>"Teach without teaching!"</em> I've spent the last <strong>15 years</strong> "not teaching" and having a blast instead.</p>
+                <p>I specialise in teaching <strong>adult learners online</strong> — professionals, executives, and curious minds aged 25-55 who want real conversations, not textbook drills. My students have ranged from Russian IT engineers to French marketing directors to Brazilian entrepreneurs. What they all have in common: they're smart, busy, and bored of <em>Spotlight</em> and <em>English File.</em> So I build my own <strong>ESL lesson plans for adults</strong> filled with original topics and a healthy spoonful of weirdness and quirks.</p>
+                <p><strong>My goal is to help online ESL tutors break out of that rigid routine</strong> and inspire them to create their own worlds. Our profession offers unmatched freedom and the chance to build genuine bonds with our students — no, wait, I call them <strong><em>"friends!"</em></strong></p>
+                <p>Everything here is tested on real students before it is published. Each plan takes up to <strong>6 hours</strong> to build: the topic, the reading, the audio, the questions, the vocabulary, the answer key.</p>
+            </div>
+        </div>
+
+        <h2>What I actually do</h2>
+        <ul class="facts">
+            <li>Teach adults online, one to one and in small groups — still taking students.</li>
+            <li>Write every lesson plan in the library myself. No committee, no freelancers, no AI-generated filler.</li>
+            <li>Build each plan around a real article, video or podcast, so the conversation has something concrete to stand on.</li>
+            <li>Keep 26 plans completely free, no account required.</li>
+        </ul>
+
+        <h2>Find me</h2>
+        <p class="links">
+            <a href="https://t.me/eslplans" target="_blank" rel="noopener">Telegram</a>
+            <a href="https://www.linkedin.com/in/alex-esl-plans-8a3451235/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.instagram.com/eslplans" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.threads.com/@eslplans" target="_blank" rel="noopener">Threads</a>
+            <a href="https://bsky.app/profile/esl-plans.com" target="_blank" rel="noopener">Bluesky</a>
+            <a href="https://medium.com/@esl-plans" target="_blank" rel="noopener">Medium</a>
+            <a href="https://www.reddit.com/r/FreeESLLessonPlans/" target="_blank" rel="noopener">Reddit</a>
+            <a href="https://au.pinterest.com/alexeslplans/esl-lesson-plans/" target="_blank" rel="noopener">Pinterest</a>
+            <a href="https://eslplanscomconversationdriveneslplans.quora.com/" target="_blank" rel="noopener">Quora</a>
+            <a href="https://www.freeed.com/users/551959" target="_blank" rel="noopener">Freeed</a>
+            <a href="https://en.islcollective.com/portfolio/12970284" target="_blank" rel="noopener">iSLCollective</a>
+        </p>
+        <p style="font-size:14px;color:#5f5f5f;">Or email: <a href="mailto:esl-plans@proton.me" style="color:#a9440c;">esl-plans@proton.me</a></p>
+
+        <div class="cta">
+            <p style="margin:0 0 14px;font-weight:700;">Want the whole library?</p>
+            <a href="${SITE}/#pricing">See plans and pricing →</a>
+        </div>
+
+        <p style="margin-top:24px;"><a class="back" href="${ALL_LESSONS_URL}" style="color:#a9440c;text-decoration:none;font-weight:600;font-size:14px;">&larr; Browse all lesson plans</a></p>
+    </main>
+    ${renderSiteFooter()}
+</body>
+</html>`;
+    fs.writeFileSync('about/index.html', html, 'utf8');
+    console.log('About page: about/index.html');
+}
+
+// ── STATIC /free/ ──
+// "Free ESL lesson plans for adults" is the highest-intent query a teacher can
+// type, and the only answer used to be a JS filter inside the app. This is a
+// real, static page listing all free plans.
+if (!fs.existsSync('free')) fs.mkdirSync('free');
+{
+    const freeLessons = lessons.filter(l => l.isFree === true);
+    const freeDesc = `${freeLessons.length} free ESL lesson plans for adult learners. PDF, audio and video included, no account and no signup. A2 to C1.`;
+    const freeList = LEVEL_CODES.map(code => {
+        const items = freeLessons.filter(l => primaryLevelCode(l) === code);
+        if (!items.length) return '';
+        return `<h2>${LEVEL_NAMES[code]} free lesson plans</h2>
+        <ul class="lesson-list">
+            ${items.map(l => `<li><a href="${lessonUrl(slugify(l.title))}">${l.title}</a><span class="li-meta">${l.levelLabel} &middot; ${l.duration} &middot; ${l.mediaType}</span></li>`).join('\n            ')}
+        </ul>`;
+    }).join('\n        ');
+    const freeSchema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        url: `${SITE}/free/`,
+        name: 'Free ESL Lesson Plans for Adults',
+        description: freeDesc,
+        mainEntity: { '@type': 'ItemList', numberOfItems: freeLessons.length, itemListElement: freeLessons.map((l, i) => ({ '@type': 'ListItem', position: i + 1, url: lessonUrl(slugify(l.title)), name: l.title })) }
+    });
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free ESL Lesson Plans for Adults — ${freeLessons.length} Complete Plans | ESL-plans.com</title>
+    <meta name="description" content="${escapeAttr(freeDesc)}">
+    <link rel="canonical" href="${SITE}/free/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="${SITE}/free/">
+    <meta property="og:title" content="Free ESL Lesson Plans for Adults">
+    <meta property="og:description" content="${escapeAttr(freeDesc)}">
+    <meta property="og:image" content="${SITE}/images/og-image.jpg">
+    <meta property="og:site_name" content="ESL-plans.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">${freeSchema}</script>
+    <style>
+        body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0;color:#333;}
+        .container{max-width:820px;margin:0 auto;padding:40px 20px;}
+        a.logo{font-size:22px;margin-bottom:28px;text-decoration:none;display:block;}
+        .logo .esl{font-weight:900;font-style:italic;color:#a9440c;}
+        .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
+        h1{color:#a9440c;font-size:30px;line-height:1.25;margin:0 0 10px;}
+        .intro{color:#555;font-size:16px;line-height:1.7;margin:0 0 18px;}
+        h2{font-size:15px;text-transform:uppercase;letter-spacing:0.6px;color:#333;margin:34px 0 10px;}
+        .lesson-list{list-style:none;padding:0;margin:0;}
+        .lesson-list li{background:white;border:1px solid #f0e6dd;border-radius:12px;padding:12px 16px;margin-bottom:8px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;}
+        .lesson-list a{color:#a9440c;text-decoration:none;font-weight:700;font-size:15px;}
+        .lesson-list a:hover{text-decoration:underline;}
+        .li-meta{color:#6b6b6b;font-size:12px;white-space:nowrap;}
+        .note{background:white;border-left:4px solid #c95210;border-radius:14px;padding:16px 20px;margin:28px 0;line-height:1.7;font-size:15px;}
+        .cta{text-align:center;margin-top:30px;}
+        .cta a{display:inline-block;background:#b8480d;color:white;padding:13px 30px;border-radius:26px;text-decoration:none;font-weight:800;}
+    </style>
+</head>
+<body>
+    <main class="container">
+        <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+        <h1>Free ESL Lesson Plans for Adults</h1>
+        <p class="intro">${freeLessons.length} complete lesson plans you can download and teach today. Each one includes the PDF handout, the audio or video, the vocabulary and the discussion questions. No account, no signup, no card.</p>
+        <p class="intro">These are full lessons, not samples or worksheets. They are the same format as the paid library, just older plans I have made free.</p>
+
+        ${freeList}
+
+        <div class="note">
+            <strong>Want the rest?</strong> The paid library has ${lessons.length - freeLessons.length} more plans across A2 to C1, and new ones appear every week. One teacher writes all of them. <a href="${SITE}/#pricing" style="color:#a9440c;font-weight:700;">See pricing →</a>
+        </div>
+
+        <div class="cta"><a href="${ALL_LESSONS_URL}">Browse all ${lessons.length} lesson plans →</a></div>
+
+        <p style="margin-top:24px;font-size:14px;color:#5f5f5f;">Also free: <a href="${SITE}/questions/" style="color:#a9440c;font-weight:600;">${conversationQuestions.length || 8} sets of ESL conversation questions</a> &middot; <a href="${SITE}/articles/" style="color:#a9440c;font-weight:600;">Teacher's Corner articles</a></p>
+    </main>
+    ${renderSiteFooter()}
+</body>
+</html>`;
+    fs.writeFileSync('free/index.html', html, 'utf8');
+    console.log(`Free page: free/index.html (${freeLessons.length} free lessons)`);
+}
+
+// ── RSS FEED ──
+// Articles and new lessons in one feed, so teachers can subscribe and so
+// aggregators/LLM crawlers get a dated, ordered list of what changed.
+{
+    const xmlEscape = s => String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+    const feedItems = [
+        ...lessons.map(l => ({
+            title: l.title,
+            url: lessonUrl(slugify(l.title)),
+            desc: String(lessonDescriptions[l.title] || l.description || '').replace(/\s+/g, ' ').slice(0, 320),
+            date: l.dateAdded || today
+        })),
+        ...articles.map(a => ({
+            title: a.title,
+            url: articleUrl(slugify(a.title)),
+            desc: String(articleDescriptions[a.title] || (a.intro || a.body || '')).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').slice(0, 320),
+            date: toISODate(a.date)
+        }))
+    ]
+        .filter(i => i.date)
+        .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+        .slice(0, 50);
+
+    const itemXml = feedItems.map(i => `    <item>
+        <title>${xmlEscape(i.title)}</title>
+        <link>${i.url}</link>
+        <guid isPermaLink="true">${i.url}</guid>
+        <pubDate>${new Date(`${i.date}T00:00:00Z`).toUTCString()}</pubDate>
+        <description>${xmlEscape(i.desc)}</description>
+    </item>`).join('\n');
+
+    const feed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title>ESL-plans.com — new lesson plans for adults</title>
+    <link>${SITE}/</link>
+    <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml" />
+    <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, 100+ plans, A2-C1.</description>
+    <language>en</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+${itemXml}
+</channel>
+</rss>`;
+    fs.writeFileSync('feed.xml', feed, 'utf8');
+    console.log(`RSS feed: feed.xml (${feedItems.length} items)`);
 }
 
 // ── GENERATE SITEMAP ──
@@ -1462,6 +1767,11 @@ const questionSitemapUrls = [...(conversationQuestions.length ? [`${SITE}/questi
         <lastmod>${today}</lastmod>
     </url>`).join('\n');
 
+const hubUrls = [`${SITE}/free/`, `${SITE}/about/`].map(u => `    <url>
+        <loc>${u}</loc>
+        <lastmod>${today}</lastmod>
+    </url>`).join('\n');
+
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
@@ -1477,10 +1787,11 @@ ${articleIndexUrls}
 ${articleUrls}
 ${archiveUrls}
 ${questionSitemapUrls}
+${hubUrls}
 </urlset>`;
 
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
-console.log(`Sitemap: ${lessons.length + articles.length + topicArchiveUrls.length + levelArchiveUrls.length + questionPageUrls.length + (conversationQuestions.length ? 1 : 0) + (articles.length ? 1 : 0) + 2} URLs`);
+console.log(`Sitemap: ${lessons.length + articles.length + topicArchiveUrls.length + levelArchiveUrls.length + questionPageUrls.length + (conversationQuestions.length ? 1 : 0) + (articles.length ? 1 : 0) + 2 + 2} URLs`);
 console.log('All done!');
 
 // ── TELEGRAM AUTO-POST ──
