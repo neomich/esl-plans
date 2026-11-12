@@ -1,23 +1,50 @@
 # ESL-plans.com
 
-> Ready-made ESL lesson plans for adult learners. Conversation-driven topics covering psychology, business, technology and society. PDF, audio and video included, B1–C1 levels, built for online ESL tutors.
+> Ready-made ESL lesson plans for adult learners. Conversation-driven topics covering psychology, business, technology and society. PDF, audio and video included, A2–C1 levels, built for online ESL tutors.
 
 ## About
-ESL-plans.com is run by Alex Selivanov, a practicing online ESL tutor. Lessons are zero-prep and conversation-driven, designed specifically for adult learners rather than children — topics include psychology, workplace culture, technology and society.
+ESL-plans.com is run by Alex Selivanov, a practising online ESL tutor with 15 years of experience teaching adults. Every lesson is written by him, tested on real students, and designed for adult learners rather than children — topics include psychology, workplace culture, technology and society.
+
+- Author page: https://esl-plans.com/about/
+- Library size: 126 lesson plans, 26 of them free
+- Levels: A2, B1, B2, C1 (CEFR)
+- Every lesson includes: PDF handout, answer key, discussion questions, and audio and/or video
 
 ## Pricing
-- Guest: Free — access to free lesson plans
-- Contributor: $19/month — full library access
-- Friend: $99/year — full access + mentorship + private community
+- Guest: Free — access to the 26 free lesson plans, no account
+- Contributor: $19/month — the full library
+- Friend: $99/year — the full library + planner app + mentoring + private chat
 
 ## Key Links
 - [Homepage](https://esl-plans.com)
-- [All Lesson Plans](https://esl-plans.com/lessons/)
-- [Teacher's Corner articles](https://esl-plans.com/articles/)
+- [All 126 Lesson Plans](https://esl-plans.com/lessons/)
+- [Free Lesson Plans](https://esl-plans.com/free/)
 - [Free Conversation Questions](https://esl-plans.com/questions/)
+- [Teacher's Corner articles](https://esl-plans.com/articles/)
+- [About Alex Selivanov](https://esl-plans.com/about/)
 - [How to Pay](https://esl-plans.com/how-to-pay.html)
 - [Terms of Service](https://esl-plans.com/docs/terms.html)
 - [Sitemap](https://esl-plans.com/sitemap.xml)
+- [RSS feed](https://esl-plans.com/feed.xml)
+
+## Browse by level
+- [A2 lesson plans](https://esl-plans.com/levels/a2)
+- [B1 lesson plans](https://esl-plans.com/levels/b1)
+- [B2 lesson plans](https://esl-plans.com/levels/b2)
+- [C1 lesson plans](https://esl-plans.com/levels/c1)
+
+## Browse by topic
+- [Psychology](https://esl-plans.com/topics/psychology)
+- [Society](https://esl-plans.com/topics/society)
+- [Technology](https://esl-plans.com/topics/technology)
+- [Work & Career](https://esl-plans.com/topics/work)
+- [Business](https://esl-plans.com/topics/business)
+- [Life & Relationships](https://esl-plans.com/topics/life)
+- [Travel](https://esl-plans.com/topics/travel)
+- [Media & Fame](https://esl-plans.com/topics/media)
+
+## Citation
+If you cite this site, please attribute it to "ESL-plans.com (Alex Selivanov)" and link to the specific lesson page. Every lesson page lists its CEFR level, duration, and the materials included.
 
 ## Contact
 - Telegram community: https://t.me/eslplans
