@@ -4847,11 +4847,12 @@ const lessonsCatalog = [
         "hasRar": true,
         "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/algorithms.pdf"
     },
-    {
+        {
         "dateAdded": "2026-06-24",
         "title": "Modern Remakes Of Famous Paintings",
         "topics": [
-            "art"
+            "art",
+            "technology"
         ],
         "category": "general",
         "categoryLabel": "General English",
@@ -4865,17 +4866,20 @@ const lessonsCatalog = [
         "keywords": "art paintings remake famous paintings museum humour prepositions description audio b1",
         "heading": "What's Inside 'Modern Remakes Of Famous Paintings'",
         "objectives": [
-            "Identify and categorize different types of art;",
-            "Practice prepositions of place through visual description;",
-            "Discuss the relevance and humor of modern remakes of classical paintings."
+            "analyze the concept of \"remake culture\" across movies, music, and video games, weighing artistic innovation against commercial cash-grab",
+            "identify and categorize nine distinct types of art through targeted definition matching",
+            "review and apply prepositions of place to describe modern alterations to classical paintings",
+            "practice listening comprehension by matching four speakers to their proposed artwork remakes, culminating in a creative AI prompt-writing task"
         ],
-        "description": "In this lesson, students explore various art forms by defining categories such as applied, conceptual, and digital arts. They engage with modern reinterpretations of famous masterpieces (e.g., Son of Man, American Gothic, The Persistence of Memory) by completing gap-fill exercises with prepositions of place to accurately describe the composition of both original and remade works.\n\nStudents listen to speakers describing specific artistic adaptations, match descriptions to images, and critically evaluate whether these modern versions respect or mock the originals. The lesson encourages debate on how shifting historical contexts alter a painting's mood and story, while reinforcing spatial vocabulary through authentic visual analysis.\n\nStudents can also do an extra creative task (e.g., generating their own prompt for a modern remake using contemporary cultural references).",
+        "description": "Page 1: Remake Culture in Media\nThe lesson opens by defining \"remake culture\" - the entertainment industry's reliance on re-adapting, rebooting, or remastering pre-existing franchises. Students examine a timeline of famous remakes across different media, including Scarface (1932 vs. 1983), Ocean's Eleven (1960 vs. 2001), Resident Evil 2 (1998 vs. 2019), and cover versions like Dolly Parton’s vs. Whitney Houston’s \"I Will Always Love You.\" This sparks a grounded discussion on whether remakes represent safe, risk-averse corporate strategies or genuine artistic tributes.\n\nPage 2: Types of Art\nStudents build foundational vocabulary by reviewing nine categories of art: Applied, Conceptual, Craft, Folk, Literary, Martial, Performing, Visual, and Digital Arts. They read clear definitions for each category and match them to corresponding pictures or examples, establishing a clear framework for how we classify creative expression.\n\nPage 3: Modern Art Remakes & Prepositions of Place\nThe focus shifts to visual art. Students look at creative, modern remakes of classical paintings, such as René Magritte’s Son of Man, Michelangelo’s The Creation of Adam, and Grant Wood’s American Gothic. They discuss whether these updates respect or mock the originals. To describe these changes accurately, students review prepositions of place (in front of, behind, in, on, under, next to, above, below, between, on the left, on the right, opposite). They then complete a matching and gap-fill exercise, using these prepositions to pinpoint exact details in the altered artworks, followed by a discussion on how changing the historical context shifts the mood of a painting.\n\nPage 4: Listening Task & AI Prompt Writing (HW Setup)\nStudents listen to four speakers (Jess, Danny, Ben, and Bella) describe their ideas for modernizing famous paintings. They match each speaker to the correct artwork based on the prepositional clues they use (e.g., \"a glowing wireless earbud right in her ear,\" \"rappers sitting on the hoods of cars,\" \"a guy with a backpack standing on top of\"). Finally, students apply this skill by writing their own AI image generation prompt. They use target prepositions to describe modern elements, setting up a structured homework task to create their own modern remake prompts.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Remake Debate: Do modern remakes of movies, games, and music show artistic innovation, or are they just safe, risk-averse commercial cash-grabs?\nArtistic Respect: Do modern remakes of classical paintings respect the original artwork, or do they mock it? Is it important for art to be taken seriously?\nContext Shift: How does changing the historical context to a modern setting change the story or mood of a classical painting?\n🧠 Target Lexicon & Vocabulary Focus\nRemake Vocabulary: Re-adapt, reboot, remaster, risk-averse, built-in nostalgia, commercial cash-grab.\nTypes of Art: Applied Arts, Conceptual Art, Craft Art, Folk Art, Literary Arts, Martial Arts, Performing Arts, Visual Arts, Digital Arts.\nPrepositions of Place: In front of, behind, in, on, under, next to, above, below, between, on the left, on the right, opposite.\n🎧 Multimedia & Authentic Materials Included\n4-Speaker Listening Task: An audio exercise where students match speakers (Jess, Danny, Ben, Bella) to the specific classical painting they are modernizing, based on prepositional clues (e.g., \"falling right off the wooden planks,\" \"standing on a high rock\").\nAI Prompt Example: A detailed, preposition-rich text prompt demonstrating how to generate a modern remake of Valentin Serov’s Girl with Peaches (e.g., \"unwrapping a Kinder Surprise egg,\" \"dressed in a pink hoodie,\" \"smartphone placed on the table\").\n⚠️ Critical Thinking Extension Work\nHomework Setup: Students use the Girl with Peaches example as a template to write their own AI image generation prompt for a different classical painting, deliberately using at least five target prepositions of place.\nCultural Value Analysis: Evaluating whether \"remake culture\" preserves cultural heritage for new generations or stifles the creation of entirely new, original stories and artworks.",
         "mediaLabel": "The audio streams:",
         "links": [],
         "hasPdf": true,
         "hasAudio": true,
         "hasRar": true,
-        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/modern-remakes-of-famous-paintings.pdf"
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/modern-remakes-of-famous-paintings.pdf",
+        "isFree": false,
+        "telegramRecap": null
     },
     {
         "dateAdded": "2026-06-20",
