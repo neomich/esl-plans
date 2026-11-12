@@ -4506,12 +4506,13 @@ const lessonsCatalog = [
         "hasRar": true,
         "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/why-do-we-gossip.pdf"
     },
-    {
+        {
         "dateAdded": "2026-07-09",
         "title": "Cultural Appropriation",
         "topics": [
             "society",
-            "grammar"
+            "grammar",
+            "art"
         ],
         "category": "general",
         "categoryLabel": "General English",
@@ -4525,17 +4526,19 @@ const lessonsCatalog = [
         "keywords": "cultural appropriation appreciation war bonnet henna mehendi feng shui cyrillic gopnik modals obligation prohibition permission sacred symbols fashion heritage podcast b1",
         "heading": "What's Inside 'Cultural Appropriation'",
         "objectives": [
-            "Distinguish between cultural appropriation and cultural appreciation through definition and visual analysis;",
-            "Identify specific examples of appropriated symbols (e.g., war bonnets, henna, Cyrillic script) and understand their original cultural significance;",
-            "Practice using modals of obligation, prohibition, and permission to discuss ethical responsibilities regarding cultural heritage."
+            "distinguish between cultural appropriation and cultural appreciation using clear, real-world definitions",
+            "identify the true origins and cultural significance of commonly appropriated symbols through targeted listening tasks",
+            "analyze a real-world dialogue about cultural stereotypes and practice modal verbs of obligation and prohibition"
         ],
-        "description": "In this lesson, students begin by defining the difference between taking from a culture for profit or fashion (appropriation) versus learning with respect and giving credit (appreciation). They examine images of commonly appropriated items — such as Native American war bonnets, Indian mehendi, and Chinese feng shui — and listen to a podcast to uncover the deep historical meanings often ignored by modern users.\n\nStudents then analyze sentences from the listening text to categorize grammar structures expressing moral duty (ought to, obligated to), strict rules (forbidden from, not allowed to), and past necessities (had to).\n\nThe lesson culminates in a critical discussion on whether movies should hire cultural experts, if sacred symbols belong in high fashion, and how stereotypes like the \"Gopnik\" image affect real communities.",
+        "description": "Page 1: Definitions & Global Origins\nThe lesson opens by defining cultural appropriation (taking elements from a less powerful culture for profit or fashion without understanding their history) versus cultural appreciation (learning the history, acting as a guest, and giving proper credit). Students look at images of specific items and practices (e.g., War Bonnets, Dreamcatchers, Mehendi, Twerking) and match them to their correct countries or nations of origin. They then complete two listening tasks: the first audio explains the cultural significance of each object to verify their answers.\n\nPage 2: The Dialogue & Modal Verbs\nThe focus shifts to an extended audio dialogue between Noam and Anna. Students listen to their conversation about cultural stereotypes in media and fashion, answering targeted comprehension questions about topics like the original purpose of the Ushanka hat, the real reason Ptitim was created, and the use of Cyrillic signs in movies. This sparks a discussion on whether films should hire cultural experts and if sacred symbols belong in high fashion. Finally, students review specific sentences from the dialogue to practice modal verbs of obligation and prohibition (e.g., must, ought to, forbidden from, not allowed to), matching each structure to its grammatical function.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nMedia Representation: Do you think movies and TV shows should be required to hire real cultural experts before portraying specific traditions?\nFashion Ethics: Is it inappropriate to wear a religious symbol (like a Christian cross) purely for fashion?\nEveryday Contexts: Is it wrong to wear an Ushanka hat if the weather is not actually cold? How would you feel if your favorite local food was sold as \"exotic\"?\n🧠 Target Lexicon & Grammar Focus\nCore Concepts: Cultural appropriation, cultural appreciation, sacred clothing, outdated image, food shortage.\nModal Verbs of Obligation & Prohibition: Practicing structures like forbidden from (strong prohibition), ought to / obligated to (moral obligation), had to (past obligation), may not / not allowed to (prohibition), and shouldn't be allowed to (negative recommendation).\n🎧 Multimedia & Authentic Materials Included\nAudio Task 1 (Cultural Significance): A targeted listening exercise where students verify their matching of appropriated items (e.g., Feng Shui, Dreamcatcher, Mehendi) to their true countries of origin.\nAudio Task 2 (Speaker Matching): An introductory listening task to identify the speakers (Noam and Anna) and connect them to the visual examples.\nAudio Task 3 (The Dialogue): An extended conversation between Noam and Anna discussing cultural stereotypes, requiring students to answer specific comprehension questions about the Ushanka hat, Ptitim, and Cyrillic signs.\n⚠️ Critical Thinking Extension Work\nGrammar in Context: Students analyze sentences directly from the dialogue to understand how modal verbs express different levels of rules, from strict societal bans (forbidden from) to personal moral duties (ought to).\nStereotype Analysis: Evaluating why certain images (like the \"Gopnik\" stereotype) are considered outdated and harmful, and discussing how to respectfully engage with cultures different from our own.",
         "mediaLabel": "The audio streams:",
         "links": [],
         "hasPdf": true,
         "hasAudio": true,
         "hasRar": true,
-        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/cultural-appropriation.pdf"
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/cultural-appropriation.pdf",
+        "isFree": false,
+        "telegramRecap": null
     },
     {
         "dateAdded": "2026-07-09",
