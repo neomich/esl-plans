@@ -207,6 +207,71 @@ function toISODate(value) {
     return isNaN(d.getTime()) ? fallback : d.toISOString().split('T')[0];
 }
 
+// ── LESSON PAGE ARTWORK ──
+// Every lesson already has a cover (visualSource) and it is already public on
+// the home cards, but the static lesson page showed no image at all. Reading
+// the real pixel size lets the <img> reserve space, so the banner costs no
+// layout shift. Pure JPEG/PNG header parsing — no dependencies.
+function readImageSize(file) {
+    try {
+        const b = fs.readFileSync(file);
+        if (b[0] === 0x89 && b[1] === 0x50) return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+        let i = 2;
+        while (i < b.length - 9) {
+            if (b[i] !== 0xFF) { i++; continue; }
+            const marker = b[i + 1];
+            if (marker >= 0xC0 && marker <= 0xCF && marker !== 0xC4 && marker !== 0xC8 && marker !== 0xCC) {
+                return { h: b.readUInt16BE(i + 5), w: b.readUInt16BE(i + 7) };
+            }
+            const len = b.readUInt16BE(i + 2);
+            if (!len || len < 2) break;
+            i += 2 + len;
+        }
+    } catch (e) { /* fall through */ }
+    return null;
+}
+
+// visualSource values were written by hand over two years, so the filename
+// case does not always match the file on disk (54 of 126 lessons say
+// "b1_teens.jpg" while the file is "b1_teens.JPG"). Windows hides this;
+// GitHub Pages runs Linux and is case-sensitive, so the wrong case 404s and
+// the OG image silently falls back to the generic card. Always resolve to the
+// real on-disk name.
+function resolveVisual(src) {
+    if (!src) return null;
+    const rel = String(src).replace(/\\/g, '/').replace(/^\.?\//, '');
+    const dir = rel.includes('/') ? rel.slice(0, rel.lastIndexOf('/') + 1) : '';
+    const base = rel.slice(dir.length);
+    try {
+        const entries = fs.readdirSync(dir || '.');
+        const hit = entries.find(f => f === base) || entries.find(f => f.toLowerCase() === base.toLowerCase());
+        if (hit) return { rel: dir + hit, dims: readImageSize(dir + hit) };
+    } catch (e) { /* ignore */ }
+    return null;
+}
+
+// ── "WHAT'S INSIDE" CONTENTS LIST ──
+// The page-by-page descriptions ("Page 1: ...", "Page 2: ...") are already
+// written for the newest lessons. This lifts the heading of each block into a
+// scannable contents list. It never invents anything: if the description is
+// not written in that convention, no list is rendered.
+function extractOutline(description) {
+    const text = String(description || '');
+    const re = /^[ \t]*Page[ \t]+(\d+)(?:[ \t]*(?:&|and|\u2013|-)[ \t]*(\d+))?[ \t]*[:\u2013\u2014.\-][ \t]*(.+)$/gim;
+    const items = [];
+    let m;
+    while ((m = re.exec(text)) !== null) {
+        const label = m[2] ? `Pages ${m[1]}\u2013${m[2]}` : `Page ${m[1]}`;
+        const heading = m[3].trim().replace(/\s+/g, ' ');
+        if (heading.length < 3 || heading.length > 90) continue;
+        if (items.some(i => i.label === label && i.heading === heading)) continue;
+        items.push({ label, heading });
+    }
+    // One block is a paragraph, not a contents list. Two is the minimum where
+    // the list tells the reader something the prose does not already show.
+    return items.length >= 2 ? items : [];
+}
+
 // First level code a lesson belongs to, e.g. "b1-b2" -> "b1".
 function primaryLevelCode(lesson) {
     return (lesson.level || '').split('-').map(s => s.trim().toLowerCase())
@@ -494,12 +559,17 @@ lessons.forEach(lesson => {
     const descSafe = (lesson.description || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const objList = (lesson.objectives || []).map(o => `<li>${o.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</li>`).join('\n');
 
+    // "What's the \"The Loneliness Economy\" ESL Lesson About?" reads like a
+    // typo, so the article is dropped in this one sentence only. The h1, the
+    // cards and the schema keep the real title.
+    const titleForH2 = String(lesson.title).replace(/^(The|A|An)\s+/i, '');
+
     // Preview image: the lesson's own cover when it exists on disk, otherwise
-    // the site-wide card. Missing/renamed covers fall back instead of 404ing.
-    const coverRel = lesson.visualSource && fs.existsSync(lesson.visualSource)
-        ? lesson.visualSource
-        : 'images/og-image.jpg';
-    const ogImage = `${SITE}/${coverRel.replace(/\\/g, '/').replace(/^\.?\//, '')}`;
+    // the site-wide card. resolveVisual returns the true on-disk filename, so
+    // the 54 hand-written case mismatches do not 404 on the Linux runner.
+    const resolvedCover = resolveVisual(lesson.visualSource);
+    const coverRel = resolvedCover ? resolvedCover.rel : 'images/og-image.jpg';
+    const ogImage = `${SITE}/${coverRel.replace(/^\.?\//, '')}`;
 
     // Breadcrumb targets: level hub first, topic hub as the middle step.
     const lessonLevel = primaryLevelCode(lesson);
@@ -525,6 +595,18 @@ lessons.forEach(lesson => {
 
     // Build topics tags
     const topicTags = (lesson.topics || []).map(t => topicLabels[t] || t).join(' · ');
+
+    // Artwork + contents list. Both are derived from data that already exists,
+    // and both disappear cleanly if the data is not there.
+    const cover = resolvedCover;
+    const coverHtml = cover
+        ? `<div class="cover"><img src="${SITE}/${cover.rel}" alt="${escapeAttr(lesson.title)} — ESL lesson plan cover"${cover.dims ? ` width="${cover.dims.w}" height="${cover.dims.h}"` : ''} loading="eager" decoding="async"></div>`
+        : '';
+    const outlineItems = extractOutline(lesson.description);
+    const outlineHtml = outlineItems.length
+        ? `<h3>Page by page</h3>
+        <ol class="inside">${outlineItems.map(i => `<li><span class="inside-page">${escapeAttr(i.label)}</span><span>${escapeAttr(i.heading)}</span></li>`).join('')}</ol>`
+        : '';
 
     // Materials list
     // Premium lessons carry hasPdf/hasAudio/hasRar flags instead of file URLs,
@@ -590,7 +672,7 @@ lessons.forEach(lesson => {
     <meta name="twitter:title" content="${escapeAttr(lesson.title)} — ESL Lesson Plan for Adults">
     <meta name="twitter:description" content="${descMeta}">
     <meta name="twitter:image" content="${ogImage}">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${jsonSafe(lesson.title)}","description":"${jsonSafe(descPlain)}","provider":${ORG_SCHEMA},"author":${AUTHOR_SCHEMA},"educationalLevel":"${jsonSafe(lesson.levelLabel)}","inLanguage":"en","isAccessibleForFree":${lesson.isFree ? 'true' : 'false'},"url":"${lessonUrl(slug)}"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"${jsonSafe(lesson.title)}","description":"${jsonSafe(descPlain)}","provider":${ORG_SCHEMA},"author":${AUTHOR_SCHEMA},"educationalLevel":"${jsonSafe(lesson.levelLabel)}","inLanguage":"en","isAccessibleForFree":${lesson.isFree ? 'true' : 'false'},"url":"${lessonUrl(slug)}","image":"${ogImage}"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What level is the ${jsonSafe(lesson.title)} ESL lesson plan?","acceptedAnswer":{"@type":"Answer","text":"The ${jsonSafe(lesson.title)} lesson plan is designed for ${jsonSafe(lesson.levelLabel)} level adult learners. It takes approximately ${jsonSafe(lesson.duration)} to complete."}},{"@type":"Question","name":"What materials are included in the ${jsonSafe(lesson.title)} lesson?","acceptedAnswer":{"@type":"Answer","text":"The ${jsonSafe(lesson.title)} lesson includes ${jsonSafe(materialsText)}."}},{"@type":"Question","name":"Is the ${jsonSafe(lesson.title)} lesson plan suitable for online ESL tutors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the ${jsonSafe(lesson.title)} lesson is specifically designed for online ESL tutors working with adult learners at ${jsonSafe(lesson.levelLabel)} level. It is zero-prep and conversation-driven, covering the topic of ${jsonSafe(topicTags)}."}}]}</script>
     ${breadcrumbSchema}
     <style>
@@ -605,6 +687,11 @@ lessons.forEach(lesson => {
         .byline{font-size:13px;color:#6b6b6b;margin:-14px 0 22px;}
         .byline a{color:#a9440c;text-decoration:underline;}
         .byline a:hover{text-decoration:underline;}
+        .cover{max-width:700px;margin:0 auto 20px;border-radius:14px;overflow:hidden;background:#f3e7dd;aspect-ratio:16/9;}
+        .cover img{width:100%;height:100%;object-fit:cover;display:block;}
+        .inside{list-style:none;padding:0;margin:0 0 24px;}
+        .inside li{background:white;border:1px solid #f3ece6;border-radius:10px;padding:10px 14px;margin-bottom:6px;font-size:14px;color:#333;display:flex;gap:10px;align-items:baseline;line-height:1.5;}
+        .inside-page{font-size:11px;font-weight:800;color:#a9440c;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;}
         h2{color:#333;font-size:17px;font-weight:700;margin:28px 0 12px;text-transform:uppercase;letter-spacing:0.5px;}
         h3{color:#333;font-size:15px;font-weight:700;margin:20px 0 10px;text-transform:uppercase;letter-spacing:0.5px;}
         ul{color:#444;line-height:1.8;padding-left:20px;margin-bottom:16px;}
@@ -635,6 +722,7 @@ lessons.forEach(lesson => {
         ${breadcrumbHtml}
 
         <h1>${lesson.title}</h1>
+        ${coverHtml}
         <div class="meta">
             <span class="meta-badge">🎓 ${lesson.categoryLabel}</span>
             <span class="meta-badge">🥉 ${lessonLevel ? `<a href="${levelUrl(lessonLevel)}" style="color:inherit;text-decoration:none;">${lesson.levelLabel}</a>` : lesson.levelLabel}</span>
@@ -666,11 +754,13 @@ lessons.forEach(lesson => {
             </tbody>
         </table>
 
-        <h2>What's the "${lesson.title}" ESL Lesson About?</h2>
+        <h2>What's the "${titleForH2}" ESL Lesson About?</h2>
         <p style="color:#6b6b6b;font-size:13px;margin-bottom:20px;">${lesson.levelLabel} · ${lesson.categoryLabel}</p>
 
         <h3>Main Objectives</h3>
         <ul>${objList}</ul>
+
+        ${outlineHtml}
 
         <h3>About This Lesson</h3>
         <p class="desc">${descSafe}</p>
