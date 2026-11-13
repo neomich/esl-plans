@@ -119,7 +119,7 @@ const SITE_FOOTER_CSS = `<style>
 function renderSiteFooter() {
     return `${SITE_FOOTER_CSS}
         <footer class="site-foot">
-            <a href="${SITE}/">Home</a><span class="sep">·</span><a href="${ALL_LESSONS_URL}">All lesson plans</a><span class="sep">·</span><a href="${SITE}/free/">Free lessons</a><span class="sep">·</span><a href="${SITE}/questions/">Conversation questions</a><span class="sep">·</span><a href="${SITE}/articles/">Teacher's Corner</a><span class="sep">·</span><a href="${SITE}/about/">About Alex</a>
+            <a href="${SITE}/">Home</a><span class="sep">·</span><a href="${ALL_LESSONS_URL}">All lesson plans</a><span class="sep">·</span><a href="${SITE}/free/">Free lessons</a><span class="sep">·</span><a href="${SITE}/questions/">Conversation questions</a><span class="sep">·</span><a href="${SITE}/articles/">Teacher's Corner</a><span class="sep">·</span><a href="${SITE}/about/">About Alex</a><span class="sep">·</span><a href="${SITE}/media/">Copyright / Media &amp; Takedown</a>
         </footer>`;
 }
 
@@ -1822,6 +1822,95 @@ if (!fs.existsSync('about')) fs.mkdirSync('about');
     console.log('About page: about/index.html');
 }
 
+// ── STATIC /media/ ──
+// Lessons are built on real photographs, songs, clips and posts, which is the
+// point of them and also the one place where the site could be accused of
+// using somebody else's work. A visible, specific takedown route matters more
+// than a paragraph of disclaimer: it gives a rights holder a reason to email
+// first instead of filing with the host or the payment processor, which is the
+// failure mode that would actually hurt (the whole site is one repo).
+if (!fs.existsSync('media')) fs.mkdirSync('media');
+{
+    const mediaDesc = 'How third-party images, audio and video are used in these ESL lesson plans, and how a rights holder can request removal - handled within 48 hours.';
+    const mediaSchema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        url: `${SITE}/media/`,
+        name: 'Copyright, media credits and takedown - ESL-plans.com',
+        description: mediaDesc,
+        inLanguage: 'en',
+        isPartOf: { '@type': 'WebSite', name: 'ESL-plans.com', url: `${SITE}/` },
+        publisher: { '@type': 'Organization', name: 'ESL-plans.com', url: `${SITE}/` }
+    });
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copyright, Media Credits and Takedown | ESL-plans.com</title>
+    <meta name="description" content="${escapeAttr(mediaDesc)}">
+    <link rel="canonical" href="${SITE}/media/">
+    <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="${SITE}/media/">
+    <meta property="og:title" content="Copyright, Media Credits and Takedown - ESL-plans.com">
+    <meta property="og:description" content="${escapeAttr(mediaDesc)}">
+    <meta property="og:site_name" content="ESL-plans.com">
+    <script type="application/ld+json">${mediaSchema}</script>
+    <style>
+        body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0;color:#333;}
+        .container{max-width:760px;margin:0 auto;padding:40px 20px;}
+        a.logo{font-size:22px;margin-bottom:28px;text-decoration:none;display:block;}
+        .logo .esl{font-weight:900;font-style:italic;color:#a9440c;}
+        .logo .plans{font-weight:300;color:#222;font-family:Georgia,serif;}
+        h1{color:#a9440c;font-size:30px;line-height:1.25;margin:0 0 10px;}
+        .standfirst{color:#5f5f5f;font-size:16px;line-height:1.65;margin:0 0 30px;}
+        h2{font-size:16px;text-transform:uppercase;letter-spacing:0.6px;color:#333;margin:34px 0 12px;}
+        p,li{line-height:1.75;font-size:15px;color:#333;}
+        p{margin:0 0 14px;}
+        ul{padding-left:20px;margin:0 0 16px;}
+        li{margin-bottom:6px;}
+        a{color:#a9440c;}
+        .contact{background:white;border:1px solid #f0e6dd;border-radius:16px;padding:22px 24px;margin:26px 0;}
+        .contact p:last-child{margin-bottom:0;}
+        .back{display:inline-block;margin-top:26px;font-size:14px;font-weight:600;text-decoration:none;}
+    </style>
+</head>
+<body>
+    <main class="container">
+        <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
+
+        <h1>Copyright, media credits and takedown</h1>
+        <p class="standfirst">Some lessons reference third-party images, audio and video for teaching purposes. If you own the rights to something here and believe it is used without permission, email <a href="mailto:esl-plans@proton.me">esl-plans@proton.me</a> with the lesson name and the item, and we will remove or replace it within 48 hours.</p>
+
+        <h2>Why third-party material is here</h2>
+        <p>These lessons are built around real material — a news photograph, a film scene, a song, a podcast, a social post — because adults stop listening when a class runs on invented dialogues. Some of that material belongs to other people.</p>
+        <p>Images, audio and video that come from third parties remain the property of their rights holders. They are included as part of a teaching resource — not offered as standalone assets, not sublicensed to buyers, and not licensed for reuse. Where the source, author or licence is known, it is credited on the lesson page or inside the lesson file.</p>
+
+        <h2>If you own the rights</h2>
+        <div class="contact">
+            <p>Write to <a href="mailto:esl-plans@proton.me">esl-plans@proton.me</a> and include:</p>
+            <ul>
+                <li>the lesson name or the page URL;</li>
+                <li>the item itself — a link to the original work, or a short description of the image, track or clip;</li>
+                <li>confirmation that you own the rights, or that you are acting for the owner.</li>
+            </ul>
+            <p>We will remove or replace the item within 48 hours of a verified request, and confirm by email when it is done. If the item is inside a downloadable pack, the pack is updated too, so new buyers do not receive it.</p>
+        </div>
+        <p>A short email is enough. You do not need a lawyer, a formal notice or a specific template to start the conversation.</p>
+
+        <h2>If you are not sure</h2>
+        <p>Write anyway. We would rather remove something than argue about it, and a replacement costs us less than a dispute.</p>
+
+        <p><a class="back" href="${ALL_LESSONS_URL}">&larr; Browse all lesson plans</a></p>
+    </main>
+    ${renderSiteFooter()}
+</body>
+</html>`;
+    fs.writeFileSync('media/index.html', html, 'utf8');
+    console.log('Media page: media/index.html');
+}
+
 // ── STATIC /free/ ──
 // "Free ESL lesson plans for adults" is the highest-intent query a teacher can
 // type, and the only answer used to be a JS filter inside the app. This is a
@@ -2021,6 +2110,7 @@ ESL-plans.com is run by ${AUTHOR_NAME}, a practising online ESL tutor with 15 ye
 - [Free Conversation Questions](${SITE}/questions/)
 - [Teacher's Corner articles](${SITE}/articles/)
 - [About ${AUTHOR_NAME}](${SITE}/about/)
+- [Copyright, media credits and takedown](${SITE}/media/)
 - [How to Pay](${SITE}/how-to-pay.html)
 - [Terms of Service](${SITE}/docs/terms.html)
 - [Sitemap](${SITE}/sitemap.xml)
@@ -2069,10 +2159,14 @@ ${articleUrls}
 ${archiveUrls}
 ${questionSitemapUrls}
 ${hubUrls}
+    <url>
+        <loc>${SITE}/media/</loc>
+        <lastmod>${today}</lastmod>
+    </url>
 </urlset>`;
 
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
-console.log(`Sitemap: ${lessons.length + articles.length + topicArchiveUrls.length + levelArchiveUrls.length + questionPageUrls.length + (conversationQuestions.length ? 1 : 0) + (articles.length ? 1 : 0) + 2 + 2} URLs`);
+console.log(`Sitemap: ${lessons.length + articles.length + topicArchiveUrls.length + levelArchiveUrls.length + questionPageUrls.length + (conversationQuestions.length ? 1 : 0) + (articles.length ? 1 : 0) + 2 + 2 + 1} URLs`);
 console.log('All done!');
 
 // ── TELEGRAM AUTO-POST ──
