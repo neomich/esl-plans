@@ -6,7 +6,14 @@
     <atom:link href="https://esl-plans.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, 100+ plans, A2-C1.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 13 Nov 2026 08:39:08 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 11:48:56 GMT</lastBuildDate>
+    <item>
+        <title>Quality of Life Vs Cost of Living</title>
+        <link>https://esl-plans.com/lessons/quality-of-life-vs-cost-of-living</link>
+        <guid isPermaLink="true">https://esl-plans.com/lessons/quality-of-life-vs-cost-of-living</guid>
+        <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
+        <description>Page 1: The Global Value Matrix The lesson opens with a visual analysis of a chart plotting 306 cities based on cost of living versus quality of life. Students examine the four quadrants (Best Value, Premium Life, Budget Living, and Bad Value) and discuss why certain regions, like Europe or major U.S. cities, fall wher</description>
+    </item>
     <item>
         <title>Legacy Code: The Untouchables</title>
         <link>https://esl-plans.com/lessons/legacy-code-the-untouchables</link>
@@ -349,13 +356,6 @@
         <guid isPermaLink="true">https://esl-plans.com/lessons/pbj</guid>
         <pubDate>Wed, 19 Aug 2026 00:00:00 GMT</pubDate>
         <description>From high-society tea parties to WW1 rations: the PB&amp;J&apos;s history, twelve nuts and the passive voice. A2-B1 lesson, 60-90 min, free.</description>
-    </item>
-    <item>
-        <title>Who Is Tilly Norwood?</title>
-        <link>https://esl-plans.com/lessons/who-is-tilly-norwood</link>
-        <guid isPermaLink="true">https://esl-plans.com/lessons/who-is-tilly-norwood</guid>
-        <pubDate>Wed, 19 Aug 2026 00:00:00 GMT</pubDate>
-        <description>Can AI replace actors? Film vocabulary, celebrity interviews and the ethics of synthetic performers. B1-B2 adult lesson, 60-90 min.</description>
     </item>
 </channel>
 </rss>
