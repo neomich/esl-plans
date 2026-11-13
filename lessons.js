@@ -3791,7 +3791,7 @@ const lessonsCatalog = [
         "hasRar": true,
         "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/ive-been-to-25-countries.pdf"
     },
-    {
+        {
         "dateAdded": "2026-07-12",
         "title": "Astrology",
         "topics": [
@@ -3811,11 +3811,11 @@ const lessonsCatalog = [
         "visualSource": "images/b1_astrology.jpg",
         "keywords": "astrology zodiac signs horoscope synastry compatibility Barnum Effect Forer experiment Fire Earth signs psychics personality tests cognitive bias b1 b2",
         "objectives": [
-            "Explore personal beliefs about astrology and evaluate the accuracy of zodiac personality traits;",
-            "Analyze relationship compatibility and the concept of synastry through listening comprehension and chart analysis;",
-            "Understand the psychological phenomenon of the Barnum Effect and why people find vague personality descriptions so convincing."
+            "identify the 12 zodiac signs and match them to their core personality traits and elemental categories",
+            "evaluate relationship compatibility concepts through targeted listening tasks about synastry and personal horoscope",
+            "analyze the psychological reasons people believe in astrology by examining the Barnum effect and vague personality descriptions"
         ],
-        "description": "In this lesson, students begin by matching zodiac signs to their symbols and discussing their personal experiences with horoscopes, including whether their own sign matches their personality and which signs they find most misunderstood. They then examine specific personality traits associated with each sign and debate whether these characteristics are shaped by the stars or by environment and experience.\n\nThe lesson transitions to relationship dynamics, where learners listen to an audio segment about astrological compatibility, verify true/false statements about elemental matches (e.g., Fire and Earth signs), and analyze a synastry chart to determine which zodiac pairings are considered favorable or unfavorable.\n\nFinally, students explore the psychological reasons behind belief in astrology by learning about the Barnum Effect. They review statistics from the Forer experiment, read ten universally applicable personality statements, and discuss how this cognitive bias influences people's trust in psychics, online personality tests, and everyday decision-making.",
+        "description": "Page 1: Zodiac Signs & Core Traits\nThe lesson opens by introducing the 12 zodiac signs. Students match each sign (e.g., Aries, Taurus, Gemini) to its corresponding number and review core personality traits (such as courageous, calm, disciplined, or restless). They then evaluate six statements about astrology’s validity, debating whether star signs oversimplify human behavior or offer genuine insights. This sets the stage for a grounded discussion on personal experiences with horoscopes and star sign compatibility.\n\nPage 2: Synastry & Speaker Audio Tasks\nThe focus shifts to relationship dynamics. Students first listen to an audio track explaining \"synastry\" (the practice of comparing birth charts to check relationship compatibility). They mark specific statements as true or false, such as identifying which elements are fire signs and whether signs of the same element always understand each other well. Next, students listen to a second audio track featuring four speakers (Sofia, Robert, Daniel, and Maria). They must match each speaker to their zodiac sign based on the specific personality traits and behaviors described in the audio.\n\nPage 3: The Barnum Effect Video\nThe lesson concludes by examining the psychology behind astrological beliefs. Students watch a video explaining the \"Barnum Effect,\" which describes why people accept vague, general personality descriptions as highly accurate. They complete a 10-question quiz tracking statistics and psychological experiments, such as Forer’s study using sketches from astrology books. Finally, students read 10 classic \"B and discuss how these statements apply to almost anyone, leading to a final conversation about how this psychological trick influences daily decisions in work and relationships.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nPersonal Beliefs: Do you check your horoscope regularly, or do you think it is just for entertainment?\nRelationship Compatibility: Have you ever dated someone whose zodiac sign was supposed to be a \"perfect match\"? Did the relationship turn out as expected?\nThe Barnum Trick: Have you ever read a horoscope or taken an online personality test and thought, \"Wow, that's exactly me,\" only to realize later it was just vague?\n🧠 Target Lexicon & Vocabulary Focus\nZodiac Traits: Courageous, calm, smart, disciplined, restless, cheerful, balanced, friendly.\nAstrology Terms: Synastry, compatibility, fire signs, earth signs, horoscope, star sign, birth chart.\nPsychology Terms: The Barnum effect, vague, specific, desirable, accurate, generalizations.\n🎧 Multimedia & Authentic Materials Included\nPage 2 Audio Task 1 (Synastry): A targeted listening exercise where students mark statements about elemental compatibility and synastry as true or false.\nPage 2 Audio Task 2 (Speaker Matching): An authentic listening segment requiring students to match four distinct speakers (Sofia, Robert, Daniel, Maria) to their corresponding zodiac signs based on described behaviors.\nPage 3 Video Task: An educational video on the Barnum effect, paired with a 10-question quiz covering statistics (e.g., \"14% of Americans believe horoscopes can predict the future\") and Forer’s psychological experiment.\n⚠️ Critical Thinking Extension Work\nStatement Analysis: Students read 10 classic Barnum statements (e.g., \"You have a strong need for others to respect and appreciate you\") and discuss how these phrases are intentionally designed to apply to almost everyone.\nReal-World Application: Debating how the Barnum effect might influence the way people around them make decisions in work, relationships, or everyday life, and how to recognize when a description is too vague to be genuinely useful.",
         "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/b1_astrology.pdf",
         "audioUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/audio/b1_astrology_4_people.mp3",
         "audioUrls": [
@@ -3832,10 +3832,11 @@ const lessonsCatalog = [
         "mediaLabel": "The video links:",
         "links": [
             {
-                "label": "Video",
+                "label": "Link 1",
                 "url": "https://www.youtube.com/watch?v=NBXRzdzFnHk"
             }
-        ]
+        ],
+        "telegramRecap": null
     },
     {
         "dateAdded": "2026-07-11",
