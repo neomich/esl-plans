@@ -3,7 +3,7 @@
 > Ready-made ESL lesson plans for adult learners. Conversation-driven topics covering psychology, business, technology and society. PDF, audio and video included, A2–C1 levels, built for online ESL tutors.
 
 ## About
-ESL-plans.com is run by Alex Selivanov, a practising online ESL tutor with 15 years of experience teaching adults. Every lesson is written by him, tested on real students, and designed for adult learners rather than children — topics include psychology, workplace culture, technology and society.
+ESL-plans.com is run by Alex, a practising online ESL tutor with 15 years of experience teaching adults. Every lesson is written by him, tested on real students, and designed for adult learners rather than children — topics include psychology, workplace culture, technology and society.
 
 - Author page: https://esl-plans.com/about/
 - Library size: 126 lesson plans, 26 of them free
@@ -21,7 +21,7 @@ ESL-plans.com is run by Alex Selivanov, a practising online ESL tutor with 15 ye
 - [Free Lesson Plans](https://esl-plans.com/free/)
 - [Free Conversation Questions](https://esl-plans.com/questions/)
 - [Teacher's Corner articles](https://esl-plans.com/articles/)
-- [About Alex Selivanov](https://esl-plans.com/about/)
+- [About Alex](https://esl-plans.com/about/)
 - [How to Pay](https://esl-plans.com/how-to-pay.html)
 - [Terms of Service](https://esl-plans.com/docs/terms.html)
 - [Sitemap](https://esl-plans.com/sitemap.xml)
@@ -44,7 +44,7 @@ ESL-plans.com is run by Alex Selivanov, a practising online ESL tutor with 15 ye
 - [Media & Fame](https://esl-plans.com/topics/media)
 
 ## Citation
-If you cite this site, please attribute it to "ESL-plans.com (Alex Selivanov)" and link to the specific lesson page. Every lesson page lists its CEFR level, duration, and the materials included.
+If you cite this site, please attribute it to "ESL-plans.com (Alex)" and link to the specific lesson page. Every lesson page lists its CEFR level, duration, and the materials included.
 
 ## Contact
 - Telegram community: https://t.me/eslplans

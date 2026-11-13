@@ -62,7 +62,10 @@ const LEVEL_NAMES = { a2: 'A2', b1: 'B1', b2: 'B2', c1: 'C1' };
 // wrote it. The same Person @id is reused everywhere (lessons, articles, About)
 // and the sameAs list ties it to the real profiles, so they resolve to one
 // entity instead of a name that appears from nowhere.
-const AUTHOR_NAME = 'Alex Selivanov';
+// Public byline name only. The surname appears in exactly one place on the
+// site — docs/terms.html, where a legal contract needs the legal name — and
+// nowhere else: not in copy, not in schema, not in llms.txt.
+const AUTHOR_NAME = 'Alex';
 const AUTHOR_URL = `${SITE}/about/`;
 const AUTHOR_SAMEAS = [
     'https://www.linkedin.com/in/alex-esl-plans-8a3451235/',
@@ -88,6 +91,16 @@ const ORG_SAMEAS = [
 ];
 const AUTHOR_SCHEMA = JSON.stringify({ '@type': 'Person', name: AUTHOR_NAME, url: AUTHOR_URL, sameAs: AUTHOR_SAMEAS });
 const ORG_SCHEMA = JSON.stringify({ '@type': 'Organization', name: 'ESL-plans.com', url: `${SITE}/`, sameAs: ORG_SAMEAS });
+
+// ── LIBRARY SIZE ──
+// Copy never quotes the exact total: "126" is wrong the moment lesson 127 is
+// published, and then somebody has to remember where all the numbers live.
+// The public figure is the next round hundred (100+ today, 200+ at 200), which
+// stays true for a year. The free count is exact because it is short and
+// genuinely useful, and it is computed from the same data that renders /free/.
+const TOTAL_LESSONS = lessons.length;
+const FREE_LESSONS_COUNT = lessons.filter(l => l.isFree === true).length;
+const TOTAL_PLUS = `${Math.floor(TOTAL_LESSONS / 100) * 100}+`;
 
 function formatLongDate(value) {
     const m = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
@@ -722,7 +735,16 @@ lessons.forEach(lesson => {
         ${breadcrumbHtml}
 
         <h1>${lesson.title}</h1>
+
+        <div style="text-align:center; margin:18px 0 22px;">
+            <a id="view-on-site-btn-top" href="${SITE}/#lesson-${slug}"
+               style="display:inline-block; background:#b8480d; color:white; padding:14px 32px; border-radius:50px; text-decoration:none; font-size:17px; font-weight:800; box-shadow:0 4px 16px rgba(201,82,16,0.3);">
+                View &amp; Download This Lesson →
+            </a>
+        </div>
+
         ${coverHtml}
+
         <div class="meta">
             <span class="meta-badge">🎓 ${lesson.categoryLabel}</span>
             <span class="meta-badge">🥉 ${lessonLevel ? `<a href="${levelUrl(lessonLevel)}" style="color:inherit;text-decoration:none;">${lesson.levelLabel}</a>` : lesson.levelLabel}</span>
@@ -788,7 +810,7 @@ lessons.forEach(lesson => {
         ${relatedHtml}
 
         <div class="cta-box">
-            <p>Looking for more ESL lesson plans for adult learners? Browse our full library of 100+ conversation-driven plans.</p>
+            <p>Looking for more ESL lesson plans for adult learners? Browse our full library of ${TOTAL_PLUS} conversation-driven plans.</p>
             <a href="${ALL_LESSONS_URL}" class="cta-btn">Browse All Lesson Plans →</a>
         </div>
 
@@ -813,6 +835,74 @@ console.log(`Descriptions: ${handWrittenCount} hand-written, ${autoCount} auto-g
 
 // ── GENERATE ARTICLE PAGES ──
 let articles = [];
+// ── ARTICLE ↔ LESSON LINKS ──
+// Articles used to point at "#lesson-<slug>", a fragment that only resolves
+// inside the SPA, so in plain HTML an article linked to no lesson at all.
+// Each article carries an explicit relatedLessons list; when a new one does
+// not, the list is derived from the text: lessons whose titles are actually
+// named in the article. No match means no block — a wrong link is worse than
+// no link, and the whole point is that the links be real.
+function articlePlainText(article) {
+    return String(`${article.title || ''} ${article.intro || ''} ${article.body || ''}`)
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/&#?\w+;/g, ' ')
+        .replace(/[^a-z0-9]+/gi, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+}
+
+function relatedLessonsForArticle(article) {
+    // Accept a real slug or the lesson title: "life-3-0" and "Life 3.0" both
+    // resolve to the page at /lessons/life-30 (slugify strips the dot). A typo
+    // is reported in the build log instead of silently shrinking the list.
+    const key = value => String(value).toLowerCase().replace(/[^a-z0-9]/g, '');
+    const find = value => lessons.find(l => key(l.title) === key(value));
+
+    if (Array.isArray(article.relatedLessons)) {
+        const picked = [];
+        for (const value of article.relatedLessons) {
+            const lesson = find(value);
+            if (lesson) picked.push(lesson);
+            else console.log(`⚠️  relatedLessons: "${value}" does not match a lesson (${article.title})`);
+        }
+        if (picked.length) {
+            return { lessons: picked.slice(0, 5), heading: 'Lesson plans on this topic', mentioned: true };
+        }
+    }
+
+    const plain = ` ${articlePlainText(article)} `;
+    const hits = [];
+    for (const lesson of lessons) {
+        const title = String(lesson.title)
+            .replace(/[^a-z0-9]+/gi, ' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+            .toLowerCase();
+        if (title.length < 6) continue;
+        const words = title.split(' ').filter(Boolean);
+        const occurrences = plain.split(` ${title} `).length - 1;
+        if (!occurrences) continue;
+        // A one-word title ("Purpose", "Teenagers") also appears as ordinary
+        // vocabulary, so it only counts when the article keeps coming back to
+        // it. A multi-word title is specific enough on its own.
+        if (words.length === 1 && occurrences < 2) continue;
+        hits.push({ lesson, score: occurrences * (words.length > 1 ? 10 : 4) });
+    }
+    hits.sort((a, b) => b.score - a.score || String(a.lesson.title).localeCompare(String(b.lesson.title)));
+    if (hits.length) {
+        return { lessons: hits.slice(0, 4).map(h => h.lesson), heading: 'Lesson plans mentioned in this article', mentioned: true };
+    }
+
+    // Nothing in the text names a lesson. Rather than invent a thematic link,
+    // show the newest plans under an honest heading — every future article gets
+    // a useful block without pretending the two are related.
+    const newest = [...lessons]
+        .sort((a, b) => String(b.dateAdded || '').localeCompare(String(a.dateAdded || '')))
+        .slice(0, 4);
+    return { lessons: newest, heading: 'Newest lesson plans', mentioned: false };
+}
+
 if (fs.existsSync('articles.js')) {
     const articlesContent = fs.readFileSync('articles.js', 'utf8');
     try {
@@ -840,6 +930,18 @@ articles.forEach(article => {
     const bodyMeta = escapeAttr(metaPlain);
     const articleISO = toISODate(article.date);
     const articleImage = `${SITE}/images/og-image.jpg`;
+    const related = relatedLessonsForArticle(article);
+    const relatedHtml = related.lessons.length ? `
+        <div class="related">
+            <h2>${related.heading}</h2>
+            ${related.lessons.map(l => `<a href="${lessonUrl(slugify(l.title))}">
+                <span class="t">${escapeAttr(l.title)}</span>
+                <span class="m">${escapeAttr(l.levelLabel)} &middot; ${escapeAttr(l.duration)}${l.isFree ? ' &middot; <span class="free">Free</span>' : ''}</span>
+            </a>`).join('\n            ')}
+        </div>` : '';
+    const mentionsJson = related.mentioned && related.lessons.length
+        ? `,"mentions":${JSON.stringify(related.lessons.map(l => ({ '@type': 'Course', name: l.title, url: lessonUrl(slugify(l.title)) })))}`
+        : '';
 
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -861,7 +963,7 @@ articles.forEach(article => {
     <meta name="twitter:title" content="${escapeAttr(article.title)}">
     <meta name="twitter:description" content="${bodyMeta}">
     <meta name="twitter:image" content="${articleImage}">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${jsonSafe(article.title)}","description":"${jsonSafe(bodyPlain)}","author":${AUTHOR_SCHEMA},"publisher":${ORG_SCHEMA},"datePublished":"${articleISO}","dateModified":"${articleISO}","inLanguage":"en","url":"${articleUrl(slug)}","mainEntityOfPage":{"@type":"WebPage","@id":"${articleUrl(slug)}"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${jsonSafe(article.title)}","description":"${jsonSafe(bodyPlain)}","author":${AUTHOR_SCHEMA},"publisher":${ORG_SCHEMA},"datePublished":"${articleISO}","dateModified":"${articleISO}","inLanguage":"en","url":"${articleUrl(slug)}","mainEntityOfPage":{"@type":"WebPage","@id":"${articleUrl(slug)}"}${mentionsJson}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"${jsonSafe(article.title)}","acceptedAnswer":{"@type":"Answer","text":"${jsonSafe(bodyPlain)}"}}]}</script>
     <style>
         body{font-family:'Segoe UI',sans-serif;background:#fff5ee;margin:0;padding:0}
@@ -875,6 +977,13 @@ articles.forEach(article => {
         .cta{margin-top:40px;padding:24px;background:white;border-radius:16px;border-left:4px solid #c95210;text-align:center}
         .cta p{color:#555;margin-bottom:16px}
         .cta a{display:inline-block;background:#b8480d;color:white;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700}
+        .related{margin-top:40px;border-top:1px dashed #e2d5c9;padding-top:22px}
+        .related h2{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#6b6b6b;margin:0 0 12px}
+        .related a{display:block;background:white;border:1px solid #f0e6dd;border-radius:12px;padding:13px 16px;margin-bottom:8px;text-decoration:none}
+        .related a:hover{border-color:#b8480d}
+        .related .t{display:block;font-weight:700;font-size:15px;color:#333;line-height:1.4}
+        .related .m{display:block;font-size:12px;color:#6b6b6b;margin-top:3px}
+        .related .free{color:#2e7d32;font-weight:700}
         .back{display:inline-block;margin-top:24px;color:#a9440c;text-decoration:none;font-weight:600;font-size:14px}
     </style>
 </head>
@@ -887,9 +996,10 @@ articles.forEach(article => {
         <p class="meta">${article.date || ''} &middot; by <a href="${SITE}/about/" style="color:#a9440c;text-decoration:underline;">${AUTHOR_NAME}</a> &middot; ESL-plans Teacher's Corner</p>
         ${introSafe ? `<p style="font-style:italic; color:#666; border-left:3px solid #c95210; padding-left:14px; margin-bottom:24px; line-height:1.7;">${introSafe}</p>` : ''}
         <div class="body">${bodySafe}</div>
+        ${relatedHtml}
         <div class="cta">
             <p>Looking for ready-made ESL lesson plans for adult learners?</p>
-            <a href="${ALL_LESSONS_URL}">Browse 100+ Lesson Plans →</a>
+            <a href="${ALL_LESSONS_URL}">Browse ${TOTAL_PLUS} Lesson Plans →</a>
         </div>
         <a class="back" href="${SITE}/">&larr; Back to ESL-plans.com</a>
     </main>
@@ -986,7 +1096,7 @@ if (articles.length && !articles.some(a => slugify(a.title) === 'index')) {
         <h1>Teacher's Corner</h1>
         <p class="intro">Practical, opinionated writing about teaching English to adults online — what works, what wastes your time, and why so much textbook advice falls flat with real students. No fluff, no listicles for the sake of it.</p>
             ${cardsHtml}
-        <a class="back" href="${ALL_LESSONS_URL}">Browse 100+ ESL lesson plans &rarr;</a>
+        <a class="back" href="${ALL_LESSONS_URL}">Browse ${TOTAL_PLUS} ESL lesson plans &rarr;</a>
     </main>
     ${renderSiteFooter()}
 </body>
@@ -1092,7 +1202,7 @@ try {
     </div>
     <div>
         <h3>All lesson plans</h3>
-        <a class="all" href="${ALL_LESSONS_URL}">Browse all 100+ plans &rarr;</a>
+        <a class="all" href="${ALL_LESSONS_URL}">Browse all ${TOTAL_PLUS} plans &rarr;</a>
         <a href="${SITE}/free/">Free lesson plans</a>
         <a href="${SITE}/questions/">Free conversation questions</a>
         <a href="${SITE}/articles/">Teacher's Corner articles</a>
@@ -1107,6 +1217,25 @@ try {
     }
 } catch (e) {
     console.log('⚠️ Error splicing nav into index.html — index.html was NOT modified:', e.message);
+}
+
+// ── LIVE COUNTS IN index.html ──
+// The home page is hand-written, so its copy used to say "100+ lessons / 26
+// free" as literals. Those numbers now sit between markers and are rewritten
+// from lessons.js on every build, so publishing a lesson updates the home page,
+// the pricing page and the stat strip without anybody editing HTML.
+try {
+    const indexPath = 'index.html';
+    const indexContent = fs.readFileSync(indexPath, 'utf8');
+    const withCounts = indexContent
+        .replace(/(<!--COUNT:PLUS-->)[\s\S]*?(<!--\/COUNT-->)/g, (m, open, close) => open + TOTAL_PLUS + close)
+        .replace(/(<!--COUNT:FREE-->)[\s\S]*?(<!--\/COUNT-->)/g, (m, open, close) => open + FREE_LESSONS_COUNT + close);
+    if (withCounts !== indexContent) {
+        fs.writeFileSync(indexPath, withCounts, 'utf8');
+        console.log(`index.html counts: ${TOTAL_PLUS} plans, ${FREE_LESSONS_COUNT} free`);
+    }
+} catch (e) {
+    console.log('⚠️ Error updating counts in index.html:', e.message);
 }
 
 // ── GENERATE TOPIC & LEVEL ARCHIVE PAGES ──
@@ -1327,7 +1456,7 @@ function renderQuestionPage(q) {
         url: url,
         inLanguage: 'en',
         isAccessibleForFree: true,
-        author: { '@type': 'Person', name: 'Alex Selivanov' },
+        author: { '@type': 'Person', name: AUTHOR_NAME },
         publisher: { '@type': 'Organization', name: 'ESL-plans.com', url: `${SITE}/` },
         about: { '@type': 'Thing', name: `ESL conversation questions: ${q.topic}` }
     });
@@ -1594,12 +1723,12 @@ if (lessons.some(l => slugify(l.title) === 'index')) {
 // an AI answer engine building a citation) had no page to land on.
 if (!fs.existsSync('about')) fs.mkdirSync('about');
 {
-    const aboutDesc = 'Alex Selivanov is a practising online ESL tutor with 15 years of experience teaching adults. The teacher behind the 100+ lesson plans on ESL-plans.com.';
+    const aboutDesc = `${AUTHOR_NAME} is a practising online ESL tutor with 15 years of experience teaching adults. The teacher behind the ${TOTAL_PLUS} lesson plans on ESL-plans.com.`;
     const aboutSchema = JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'AboutPage',
         url: `${SITE}/about/`,
-        name: 'About Alex Selivanov — ESL-plans.com',
+        name: `About ${AUTHOR_NAME} — ESL-plans.com`,
         description: aboutDesc,
         mainEntity: { '@type': 'Person', name: AUTHOR_NAME, url: AUTHOR_URL, sameAs: AUTHOR_SAMEAS, jobTitle: 'Online ESL tutor', knowsLanguage: ['en', 'ru'], worksFor: { '@type': 'Organization', name: 'ESL-plans.com', url: `${SITE}/` } }
     });
@@ -1608,12 +1737,12 @@ if (!fs.existsSync('about')) fs.mkdirSync('about');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Alex Selivanov — ESL Lesson Plans for Adults | ESL-plans.com</title>
+    <title>About ${AUTHOR_NAME} — ESL Lesson Plans for Adults | ESL-plans.com</title>
     <meta name="description" content="${escapeAttr(aboutDesc)}">
     <link rel="canonical" href="${SITE}/about/">
     <meta property="og:type" content="profile">
     <meta property="og:url" content="${SITE}/about/">
-    <meta property="og:title" content="About Alex Selivanov — ESL-plans.com">
+    <meta property="og:title" content="About ${AUTHOR_NAME} — ESL-plans.com">
     <meta property="og:description" content="${escapeAttr(aboutDesc)}">
     <meta property="og:image" content="${SITE}/images/alex.jpg">
     <meta property="og:site_name" content="ESL-plans.com">
@@ -1642,11 +1771,11 @@ if (!fs.existsSync('about')) fs.mkdirSync('about');
 <body>
     <main class="container">
         <a class="logo" href="${SITE}/"><span class="esl">ESL</span>-<span class="plans">plans</span></a>
-        <h1>About Alex Selivanov</h1>
+        <h1>About ${AUTHOR_NAME}</h1>
         <p class="standfirst">One teacher, 15 years of adult learners online, and every lesson plan on this site written by the same person.</p>
 
         <div class="bio">
-            <img src="${SITE}/images/alex.jpg" alt="Alex Selivanov, online ESL tutor and founder of ESL-plans.com" width="180" height="176">
+            <img src="${SITE}/images/alex.jpg" alt="${AUTHOR_NAME}, online ESL tutor and founder of ESL-plans.com" width="180" height="176">
             <div>
                 <p>Hi there, I'm <strong>Alex!</strong> Back when I was a student, a teacher of mine used to scribble on the board: <em>"Learn without learning!"</em> It completely flipped my perspective on education. I followed in those footsteps and became an English tutor myself — until I thought, why not turn the tables? <em>"Teach without teaching!"</em> I've spent the last <strong>15 years</strong> "not teaching" and having a blast instead.</p>
                 <p>I specialise in teaching <strong>adult learners online</strong> — professionals, executives, and curious minds aged 25-55 who want real conversations, not textbook drills. My students have ranged from Russian IT engineers to French marketing directors to Brazilian entrepreneurs. What they all have in common: they're smart, busy, and bored of <em>Spotlight</em> and <em>English File.</em> So I build my own <strong>ESL lesson plans for adults</strong> filled with original topics and a healthy spoonful of weirdness and quirks.</p>
@@ -1660,7 +1789,7 @@ if (!fs.existsSync('about')) fs.mkdirSync('about');
             <li>Teach adults online, one to one and in small groups — still taking students.</li>
             <li>Write every lesson plan in the library myself. No committee, no freelancers, no AI-generated filler.</li>
             <li>Build each plan around a real article, video or podcast, so the conversation has something concrete to stand on.</li>
-            <li>Keep 26 plans completely free, no account required.</li>
+            <li>Keep ${FREE_LESSONS_COUNT} plans completely free, no account required.</li>
         </ul>
 
         <h2>Find me</h2>
@@ -1815,7 +1944,7 @@ if (!fs.existsSync('free')) fs.mkdirSync('free');
     <title>ESL-plans.com — new lesson plans for adults</title>
     <link>${SITE}/</link>
     <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml" />
-    <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, 100+ plans, A2-C1.</description>
+    <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, ${TOTAL_PLUS} plans, A2-C1.</description>
     <language>en</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${itemXml}
@@ -1861,6 +1990,68 @@ const hubUrls = [`${SITE}/free/`, `${SITE}/about/`].map(u => `    <url>
         <loc>${u}</loc>
         <lastmod>${today}</lastmod>
     </url>`).join('\n');
+
+// ── llms.txt ──
+// Generated rather than hand-maintained: the library size and the free count
+// used to live in this file as literals, which is exactly the kind of number
+// that goes stale silently. An LLM reading a stale count is worse than reading
+// no count at all.
+{
+    const llms = `# ESL-plans.com
+
+> Ready-made ESL lesson plans for adult learners. Conversation-driven topics covering psychology, business, technology and society. PDF, audio and video included, A2–C1 levels, built for online ESL tutors.
+
+## About
+ESL-plans.com is run by ${AUTHOR_NAME}, a practising online ESL tutor with 15 years of experience teaching adults. Every lesson is written by him, tested on real students, and designed for adult learners rather than children — topics include psychology, workplace culture, technology and society.
+
+- Author page: ${SITE}/about/
+- Library size: ${TOTAL_LESSONS} lesson plans, ${FREE_LESSONS_COUNT} of them free
+- Levels: A2, B1, B2, C1 (CEFR)
+- Every lesson includes: PDF handout, answer key, discussion questions, and audio and/or video
+
+## Pricing
+- Guest: Free — access to the ${FREE_LESSONS_COUNT} free lesson plans, no account
+- Contributor: $19/month — the full library
+- Friend: $99/year — the full library + planner app + mentoring + private chat
+
+## Key Links
+- [Homepage](${SITE})
+- [All ${TOTAL_LESSONS} Lesson Plans](${ALL_LESSONS_URL})
+- [Free Lesson Plans](${SITE}/free/)
+- [Free Conversation Questions](${SITE}/questions/)
+- [Teacher's Corner articles](${SITE}/articles/)
+- [About ${AUTHOR_NAME}](${SITE}/about/)
+- [How to Pay](${SITE}/how-to-pay.html)
+- [Terms of Service](${SITE}/docs/terms.html)
+- [Sitemap](${SITE}/sitemap.xml)
+- [RSS feed](${SITE}/feed.xml)
+
+## Browse by level
+- [A2 lesson plans](${SITE}/levels/a2)
+- [B1 lesson plans](${SITE}/levels/b1)
+- [B2 lesson plans](${SITE}/levels/b2)
+- [C1 lesson plans](${SITE}/levels/c1)
+
+## Browse by topic
+- [Psychology](${SITE}/topics/psychology)
+- [Society](${SITE}/topics/society)
+- [Technology](${SITE}/topics/technology)
+- [Work & Career](${SITE}/topics/work)
+- [Business](${SITE}/topics/business)
+- [Life & Relationships](${SITE}/topics/life)
+- [Travel](${SITE}/topics/travel)
+- [Media & Fame](${SITE}/topics/media)
+
+## Citation
+If you cite this site, please attribute it to "ESL-plans.com (${AUTHOR_NAME})" and link to the specific lesson page. Every lesson page lists its CEFR level, duration, and the materials included.
+
+## Contact
+- Telegram community: https://t.me/eslplans
+- Email: esl-plans@proton.me
+`;
+    fs.writeFileSync('llms.txt', llms, 'utf8');
+    console.log(`llms.txt: ${TOTAL_LESSONS} lessons, ${FREE_LESSONS_COUNT} free`);
+}
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
