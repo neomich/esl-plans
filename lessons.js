@@ -6,6 +6,48 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-13",
+        "title": "Quality of Life Vs Cost of Living",
+        "topics": [
+            "society",
+            "work",
+            "life",
+            "travel"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "90 min",
+        "visualSource": "images/b1_cost_quality.jpg",
+        "keywords": "quality of life vs cost of living society work life travel b1-b2",
+        "objectives": [
+            "analyze the real-world trade-offs between cost of living and quality of life using a global city matrix",
+            "practice listening comprehension by identifying specific lifestyle factors from four expats living in different global cities",
+            "evaluate the reality of relocating abroad with a million dollars through targeted video gap-fill and comprehension tasks"
+        ],
+        "description": "Page 1: The Global Value Matrix\nThe lesson opens with a visual analysis of a chart plotting 306 cities based on cost of living versus quality of life. Students examine the four quadrants (Best Value, Premium Life, Budget Living, and Bad Value) and discuss why certain regions, like Europe or major U.S. cities, fall where they do. This sparks a grounded debate about what makes a location truly appealing and whether high costs always guarantee a better lifestyle.\n\nPage 2: Pre-Listening & Core Audio Task\nStudents categorize everyday phrases as either \"Quality of Life\" or \"Cost of Living\" factors to build foundational vocabulary. They then listen to an audio track featuring four individuals (Aigerim in Astana, Beat in Zurich, Pim in Chiang Mai, and Marcus in Los Angeles) describing their daily realities. Students match specific challenges and benefits (like affordable food, severe traffic, or high income taxes) to the correct speaker, leading to a discussion on whose lifestyle they would prefer and what they would be willing to sacrifice.\n\nPage 3: The Million-Dollar Move (Video Gap-Fill)\nThe focus shifts to a hypothetical scenario. Students watch a video introduction about where a million dollars can still buy a completely new life. They complete a targeted gap-fill exercise using specific vocabulary from the clip (e.g., ordinary, stress, lifestyle, expensive, independence, food, comfort, freedom), setting up the context for the final analysis. Students watch a second video revealing the top country choice for this budget, completing a True/False task about housing trends, infrastructure, and international demand. The lesson wraps up with an imaginative discussion on where they would move if they won the lottery, what their non-negotiable city requirements are, and what they would miss most about their current hometown.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Big Trade-Off: Which aspect of living are you willing to give up? Would you choose a lower quality of life to save money, or a high cost of living to live in a better environment?\nYour Hometown: If your city is not on the chart, which quadrant does it belong in? What are two examples of the cost of living and quality of life in your area?\nThe Lottery Scenario: If you had a million dollars tomorrow, what is the very first thing you think you would miss about your current hometown?\n🧠 Target Lexicon & Vocabulary Focus\nQuality of Life Factors: Relaxing lifestyle, clean environment, welcoming community, exceptional public safety.\nCost of Living Factors: Affordable food delivery, expensive electricity bills, severe daily traffic jams, high income taxes.\nRelocation Vocabulary: Ordinary, stress, lifestyle, expensive, independence, food, comfort, freedom.\n🎧 Multimedia & Authentic Materials Included\nGlobal City Matrix Chart: A visual data analysis tool plotting 306 cities across four distinct value quadrants.\n4-Speaker Expat Audio Task: A targeted listening exercise featuring Aigerim, Beat, Pim, and Marcus, requiring students to map specific lifestyle pros and cons to their respective cities.\nVideo Task 1 (Introduction): A gap-fill listening activity tracking the vocabulary used to describe how a million dollars buys different realities globally.\nVideo Task 2 (The Number One Pick): A True/False comprehension check focusing on housing trends, infrastructure, and international demand in the top-ranked country.\n⚠️ Critical Thinking Extension Work\nEvaluating the \"Perfect Country\" Myth: Discussing the video's claim that \"the perfect country doesn't exist, but the perfect country for you does,\" and having students list their top three non-negotiable requirements for an ideal city.\nComparing Lives: Analyzing the four expat stories to determine which lifestyle aligns best with the students' personal values, and identifying which trade-offs they would absolutely refuse to make.",
+        "telegramRecap": "From \"Best Value\" to \"Premium Life\". Listen to 4 expats, weigh cost of living vs. quality of life, and watch videos on the ultimate relocation pick.",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=sYa8jtSJghE"
+            }
+        ],
+        "hasPdf": true,
+        "hasAudio": true,
+        "hasRar": true,
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/quality-of-life-vs-cost-of-living.pdf"
+    },
+
+
+
+    {
         "dateAdded": "2026-11-11",
         "title": "Legacy Code: The Untouchables",
         "topics": [
