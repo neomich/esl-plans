@@ -4812,7 +4812,7 @@ const lessonsCatalog = [
         "hasRar": true,
         "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/affectations.pdf"
     },
-    {
+        {
         "dateAdded": "2026-06-24",
         "title": "Algorithms",
         "topics": [
@@ -4831,22 +4831,24 @@ const lessonsCatalog = [
         "keywords": "algorithms data social media e-commerce decision making AI artificial intelligence ethics autonomy technology digital life podcast video b1 b2",
         "heading": "What's Inside 'Algorithms'",
         "objectives": [
-            "Define algorithms and understand their step-by-step nature;",
-            "Explore how algorithms function in daily life, from e-commerce to social media;",
-            "Critically evaluate the positive and negative impacts of algorithmic decision-making."
+            "earn and apply basic culinary vocabulary to write clear, step-by-step instructions",
+            "understand the concept of an algorithm as a precise set of rules by analyzing a literal recipe interpretation and a targeted video explanation",
+            "evaluate the real-world impact of algorithms on daily life through a structured debate and a targeted podcast listening task"
         ],
-        "description": "In this lesson, students begin by clarifying the concept of an algorithm through a humorous cooking analogy, rewriting unclear instructions into precise steps. They then watch a video explaining computer basics before diving into the mechanics of modern algorithms, analyzing processes like data collection, profile matching, and dynamic triggers.\n\nStudents review arguments regarding algorithm use, distinguishing between benefits (e.g., streamlining tasks) and drawbacks (e.g., manipulation, loss of free will), and verify their opinions via a podcast.\n\nThe lesson culminates in a debate on ethical dilemmas, such as whether to trust AI with personal relationships or if predictive technology threatens human autonomy.\n\n(Watch the video: 00:25-05:06).",
+        "description": "Page 1: Culinary Vocabulary & Recipe Writing\nThe lesson opens with a practical vocabulary task. Students match 12 common kitchen items (e.g., mayo, cucumber, loaf of bread, avocado, head of lettuce, tomatoes, kitchen knife, glass bowl, tin of tuna, tablespoon) to their corresponding pictures. They then use this vocabulary to write a simple, 3-sentence recipe, establishing the foundational idea of giving clear, sequential instructions.\n\nPage 2: The PB&J Algorithm & Video Explanation\nStudents examine a flawed, overly literal interpretation of a recipe to understand how algorithms require exact, unambiguous steps to function correctly. They rewrite the confusing instructions to make them clear. Next, they watch a video where an expert explains the concept of an algorithm to a child using a peanut butter and jelly sandwich example. Students complete a True/False comprehension check based on the video, solidifying the definition of an algorithm as clear, step-by-step instructions used to solve a problem or complete a task.\n\nPage 3: Algorithms in Daily Life & Podcast Discussion\nThe focus shifts to the broader impact of technology. Students review a 5-step e-commerce algorithm model (Data Collection, Profile Matching, Ranking and Sorting, Dynamic Triggers, Feedback Loop) and identify real-world examples, such as GPS routing, dating app matching, and dynamic airline pricing. They then evaluate 10 arguments for and against daily algorithm use (e.g., streamlining tedious tasks vs. exploiting psychology for screen time). Students listen to a podcast to verify their choices and hear the speakers' reasoning, concluding the lesson with a discussion on how these invisible rules shape personal choices and global systems.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nLiteral Instructions: Why did John’s recipe fail? How does this show the need for extreme precision when giving instructions to a computer or a machine?\nAlgorithm Impact: Which of the 10 arguments for or against algorithms do you agree with the most? Do algorithms make your life easier or more controlled?\nReal-World Examples: Can you identify an algorithm you interact with daily (e.g., social media feeds, GPS, dating apps)? How does it change your behavior?\n🧠 Target Lexicon & Vocabulary Focus\nCulinary Items: Mayo, bone-in steak, kitchen knife, cucumber, loaf of bread, avocado, head of lettuce, tomatoes, chopsticks, glass bowl, tin of tuna, tablespoon.\nAlgorithm Steps: Data Collection, Profile Matching, Ranking and Sorting, Dynamic Triggers, Feedback Loop.\nDebate Language: Streamline tedious tasks, expand access to knowledge, flatten cultural diversity, exploit psychology, dictate information.\n📺 Multimedia & Authentic Materials Included\nPage 2 Video Task: A targeted viewing exercise featuring an expert explaining the concept of an algorithm to a child using a peanut butter and jelly sandwich, paired with a True/False comprehension check.\nPage 3 Audio Task: A podcast discussion where speakers evaluate the positive and negative arguments of daily algorithm use, allowing students to verify their prior choices and hear native-level reasoning.\n⚠️ Critical Thinking Extension Work\nArgument Evaluation: Students actively sort 10 statements about algorithm use into \"positive\" or \"negative\" categories before listening, then adjust their views based on the podcast evidence.\nReal-World Mapping: Students select one hidden background algorithm (e.g., high-frequency stock market trading, city traffic light timing, or credit scoring) and explain its step-by-step process using the 5-step e-commerce model as a template.\n(Watch the video: 00:25-05:06).",
         "mediaLabel": "The video links:",
         "links": [
             {
-                "label": "Video",
+                "label": "Link 1",
                 "url": "https://www.youtube.com/watch?v=fkIvmfqX-t0"
             }
         ],
         "hasPdf": true,
         "hasAudio": true,
         "hasRar": true,
-        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/algorithms.pdf"
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/algorithms.pdf",
+        "isFree": false,
+        "telegramRecap": null
     },
         {
         "dateAdded": "2026-06-24",
