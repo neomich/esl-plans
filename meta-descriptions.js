@@ -20,6 +20,10 @@
 
 const lessonDescriptions = {
 
+    "The Psychology of Greed": "Watch The Black Hole, decode Bruegel's greed engraving and test Gordon Gekko's good greed speech. Second conditional practice. B2-C1, 90-120 min.",
+
+    "Quality of Life Vs Cost of Living": "Four expats weigh rent, salaries and daily life: what cost-of-living numbers miss about quality of life. Listening and debate. B1-B2, 90 min.",
+
     "Legacy Code: The Untouchables": "Broken systems that survive: workplace legacy code, then India's 3,000-year-old caste system. Advanced vocabulary, audio and video. B2-C1, 90 min.",
 
     "Going and Coming": "Rockwell's holiday painting sparks talk of post-vacation blues, plus Past Simple vs Present Perfect and a stray cat's second chance. A2-B1, 60 min, free.",
