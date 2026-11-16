@@ -6,6 +6,53 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-16",
+        "title": "The Psychology of Greed",
+        "topics": [
+            "psychology",
+            "society",
+            "life",
+            "art",
+            "grammar"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b2-c1",
+        "levelLabel": "B2-C1",
+        "duration": "90-120 min",
+        "visualSource": "images/b2_greed.jpg",
+        "keywords": "the psychology of greed psychology society life art grammar b2-c1",
+        "objectives": [
+            "review the second conditional to discuss hypothetical choices and analyze human nature through a short film",
+            "evaluate the concept of \"good greed\" versus destructive ambition using a classic movie clip and historical quotes",
+            "analyze animal metaphors in music and literature through Pink Floyd lyrics and complete an animal idioms homework task"
+        ],
+        "description": "Page 1: \"The Black Hole\" & Bruegel’s Engraving\nThe lesson opens with the short film The Black Hole by Phil & Olly, showing a sleep-deprived office worker who discovers a way to photocopy objects through a wall. Students use the second conditional (If + past simple, ... would + base verb) to discuss what they would do with this power. Next, the class examines Pieter Bruegel the Elder’s 16th-century engraving Greed. Students listen to an Art Exploration podcast and match specific descriptions to the lettered scenes in the artwork. This leads to a discussion on what modern items people might fight over today and when the desire for a better life crosses into plain greed.\n\nPage 2: Wall Street & \"Good Greed\"\nThe focus shifts to modern corporate culture. Students watch the famous \"Greed is good\" speech by Gordon Gekko from the 1987 movie Wall Street. They discuss the \"survival of the fittest\" philosophy and whether ambition can ever be a positive driving force. Students then complete a matching task linking eight types of \"good greed\" (e.g., greed for knowledge, self-improvement, independence, recognition) to real-world example sentences. The page concludes with a review of quotes from Rebecca M. Blank, Mahatma Gandhi, and the proverb \"Pigs get fat, hogs get slaughtered,\" prompting a debate on the limits of ambition.\n\nPage 3: Pink Floyd’s Animals & Lyric Analysis\nThe lesson concludes with an in-depth examination of Pink Floyd’s 1977 concept album Animals. Students read about the album’s three main metaphors: Dogs (ruthless businessmen), Pigs (corrupt authority figures), and Sheep (blindly obedient masses). They listen to three short song clips, read the lyrics, and use context clues to guess the meaning of bolded phrases (e.g., charade, well-heeled big wheel, terminal shock). After discussing which animal metaphor they identify with, the class wraps up with a homework task matching eight animal idioms (Fox, Owl, Lion, Snake, Butterfly, Turtle, Peacock, Elephant) to their corresponding personality traits.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Black Hole Choice: If you found a black hole, would you use it to steal money, or just grab snacks from the vending machine? Why?\nModern Greed: If Bruegel drew his Greed engraving today, what modern items would people be fighting over?\nSurvival of the Fittest: Do you agree with Gordon Gekko that greed \"clarifies and cuts through,\" or does it conflict with modern values of cooperation?\nAnimal Identification: Which Pink Floyd animal (Dog, Pig, or Sheep) do you identify with most in your professional or personal life, and why?\n🧠 Target Lexicon & Grammar Focus\nSecond Conditional: If + past simple, ... would + base verb (for hypothetical or unlikely situations).\n\"Good Greed\" Vocabulary: Greed for knowledge, self-improvement, independence, recognition, creativity, new experiences.\nPink Floyd Lyric Vocabulary: Charade, well-heeled big wheel, pig bin, terminal shock, pick out the easy meat, strike when the moment is right.\nAnimal Idioms: Fox (clever/cunning), Owl (wise/knowledgeable), Lion (brave/strong), Snake (deceitful/sly), Butterfly (social/lively), Turtle (cautious/patient), Peacock (showy/vain), Elephant (wise/loyal).\n🎧 Multimedia & Authentic Materials Included\nPage 1 Short Film: The Black Hole by Phil & Olly, used as a springboard for second conditional practice.\nPage 1 Audio Task: An Art Exploration podcast requiring students to match 10 specific vocabulary descriptions to scenes in Bruegel’s Greed engraving.\nPage 2 Video Task: The iconic \"Greed is good\" speech from Wall Street (1987), followed by a matching task for positive ambition traits.\nPage 3 Audio Tasks: Three short song excerpts from Pink Floyd’s Animals (\"Dogs,\" \"Pigs,\" \"Sheep\") for lyric analysis and context-clue vocabulary practice.\n⚠️ Critical Thinking Extension Work\nHomework Application: Students complete the animal idioms matching task and write a short paragraph describing their own personality or a colleague’s using at least three of the animal metaphors.\nAmbition Limits: Debating the proverb \"Pigs get fat, hogs get slaughtered\" and evaluating at what point healthy ambition becomes destructive to oneself or society.",
+        "telegramRecap": "Watch \"The Black Hole\", analyze a Bruegel engraving, and listen to Pink Floyd lyrics to explore the theme of greed.",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=RSmjqss0XKQ"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=VVxYOQS6ggk"
+            }
+        ],
+        "hasPdf": true,
+        "hasAudio": true,
+        "hasRar": true,
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/the-psychology-of-greed.pdf"
+    },
+
+
+
+    {
         "dateAdded": "2026-11-13",
         "title": "Quality of Life Vs Cost of Living",
         "topics": [
