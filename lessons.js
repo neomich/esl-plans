@@ -6,6 +6,47 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-18",
+        "title": "Model Citizen",
+        "topics": [
+            "psychology",
+            "society",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "90 min",
+        "visualSource": "images/b1_model.jpg",
+        "keywords": "model citizen psychology society life b1-b2",
+        "objectives": [
+            "define the concept of a \"model\" in everyday contexts and analyze its application in social behavior",
+            "identify and categorize four distinct personality types based on Gretchen Rubin’s \"Four Tendencies\" framework through targeted listening tasks",
+            "evaluate the dangers of blind conformity and strict societal rules through a dystopian animated short film and critical discussion"
+        ],
+        "description": "Page 1: Defining the \"Model\"\nThe lesson opens by exploring the everyday meaning of a \"model\" as an ideal example to follow or imitate. Students answer relatable, lighthearted questions to define ideal scenarios, such as a \"model excuse\" for being late, a \"model pizza topping,\" or a \"model citizen.\" This sets a clear, conversational foundation before introducing the core theme of societal expectations and perfection.\n\nPage 2: The Four Tendencies & Audio Task\nStudents are introduced to Gretchen Rubin’s \"Four Tendencies\" framework, which categorizes people by how they respond to inner and outer expectations. They review the four types: Upholder (meets both), Questioner (questions all), Obliger (meets outer, resists inner), and Rebel (resists both). Students match descriptive adjectives (e.g., analytical, disciplined, free-spirited, dutiful) to the correct tendency. They then listen to an audio track featuring four speakers (Leo, Sarah, Ravi, and Emma) and match each speaker to their corresponding personality type based on their habits and attitudes toward rules.\n\nPage 3: \"Model Citizen\" Short Film & Dystopia\nThe class watches the 5-minute animated short film Model Citizen by David James Armsby, set in the eerie town of Autodale. Students discuss the Robinson family’s strict adherence to rules and the removal of \"broken\" citizens. They complete a summary gap-fill task using target vocabulary (rigid, dystopian, individuality, grim, enforcers, societal, monochromatic). Finally, students read real YouTube comments on the film and engage in a thoughtful discussion on the balance between following societal rules and maintaining personal individuality, asking whether true horror is not knowing that something is wrong.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Model Standard: What is a \"model excuse\" for being late? What is a \"model way\" to ask for a raise?\nPersonality Self-Assessment: Which of the Four Tendencies (Upholder, Questioner, Obliger, Rebel) best describes you? Can you give examples from your life?\nDystopian Reality: In your culture or community, are there rules or expectations you follow without questioning? Why do people sometimes accept harsh systems?\nIndividuality vs. Rules: How would you guide a younger person to balance following rules with being true to themselves?\n🧠 Target Lexicon & Vocabulary Focus\nPersonality Types: Upholder, Questioner, Obliger, Rebel.\nDescriptive Adjectives: Analytical, skeptical, independent, efficient, resistant, free-spirited, unconventional, defiant, disciplined, reliable, structured, rule-abiding, responsive, dutiful, accommodating, people-pleasing.\nDystopian Vocabulary: Rigid, dystopian, individuality, grim, enforcers, societal, monochromatic, compliance, brainwashed, utopia.\n🎧 Multimedia & Authentic Materials Included\nPage 2 Audio Task: A targeted listening exercise featuring four speakers (Leo, Sarah, Ravi, Emma) describing their habits, requiring students to map them to the correct \"Four Tendencies\" category.\nPage 3 Video Task: The animated short film Model Citizen (2020) by David James Armsby, depicting the Robinson family in the conformist town of Autodale.\nYouTube Comment Analysis: Real viewer reactions (e.g., \"The perfect dystopia is one where everybody thinks it's a utopia\") used to spark debate on control and awareness.\n⚠️ Critical Thinking Extension Work\nGap-Fill Summary: Students actively apply target vocabulary to complete a detailed summary of the Model Citizen plot, reinforcing understanding of dystopian themes.\nThe \"Prison\" Metaphor: Analyzing the comment \"The only way to prevent a prisoner from escaping is for them to never realize they are in prison\" and discussing how this applies to modern social pressures and self-imposed limitations.",
+        "telegramRecap": "Are you an Upholder or a Rebel? Match personality types, watch a chilling animated short about Autodale, and discuss the cost of perfection.",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=mVLrBJYGxk4"
+            }
+        ],
+        "hasPdf": true,
+        "hasAudio": true,
+        "hasRar": true,
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/model-citizen.pdf"
+    },
+
+
+
+    {
         "dateAdded": "2026-11-16",
         "title": "The Psychology of Greed",
         "topics": [
