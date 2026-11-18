@@ -6,7 +6,14 @@
     <atom:link href="https://esl-plans.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, 100+ plans, A2-C1.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 16 Nov 2026 06:37:19 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 18 Nov 2026 04:43:13 GMT</lastBuildDate>
+    <item>
+        <title>Model Citizen</title>
+        <link>https://esl-plans.com/lessons/model-citizen</link>
+        <guid isPermaLink="true">https://esl-plans.com/lessons/model-citizen</guid>
+        <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+        <description>Page 1: Defining the &quot;Model&quot; The lesson opens by exploring the everyday meaning of a &quot;model&quot; as an ideal example to follow or imitate. Students answer relatable, lighthearted questions to define ideal scenarios, such as a &quot;model excuse&quot; for being late, a &quot;model pizza topping,&quot; or a &quot;model citizen.&quot; This sets a clear, c</description>
+    </item>
     <item>
         <title>The Psychology of Greed</title>
         <link>https://esl-plans.com/lessons/the-psychology-of-greed</link>
@@ -349,13 +356,6 @@
         <guid isPermaLink="true">https://esl-plans.com/lessons/chinese-century</guid>
         <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
         <description>From 996 culture to QR payments: China&apos;s manufacturing rise, demographic data and practical travel English. B1-B2 lesson, 90-120 min.</description>
-    </item>
-    <item>
-        <title>The Great Fatigue</title>
-        <link>https://esl-plans.com/lessons/the-great-fatigue</link>
-        <guid isPermaLink="true">https://esl-plans.com/lessons/the-great-fatigue</guid>
-        <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
-        <description>Hustle culture, iron deficiency and a poem about modern exhaustion: burnout vocabulary and honest discussion. B1-B2 adults, 60-90 min.</description>
     </item>
 </channel>
 </rss>
