@@ -6,7 +6,14 @@
     <atom:link href="https://esl-plans.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, 100+ plans, A2-C1.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 18 Nov 2026 04:43:13 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 20 Nov 2026 04:29:28 GMT</lastBuildDate>
+    <item>
+        <title>Meet Elara an AI influencer</title>
+        <link>https://esl-plans.com/lessons/meet-elara-an-ai-influencer</link>
+        <guid isPermaLink="true">https://esl-plans.com/lessons/meet-elara-an-ai-influencer</guid>
+        <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+        <description>Page 1: The AI Influencer &amp; Negative Questions The lesson introduces students to &quot;Elara Whitmore,&quot; a 100% AI-generated Instagram character created by @lotzy.ai and @sibersorfcu. After watching the first video short, students analyze user comments discussing themes of ego, satisfaction, and &quot;beauty with brains.&quot; This na</description>
+    </item>
     <item>
         <title>Model Citizen</title>
         <link>https://esl-plans.com/lessons/model-citizen</link>
@@ -349,13 +356,6 @@
         <guid isPermaLink="true">https://esl-plans.com/lessons/what-is-your-mojo</guid>
         <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
         <description>Ten mojo archetypes, three speakers on charisma and the mojo-versus-nojo mindset. B2-C1 listening and speaking lesson, 60-90 min.</description>
-    </item>
-    <item>
-        <title>Chinese Century</title>
-        <link>https://esl-plans.com/lessons/chinese-century</link>
-        <guid isPermaLink="true">https://esl-plans.com/lessons/chinese-century</guid>
-        <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
-        <description>From 996 culture to QR payments: China&apos;s manufacturing rise, demographic data and practical travel English. B1-B2 lesson, 90-120 min.</description>
     </item>
 </channel>
 </rss>
