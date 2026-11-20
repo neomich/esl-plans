@@ -6,6 +6,43 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-20",
+        "title": "Meet Elara an AI influencer",
+        "topics": [
+            "society",
+            "technology",
+            "life",
+            "media",
+            "grammar"
+        ],
+        "isFree": true,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "a2-b1",
+        "levelLabel": "A2-B1",
+        "duration": "60-90 min",
+        "visualSource": "images/a2_elara.jpg",
+        "keywords": "meet elara an ai influencer society technology life media grammar a2-b1",
+        "objectives": [
+            "critically analyze AI-generated social media content and the life lessons embedded within viral influencer scenarios",
+            "master four distinct grammar structures: negative questions, past modals of possibility, the Second Conditional, and \"make\" collocations",
+            "apply practical English skills to discuss modern digital culture, hidden fees, ageism, and smart decision-making"
+        ],
+        "description": "Page 1: The AI Influencer & Negative Questions\nThe lesson introduces students to \"Elara Whitmore,\" a 100% AI-generated Instagram character created by @lotzy.ai and @sibersorfcu. After watching the first video short, students analyze user comments discussing themes of ego, satisfaction, and \"beauty with brains.\" This naturally transitions into the grammar focus: forming negative questions (e.g., Don’t you think...? Haven’t you used...? Shouldn’t you make...?). Students practice writing and asking their own negative questions to a partner.\n\nPage 2: Outsmarting Hidden Fees & Past Modals\nThe second video short features Elara dealing with a Las Vegas hotel trying to add a surprise \"facilities fee.\" Students read authentic user comments praising how she \"outsmarted\" the manager. This scenario introduces the grammar focus: past modals of possibility and impossibility (could have / could not have + past participle). Students analyze examples like \"She could have used the pool, but she didn't,\" and then write 3-5 sentences about missed opportunities or alternative past actions in their own lives.\n\nPage 3: Ageism & The Second Conditional\nThe third video short tackles superficiality, featuring a comment asking, \"If I were forty years younger, would you marry me?\" Students read reactions discussing age, money, and the term \"spinster.\" This sparks a debate on modern relationship values and introduces the Second Conditional (If + Past Simple, ... would + verb). Students practice forming hypothetical questions (e.g., Would you marry an AI?) and ask their partners using the target structure.\n\nPage 4: Smart Choices & \"Make\" Collocations\nThe final video short highlights Elara making a \"good call\" and asserting, \"She makes coffee, I make the decisions.\" Students discuss the blurring lines between AI and reality. The lesson wraps up with a targeted vocabulary focus on collocations with the verb make (e.g., make progress, make a mistake, make an effort, make a complaint, make sense). Students match these collocations to their definitions and apply them in a personalized discussion about their own English learning journey and daily habits.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe AI Reality Check: Does knowing a video is 100% AI-generated change how you feel about the \"life lesson\" it teaches?\nHidden Fees: Have you ever had to argue back-and-forth with a hotel or company to remove an unfair charge? How did you outsmart them?\nSuperficiality vs. Substance: Do you agree with the comment that \"it's how much money you've got in your bank account that matters\" when it comes to relationships?\nSmart Choices: What was the last \"good call\" you made that saved you time, money, or stress?\n🧠 Target Lexicon & Grammar Focus\nPage 1 Grammar: Negative Questions (Don’t you + verb, Haven’t you + past participle, Shouldn’t you + verb).\nPage 2 Grammar: Past Modals of Possibility (could have / could not have + past participle).\nPage 3 Grammar: Second Conditional for hypothetical present/future situations (If + Past Simple, ... would + verb).\nPage 4 Vocabulary: \"Make\" Collocations (make progress, make a mistake, make an effort, make a suggestion, make an excuse, make a complaint, make a joke, make a mess, make noise, make sense, make sure, make friends).\nSlang & Idioms: Hit a nerve, beauty with brains, outsmart, back-and-forth, good call, spinster.\n📺 Multimedia & Authentic Materials Included\n4 AI Video Shorts: Sequential viewing tasks featuring the AI character \"Elara Whitmore,\" each presenting a distinct everyday scenario (ego/satisfaction, hotel fees, ageism, smart decisions).\nAuthentic Social Media Comments: Real-world Instagram-style reactions used as reading comprehension and debate prompts on every page.\n⚠️ Critical Thinking Extension Work\nThe Ethics of AI Influencers: Debating whether AI characters that \"teach life lessons\" are harmless entertainment or deceptive manipulation.\nGrammar in Context: Students don't just memorize rules; they apply the Second Conditional to hypothetical AI scenarios (Would you date an AI if it were perfect?) and use \"make\" collocations to reflect on their own language learning progress (I need to make more of an effort to make fewer mistakes).",
+        "telegramRecap": "Is your favorite influencer even real? Watch 4 AI video shorts, tackle ageism and hidden fees, and master 4 key English grammar structures.",
+        "pdfUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/materials/a2_elara.pdf",
+        "audioUrl": null,
+        "rarUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/zips/a2_elara.rar",
+        "mediaLabel": "The audio streams:",
+        "links": []
+    },
+
+
+
+    {
         "dateAdded": "2026-11-18",
         "title": "Model Citizen",
         "topics": [
