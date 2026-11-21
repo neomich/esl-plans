@@ -6,7 +6,14 @@
     <atom:link href="https://esl-plans.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, 100+ plans, A2-C1.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 20 Nov 2026 09:26:30 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2026 08:58:58 GMT</lastBuildDate>
+    <item>
+        <title>I Love my Car</title>
+        <link>https://esl-plans.com/lessons/i-love-my-car</link>
+        <guid isPermaLink="true">https://esl-plans.com/lessons/i-love-my-car</guid>
+        <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
+        <description>Page 1: Car Culture, Songs &amp; Habits The lesson opens with a fun look at car culture, featuring favorite road-trip songs (e.g., Don&apos;t Stop Me Now, Livin&apos; on a Prayer), car-themed movies (Gran Torino, Christine), and video games (Forza Horizon, Need for Speed). Students discuss what their favorite car movies, games, and </description>
+    </item>
     <item>
         <title>Meet Elara an AI influencer</title>
         <link>https://esl-plans.com/lessons/meet-elara-an-ai-influencer</link>
@@ -349,13 +356,6 @@
         <guid isPermaLink="true">https://esl-plans.com/lessons/purpose</guid>
         <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
         <description>Quarter-life crisis or mid-life? Goal vocabulary, Bob Odenkirk and the difference between a purpose and a target. B2-C1, 60-90 min, free.</description>
-    </item>
-    <item>
-        <title>Cognitive Behavioral Therapy (CBT)</title>
-        <link>https://esl-plans.com/lessons/cognitive-behavioral-therapy-cbt</link>
-        <guid isPermaLink="true">https://esl-plans.com/lessons/cognitive-behavioral-therapy-cbt</guid>
-        <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
-        <description>Fifteen thinking traps, real CBT success stories and a coping plan students build themselves. B2-C1 adult lesson, 60-90 min.</description>
     </item>
 </channel>
 </rss>
