@@ -6,6 +6,52 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-21",
+        "title": "I Love my Car",
+        "topics": [
+            "society",
+            "technology",
+            "life",
+            "media"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_i_love_my_car.jpg",
+        "keywords": "i love my car society technology life media b1-b2",
+        "objectives": [
+            "explore personal habits, emotional attachments, and statistics related to car ownership and driving culture",
+            "practice listening comprehension through a viral story, a humorous audio, and a practical guide on inspecting a new car",
+            "learn and apply everyday automotive and maintenance vocabulary in real-world contexts"
+        ],
+        "description": "Page 1: Car Culture, Songs & Habits\nThe lesson opens with a fun look at car culture, featuring favorite road-trip songs (e.g., Don't Stop Me Now, Livin' on a Prayer), car-themed movies (Gran Torino, Christine), and video games (Forza Horizon, Need for Speed). Students discuss what their favorite car movies, games, and songs are.\n\nPage 2: Viral Story & Emotional Attachment\nStudents review a list of the top 10 things people actually do inside their vehicles, such as eating, napping, stargazing, or changing clothes. They rate these activities on a comfort scale and discuss which ones they have tried. The page concludes by examining surprising statistics about \"car lovers,\" including the fact that 49% name their cars, 87% perform unnecessary maintenance, and many view their vehicle as an extension of their personality.\n\nPage 3: Cars vs. Relationships (Humorous Audio)\nStudents watch a viral video about Nathaniel, a man who forms a deep, emotional attachment to his car, Chase. After the car is damaged, Nathaniel experiences genuine heartbreak before finding a \"new love\" in a car named Lex. Students answer targeted comprehension questions about Nathaniel’s mementos, his bedroom setup, and his reaction to the loss. This sparks a grounded conversation about whether people can truly form emotional bonds with inanimate objects, why some possessions hold such sentimental value, and if naming a car changes how we treat it.\nThe tone shifts to humor with an audio segment asking, \"Why do men love cars?\" Students match automotive vocabulary (e.g., exhaust notes, mixed signals, silent treatment, buckle up) to their definitions. They then complete a comparison table contrasting the quirks of cars with the quirks of romantic relationships. For example, they compare a car’s \"reliable simplicity\" and safety beeps to a partner’s complex emotions and \"I'm fine\" statements. This leads to a lighthearted discussion about stereotypes, how vehicles reflect our personalities, and whether the comparison between cars and partners captures important differences or just reinforces clichés.\n\nPage 4: New Car Inspection & Maintenance\nThe lesson gets practical with a video outlining the top 10 things to do when buying a new car. Students learn essential maintenance steps, such as checking the chassis number, verifying mileage, inspecting interior plastics, and applying ceramic coatings or paint protection film (PPF). They complete a True/False task to verify their understanding of these tips (e.g., \"Leaving plastic covers on seats for months is safe\"). The class wraps up by sharing which inspection tips they find most useful for protecting their own vehicles and maintaining their resale value.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nEmotional Bonds: Have you ever been attached emotionally to any of your possessions? Why do some people name their cars while others see them just as tools?\nStereotypes: Do you think the comparison between cars and women/cars and men captures important differences or just reinforces stereotypes?\nPractical Value: How important do you think protecting your car's paint and interior is for its overall value and appearance?\n🧠 Target Lexicon & Vocabulary Focus\nAutomotive Terms: Chassis, mileage, ceramic coating, paint protection film (PPF), exhaust notes, dashboard, interior plastics.\nRelationship/Humor Terms: Mixed signals, silent treatment, validation, geek out, extension of personality, reliable simplicity.\nCar Culture Stats: Car lovers, car likers, car dislikers, naming conventions, maintenance frequency.\n🎧 Multimedia & Authentic Materials Included\nPage 2 Video Task: A viral story about Nathaniel and his car Chase, paired with comprehension questions about his emotional journey and new car Lex.\nPage 3 Audio Task: A humorous segment comparing the reliability of cars to the complexity of human relationships, requiring students to match vocabulary and complete a comparison table.\nPage 4 Video Task: A practical guide on the top 10 things to check when buying a new car, followed by a True/False verification task on maintenance myths and facts.\n⚠️ Critical Thinking Extension Work\nStatistical Analysis: Students evaluate the data showing that \"car lovers\" are more likely to address warning lights immediately, discussing whether this reflects responsibility or anxiety.\nMaintenance Debate: Debating whether expensive protections like ceramic coatings are necessary for everyday drivers or just a marketing upsell for luxury vehicles.",
+        "telegramRecap": "Do you name your car? Analyze emotional attachment stats, watch a heartbreak story, and learn practical tips for buying and protecting your vehicle.",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=06BFsQ_28Co"
+            },
+            {
+                "label": "Link 2",
+                "url": "https://www.youtube.com/watch?v=nUaSLP3f4i8"
+            }
+        ],
+        "hasPdf": true,
+        "hasAudio": true,
+        "hasRar": true,
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/i-love-my-car.pdf"
+    },
+
+
+
+    {
         "dateAdded": "2026-11-20",
         "title": "Meet Elara an AI influencer",
         "topics": [
