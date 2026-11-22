@@ -6,7 +6,14 @@
     <atom:link href="https://esl-plans.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, 100+ plans, A2-C1.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 21 Nov 2026 10:56:47 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2026 14:23:12 GMT</lastBuildDate>
+    <item>
+        <title>Textbook English - WTF Is It?</title>
+        <link>https://esl-plans.com/articles/textbook-english-wtf-is-it</link>
+        <guid isPermaLink="true">https://esl-plans.com/articles/textbook-english-wtf-is-it</guid>
+        <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
+        <description>“Authentic English for real-life situations.”</description>
+    </item>
     <item>
         <title>I Love my Car</title>
         <link>https://esl-plans.com/lessons/i-love-my-car</link>
@@ -349,13 +356,6 @@
         <guid isPermaLink="true">https://esl-plans.com/lessons/i-love-horses</guid>
         <pubDate>Fri, 28 Aug 2026 00:00:00 GMT</pubDate>
         <description>Why do riders say they love horses? Animal vocabulary, riddles about sounds and the human-animal bond. A2-B1 conversation lesson, 60-90 min.</description>
-    </item>
-    <item>
-        <title>Purpose</title>
-        <link>https://esl-plans.com/lessons/purpose</link>
-        <guid isPermaLink="true">https://esl-plans.com/lessons/purpose</guid>
-        <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
-        <description>Quarter-life crisis or mid-life? Goal vocabulary, Bob Odenkirk and the difference between a purpose and a target. B2-C1, 60-90 min, free.</description>
     </item>
 </channel>
 </rss>
