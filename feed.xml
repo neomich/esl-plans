@@ -6,7 +6,14 @@
     <atom:link href="https://esl-plans.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, 100+ plans, A2-C1.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 22 Nov 2026 14:23:12 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 23 Nov 2026 05:42:47 GMT</lastBuildDate>
+    <item>
+        <title>Causes of Miscommunication</title>
+        <link>https://esl-plans.com/lessons/causes-of-miscommunication</link>
+        <guid isPermaLink="true">https://esl-plans.com/lessons/causes-of-miscommunication</guid>
+        <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+        <description>Page 1: Mismatched expectations The lesson opens with a relatable visual story about Adam and Lee, whose simple text message about meeting at the canteen leads to mismatched expectations and an awkward situation. This sparks a discussion on personal experiences with misread messages. Page 2: Common causes of Miscommuni</description>
+    </item>
     <item>
         <title>Textbook English - WTF Is It?</title>
         <link>https://esl-plans.com/articles/textbook-english-wtf-is-it</link>
@@ -349,13 +356,6 @@
         <guid isPermaLink="true">https://esl-plans.com/lessons/newcombs-paradox</guid>
         <pubDate>Sun, 30 Aug 2026 00:00:00 GMT</pubDate>
         <description>Quit the safe job or take the risk? Four decision theories, real dilemmas and a six-step framework. B2-C1 adult lesson, 60-90 min.</description>
-    </item>
-    <item>
-        <title>I love horses!</title>
-        <link>https://esl-plans.com/lessons/i-love-horses</link>
-        <guid isPermaLink="true">https://esl-plans.com/lessons/i-love-horses</guid>
-        <pubDate>Fri, 28 Aug 2026 00:00:00 GMT</pubDate>
-        <description>Why do riders say they love horses? Animal vocabulary, riddles about sounds and the human-animal bond. A2-B1 conversation lesson, 60-90 min.</description>
     </item>
 </channel>
 </rss>
