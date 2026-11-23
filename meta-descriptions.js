@@ -20,6 +20,14 @@
 
 const lessonDescriptions = {
 
+    "Causes of Miscommunication": "A canteen text that goes wrong, then 10 causes of miscommunication and 7 real video clips. Spelling rules for the mis- prefix. B2, 60-90 min.",
+
+    "I Love my Car": "Do you name your car? Emotional attachment stats, a heartbreak story and a guide to inspecting a used car. Everyday car vocabulary. B1-B2, 60-90 min.",
+
+    "Meet Elara an AI influencer": "Is your favorite influencer even real? Four AI video shorts on hidden fees and ageism, plus negative questions and past modals. A2-B1, 60-90 min.",
+
+    "Model Citizen": "Upholder or Rebel? Match Gretchen Rubin's Four Tendencies, then watch a dystopian short about perfect citizens and why rules fail. B1-B2, 90 min.",
+
     "The Psychology of Greed": "Watch The Black Hole, decode Bruegel's greed engraving and test Gordon Gekko's good greed speech. Second conditional practice. B2-C1, 90-120 min.",
 
     "Quality of Life Vs Cost of Living": "Four expats weigh rent, salaries and daily life: what cost-of-living numbers miss about quality of life. Listening and debate. B1-B2, 90 min.",
