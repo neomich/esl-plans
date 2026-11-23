@@ -384,6 +384,7 @@ async function fetchWithTimeout(url, options = {}, ms = DEFAULT_TIMEOUT_MS) {
 
 let handWrittenCount = 0;
 let autoCount = 0;
+const autoTitles = [];
 
 // Fallback for a lesson with no hand-written SERP description.
 // Order: Telegram recap (already written in a human voice, usually <150 chars)
@@ -566,7 +567,7 @@ lessons.forEach(lesson => {
     // is only a safety net for lessons added before their description is written.
     const handWritten = String(lessonDescriptions[lesson.title] || '').trim();
     if (handWritten) handWrittenCount++;
-    else autoCount++;
+    else { autoCount++; autoTitles.push(lesson.title); }
     const descPlain = handWritten || buildAutoDescription(lesson);
     const descMeta = escapeAttr(descPlain);
     const descSafe = (lesson.description || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -831,7 +832,7 @@ lessons.forEach(lesson => {
     console.log(`Lesson: lessons/${slug}.html`);
 });
 
-console.log(`Descriptions: ${handWrittenCount} hand-written, ${autoCount} auto-generated${autoCount ? ' ⚠️ add those to meta-descriptions.js' : ''}`);
+console.log(`Descriptions: ${handWrittenCount} hand-written, ${autoCount} auto-generated${autoCount ? ' ⚠️ add those to meta-descriptions.js: ' + autoTitles.map(t => '"' + t + '"').join(', ') : ''}`);
 
 // ── GENERATE ARTICLE PAGES ──
 let articles = [];
