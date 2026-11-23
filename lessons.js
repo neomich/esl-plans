@@ -6,6 +6,42 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-23",
+        "title": "Causes of Miscommunication",
+        "topics": [
+            "society",
+            "media",
+            "grammar"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "b2",
+        "levelLabel": "B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b2_miscommunication.jpg",
+        "keywords": "causes of miscommunication society media grammar b2",
+        "objectives": [
+            "identify and analyze the top 10 most common causes of miscommunication in personal and professional settings",
+            "practice critical viewing skills by evaluating real-world video scenarios of communication breakdowns",
+            "master the \"mis-\" prefix and its specific spelling rules to accurately describe errors and misunderstandings"
+        ],
+        "description": "Page 1: Mismatched expectations \nThe lesson opens with a relatable visual story about Adam and Lee, whose simple text message about meeting at the canteen leads to mismatched expectations and an awkward situation. This sparks a discussion on personal experiences with misread messages. \n\nPage 2: Common causes of Miscommunication\nStudents then explore the top 10 most common causes of miscommunication, matching key concepts (such as pretending to listen, making wrong assumptions, using jargon, lack of feedback, and inappropriate humor) to their clear definitions.\nThe focus shifts to real-world application. Before watching 7 video clips, students match 12 specific vocabulary words from the upcoming clips to pictures (e.g., robbery, flight attendant, Taser, hostage, movie plot). They then watch a series of short videos ranging from commercials to movie clips, each demonstrating a different communication failure. Students must identify which of the 10 common causes is shown in each clip and discuss practical ways these awkward or dangerous situations could have been avoided.\n\nPage 3: Prefix mis- \nThe lesson wraps up with a targeted vocabulary and spelling focus. Students learn how the prefix mis- changes the meaning of root words (e.g., miscommunication, misperception, misinterpreting). They are introduced to the \"Double-S Rule\" (e.g., misspell keeps both S's, while mistake uses one). Finally, students apply this knowledge by completing a gap-fill exercise, choosing the correct \"mis-\" word (such as miscalculated, misinformed, misrepresent, mistrust, misguide, misdirected, or misemployed) to accurately describe professional and personal errors.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Texting Trap: Have you ever misread a message or had your expectations mismatch with a boss, colleague, or friend? What happened?\nReal-World Reflection: Can you recall the last time you experienced a miscommunication? How was it resolved?\nVideo Debrief: Which common cause of miscommunication does each video show, and how could these situations be easily avoided?\n🧠 Target Lexicon & Spelling Focus\nThe 10 Common Causes: Pretending to listen, making wrong assumptions, using jargon, lack of feedback, inappropriate humor, over-reliance on one method, losing focus, talking over others, misinterpreting, and interrupting.\nThe \"Mis-\" Prefix: Miscalculated, misjudged, misinformed, misrepresent, mistrust, misguide, misdirected, misemployed, miscommunication, misperception.\nThe Double-S Rule: Understanding when to keep double 's' (e.g., misspell) versus single 's' (e.g., mistake).\n📺 Multimedia & Authentic Materials Included\nVideo Scenario Analysis: A series of short, engaging video clips demonstrating classic communication failures.\nPre-Watching Vocabulary Match: 12 visual vocabulary items (e.g., robbery, flight attendant, Taser, hostage, movie plot) to prime students for the video content.\n⚠️ Critical Thinking & Application Work\nProfessional Context Gap-Fill: Students apply \"mis-\" vocabulary to realistic workplace sentences (e.g., \"The accountant miscalculated the budget,\" \"Do not misrepresent your previous work experience\").\nPrevention Strategies: Group discussions on how to implement clear feedback loops and active listening to prevent the \"Double-S\" of communication: misunderstanding and mismatch.",
+        "telegramRecap": "From texting fails to video analysis. Explore 10 common communication breakdowns with video clips and learn the spelling rules for the \"mis-\" prefix.",
+        "mediaLabel": "The audio streams:",
+        "links": [],
+        "hasPdf": true,
+        "hasAudio": false,
+        "hasRar": true,
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/causes-of-miscommunication.pdf"
+    },
+
+
+
+    {
         "dateAdded": "2026-11-21",
         "title": "I Love my Car",
         "topics": [
