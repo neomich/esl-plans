@@ -6,7 +6,14 @@
     <atom:link href="https://esl-plans.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, 100+ plans, A2-C1.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 23 Nov 2026 18:38:43 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 05:01:25 GMT</lastBuildDate>
+    <item>
+        <title>Urban Legends</title>
+        <link>https://esl-plans.com/lessons/urban-legends</link>
+        <guid isPermaLink="true">https://esl-plans.com/lessons/urban-legends</guid>
+        <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+        <description>Page 1: Fact vs. Fiction (Podcast &amp; True/False) The lesson opens with a clear definition of what makes an urban legend, introducing famous examples like the &quot;27 Club,&quot; &quot;Area 51,&quot; and the &quot;Elevator Game.&quot; Students then listen to a podcast that reveals the actual truth behind these myths, such as the genetic reality behi</description>
+    </item>
     <item>
         <title>Causes of Miscommunication</title>
         <link>https://esl-plans.com/lessons/causes-of-miscommunication</link>
@@ -349,13 +356,6 @@
         <guid isPermaLink="true">https://esl-plans.com/lessons/teenagers</guid>
         <pubDate>Tue, 01 Sep 2026 00:00:00 GMT</pubDate>
         <description>Toxic content, &apos;trash streaming&apos; and 28 controversial teen behaviours: an honest debate about modern youth. A2-B1 lesson, 60-90 min.</description>
-    </item>
-    <item>
-        <title>Newcomb&apos;s paradox</title>
-        <link>https://esl-plans.com/lessons/newcombs-paradox</link>
-        <guid isPermaLink="true">https://esl-plans.com/lessons/newcombs-paradox</guid>
-        <pubDate>Sun, 30 Aug 2026 00:00:00 GMT</pubDate>
-        <description>Quit the safe job or take the risk? Four decision theories, real dilemmas and a six-step framework. B2-C1 adult lesson, 60-90 min.</description>
     </item>
 </channel>
 </rss>
