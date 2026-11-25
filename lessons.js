@@ -6,6 +6,41 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-25",
+        "title": "Urban Legends",
+        "topics": [
+            "media",
+            "art"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video & Audio",
+        "mediaIcon": "▶️🎵",
+        "categoryIcon": "🎓",
+        "level": "b1",
+        "levelLabel": "B1",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_urban_legend.jpg",
+        "keywords": "urban legends media art b1",
+        "objectives": [
+            "separate fact from fiction by exploring common urban legends and their real-world origins through targeted listening tasks",
+            "analyze the cultural roots and narrative structure of modern myths through video comprehension and discussion",
+            "apply key storytelling elements to write an original, engaging urban legend using a structured framework"
+        ],
+        "description": "Page 1: Fact vs. Fiction (Podcast & True/False)\nThe lesson opens with a clear definition of what makes an urban legend, introducing famous examples like the \"27 Club,\" \"Area 51,\" and the \"Elevator Game.\" Students then listen to a podcast that reveals the actual truth behind these myths, such as the genetic reality behind Alexandria’s Genesis or the military purpose of Area 51. They complete a True/False task to check their understanding, separating historical fact from modern fiction, and discuss which legends they find most believable or terrifying.\n\nPage 2: Video Exploration & Creative Writing\nThe core media section features four short videos exploring specific legends from around the world and history. Students watch clips about the Japanese ghost Kuchisake-onna, the Viking Berserkergang, the historical origins of Satan, and the real animal skull that inspired the Cyclops myth. For each video, they answer targeted comprehension questions about the origins and details of the stories. The lesson wraps up with a creative, hands-on task where students listen to a short podcast outlining the four key ingredients of a good urban legend (modern fear, narrative structure, cautionary tale, and revision). They read a modern example called \"The Roacher\" to see these rules in action, then use this framework to write their own original urban legend as a home work task, with the optional step of using AI tools to generate a picture of their custom monster.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nBelief Check: Which of the four video stories do you find the most fascinating? The scariest? The silliest?\nSocial Reflection: Why do you think these legends have survived for so long? What is the most unforgettable urban legend you’ve ever heard?\nPersonal Fear: Which urban legend scared you the most as a child? Do you think urban legends can teach us something about society?\n🧠 Target Lexicon & Vocabulary Focus\nMyth & Legend Terms: Urban legend, folklore, superstition, extraterrestrial, cautionary tale, narrative, conflict, revised.\nSpecific Legend Vocabulary: Slit-mouthed woman, frenzy, rebellion, genetic mutation, cyclops, sewer lines, telepathic call.\n🎧 Multimedia & Authentic Materials Included\nPage 1 Audio Task: A targeted listening exercise debunking six common myths (27 Club, 999 battery trick, Alexandria’s Genesis, Area 51, Kuchisake-onna, Elevator Game), paired with a True/False verification task.\nPage 2 Video Tasks: Four short clips covering:\nKuchisake-onna (Japanese ghost)\nBerserkergang (Viking warriors)\nThe Origin of Satan (Historical/Religious evolution)\nThe Skull of a Cyclops (Elephant skulls mistaken for giants)\nPage 2 Audio Task: A short podcast on \"How to Write an Urban Legend,\" requiring students to fill in gaps for the four key ingredients (modern fear, narrative elements, cautionary lesson, and revision).\n⚠️ Critical Thinking Extension Work\nStory Structure Analysis: Students analyze the provided example \"The Roacher\" to identify how it follows the four rules of urban legend creation, specifically looking for the modern fear (pests/cleanliness) and the cautionary lesson.\nCreative Application: Students draft their own urban legend using the framework, focusing on creating a relatable modern fear and a clear narrative arc, optionally using AI image generators to visualize their monster.",
+        "telegramRecap": "Separate fact from fiction! Listen to a podcast on urban legends, watch videos on Vikings and ghosts, and write your own modern myth.",
+        "mediaLabel": "The audio streams:",
+        "links": [],
+        "hasPdf": true,
+        "hasAudio": true,
+        "hasRar": true,
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/urban-legends.pdf"
+    },
+
+
+
+    {
         "dateAdded": "2026-11-23",
         "title": "Causes of Miscommunication",
         "topics": [
