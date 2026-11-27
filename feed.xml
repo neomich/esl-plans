@@ -6,7 +6,14 @@
     <atom:link href="https://esl-plans.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>New ESL lesson plans and articles for teachers of adult learners. One teacher, 100+ plans, A2-C1.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 25 Nov 2026 05:01:25 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 27 Nov 2026 04:45:52 GMT</lastBuildDate>
+    <item>
+        <title>Petty Crimes &amp; System Loopholes</title>
+        <link>https://esl-plans.com/lessons/petty-crimes-system-loopholes</link>
+        <guid isPermaLink="true">https://esl-plans.com/lessons/petty-crimes-system-loopholes</guid>
+        <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+        <description>Page 1: Petty Crimes &amp; Statistics The lesson opens with a list of 10 everyday rule-breaking actions, such as downloading media illegally, crossing the street on a red light, taking office supplies, or &quot;forgetting&quot; to scan an item at self-checkout. Students match these actions to global statistics showing how common the</description>
+    </item>
     <item>
         <title>Urban Legends</title>
         <link>https://esl-plans.com/lessons/urban-legends</link>
@@ -349,13 +356,6 @@
         <guid isPermaLink="true">https://esl-plans.com/lessons/mac-vs-windows</guid>
         <pubDate>Tue, 01 Sep 2026 00:00:00 GMT</pubDate>
         <description>Mac or Windows? Advanced comparatives, fifteen computer terms and the great operating-system debate. A2-B1 adult lesson, 60-90 min, free.</description>
-    </item>
-    <item>
-        <title>Teenagers</title>
-        <link>https://esl-plans.com/lessons/teenagers</link>
-        <guid isPermaLink="true">https://esl-plans.com/lessons/teenagers</guid>
-        <pubDate>Tue, 01 Sep 2026 00:00:00 GMT</pubDate>
-        <description>Toxic content, &apos;trash streaming&apos; and 28 controversial teen behaviours: an honest debate about modern youth. A2-B1 lesson, 60-90 min.</description>
     </item>
 </channel>
 </rss>
