@@ -6,6 +6,46 @@
 const lessonsCatalog = [
 
     {
+        "dateAdded": "2026-11-27",
+        "title": "Petty Crimes & System Loopholes",
+        "topics": [
+            "society",
+            "life"
+        ],
+        "isFree": false,
+        "category": "general",
+        "categoryLabel": "General English",
+        "mediaType": "Video",
+        "mediaIcon": "▶️",
+        "categoryIcon": "🎓",
+        "level": "b1-b2",
+        "levelLabel": "B1-B2",
+        "duration": "60-90 min",
+        "visualSource": "images/b1_petty_crimes.jpg",
+        "keywords": "petty crimes & system loopholes society life b1-b2",
+        "objectives": [
+            "identify and discuss common \"petty crimes\" and minor rule-breaking behaviors in everyday life",
+            "analyze different ways people push back against corporate or societal systems using authentic internet comments",
+            "evaluate the ethics of exploiting loopholes through a targeted video case study and quote analysis"
+        ],
+        "description": "Page 1: Petty Crimes & Statistics\nThe lesson opens with a list of 10 everyday rule-breaking actions, such as downloading media illegally, crossing the street on a red light, taking office supplies, or \"forgetting\" to scan an item at self-checkout. Students match these actions to global statistics showing how common they are. They then rate each behavior on a scale from least to most serious, sparking a grounded debate on what actually constitutes a \"petty crime\" and what the appropriate consequences should be.\n\nPage 2: Pushing Back & Reddit Responses\nThe class examines real Reddit comments about harmless ways people push back against corporate or automated annoyances. Students match specific behaviors - like blocking online tracking, ignoring robocalls, delaying software updates, or prioritizing support over productivity - to the commenters. This leads to a discussion on personal boundaries, rejecting conventional life milestones, and how individuals navigate automated systems in their daily lives.\n\nPage 3: The Airport Loophole (Core Video)\nStudents watch a short video about a man who managed to eat for free at an airport for 300 days straight. They answer five targeted comprehension questions about his method: the type of ticket he bought, where he got his meals, what he did instead of boarding, how often he repeated the trick, and how the airline staff finally stopped him. The class then debates whether this man was a genius exploiting a broken rule or a thief taking advantage of the system.\nThe lesson concludes with an analysis of famous quotes about breaking rules from figures like Pablo Picasso, Katharine Hepburn, Noam Chomsky, and Keanu Reeves. Students discuss whether they agree with the idea that rules are meant to be broken, or if learning the rules is a necessary first step before bending them.\n\n📄 Inside This Lesson Pack\n💬 Core Discussion Prompts & Speaking Activities\nThe Severity Scale: Which of the 10 everyday actions (e.g., taking office supplies, crossing on red) is the most serious, and what should the punishment be?\nPersonal Boundaries: Do you do any personal things during work hours? How do you personally deal with automated phone calls or robocalls?\nGenius or Thief: Did the man in the video actually \"fuck the system,\" or was he just taking advantage of bad company rules?\n🧠 Target Lexicon & Vocabulary Focus\nPetty Crime Actions: Downloading illegally, crossing on red, taking office supplies, extending lunch breaks, returning worn clothes.\nSystem Pushback Vocabulary: Avoid, preventative care, succeeding in life, refuses to accept, on purpose, automated phone calls, traditional milestones, delaying until later, collecting online data.\n📺 Multimedia & Authentic Materials Included\nPage 3 Video Task: A targeted viewing exercise about \"The Man Who Ate for Free for 300 Days,\" requiring students to extract specific details about his ticket type, daily routine, and how the airline intervened.\nReddit Comment Analysis: Authentic internet responses used as a reading and matching task to explore harmless ways people push back against corporate annoyances.\n⚠️ Critical Thinking Extension Work\nQuote Evaluation: Analyzing quotes from Pablo Picasso (\"Learn the rules like a pro, so you can break them like an artist\") and Noam Chomsky to debate the value of conformity versus rebellion.\nThe Ethics of Loopholes: Discussing whether exploiting a poorly written company policy is a smart survival tactic or a breach of trust that harms the broader community.",
+        "telegramRecap": "Explore minor rule-breaking, match Reddit responses, and analyze a video about exploiting airport loopholes to eat for free.",
+        "mediaLabel": "The video links:",
+        "links": [
+            {
+                "label": "Link 1",
+                "url": "https://www.youtube.com/watch?v=Y5sYeAxwpOU"
+            }
+        ],
+        "hasPdf": true,
+        "hasAudio": false,
+        "hasRar": true,
+        "previewUrl": "https://pub-fbab04fc1d254b1a934ef7b6ec357a1a.r2.dev/previews/petty-crimes-system-loopholes.pdf"
+    },
+
+
+
+    {
         "dateAdded": "2026-11-25",
         "title": "Urban Legends",
         "topics": [
